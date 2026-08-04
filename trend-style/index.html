@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Design Trends Showcase | Design Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: rgba(30, 41, 59, 0.4);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #6366f1;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(at 10% 10%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+        radial-gradient(at 90% 80%, rgba(168, 85, 247, 0.15) 0px, transparent 50%);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      padding-top: 100px;
+      padding-bottom: 80px;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff 30%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 16px;
+      letter-spacing: -0.03em;
+    }
+    .header p {
+      font-size: 1.125rem;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 28px;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 20px 0 rgba(99, 102, 241, 0.2);
+    }
+    .card:hover::before {
+      opacity: 1;
+    }
+    .card-num {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+    .card-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+    .card-desc {
+      font-size: 0.925rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .card-arrow {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .card:hover .card-arrow {
+      background: var(--accent);
+      transform: translateX(4px);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h1>15 Modern Design Trends</h1>
+      <p>스큐어모피즘부터 글래스모피즘, 키네틱 타이포그래피까지 UI 디자인 트렌드의 정수를 탐색하세요.</p>
+    </div>
+
+    <div class="grid">
+      <a href="1_skeuomorphism.html" class="card">
+        <div>
+          <div class="card-num">Trend 01</div>
+          <h2 class="card-title">Skeuomorphism</h2>
+          <p class="card-desc">현실 세계 물체의 질감, 입체감, 질감을 디지털 UI에 극적으로 재현한 정교한 스타일.</p>
+        </div>
+        <div class="card-footer">
+          <span>Explore Style</span>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="2_flat_design.html" class="card">
+        <div>
+          <div class="card-num">Trend 02</div>
+          <h2 class="card-title">Flat Design</h2>
+          <p class="card-desc">장식적 요소를 제거하고 명확한 미니멀리즘과 선명한 컬러에 집중한 디자인.</p>
+        </div>
+        <div class="card-footer">
+          <span>Explore Style</span>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="3_material_design.html" class="card">
+        <div>
+          <div class="card-num">Trend 03</div>
+          <h2 class="card-title">Material Design</h2>
+          <p class="card-desc">Google의 종이와 잉크 메타포 기반 그림자와 아늑한 애니메이션의 표준 가이드.</p>
+        </div>
+        <div class="card-footer">
+          <span>Explore Style</span>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="4_glassmorphism.html" class="card">
+        <div>
+          <div class="card-num">Trend 04</div>
+          <h2 class="card-title">Glassmorphism</h2>
+          <p class="card-desc">반투명 블러 효과(Backdrop Blur)와 투명한 유리의 감각적인 레이어링 UI.</p>
+        </div>
+        <div class="card-footer">
+          <span>Explore Style</span>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="5_neumorphism.html" class="card">
+        <div>
+          <div class="card-num">Trend 05</div>
+          <h2 class="card-title">Neumorphism</h2>
+          <p class="card-desc">부드러운 음영 조절로 배경에서 버튼이 돌출되거나 음각으로 파인 매끄러운 3D 효과.</p>
+        </div>
+        <div class="card-footer">
+          <span>Explore Style</span>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="6_neobrutalism.html" class="card">
+        <div>
+          <div class="card-num">Trend 06</div>
+          <h2 class="card-title">Neo-Brutalism</h2>
+          <p class="card-desc">두꺼운 검은 테두리, 강렬한 대비, 그림자 offset을 활용한 개성 넘치는 스타일.</p>
+        </div>
+        <div class="card-footer">
+          <span>Explore Style</span>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="7_claymorphism.html" class="card">
+        <div>
+          <div class="card-num">Trend 07</div>
+          <h2 class="card-title">Claymorphism</h2>
+          <p class="card-desc">말랑말랑한 점토(Clay) 느낌의 내/외부 둥근 그림자와 귀여운 3D 둥근 모서리 UI.</p>
+        </div>
+        <div class="card-footer">
+          <span>Explore Style</span>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="8_aurora_ui.html" class="card">
+        <div>
+          <div class="card-num">Trend 08</div>
+          <h2 class="card-title">Aurora UI</h2>
+          <p class="card-desc">몽환적이고 부드러운 오로라빛 메시 그래디언트 배경과 서정적 비주얼.</p>
+        </div>
+        <div class="card-footer">
+          <span>Explore Style</span>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="9_dark_mode_ui.html" class="card">
+        <div>
+          <div class="card-num">Trend 09</div>
+          <h2 class="card-title">Dark Mode UI</h2>
+          <p class="card-desc">눈의 피로도를 줄이고 OLED 디스플레이의 깊은 블랙과 형광 네온 컬러를 강조한 UI.</p>
+        </div>
+        <div class="card-footer">
+          <span>Explore Style</span>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="10_brutalism.html" class="card">
+        <div>
+          <div class="card-num">Trend 10</div>
+          <h2 class="card-title">Brutalism</h2>
+          <p class="card-desc">정형화된 가이드라인을 거부하고 날것 그대로의 생생한 조형감을 표현한 디자이너의 예술적 UI.</p>
+        </div>
+        <div class="card-footer">
+          <span>Explore Style</span>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="11_kinetic_typography.html" class="card">
+        <div>
+          <div class="card-num">Trend 11</div>
+          <h2 class="card-title">Kinetic Typography</h2>
+          <p class="card-desc">움직이는 텍스트, 다이내믹 루핑 마키와 폰트 가변 애니메이션의 화려한 조화.</p>
+        </div>
+        <div class="card-footer">
+          <span>Explore Style</span>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="12_retro_ui.html" class="card">
+        <div>
+          <div class="card-num">Trend 12</div>
+          <h2 class="card-title">Retro UI</h2>
+          <p class="card-desc">80~90년대 픽셀 아트, 윈도우 95 감성과 레트로 레트로 게임 콘솔 인터페이스.</p>
+        </div>
+        <div class="card-footer">
+          <span>Explore Style</span>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="13_isometric_ui.html" class="card">
+        <div>
+          <div class="card-num">Trend 13</div>
+          <h2 class="card-title">Isometric UI</h2>
+          <p class="card-desc">3D 투시도 각도로 평면 UI에 입체 공간감을 불어넣는 등각 투영 비주얼.</p>
+        </div>
+        <div class="card-footer">
+          <span>Explore Style</span>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="14_biomorphic_organic.html" class="card">
+        <div>
+          <div class="card-num">Trend 14</div>
+          <h2 class="card-title">Biomorphic Organic</h2>
+          <p class="card-desc">자연의 유기적인 곡선, 미생물/물방울 형태(Blob)와 유연한 흐름의 디자인.</p>
+        </div>
+        <div class="card-footer">
+          <span>Explore Style</span>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="15_micro_interaction.html" class="card">
+        <div>
+          <div class="card-num">Trend 15</div>
+          <h2 class="card-title">Micro Interaction</h2>
+          <p class="card-desc">사용자 액션에 즉각적으로 피드백을 주는 디테일하고 섬세한 마이크로 애니메이션.</p>
+        </div>
+        <div class="card-footer">
+          <span>Explore Style</span>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <script src="../shared/js/global-nav.js" defer></script>
+</body>
+</html>

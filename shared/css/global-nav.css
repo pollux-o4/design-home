@@ -1,0 +1,116 @@
+/* Design Home - Global Navigation Bar Styles */
+:root {
+  --gnb-bg: rgba(15, 23, 42, 0.75);
+  --gnb-border: rgba(255, 255, 255, 0.12);
+  --gnb-text: #f8fafc;
+  --gnb-text-muted: #94a3b8;
+  --gnb-accent: #6366f1;
+  --gnb-accent-glow: rgba(99, 102, 241, 0.35);
+  --gnb-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+#dh-global-nav {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999;
+  width: calc(100% - 32px);
+  max-width: 1100px;
+  background: var(--gnb-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--gnb-border);
+  border-radius: 9999px;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5),
+              0 0 20px 0 var(--gnb-accent-glow);
+  font-family: var(--gnb-font);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+#dh-global-nav .dh-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--gnb-text);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.02em;
+}
+
+#dh-global-nav .dh-brand-badge {
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 900;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+}
+
+#dh-global-nav .dh-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#dh-global-nav .dh-nav-link {
+  color: var(--gnb-text-muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#dh-global-nav .dh-nav-link:hover,
+#dh-global-nav .dh-nav-link.active {
+  color: var(--gnb-text);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+#dh-global-nav .dh-nav-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+#dh-global-nav .dh-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  #dh-global-nav {
+    top: 8px;
+    padding: 8px 16px;
+  }
+  #dh-global-nav .dh-nav-links {
+    gap: 12px;
+  }
+  #dh-global-nav .dh-nav-link span {
+    display: none;
+  }
+}
