@@ -1,35 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Design Home — Modern UI/UX Architecture & Showcase Hub</title>
-  <meta name="description" content="Design Home is a curated showcase hub featuring 15 modern UI design trends, an interactive Figma-canvas style component system, and clean CSS design token architecture." />
+  <title>Design Home — 모던 UI/UX 아키텍처 & 쇼케이스 허브</title>
+  <meta name="description" content="Design Home은 15가지 최신 UI 디자인 트렌드, 피그마 캔버스 스타일 인터랙티브 컴포넌트 시스템, 디자인 토큰 가이드를 제공하는 큐레이션 허브입니다." />
   <link rel="canonical" href="https://pollux-o4.github.io/design-home/" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://pollux-o4.github.io/design-home/" />
-  <meta property="og:title" content="Design Home — Modern UI/UX Architecture Hub" />
-  <meta property="og:description" content="Explore 15 design trends, interactive component systems, and visual design guidelines." />
+  <meta property="og:title" content="Design Home — 모던 UI/UX 아키텍처 허브" />
+  <meta property="og:description" content="15가지 디자인 트렌드, 인터랙티브 컴포넌트 시스템, 시각적 디자인 가이드라인 탐색." />
   <meta property="og:image" content="https://pollux-o4.github.io/design-home/shared/assets/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="Design Home" />
-  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale" content="ko_KR" />
 
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://pollux-o4.github.io/design-home/" />
-  <meta name="twitter:title" content="Design Home — Modern UI/UX Architecture Hub" />
-  <meta name="twitter:description" content="Explore 15 design trends, interactive component systems, and visual design guidelines." />
+  <meta name="twitter:title" content="Design Home — 모던 UI/UX 아키텍처 허브" />
+  <meta name="twitter:description" content="15가지 디자인 트렌드, 인터랙티브 컴포넌트 시스템, 시각적 디자인 가이드라인 탐색." />
   <meta name="twitter:image" content="https://pollux-o4.github.io/design-home/shared/assets/og-image.png" />
 
   <!-- Favicon & Theme -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❖</text></svg>" type="image/svg+xml" />
   <meta name="theme-color" content="#07090e" />
 
-  <!-- Fonts Optimization (Preload & Essential Weights) -->
+  <!-- Fonts Optimization -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@700;900&display=swap" />
@@ -167,7 +167,7 @@
       font-family: 'Outfit', sans-serif;
       font-size: 4.2rem;
       font-weight: 900;
-      line-height: 1.1;
+      line-height: 1.15;
       letter-spacing: -0.04em;
       margin-bottom: 24px;
       background: linear-gradient(135deg, #ffffff 20%, #cbd5e1 50%, #818cf8 100%);
@@ -431,7 +431,7 @@
 <body>
 
   <!-- Skip to Main Content for Accessibility -->
-  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#main-content" class="skip-link">본문 영역으로 건너뛰기</a>
 
   <!-- Ambient background glow elements -->
   <div class="bg-glow-1" aria-hidden="true"></div>
@@ -442,20 +442,21 @@
     <div class="container">
       <div class="hero-badge">
         <span class="hero-badge-spark" aria-hidden="true"></span>
-        Design System & UX Architecture Hub
+        <span data-i18n="hero_badge">디자인 시스템 & UX 아키텍처 허브</span>
       </div>
-      <h1 class="hero-title">
-        Crafting Modern Web <br /><span>Interfaces & Trends</span>
+      <h1 class="hero-title" data-i18n="hero_title">
+        모던 웹 인터페이스 & <br /><span>디자인 트렌드 아키텍처</span>
       </h1>
-      <p class="hero-subtitle">
-        Explore 15 curated UI design trends, interactive component canvas systems, and modular CSS architecture guidelines built for high visual excellence.
+      <p class="hero-subtitle" data-i18n="hero_subtitle">
+        스큐어모피즘부터 글래스모피즘, 인터랙티브 캔버스 컴포넌트까지.<br />
+        최신 웹 UI/UX 모듈 아키텍처와 트렌드 디자인을 한곳에서 탐색하세요.
       </p>
       <div class="hero-actions">
         <a href="./trend-style/index.html" class="btn-primary">
-          Explore 15 Trends <span aria-hidden="true">→</span>
+          <span data-i18n="hero_btn_primary">15가지 트렌드 탐색</span> <span aria-hidden="true">→</span>
         </a>
         <a href="./ui-components/index.html" class="btn-secondary">
-          Component Canvas <span aria-hidden="true">🧩</span>
+          <span data-i18n="hero_btn_secondary">컴포넌트 캔버스</span> <span aria-hidden="true">🧩</span>
         </a>
       </div>
     </div>
@@ -463,7 +464,7 @@
 
   <!-- Main Content Landmark -->
   <main id="main-content" tabindex="-1">
-    <section class="container hub-section" aria-label="Main Navigation Hub">
+    <section class="container hub-section" aria-label="메인 내비게이션 허브">
       <div class="hub-grid">
         <!-- Card 1: Trend Styles Showcase -->
         <a href="./trend-style/index.html" class="hub-card">
@@ -471,14 +472,14 @@
             <div class="card-icon-box" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.2 19.54 10.56 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
             </div>
-            <div class="card-tag">Collection</div>
-            <h2 class="card-heading">15 Design Trends</h2>
-            <p class="card-body-text">
-              Live demos of 15 key design trends including Skeuomorphism, Glassmorphism, Neo-Brutalism, and Kinetic Typography.
+            <div class="card-tag" data-i18n="card1_tag">컬렉션</div>
+            <h2 class="card-heading" data-i18n="card1_title">15가지 디자인 트렌드</h2>
+            <p class="card-body-text" data-i18n="card1_desc">
+              스큐어모피즘, 글래스모피즘, 네오브루탈리즘, 키네틱 타이포그래피 등 15가지 핵심 디자인 트렌드 라이브 데모.
             </p>
           </div>
           <div class="card-action">
-            <span>Explore 15 Styles</span>
+            <span data-i18n="card1_action">15가지 스타일 둘러보기</span>
             <div class="card-action-arrow" aria-hidden="true">→</div>
           </div>
         </a>
@@ -489,54 +490,54 @@
             <div class="card-icon-box" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
             </div>
-            <div class="card-tag">Interactive Library</div>
-            <h2 class="card-heading">UI Components Canvas</h2>
-            <p class="card-body-text">
-              Interactive playground featuring buttons, toggles, modals, and navigation components in a Figma-canvas layout.
+            <div class="card-tag" data-i18n="card2_tag">인터랙티브 라이브러리</div>
+            <h2 class="card-heading" data-i18n="card2_title">UI 컴포넌트 캔버스</h2>
+            <p class="card-body-text" data-i18n="card2_desc">
+              피그마(Figma) 캔버스 인터페이스 스타일의 인터랙티브 버튼, 토글, 모달, 네비게이션 컴포넌트 플레이그라운드.
             </p>
           </div>
           <div class="card-action">
-            <span>Launch Component Canvas</span>
+            <span data-i18n="card2_action">컴포넌트 캔버스 실행</span>
             <div class="card-action-arrow" aria-hidden="true">→</div>
           </div>
         </a>
 
         <!-- Card 3: Design Guidelines & Skills -->
-        <a href="https://github.com/pollux-o4/design-home" target="_blank" rel="noopener" class="hub-card" aria-label="Design Architecture on GitHub (opens in a new tab)">
+        <a href="https://github.com/pollux-o4/design-home" target="_blank" rel="noopener" class="hub-card" aria-label="GitHub의 디자인 아키텍처 (새 창으로 열림)">
           <div>
             <div class="card-icon-box" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
             </div>
-            <div class="card-tag">Repository & Docs</div>
-            <h2 class="card-heading">Design Architecture</h2>
-            <p class="card-body-text">
-              Clean CSS architecture, design tokens, agent skills documentation, and open-source GitHub repository.
+            <div class="card-tag" data-i18n="card3_tag">저장소 & 문서</div>
+            <h2 class="card-heading" data-i18n="card3_title">디자인 아키텍처</h2>
+            <p class="card-body-text" data-i18n="card3_desc">
+              클린 CSS 아키텍처, 디자인 토큰, 에이전트 스킬 세트 가이드 문서 및 오픈소스 GitHub 저장소.
             </p>
           </div>
           <div class="card-action">
-            <span>View GitHub Repository</span>
+            <span data-i18n="card3_action">GitHub 저장소 보기</span>
             <div class="card-action-arrow" aria-hidden="true">→</div>
           </div>
         </a>
       </div>
 
       <!-- Stats Telemetry Bar -->
-      <div class="stats-bar" aria-label="Project Key Metrics">
+      <div class="stats-bar" aria-label="프로젝트 핵심 지표">
         <div class="stat-item">
           <div class="stat-value">15+</div>
-          <div class="stat-label">UI Design Trends</div>
+          <div class="stat-label" data-i18n="stat1_label">UI 디자인 트렌드</div>
         </div>
         <div class="stat-item">
           <div class="stat-value">50+</div>
-          <div class="stat-label">Reusable Components</div>
+          <div class="stat-label" data-i18n="stat2_label">재사용 컴포넌트</div>
         </div>
         <div class="stat-item">
           <div class="stat-value">100%</div>
-          <div class="stat-label">Pure HTML/CSS/JS</div>
+          <div class="stat-label" data-i18n="stat3_label">순수 HTML/CSS/JS</div>
         </div>
         <div class="stat-item">
           <div class="stat-value">&lt; 10ms</div>
-          <div class="stat-label">Sub-millisecond Render</div>
+          <div class="stat-label" data-i18n="stat4_label">초고속 렌더링 타임</div>
         </div>
       </div>
     </section>
@@ -544,9 +545,12 @@
 
   <footer>
     <div class="container">
-      <p>© 2026 Design Home. Built for GitHub Pages with High Visual Excellence & WCAG 2.2 Compliance.</p>
+      <p data-i18n="footer_text">© 2026 Design Home. 높은 시각적 완성도와 WCAG 2.2 웹 접근성을 준수하여 제작되었습니다.</p>
     </div>
   </footer>
+
+  <!-- i18n Internationalization Engine -->
+  <script src="./shared/js/i18n.js"></script>
 
   <!-- Universal Global Navigation Bar Script -->
   <script src="./shared/js/global-nav.js" defer></script>
