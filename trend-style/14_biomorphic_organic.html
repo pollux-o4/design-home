@@ -1,0 +1,2498 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="flora">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biomorphic / Organic SaaS Analytics Dashboard</title>
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit for smooth organic typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       1. THEME DESIGN TOKENS & CSS VARIABLES (6 BIOMORPHIC THEMES)
+       ========================================================================== */
+    :root {
+      /* Shared Spacing & Physics */
+      --font-main: 'Plus Jakarta Sans', 'Outfit', -apple-system, sans-serif;
+      --ease-fluid: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-smooth: cubic-bezier(0.4, 0.0, 0.2, 1);
+      --radius-blob-1: 32px 48px 36px 52px / 48px 36px 56px 32px;
+      --radius-blob-2: 54px 30px 48px 36px / 32px 52px 36px 48px;
+      --radius-blob-3: 40px 60px 45px 55px / 55px 42px 58px 40px;
+      --radius-card: 28px 36px 32px 40px / 36px 28px 44px 32px;
+      --radius-pill: 999px;
+      --transition-theme: background-color 0.6s var(--ease-smooth), color 0.6s var(--ease-smooth), border-color 0.6s var(--ease-smooth), box-shadow 0.6s var(--ease-smooth);
+    }
+
+    /* THEME 1: Ethereal Flora / Soft Pastel (Default) */
+    [data-theme="flora"] {
+      --bg-gradient: radial-gradient(circle at 10% 20%, #FFF5F7 0%, #F3F8F2 50%, #ECEFFB 100%);
+      --bg-color: #FAFAF8;
+      --card-bg: rgba(255, 255, 255, 0.68);
+      --card-border: rgba(255, 255, 255, 0.85);
+      --card-shadow: 0 20px 40px -15px rgba(230, 185, 200, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.9);
+      --text-main: #2D3142;
+      --text-muted: #6C757D;
+      --text-light: #9EA3B0;
+      --accent-1: #FF80AB; /* Soft Rose */
+      --accent-2: #B9F6CA; /* Mint Leaf */
+      --accent-3: #8C9EFF; /* Lavender Glow */
+      --accent-4: #FFE082; /* Warm Peach */
+      --accent-gradient: linear-gradient(135deg, #FF80AB 0%, #8C9EFF 100%);
+      --blob-1: rgba(255, 128, 171, 0.28);
+      --blob-2: rgba(185, 246, 202, 0.35);
+      --blob-3: rgba(140, 158, 255, 0.25);
+      --sidebar-bg: rgba(255, 255, 255, 0.55);
+      --chart-line: #FF6584;
+      --chart-area-start: rgba(255, 101, 132, 0.4);
+      --chart-area-end: rgba(255, 101, 132, 0.0);
+      --chart-line-2: #536DFE;
+      --badge-bg: rgba(255, 128, 171, 0.15);
+      --badge-text: #D81B60;
+    }
+
+    /* THEME 2: Deep Sea Bioluminescent (Dark Ocean) */
+    [data-theme="biolum"] {
+      --bg-gradient: radial-gradient(circle at 80% 20%, #0D1B2A 0%, #070A13 60%, #030509 100%);
+      --bg-color: #070A13;
+      --card-bg: rgba(16, 27, 44, 0.65);
+      --card-border: rgba(72, 202, 228, 0.25);
+      --card-shadow: 0 20px 50px -10px rgba(0, 242, 254, 0.12), inset 0 1px 2px rgba(255, 255, 255, 0.1);
+      --text-main: #E0E6ED;
+      --text-muted: #8A99AD;
+      --text-light: #52637A;
+      --accent-1: #00F2FE; /* Biolum Cyan */
+      --accent-2: #7209B7; /* Deep Sea Violet */
+      --accent-3: #4EA8DE; /* Aqua Pulse */
+      --accent-4: #3A0CA3; /* Abyssal Blue */
+      --accent-gradient: linear-gradient(135deg, #00F2FE 0%, #7209B7 100%);
+      --blob-1: rgba(0, 242, 254, 0.22);
+      --blob-2: rgba(114, 9, 183, 0.28);
+      --blob-3: rgba(78, 168, 222, 0.20);
+      --sidebar-bg: rgba(12, 20, 34, 0.7);
+      --chart-line: #00F2FE;
+      --chart-area-start: rgba(0, 242, 254, 0.45);
+      --chart-area-end: rgba(0, 242, 254, 0.0);
+      --chart-line-2: #B5179E;
+      --badge-bg: rgba(0, 242, 254, 0.15);
+      --badge-text: #00F2FE;
+    }
+
+    /* THEME 3: Terracotta Soil & Clay (Earth Bio-Flow) */
+    [data-theme="terracotta"] {
+      --bg-gradient: radial-gradient(circle at 30% 10%, #F5EBE6 0%, #EFE5DC 50%, #E3D5C8 100%);
+      --bg-color: #F4EBE1;
+      --card-bg: rgba(248, 242, 236, 0.72);
+      --card-border: rgba(255, 255, 255, 0.8);
+      --card-shadow: 0 20px 40px -15px rgba(180, 110, 85, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.95);
+      --text-main: #3D312A;
+      --text-muted: #7D6E65;
+      --text-light: #A89B92;
+      --accent-1: #E07A5F; /* Terracotta Orange */
+      --accent-2: #F2CC8F; /* Sunlit Ochre */
+      --accent-3: #81B29A; /* Clay Sage */
+      --accent-4: #D4A373; /* Warm Sand */
+      --accent-gradient: linear-gradient(135deg, #E07A5F 0%, #F2CC8F 100%);
+      --blob-1: rgba(224, 122, 95, 0.26);
+      --blob-2: rgba(242, 204, 143, 0.32);
+      --blob-3: rgba(129, 178, 154, 0.25);
+      --sidebar-bg: rgba(245, 237, 229, 0.65);
+      --chart-line: #E07A5F;
+      --chart-area-start: rgba(224, 122, 95, 0.4);
+      --chart-area-end: rgba(224, 122, 95, 0.0);
+      --chart-line-2: #81B29A;
+      --badge-bg: rgba(224, 122, 95, 0.15);
+      --badge-text: #C85A3F;
+    }
+
+    /* THEME 4: Forest Canopy & Moss (Botanical Living) */
+    [data-theme="forest"] {
+      --bg-gradient: radial-gradient(circle at 70% 80%, #0F2A1D 0%, #081C12 60%, #040E09 100%);
+      --bg-color: #071910;
+      --card-bg: rgba(18, 48, 33, 0.65);
+      --card-border: rgba(116, 198, 157, 0.25);
+      --card-shadow: 0 20px 50px -10px rgba(45, 106, 79, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.15);
+      --text-main: #E8F5E9;
+      --text-muted: #81C784;
+      --text-light: #4CAF50;
+      --accent-1: #52B788; /* Emerald Leaf */
+      --accent-2: #74C69D; /* Dewdrop Sage */
+      --accent-3: #D8F3DC; /* Soft Chlorophyll */
+      --accent-4: #1B4332; /* Deep Pine */
+      --accent-gradient: linear-gradient(135deg, #52B788 0%, #B7E4C7 100%);
+      --blob-1: rgba(82, 183, 136, 0.25);
+      --blob-2: rgba(116, 198, 157, 0.22);
+      --blob-3: rgba(45, 106, 79, 0.35);
+      --sidebar-bg: rgba(14, 38, 26, 0.7);
+      --chart-line: #52B788;
+      --chart-area-start: rgba(82, 183, 136, 0.45);
+      --chart-area-end: rgba(82, 183, 136, 0.0);
+      --chart-line-2: #A7C957;
+      --badge-bg: rgba(82, 183, 136, 0.18);
+      --badge-text: #74C69D;
+    }
+
+    /* THEME 5: Cyber Bio-Tech / Cellular (Synthetix Organica) */
+    [data-theme="cyberbio"] {
+      --bg-gradient: radial-gradient(circle at 50% 30%, #120D24 0%, #090614 60%, #04020A 100%);
+      --bg-color: #080512;
+      --card-bg: rgba(24, 18, 46, 0.65);
+      --card-border: rgba(0, 245, 212, 0.3);
+      --card-shadow: 0 20px 50px -10px rgba(157, 78, 221, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.12);
+      --text-main: #F4F0FF;
+      --text-muted: #A39BB9;
+      --text-light: #6A608A;
+      --accent-1: #00F5D4; /* Bio Neon Teal */
+      --accent-2: #9D4EDD; /* Bio Synth Violet */
+      --accent-3: #FF007A; /* Pulse Magenta */
+      --accent-4: #3A0CA3; /* Matrix Blue */
+      --accent-gradient: linear-gradient(135deg, #00F5D4 0%, #9D4EDD 100%);
+      --blob-1: rgba(0, 245, 212, 0.22);
+      --blob-2: rgba(157, 78, 221, 0.28);
+      --blob-3: rgba(255, 0, 122, 0.20);
+      --sidebar-bg: rgba(18, 13, 36, 0.75);
+      --chart-line: #00F5D4;
+      --chart-area-start: rgba(0, 245, 212, 0.45);
+      --chart-area-end: rgba(0, 245, 212, 0.0);
+      --chart-line-2: #FF007A;
+      --badge-bg: rgba(0, 245, 212, 0.15);
+      --badge-text: #00F5D4;
+    }
+
+    /* THEME 6: Sunlit Coral Reef (Oceanic Splash) */
+    [data-theme="coral"] {
+      --bg-gradient: radial-gradient(circle at 20% 80%, #EFF8F8 0%, #E6F3F4 50%, #FAF0EC 100%);
+      --bg-color: #F2F8F8;
+      --card-bg: rgba(255, 255, 255, 0.72);
+      --card-border: rgba(255, 255, 255, 0.9);
+      --card-shadow: 0 20px 40px -15px rgba(0, 109, 119, 0.18), inset 0 2px 4px rgba(255, 255, 255, 0.9);
+      --text-main: #004D54;
+      --text-muted: #5C8B90;
+      --text-light: #94B6B9;
+      --accent-1: #E29578; /* Coral Blossom */
+      --accent-2: #83C5BE; /* Soft Aqua */
+      --accent-3: #FFDDD2; /* Warm Splash */
+      --accent-4: #006D77; /* Ocean Deep */
+      --accent-gradient: linear-gradient(135deg, #E29578 0%, #83C5BE 100%);
+      --blob-1: rgba(226, 149, 120, 0.28);
+      --blob-2: rgba(131, 197, 190, 0.32);
+      --blob-3: rgba(0, 109, 119, 0.20);
+      --sidebar-bg: rgba(240, 247, 247, 0.65);
+      --chart-line: #E29578;
+      --chart-area-start: rgba(226, 149, 120, 0.42);
+      --chart-area-end: rgba(226, 149, 120, 0.0);
+      --chart-line-2: #006D77;
+      --badge-bg: rgba(226, 149, 120, 0.16);
+      --badge-text: #D06B4C;
+    }
+
+    /* ==========================================================================
+       2. GLOBAL RESET & BASE STYLES
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-main);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background: var(--bg-color);
+      background-image: var(--bg-gradient);
+      background-attachment: fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: var(--transition-theme);
+      position: relative;
+    }
+
+    /* Custom Organic Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.03);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent-1);
+      border-radius: var(--radius-pill);
+      border: 3px solid transparent;
+      background-clip: padding-box;
+    }
+
+    /* ==========================================================================
+       3. BACKGROUND MORPHING LIVING BLOBS (BIOMORPHIC AESTHETICS)
+       ========================================================================== */
+    .bio-canvas-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .living-blob {
+      position: absolute;
+      filter: blur(50px);
+      opacity: 0.85;
+      mix-blend-mode: multiply;
+      transition: var(--transition-theme);
+      will-change: transform, border-radius;
+    }
+
+    [data-theme="biolum"] .living-blob,
+    [data-theme="forest"] .living-blob,
+    [data-theme="cyberbio"] .living-blob {
+      mix-blend-mode: screen;
+      opacity: 0.65;
+    }
+
+    .blob-1 {
+      width: 520px;
+      height: 520px;
+      top: -100px;
+      left: -100px;
+      background: var(--blob-1);
+      border-radius: var(--radius-blob-1);
+      animation: floatBlob1 18s ease-in-out infinite alternate;
+    }
+
+    .blob-2 {
+      width: 600px;
+      height: 600px;
+      bottom: -150px;
+      right: -100px;
+      background: var(--blob-2);
+      border-radius: var(--radius-blob-2);
+      animation: floatBlob2 22s ease-in-out infinite alternate;
+    }
+
+    .blob-3 {
+      width: 450px;
+      height: 450px;
+      top: 40%;
+      left: 35%;
+      background: var(--blob-3);
+      border-radius: var(--radius-blob-3);
+      animation: floatBlob3 15s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatBlob1 {
+      0% { transform: translate(0, 0) rotate(0deg) scale(1); border-radius: var(--radius-blob-1); }
+      50% { transform: translate(120px, 80px) rotate(90deg) scale(1.15); border-radius: var(--radius-blob-2); }
+      100% { transform: translate(-40px, 140px) rotate(180deg) scale(0.95); border-radius: var(--radius-blob-3); }
+    }
+
+    @keyframes floatBlob2 {
+      0% { transform: translate(0, 0) rotate(0deg) scale(1); border-radius: var(--radius-blob-2); }
+      50% { transform: translate(-100px, -90px) rotate(-120deg) scale(1.1); border-radius: var(--radius-blob-3); }
+      100% { transform: translate(60px, -150px) rotate(-240deg) scale(0.9); border-radius: var(--radius-blob-1); }
+    }
+
+    @keyframes floatBlob3 {
+      0% { transform: translate(0, 0) scale(0.9); border-radius: var(--radius-blob-3); }
+      50% { transform: translate(90px, -60px) scale(1.2); border-radius: var(--radius-blob-1); }
+      100% { transform: translate(-80px, 70px) scale(1); border-radius: var(--radius-blob-2); }
+    }
+
+    /* Pause animation if Bio-Sync toggle is off */
+    body.paused-blobs .living-blob {
+      animation-play-state: paused !important;
+    }
+
+    /* ==========================================================================
+       4. TOP-RIGHT THEME SWITCHER (FIXED)
+       ========================================================================== */
+    .version-switcher-bar {
+      position: fixed;
+      top: 18px;
+      right: 24px;
+      z-index: 10000;
+      background: var(--card-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1.5px solid var(--card-border);
+      padding: 6px 10px;
+      border-radius: var(--radius-pill);
+      box-shadow: var(--card-shadow);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition-theme);
+    }
+
+    .switcher-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      padding: 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .switcher-label svg {
+      width: 14px;
+      height: 14px;
+      fill: var(--accent-1);
+    }
+
+    .theme-btn {
+      background: transparent;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.3s var(--ease-fluid);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .theme-btn .color-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      transition: transform 0.3s var(--ease-fluid);
+    }
+
+    .theme-btn[data-target="flora"] .color-dot { background: #FF80AB; }
+    .theme-btn[data-target="biolum"] .color-dot { background: #00F2FE; }
+    .theme-btn[data-target="terracotta"] .color-dot { background: #E07A5F; }
+    .theme-btn[data-target="forest"] .color-dot { background: #52B788; }
+    .theme-btn[data-target="cyberbio"] .color-dot { background: #00F5D4; }
+    .theme-btn[data-target="coral"] .color-dot { background: #E29578; }
+
+    .theme-btn:hover {
+      color: var(--text-main);
+      transform: translateY(-2px);
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .theme-btn.active {
+      background: var(--accent-gradient);
+      color: #FFFFFF !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      border-radius: var(--radius-pill);
+    }
+
+    .theme-btn.active .color-dot {
+      transform: scale(1.3);
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8);
+    }
+
+    /* ==========================================================================
+       5. MAIN APPLICATION LAYOUT STRUCTURE
+       ========================================================================== */
+    .app-wrapper {
+      display: flex;
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+      padding: 16px;
+      gap: 20px;
+      max-width: 1720px;
+      margin: 0 auto;
+    }
+
+    /* ==========================================================================
+       6. SIDEBAR COMPONENT (BIOMORPHIC ACCORDION & CONTROLS)
+       ========================================================================== */
+    .sidebar {
+      width: 270px;
+      flex-shrink: 0;
+      background: var(--sidebar-bg);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1.5px solid var(--card-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--card-shadow);
+      padding: 28px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition-theme);
+    }
+
+    /* Sidebar Brand Logo */
+    .brand-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 30px;
+      padding: 0 6px;
+    }
+
+    .brand-logo-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--accent-gradient);
+      border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      animation: morphLogo 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes morphLogo {
+      0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+      50% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+      100% { border-radius: 50% 50% 40% 60% / 30% 70% 50% 50%; }
+    }
+
+    .brand-logo-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: #FFFFFF;
+    }
+
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      color: var(--text-main);
+      line-height: 1.1;
+    }
+
+    .brand-subtitle {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Accordion Navigation */
+    .nav-section-title {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--text-light);
+      margin: 18px 10px 8px 10px;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .nav-item {
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+      transition: all 0.3s var(--ease-smooth);
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 16px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      transition: all 0.3s var(--ease-fluid);
+      user-select: none;
+    }
+
+    .nav-link-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-link-left svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+      transition: transform 0.3s var(--ease-fluid);
+    }
+
+    .chevron-icon {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+      transition: transform 0.3s var(--ease-fluid);
+    }
+
+    .nav-item.open .chevron-icon {
+      transform: rotate(90deg);
+    }
+
+    .nav-link:hover, .nav-item.active > .nav-link {
+      color: var(--text-main);
+      background: rgba(0, 0, 0, 0.04);
+      transform: translateX(4px);
+    }
+
+    [data-theme="biolum"] .nav-link:hover, [data-theme="forest"] .nav-link:hover, [data-theme="cyberbio"] .nav-link:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-item.active > .nav-link {
+      background: var(--card-bg);
+      color: var(--text-main);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border: 1px solid var(--card-border);
+    }
+
+    /* Accordion Submenu */
+    .submenu {
+      list-style: none;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s var(--ease-smooth), opacity 0.3s var(--ease-smooth);
+      opacity: 0;
+      padding-left: 38px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-item.open > .submenu {
+      max-height: 200px;
+      opacity: 1;
+      padding-top: 6px;
+      padding-bottom: 8px;
+    }
+
+    .submenu-item a {
+      display: block;
+      padding: 7px 12px;
+      font-size: 0.81rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-radius: var(--radius-pill);
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .submenu-item a::before {
+      content: '';
+      position: absolute;
+      left: -12px;
+      top: 50%;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--text-light);
+      transform: translateY(-50%);
+      transition: all 0.2s ease;
+    }
+
+    .submenu-item a:hover, .submenu-item a.active {
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    .submenu-item a:hover::before, .submenu-item a.active::before {
+      background: var(--accent-1);
+      transform: translateY(-50%) scale(1.5);
+    }
+
+    /* Sidebar Footer Toggle Switch */
+    .sidebar-footer {
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    [data-theme="biolum"] .sidebar-footer, [data-theme="forest"] .sidebar-footer, [data-theme="cyberbio"] .sidebar-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .toggle-widget {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(0, 0, 0, 0.03);
+      padding: 10px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    [data-theme="biolum"] .toggle-widget, [data-theme="forest"] .toggle-widget, [data-theme="cyberbio"] .toggle-widget {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .toggle-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .switch-input {
+      appearance: none;
+      width: 44px;
+      height: 24px;
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: var(--radius-pill);
+      position: relative;
+      cursor: pointer;
+      outline: none;
+      transition: background 0.3s var(--ease-fluid);
+    }
+
+    .switch-input::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 18px;
+      height: 18px;
+      background: #FFFFFF;
+      border-radius: 50%;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s var(--ease-fluid);
+    }
+
+    .switch-input:checked {
+      background: var(--accent-1);
+    }
+
+    .switch-input:checked::after {
+      transform: translateX(20px);
+    }
+
+    /* ==========================================================================
+       7. MAIN CONTENT AREA & HEADER CONTROLS
+       ========================================================================== */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      min-width: 0; /* Prevents flex overflow */
+    }
+
+    /* Top Navigation Header */
+    .top-header {
+      background: var(--card-bg);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1.5px solid var(--card-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--card-shadow);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      transition: var(--transition-theme);
+    }
+
+    .header-title-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dashboard-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .bio-pulse-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--accent-1);
+      border-radius: 50%;
+      position: relative;
+      box-shadow: 0 0 10px var(--accent-1);
+    }
+
+    .bio-pulse-dot::after {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border: 2px solid var(--accent-1);
+      border-radius: 50%;
+      animation: pulseHalo 2s infinite ease-out;
+    }
+
+    @keyframes pulseHalo {
+      0% { transform: scale(0.8); opacity: 1; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    .dashboard-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Custom Dropdown Menus */
+    .dropdown-container {
+      position: relative;
+    }
+
+    .dropdown-btn {
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      padding: 10px 16px;
+      border-radius: var(--radius-pill);
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s var(--ease-fluid);
+    }
+
+    [data-theme="biolum"] .dropdown-btn, [data-theme="forest"] .dropdown-btn, [data-theme="cyberbio"] .dropdown-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .dropdown-btn:hover {
+      background: rgba(0, 0, 0, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .dropdown-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: var(--card-bg);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border: 1.5px solid var(--card-border);
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      padding: 8px;
+      min-width: 180px;
+      z-index: 100;
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      animation: dropdownFade 0.3s var(--ease-fluid);
+    }
+
+    @keyframes dropdownFade {
+      from { opacity: 0; transform: translateY(-8px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .dropdown-menu.show {
+      display: flex;
+    }
+
+    .dropdown-option {
+      padding: 9px 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .dropdown-option:hover, .dropdown-option.selected {
+      background: var(--accent-1);
+      color: #FFFFFF;
+    }
+
+    /* Action Trigger Button (+ New Project) */
+    .btn-action-primary {
+      background: var(--accent-gradient);
+      color: #FFFFFF;
+      border: none;
+      padding: 10px 20px;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 8px 25px -5px var(--accent-1);
+      transition: all 0.3s var(--ease-fluid);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-action-primary:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 12px 30px -4px var(--accent-1);
+    }
+
+    .btn-action-primary svg {
+      width: 16px;
+      height: 16px;
+      fill: #FFFFFF;
+    }
+
+    /* Profile Switcher Quick Avatar */
+    .profile-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 12px 4px 6px;
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+    }
+
+    [data-theme="biolum"] .profile-pill, [data-theme="forest"] .profile-pill, [data-theme="cyberbio"] .profile-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .profile-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 0.8rem;
+    }
+
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .profile-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .profile-role {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       8. CONTROLS BAR & DATA MODE TABS ([Daily] [Weekly] [Monthly])
+       ========================================================================== */
+    .controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 0 4px;
+    }
+
+    .section-headline {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .data-tabs {
+      display: flex;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      padding: 5px;
+      border-radius: var(--radius-pill);
+      box-shadow: var(--card-shadow);
+      gap: 4px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      padding: 8px 18px;
+      border-radius: var(--radius-pill);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.3s var(--ease-fluid);
+    }
+
+    .tab-btn:hover {
+      color: var(--text-main);
+    }
+
+    .tab-btn.active {
+      background: var(--accent-gradient);
+      color: #FFFFFF;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+    }
+
+    /* ==========================================================================
+       9. DRAGGABLE KPI METRIC WIDGETS GRID
+       ========================================================================== */
+    .widget-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 1200px) {
+      .widget-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .widget-grid { grid-template-columns: 1fr; }
+    }
+
+    .kpi-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1.5px solid var(--card-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--card-shadow);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+      transition: transform 0.3s var(--ease-fluid), box-shadow 0.3s var(--ease-fluid), border-color 0.3s var(--ease-smooth);
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-5px) scale(1.015);
+      border-color: var(--accent-1);
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.15);
+    }
+
+    .kpi-card:active {
+      cursor: grabbing;
+    }
+
+    .kpi-card.dragging {
+      opacity: 0.5;
+      transform: scale(0.96) rotate(1deg);
+      border: 2px dashed var(--accent-1);
+    }
+
+    /* Biomorphic Liquid Background Accent in KPI Card */
+    .kpi-bg-blob {
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 110px;
+      height: 110px;
+      border-radius: 40% 60% 70% 30% / 50% 30% 70% 50%;
+      background: var(--accent-1);
+      opacity: 0.12;
+      pointer-events: none;
+      transition: transform 0.5s var(--ease-fluid);
+    }
+
+    .kpi-card:hover .kpi-bg-blob {
+      transform: scale(1.4) rotate(45deg);
+      opacity: 0.22;
+    }
+
+    .kpi-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .kpi-icon-wrapper {
+      width: 42px;
+      height: 42px;
+      border-radius: 35% 65% 60% 40% / 50% 40% 60% 50%;
+      background: var(--badge-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.4s var(--ease-fluid);
+    }
+
+    .kpi-card:hover .kpi-icon-wrapper {
+      transform: rotate(12deg) scale(1.1);
+    }
+
+    .kpi-icon-wrapper svg {
+      width: 22px;
+      height: 22px;
+      fill: var(--badge-text);
+    }
+
+    .kpi-badge {
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.72rem;
+      font-weight: 800;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .kpi-body {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .kpi-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .kpi-value {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.8px;
+      line-height: 1.1;
+    }
+
+    .kpi-footer {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Skeleton Loading State for KPI Cards */
+    .skeleton .kpi-value,
+    .skeleton .kpi-title,
+    .skeleton .kpi-footer {
+      position: relative;
+      color: transparent !important;
+      background: rgba(0, 0, 0, 0.08) !important;
+      border-radius: 8px !important;
+      overflow: hidden;
+    }
+
+    [data-theme="biolum"] .skeleton .kpi-value,
+    [data-theme="forest"] .skeleton .kpi-value,
+    [data-theme="cyberbio"] .skeleton .kpi-value {
+      background: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .skeleton .kpi-value::after,
+    .skeleton .kpi-title::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      animation: skeletonSweep 1.2s infinite;
+    }
+
+    @keyframes skeletonSweep {
+      100% { left: 100%; }
+    }
+
+    /* ==========================================================================
+       10. CHARTS CONTAINER & INTERACTIVE SVG CHARTS
+       ========================================================================== */
+    .charts-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 1100px) {
+      .charts-row { grid-template-columns: 1fr; }
+    }
+
+    .chart-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1.5px solid var(--card-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--card-shadow);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+    }
+
+    .chart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chart-title-box {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .chart-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .chart-desc {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .chart-legend {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* SVG Chart Drawing Wrapper */
+    .svg-chart-container {
+      width: 100%;
+      height: 280px;
+      position: relative;
+    }
+
+    .svg-chart-container svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    /* Interactive Hover Point & Tooltip */
+    .chart-point {
+      cursor: pointer;
+      transition: r 0.3s var(--ease-fluid), fill 0.3s ease;
+    }
+
+    .chart-point:hover {
+      r: 8;
+      filter: drop-shadow(0 0 8px var(--accent-1));
+    }
+
+    .chart-tooltip {
+      position: absolute;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1.5px solid var(--card-border);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      padding: 8px 14px;
+      border-radius: 16px;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate(-50%, -110%) scale(0.9);
+      transition: opacity 0.2s ease, transform 0.2s var(--ease-fluid);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      white-space: nowrap;
+    }
+
+    .chart-tooltip.show {
+      opacity: 1;
+      transform: translate(-50%, -125%) scale(1);
+    }
+
+    .tooltip-date {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .tooltip-val {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    /* Donut / Radial Cellular Chart */
+    .cellular-radial-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      height: 280px;
+    }
+
+    .radial-center-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    .radial-val {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1;
+    }
+
+    .radial-lbl {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ==========================================================================
+       11. RECENT BIO-FLOW ACTIVITIES TABLE / KANBAN WIDGET
+       ========================================================================== */
+    .table-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1.5px solid var(--card-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--card-shadow);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .bio-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .bio-table th {
+      padding: 12px 16px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    [data-theme="biolum"] .bio-table th, [data-theme="forest"] .bio-table th, [data-theme="cyberbio"] .bio-table th {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .bio-table td {
+      padding: 14px 16px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text-main);
+      border-bottom: 1px solid rgba(0,0,0,0.03);
+    }
+
+    .bio-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .node-cell {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .node-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 40% 60% 50% 50% / 50% 40% 60% 50%;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.78rem;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .status-active { background: rgba(82, 183, 136, 0.18); color: #2D6A4F; }
+    .status-pending { background: rgba(242, 204, 143, 0.3); color: #D4A373; }
+    .status-syncing { background: rgba(140, 158, 255, 0.2); color: #536DFE; }
+
+    [data-theme="biolum"] .status-active { color: #00F2FE; }
+    [data-theme="biolum"] .status-pending { color: #F2CC8F; }
+    [data-theme="biolum"] .status-syncing { color: #8C9EFF; }
+
+    /* ==========================================================================
+       12. MODAL SLIDE-OVER POPUP ("+ NEW PROJECT")
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 20000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s var(--ease-smooth);
+    }
+
+    .modal-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(35px);
+      -webkit-backdrop-filter: blur(35px);
+      border: 1.5px solid var(--card-border);
+      border-radius: var(--radius-card);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+      width: 90%;
+      max-width: 520px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      transform: scale(0.9) translateY(20px);
+      transition: transform 0.4s var(--ease-fluid);
+      position: relative;
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .modal-close-btn {
+      background: rgba(0, 0, 0, 0.05);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+    }
+
+    .modal-close-btn:hover {
+      background: var(--accent-1);
+      color: #FFFFFF;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
+
+    .form-input, .form-select {
+      background: rgba(0, 0, 0, 0.03);
+      border: 1.5px solid rgba(0, 0, 0, 0.08);
+      padding: 12px 18px;
+      border-radius: var(--radius-pill);
+      font-size: 0.9rem;
+      color: var(--text-main);
+      outline: none;
+      transition: all 0.3s var(--ease-smooth);
+    }
+
+    [data-theme="biolum"] .form-input, [data-theme="biolum"] .form-select,
+    [data-theme="forest"] .form-input, [data-theme="forest"] .form-select,
+    [data-theme="cyberbio"] .form-input, [data-theme="cyberbio"] .form-select {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: var(--accent-1);
+      box-shadow: 0 0 0 3px var(--badge-bg);
+    }
+
+    .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--text-muted);
+      padding: 10px 20px;
+      border-radius: var(--radius-pill);
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(0, 0, 0, 0.05);
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hidden SVG Gooey Filter Definitions for Dynamic Organic Morphing -->
+  <svg style="width:0; height:0; position:absolute;" aria-hidden="true">
+    <defs>
+      <filter id="gooey">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="gooey" />
+        <feComposite in="SourceGraphic" in2="gooey" operator="atop"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Living Morphing Background Blobs -->
+  <div class="bio-canvas-bg">
+    <div class="living-blob blob-1"></div>
+    <div class="living-blob blob-2"></div>
+    <div class="living-blob blob-3"></div>
+  </div>
+
+  <!-- FIXED TOP-RIGHT 6-VERSION THEME SWITCHER -->
+  <div class="version-switcher-bar">
+    <div class="switcher-label">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+      Bio Theme:
+    </div>
+    <button class="theme-btn active" data-target="flora" onclick="switchTheme('flora')">
+      <span class="color-dot"></span> Flora Pastel
+    </button>
+    <button class="theme-btn" data-target="biolum" onclick="switchTheme('biolum')">
+      <span class="color-dot"></span> Deep Biolum
+    </button>
+    <button class="theme-btn" data-target="terracotta" onclick="switchTheme('terracotta')">
+      <span class="color-dot"></span> Terracotta Soil
+    </button>
+    <button class="theme-btn" data-target="forest" onclick="switchTheme('forest')">
+      <span class="color-dot"></span> Forest Canopy
+    </button>
+    <button class="theme-btn" data-target="cyberbio" onclick="switchTheme('cyberbio')">
+      <span class="color-dot"></span> Cyber Bio-Tech
+    </button>
+    <button class="theme-btn" data-target="coral" onclick="switchTheme('coral')">
+      <span class="color-dot"></span> Coral Reef
+    </button>
+  </div>
+
+  <!-- APP WRAPPER CONTAINER -->
+  <div class="app-wrapper">
+
+    <!-- BIOMORPHIC ACCORDION SIDEBAR -->
+    <aside class="sidebar">
+      <div>
+        <!-- Brand Header -->
+        <div class="brand-header">
+          <div class="brand-logo-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.21 19.57 10.56 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
+          </div>
+          <div>
+            <div class="brand-title">ORGANICA</div>
+            <div class="brand-subtitle">Bio-Flow Analytics</div>
+          </div>
+        </div>
+
+        <!-- Accordion Navigation -->
+        <div class="nav-section-title">Core Modules</div>
+        <ul class="nav-list">
+          <!-- Accordion Item 1: Analytics -->
+          <li class="nav-item open active">
+            <div class="nav-link" onclick="toggleAccordion(this)">
+              <div class="nav-link-left">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H7v-4h5v4zm0-6H7V7h5v4zm5 6h-4V7h4v10z"/></svg>
+                <span>Analytics</span>
+              </div>
+              <svg class="chevron-icon" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item"><a href="#" class="active">Bio-Overview</a></li>
+              <li class="submenu-item"><a href="#">Conversion Flow</a></li>
+              <li class="submenu-item"><a href="#">Cell Retention</a></li>
+              <li class="submenu-item"><a href="#">Live Funnels</a></li>
+            </ul>
+          </li>
+
+          <!-- Accordion Item 2: Reports -->
+          <li class="nav-item">
+            <div class="nav-link" onclick="toggleAccordion(this)">
+              <div class="nav-link-left">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                <span>Bio-Reports</span>
+              </div>
+              <svg class="chevron-icon" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item"><a href="#">Performance Log</a></li>
+              <li class="submenu-item"><a href="#">Cohort Matrix</a></li>
+              <li class="submenu-item"><a href="#">Export CSV Stream</a></li>
+            </ul>
+          </li>
+
+          <!-- Accordion Item 3: Team -->
+          <li class="nav-item">
+            <div class="nav-link" onclick="toggleAccordion(this)">
+              <div class="nav-link-left">
+                <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                <span>Bio-Nodes</span>
+              </div>
+              <svg class="chevron-icon" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item"><a href="#">Active Organisms</a></li>
+              <li class="submenu-item"><a href="#">Permissions Mesh</a></li>
+            </ul>
+          </li>
+
+          <!-- Accordion Item 4: Settings -->
+          <li class="nav-item">
+            <div class="nav-link" onclick="toggleAccordion(this)">
+              <div class="nav-link-left">
+                <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                <span>Settings</span>
+              </div>
+              <svg class="chevron-icon" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item"><a href="#">Organica Config</a></li>
+              <li class="submenu-item"><a href="#">Bio-Sync Keys</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Sidebar Footer Controls -->
+      <div class="sidebar-footer">
+        <div class="toggle-widget">
+          <div class="toggle-label">
+            <svg style="width:16px; height:16px; fill:var(--accent-1);" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            Living Blobs
+          </div>
+          <input type="checkbox" id="blobSyncToggle" class="switch-input" checked onchange="toggleLivingBlobs(this)">
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN DASHBOARD CONTENT AREA -->
+    <main class="main-content">
+
+      <!-- TOP HEADER BAR -->
+      <header class="top-header">
+        <div class="header-title-group">
+          <div class="dashboard-title">
+            <span class="bio-pulse-dot"></span>
+            Performance Cellular Stream
+          </div>
+          <div class="dashboard-subtitle">Real-time organic metrics & dynamic fluid growth telemetry</div>
+        </div>
+
+        <div class="header-actions">
+          <!-- Profile Switcher Dropdown -->
+          <div class="dropdown-container">
+            <div class="profile-pill" onclick="toggleDropdown('profileDropdown')">
+              <div class="profile-avatar">AO</div>
+              <div class="profile-info">
+                <div class="profile-name">Acme Organics</div>
+                <div class="profile-role">Enterprise Bio-Plan</div>
+              </div>
+              <svg style="width:14px; height:14px; fill:currentColor;" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+            </div>
+            <div id="profileDropdown" class="dropdown-menu">
+              <div class="dropdown-option selected" onclick="selectProfile(this, 'Acme Organics')">Acme Organics</div>
+              <div class="dropdown-option" onclick="selectProfile(this, 'BioHealth AI')">BioHealth AI</div>
+              <div class="dropdown-option" onclick="selectProfile(this, 'FloraLabs Global')">FloraLabs Global</div>
+            </div>
+          </div>
+
+          <!-- Date Range Selector Dropdown -->
+          <div class="dropdown-container">
+            <button class="dropdown-btn" onclick="toggleDropdown('dateDropdown')">
+              <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+              <span id="selectedDateLabel">This Month</span>
+              <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+            </button>
+            <div id="dateDropdown" class="dropdown-menu">
+              <div class="dropdown-option" onclick="changeDateRange('Today')">Today</div>
+              <div class="dropdown-option" onclick="changeDateRange('This Week')">This Week</div>
+              <div class="dropdown-option selected" onclick="changeDateRange('This Month')">This Month</div>
+              <div class="dropdown-option" onclick="changeDateRange('This Year')">This Year</div>
+            </div>
+          </div>
+
+          <!-- Quick Action Modal Trigger Button -->
+          <button class="btn-action-primary" onclick="openModal()">
+            <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            + New Project
+          </button>
+        </div>
+      </header>
+
+      <!-- CONTROLS BAR & DATA VIEW TABS ([Daily] [Weekly] [Monthly]) -->
+      <div class="controls-bar">
+        <div class="section-headline">
+          Fluid Telemetry View
+        </div>
+        <div class="data-tabs">
+          <button class="tab-btn" onclick="switchDataTab('daily', this)">Daily</button>
+          <button class="tab-btn active" onclick="switchDataTab('weekly', this)">Weekly</button>
+          <button class="tab-btn" onclick="switchDataTab('monthly', this)">Monthly</button>
+        </div>
+      </div>
+
+      <!-- DRAGGABLE KPI METRIC CARDS GRID -->
+      <div class="widget-grid" id="kpiGrid">
+        
+        <!-- KPI Card 1 -->
+        <div class="kpi-card" draggable="true">
+          <div class="kpi-bg-blob"></div>
+          <div class="kpi-header">
+            <div class="kpi-icon-wrapper">
+              <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+            </div>
+            <div class="kpi-badge">+14.8% ▲</div>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-title">Organic Revenue</div>
+            <div class="kpi-value" id="kpi-revenue" data-target="128450">$128,450</div>
+          </div>
+          <div class="kpi-footer">
+            <svg style="width:12px; height:12px; fill:var(--accent-1)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            +$16,400 vs previous period
+          </div>
+        </div>
+
+        <!-- KPI Card 2 -->
+        <div class="kpi-card" draggable="true">
+          <div class="kpi-bg-blob"></div>
+          <div class="kpi-header">
+            <div class="kpi-icon-wrapper">
+              <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+            </div>
+            <div class="kpi-badge">+8.2% ▲</div>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-title">Active Bio-Nodes</div>
+            <div class="kpi-value" id="kpi-nodes" data-target="42890">42,890</div>
+          </div>
+          <div class="kpi-footer">
+            <svg style="width:12px; height:12px; fill:var(--accent-1)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            3,420 active concurrent flows
+          </div>
+        </div>
+
+        <!-- KPI Card 3 -->
+        <div class="kpi-card" draggable="true">
+          <div class="kpi-bg-blob"></div>
+          <div class="kpi-header">
+            <div class="kpi-icon-wrapper">
+              <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            </div>
+            <div class="kpi-badge">Optimal</div>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-title">Cell Retention</div>
+            <div class="kpi-value" id="kpi-retention" data-target="98.4">98.4%</div>
+          </div>
+          <div class="kpi-footer">
+            <svg style="width:12px; height:12px; fill:var(--accent-1)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            99.1% biological stability
+          </div>
+        </div>
+
+        <!-- KPI Card 4 -->
+        <div class="kpi-card" draggable="true">
+          <div class="kpi-bg-blob"></div>
+          <div class="kpi-header">
+            <div class="kpi-icon-wrapper">
+              <svg viewBox="0 0 24 24"><path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+            </div>
+            <div class="kpi-badge">-180ms</div>
+          </div>
+          <div class="kpi-body">
+            <div class="kpi-title">Flow Latency</div>
+            <div class="kpi-value" id="kpi-latency" data-target="1.24">1.24s</div>
+          </div>
+          <div class="kpi-footer">
+            <svg style="width:12px; height:12px; fill:var(--accent-1)" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            Ultra-fast organic routing
+          </div>
+        </div>
+
+      </div>
+
+      <!-- INTERACTIVE CHARTS SECTION -->
+      <div class="charts-row">
+
+        <!-- Chart 1: Smooth Organic Bezier Line/Area Chart -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title-box">
+              <div class="chart-title">Bio-Flow Growth & Traffic Curves</div>
+              <div class="chart-desc">Continuous fluid spline representing multi-cellular engagement rate</div>
+            </div>
+            <div class="chart-legend">
+              <div class="legend-item">
+                <span class="legend-dot" style="background:var(--chart-line)"></span> Revenue Stream
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot" style="background:var(--chart-line-2)"></span> Bio-Nodes
+              </div>
+            </div>
+          </div>
+
+          <!-- SVG Chart Container -->
+          <div class="svg-chart-container" id="lineChartContainer">
+            <!-- Dynamic Tooltip -->
+            <div class="chart-tooltip" id="chartTooltip">
+              <div class="tooltip-date" id="ttDate">MAY 14</div>
+              <div class="tooltip-val" id="ttVal">$18,400</div>
+            </div>
+            
+            <svg viewBox="0 0 800 280" preserveAspectRatio="none" id="lineChartSvg">
+              <!-- SVG Gradients -->
+              <defs>
+                <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="var(--chart-line)" stop-opacity="0.45" />
+                  <stop offset="100%" stop-color="var(--chart-line)" stop-opacity="0.0" />
+                </linearGradient>
+              </defs>
+
+              <!-- Dynamic Area Path -->
+              <path id="chartAreaPath" fill="url(#chartGradient)" d="" />
+              <!-- Dynamic Smooth Organic Bezier Line Path -->
+              <path id="chartLinePath" fill="none" stroke="var(--chart-line)" stroke-width="4" stroke-linecap="round" d="" />
+
+              <!-- Interactive Data Points -->
+              <g id="chartPointsGroup"></g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Chart 2: Cellular Radial Donut Chart -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <div class="chart-title-box">
+              <div class="chart-title">Cell Density</div>
+              <div class="chart-desc">Organic segment allocation</div>
+            </div>
+          </div>
+
+          <div class="cellular-radial-box">
+            <svg viewBox="0 0 200 200" style="width:220px; height:220px;">
+              <!-- Background Ring -->
+              <circle cx="100" cy="100" r="75" fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="18" />
+              <!-- Animated Bio Donut Segments -->
+              <circle cx="100" cy="100" r="75" fill="none" stroke="var(--accent-1)" stroke-width="18" stroke-dasharray="471" stroke-dashoffset="140" stroke-linecap="round" transform="rotate(-90 100 100)" />
+              <circle cx="100" cy="100" r="75" fill="none" stroke="var(--accent-2)" stroke-width="18" stroke-dasharray="471" stroke-dashoffset="310" stroke-linecap="round" transform="rotate(45 100 100)" />
+              <circle cx="100" cy="100" r="75" fill="none" stroke="var(--accent-3)" stroke-width="18" stroke-dasharray="471" stroke-dashoffset="400" stroke-linecap="round" transform="rotate(160 100 100)" />
+            </svg>
+
+            <div class="radial-center-text">
+              <div class="radial-val" id="radialCenterVal">84.6%</div>
+              <div class="radial-lbl">Density</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RECENT BIO-FLOW ACTIVITIES TABLE -->
+      <div class="table-card">
+        <div class="chart-header">
+          <div class="chart-title-box">
+            <div class="chart-title">Recent Bio-Node Activity</div>
+            <div class="chart-desc">Live Telemetry updates from connected organisms</div>
+          </div>
+        </div>
+
+        <table class="bio-table">
+          <thead>
+            <tr>
+              <th>Bio-Node / Organism</th>
+              <th>Category</th>
+              <th>Status</th>
+              <th>Flow Volume</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="node-cell">
+                  <div class="node-avatar">FX</div>
+                  <div>
+                    <div>FloraX Synthetix</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">ID: #BIO-9021</div>
+                  </div>
+                </div>
+              </td>
+              <td>Cellular Mesh</td>
+              <td><span class="status-pill status-active">● Active</span></td>
+              <td>$42,800</td>
+              <td>2 mins ago</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="node-cell">
+                  <div class="node-avatar">ML</div>
+                  <div>
+                    <div>MicroLab Gen II</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">ID: #BIO-4410</div>
+                  </div>
+                </div>
+              </td>
+              <td>Enzyme Stream</td>
+              <td><span class="status-pill status-syncing">● Syncing</span></td>
+              <td>$18,950</td>
+              <td>14 mins ago</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="node-cell">
+                  <div class="node-avatar">CP</div>
+                  <div>
+                    <div>CoralPulse Core</div>
+                    <div style="font-size:0.7rem; color:var(--text-muted);">ID: #BIO-8832</div>
+                  </div>
+                </div>
+              </td>
+              <td>Aqua Fluid</td>
+              <td><span class="status-pill status-pending">● Pending</span></td>
+              <td>$9,400</td>
+              <td>1 hour ago</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- MODAL / SLIDE-OVER POPUP ("+ NEW PROJECT") -->
+  <div class="modal-overlay" id="newProjectModal" onclick="closeModalOnBackdrop(event)">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title">Initialize New Bio-Project</div>
+        <button class="modal-close-btn" onclick="closeModal()">✕</button>
+      </div>
+
+      <form onsubmit="handleProjectSubmit(event)" style="display:flex; flex-direction:column; gap:16px;">
+        <div class="form-group">
+          <label class="form-label">Project / Organism Name</label>
+          <input type="text" class="form-input" placeholder="e.g. Chlorophyll Synth v3" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Bio-Category</label>
+          <select class="form-select">
+            <option>Cellular Telemetry</option>
+            <option>Enzyme Flow</option>
+            <option>Botanical Stream</option>
+            <option>Bioluminescent Mesh</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Target Initial Capacity ($)</label>
+          <input type="number" class="form-input" placeholder="50000" value="50000" />
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn-action-primary">Create Bio-Project</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- COMPLETE JAVASCRIPT CONTROLLER -->
+  <script>
+    /* ==========================================================================
+       1. THEME SWITCHER CONTROLLER (6 DISTINCT BIOMORPHIC THEMES)
+       ========================================================================== */
+    function switchTheme(themeName) {
+      document.documentElement.setAttribute('data-theme', themeName);
+      
+      // Update Active State on Switcher Buttons
+      document.querySelectorAll('.theme-btn').forEach(btn => {
+        if (btn.getAttribute('data-target') === themeName) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      // Redraw SVG line chart to refresh stroke & gradient colors dynamically
+      setTimeout(renderLineChart, 100);
+    }
+
+    /* ==========================================================================
+       2. ACCORDION SIDEBAR CONTROLLER
+       ========================================================================== */
+    function toggleAccordion(element) {
+      const parentItem = element.parentElement;
+      const isCurrentlyOpen = parentItem.classList.contains('open');
+      
+      // Close other accordion items
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('open');
+      });
+
+      // Toggle clicked item
+      if (!isCurrentlyOpen) {
+        parentItem.classList.add('open');
+      }
+    }
+
+    /* ==========================================================================
+       3. LIVING BLOBS TOGGLE (ANIMATION PAUSE/RESUME)
+       ========================================================================== */
+    function toggleLivingBlobs(toggleInput) {
+      if (toggleInput.checked) {
+        document.body.classList.remove('paused-blobs');
+      } else {
+        document.body.classList.add('paused-blobs');
+      }
+    }
+
+    /* ==========================================================================
+       4. DROPDOWN MENUS & DATE RANGE SELECTOR
+       ========================================================================== */
+    function toggleDropdown(menuId) {
+      const dropdown = document.getElementById(menuId);
+      const isOpen = dropdown.classList.contains('show');
+      
+      // Close all dropdowns
+      document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('show'));
+      
+      if (!isOpen) {
+        dropdown.classList.add('show');
+      }
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.dropdown-container')) {
+        document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('show'));
+      }
+    });
+
+    function changeDateRange(rangeText) {
+      document.getElementById('selectedDateLabel').innerText = rangeText;
+      document.querySelectorAll('#dateDropdown .dropdown-option').forEach(opt => {
+        opt.classList.remove('selected');
+        if (opt.innerText === rangeText) opt.classList.add('selected');
+      });
+
+      // Trigger data tab update simulation with skeleton loading
+      triggerDataRefresh();
+    }
+
+    function selectProfile(element, profileName) {
+      document.querySelectorAll('#profileDropdown .dropdown-option').forEach(opt => opt.classList.remove('selected'));
+      element.classList.add('selected');
+      document.querySelector('.profile-name').innerText = profileName;
+    }
+
+    /* ==========================================================================
+       5. DATA MODE TABS ([Daily] [Weekly] [Monthly]) & SKELETON LOADING
+       ========================================================================== */
+    const datasets = {
+      daily: {
+        revenue: 12450,
+        nodes: 1420,
+        retention: 99.2,
+        latency: 0.98,
+        chart: [2100, 3400, 2800, 4500, 3900, 5200, 6100],
+        dates: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '23:59']
+      },
+      weekly: {
+        revenue: 128450,
+        nodes: 42890,
+        retention: 98.4,
+        latency: 1.24,
+        chart: [18400, 24500, 21000, 32000, 28900, 39500, 42890],
+        dates: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
+      },
+      monthly: {
+        revenue: 542000,
+        nodes: 184500,
+        retention: 97.8,
+        latency: 1.45,
+        chart: [85000, 112000, 145000, 168000, 195000, 240000, 310000],
+        dates: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL']
+      }
+    };
+
+    let currentMode = 'weekly';
+
+    function switchDataTab(mode, btnElement) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btnElement.classList.add('active');
+      currentMode = mode;
+
+      triggerDataRefresh();
+    }
+
+    function triggerDataRefresh() {
+      const grid = id => document.getElementById(id);
+      
+      // Add Skeleton loader effect
+      document.querySelectorAll('.kpi-card').forEach(card => card.classList.add('skeleton'));
+
+      setTimeout(() => {
+        document.querySelectorAll('.kpi-card').forEach(card => card.classList.remove('skeleton'));
+
+        const data = datasets[currentMode];
+        
+        // Count Up animations
+        animateCountUp('kpi-revenue', 0, data.revenue, '$');
+        animateCountUp('kpi-nodes', 0, data.nodes, '');
+        animateCountUp('kpi-retention', 0, data.retention, '', '%');
+        animateCountUp('kpi-latency', 0, data.latency, '', 's');
+
+        // Re-render chart
+        renderLineChart();
+      }, 450);
+    }
+
+    /* ==========================================================================
+       6. COUNT-UP ANIMATION UTILITY
+       ========================================================================== */
+    function animateCountUp(elementId, start, end, prefix = '', suffix = '', duration = 1000) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+
+      const startTime = performance.now();
+      const isFloat = end.toString().includes('.');
+
+      function update(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // EaseOutExpo curve
+        const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+        const currentVal = start + (end - start) * easeProgress;
+
+        if (isFloat) {
+          el.innerText = prefix + currentVal.toFixed(2) + suffix;
+        } else {
+          el.innerText = prefix + Math.floor(currentVal).toLocaleString() + suffix;
+        }
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        }
+      }
+
+      requestAnimationFrame(update);
+    }
+
+    /* ==========================================================================
+       7. INTERACTIVE SVG SMOOTH CUBIC BEZIER CHART
+       ========================================================================== */
+    function renderLineChart() {
+      const data = datasets[currentMode].chart;
+      const dates = datasets[currentMode].dates;
+      
+      const svg = document.getElementById('lineChartSvg');
+      const linePath = document.getElementById('chartLinePath');
+      const areaPath = document.getElementById('chartAreaPath');
+      const pointsGroup = document.getElementById('chartPointsGroup');
+
+      const width = 800;
+      const height = 280;
+      const padding = 40;
+
+      const maxVal = Math.max(...data) * 1.15;
+      const minVal = 0;
+
+      // Compute X, Y coordinates
+      const coords = data.map((val, idx) => {
+        const x = padding + (idx / (data.length - 1)) * (width - padding * 2);
+        const y = height - padding - ((val - minVal) / (maxVal - minVal)) * (height - padding * 2);
+        return { x, y, val, date: dates[idx] };
+      });
+
+      // Generate Smooth Cubic Bezier Path ("M ... C ...")
+      let dLine = `M ${coords[0].x},${coords[0].y}`;
+      for (let i = 0; i < coords.length - 1; i++) {
+        const curr = coords[i];
+        const next = coords[i + 1];
+        const cp1x = curr.x + (next.x - curr.x) / 2;
+        const cp1y = curr.y;
+        const cp2x = curr.x + (next.x - curr.x) / 2;
+        const cp2y = next.y;
+        dLine += ` C ${cp1x},${cp1y} ${cp2x},${cp2y} ${next.x},${next.y}`;
+      }
+
+      linePath.setAttribute('d', dLine);
+
+      // Closed Area Path
+      const dArea = `${dLine} L ${coords[coords.length - 1].x},${height - padding} L ${coords[0].x},${height - padding} Z`;
+      areaPath.setAttribute('d', dArea);
+
+      // Render interactive points
+      pointsGroup.innerHTML = '';
+      coords.forEach((pt) => {
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', pt.x);
+        circle.setAttribute('cy', pt.y);
+        circle.setAttribute('r', '5');
+        circle.setAttribute('fill', 'var(--card-bg)');
+        circle.setAttribute('stroke', 'var(--chart-line)');
+        circle.setAttribute('stroke-width', '3');
+        circle.setAttribute('class', 'chart-point');
+
+        // Hover Tooltip Handlers
+        circle.addEventListener('mouseenter', (e) => showTooltip(e, pt));
+        circle.addEventListener('mouseleave', hideTooltip);
+
+        pointsGroup.appendChild(circle);
+      });
+    }
+
+    function showTooltip(e, pt) {
+      const tooltip = document.getElementById('chartTooltip');
+      const container = document.getElementById('lineChartContainer');
+      const rect = container.getBoundingClientRect();
+
+      const formatVal = typeof pt.val === 'number' && pt.val > 1000 ? '$' + pt.val.toLocaleString() : pt.val;
+
+      document.getElementById('ttDate').innerText = pt.date;
+      document.getElementById('ttVal').innerText = formatVal;
+
+      // Position tooltip inside container
+      const posX = (pt.x / 800) * rect.width;
+      const posY = (pt.y / 280) * rect.height;
+
+      tooltip.style.left = posX + 'px';
+      tooltip.style.top = posY + 'px';
+      tooltip.classList.add('show');
+    }
+
+    function hideTooltip() {
+      document.getElementById('chartTooltip').classList.remove('show');
+    }
+
+    /* ==========================================================================
+       8. DRAGGABLE KANBAN / WIDGET GRID (DRAG & DROP)
+       ========================================================================== */
+    let draggedItem = null;
+
+    function initDragAndDrop() {
+      const cards = document.querySelectorAll('.kpi-card');
+      const grid = document.getElementById('kpiGrid');
+
+      cards.forEach(card => {
+        card.addEventListener('dragstart', function(e) {
+          draggedItem = this;
+          setTimeout(() => this.classList.add('dragging'), 0);
+        });
+
+        card.addEventListener('dragend', function() {
+          this.classList.remove('dragging');
+          draggedItem = null;
+        });
+
+        card.addEventListener('dragover', function(e) {
+          e.preventDefault();
+        });
+
+        card.addEventListener('drop', function(e) {
+          e.preventDefault();
+          if (this !== draggedItem && draggedItem) {
+            const allCards = Array.from(grid.children);
+            const draggedIdx = allCards.indexOf(draggedItem);
+            const targetIdx = allCards.indexOf(this);
+
+            if (draggedIdx < targetIdx) {
+              grid.insertBefore(draggedItem, this.nextSibling);
+            } else {
+              grid.insertBefore(draggedItem, this);
+            }
+          }
+        });
+      });
+    }
+
+    /* ==========================================================================
+       9. MODAL SLIDE-OVER POPUP ("+ NEW PROJECT")
+       ========================================================================== */
+    function openModal() {
+      document.getElementById('newProjectModal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('newProjectModal').classList.remove('active');
+    }
+
+    function closeModalOnBackdrop(e) {
+      if (e.target === document.getElementById('newProjectModal')) {
+        closeModal();
+      }
+    }
+
+    function handleProjectSubmit(e) {
+      e.preventDefault();
+      closeModal();
+      alert('Bio-Project Initialized Successfully! New telemetric node registered.');
+    }
+
+    // Keyboard ESC to close Modal
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    /* ==========================================================================
+       10. INITIALIZATION ON DOM LOAD
+       ========================================================================== */
+    window.addEventListener('DOMContentLoaded', () => {
+      renderLineChart();
+      initDragAndDrop();
+
+      // Trigger initial count up
+      animateCountUp('kpi-revenue', 0, 128450, '$');
+      animateCountUp('kpi-nodes', 0, 42890, '');
+      animateCountUp('kpi-retention', 0, 98.4, '', '%');
+      animateCountUp('kpi-latency', 0, 1.24, '', 's');
+    });
+
+    // Handle Window Resize for Responsive SVG Charting
+    window.addEventListener('resize', () => {
+      renderLineChart();
+    });
+  </script>
+
+<!-- Draggable Theme Switcher Script -->
+<script>
+(function() {
+    function initDraggableSwitcher() {
+        const selectors = [
+            '.version-switcher', '.version-switcher-bar', '.version-switcher-box', 
+            '.theme-switcher-deck', '.top-switcher-bar', '#switcher', '#versionSwitcher',
+            '.theme-switcher', '.switcher-bar', '.version-deck', '[class*="switcher"]'
+        ];
+        let el = null;
+        for (const sel of selectors) {
+            const found = document.querySelector(sel);
+            if (found) {
+                const pos = getComputedStyle(found).position;
+                if (pos === 'fixed' || pos === 'absolute') {
+                    el = found;
+                    break;
+                }
+            }
+        }
+        if (!el) {
+            const allFixed = Array.from(document.querySelectorAll('*')).filter(e => {
+                const pos = getComputedStyle(e).position;
+                const z = parseInt(getComputedStyle(e).zIndex || 0);
+                return (pos === 'fixed' || pos === 'absolute') && z >= 90;
+            });
+            if (allFixed.length > 0) el = allFixed[0];
+        }
+        if (!el) return;
+
+        // Visual Drag Indicator
+        el.style.cursor = 'grab';
+        el.style.zIndex = '99999';
+        if (!el.querySelector('.drag-handle-hint')) {
+            const hint = document.createElement('span');
+            hint.className = 'drag-handle-hint';
+            hint.innerHTML = ' ⠿ ';
+            hint.title = '드래그하여 원하는 위치로 이동하세요';
+            hint.style.cssText = 'cursor:grab; font-weight:bold; opacity:0.7; margin-right:6px; user-select:none; display:inline-block; vertical-align:middle;';
+            el.insertBefore(hint, el.firstChild);
+        }
+
+        let isMouseDown = false;
+        let startX = 0, startY = 0;
+        let origLeft = 0, origTop = 0;
+        let hasMoved = false;
+
+        function startDrag(clientX, clientY) {
+            isMouseDown = true;
+            hasMoved = false;
+            startX = clientX;
+            startY = clientY;
+            const rect = el.getBoundingClientRect();
+            origLeft = rect.left;
+            origTop = rect.top;
+            el.style.cursor = 'grabbing';
+        }
+
+        function moveDrag(clientX, clientY, e) {
+            if (!isMouseDown) return;
+            const dx = clientX - startX;
+            const dy = clientY - startY;
+            if (Math.abs(dx) > 2 || Math.abs(dy) > 2) {
+                hasMoved = true;
+                if (e && e.cancelable) e.preventDefault();
+                el.style.right = 'auto';
+                el.style.bottom = 'auto';
+                let newLeft = Math.max(0, Math.min(window.innerWidth - el.offsetWidth, origLeft + dx));
+                let newTop = Math.max(0, Math.min(window.innerHeight - el.offsetHeight, origTop + dy));
+                el.style.left = newLeft + 'px';
+                el.style.top = newTop + 'px';
+            }
+        }
+
+        function stopDrag() {
+            isMouseDown = false;
+            el.style.cursor = 'grab';
+        }
+
+        el.addEventListener('mousedown', function(e) {
+            startDrag(e.clientX, e.clientY);
+            function onMouseMove(me) { moveDrag(me.clientX, me.clientY, me); }
+            function onMouseUp() {
+                stopDrag();
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+            }
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        });
+
+        el.addEventListener('touchstart', function(e) {
+            if (!e.touches || e.touches.length === 0) return;
+            startDrag(e.touches[0].clientX, e.touches[0].clientY);
+            function onTouchMove(te) {
+                if (te.touches && te.touches.length > 0) {
+                    moveDrag(te.touches[0].clientX, te.touches[0].clientY, te);
+                }
+            }
+            function onTouchEnd() {
+                stopDrag();
+                document.removeEventListener('touchmove', onTouchMove);
+                document.removeEventListener('touchend', onTouchEnd);
+            }
+            document.addEventListener('touchmove', onTouchMove, { passive: false });
+            document.addEventListener('touchend', onTouchEnd);
+        }, { passive: true });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initDraggableSwitcher);
+    } else {
+        initDraggableSwitcher();
+    }
+})();
+</script>
+
+</body>
+</html>

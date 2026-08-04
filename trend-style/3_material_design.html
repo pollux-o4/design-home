@@ -1,0 +1,2090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaaS Performance & Analytics Dashboard - Material Design 3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* V1: Material You Light (Classic Purple Tonal) */
+            --md-sys-color-primary-v1: #6750A4;
+            --md-sys-color-on-primary-v1: #FFFFFF;
+            --md-sys-color-primary-container-v1: #EADDFF;
+            --md-sys-color-on-primary-container-v1: #21005D;
+            --md-sys-color-secondary-v1: #625B71;
+            --md-sys-color-secondary-container-v1: #E8DEF8;
+            --md-sys-color-on-secondary-container-v1: #1D192B;
+            --md-sys-color-tertiary-v1: #7D5260;
+            --md-sys-color-tertiary-container-v1: #FFD8E4;
+            --md-sys-color-background-v1: #FEF7FF;
+            --md-sys-color-surface-v1: #F7F2FA;
+            --md-sys-color-surface-variant-v1: #E7E0EC;
+            --md-sys-color-on-surface-v1: #1D1B20;
+            --md-sys-color-on-surface-variant-v1: #49454F;
+            --md-sys-color-outline-v1: #79747E;
+            --md-sys-color-outline-variant-v1: #CAC4D0;
+            --md-elevation-1-v1: 0px 1px 3px 1px rgba(0, 0, 0, 0.08), 0px 1px 2px 0px rgba(0, 0, 0, 0.12);
+            --md-elevation-2-v1: 0px 2px 6px 2px rgba(0, 0, 0, 0.10), 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
+            --md-elevation-3-v1: 0px 4px 12px 3px rgba(0, 0, 0, 0.12), 0px 1px 3px 0px rgba(0, 0, 0, 0.20);
+            --md-shape-radius-v1: 16px;
+
+            /* V2: Material You Dark (Violet Night) */
+            --md-sys-color-primary-v2: #D0BCFF;
+            --md-sys-color-on-primary-v2: #381E72;
+            --md-sys-color-primary-container-v2: #4F378B;
+            --md-sys-color-on-primary-container-v2: #EADDFF;
+            --md-sys-color-secondary-v2: #CCC2DC;
+            --md-sys-color-secondary-container-v2: #4A4458;
+            --md-sys-color-on-secondary-container-v2: #E8DEF8;
+            --md-sys-color-tertiary-v2: #EFB8C8;
+            --md-sys-color-tertiary-container-v2: #633B48;
+            --md-sys-color-background-v2: #141218;
+            --md-sys-color-surface-v2: #211F26;
+            --md-sys-color-surface-variant-v2: #49454F;
+            --md-sys-color-on-surface-v2: #E6E1E5;
+            --md-sys-color-on-surface-variant-v2: #CAC4D0;
+            --md-sys-color-outline-v2: #938F99;
+            --md-sys-color-outline-variant-v2: #49454F;
+            --md-elevation-1-v2: 0px 1px 3px 1px rgba(0, 0, 0, 0.35), 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+            --md-elevation-2-v2: 0px 2px 6px 2px rgba(0, 0, 0, 0.4), 0px 1px 3px 0px rgba(0, 0, 0, 0.5);
+            --md-elevation-3-v2: 0px 4px 12px 3px rgba(0, 0, 0, 0.5), 0px 2px 4px 0px rgba(0, 0, 0, 0.6);
+            --md-shape-radius-v2: 16px;
+
+            /* V3: High-Contrast Dynamic Blue */
+            --md-sys-color-primary-v3: #0061A4;
+            --md-sys-color-on-primary-v3: #FFFFFF;
+            --md-sys-color-primary-container-v3: #D1E4FF;
+            --md-sys-color-on-primary-container-v3: #001D36;
+            --md-sys-color-secondary-v3: #535F70;
+            --md-sys-color-secondary-container-v3: #D7E3F7;
+            --md-sys-color-on-secondary-container-v3: #101C2B;
+            --md-sys-color-tertiary-v3: #6B5778;
+            --md-sys-color-tertiary-container-v3: #F2DAFF;
+            --md-sys-color-background-v3: #F8F9FF;
+            --md-sys-color-surface-v3: #EEF2FB;
+            --md-sys-color-surface-variant-v3: #DFE2EB;
+            --md-sys-color-on-surface-v3: #1A1C1E;
+            --md-sys-color-on-surface-variant-v3: #43474E;
+            --md-sys-color-outline-v3: #73777F;
+            --md-sys-color-outline-variant-v3: #C3C7D0;
+            --md-elevation-1-v3: 0px 2px 6px rgba(0, 97, 164, 0.08);
+            --md-elevation-2-v3: 0px 4px 12px rgba(0, 97, 164, 0.14);
+            --md-elevation-3-v3: 0px 8px 24px rgba(0, 97, 164, 0.18);
+            --md-shape-radius-v3: 20px;
+
+            /* V4: Monochromatic Eco Sage */
+            --md-sys-color-primary-v4: #386A20;
+            --md-sys-color-on-primary-v4: #FFFFFF;
+            --md-sys-color-primary-container-v4: #B7F397;
+            --md-sys-color-on-primary-container-v4: #042100;
+            --md-sys-color-secondary-v4: #55624C;
+            --md-sys-color-secondary-container-v4: #D9E7CB;
+            --md-sys-color-on-secondary-container-v4: #131F0D;
+            --md-sys-color-tertiary-v4: #386663;
+            --md-sys-color-tertiary-container-v4: #BCECE7;
+            --md-sys-color-background-v4: #F7FBF1;
+            --md-sys-color-surface-v4: #EEF4E8;
+            --md-sys-color-surface-variant-v4: #E1E4D5;
+            --md-sys-color-on-surface-v4: #191E16;
+            --md-sys-color-on-surface-variant-v4: #44483D;
+            --md-sys-color-outline-v4: #75796C;
+            --md-sys-color-outline-variant-v4: #C5C8BA;
+            --md-elevation-1-v4: 0px 1px 3px rgba(56, 106, 32, 0.10);
+            --md-elevation-2-v4: 0px 3px 8px rgba(56, 106, 32, 0.15);
+            --md-elevation-3-v4: 0px 6px 16px rgba(56, 106, 32, 0.20);
+            --md-shape-radius-v4: 24px;
+
+            /* V5: Clean Architectural Teal */
+            --md-sys-color-primary-v5: #006874;
+            --md-sys-color-on-primary-v5: #FFFFFF;
+            --md-sys-color-primary-container-v5: #97F0FF;
+            --md-sys-color-on-primary-container-v5: #001F24;
+            --md-sys-color-secondary-v5: #4A6267;
+            --md-sys-color-secondary-container-v5: #CCE8ED;
+            --md-sys-color-on-secondary-container-v5: #051F23;
+            --md-sys-color-tertiary-v5: #525B7D;
+            --md-sys-color-tertiary-container-v5: #DAE2FF;
+            --md-sys-color-background-v5: #F5FAFB;
+            --md-sys-color-surface-v5: #EAF3F5;
+            --md-sys-color-surface-variant-v5: #DAE4E5;
+            --md-sys-color-on-surface-v5: #161D1E;
+            --md-sys-color-on-surface-variant-v5: #3F484A;
+            --md-sys-color-outline-v5: #6F797A;
+            --md-sys-color-outline-variant-v5: #BEC8C9;
+            --md-elevation-1-v5: 0px 1px 2px rgba(0, 0, 0, 0.06);
+            --md-elevation-2-v5: 0px 2px 6px rgba(0, 0, 0, 0.1);
+            --md-elevation-3-v5: 0px 4px 12px rgba(0, 0, 0, 0.14);
+            --md-shape-radius-v5: 12px;
+
+            /* V6: Material Cyber Sunset (Neon Dark) */
+            --md-sys-color-primary-v6: #FFB4AB;
+            --md-sys-color-on-primary-v6: #690005;
+            --md-sys-color-primary-container-v6: #93000A;
+            --md-sys-color-on-primary-container-v6: #FFDAD6;
+            --md-sys-color-secondary-v6: #F6B8A0;
+            --md-sys-color-secondary-container-v6: #723521;
+            --md-sys-color-on-secondary-container-v6: #FFDBCF;
+            --md-sys-color-tertiary-v6: #E5C158;
+            --md-sys-color-tertiary-container-v6: #574500;
+            --md-sys-color-background-v6: #1B1110;
+            --md-sys-color-surface-v6: #2A1918;
+            --md-sys-color-surface-variant-v6: #534341;
+            --md-sys-color-on-surface-v6: #F1DFDC;
+            --md-sys-color-on-surface-variant-v6: #D8C2BF;
+            --md-sys-color-outline-v6: #A08C8A;
+            --md-sys-color-outline-variant-v6: #534341;
+            --md-elevation-1-v6: 0px 2px 8px rgba(255, 180, 171, 0.12);
+            --md-elevation-2-v6: 0px 4px 16px rgba(255, 180, 171, 0.18);
+            --md-elevation-3-v6: 0px 8px 28px rgba(255, 180, 171, 0.25);
+            --md-shape-radius-v6: 28px;
+        }
+
+        /* Default fallback binding */
+        body[data-theme="v1"] {
+            --md-sys-color-primary: var(--md-sys-color-primary-v1);
+            --md-sys-color-on-primary: var(--md-sys-color-on-primary-v1);
+            --md-sys-color-primary-container: var(--md-sys-color-primary-container-v1);
+            --md-sys-color-on-primary-container: var(--md-sys-color-on-primary-container-v1);
+            --md-sys-color-secondary: var(--md-sys-color-secondary-v1);
+            --md-sys-color-secondary-container: var(--md-sys-color-secondary-container-v1);
+            --md-sys-color-on-secondary-container: var(--md-sys-color-on-secondary-container-v1);
+            --md-sys-color-tertiary: var(--md-sys-color-tertiary-v1);
+            --md-sys-color-tertiary-container: var(--md-sys-color-tertiary-container-v1);
+            --md-sys-color-background: var(--md-sys-color-background-v1);
+            --md-sys-color-surface: var(--md-sys-color-surface-v1);
+            --md-sys-color-surface-variant: var(--md-sys-color-surface-variant-v1);
+            --md-sys-color-on-surface: var(--md-sys-color-on-surface-v1);
+            --md-sys-color-on-surface-variant: var(--md-sys-color-on-surface-variant-v1);
+            --md-sys-color-outline: var(--md-sys-color-outline-v1);
+            --md-sys-color-outline-variant: var(--md-sys-color-outline-variant-v1);
+            --md-elevation-1: var(--md-elevation-1-v1);
+            --md-elevation-2: var(--md-elevation-2-v1);
+            --md-elevation-3: var(--md-elevation-3-v1);
+            --md-shape-radius: var(--md-shape-radius-v1);
+        }
+
+        body[data-theme="v2"] {
+            --md-sys-color-primary: var(--md-sys-color-primary-v2);
+            --md-sys-color-on-primary: var(--md-sys-color-on-primary-v2);
+            --md-sys-color-primary-container: var(--md-sys-color-primary-container-v2);
+            --md-sys-color-on-primary-container: var(--md-sys-color-on-primary-container-v2);
+            --md-sys-color-secondary: var(--md-sys-color-secondary-v2);
+            --md-sys-color-secondary-container: var(--md-sys-color-secondary-container-v2);
+            --md-sys-color-on-secondary-container: var(--md-sys-color-on-secondary-container-v2);
+            --md-sys-color-tertiary: var(--md-sys-color-tertiary-v2);
+            --md-sys-color-tertiary-container: var(--md-sys-color-tertiary-container-v2);
+            --md-sys-color-background: var(--md-sys-color-background-v2);
+            --md-sys-color-surface: var(--md-sys-color-surface-v2);
+            --md-sys-color-surface-variant: var(--md-sys-color-surface-variant-v2);
+            --md-sys-color-on-surface: var(--md-sys-color-on-surface-v2);
+            --md-sys-color-on-surface-variant: var(--md-sys-color-on-surface-variant-v2);
+            --md-sys-color-outline: var(--md-sys-color-outline-v2);
+            --md-sys-color-outline-variant: var(--md-sys-color-outline-variant-v2);
+            --md-elevation-1: var(--md-elevation-1-v2);
+            --md-elevation-2: var(--md-elevation-2-v2);
+            --md-elevation-3: var(--md-elevation-3-v2);
+            --md-shape-radius: var(--md-shape-radius-v2);
+        }
+
+        body[data-theme="v3"] {
+            --md-sys-color-primary: var(--md-sys-color-primary-v3);
+            --md-sys-color-on-primary: var(--md-sys-color-on-primary-v3);
+            --md-sys-color-primary-container: var(--md-sys-color-primary-container-v3);
+            --md-sys-color-on-primary-container: var(--md-sys-color-on-primary-container-v3);
+            --md-sys-color-secondary: var(--md-sys-color-secondary-v3);
+            --md-sys-color-secondary-container: var(--md-sys-color-secondary-container-v3);
+            --md-sys-color-on-secondary-container: var(--md-sys-color-on-secondary-container-v3);
+            --md-sys-color-tertiary: var(--md-sys-color-tertiary-v3);
+            --md-sys-color-tertiary-container: var(--md-sys-color-tertiary-container-v3);
+            --md-sys-color-background: var(--md-sys-color-background-v3);
+            --md-sys-color-surface: var(--md-sys-color-surface-v3);
+            --md-sys-color-surface-variant: var(--md-sys-color-surface-variant-v3);
+            --md-sys-color-on-surface: var(--md-sys-color-on-surface-v3);
+            --md-sys-color-on-surface-variant: var(--md-sys-color-on-surface-variant-v3);
+            --md-sys-color-outline: var(--md-sys-color-outline-v3);
+            --md-sys-color-outline-variant: var(--md-sys-color-outline-variant-v3);
+            --md-elevation-1: var(--md-elevation-1-v3);
+            --md-elevation-2: var(--md-elevation-2-v3);
+            --md-elevation-3: var(--md-elevation-3-v3);
+            --md-shape-radius: var(--md-shape-radius-v3);
+        }
+
+        body[data-theme="v4"] {
+            --md-sys-color-primary: var(--md-sys-color-primary-v4);
+            --md-sys-color-on-primary: var(--md-sys-color-on-primary-v4);
+            --md-sys-color-primary-container: var(--md-sys-color-primary-container-v4);
+            --md-sys-color-on-primary-container: var(--md-sys-color-on-primary-container-v4);
+            --md-sys-color-secondary: var(--md-sys-color-secondary-v4);
+            --md-sys-color-secondary-container: var(--md-sys-color-secondary-container-v4);
+            --md-sys-color-on-secondary-container: var(--md-sys-color-on-secondary-container-v4);
+            --md-sys-color-tertiary: var(--md-sys-color-tertiary-v4);
+            --md-sys-color-tertiary-container: var(--md-sys-color-tertiary-container-v4);
+            --md-sys-color-background: var(--md-sys-color-background-v4);
+            --md-sys-color-surface: var(--md-sys-color-surface-v4);
+            --md-sys-color-surface-variant: var(--md-sys-color-surface-variant-v4);
+            --md-sys-color-on-surface: var(--md-sys-color-on-surface-v4);
+            --md-sys-color-on-surface-variant: var(--md-sys-color-on-surface-variant-v4);
+            --md-sys-color-outline: var(--md-sys-color-outline-v4);
+            --md-sys-color-outline-variant: var(--md-sys-color-outline-variant-v4);
+            --md-elevation-1: var(--md-elevation-1-v4);
+            --md-elevation-2: var(--md-elevation-2-v4);
+            --md-elevation-3: var(--md-elevation-3-v4);
+            --md-shape-radius: var(--md-shape-radius-v4);
+        }
+
+        body[data-theme="v5"] {
+            --md-sys-color-primary: var(--md-sys-color-primary-v5);
+            --md-sys-color-on-primary: var(--md-sys-color-on-primary-v5);
+            --md-sys-color-primary-container: var(--md-sys-color-primary-container-v5);
+            --md-sys-color-on-primary-container: var(--md-sys-color-on-primary-container-v5);
+            --md-sys-color-secondary: var(--md-sys-color-secondary-v5);
+            --md-sys-color-secondary-container: var(--md-sys-color-secondary-container-v5);
+            --md-sys-color-on-secondary-container: var(--md-sys-color-on-secondary-container-v5);
+            --md-sys-color-tertiary: var(--md-sys-color-tertiary-v5);
+            --md-sys-color-tertiary-container: var(--md-sys-color-tertiary-container-v5);
+            --md-sys-color-background: var(--md-sys-color-background-v5);
+            --md-sys-color-surface: var(--md-sys-color-surface-v5);
+            --md-sys-color-surface-variant: var(--md-sys-color-surface-variant-v5);
+            --md-sys-color-on-surface: var(--md-sys-color-on-surface-v5);
+            --md-sys-color-on-surface-variant: var(--md-sys-color-on-surface-variant-v5);
+            --md-sys-color-outline: var(--md-sys-color-outline-v5);
+            --md-sys-color-outline-variant: var(--md-sys-color-outline-variant-v5);
+            --md-elevation-1: var(--md-elevation-1-v5);
+            --md-elevation-2: var(--md-elevation-2-v5);
+            --md-elevation-3: var(--md-elevation-3-v5);
+            --md-shape-radius: var(--md-shape-radius-v5);
+        }
+
+        body[data-theme="v6"] {
+            --md-sys-color-primary: var(--md-sys-color-primary-v6);
+            --md-sys-color-on-primary: var(--md-sys-color-on-primary-v6);
+            --md-sys-color-primary-container: var(--md-sys-color-primary-container-v6);
+            --md-sys-color-on-primary-container: var(--md-sys-color-on-primary-container-v6);
+            --md-sys-color-secondary: var(--md-sys-color-secondary-v6);
+            --md-sys-color-secondary-container: var(--md-sys-color-secondary-container-v6);
+            --md-sys-color-on-secondary-container: var(--md-sys-color-on-secondary-container-v6);
+            --md-sys-color-tertiary: var(--md-sys-color-tertiary-v6);
+            --md-sys-color-tertiary-container: var(--md-sys-color-tertiary-container-v6);
+            --md-sys-color-background: var(--md-sys-color-background-v6);
+            --md-sys-color-surface: var(--md-sys-color-surface-v6);
+            --md-sys-color-surface-variant: var(--md-sys-color-surface-variant-v6);
+            --md-sys-color-on-surface: var(--md-sys-color-on-surface-v6);
+            --md-sys-color-on-surface-variant: var(--md-sys-color-on-surface-variant-v6);
+            --md-sys-color-outline: var(--md-sys-color-outline-v6);
+            --md-sys-color-outline-variant: var(--md-sys-color-outline-variant-v6);
+            --md-elevation-1: var(--md-elevation-1-v6);
+            --md-elevation-2: var(--md-elevation-2-v6);
+            --md-elevation-3: var(--md-elevation-3-v6);
+            --md-shape-radius: var(--md-shape-radius-v6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', 'Roboto', sans-serif;
+            background-color: var(--md-sys-color-background);
+            color: var(--md-sys-color-on-surface);
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Material Ripple */
+        .md-ripple {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .md-ripple .ripple-effect {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.35);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+
+        body[data-theme="v1"] .md-ripple .ripple-effect,
+        body[data-theme="v3"] .md-ripple .ripple-effect,
+        body[data-theme="v4"] .md-ripple .ripple-effect,
+        body[data-theme="v5"] .md-ripple .ripple-effect {
+            background-color: rgba(103, 80, 164, 0.2);
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Fixed Top-Right Version Switcher */
+        .version-switcher {
+            position: fixed;
+            top: 16px;
+            right: 20px;
+            background: var(--md-sys-color-surface);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: 50px;
+            padding: 4px 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 1200;
+            box-shadow: var(--md-elevation-3);
+        }
+
+        .switcher-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--md-sys-color-on-surface-variant);
+            margin: 0 6px 0 8px;
+        }
+
+        .theme-btn {
+            background: transparent;
+            border: none;
+            color: var(--md-sys-color-on-surface-variant);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .theme-btn.active {
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            box-shadow: var(--md-elevation-1);
+        }
+
+        /* Layout Architecture */
+        .sidebar {
+            width: 270px;
+            background-color: var(--md-sys-color-surface);
+            border-right: 1px solid var(--md-sys-color-outline-variant);
+            display: flex;
+            flex-direction: column;
+            padding: 24px 16px;
+            flex-shrink: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 12px 24px 12px;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            border-radius: var(--md-shape-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .brand-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--md-sys-color-on-surface);
+            letter-spacing: -0.2px;
+        }
+
+        .brand-subtitle {
+            font-size: 11px;
+            color: var(--md-sys-color-on-surface-variant);
+            font-weight: 500;
+        }
+
+        /* Nav Accordion */
+        .nav-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-top: 8px;
+        }
+
+        .nav-item {
+            border-radius: var(--md-shape-radius);
+            overflow: hidden;
+        }
+
+        .nav-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            color: var(--md-sys-color-on-surface-variant);
+            font-weight: 600;
+            font-size: 14px;
+            border-radius: var(--md-shape-radius);
+            transition: all 0.2s ease;
+        }
+
+        .nav-header:hover {
+            background-color: var(--md-sys-color-surface-variant);
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .nav-header.active {
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+        }
+
+        .nav-header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-header-left svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .chevron {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-item.open .chevron {
+            transform: rotate(180deg);
+        }
+
+        .nav-sub {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            padding-left: 20px;
+        }
+
+        .nav-item.open .nav-sub {
+            max-height: 200px;
+            padding-top: 4px;
+            padding-bottom: 8px;
+        }
+
+        .nav-sub-item {
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--md-sys-color-on-surface-variant);
+            border-radius: calc(var(--md-shape-radius) - 4px);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-sub-item:hover, .nav-sub-item.active {
+            color: var(--md-sys-color-primary);
+            background-color: var(--md-sys-color-surface-variant);
+        }
+
+        .nav-sub-item.active {
+            font-weight: 700;
+        }
+
+        /* Live Sync Toggle Widget */
+        .sidebar-widget {
+            background-color: var(--md-sys-color-surface-variant);
+            border-radius: var(--md-shape-radius);
+            padding: 16px;
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .sync-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sync-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .badge-pulse {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 700;
+            background: rgba(46, 125, 50, 0.15);
+            color: #2E7D32;
+        }
+
+        .dot-pulse {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #2E7D32;
+            animation: pulse-dot 1.5s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0% { transform: scale(0.9); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.4; }
+            100% { transform: scale(0.9); opacity: 1; }
+        }
+
+        /* Material Switch */
+        .md-switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .md-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .switch-slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background-color: var(--md-sys-color-outline);
+            border-radius: 24px;
+            transition: 0.3s;
+        }
+
+        .switch-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            border-radius: 50%;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        input:checked + .switch-slider {
+            background-color: var(--md-sys-color-primary);
+        }
+
+        input:checked + .switch-slider:before {
+            transform: translateX(20px);
+            background-color: var(--md-sys-color-on-primary);
+        }
+
+        /* Main Content Container */
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            min-width: 0;
+        }
+
+        /* Header */
+        .header {
+            height: 72px;
+            background-color: var(--md-sys-color-surface);
+            border-bottom: 1px solid var(--md-sys-color-outline-variant);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            gap: 24px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--md-sys-color-surface-variant);
+            padding: 8px 16px;
+            border-radius: 50px;
+            width: 320px;
+        }
+
+        .search-bar svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--md-sys-color-on-surface-variant);
+        }
+
+        .search-bar input {
+            border: none;
+            background: transparent;
+            outline: none;
+            color: var(--md-sys-color-on-surface);
+            font-size: 14px;
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-right: 170px; /* Leave space for version switcher */
+        }
+
+        /* Dropdowns */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--md-sys-color-surface-variant);
+            color: var(--md-sys-color-on-surface);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            padding: 8px 14px;
+            border-radius: var(--md-shape-radius);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 110%;
+            right: 0;
+            background-color: var(--md-sys-color-surface);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: var(--md-shape-radius);
+            box-shadow: var(--md-elevation-3);
+            min-width: 180px;
+            padding: 6px;
+            display: none;
+            flex-direction: column;
+            gap: 2px;
+            z-index: 500;
+        }
+
+        .dropdown.open .dropdown-menu {
+            display: flex;
+        }
+
+        .dropdown-option {
+            padding: 10px 14px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--md-sys-color-on-surface);
+            border-radius: calc(var(--md-shape-radius) - 6px);
+            cursor: pointer;
+        }
+
+        .dropdown-option:hover {
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+        }
+
+        /* Profile Switcher */
+        .profile-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 4px 12px 4px 4px;
+            border-radius: 50px;
+            background-color: var(--md-sys-color-surface-variant);
+            border: 1px solid var(--md-sys-color-outline-variant);
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--md-sys-color-primary), var(--md-sys-color-tertiary));
+            color: white;
+            font-weight: 700;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .profile-name {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .profile-role {
+            font-size: 10px;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        /* Dashboard Body */
+        .content-container {
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .top-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .page-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--md-sys-color-on-surface);
+            letter-spacing: -0.5px;
+        }
+
+        .page-desc {
+            font-size: 13px;
+            color: var(--md-sys-color-on-surface-variant);
+            margin-top: 2px;
+        }
+
+        /* Material Segmented Data Tabs */
+        .tabs-wrapper {
+            display: flex;
+            background-color: var(--md-sys-color-surface-variant);
+            padding: 4px;
+            border-radius: 50px;
+            gap: 4px;
+        }
+
+        .tab-btn {
+            border: none;
+            background: transparent;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--md-sys-color-on-surface-variant);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background-color: var(--md-sys-color-surface);
+            color: var(--md-sys-color-primary);
+            box-shadow: var(--md-elevation-1);
+        }
+
+        /* Action Primary Button */
+        .btn-primary {
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--md-elevation-1);
+        }
+
+        .btn-primary:hover {
+            box-shadow: var(--md-elevation-2);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* Widget Draggable Grid */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .widget-card {
+            background-color: var(--md-sys-color-surface);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: var(--md-shape-radius);
+            padding: 20px;
+            box-shadow: var(--md-elevation-1);
+            position: relative;
+            cursor: grab;
+            transition: all 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .widget-card:hover {
+            box-shadow: var(--md-elevation-2);
+        }
+
+        .widget-card.dragging {
+            opacity: 0.4;
+            transform: scale(0.98);
+            border: 2px dashed var(--md-sys-color-primary);
+        }
+
+        .widget-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .widget-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        .widget-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--md-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary-container);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .widget-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .metric-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--md-sys-color-on-surface);
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+        }
+
+        .metric-footer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+        }
+
+        .badge-trend {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 11px;
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .badge-up {
+            background-color: rgba(46, 125, 50, 0.12);
+            color: #2E7D32;
+        }
+
+        .badge-down {
+            background-color: rgba(198, 40, 40, 0.12);
+            color: #C62828;
+        }
+
+        .trend-text {
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        /* Charts Layout */
+        .charts-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+
+        .chart-card {
+            background-color: var(--md-sys-color-surface);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: var(--md-shape-radius);
+            padding: 24px;
+            box-shadow: var(--md-elevation-1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .chart-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .chart-title-area h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .chart-title-area p {
+            font-size: 12px;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
+        /* Dynamic SVG Line & Bar Charts */
+        .svg-container {
+            width: 100%;
+            height: 280px;
+            position: relative;
+        }
+
+        .svg-chart {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        .chart-path-revenue {
+            fill: none;
+            stroke: var(--md-sys-color-primary);
+            stroke-width: 3.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: all 0.5s ease;
+        }
+
+        .chart-path-users {
+            fill: none;
+            stroke: var(--md-sys-color-tertiary);
+            stroke-width: 2.5;
+            stroke-dasharray: 4 4;
+            stroke-linecap: round;
+            transition: all 0.5s ease;
+        }
+
+        .chart-point {
+            fill: var(--md-sys-color-surface);
+            stroke: var(--md-sys-color-primary);
+            stroke-width: 3;
+            r: 5;
+            cursor: pointer;
+            transition: transform 0.2s ease, r 0.2s ease;
+        }
+
+        .chart-point:hover {
+            r: 8;
+            stroke-width: 4;
+            fill: var(--md-sys-color-primary-container);
+        }
+
+        .chart-bar {
+            fill: var(--md-sys-color-primary-container);
+            rx: 6;
+            transition: height 0.5s ease, y 0.5s ease, fill 0.2s ease;
+            cursor: pointer;
+        }
+
+        .chart-bar:hover {
+            fill: var(--md-sys-color-primary);
+        }
+
+        /* Chart Tooltip */
+        .chart-tooltip {
+            position: absolute;
+            background: var(--md-sys-color-on-surface);
+            color: var(--md-sys-color-surface);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            pointer-events: none;
+            opacity: 0;
+            transform: translate(-50%, -120%);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            box-shadow: var(--md-elevation-3);
+            white-space: nowrap;
+            z-index: 600;
+        }
+
+        .chart-tooltip.visible {
+            opacity: 1;
+        }
+
+        /* Recent Activity Table */
+        .activity-card {
+            background-color: var(--md-sys-color-surface);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: var(--md-shape-radius);
+            padding: 24px;
+            box-shadow: var(--md-elevation-1);
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 16px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        .data-table th {
+            padding: 12px 16px;
+            color: var(--md-sys-color-on-surface-variant);
+            font-weight: 700;
+            border-bottom: 1px solid var(--md-sys-color-outline-variant);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .data-table td {
+            padding: 14px 16px;
+            color: var(--md-sys-color-on-surface);
+            border-bottom: 1px solid var(--md-sys-color-outline-variant);
+            font-weight: 500;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .chip-success {
+            background-color: rgba(46, 125, 50, 0.12);
+            color: #2E7D32;
+        }
+
+        .chip-pending {
+            background-color: rgba(237, 108, 2, 0.12);
+            color: #ED6C02;
+        }
+
+        /* Skeleton Loading Effect */
+        .skeleton {
+            position: relative;
+            overflow: hidden;
+            background-color: var(--md-sys-color-surface-variant) !important;
+            color: transparent !important;
+            border-color: transparent !important;
+            pointer-events: none;
+        }
+
+        .skeleton * {
+            visibility: hidden !important;
+        }
+
+        .skeleton::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            transform: translateX(-100%);
+            background-image: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0,
+                rgba(255, 255, 255, 0.2) 20%,
+                rgba(255, 255, 255, 0.5) 60%,
+                rgba(255, 255, 255, 0)
+            );
+            animation: shimmer 1.2s infinite;
+        }
+
+        @keyframes shimmer {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Floating Action Button (FAB) */
+        .fab-main {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 56px;
+            height: 56px;
+            border-radius: var(--md-shape-radius);
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--md-elevation-3);
+            border: none;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        .fab-main:hover {
+            transform: scale(1.08);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+        }
+
+        .fab-main svg {
+            width: 26px;
+            height: 26px;
+            fill: currentColor;
+        }
+
+        /* Modal Slide-over Popup */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 2000;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-container {
+            background-color: var(--md-sys-color-surface);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: var(--md-shape-radius);
+            width: 90%;
+            max-width: 520px;
+            padding: 32px;
+            box-shadow: var(--md-elevation-3);
+            transform: translateY(20px) scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        .modal-overlay.open .modal-container {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .btn-close {
+            background: transparent;
+            border: none;
+            color: var(--md-sys-color-on-surface-variant);
+            cursor: pointer;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--md-sys-color-on-surface-variant);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input, .form-select {
+            background-color: var(--md-sys-color-surface-variant);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            color: var(--md-sys-color-on-surface);
+            padding: 12px 16px;
+            border-radius: var(--md-shape-radius);
+            font-size: 14px;
+            outline: none;
+            width: 100%;
+        }
+
+        .form-input:focus, .form-select:focus {
+            border-color: var(--md-sys-color-primary);
+            box-shadow: 0 0 0 2px rgba(103, 80, 164, 0.2);
+        }
+
+        .modal-actions {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .btn-text {
+            background: transparent;
+            border: none;
+            color: var(--md-sys-color-primary);
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* Responsive Layout */
+        @media (max-width: 1200px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .charts-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--md-sys-color-outline-variant);
+            }
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            .header-actions {
+                margin-right: 0;
+            }
+            .version-switcher {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin: 12px 20px;
+                width: fit-content;
+            }
+        }
+    </style>
+</head>
+<body data-theme="v1">
+
+    <!-- Top-Right Version Switcher -->
+    <div class="version-switcher">
+        <span class="switcher-title">M3 Style</span>
+        <button class="theme-btn active md-ripple" data-target="v1" title="V1: Material You Light">1</button>
+        <button class="theme-btn md-ripple" data-target="v2" title="V2: Material You Dark">2</button>
+        <button class="theme-btn md-ripple" data-target="v3" title="V3: High-Contrast Blue">3</button>
+        <button class="theme-btn md-ripple" data-target="v4" title="V4: Monochromatic Eco">4</button>
+        <button class="theme-btn md-ripple" data-target="v5" title="V5: Outlined Modern Teal">5</button>
+        <button class="theme-btn md-ripple" data-target="v6" title="V6: Cyber Sunset Dark">6</button>
+    </div>
+
+    <!-- Sidebar Accordion -->
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+            </div>
+            <div>
+                <div class="brand-title">Nexus Analytics</div>
+                <div class="brand-subtitle">Material Design 3 Engine</div>
+            </div>
+        </div>
+
+        <nav class="nav-section">
+            <!-- Accordion 1: Analytics -->
+            <div class="nav-item open">
+                <div class="nav-header active md-ripple" onclick="toggleAccordion(this)">
+                    <div class="nav-header-left">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-2.33 4.67-3.53 7-3.53s7 1.2 7 3.53V19z"/></svg>
+                        <span>Analytics</span>
+                    </div>
+                    <svg class="chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                </div>
+                <div class="nav-sub">
+                    <a href="#" class="nav-sub-item active">Overview Performance</a>
+                    <a href="#" class="nav-sub-item">Realtime Traffic</a>
+                    <a href="#" class="nav-sub-item">Conversion Funnels</a>
+                </div>
+            </div>
+
+            <!-- Accordion 2: Reports -->
+            <div class="nav-item">
+                <div class="nav-header md-ripple" onclick="toggleAccordion(this)">
+                    <div class="nav-header-left">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                        <span>Reports</span>
+                    </div>
+                    <svg class="chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                </div>
+                <div class="nav-sub">
+                    <a href="#" class="nav-sub-item">Revenue Breakdown</a>
+                    <a href="#" class="nav-sub-item">Cohort Retention</a>
+                    <a href="#" class="nav-sub-item">Export PDF / CSV</a>
+                </div>
+            </div>
+
+            <!-- Accordion 3: Team -->
+            <div class="nav-item">
+                <div class="nav-header md-ripple" onclick="toggleAccordion(this)">
+                    <div class="nav-header-left">
+                        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                        <span>Team Management</span>
+                    </div>
+                    <svg class="chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                </div>
+                <div class="nav-sub">
+                    <a href="#" class="nav-sub-item">Members & Roles</a>
+                    <a href="#" class="nav-sub-item">Audit Activity Log</a>
+                </div>
+            </div>
+
+            <!-- Accordion 4: Settings -->
+            <div class="nav-item">
+                <div class="nav-header md-ripple" onclick="toggleAccordion(this)">
+                    <div class="nav-header-left">
+                        <svg viewBox="0 0 24 24"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>
+                        <span>System Settings</span>
+                    </div>
+                    <svg class="chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                </div>
+                <div class="nav-sub">
+                    <a href="#" class="nav-sub-item">API Tokens</a>
+                    <a href="#" class="nav-sub-item">Billing & Plan</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Sidebar Sync Widget -->
+        <div class="sidebar-widget">
+            <div class="sync-row">
+                <span class="sync-label">Live Data Stream</span>
+                <label class="md-switch">
+                    <input type="checkbox" id="liveSyncToggle" checked onchange="handleSyncToggle(this)">
+                    <span class="switch-slider"></span>
+                </label>
+            </div>
+            <div class="sync-row">
+                <span style="font-size: 11px; color: var(--md-sys-color-on-surface-variant);">Status</span>
+                <span class="badge-pulse" id="syncStatusBadge">
+                    <span class="dot-pulse"></span> SYNCED
+                </span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Wrapper -->
+    <main class="main-wrapper">
+        <!-- Top App Bar / Header -->
+        <header class="header">
+            <div class="search-bar">
+                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                <input type="text" placeholder="Search metrics, reports, queries...">
+            </div>
+
+            <div class="header-actions">
+                <!-- Date Selector Dropdown -->
+                <div class="dropdown" id="dateDropdown">
+                    <button class="dropdown-btn md-ripple" onclick="toggleDropdown('dateDropdown')">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+                        <span id="selectedDateLabel">This Month</span>
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                    </button>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-option" onclick="selectDate('Today')">Today</div>
+                        <div class="dropdown-option" onclick="selectDate('This Week')">This Week</div>
+                        <div class="dropdown-option" onclick="selectDate('This Month')">This Month</div>
+                        <div class="dropdown-option" onclick="selectDate('This Year')">This Year</div>
+                    </div>
+                </div>
+
+                <!-- Profile Switcher Dropdown -->
+                <div class="dropdown" id="profileDropdown">
+                    <button class="profile-btn md-ripple" onclick="toggleDropdown('profileDropdown')">
+                        <div class="avatar">AM</div>
+                        <div class="profile-info">
+                            <span class="profile-name">Alex Morgan</span>
+                            <span class="profile-role">Lead Architect</span>
+                        </div>
+                    </button>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-option">View Account</div>
+                        <div class="dropdown-option">Workspace Config</div>
+                        <div class="dropdown-option" style="color: var(--md-sys-color-primary);">Sign Out</div>
+                    </div>
+                </div>
+
+                <button class="btn-primary md-ripple" onclick="openModal()">
+                    <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    <span>+ New Project</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Dashboard Content Container -->
+        <div class="content-container">
+            <div class="top-row">
+                <div>
+                    <h1 class="page-title">Executive SaaS Dashboard</h1>
+                    <p class="page-desc">Realtime financial metrics, subscriber acquisition & system health.</p>
+                </div>
+
+                <!-- Data Tabs -->
+                <div class="tabs-wrapper">
+                    <button class="tab-btn active md-ripple" onclick="switchDataTab(this, 'daily')">Daily</button>
+                    <button class="tab-btn md-ripple" onclick="switchDataTab(this, 'weekly')">Weekly</button>
+                    <button class="tab-btn md-ripple" onclick="switchDataTab(this, 'monthly')">Monthly</button>
+                </div>
+            </div>
+
+            <!-- Draggable KPI Grid -->
+            <div class="grid-container" id="kpiGrid">
+                <!-- Card 1 -->
+                <div class="widget-card md-ripple" draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)" ondragend="dragEnd(event)">
+                    <div class="widget-header">
+                        <span class="widget-title">Gross Revenue</span>
+                        <div class="widget-icon">
+                            <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+                        </div>
+                    </div>
+                    <div class="metric-value" id="valRevenue" data-target="128450">$0</div>
+                    <div class="metric-footer">
+                        <span class="badge-trend badge-up">↑ +14.2%</span>
+                        <span class="trend-text">vs previous period</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="widget-card md-ripple" draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)" ondragend="dragEnd(event)">
+                    <div class="widget-header">
+                        <span class="widget-title">Active Subscribers</span>
+                        <div class="widget-icon">
+                            <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                        </div>
+                    </div>
+                    <div class="metric-value" id="valUsers" data-target="42890">0</div>
+                    <div class="metric-footer">
+                        <span class="badge-trend badge-up">↑ +8.7%</span>
+                        <span class="trend-text">growth rate</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="widget-card md-ripple" draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)" ondragend="dragEnd(event)">
+                    <div class="widget-header">
+                        <span class="widget-title">Conversion Rate</span>
+                        <div class="widget-icon">
+                            <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+                        </div>
+                    </div>
+                    <div class="metric-value" id="valConv" data-target="3.84">0%</div>
+                    <div class="metric-footer">
+                        <span class="badge-trend badge-up">↑ +1.2%</span>
+                        <span class="trend-text">funnel optimization</span>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="widget-card md-ripple" draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)" ondragend="dragEnd(event)">
+                    <div class="widget-header">
+                        <span class="widget-title">Avg Session Time</span>
+                        <div class="widget-icon">
+                            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                        </div>
+                    </div>
+                    <div class="metric-value" id="valTime" data-target="4.32">0m</div>
+                    <div class="metric-footer">
+                        <span class="badge-trend badge-down">↓ -0.4%</span>
+                        <span class="trend-text">engagement duration</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic SVG Charts Section -->
+            <div class="charts-row">
+                <!-- Line Chart Card -->
+                <div class="chart-card" id="mainChartCard">
+                    <div class="chart-header">
+                        <div class="chart-title-area">
+                            <h3>Revenue & Active Users Trajectory</h3>
+                            <p>Real-time comparative performance telemetry</p>
+                        </div>
+                        <div style="display: flex; gap: 12px; font-size: 12px; font-weight: 600;">
+                            <span style="color: var(--md-sys-color-primary);">● Revenue ($)</span>
+                            <span style="color: var(--md-sys-color-tertiary);">-- Active Users</span>
+                        </div>
+                    </div>
+                    <div class="svg-container">
+                        <svg class="svg-chart" viewBox="0 0 700 260" preserveAspectRatio="none">
+                            <!-- Grid Lines -->
+                            <line x1="0" y1="50" x2="700" y2="50" stroke="var(--md-sys-color-outline-variant)" stroke-dasharray="3 3" opacity="0.4"/>
+                            <line x1="0" y1="120" x2="700" y2="120" stroke="var(--md-sys-color-outline-variant)" stroke-dasharray="3 3" opacity="0.4"/>
+                            <line x1="0" y1="190" x2="700" y2="190" stroke="var(--md-sys-color-outline-variant)" stroke-dasharray="3 3" opacity="0.4"/>
+                            <line x1="0" y1="240" x2="700" y2="240" stroke="var(--md-sys-color-outline-variant)"/>
+
+                            <!-- Dynamic Paths -->
+                            <path class="chart-path-revenue" id="revenuePath" d="M 20 200 Q 150 140, 300 160 T 550 80 T 680 40"></path>
+                            <path class="chart-path-users" id="usersPath" d="M 20 220 Q 150 190, 300 180 T 550 120 T 680 90"></path>
+
+                            <!-- Interactive Points -->
+                            <g id="chartPointsGroup">
+                                <circle class="chart-point" cx="20" cy="200" data-val="$18,400 / 4,200 users" onmousemove="showTooltip(event)" onmouseout="hideTooltip()"></circle>
+                                <circle class="chart-point" cx="150" cy="140" data-val="$42,100 / 12,500 users" onmousemove="showTooltip(event)" onmouseout="hideTooltip()"></circle>
+                                <circle class="chart-point" cx="300" cy="160" data-val="$38,900 / 16,800 users" onmousemove="showTooltip(event)" onmouseout="hideTooltip()"></circle>
+                                <circle class="chart-point" cx="450" cy="100" data-val="$84,200 / 28,400 users" onmousemove="showTooltip(event)" onmouseout="hideTooltip()"></circle>
+                                <circle class="chart-point" cx="550" cy="80" data-val="$105,600 / 35,100 users" onmousemove="showTooltip(event)" onmouseout="hideTooltip()"></circle>
+                                <circle class="chart-point" cx="680" cy="40" data-val="$128,450 / 42,890 users" onmousemove="showTooltip(event)" onmouseout="hideTooltip()"></circle>
+                            </g>
+                        </svg>
+                        <div class="chart-tooltip" id="chartTooltip"></div>
+                    </div>
+                </div>
+
+                <!-- Bar Chart Card -->
+                <div class="chart-card" id="barChartCard">
+                    <div class="chart-header">
+                        <div class="chart-title-area">
+                            <h3>Acquisition Channels</h3>
+                            <p>Traffic volume by source</p>
+                        </div>
+                    </div>
+                    <div class="svg-container">
+                        <svg class="svg-chart" viewBox="0 0 320 240">
+                            <!-- Bars -->
+                            <rect class="chart-bar" x="20" y="60" width="36" height="170" data-val="Direct: 42%" onmousemove="showTooltip(event)" onmouseout="hideTooltip()"/>
+                            <rect class="chart-bar" x="80" y="30" width="36" height="200" data-val="Organic Search: 68%" onmousemove="showTooltip(event)" onmouseout="hideTooltip()"/>
+                            <rect class="chart-bar" x="140" y="100" width="36" height="130" data-val="Referral: 34%" onmousemove="showTooltip(event)" onmouseout="hideTooltip()"/>
+                            <rect class="chart-bar" x="200" y="80" width="36" height="150" data-val="Social Media: 48%" onmousemove="showTooltip(event)" onmouseout="hideTooltip()"/>
+                            <rect class="chart-bar" x="260" y="140" width="36" height="90" data-val="Email Campaigns: 22%" onmousemove="showTooltip(event)" onmouseout="hideTooltip()"/>
+
+                            <!-- Labels -->
+                            <text x="38" y="248" font-size="10" fill="var(--md-sys-color-on-surface-variant)" text-anchor="middle">Dir</text>
+                            <text x="98" y="248" font-size="10" fill="var(--md-sys-color-on-surface-variant)" text-anchor="middle">Org</text>
+                            <text x="158" y="248" font-size="10" fill="var(--md-sys-color-on-surface-variant)" text-anchor="middle">Ref</text>
+                            <text x="218" y="248" font-size="10" fill="var(--md-sys-color-on-surface-variant)" text-anchor="middle">Soc</text>
+                            <text x="278" y="248" font-size="10" fill="var(--md-sys-color-on-surface-variant)" text-anchor="middle">Eml</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity Table -->
+            <div class="activity-card" draggable="true" ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)" ondragend="dragEnd(event)">
+                <div class="chart-header">
+                    <div class="chart-title-area">
+                        <h3>Recent Financial Transactions</h3>
+                        <p>Real-time billing activity log</p>
+                    </div>
+                    <button class="btn-text md-ripple">View All Transactions</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Transaction ID</th>
+                                <th>Client / Organization</th>
+                                <th>Plan Tier</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#TX-94821</td>
+                                <td>Acme Software Corp</td>
+                                <td>Enterprise Plan</td>
+                                <td>$4,800.00</td>
+                                <td>Today, 14:32</td>
+                                <td><span class="chip chip-success">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>#TX-94820</td>
+                                <td>Starlight Dynamics</td>
+                                <td>Pro Monthly</td>
+                                <td>$299.00</td>
+                                <td>Today, 13:10</td>
+                                <td><span class="chip chip-success">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>#TX-94819</td>
+                                <td>Hyperion Labs LLC</td>
+                                <td>Custom Tier</td>
+                                <td>$12,500.00</td>
+                                <td>Yesterday</td>
+                                <td><span class="chip chip-pending">In Escrow</span></td>
+                            </tr>
+                            <tr>
+                                <td>#TX-94818</td>
+                                <td>Nexus Systems</td>
+                                <td>Growth Plan</td>
+                                <td>$899.00</td>
+                                <td>Yesterday</td>
+                                <td><span class="chip chip-success">Completed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Action Button (FAB) -->
+    <button class="fab-main md-ripple" onclick="openModal()" title="Quick Add Project">
+        <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+    </button>
+
+    <!-- Modal Popup "+ New Project" -->
+    <div class="modal-overlay" id="projectModal" onclick="closeModalOnBackdrop(event)">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">Create New Analytics Project</h3>
+                <button class="btn-close md-ripple" onclick="closeModal()">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                </button>
+            </div>
+            <form onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label class="form-label">Project Name</label>
+                    <input type="text" class="form-input" placeholder="e.g. Q4 Growth Funnel" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Category</label>
+                    <select class="form-select">
+                        <option>Financial Performance</option>
+                        <option>User Acquisition & Funnels</option>
+                        <option>API Infrastructure Telemetry</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Target Revenue Goal ($)</label>
+                    <input type="number" class="form-input" placeholder="250000">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-text md-ripple" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn-primary md-ripple">Launch Project</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Interactions Engine -->
+    <script>
+        // Theme Switcher Engine
+        const themeBtns = document.querySelectorAll('.theme-btn');
+        const body = document.body;
+
+        themeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = btn.getAttribute('data-target');
+                body.setAttribute('data-theme', target);
+                themeBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Re-trigger count-up animations on theme switch for delight
+                animateMetrics();
+            });
+        });
+
+        // Material Ripple Click Effect
+        document.addEventListener('click', function(e) {
+            const target = e.target.closest('.md-ripple');
+            if (target) {
+                const rect = target.getBoundingClientRect();
+                const circle = document.createElement('span');
+                const diameter = Math.max(rect.width, rect.height);
+                const radius = diameter / 2;
+
+                circle.style.width = circle.style.height = `${diameter}px`;
+                circle.style.left = `${e.clientX - rect.left - radius}px`;
+                circle.style.top = `${e.clientY - rect.top - radius}px`;
+                circle.classList.add('ripple-effect');
+
+                const existingRipple = target.querySelector('.ripple-effect');
+                if (existingRipple) existingRipple.remove();
+
+                target.appendChild(circle);
+                setTimeout(() => circle.remove(), 600);
+            }
+        });
+
+        // Accordion Toggle
+        function toggleAccordion(headerEl) {
+            const item = headerEl.parentElement;
+            const isOpen = item.classList.contains('open');
+            
+            // Optionally close other accordions
+            document.querySelectorAll('.nav-item').forEach(el => {
+                if(el !== item) el.classList.remove('open');
+            });
+
+            if (isOpen) {
+                item.classList.remove('open');
+            } else {
+                item.classList.add('open');
+            }
+        }
+
+        // Dropdown Handlers
+        function toggleDropdown(id) {
+            const el = document.getElementById(id);
+            const isOpen = el.classList.contains('open');
+            closeAllDropdowns();
+            if (!isOpen) el.classList.add('open');
+        }
+
+        function closeAllDropdowns() {
+            document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+        }
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown')) {
+                closeAllDropdowns();
+            }
+        });
+
+        function selectDate(label) {
+            document.getElementById('selectedDateLabel').innerText = label;
+            closeAllDropdowns();
+            triggerSkeletonAndRefresh();
+        }
+
+        // Live Sync Toggle Switch
+        function handleSyncToggle(checkbox) {
+            const badge = document.getElementById('syncStatusBadge');
+            if (checkbox.checked) {
+                badge.innerHTML = `<span class="dot-pulse"></span> SYNCED`;
+                badge.style.background = 'rgba(46, 125, 50, 0.15)';
+                badge.style.color = '#2E7D32';
+            } else {
+                badge.innerHTML = `PAUSED`;
+                badge.style.background = 'rgba(237, 108, 2, 0.15)';
+                badge.style.color = '#ED6C02';
+            }
+        }
+
+        // Count-Up Animation Engine
+        function animateValue(id, start, end, duration, isCurrency = false, isPercent = false, isTime = false) {
+            const obj = document.getElementById(id);
+            if (!obj) return;
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const currentVal = Math.floor(progress * (end - start) + start);
+                
+                if (isCurrency) {
+                    obj.innerHTML = `$${currentVal.toLocaleString()}`;
+                } else if (isPercent) {
+                    const decimalVal = (progress * (end - start) + start).toFixed(2);
+                    obj.innerHTML = `${decimalVal}%`;
+                } else if (isTime) {
+                    const minutes = (progress * (end - start) + start).toFixed(2);
+                    obj.innerHTML = `${minutes}m`;
+                } else {
+                    obj.innerHTML = currentVal.toLocaleString();
+                }
+
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        function animateMetrics() {
+            animateValue('valRevenue', 0, 128450, 1000, true);
+            animateValue('valUsers', 0, 42890, 1000);
+            animateValue('valConv', 0, 3.84, 1000, false, true);
+            animateValue('valTime', 0, 4.32, 1000, false, false, true);
+        }
+
+        // Skeleton Loading & Data Tab Switching
+        function triggerSkeletonAndRefresh() {
+            const targets = [
+                ...document.querySelectorAll('.widget-card'),
+                document.getElementById('mainChartCard'),
+                document.getElementById('barChartCard')
+            ];
+
+            targets.forEach(el => el.classList.add('skeleton'));
+
+            setTimeout(() => {
+                targets.forEach(el => el.classList.remove('skeleton'));
+                animateMetrics();
+            }, 600);
+        }
+
+        function switchDataTab(btn, mode) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            triggerSkeletonAndRefresh();
+        }
+
+        // Hover Tooltip for SVG Charts
+        const tooltip = document.getElementById('chartTooltip');
+
+        function showTooltip(e) {
+            const val = e.target.getAttribute('data-val');
+            tooltip.innerText = val;
+            tooltip.classList.add('visible');
+
+            const cardRect = e.target.closest('.svg-container').getBoundingClientRect();
+            const x = e.clientX - cardRect.left;
+            const y = e.clientY - cardRect.top;
+
+            tooltip.style.left = `${x}px`;
+            tooltip.style.top = `${y}px`;
+        }
+
+        function hideTooltip() {
+            tooltip.classList.remove('visible');
+        }
+
+        // Draggable Widget Grid Engine
+        let draggedItem = null;
+
+        function dragStart(e) {
+            draggedItem = e.currentTarget;
+            e.currentTarget.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        }
+
+        function dragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        }
+
+        function drop(e) {
+            e.preventDefault();
+            const targetItem = e.currentTarget;
+            if (draggedItem && targetItem !== draggedItem) {
+                const parent = targetItem.parentNode;
+                const children = Array.from(parent.children);
+                const draggedIdx = children.indexOf(draggedItem);
+                const targetIdx = children.indexOf(targetItem);
+
+                if (draggedIdx < targetIdx) {
+                    parent.insertBefore(draggedItem, targetItem.nextSibling);
+                } else {
+                    parent.insertBefore(draggedItem, targetItem);
+                }
+            }
+        }
+
+        function dragEnd(e) {
+            e.currentTarget.classList.remove('dragging');
+            draggedItem = null;
+        }
+
+        // Modal Controls
+        function openModal() {
+            document.getElementById('projectModal').classList.add('open');
+        }
+
+        function closeModal() {
+            document.getElementById('projectModal').classList.remove('open');
+        }
+
+        function closeModalOnBackdrop(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeModal();
+            }
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            closeModal();
+            triggerSkeletonAndRefresh();
+        }
+
+        // Keyboard Shortcut Escape for Modal
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Initialize animations on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            animateMetrics();
+        });
+    </script>
+
+<!-- Draggable Theme Switcher Script -->
+<script>
+(function() {
+    function initDraggableSwitcher() {
+        const selectors = [
+            '.version-switcher', '.version-switcher-bar', '.version-switcher-box', 
+            '.theme-switcher-deck', '.top-switcher-bar', '#switcher', '#versionSwitcher',
+            '.theme-switcher', '.switcher-bar', '.version-deck', '[class*="switcher"]'
+        ];
+        let el = null;
+        for (const sel of selectors) {
+            const found = document.querySelector(sel);
+            if (found) {
+                const pos = getComputedStyle(found).position;
+                if (pos === 'fixed' || pos === 'absolute') {
+                    el = found;
+                    break;
+                }
+            }
+        }
+        if (!el) {
+            const allFixed = Array.from(document.querySelectorAll('*')).filter(e => {
+                const pos = getComputedStyle(e).position;
+                const z = parseInt(getComputedStyle(e).zIndex || 0);
+                return (pos === 'fixed' || pos === 'absolute') && z >= 90;
+            });
+            if (allFixed.length > 0) el = allFixed[0];
+        }
+        if (!el) return;
+
+        // Visual Drag Indicator
+        el.style.cursor = 'grab';
+        el.style.zIndex = '99999';
+        if (!el.querySelector('.drag-handle-hint')) {
+            const hint = document.createElement('span');
+            hint.className = 'drag-handle-hint';
+            hint.innerHTML = ' ⠿ ';
+            hint.title = '드래그하여 원하는 위치로 이동하세요';
+            hint.style.cssText = 'cursor:grab; font-weight:bold; opacity:0.7; margin-right:6px; user-select:none; display:inline-block; vertical-align:middle;';
+            el.insertBefore(hint, el.firstChild);
+        }
+
+        let isMouseDown = false;
+        let startX = 0, startY = 0;
+        let origLeft = 0, origTop = 0;
+        let hasMoved = false;
+
+        function startDrag(clientX, clientY) {
+            isMouseDown = true;
+            hasMoved = false;
+            startX = clientX;
+            startY = clientY;
+            const rect = el.getBoundingClientRect();
+            origLeft = rect.left;
+            origTop = rect.top;
+            el.style.cursor = 'grabbing';
+        }
+
+        function moveDrag(clientX, clientY, e) {
+            if (!isMouseDown) return;
+            const dx = clientX - startX;
+            const dy = clientY - startY;
+            if (Math.abs(dx) > 2 || Math.abs(dy) > 2) {
+                hasMoved = true;
+                if (e && e.cancelable) e.preventDefault();
+                el.style.right = 'auto';
+                el.style.bottom = 'auto';
+                let newLeft = Math.max(0, Math.min(window.innerWidth - el.offsetWidth, origLeft + dx));
+                let newTop = Math.max(0, Math.min(window.innerHeight - el.offsetHeight, origTop + dy));
+                el.style.left = newLeft + 'px';
+                el.style.top = newTop + 'px';
+            }
+        }
+
+        function stopDrag() {
+            isMouseDown = false;
+            el.style.cursor = 'grab';
+        }
+
+        el.addEventListener('mousedown', function(e) {
+            startDrag(e.clientX, e.clientY);
+            function onMouseMove(me) { moveDrag(me.clientX, me.clientY, me); }
+            function onMouseUp() {
+                stopDrag();
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+            }
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        });
+
+        el.addEventListener('touchstart', function(e) {
+            if (!e.touches || e.touches.length === 0) return;
+            startDrag(e.touches[0].clientX, e.touches[0].clientY);
+            function onTouchMove(te) {
+                if (te.touches && te.touches.length > 0) {
+                    moveDrag(te.touches[0].clientX, te.touches[0].clientY, te);
+                }
+            }
+            function onTouchEnd() {
+                stopDrag();
+                document.removeEventListener('touchmove', onTouchMove);
+                document.removeEventListener('touchend', onTouchEnd);
+            }
+            document.addEventListener('touchmove', onTouchMove, { passive: false });
+            document.addEventListener('touchend', onTouchEnd);
+        }, { passive: true });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initDraggableSwitcher);
+    } else {
+        initDraggableSwitcher();
+    }
+})();
+</script>
+
+</body>
+</html>

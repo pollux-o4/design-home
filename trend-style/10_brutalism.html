@@ -1,0 +1,2005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRUTAL_ANALYTICS // SaaS Performance Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ==========================================================================
+           BRUTALISM DASHBOARD MASTER STYLESHEET
+           Supports 6 Themes via [data-theme="v1" .. "v6"]
+           ========================================================================== */
+
+        :root {
+            /* Theme V1: Raw Red & Black (Default Classic Web Brutalism) */
+            --bg-main: #f4f4f0;
+            --bg-card: #ffffff;
+            --text-main: #000000;
+            --text-muted: #555555;
+            --accent-primary: #ff0000;
+            --accent-secondary: #000000;
+            --accent-hover: #cc0000;
+            --border-color: #000000;
+            --border-width: 3px;
+            --box-shadow: 4px 4px 0px #000000;
+            --font-head: 'Archivo Black', 'Space Mono', sans-serif;
+            --font-body: 'JetBrains Mono', monospace;
+            --font-mono: 'Space Mono', monospace;
+            --card-radius: 0px;
+            --btn-radius: 0px;
+            --chart-grid: #e0e0e0;
+            --chart-line: #ff0000;
+            --chart-bar: #000000;
+            --badge-bg: #ff0000;
+            --badge-text: #ffffff;
+        }
+
+        /* Theme V2: Cyber Electric Neobrutalism */
+        body[data-theme="v2"] {
+            --bg-main: #ffe600;
+            --bg-card: #ffffff;
+            --text-main: #000000;
+            --text-muted: #333333;
+            --accent-primary: #ff007a;
+            --accent-secondary: #00f0ff;
+            --accent-hover: #d60066;
+            --border-color: #000000;
+            --border-width: 4px;
+            --box-shadow: 6px 6px 0px #000000;
+            --font-head: 'Syne', sans-serif;
+            --font-body: 'Space Mono', monospace;
+            --font-mono: 'Space Mono', monospace;
+            --chart-grid: #cccccc;
+            --chart-line: #ff007a;
+            --chart-bar: #00f0ff;
+            --badge-bg: #000000;
+            --badge-text: #ffe600;
+        }
+
+        /* Theme V3: Terminal Monochrome / Industrial Matrix */
+        body[data-theme="v3"] {
+            --bg-main: #0a0a0a;
+            --bg-card: #141414;
+            --text-main: #00ff66;
+            --text-muted: #00aa44;
+            --accent-primary: #ffb000;
+            --accent-secondary: #00ff66;
+            --accent-hover: #e09b00;
+            --border-color: #00ff66;
+            --border-width: 2px;
+            --box-shadow: 0px 0px 8px rgba(0, 255, 102, 0.4);
+            --font-head: 'JetBrains Mono', monospace;
+            --font-body: 'JetBrains Mono', monospace;
+            --font-mono: 'JetBrains Mono', monospace;
+            --chart-grid: #222222;
+            --chart-line: #ffb000;
+            --chart-bar: #00ff66;
+            --badge-bg: #ffb000;
+            --badge-text: #000000;
+        }
+
+        /* Theme V4: Swiss International Brutalism */
+        body[data-theme="v4"] {
+            --bg-main: #ffffff;
+            --bg-card: #f8f8f8;
+            --text-main: #050505;
+            --text-muted: #666666;
+            --accent-primary: #002244;
+            --accent-secondary: #e63946;
+            --accent-hover: #001122;
+            --border-color: #050505;
+            --border-width: 3px;
+            --box-shadow: none;
+            --font-head: 'Inter', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+            --chart-grid: #e5e5e5;
+            --chart-line: #e63946;
+            --chart-bar: #002244;
+            --badge-bg: #002244;
+            --badge-text: #ffffff;
+        }
+
+        /* Theme V5: Vintage Print Zine Brutalism */
+        body[data-theme="v5"] {
+            --bg-main: #f2efe9;
+            --bg-card: #faf8f5;
+            --text-main: #1a1a1a;
+            --text-muted: #666055;
+            --accent-primary: #d32f2f;
+            --accent-secondary: #1976d2;
+            --accent-hover: #b71c1c;
+            --border-color: #1a1a1a;
+            --border-width: 3px;
+            --box-shadow: 4px 4px 0px #1a1a1a;
+            --font-head: 'Space Mono', serif;
+            --font-body: 'Space Mono', monospace;
+            --font-mono: 'Space Mono', monospace;
+            --chart-grid: #dcd7ce;
+            --chart-line: #d32f2f;
+            --chart-bar: #1976d2;
+            --badge-bg: #d32f2f;
+            --badge-text: #ffffff;
+        }
+
+        /* Theme V6: Obsidian Acid Highlight (Dark High-Contrast) */
+        body[data-theme="v6"] {
+            --bg-main: #000000;
+            --bg-card: #0d0d0d;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --accent-primary: #ccff00;
+            --accent-secondary: #ff1744;
+            --accent-hover: #b3e600;
+            --border-color: #ffffff;
+            --border-width: 3px;
+            --box-shadow: 4px 4px 0px #ccff00;
+            --font-head: 'Archivo Black', sans-serif;
+            --font-body: 'JetBrains Mono', monospace;
+            --font-mono: 'JetBrains Mono', monospace;
+            --chart-grid: #262626;
+            --chart-line: #ccff00;
+            --chart-bar: #ff1744;
+            --badge-bg: #ccff00;
+            --badge-text: #000000;
+        }
+
+        /* Reset & Base Setup */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 1.5;
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background-color 0.15s ease, color 0.15s ease;
+        }
+
+        /* Typography Helper Classes */
+        h1, h2, h3, h4, .font-head {
+            font-family: var(--font-head);
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        .mono {
+            font-family: var(--font-mono);
+        }
+
+        /* Fixed Top-Right Version Switcher */
+        .version-switcher {
+            position: fixed;
+            top: 12px;
+            right: 12px;
+            z-index: 10000;
+            display: flex;
+            gap: 4px;
+            background: #000000;
+            padding: 6px;
+            border: 3px solid #ffffff;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .version-btn {
+            background: #222222;
+            color: #ffffff;
+            border: 2px solid #555555;
+            padding: 6px 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.1s ease;
+        }
+
+        .version-btn:hover {
+            background: #444444;
+            border-color: #ffffff;
+        }
+
+        .version-btn.active {
+            background: var(--accent-primary);
+            color: var(--badge-text);
+            border-color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        /* Top Announcement Ticker Bar */
+        .marquee-bar {
+            background: var(--accent-secondary);
+            color: var(--bg-card);
+            border-bottom: var(--border-width) solid var(--border-color);
+            padding: 6px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: flex;
+        }
+
+        body[data-theme="v3"] .marquee-bar {
+            color: #000000;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 25s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Layout Structure */
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            background: var(--bg-card);
+            border-bottom: var(--border-width) solid var(--border-color);
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-box {
+            background: var(--accent-primary);
+            color: var(--badge-text);
+            padding: 8px 14px;
+            font-family: var(--font-head);
+            font-size: 20px;
+            font-weight: 900;
+            border: var(--border-width) solid var(--border-color);
+            box-shadow: 3px 3px 0px var(--border-color);
+        }
+
+        .logo-tag {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 700;
+            background: var(--text-main);
+            color: var(--bg-main);
+            padding: 2px 6px;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-right: 280px; /* Space for fixed version switcher */
+        }
+
+        /* Custom Brutalist Dropdown Component */
+        .brutal-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-trigger {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: var(--border-width) solid var(--border-color);
+            padding: 8px 14px;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 3px 3px 0px var(--border-color);
+            transition: transform 0.05s ease;
+        }
+
+        .dropdown-trigger:active {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0px var(--border-color);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 4px);
+            right: 0;
+            background: var(--bg-card);
+            border: var(--border-width) solid var(--border-color);
+            box-shadow: var(--box-shadow);
+            min-width: 200px;
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .dropdown-menu.show {
+            display: flex;
+        }
+
+        .dropdown-item {
+            padding: 10px 14px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-main);
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-color);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: var(--accent-primary);
+            color: var(--badge-text);
+        }
+
+        .dropdown-item.selected {
+            background: var(--text-main);
+            color: var(--bg-card);
+        }
+
+        /* Buttons */
+        .btn-brutal {
+            background: var(--accent-primary);
+            color: var(--badge-text);
+            border: var(--border-width) solid var(--border-color);
+            padding: 10px 18px;
+            font-family: var(--font-head);
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: var(--box-shadow);
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.05s ease;
+        }
+
+        .btn-brutal:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-brutal:active {
+            transform: translate(3px, 3px);
+            box-shadow: 1px 1px 0px var(--border-color);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-main);
+        }
+
+        /* Dashboard Main Layout */
+        .dashboard-body {
+            display: flex;
+            flex: 1;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 280px;
+            background: var(--bg-card);
+            border-right: var(--border-width) solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px 0;
+            flex-shrink: 0;
+        }
+
+        .sidebar-section-title {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--text-muted);
+            padding: 0 20px 8px 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Accordion Navigation */
+        .nav-accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .accordion-header {
+            padding: 12px 20px;
+            font-family: var(--font-head);
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid transparent;
+            border-bottom: 1px solid transparent;
+            transition: background 0.1s ease;
+        }
+
+        .accordion-header:hover {
+            background: var(--bg-main);
+        }
+
+        .accordion-header.active {
+            background: var(--accent-primary);
+            color: var(--badge-text);
+            border-color: var(--border-color);
+        }
+
+        .accordion-icon {
+            font-family: var(--font-mono);
+            font-weight: bold;
+        }
+
+        .accordion-content {
+            display: none;
+            flex-direction: column;
+            background: var(--bg-main);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .accordion-content.show {
+            display: flex;
+        }
+
+        .sub-nav-item {
+            padding: 10px 20px 10px 36px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-main);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .sub-nav-item:last-child {
+            border-bottom: none;
+        }
+
+        .sub-nav-item:hover, .sub-nav-item.active {
+            background: var(--text-main);
+            color: var(--bg-card);
+        }
+
+        /* Toggle Switches */
+        .sidebar-controls {
+            padding: 20px;
+            border-top: var(--border-width) solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .brutal-toggle {
+            width: 50px;
+            height: 26px;
+            background: var(--bg-main);
+            border: var(--border-width) solid var(--border-color);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .brutal-toggle-handle {
+            width: 18px;
+            height: 18px;
+            background: var(--text-main);
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            transition: left 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .brutal-toggle.on {
+            background: var(--accent-primary);
+        }
+
+        .brutal-toggle.on .brutal-toggle-handle {
+            left: 25px;
+            background: var(--badge-text);
+        }
+
+        /* Main Content Container */
+        .content-area {
+            flex: 1;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            overflow-y: auto;
+        }
+
+        /* View Mode Tabs */
+        .content-top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            border-bottom: var(--border-width) solid var(--border-color);
+            padding-bottom: 16px;
+        }
+
+        .page-title-box h1 {
+            font-size: 28px;
+            line-height: 1;
+        }
+
+        .page-title-box p {
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .data-tabs {
+            display: flex;
+            border: var(--border-width) solid var(--border-color);
+            box-shadow: var(--box-shadow);
+            background: var(--bg-card);
+        }
+
+        .tab-btn {
+            background: transparent;
+            color: var(--text-main);
+            border: none;
+            border-right: var(--border-width) solid var(--border-color);
+            padding: 10px 18px;
+            font-family: var(--font-mono);
+            font-weight: 800;
+            font-size: 12px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .tab-btn:last-child {
+            border-right: none;
+        }
+
+        .tab-btn.active {
+            background: var(--accent-primary);
+            color: var(--badge-text);
+        }
+
+        /* Draggable Widget Grid */
+        .draggable-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 1200px) {
+            .draggable-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .draggable-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Widget Card Brutalist Base */
+        .widget-card {
+            background: var(--bg-card);
+            border: var(--border-width) solid var(--border-color);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            cursor: grab;
+        }
+
+        .widget-card:active {
+            cursor: grabbing;
+        }
+
+        .widget-card.dragging {
+            opacity: 0.4;
+            transform: scale(0.98);
+            border-style: dashed;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .drag-handle {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            cursor: grab;
+            opacity: 0.5;
+        }
+
+        .card-value {
+            font-family: var(--font-head);
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--text-main);
+            letter-spacing: -1px;
+            line-height: 1.1;
+            margin-bottom: 8px;
+        }
+
+        .card-trend {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .trend-up {
+            color: var(--accent-primary);
+        }
+
+        body[data-theme="v3"] .trend-up {
+            color: #00ff66;
+        }
+
+        .trend-down {
+            color: #ff0055;
+        }
+
+        .badge-tag {
+            background: var(--text-main);
+            color: var(--bg-card);
+            padding: 2px 6px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        /* Sparkline SVGs */
+        .sparkline-svg {
+            width: 100%;
+            height: 36px;
+            margin-top: 10px;
+        }
+
+        .sparkline-path {
+            fill: none;
+            stroke: var(--accent-primary);
+            stroke-width: 3;
+            stroke-linecap: square;
+        }
+
+        /* Skeleton Loading State */
+        .skeleton-active .skeleton-target {
+            color: transparent !important;
+            background: repeating-linear-gradient(
+                -45deg,
+                var(--border-color),
+                var(--border-color) 10px,
+                var(--bg-main) 10px,
+                var(--bg-main) 20px
+            ) !important;
+            animation: skeleton-shift 1s linear infinite;
+            border-radius: 0px;
+            position: relative;
+        }
+
+        @keyframes skeleton-shift {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 0; }
+        }
+
+        /* Chart Section Grid */
+        .charts-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 1024px) {
+            .charts-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .chart-card {
+            background: var(--bg-card);
+            border: var(--border-width) solid var(--border-color);
+            box-shadow: var(--box-shadow);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .chart-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+
+        .chart-title-group h3 {
+            font-size: 18px;
+        }
+
+        .chart-title-group p {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Interactive SVG Chart Container */
+        .svg-chart-wrapper {
+            position: relative;
+            width: 100%;
+            height: 280px;
+        }
+
+        .main-svg-chart {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        /* Chart Elements */
+        .chart-grid-line {
+            stroke: var(--chart-grid);
+            stroke-width: 1;
+            stroke-dasharray: 4,4;
+        }
+
+        .chart-bar-rect {
+            fill: var(--chart-bar);
+            stroke: var(--border-color);
+            stroke-width: 2;
+            transition: opacity 0.1s ease, fill 0.1s ease;
+            cursor: pointer;
+        }
+
+        .chart-bar-rect:hover {
+            fill: var(--accent-primary);
+        }
+
+        .chart-line-path {
+            fill: none;
+            stroke: var(--chart-line);
+            stroke-width: 4;
+            stroke-linecap: square;
+        }
+
+        .chart-node {
+            fill: var(--bg-card);
+            stroke: var(--accent-primary);
+            stroke-width: 3;
+            cursor: pointer;
+            transition: r 0.15s ease;
+        }
+
+        .chart-node:hover {
+            r: 7;
+            fill: var(--accent-primary);
+        }
+
+        /* Custom Interactive Tooltip */
+        .brutal-tooltip {
+            position: absolute;
+            background: #000000;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            padding: 8px 12px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: bold;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.1s ease, transform 0.1s ease;
+            transform: translate(-50%, -120%);
+            box-shadow: 4px 4px 0px rgba(255,255,255,0.3);
+            z-index: 100;
+            white-space: nowrap;
+        }
+
+        body[data-theme="v3"] .brutal-tooltip {
+            background: #141414;
+            color: #00ff66;
+            border-color: #00ff66;
+        }
+
+        .brutal-tooltip.show {
+            opacity: 1;
+        }
+
+        /* Conversion Funnel Bar Component */
+        .funnel-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .funnel-stage {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .funnel-label {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .funnel-bar-outer {
+            height: 24px;
+            background: var(--bg-main);
+            border: 2px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .funnel-bar-inner {
+            height: 100%;
+            background: var(--accent-primary);
+            border-right: 2px solid var(--border-color);
+            transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Bottom Section: Transactions Table & Audit Log */
+        .table-card {
+            background: var(--bg-card);
+            border: var(--border-width) solid var(--border-color);
+            box-shadow: var(--box-shadow);
+            padding: 24px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin-top: 16px;
+        }
+
+        .brutal-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            text-align: left;
+        }
+
+        .brutal-table th {
+            background: var(--text-main);
+            color: var(--bg-card);
+            padding: 12px 16px;
+            font-weight: 800;
+            text-transform: uppercase;
+            border: 2px solid var(--border-color);
+        }
+
+        .brutal-table td {
+            padding: 12px 16px;
+            border: 2px solid var(--border-color);
+            font-weight: 700;
+        }
+
+        .brutal-table tr:nth-child(even) {
+            background: var(--bg-main);
+        }
+
+        .brutal-table tr:hover {
+            background: var(--accent-primary);
+            color: var(--badge-text);
+        }
+
+        .status-pill {
+            display: inline-block;
+            padding: 2px 8px;
+            border: 1px solid var(--border-color);
+            font-weight: 800;
+            font-size: 10px;
+            text-transform: uppercase;
+        }
+
+        .status-success {
+            background: #00e676;
+            color: #000000;
+        }
+
+        .status-pending {
+            background: #ffea00;
+            color: #000000;
+        }
+
+        .status-failed {
+            background: #ff1744;
+            color: #ffffff;
+        }
+
+        /* Modal Slide-Over Popup */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(2px);
+            z-index: 99999;
+            display: none;
+            justify-content: flex-end;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal-panel {
+            width: 480px;
+            max-width: 90vw;
+            height: 100%;
+            background: var(--bg-card);
+            border-left: var(--border-width) solid var(--border-color);
+            box-shadow: -10px 0px 30px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            animation: slideInRight 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        .modal-header {
+            padding: 24px;
+            background: var(--text-main);
+            color: var(--bg-card);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: var(--border-width) solid var(--border-color);
+        }
+
+        .modal-close-btn {
+            background: var(--accent-primary);
+            color: var(--badge-text);
+            border: 2px solid var(--border-color);
+            width: 32px;
+            height: 32px;
+            font-family: var(--font-mono);
+            font-weight: 900;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-body {
+            padding: 24px;
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .brutal-input, .brutal-select, .brutal-textarea {
+            background: var(--bg-main);
+            color: var(--text-main);
+            border: var(--border-width) solid var(--border-color);
+            padding: 10px 14px;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 700;
+            outline: none;
+            box-shadow: 3px 3px 0px var(--border-color);
+        }
+
+        .brutal-input:focus, .brutal-select:focus, .brutal-textarea:focus {
+            background: var(--bg-card);
+            border-color: var(--accent-primary);
+        }
+
+        .modal-footer {
+            padding: 20px 24px;
+            border-top: var(--border-width) solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            background: var(--bg-main);
+        }
+
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            z-index: 999999;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .brutal-toast {
+            background: var(--text-main);
+            color: var(--bg-card);
+            border: var(--border-width) solid var(--border-color);
+            box-shadow: var(--box-shadow);
+            padding: 12px 18px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: popUp 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+    </style>
+</head>
+<body data-theme="v1">
+
+    <!-- FIXED TOP-RIGHT 6-VERSION SWITCHER -->
+    <div class="version-switcher" id="versionSwitcher">
+        <button class="version-btn active" data-v="v1">V1: RAW_RED</button>
+        <button class="version-btn" data-v="v2">V2: CYBER_YELLOW</button>
+        <button class="version-btn" data-v="v3">V3: MATRIX_DARK</button>
+        <button class="version-btn" data-v="v4">V4: SWISS_GRID</button>
+        <button class="version-btn" data-v="v5">V5: PRINT_ZINE</button>
+        <button class="version-btn" data-v="v6">V6: OBSIDIAN_ACID</button>
+    </div>
+
+    <!-- ANNOUNCEMENT / MARQUEE TICKER BAR -->
+    <div class="marquee-bar">
+        <div class="marquee-content" id="marqueeText">
+            ⚡ SYSTEM_STATUS: OPERATIONAL 100% | 📈 MONTHLY REVENUE: $148,920 (+18.4%) | 🚀 ACTIVE CLUSTERS: 42/42 | 🔒 SECURITY AUDIT: PASSED 2026-08-03 | ⚡ SYSTEM_STATUS: OPERATIONAL 100% | 📈 MONTHLY REVENUE: $148,920 (+18.4%) | 🚀 ACTIVE CLUSTERS: 42/42
+        </div>
+    </div>
+
+    <!-- APP MAIN CONTAINER -->
+    <div class="app-container">
+
+        <!-- HEADER & TOOLBAR -->
+        <header class="main-header">
+            <div class="logo-area">
+                <div class="logo-box">BRUTAL_DASH</div>
+                <div class="logo-tag">v4.8.2 // PROD</div>
+            </div>
+
+            <div class="header-controls">
+                <!-- Date Selector Dropdown -->
+                <div class="brutal-dropdown" id="dateDropdown">
+                    <button class="dropdown-trigger" onclick="toggleDropdown('dateDropdownMenu')">
+                        📅 RANGE: <span id="selectedDateText">THIS MONTH</span> ▼
+                    </button>
+                    <div class="dropdown-menu" id="dateDropdownMenu">
+                        <div class="dropdown-item" onclick="selectDateRange('TODAY')">TODAY</div>
+                        <div class="dropdown-item" onclick="selectDateRange('THIS WEEK')">THIS WEEK</div>
+                        <div class="dropdown-item selected" onclick="selectDateRange('THIS MONTH')">THIS MONTH</div>
+                        <div class="dropdown-item" onclick="selectDateRange('THIS YEAR')">THIS YEAR</div>
+                    </div>
+                </div>
+
+                <!-- Profile Switcher Dropdown -->
+                <div class="brutal-dropdown" id="profileDropdown">
+                    <button class="dropdown-trigger" onclick="toggleDropdown('profileDropdownMenu')">
+                        👤 SYS_ADMIN // ALICE_V ▼
+                    </button>
+                    <div class="dropdown-menu" id="profileDropdownMenu">
+                        <div class="dropdown-item">⚙️ ACCOUNT SETTINGS</div>
+                        <div class="dropdown-item">🔑 API KEYS & TOKENS</div>
+                        <div class="dropdown-item">🛡️ ACCESS LOGS</div>
+                        <div class="dropdown-item" style="color:var(--accent-primary);">🔴 LOGOUT SYS</div>
+                    </div>
+                </div>
+
+                <!-- Quick Action CTA Button -->
+                <button class="btn-brutal" onclick="openModal()">
+                    + NEW PROJECT
+                </button>
+            </div>
+        </header>
+
+        <!-- DASHBOARD BODY (SIDEBAR + MAIN CONTENT) -->
+        <div class="dashboard-body">
+
+            <!-- SIDEBAR NAVIGATION -->
+            <aside class="sidebar">
+                <div>
+                    <div class="sidebar-section-title">NAVIGATION MENU</div>
+                    
+                    <!-- Accordion Sub-Menus -->
+                    <div class="nav-accordion">
+                        <!-- Accordion 1: Analytics -->
+                        <div class="accordion-item">
+                            <div class="accordion-header active" onclick="toggleAccordion(this)">
+                                <span>📊 ANALYTICS</span>
+                                <span class="accordion-icon">−</span>
+                            </div>
+                            <div class="accordion-content show">
+                                <div class="sub-nav-item active" onclick="setActiveNav(this)">▸ OVERVIEW METRICS</div>
+                                <div class="sub-nav-item" onclick="setActiveNav(this)">▸ TRAFFIC & CONVERSION</div>
+                                <div class="sub-nav-item" onclick="setActiveNav(this)">▸ REVENUE STREAMS</div>
+                                <div class="sub-nav-item" onclick="setActiveNav(this)">▸ FUNNEL PERFORMANCE</div>
+                            </div>
+                        </div>
+
+                        <!-- Accordion 2: Reports -->
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span>📑 REPORTS</span>
+                                <span class="accordion-icon">+</span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="sub-nav-item" onclick="setActiveNav(this)">▸ EXECUTIVE SUMMARY</div>
+                                <div class="sub-nav-item" onclick="setActiveNav(this)">▸ EXPORT DATA (CSV)</div>
+                                <div class="sub-nav-item" onclick="setActiveNav(this)">▸ SCHEDULED EMAILS</div>
+                            </div>
+                        </div>
+
+                        <!-- Accordion 3: Team -->
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span>👥 TEAM & ACCESS</span>
+                                <span class="accordion-icon">+</span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="sub-nav-item" onclick="setActiveNav(this)">▸ MEMBERS & ROLES</div>
+                                <div class="sub-nav-item" onclick="setActiveNav(this)">▸ AUDIT TRAILS</div>
+                            </div>
+                        </div>
+
+                        <!-- Accordion 4: Settings -->
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span>⚙️ SETTINGS</span>
+                                <span class="accordion-icon">+</span>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="sub-nav-item" onclick="setActiveNav(this)">▸ API INTEGRATIONS</div>
+                                <div class="sub-nav-item" onclick="setActiveNav(this)">▸ BILLING & INVOICES</div>
+                                <div class="sub-nav-item" onclick="setActiveNav(this)">▸ SYSTEM WEBHOOKS</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar Controls / Toggles -->
+                <div class="sidebar-controls">
+                    <div class="toggle-row">
+                        <span>LIVE SYNC:</span>
+                        <div class="brutal-toggle on" id="liveSyncToggle" onclick="toggleSwitch(this, 'Live Sync')">
+                            <div class="brutal-toggle-handle"></div>
+                        </div>
+                    </div>
+                    <div class="toggle-row">
+                        <span>GRID LINES:</span>
+                        <div class="brutal-toggle on" id="gridToggle" onclick="toggleSwitch(this, 'Grid Lines')">
+                            <div class="brutal-toggle-handle"></div>
+                        </div>
+                    </div>
+                    <div style="font-family:var(--font-mono); font-size:10px; color:var(--text-muted); text-align:center; margin-top:10px;">
+                        NODE ID: #US-EAST-802<br>UPTIME: 99.98%
+                    </div>
+                </div>
+            </aside>
+
+            <!-- MAIN CONTENT AREA -->
+            <main class="content-area" id="mainContentArea">
+
+                <!-- TOP BAR WITH VIEW MODE DATA TABS -->
+                <div class="content-top-bar">
+                    <div class="page-title-box">
+                        <h1>SYSTEM PERFORMANCE ANALYTICS</h1>
+                        <p>REAL-TIME AGGREGATED METRICS & REVENUE MONITORING</p>
+                    </div>
+
+                    <!-- View Mode Data Tabs -->
+                    <div class="data-tabs">
+                        <button class="tab-btn" onclick="switchDataTab(this, 'daily')">DAILY</button>
+                        <button class="tab-btn" onclick="switchDataTab(this, 'weekly')">WEEKLY</button>
+                        <button class="tab-btn active" onclick="switchDataTab(this, 'monthly')">MONTHLY</button>
+                        <button class="tab-btn" onclick="switchDataTab(this, 'yearly')">YEARLY</button>
+                    </div>
+                </div>
+
+                <!-- DRAGGABLE KPI METRIC CARDS GRID -->
+                <div class="draggable-grid" id="draggableGrid">
+
+                    <!-- KPI CARD 1 -->
+                    <div class="widget-card" draggable="true" id="widget-1">
+                        <div class="card-header">
+                            <span class="card-title">💵 TOTAL REVENUE</span>
+                            <span class="drag-handle" title="Drag to reorder">⠿</span>
+                        </div>
+                        <div class="card-value skeleton-target" id="kpiVal1">$148,920</div>
+                        <div class="card-trend trend-up">
+                            ▲ +18.4% <span class="badge-tag">vs LAST PERIOD</span>
+                        </div>
+                        <svg class="sparkline-svg" viewBox="0 0 100 30">
+                            <path class="sparkline-path" d="M0,25 L20,18 L40,22 L60,10 L80,14 L100,4" />
+                        </svg>
+                    </div>
+
+                    <!-- KPI CARD 2 -->
+                    <div class="widget-card" draggable="true" id="widget-2">
+                        <div class="card-header">
+                            <span class="card-title">👥 ACTIVE SUBSCRIPTIONS</span>
+                            <span class="drag-handle" title="Drag to reorder">⠿</span>
+                        </div>
+                        <div class="card-value skeleton-target" id="kpiVal2">4,892</div>
+                        <div class="card-trend trend-up">
+                            ▲ +312 NEW <span class="badge-tag">THIS WEEK</span>
+                        </div>
+                        <svg class="sparkline-svg" viewBox="0 0 100 30">
+                            <path class="sparkline-path" d="M0,20 L20,15 L40,18 L60,8 L80,12 L100,2" />
+                        </svg>
+                    </div>
+
+                    <!-- KPI CARD 3 -->
+                    <div class="widget-card" draggable="true" id="widget-3">
+                        <div class="card-header">
+                            <span class="card-title">⚡ AVERAGE CHURN RATE</span>
+                            <span class="drag-handle" title="Drag to reorder">⠿</span>
+                        </div>
+                        <div class="card-value skeleton-target" id="kpiVal3">1.42%</div>
+                        <div class="card-trend trend-up" style="color:var(--text-main);">
+                            ▼ -0.28% <span class="badge-tag">OPTIMIZED</span>
+                        </div>
+                        <svg class="sparkline-svg" viewBox="0 0 100 30">
+                            <path class="sparkline-path" d="M0,5 L20,10 L40,8 L60,20 L80,18 L100,26" />
+                        </svg>
+                    </div>
+
+                    <!-- KPI CARD 4 -->
+                    <div class="widget-card" draggable="true" id="widget-4">
+                        <div class="card-header">
+                            <span class="card-title">📈 NET PROFIT MARGIN</span>
+                            <span class="drag-handle" title="Drag to reorder">⠿</span>
+                        </div>
+                        <div class="card-value skeleton-target" id="kpiVal4">$62,450</div>
+                        <div class="card-trend trend-up">
+                            ▲ 41.9% <span class="badge-tag">HIGH MARGIN</span>
+                        </div>
+                        <svg class="sparkline-svg" viewBox="0 0 100 30">
+                            <path class="sparkline-path" d="M0,28 L20,22 L40,15 L60,18 L80,8 L100,3" />
+                        </svg>
+                    </div>
+
+                </div>
+
+                <!-- CHARTS ROW -->
+                <div class="charts-row">
+
+                    <!-- MAIN SVG REVENUE & TRAFFIC CHART -->
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <div class="chart-title-group">
+                                <h3>REVENUE & TRAFFIC FLOW TREND</h3>
+                                <p>HOVER NODES & BARS FOR DETAILED BREAKDOWN</p>
+                            </div>
+                            <div class="data-tabs">
+                                <button class="tab-btn active" id="chartTypeLineBtn" onclick="toggleChartType('line')">LINE</button>
+                                <button class="tab-btn" id="chartTypeBarBtn" onclick="toggleChartType('bar')">BAR</button>
+                            </div>
+                        </div>
+
+                        <div class="svg-chart-wrapper" id="chartWrapper">
+                            <svg class="main-svg-chart" viewBox="0 0 700 240" preserveAspectRatio="none" id="mainSvgChart">
+                                <!-- Grid Lines -->
+                                <line x1="0" y1="40" x2="700" y2="40" class="chart-grid-line" />
+                                <line x1="0" y1="90" x2="700" y2="90" class="chart-grid-line" />
+                                <line x1="0" y1="140" x2="700" y2="140" class="chart-grid-line" />
+                                <line x1="0" y1="190" x2="700" y2="190" class="chart-grid-line" />
+
+                                <!-- Bars Group (hidden by default unless bar mode) -->
+                                <g id="chartBarsGroup" style="display:none;">
+                                    <rect x="30" y="80" width="30" height="110" class="chart-bar-rect" data-val="$28,400" data-label="JAN" />
+                                    <rect x="130" y="60" width="30" height="130" class="chart-bar-rect" data-val="$42,100" data-label="FEB" />
+                                    <rect x="230" y="95" width="30" height="95" class="chart-bar-rect" data-val="$35,800" data-label="MAR" />
+                                    <rect x="330" y="45" width="30" height="145" class="chart-bar-rect" data-val="$59,200" data-label="APR" />
+                                    <rect x="430" y="30" width="30" height="160" class="chart-bar-rect" data-val="$74,500" data-label="MAY" />
+                                    <rect x="530" y="50" width="30" height="140" class="chart-bar-rect" data-val="$68,100" data-label="JUN" />
+                                    <rect x="630" y="20" width="30" height="170" class="chart-bar-rect" data-val="$89,400" data-label="JUL" />
+                                </g>
+
+                                <!-- Line Path Group -->
+                                <g id="chartLineGroup">
+                                    <path d="M45,160 L145,120 L245,140 L345,70 L445,40 L545,75 L645,25" class="chart-line-path" id="mainChartPath" />
+                                    <!-- Interactive Nodes -->
+                                    <circle cx="45" cy="160" r="5" class="chart-node" data-val="$28,400" data-label="JAN" />
+                                    <circle cx="145" cy="120" r="5" class="chart-node" data-val="$42,100" data-label="FEB" />
+                                    <circle cx="245" cy="140" r="5" class="chart-node" data-val="$35,800" data-label="MAR" />
+                                    <circle cx="345" cy="70" r="5" class="chart-node" data-val="$59,200" data-label="APR" />
+                                    <circle cx="445" cy="40" r="5" class="chart-node" data-val="$74,500" data-label="MAY" />
+                                    <circle cx="545" cy="75" r="5" class="chart-node" data-val="$68,100" data-label="JUN" />
+                                    <circle cx="645" cy="25" r="5" class="chart-node" data-val="$89,400" data-label="JUL" />
+                                </g>
+
+                                <!-- X Axis Labels -->
+                                <text x="45" y="220" font-family="var(--font-mono)" font-size="11" fill="var(--text-main)" text-anchor="middle" font-weight="bold">JAN</text>
+                                <text x="145" y="220" font-family="var(--font-mono)" font-size="11" fill="var(--text-main)" text-anchor="middle" font-weight="bold">FEB</text>
+                                <text x="245" y="220" font-family="var(--font-mono)" font-size="11" fill="var(--text-main)" text-anchor="middle" font-weight="bold">MAR</text>
+                                <text x="345" y="220" font-family="var(--font-mono)" font-size="11" fill="var(--text-main)" text-anchor="middle" font-weight="bold">APR</text>
+                                <text x="445" y="220" font-family="var(--font-mono)" font-size="11" fill="var(--text-main)" text-anchor="middle" font-weight="bold">MAY</text>
+                                <text x="545" y="220" font-family="var(--font-mono)" font-size="11" fill="var(--text-main)" text-anchor="middle" font-weight="bold">JUN</text>
+                                <text x="645" y="220" font-family="var(--font-mono)" font-size="11" fill="var(--text-main)" text-anchor="middle" font-weight="bold">JUL</text>
+                            </svg>
+
+                            <!-- Hover Tooltip -->
+                            <div class="brutal-tooltip" id="chartTooltip">
+                                <span id="tooltipLabel">JAN</span>: <span id="tooltipVal">$28,400</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CONVERSION FUNNEL CHART -->
+                    <div class="chart-card">
+                        <div class="chart-card-header">
+                            <div class="chart-title-group">
+                                <h3>CONVERSION FUNNEL</h3>
+                                <p>USER ACQUISITION STAGES</p>
+                            </div>
+                        </div>
+
+                        <div class="funnel-container">
+                            <div class="funnel-stage">
+                                <div class="funnel-label">
+                                    <span>1. TOTAL IMPRESSIONS</span>
+                                    <span>248,900</span>
+                                </div>
+                                <div class="funnel-bar-outer">
+                                    <div class="funnel-bar-inner" style="width: 100%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="funnel-stage">
+                                <div class="funnel-label">
+                                    <span>2. SITE VISITORS</span>
+                                    <span>94,200 (37.8%)</span>
+                                </div>
+                                <div class="funnel-bar-outer">
+                                    <div class="funnel-bar-inner" style="width: 70%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="funnel-stage">
+                                <div class="funnel-label">
+                                    <span>3. FREE SIGNUPS</span>
+                                    <span>18,450 (19.5%)</span>
+                                </div>
+                                <div class="funnel-bar-outer">
+                                    <div class="funnel-bar-inner" style="width: 45%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="funnel-stage">
+                                <div class="funnel-label">
+                                    <span>4. PAID SUBSCRIBERS</span>
+                                    <span>4,892 (26.5%)</span>
+                                </div>
+                                <div class="funnel-bar-outer">
+                                    <div class="funnel-bar-inner" style="width: 28%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- BOTTOM TABLE WIDGET -->
+                <div class="table-card">
+                    <div class="chart-card-header">
+                        <div class="chart-title-group">
+                            <h3>RECENT TRANSACTION AUDIT LOG</h3>
+                            <p>REAL-TIME SUBSCRIPTION BILLING & EVENT STREAM</p>
+                        </div>
+                        <button class="btn-brutal btn-secondary" onclick="triggerToast('AUDIT LOG EXPORTED (.CSV)')">
+                            💾 EXPORT CSV
+                        </button>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table class="brutal-table">
+                            <thead>
+                                <tr>
+                                    <th>TX_ID</th>
+                                    <th>CUSTOMER / ENTITY</th>
+                                    <th>PLAN TYPE</th>
+                                    <th>AMOUNT</th>
+                                    <th>STATUS</th>
+                                    <th>TIMESTAMP</th>
+                                    <th>ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#TX-9041</td>
+                                    <td>ACME CORP (ENTERPRISE)</td>
+                                    <td>ANNUAL SCALE</td>
+                                    <td>$12,400.00</td>
+                                    <td><span class="status-pill status-success">COMPLETED</span></td>
+                                    <td>2026-08-03 23:41:12</td>
+                                    <td><button class="btn-brutal" style="padding:2px 8px; font-size:10px;" onclick="triggerToast('INVOICE PDF GENERATED')">INVOICE</button></td>
+                                </tr>
+                                <tr>
+                                    <td>#TX-9040</td>
+                                    <td>CYBERDYNE SYSTEMS</td>
+                                    <td>PRO TIER</td>
+                                    <td>$890.00</td>
+                                    <td><span class="status-pill status-success">COMPLETED</span></td>
+                                    <td>2026-08-03 22:15:04</td>
+                                    <td><button class="btn-brutal" style="padding:2px 8px; font-size:10px;" onclick="triggerToast('INVOICE PDF GENERATED')">INVOICE</button></td>
+                                </tr>
+                                <tr>
+                                    <td>#TX-9039</td>
+                                    <td>WEYLAND-YUTANI LTD</td>
+                                    <td>CUSTOM CLUSTER</td>
+                                    <td>$4,500.00</td>
+                                    <td><span class="status-pill status-pending">PENDING</span></td>
+                                    <td>2026-08-03 21:04:55</td>
+                                    <td><button class="btn-brutal" style="padding:2px 8px; font-size:10px;" onclick="triggerToast('PAYMENT RETRY INITIATED')">RETRY</button></td>
+                                </tr>
+                                <tr>
+                                    <td>#TX-9038</td>
+                                    <td>TYRELL LABS</td>
+                                    <td>STARTER LITE</td>
+                                    <td>$149.00</td>
+                                    <td><span class="status-pill status-failed">FAILED</span></td>
+                                    <td>2026-08-03 19:30:11</td>
+                                    <td><button class="btn-brutal" style="padding:2px 8px; font-size:10px;" onclick="triggerToast('DISPATCHED FLAGGED NOTICE')">FLAG</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+
+    </div>
+
+    <!-- MODAL SLIDE-OVER POPUP ("+ NEW PROJECT") -->
+    <div class="modal-overlay" id="projectModal">
+        <div class="modal-panel">
+            <div class="modal-header">
+                <h3 class="font-head" style="font-size:18px;">+ INITIALIZE NEW PROJECT</h3>
+                <button class="modal-close-btn" onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>PROJECT IDENTIFIER / NAME</label>
+                    <input type="text" class="brutal-input" placeholder="e.g. PROJECT_NEBULA_V2" id="projNameInput" />
+                </div>
+
+                <div class="form-group">
+                    <label>INFRASTRUCTURE CLUSTER</label>
+                    <select class="brutal-select">
+                        <option>AWS US-EAST-1 (VIRGINIA)</option>
+                        <option>EU-CENTRAL-1 (FRANKFURT)</option>
+                        <option>AP-NORTHEAST-1 (TOKYO)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>ALLOCATED MONTHLY BUDGET ($)</label>
+                    <input type="number" class="brutal-input" value="5000" />
+                </div>
+
+                <div class="form-group">
+                    <label>PROJECT DESCRIPTION / SCOPE</label>
+                    <textarea class="brutal-textarea" rows="4" placeholder="Enter brutalist architectural requirements..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-brutal btn-secondary" onclick="closeModal()">ABORT</button>
+                <button class="btn-brutal" onclick="submitProject()">DEPLOY PROJECT</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        /* ==========================================================================
+           BRUTALISM DASHBOARD INTERACTIVE ENGINE
+           ========================================================================== */
+
+        // 1. VERSION / THEME SWITCHER LOGIC
+        const versionBtns = document.querySelectorAll('.version-btn');
+        versionBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                versionBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const themeVal = btn.getAttribute('data-v');
+                document.body.setAttribute('data-theme', themeVal);
+                triggerToast(`THEME CHANGED TO: ${btn.innerText}`);
+            });
+        });
+
+        // 2. ACCORDION SIDEBAR TOGGLE
+        function toggleAccordion(headerEl) {
+            const accordionContent = headerEl.nextElementSibling;
+            const iconEl = headerEl.querySelector('.accordion-icon');
+            const isActive = headerEl.classList.contains('active');
+
+            if (isActive) {
+                headerEl.classList.remove('active');
+                accordionContent.classList.remove('show');
+                iconEl.innerText = '+';
+            } else {
+                headerEl.classList.add('active');
+                accordionContent.classList.add('show');
+                iconEl.innerText = '−';
+            }
+        }
+
+        function setActiveNav(itemEl) {
+            document.querySelectorAll('.sub-nav-item').forEach(el => el.classList.remove('active'));
+            itemEl.classList.add('active');
+            triggerToast(`NAVIGATED TO: ${itemEl.innerText.replace('▸ ', '')}`);
+        }
+
+        // 3. DROPDOWN TOGGLES
+        function toggleDropdown(menuId) {
+            const menu = document.getElementById(menuId);
+            const isVisible = menu.classList.contains('show');
+            
+            // Close all dropdowns first
+            document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('show'));
+
+            if (!isVisible) {
+                menu.classList.add('show');
+            }
+        }
+
+        // Close dropdowns when clicking outside
+        window.addEventListener('click', (e) => {
+            if (!e.target.closest('.brutal-dropdown')) {
+                document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('show'));
+            }
+        });
+
+        function selectDateRange(rangeText) {
+            document.getElementById('selectedDateText').innerText = rangeText;
+            triggerToast(`DATE RANGE UPDATED: ${rangeText}`);
+            
+            // Trigger skeleton loading and count-up reload
+            refreshDashboardData();
+        }
+
+        // 4. TOGGLE SWITCHES
+        function toggleSwitch(toggleEl, labelText) {
+            toggleEl.classList.toggle('on');
+            const isOn = toggleEl.classList.contains('on');
+            triggerToast(`${labelText}: ${isOn ? 'ENABLED' : 'DISABLED'}`);
+        }
+
+        // 5. COUNT-UP ANIMATION & SKELETON EFFECT
+        function animateCountUp(elementId, targetValue, duration = 800, prefix = '', suffix = '') {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+
+            const isDecimal = targetValue.toString().includes('.');
+            const startVal = 0;
+            const startTime = performance.now();
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Ease Out Quad
+                const easeProgress = progress * (2 - progress);
+                const currentVal = startVal + (targetValue - startVal) * easeProgress;
+
+                let formattedVal = isDecimal 
+                    ? currentVal.toFixed(2) 
+                    : Math.floor(currentVal).toLocaleString();
+
+                el.innerText = `${prefix}${formattedVal}${suffix}`;
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        function triggerKPIAnimations(mode = 'monthly') {
+            let data = {
+                kpi1: { val: 148920, prefix: '$', suffix: '' },
+                kpi2: { val: 4892, prefix: '', suffix: '' },
+                kpi3: { val: 1.42, prefix: '', suffix: '%' },
+                kpi4: { val: 62450, prefix: '$', suffix: '' }
+            };
+
+            if (mode === 'daily') {
+                data = {
+                    kpi1: { val: 5120, prefix: '$', suffix: '' },
+                    kpi2: { val: 142, prefix: '', suffix: '' },
+                    kpi3: { val: 1.15, prefix: '', suffix: '%' },
+                    kpi4: { val: 2150, prefix: '$', suffix: '' }
+                };
+            } else if (mode === 'weekly') {
+                data = {
+                    kpi1: { val: 34800, prefix: '$', suffix: '' },
+                    kpi2: { val: 980, prefix: '', suffix: '' },
+                    kpi3: { val: 1.30, prefix: '', suffix: '%' },
+                    kpi4: { val: 14200, prefix: '$', suffix: '' }
+                };
+            } else if (mode === 'yearly') {
+                data = {
+                    kpi1: { val: 1780900, prefix: '$', suffix: '' },
+                    kpi2: { val: 18450, prefix: '', suffix: '' },
+                    kpi3: { val: 1.85, prefix: '', suffix: '%' },
+                    kpi4: { val: 742000, prefix: '$', suffix: '' }
+                };
+            }
+
+            animateCountUp('kpiVal1', data.kpi1.val, 800, data.kpi1.prefix, data.kpi1.suffix);
+            animateCountUp('kpiVal2', data.kpi2.val, 800, data.kpi2.prefix, data.kpi2.suffix);
+            animateCountUp('kpiVal3', data.kpi3.val, 800, data.kpi3.prefix, data.kpi3.suffix);
+            animateCountUp('kpiVal4', data.kpi4.val, 800, data.kpi4.prefix, data.kpi4.suffix);
+        }
+
+        function refreshDashboardData(mode = 'monthly') {
+            const mainContent = document.getElementById('mainContentArea');
+            mainContent.classList.add('skeleton-active');
+
+            setTimeout(() => {
+                mainContent.classList.remove('skeleton-active');
+                triggerKPIAnimations(mode);
+            }, 400);
+        }
+
+        function switchDataTab(tabEl, mode) {
+            document.querySelectorAll('.data-tabs .tab-btn').forEach(btn => {
+                if (btn.id !== 'chartTypeLineBtn' && btn.id !== 'chartTypeBarBtn') {
+                    btn.classList.remove('active');
+                }
+            });
+            tabEl.classList.add('active');
+            refreshDashboardData(mode);
+            triggerToast(`VIEW MODE CHANGED: ${mode.toUpperCase()}`);
+        }
+
+        // 6. INTERACTIVE SVG CHART ENGINE & TOOLTIP
+        const chartWrapper = document.getElementById('chartWrapper');
+        const chartTooltip = document.getElementById('chartTooltip');
+        const tooltipLabel = document.getElementById('tooltipLabel');
+        const tooltipVal = document.getElementById('tooltipVal');
+
+        function attachChartHoverListeners() {
+            const interactiveEls = document.querySelectorAll('.chart-node, .chart-bar-rect');
+            interactiveEls.forEach(el => {
+                el.addEventListener('mousemove', (e) => {
+                    const rect = chartWrapper.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    const label = el.getAttribute('data-label');
+                    const val = el.getAttribute('data-val');
+
+                    tooltipLabel.innerText = label;
+                    tooltipVal.innerText = val;
+
+                    chartTooltip.style.left = `${x}px`;
+                    chartTooltip.style.top = `${y}px`;
+                    chartTooltip.classList.add('show');
+                });
+
+                el.addEventListener('mouseleave', () => {
+                    chartTooltip.classList.remove('show');
+                });
+            });
+        }
+
+        function toggleChartType(type) {
+            const lineGroup = document.getElementById('chartLineGroup');
+            const barsGroup = document.getElementById('chartBarsGroup');
+            const lineBtn = document.getElementById('chartTypeLineBtn');
+            const barBtn = document.getElementById('chartTypeBarBtn');
+
+            if (type === 'line') {
+                lineGroup.style.display = 'block';
+                barsGroup.style.display = 'none';
+                lineBtn.classList.add('active');
+                barBtn.classList.remove('active');
+            } else {
+                lineGroup.style.display = 'none';
+                barsGroup.style.display = 'block';
+                barBtn.classList.add('active');
+                lineBtn.classList.remove('active');
+            }
+        }
+
+        // 7. DRAGGABLE WIDGET GRID ENGINE
+        const grid = document.getElementById('draggableGrid');
+        let draggedItem = null;
+
+        grid.addEventListener('dragstart', (e) => {
+            if (e.target.classList.contains('widget-card')) {
+                draggedItem = e.target;
+                e.target.classList.add('dragging');
+            }
+        });
+
+        grid.addEventListener('dragend', (e) => {
+            if (e.target.classList.contains('widget-card')) {
+                e.target.classList.remove('dragging');
+                draggedItem = null;
+                triggerToast('WIDGET LAYOUT REORDERED');
+            }
+        });
+
+        grid.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            const afterElement = getDragAfterElement(grid, e.clientX);
+            if (draggedItem) {
+                if (afterElement == null) {
+                    grid.appendChild(draggedItem);
+                } else {
+                    grid.insertBefore(draggedItem, afterElement);
+                }
+            }
+        });
+
+        function getDragAfterElement(container, x) {
+            const draggableElements = [...container.querySelectorAll('.widget-card:not(.dragging)')];
+
+            return draggableElements.reduce((closest, child) => {
+                const box = child.getBoundingClientRect();
+                const offset = x - box.left - box.width / 2;
+                if (offset < 0 && offset > closest.offset) {
+                    return { offset: offset, element: child };
+                } else {
+                    return closest;
+                }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+
+        // 8. MODAL SLIDE-OVER ENGINE
+        function openModal() {
+            document.getElementById('projectModal').classList.add('open');
+        }
+
+        function closeModal() {
+            document.getElementById('projectModal').classList.remove('open');
+        }
+
+        function submitProject() {
+            const projName = document.getElementById('projNameInput').value || 'PROJECT_ALPHA';
+            closeModal();
+            triggerToast(`🚀 PROJECT CREATED: ${projName.toUpperCase()}`);
+        }
+
+        // 9. TOAST NOTIFICATION ENGINE
+        function triggerToast(message) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'brutal-toast';
+            toast.innerHTML = `<span>⚡</span> <span>${message}</span>`;
+            
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(10px)';
+                toast.style.transition = 'all 0.2s ease';
+                setTimeout(() => toast.remove(), 200);
+            }, 3000);
+        }
+
+        // INITIALIZATION ON LOAD
+        window.addEventListener('DOMContentLoaded', () => {
+            triggerKPIAnimations('monthly');
+            attachChartHoverListeners();
+        });
+
+    </script>
+
+<!-- Draggable Theme Switcher Script -->
+<script>
+(function() {
+    function initDraggableSwitcher() {
+        const selectors = [
+            '.version-switcher', '.version-switcher-bar', '.version-switcher-box', 
+            '.theme-switcher-deck', '.top-switcher-bar', '#switcher', '#versionSwitcher',
+            '.theme-switcher', '.switcher-bar', '.version-deck', '[class*="switcher"]'
+        ];
+        let el = null;
+        for (const sel of selectors) {
+            const found = document.querySelector(sel);
+            if (found) {
+                const pos = getComputedStyle(found).position;
+                if (pos === 'fixed' || pos === 'absolute') {
+                    el = found;
+                    break;
+                }
+            }
+        }
+        if (!el) {
+            const allFixed = Array.from(document.querySelectorAll('*')).filter(e => {
+                const pos = getComputedStyle(e).position;
+                const z = parseInt(getComputedStyle(e).zIndex || 0);
+                return (pos === 'fixed' || pos === 'absolute') && z >= 90;
+            });
+            if (allFixed.length > 0) el = allFixed[0];
+        }
+        if (!el) return;
+
+        // Visual Drag Indicator
+        el.style.cursor = 'grab';
+        el.style.zIndex = '99999';
+        if (!el.querySelector('.drag-handle-hint')) {
+            const hint = document.createElement('span');
+            hint.className = 'drag-handle-hint';
+            hint.innerHTML = ' ⠿ ';
+            hint.title = '드래그하여 원하는 위치로 이동하세요';
+            hint.style.cssText = 'cursor:grab; font-weight:bold; opacity:0.7; margin-right:6px; user-select:none; display:inline-block; vertical-align:middle;';
+            el.insertBefore(hint, el.firstChild);
+        }
+
+        let isMouseDown = false;
+        let startX = 0, startY = 0;
+        let origLeft = 0, origTop = 0;
+        let hasMoved = false;
+
+        function startDrag(clientX, clientY) {
+            isMouseDown = true;
+            hasMoved = false;
+            startX = clientX;
+            startY = clientY;
+            const rect = el.getBoundingClientRect();
+            origLeft = rect.left;
+            origTop = rect.top;
+            el.style.cursor = 'grabbing';
+        }
+
+        function moveDrag(clientX, clientY, e) {
+            if (!isMouseDown) return;
+            const dx = clientX - startX;
+            const dy = clientY - startY;
+            if (Math.abs(dx) > 2 || Math.abs(dy) > 2) {
+                hasMoved = true;
+                if (e && e.cancelable) e.preventDefault();
+                el.style.right = 'auto';
+                el.style.bottom = 'auto';
+                let newLeft = Math.max(0, Math.min(window.innerWidth - el.offsetWidth, origLeft + dx));
+                let newTop = Math.max(0, Math.min(window.innerHeight - el.offsetHeight, origTop + dy));
+                el.style.left = newLeft + 'px';
+                el.style.top = newTop + 'px';
+            }
+        }
+
+        function stopDrag() {
+            isMouseDown = false;
+            el.style.cursor = 'grab';
+        }
+
+        el.addEventListener('mousedown', function(e) {
+            startDrag(e.clientX, e.clientY);
+            function onMouseMove(me) { moveDrag(me.clientX, me.clientY, me); }
+            function onMouseUp() {
+                stopDrag();
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+            }
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        });
+
+        el.addEventListener('touchstart', function(e) {
+            if (!e.touches || e.touches.length === 0) return;
+            startDrag(e.touches[0].clientX, e.touches[0].clientY);
+            function onTouchMove(te) {
+                if (te.touches && te.touches.length > 0) {
+                    moveDrag(te.touches[0].clientX, te.touches[0].clientY, te);
+                }
+            }
+            function onTouchEnd() {
+                stopDrag();
+                document.removeEventListener('touchmove', onTouchMove);
+                document.removeEventListener('touchend', onTouchEnd);
+            }
+            document.addEventListener('touchmove', onTouchMove, { passive: false });
+            document.addEventListener('touchend', onTouchEnd);
+        }, { passive: true });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initDraggableSwitcher);
+    } else {
+        initDraggableSwitcher();
+    }
+})();
+</script>
+
+</body>
+</html>

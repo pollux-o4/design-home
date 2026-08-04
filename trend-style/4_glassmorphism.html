@@ -1,0 +1,2262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS Analytics // Glassmorphism SaaS Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ==========================================================================
+       GLASSMORPHISM DASHBOARD STYLESHEET
+       Theme Variations & Glass Core Tokens
+       ========================================================================== */
+    :root {
+      /* Default Theme: Cyberpunk Dark Glass */
+      --bg-base: #080b14;
+      --orb-1: #00f2fe;
+      --orb-2: #7928ca;
+      --orb-3: #ff007f;
+      --glass-bg: rgba(15, 23, 42, 0.55);
+      --glass-border: rgba(0, 242, 254, 0.22);
+      --glass-border-hover: rgba(0, 242, 254, 0.6);
+      --glass-shadow: 0 12px 40px 0 rgba(0, 242, 254, 0.15);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #00f2fe;
+      --accent-secondary: #ff007f;
+      --accent-glow: rgba(0, 242, 254, 0.4);
+      --card-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+      --backdrop-blur: blur(20px);
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    /* Theme 1: Cyberpunk Glass */
+    body[data-theme="cyberpunk-glass"] {
+      --bg-base: #080b14;
+      --orb-1: #00f2fe;
+      --orb-2: #7928ca;
+      --orb-3: #ff007f;
+      --glass-bg: rgba(15, 23, 42, 0.55);
+      --glass-border: rgba(0, 242, 254, 0.22);
+      --glass-border-hover: rgba(0, 242, 254, 0.6);
+      --glass-shadow: 0 12px 40px 0 rgba(0, 242, 254, 0.18);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #00f2fe;
+      --accent-secondary: #ff007f;
+      --accent-glow: rgba(0, 242, 254, 0.45);
+      --card-gradient: linear-gradient(135deg, rgba(0, 242, 254, 0.08), rgba(255, 0, 127, 0.03));
+    }
+
+    /* Theme 2: Aurora Frost */
+    body[data-theme="aurora-frost"] {
+      --bg-base: #06131e;
+      --orb-1: #10b981;
+      --orb-2: #6366f1;
+      --orb-3: #06b6d4;
+      --glass-bg: rgba(15, 32, 48, 0.55);
+      --glass-border: rgba(255, 255, 255, 0.18);
+      --glass-border-hover: rgba(16, 185, 129, 0.55);
+      --glass-shadow: 0 12px 40px 0 rgba(16, 185, 129, 0.16);
+      --text-main: #f0fdf4;
+      --text-muted: #94a3b8;
+      --accent: #10b981;
+      --accent-secondary: #06b6d4;
+      --accent-glow: rgba(16, 185, 129, 0.4);
+      --card-gradient: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(6, 182, 212, 0.03));
+    }
+
+    /* Theme 3: Crystal Light */
+    body[data-theme="crystal-light"] {
+      --bg-base: #e2e8f0;
+      --orb-1: #ff7eb3;
+      --orb-2: #8b5cf6;
+      --orb-3: #34d399;
+      --glass-bg: rgba(255, 255, 255, 0.55);
+      --glass-border: rgba(255, 255, 255, 0.85);
+      --glass-border-hover: rgba(99, 102, 241, 0.6);
+      --glass-shadow: 0 12px 40px 0 rgba(99, 102, 241, 0.12);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --accent: #4f46e5;
+      --accent-secondary: #059669;
+      --accent-glow: rgba(79, 70, 229, 0.35);
+      --card-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4));
+    }
+
+    /* Theme 4: Holographic Prism */
+    body[data-theme="holographic-prism"] {
+      --bg-base: #040409;
+      --orb-1: #ec4899;
+      --orb-2: #8b5cf6;
+      --orb-3: #06b6d4;
+      --glass-bg: rgba(24, 20, 42, 0.55);
+      --glass-border: rgba(255, 255, 255, 0.22);
+      --glass-border-hover: rgba(236, 72, 153, 0.65);
+      --glass-shadow: 0 12px 40px 0 rgba(236, 72, 153, 0.2);
+      --text-main: #ffffff;
+      --text-muted: #a1a1aa;
+      --accent: #ec4899;
+      --accent-secondary: #06b6d4;
+      --accent-glow: rgba(236, 72, 153, 0.5);
+      --card-gradient: linear-gradient(135deg, rgba(236, 72, 153, 0.08), rgba(139, 92, 246, 0.04));
+    }
+
+    /* Theme 5: Tinted Midnight */
+    body[data-theme="tinted-midnight"] {
+      --bg-base: #0f0a1c;
+      --orb-1: #a855f7;
+      --orb-2: #ec4899;
+      --orb-3: #3b82f6;
+      --glass-bg: rgba(30, 18, 54, 0.55);
+      --glass-border: rgba(168, 85, 247, 0.28);
+      --glass-border-hover: rgba(236, 72, 153, 0.65);
+      --glass-shadow: 0 12px 40px 0 rgba(168, 85, 247, 0.2);
+      --text-main: #faf5ff;
+      --text-muted: #c084fc;
+      --accent: #c084fc;
+      --accent-secondary: #ec4899;
+      --accent-glow: rgba(192, 132, 252, 0.4);
+      --card-gradient: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.03));
+    }
+
+    /* Theme 6: Sunset Emerald */
+    body[data-theme="sunset-emerald"] {
+      --bg-base: #120e0b;
+      --orb-1: #f59e0b;
+      --orb-2: #10b981;
+      --orb-3: #ef4444;
+      --glass-bg: rgba(34, 26, 18, 0.55);
+      --glass-border: rgba(245, 158, 11, 0.28);
+      --glass-border-hover: rgba(245, 158, 11, 0.65);
+      --glass-shadow: 0 12px 40px 0 rgba(245, 158, 11, 0.2);
+      --text-main: #fffbeb;
+      --text-muted: #d97706;
+      --accent: #f59e0b;
+      --accent-secondary: #10b981;
+      --accent-glow: rgba(245, 158, 11, 0.45);
+      --card-gradient: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(16, 185, 129, 0.04));
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    /* Floating Glowing Glass Orbs (Background Spheres) */
+    .orb-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.6;
+      transition: background 0.8s ease;
+    }
+
+    .orb-1 {
+      top: -10%;
+      left: -10%;
+      width: 550px;
+      height: 550px;
+      background: var(--orb-1);
+      animation: floatOrb1 18s ease-in-out infinite alternate;
+    }
+
+    .orb-2 {
+      bottom: -15%;
+      right: -5%;
+      width: 600px;
+      height: 600px;
+      background: var(--orb-2);
+      animation: floatOrb2 22s ease-in-out infinite alternate;
+    }
+
+    .orb-3 {
+      top: 40%;
+      left: 35%;
+      width: 450px;
+      height: 450px;
+      background: var(--orb-3);
+      animation: floatOrb3 15s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatOrb1 {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(120px, 80px) scale(1.15); }
+      100% { transform: translate(-60px, 140px) scale(0.95); }
+    }
+
+    @keyframes floatOrb2 {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-100px, -120px) scale(1.1); }
+      100% { transform: translate(80px, -60px) scale(0.9); }
+    }
+
+    @keyframes floatOrb3 {
+      0% { transform: translate(0, 0) scale(0.9); }
+      50% { transform: translate(80px, -80px) scale(1.2); }
+      100% { transform: translate(-90px, 90px) scale(1); }
+    }
+
+    /* Grain Texture Overlay */
+    .grain-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
+      background-size: 24px 24px;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Core Layout */
+    .app-layout {
+      display: grid;
+      grid-template-columns: 270px 1fr;
+      min-height: 100vh;
+    }
+
+    /* Glass Container Base Component */
+    .glass-panel {
+      background: var(--glass-bg);
+      background-image: var(--card-gradient);
+      backdrop-filter: var(--backdrop-blur);
+      -webkit-backdrop-filter: var(--backdrop-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      box-shadow: var(--glass-shadow);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease;
+    }
+
+    /* Glossy Specular Highlight Edge */
+    .glass-panel::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      pointer-events: none;
+    }
+
+    .glass-panel:hover {
+      border-color: var(--glass-border-hover);
+    }
+
+    /* ==========================================================================
+       Top-Right Version Switcher
+       ========================================================================== */
+    .theme-switcher-bar {
+      position: fixed;
+      top: 16px;
+      right: 24px;
+      z-index: 1000;
+      background: var(--glass-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      border-radius: 40px;
+      padding: 6px 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: var(--glass-shadow);
+    }
+
+    .switcher-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--accent);
+      padding: 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .switcher-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .switcher-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .switcher-btn.active {
+      background: rgba(255, 255, 255, 0.18);
+      color: var(--text-main);
+      border-color: var(--accent);
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    /* ==========================================================================
+       Sidebar Component
+       ========================================================================== */
+    .sidebar {
+      padding: 24px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      border-right: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      backdrop-filter: var(--backdrop-blur);
+      -webkit-backdrop-filter: var(--backdrop-blur);
+      z-index: 100;
+    }
+
+    .brand-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 8px;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 16px var(--accent-glow);
+    }
+
+    .brand-logo svg {
+      width: 22px;
+      height: 22px;
+      fill: #ffffff;
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      background: linear-gradient(90deg, var(--text-main), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-version {
+      font-size: 10px;
+      font-family: var(--font-mono);
+      color: var(--accent);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--glass-border);
+      padding: 2px 6px;
+      border-radius: 6px;
+      margin-left: auto;
+    }
+
+    /* Live Sync Glass Switcher Widget */
+    .sync-widget {
+      background: rgba(0, 0, 0, 0.15);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sync-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+      animation: pulseGlow 1.8s infinite;
+    }
+
+    .pulse-dot.off {
+      background: #64748b;
+      box-shadow: none;
+      animation: none;
+    }
+
+    @keyframes pulseGlow {
+      0% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.25); }
+      100% { opacity: 0.4; transform: scale(0.9); }
+    }
+
+    /* Toggle Switch Component */
+    .toggle-switch {
+      position: relative;
+      width: 38px;
+      height: 22px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .toggle-switch.checked {
+      background: var(--accent);
+    }
+
+    .toggle-knob {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 16px;
+      height: 16px;
+      background: #ffffff;
+      border-radius: 50%;
+      transition: transform 0.25s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .toggle-switch.checked .toggle-knob {
+      transform: translateX(16px);
+    }
+
+    /* Accordion Menu */
+    .nav-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .nav-section-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin: 12px 0 4px 8px;
+    }
+
+    .accordion-item {
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+
+    .accordion-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 13px;
+      transition: all 0.25s ease;
+    }
+
+    .accordion-header:hover, .accordion-header.active {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .accordion-header.active {
+      border-left: 3px solid var(--accent);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-content svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .chevron {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+      transition: transform 0.3s ease;
+    }
+
+    .accordion-item.open .chevron {
+      transform: rotate(180deg);
+    }
+
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding-left: 36px;
+    }
+
+    .accordion-item.open .accordion-body {
+      max-height: 200px;
+      padding-top: 4px;
+      padding-bottom: 8px;
+    }
+
+    .subnav-link {
+      padding: 7px 10px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: block;
+    }
+
+    .subnav-link:hover, .subnav-link.active {
+      color: var(--accent);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Sidebar Footer Gauge */
+    .sidebar-footer {
+      margin-top: auto;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .gauge-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .gauge-bar-bg {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gauge-bar-fill {
+      width: 74%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+      border-radius: 10px;
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    /* ==========================================================================
+       Header & Main Dashboard Content Area
+       ========================================================================== */
+    .main-content {
+      padding: 24px 32px 40px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 1440px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Top Navigation Header Bar */
+    .header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 10px;
+      margin-bottom: 8px;
+    }
+
+    .header-title-group h1 {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text-main);
+    }
+
+    .header-title-group p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Custom Glass Dropdowns */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-btn {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 16px;
+      border-radius: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .dropdown-btn:hover {
+      border-color: var(--glass-border-hover);
+      transform: translateY(-1px);
+    }
+
+    .dropdown-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      width: 220px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 8px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      z-index: 500;
+      animation: fadeInDown 0.2s ease;
+    }
+
+    .dropdown.open .dropdown-menu {
+      display: flex;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .dropdown-item {
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .dropdown-item:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .dropdown-item.selected {
+      color: var(--accent);
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Primary Action Glass Button (+ New Project) */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 20px var(--accent-glow);
+      transition: all 0.25s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 24px var(--accent-glow);
+    }
+
+    .btn-primary svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    /* Avatar Badge */
+    .avatar-badge {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #f59e0b, #ec4899);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    /* Data Tabs Bar ([Daily] [Weekly] [Monthly]) */
+    .tabs-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 4px;
+    }
+
+    .tab-strip {
+      display: flex;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 4px;
+      gap: 4px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-main);
+    }
+
+    .tab-btn.active {
+      background: var(--glass-bg);
+      color: var(--accent);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      font-weight: 700;
+    }
+
+    .live-status-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      padding: 6px 12px;
+      border-radius: 20px;
+    }
+
+    /* ==========================================================================
+       Draggable KPI Metric Cards Grid
+       ========================================================================== */
+    .draggable-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .kpi-card {
+      padding: 20px 22px;
+      cursor: grab;
+      position: relative;
+    }
+
+    .kpi-card:active {
+      cursor: grabbing;
+    }
+
+    .kpi-card.dragging {
+      opacity: 0.4;
+      border-dash: 2px dashed var(--accent);
+      transform: scale(0.98);
+    }
+
+    .kpi-card.drag-over {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .kpi-icon-box {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+    }
+
+    .kpi-icon-box svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    .drag-handle {
+      color: var(--text-muted);
+      opacity: 0.4;
+      cursor: grab;
+      transition: opacity 0.2s;
+    }
+
+    .kpi-card:hover .drag-handle {
+      opacity: 0.9;
+    }
+
+    .kpi-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .kpi-value-group {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .kpi-number {
+      font-size: 28px;
+      font-weight: 800;
+      font-family: var(--font-sans);
+      letter-spacing: -0.8px;
+      color: var(--text-main);
+    }
+
+    .badge-trend {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .badge-trend.up {
+      background: rgba(16, 185, 129, 0.18);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .badge-trend.down {
+      background: rgba(239, 68, 68, 0.18);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    /* Mini Sparkline SVG */
+    .mini-sparkline {
+      width: 100%;
+      height: 36px;
+      margin-top: 12px;
+      overflow: visible;
+    }
+
+    .mini-sparkline path {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      filter: drop-shadow(0 4px 6px var(--accent-glow));
+    }
+
+    /* ==========================================================================
+       Interactive Main SVG Chart Widget
+       ========================================================================== */
+    .chart-panel {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .chart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chart-title-box h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .chart-title-box p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .chart-legend {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* SVG Interactive Canvas Container */
+    .svg-chart-container {
+      position: relative;
+      width: 100%;
+      height: 280px;
+    }
+
+    .main-svg-chart {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    /* Chart Hover Crosshair & Dynamic Tooltip */
+    .chart-crosshair {
+      stroke: rgba(255, 255, 255, 0.3);
+      stroke-dasharray: 4 4;
+      stroke-width: 1.5;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .chart-node {
+      fill: var(--bg-base);
+      stroke: var(--accent);
+      stroke-width: 3;
+      cursor: pointer;
+      transition: transform 0.2s ease, fill 0.2s ease;
+    }
+
+    .chart-node:hover, .chart-node.active {
+      transform: scale(1.6);
+      fill: var(--accent);
+      filter: drop-shadow(0 0 10px var(--accent-glow));
+    }
+
+    .chart-tooltip {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translate(-50%, -120%);
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border-hover);
+      border-radius: 12px;
+      padding: 8px 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease, transform 0.15s ease-out;
+      z-index: 200;
+      white-space: nowrap;
+    }
+
+    .chart-tooltip.visible {
+      opacity: 1;
+    }
+
+    .tooltip-date {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .tooltip-val {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      margin-top: 2px;
+    }
+
+    /* ==========================================================================
+       Secondary Widget Grid (Bar Chart & Donut Chart & System Feed)
+       ========================================================================== */
+    .widgets-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 1024px) {
+      .app-layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .widgets-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Bar Chart Styling */
+    .bar-chart-box {
+      height: 180px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 20px;
+    }
+
+    .bar-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      height: 100%;
+      justify-content: flex-end;
+    }
+
+    .bar-fill {
+      width: 100%;
+      max-width: 32px;
+      background: linear-gradient(180deg, var(--accent), rgba(255, 255, 255, 0.05));
+      border: 1px solid var(--glass-border);
+      border-radius: 8px 8px 0 0;
+      transition: height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .bar-fill:hover {
+      background: linear-gradient(180deg, var(--accent-secondary), var(--accent));
+      box-shadow: 0 0 16px var(--accent-glow);
+    }
+
+    .bar-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    /* Donut Chart Ring */
+    .donut-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      gap: 16px;
+      padding-top: 10px;
+    }
+
+    .donut-svg {
+      width: 140px;
+      height: 140px;
+      transform: rotate(-90deg);
+    }
+
+    .donut-circle-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.08);
+      stroke-width: 16;
+    }
+
+    .donut-segment {
+      fill: none;
+      stroke-width: 16;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.8s ease, stroke 0.3s ease;
+      cursor: pointer;
+    }
+
+    .donut-segment:hover {
+      filter: drop-shadow(0 0 8px var(--accent-glow));
+      stroke-width: 19;
+    }
+
+    .donut-legend-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .donut-legend-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 12.5px;
+    }
+
+    .donut-legend-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .donut-legend-val {
+      font-weight: 700;
+      color: var(--text-main);
+      font-family: var(--font-mono);
+    }
+
+    /* ==========================================================================
+       Skeleton Loader Shimmer Effect
+       ========================================================================== */
+    .skeleton-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      z-index: 10;
+      display: none;
+      overflow: hidden;
+    }
+
+    .glass-panel.loading .skeleton-overlay {
+      display: block;
+    }
+
+    .skeleton-overlay::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+      animation: shimmer 1.2s infinite;
+    }
+
+    @keyframes shimmer {
+      100% { left: 100%; }
+    }
+
+    /* ==========================================================================
+       Modal Slide-over Popup ("+ New Project")
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .glass-modal {
+      width: 100%;
+      max-width: 480px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+      transform: translateY(20px) scale(0.96);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-backdrop.active .glass-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .modal-close-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--glass-border);
+      color: var(--text-muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: all 0.2s ease;
+    }
+
+    .modal-close-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .form-input, .form-select {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--glass-border);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      outline: none;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    .modal-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--glass-border);
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 3000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast-glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid #10b981;
+      color: var(--text-main);
+      padding: 12px 18px;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      animation: slideInRight 0.3s ease;
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body data-theme="cyberpunk-glass">
+
+  <!-- Background Orbs & Texture Grid -->
+  <div class="orb-container">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div class="grain-overlay"></div>
+
+  <!-- Top-Right 6-Version Theme Switcher -->
+  <div class="theme-switcher-bar">
+    <span class="switcher-label">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 22h20L12 2z"/></svg>
+      Glass Styles:
+    </span>
+    <button class="switcher-btn active" data-theme-target="cyberpunk-glass" onclick="switchTheme('cyberpunk-glass')">Cyberpunk</button>
+    <button class="switcher-btn" data-theme-target="aurora-frost" onclick="switchTheme('aurora-frost')">Aurora Frost</button>
+    <button class="switcher-btn" data-theme-target="crystal-light" onclick="switchTheme('crystal-light')">Crystal Light</button>
+    <button class="switcher-btn" data-theme-target="holographic-prism" onclick="switchTheme('holographic-prism')">Holographic</button>
+    <button class="switcher-btn" data-theme-target="tinted-midnight" onclick="switchTheme('tinted-midnight')">Tinted Midnight</button>
+    <button class="switcher-btn" data-theme-target="sunset-emerald" onclick="switchTheme('sunset-emerald')">Sunset Emerald</button>
+  </div>
+
+  <!-- App Layout -->
+  <div class="app-layout">
+
+    <!-- Accordion Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand-header">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <span class="brand-title">NEXUS</span>
+        <span class="brand-version">v4.8</span>
+      </div>
+
+      <!-- Live Sync Switcher Widget -->
+      <div class="sync-widget">
+        <div class="sync-info">
+          <div class="pulse-dot" id="syncPulse"></div>
+          <span id="syncText">Live Telemetry</span>
+        </div>
+        <div class="toggle-switch checked" id="liveSyncToggle" onclick="toggleLiveSync()">
+          <div class="toggle-knob"></div>
+        </div>
+      </div>
+
+      <!-- Accordion Navigation Menu -->
+      <nav class="nav-menu">
+        <div class="nav-section-title">Core Engine</div>
+
+        <!-- Accordion Item 1: Analytics (Default Open) -->
+        <div class="accordion-item open" id="nav-analytics">
+          <div class="accordion-header active" onclick="toggleAccordion('nav-analytics')">
+            <div class="header-content">
+              <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z"/></svg>
+              <span>Analytics</span>
+            </div>
+            <svg class="chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+          </div>
+          <div class="accordion-body">
+            <a href="#" class="subnav-link active">Overview Matrix</a>
+            <a href="#" class="subnav-link">Realtime Traffic</a>
+            <a href="#" class="subnav-link">Conversion Funnels</a>
+            <a href="#" class="subnav-link">Cohort Retention</a>
+          </div>
+        </div>
+
+        <!-- Accordion Item 2: Performance -->
+        <div class="accordion-item" id="nav-performance">
+          <div class="accordion-header" onclick="toggleAccordion('nav-performance')">
+            <div class="header-content">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+              <span>Performance</span>
+            </div>
+            <svg class="chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+          </div>
+          <div class="accordion-body">
+            <a href="#" class="subnav-link">API Response Time</a>
+            <a href="#" class="subnav-link">Error Monitor</a>
+            <a href="#" class="subnav-link">Cluster Health</a>
+          </div>
+        </div>
+
+        <!-- Accordion Item 3: Reports -->
+        <div class="accordion-item" id="nav-reports">
+          <div class="accordion-header" onclick="toggleAccordion('nav-reports')">
+            <div class="header-content">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+              <span>Reports</span>
+            </div>
+            <svg class="chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+          </div>
+          <div class="accordion-body">
+            <a href="#" class="subnav-link">Monthly Revenue</a>
+            <a href="#" class="subnav-link">User Churn Report</a>
+            <a href="#" class="subnav-link">Export Data CSV</a>
+          </div>
+        </div>
+
+        <!-- Accordion Item 4: Settings -->
+        <div class="accordion-item" id="nav-settings">
+          <div class="accordion-header" onclick="toggleAccordion('nav-settings')">
+            <div class="header-content">
+              <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+              <span>Settings</span>
+            </div>
+            <svg class="chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+          </div>
+          <div class="accordion-body">
+            <a href="#" class="subnav-link">API Keys & Tokens</a>
+            <a href="#" class="subnav-link">Billing & SLA</a>
+            <a href="#" class="subnav-link">Team Permissions</a>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Sidebar Storage Meter -->
+      <div class="sidebar-footer">
+        <div class="gauge-title">
+          <span>CLOUD STORAGE</span>
+          <span>740 GB / 1 TB</span>
+        </div>
+        <div class="gauge-bar-bg">
+          <div class="gauge-bar-fill"></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+
+      <!-- Header & Navigation Bar -->
+      <header class="header-bar">
+        <div class="header-title-group">
+          <h1>SaaS Telemetry & Revenue Dashboard</h1>
+          <p>Real-time system telemetry, cohort metrics & engine throughput</p>
+        </div>
+
+        <div class="header-actions">
+
+          <!-- Profile Switcher Dropdown -->
+          <div class="dropdown" id="profileDropdown">
+            <button class="dropdown-btn" onclick="toggleDropdown('profileDropdown')">
+              <div class="avatar-badge">AC</div>
+              <span id="selectedProfile">Acme Corp (Prod)</span>
+              <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item selected" onclick="selectProfile('Acme Corp (Prod)')">
+                <div class="avatar-badge">AC</div> Acme Corp (Prod)
+              </div>
+              <div class="dropdown-item" onclick="selectProfile('Stark Labs (Staging)')">
+                <div class="avatar-badge" style="background:#8b5cf6">SL</div> Stark Labs (Staging)
+              </div>
+              <div class="dropdown-item" onclick="selectProfile('Cyberdyne Systems')">
+                <div class="avatar-badge" style="background:#06b6d4">CS</div> Cyberdyne Systems
+              </div>
+            </div>
+          </div>
+
+          <!-- Date Range Selector Dropdown -->
+          <div class="dropdown" id="dateDropdown">
+            <button class="dropdown-btn" onclick="toggleDropdown('dateDropdown')">
+              <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+              <span id="selectedDateRange">This Month</span>
+              <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" onclick="selectDateRange('Today')">Today (Aug 4)</div>
+              <div class="dropdown-item" onclick="selectDateRange('This Week')">This Week</div>
+              <div class="dropdown-item selected" onclick="selectDateRange('This Month')">This Month</div>
+              <div class="dropdown-item" onclick="selectDateRange('This Year')">This Year (2026)</div>
+            </div>
+          </div>
+
+          <!-- Quick Action Button (+ New Project Modal Trigger) -->
+          <button class="btn-primary" onclick="openModal()">
+            <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            + Add Project
+          </button>
+        </div>
+      </header>
+
+      <!-- Data View Mode Tabs Bar ([Daily] [Weekly] [Monthly]) -->
+      <div class="tabs-row">
+        <div class="tab-strip">
+          <button class="tab-btn" onclick="switchDataTab('daily', this)">Daily</button>
+          <button class="tab-btn active" onclick="switchDataTab('weekly', this)">Weekly</button>
+          <button class="tab-btn" onclick="switchDataTab('monthly', this)">Monthly</button>
+        </div>
+
+        <div class="live-status-pill">
+          <span style="color:var(--accent)">●</span> Cluster Latency: <strong style="color:var(--text-main)" id="clusterPing">142ms</strong>
+        </div>
+      </div>
+
+      <!-- Draggable KPI Metric Cards Grid -->
+      <div class="draggable-grid" id="kpiGrid">
+
+        <!-- Card 1: Total Revenue -->
+        <div class="glass-panel kpi-card" draggable="true" id="kpi-1">
+          <div class="skeleton-overlay"></div>
+          <div class="card-top">
+            <div class="kpi-icon-box">
+              <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+            </div>
+            <div class="drag-handle">⋮⋮</div>
+          </div>
+          <div class="kpi-title">TOTAL REVENUE</div>
+          <div class="kpi-value-group">
+            <span class="kpi-number" id="val-revenue" data-target="128450" data-prefix="$">$0</span>
+            <span class="badge-trend up">▲ 18.4%</span>
+          </div>
+          <svg class="mini-sparkline" viewBox="0 0 100 30">
+            <path d="M0,25 Q15,5 30,18 T60,8 T90,20 T100,5"/>
+          </svg>
+        </div>
+
+        <!-- Card 2: Active Users -->
+        <div class="glass-panel kpi-card" draggable="true" id="kpi-2">
+          <div class="skeleton-overlay"></div>
+          <div class="card-top">
+            <div class="kpi-icon-box" style="color:var(--accent-secondary)">
+              <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+            </div>
+            <div class="drag-handle">⋮⋮</div>
+          </div>
+          <div class="kpi-title">ACTIVE USERS</div>
+          <div class="kpi-value-group">
+            <span class="kpi-number" id="val-users" data-target="48290" data-prefix="">0</span>
+            <span class="badge-trend up">▲ 12.1%</span>
+          </div>
+          <svg class="mini-sparkline" viewBox="0 0 100 30">
+            <path d="M0,20 Q20,28 40,12 T70,22 T100,8" style="stroke:var(--accent-secondary)"/>
+          </svg>
+        </div>
+
+        <!-- Card 3: Conversion Rate -->
+        <div class="glass-panel kpi-card" draggable="true" id="kpi-3">
+          <div class="skeleton-overlay"></div>
+          <div class="card-top">
+            <div class="kpi-icon-box" style="color:#34d399">
+              <svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg>
+            </div>
+            <div class="drag-handle">⋮⋮</div>
+          </div>
+          <div class="kpi-title">CONVERSION RATE</div>
+          <div class="kpi-value-group">
+            <span class="kpi-number" id="val-conversion" data-target="4.86" data-suffix="%" data-decimals="2">0.00%</span>
+            <span class="badge-trend up">▲ 0.64%</span>
+          </div>
+          <svg class="mini-sparkline" viewBox="0 0 100 30">
+            <path d="M0,28 Q25,18 50,22 T75,10 T100,4" style="stroke:#34d399"/>
+          </svg>
+        </div>
+
+        <!-- Card 4: Avg Latency -->
+        <div class="glass-panel kpi-card" draggable="true" id="kpi-4">
+          <div class="skeleton-overlay"></div>
+          <div class="card-top">
+            <div class="kpi-icon-box" style="color:#f59e0b">
+              <svg viewBox="0 0 24 24"><path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+            </div>
+            <div class="drag-handle">⋮⋮</div>
+          </div>
+          <div class="kpi-title">AVG RESPONSE TIME</div>
+          <div class="kpi-value-group">
+            <span class="kpi-number" id="val-latency" data-target="142" data-suffix="ms">0ms</span>
+            <span class="badge-trend down">▼ 24ms</span>
+          </div>
+          <svg class="mini-sparkline" viewBox="0 0 100 30">
+            <path d="M0,8 Q30,15 50,5 T80,25 T100,12" style="stroke:#f59e0b"/>
+          </svg>
+        </div>
+
+      </div>
+
+      <!-- Main Interactive SVG Chart Panel -->
+      <div class="glass-panel chart-panel" id="mainChartPanel">
+        <div class="skeleton-overlay"></div>
+
+        <div class="chart-header">
+          <div class="chart-title-box">
+            <h2>System Performance & Throughput Trend</h2>
+            <p>Hover over chart points to inspect dynamic glass tooltips</p>
+          </div>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-dot" style="background:var(--accent)"></div>
+              <span>API Throughput (req/s)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:var(--accent-secondary)"></div>
+              <span>Baseline SLA</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SVG Chart Container with Dynamic Tooltip -->
+        <div class="svg-chart-container" id="chartContainer">
+          <div class="chart-tooltip" id="chartTooltip">
+            <div class="tooltip-date" id="tooltipDate">Aug 04, 2026</div>
+            <div class="tooltip-val" id="tooltipVal">14,280 req/s</div>
+          </div>
+
+          <svg class="main-svg-chart" viewBox="0 0 1000 280" preserveAspectRatio="none" id="mainSvg">
+            <defs>
+              <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.45"/>
+                <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.0"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Background Grid Lines -->
+            <line x1="0" y1="40" x2="1000" y2="40" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+            <line x1="0" y1="100" x2="1000" y2="100" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+            <line x1="0" y1="160" x2="1000" y2="160" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+            <line x1="0" y1="220" x2="1000" y2="220" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+
+            <!-- Area Gradient Fill under Main Curve -->
+            <path id="chartArea" d="M0,220 C150,180 300,60 450,120 C600,180 750,40 1000,90 L1000,260 L0,260 Z" fill="url(#chartGradient)"/>
+
+            <!-- Secondary Baseline Line -->
+            <path d="M0,190 C200,170 400,160 600,150 C800,140 1000,130 1000,130" fill="none" stroke="var(--accent-secondary)" stroke-width="2" stroke-dasharray="6 6" opacity="0.7"/>
+
+            <!-- Primary Smooth Line Curve -->
+            <path id="chartLine" d="M0,220 C150,180 300,60 450,120 C600,180 750,40 1000,90" fill="none" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round"/>
+
+            <!-- Vertical Crosshair Line -->
+            <line id="crosshair" class="chart-crosshair" x1="0" y1="0" x2="0" y2="260"/>
+
+            <!-- Interactive Data Points (Nodes) -->
+            <g id="chartNodes">
+              <circle class="chart-node" cx="0" cy="220" r="6" data-date="Mon 01" data-val="6,420 req/s"/>
+              <circle class="chart-node" cx="166" cy="180" r="6" data-date="Tue 02" data-val="8,910 req/s"/>
+              <circle class="chart-node" cx="333" cy="70" r="6" data-date="Wed 03" data-val="16,840 req/s"/>
+              <circle class="chart-node" cx="500" cy="130" r="6" data-date="Thu 04" data-val="12,150 req/s"/>
+              <circle class="chart-node" cx="666" cy="170" r="6" data-date="Fri 05" data-val="9,400 req/s"/>
+              <circle class="chart-node" cx="833" cy="45" r="6" data-date="Sat 06" data-val="18,920 req/s"/>
+              <circle class="chart-node" cx="1000" cy="90" r="6" data-date="Sun 07" data-val="15,310 req/s"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Secondary Widgets Grid (Bar Chart & Donut Chart) -->
+      <div class="widgets-grid" id="widgetsGrid">
+
+        <!-- Bar Chart Widget -->
+        <div class="glass-panel chart-panel">
+          <div class="chart-header">
+            <div class="chart-title-box">
+              <h2>Traffic Sources Breakdown</h2>
+              <p>Acquisition channels this period</p>
+            </div>
+          </div>
+
+          <div class="bar-chart-box">
+            <div class="bar-col">
+              <div class="bar-fill" style="height: 75%;" data-val="42.5k Organic"></div>
+              <span class="bar-label">Organic</span>
+            </div>
+            <div class="bar-col">
+              <div class="bar-fill" style="height: 55%;" data-val="28.1k Direct"></div>
+              <span class="bar-label">Direct</span>
+            </div>
+            <div class="bar-col">
+              <div class="bar-fill" style="height: 90%; background:linear-gradient(180deg, var(--accent-secondary), rgba(255,255,255,0.05));" data-val="64.2k Referral"></div>
+              <span class="bar-label">Referral</span>
+            </div>
+            <div class="bar-col">
+              <div class="bar-fill" style="height: 40%;" data-val="19.8k Social"></div>
+              <span class="bar-label">Social</span>
+            </div>
+            <div class="bar-col">
+              <div class="bar-fill" style="height: 65%;" data-val="33.4k Email"></div>
+              <span class="bar-label">Email</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Donut Chart Widget -->
+        <div class="glass-panel chart-panel">
+          <div class="chart-header">
+            <div class="chart-title-box">
+              <h2>Client Device Share</h2>
+              <p>Platform distribution across active sessions</p>
+            </div>
+          </div>
+
+          <div class="donut-container">
+            <svg class="donut-svg" viewBox="0 0 100 100">
+              <circle class="donut-circle-bg" cx="50" cy="50" r="35"/>
+              <!-- Segment 1: Desktop (58%) -->
+              <circle class="donut-segment" cx="50" cy="50" r="35" stroke="var(--accent)" stroke-dasharray="127 220" stroke-dashoffset="0"/>
+              <!-- Segment 2: Mobile (32%) -->
+              <circle class="donut-segment" cx="50" cy="50" r="35" stroke="var(--accent-secondary)" stroke-dasharray="70 220" stroke-dashoffset="-130"/>
+              <!-- Segment 3: Tablet (10%) -->
+              <circle class="donut-segment" cx="50" cy="50" r="35" stroke="#f59e0b" stroke-dasharray="22 220" stroke-dashoffset="-203"/>
+            </svg>
+
+            <div class="donut-legend-list">
+              <div class="donut-legend-item">
+                <div class="donut-legend-label">
+                  <div class="legend-dot" style="background:var(--accent)"></div>
+                  <span>Desktop Web</span>
+                </div>
+                <span class="donut-legend-val">58%</span>
+              </div>
+              <div class="donut-legend-item">
+                <div class="donut-legend-label">
+                  <div class="legend-dot" style="background:var(--accent-secondary)"></div>
+                  <span>Mobile iOS/Android</span>
+                </div>
+                <span class="donut-legend-val">32%</span>
+              </div>
+              <div class="donut-legend-item">
+                <div class="donut-legend-label">
+                  <div class="legend-dot" style="background:#f59e0b"></div>
+                  <span>Tablet / Other</span>
+                </div>
+                <span class="donut-legend-val">10%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Modal Slide-over Popup ("+ New Project") -->
+  <div class="modal-backdrop" id="projectModal">
+    <div class="glass-modal">
+      <div class="modal-header">
+        <h3 class="modal-title">Create New Analytics Project</h3>
+        <button class="modal-close-btn" onclick="closeModal()">✕</button>
+      </div>
+
+      <form id="projectForm" onsubmit="handleFormSubmit(event)">
+        <div class="form-group">
+          <label class="form-label">Project Identifier</label>
+          <input type="text" class="form-input" placeholder="e.g. quantum-cluster-prod" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Deployment Environment</label>
+          <select class="form-select">
+            <option>Production (US-East Edge)</option>
+            <option>Staging (EU-Central)</option>
+            <option>Development Sandbox</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Target SLA Threshold</label>
+          <input type="text" class="form-input" value="99.99% Availability">
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn-primary" id="btnDeploy">
+            <span>Deploy Project</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- JavaScript Logic -->
+  <script>
+    /* ==========================================================================
+       Theme Switcher & Glass Accent Handlers
+       ========================================================================== */
+    function switchTheme(themeName) {
+      document.body.setAttribute('data-theme', themeName);
+      
+      document.querySelectorAll('.switcher-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-theme-target') === themeName) {
+          btn.classList.add('active');
+        }
+      });
+    }
+
+    /* ==========================================================================
+       Accordion Menu Toggle
+       ========================================================================== */
+    function toggleAccordion(itemId) {
+      const targetItem = document.getElementById(itemId);
+      const isOpen = targetItem.classList.contains('open');
+
+      document.querySelectorAll('.accordion-item').forEach(item => {
+        item.classList.remove('open');
+      });
+
+      if (!isOpen) {
+        targetItem.classList.add('open');
+      }
+    }
+
+    /* ==========================================================================
+       Dropdown Switchers (Profile & Date Range)
+       ========================================================================== */
+    function toggleDropdown(dropdownId) {
+      const dropdown = document.getElementById(dropdownId);
+      const isOpen = dropdown.classList.contains('open');
+
+      document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+
+      if (!isOpen) {
+        dropdown.classList.add('open');
+      }
+    }
+
+    // Close dropdowns when clicking outside
+    window.addEventListener('click', function(e) {
+      if (!e.target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open'));
+      }
+    });
+
+    function selectProfile(name) {
+      document.getElementById('selectedProfile').innerText = name;
+      document.querySelectorAll('#profileDropdown .dropdown-item').forEach(item => {
+        item.classList.toggle('selected', item.innerText.includes(name));
+      });
+    }
+
+    function selectDateRange(range) {
+      document.getElementById('selectedDateRange').innerText = range;
+      document.querySelectorAll('#dateDropdown .dropdown-item').forEach(item => {
+        item.classList.toggle('selected', item.innerText.includes(range));
+      });
+      triggerSkeletonReload();
+    }
+
+    /* ==========================================================================
+       Live Sync Toggle
+       ========================================================================== */
+    let liveSyncActive = true;
+    function toggleLiveSync() {
+      liveSyncActive = !liveSyncActive;
+      const toggle = document.getElementById('liveSyncToggle');
+      const pulse = document.getElementById('syncPulse');
+      const text = document.getElementById('syncText');
+
+      if (liveSyncActive) {
+        toggle.classList.add('checked');
+        pulse.classList.remove('off');
+        text.innerText = "Live Telemetry";
+      } else {
+        toggle.classList.remove('checked');
+        pulse.classList.add('off');
+        text.innerText = "Sync Paused";
+      }
+    }
+
+    /* ==========================================================================
+       Count-Up Number Animation
+       ========================================================================== */
+    function animateValue(obj, start, end, duration, prefix = '', suffix = '', decimals = 0) {
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const current = start + progress * (end - start);
+
+        let formatted = decimals > 0 ? current.toFixed(decimals) : Math.floor(current).toLocaleString();
+        obj.innerHTML = `${prefix}${formatted}${suffix}`;
+
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+
+    function runAllCountUps() {
+      document.querySelectorAll('.kpi-number').forEach(el => {
+        const target = parseFloat(el.getAttribute('data-target'));
+        const prefix = el.getAttribute('data-prefix') || '';
+        const suffix = el.getAttribute('data-suffix') || '';
+        const decimals = parseInt(el.getAttribute('data-decimals') || '0');
+        animateValue(el, 0, target, 1000, prefix, suffix, decimals);
+      });
+    }
+
+    /* ==========================================================================
+       Data Tabs & Skeleton Loading Trigger
+       ========================================================================== */
+    function switchDataTab(mode, btnEl) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      btnEl.classList.add('active');
+
+      // Update KPI target numbers based on tab mode
+      const revEl = document.getElementById('val-revenue');
+      const usrEl = document.getElementById('val-users');
+
+      if (mode === 'daily') {
+        revEl.setAttribute('data-target', '18420');
+        usrEl.setAttribute('data-target', '6210');
+      } else if (mode === 'weekly') {
+        revEl.setAttribute('data-target', '128450');
+        usrEl.setAttribute('data-target', '48290');
+      } else if (mode === 'monthly') {
+        revEl.setAttribute('data-target', '542100');
+        usrEl.setAttribute('data-target', '194200');
+      }
+
+      triggerSkeletonReload();
+    }
+
+    function triggerSkeletonReload() {
+      const panels = document.querySelectorAll('.glass-panel');
+      panels.forEach(p => p.classList.add('loading'));
+
+      setTimeout(() => {
+        panels.forEach(p => p.classList.remove('loading'));
+        runAllCountUps();
+      }, 450);
+    }
+
+    /* ==========================================================================
+       Interactive SVG Chart Hover Tooltip
+       ========================================================================== */
+    const svgChart = document.getElementById('mainSvg');
+    const crosshair = document.getElementById('crosshair');
+    const tooltip = document.getElementById('chartTooltip');
+    const tooltipDate = document.getElementById('tooltipDate');
+    const tooltipVal = document.getElementById('tooltipVal');
+    const chartNodes = document.querySelectorAll('.chart-node');
+
+    chartNodes.forEach(node => {
+      node.addEventListener('mouseenter', (e) => {
+        const cx = node.getAttribute('cx');
+        const date = node.getAttribute('data-date');
+        const val = node.getAttribute('data-val');
+
+        crosshair.setAttribute('x1', cx);
+        crosshair.setAttribute('x2', cx);
+        crosshair.style.opacity = '1';
+
+        tooltipDate.innerText = date;
+        tooltipVal.innerText = val;
+
+        const containerRect = document.getElementById('chartContainer').getBoundingClientRect();
+        const nodeRect = node.getBoundingClientRect();
+        const relativeX = nodeRect.left - containerRect.left + 6;
+        const relativeY = nodeRect.top - containerRect.top;
+
+        tooltip.style.left = `${relativeX}px`;
+        tooltip.style.top = `${relativeY}px`;
+        tooltip.classList.add('visible');
+      });
+
+      node.addEventListener('mouseleave', () => {
+        crosshair.style.opacity = '0';
+        tooltip.classList.remove('visible');
+      });
+    });
+
+    /* ==========================================================================
+       HTML5 Drag and Drop Reordering (KPI Cards)
+       ========================================================================== */
+    const kpiGrid = document.getElementById('kpiGrid');
+    let dragItem = null;
+
+    kpiGrid.addEventListener('dragstart', (e) => {
+      if (e.target.classList.contains('kpi-card')) {
+        dragItem = e.target;
+        e.target.classList.add('dragging');
+      }
+    });
+
+    kpiGrid.addEventListener('dragend', (e) => {
+      if (e.target.classList.contains('kpi-card')) {
+        e.target.classList.remove('dragging');
+        document.querySelectorAll('.kpi-card').forEach(c => c.classList.remove('drag-over'));
+        dragItem = null;
+      }
+    });
+
+    kpiGrid.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      const targetCard = e.target.closest('.kpi-card');
+      if (targetCard && targetCard !== dragItem) {
+        targetCard.classList.add('drag-over');
+        const rect = targetCard.getBoundingClientRect();
+        const next = (e.clientY - rect.top) / (rect.bottom - rect.top) > 0.5;
+        kpiGrid.insertBefore(dragItem, next && targetCard.nextSibling || targetCard);
+      }
+    });
+
+    kpiGrid.addEventListener('dragleave', (e) => {
+      const targetCard = e.target.closest('.kpi-card');
+      if (targetCard) {
+        targetCard.classList.remove('drag-over');
+      }
+    });
+
+    /* ==========================================================================
+       Modal Slide-Over Handler ("+ New Project")
+       ========================================================================== */
+    function openModal() {
+      document.getElementById('projectModal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('projectModal').classList.remove('active');
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnDeploy');
+      btn.innerHTML = 'Deploying...';
+
+      setTimeout(() => {
+        btn.innerHTML = '<span>Deploy Project</span>';
+        closeModal();
+        showToast('🚀 Project deployed to Edge network successfully!');
+      }, 650);
+    }
+
+    function showToast(message) {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = 'toast-glass';
+      toast.innerHTML = message;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(100%)';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    /* ==========================================================================
+       On Load Initialization
+       ========================================================================== */
+    window.addEventListener('DOMContentLoaded', () => {
+      runAllCountUps();
+    });
+  </script>
+
+<!-- Draggable Theme Switcher Script -->
+<script>
+(function() {
+    function initDraggableSwitcher() {
+        const selectors = [
+            '.version-switcher', '.version-switcher-bar', '.version-switcher-box', 
+            '.theme-switcher-deck', '.top-switcher-bar', '#switcher', '#versionSwitcher',
+            '.theme-switcher', '.switcher-bar', '.version-deck', '[class*="switcher"]'
+        ];
+        let el = null;
+        for (const sel of selectors) {
+            const found = document.querySelector(sel);
+            if (found) {
+                const pos = getComputedStyle(found).position;
+                if (pos === 'fixed' || pos === 'absolute') {
+                    el = found;
+                    break;
+                }
+            }
+        }
+        if (!el) {
+            const allFixed = Array.from(document.querySelectorAll('*')).filter(e => {
+                const pos = getComputedStyle(e).position;
+                const z = parseInt(getComputedStyle(e).zIndex || 0);
+                return (pos === 'fixed' || pos === 'absolute') && z >= 90;
+            });
+            if (allFixed.length > 0) el = allFixed[0];
+        }
+        if (!el) return;
+
+        // Visual Drag Indicator
+        el.style.cursor = 'grab';
+        el.style.zIndex = '99999';
+        if (!el.querySelector('.drag-handle-hint')) {
+            const hint = document.createElement('span');
+            hint.className = 'drag-handle-hint';
+            hint.innerHTML = ' ⠿ ';
+            hint.title = '드래그하여 원하는 위치로 이동하세요';
+            hint.style.cssText = 'cursor:grab; font-weight:bold; opacity:0.7; margin-right:6px; user-select:none; display:inline-block; vertical-align:middle;';
+            el.insertBefore(hint, el.firstChild);
+        }
+
+        let isMouseDown = false;
+        let startX = 0, startY = 0;
+        let origLeft = 0, origTop = 0;
+        let hasMoved = false;
+
+        function startDrag(clientX, clientY) {
+            isMouseDown = true;
+            hasMoved = false;
+            startX = clientX;
+            startY = clientY;
+            const rect = el.getBoundingClientRect();
+            origLeft = rect.left;
+            origTop = rect.top;
+            el.style.cursor = 'grabbing';
+        }
+
+        function moveDrag(clientX, clientY, e) {
+            if (!isMouseDown) return;
+            const dx = clientX - startX;
+            const dy = clientY - startY;
+            if (Math.abs(dx) > 2 || Math.abs(dy) > 2) {
+                hasMoved = true;
+                if (e && e.cancelable) e.preventDefault();
+                el.style.right = 'auto';
+                el.style.bottom = 'auto';
+                let newLeft = Math.max(0, Math.min(window.innerWidth - el.offsetWidth, origLeft + dx));
+                let newTop = Math.max(0, Math.min(window.innerHeight - el.offsetHeight, origTop + dy));
+                el.style.left = newLeft + 'px';
+                el.style.top = newTop + 'px';
+            }
+        }
+
+        function stopDrag() {
+            isMouseDown = false;
+            el.style.cursor = 'grab';
+        }
+
+        el.addEventListener('mousedown', function(e) {
+            startDrag(e.clientX, e.clientY);
+            function onMouseMove(me) { moveDrag(me.clientX, me.clientY, me); }
+            function onMouseUp() {
+                stopDrag();
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+            }
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        });
+
+        el.addEventListener('touchstart', function(e) {
+            if (!e.touches || e.touches.length === 0) return;
+            startDrag(e.touches[0].clientX, e.touches[0].clientY);
+            function onTouchMove(te) {
+                if (te.touches && te.touches.length > 0) {
+                    moveDrag(te.touches[0].clientX, te.touches[0].clientY, te);
+                }
+            }
+            function onTouchEnd() {
+                stopDrag();
+                document.removeEventListener('touchmove', onTouchMove);
+                document.removeEventListener('touchend', onTouchEnd);
+            }
+            document.addEventListener('touchmove', onTouchMove, { passive: false });
+            document.addEventListener('touchend', onTouchEnd);
+        }, { passive: true });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initDraggableSwitcher);
+    } else {
+        initDraggableSwitcher();
+    }
+})();
+</script>
+
+</body>
+</html>

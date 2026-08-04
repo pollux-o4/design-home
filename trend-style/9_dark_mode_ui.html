@@ -1,0 +1,2445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus SaaS Analytics - Dark Mode UI Suite</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           THEME DEFINITIONS (6 DISTINCT DARK MODE UI VARIATIONS)
+           ========================================================================== */
+        :root {
+            /* Default Theme: 1. Cyber Neon (Deep Obsidian + Cyber Indigo & Magenta Glow) */
+            --theme-name: "1. Cyber Neon";
+            --bg-base: #090c15;
+            --bg-surface: #101625;
+            --bg-surface-hover: #172033;
+            --bg-card: #141c2e;
+            --bg-card-hover: #1a253d;
+            --bg-input: #0b101c;
+            --border-subtle: rgba(99, 102, 241, 0.18);
+            --border-glow: rgba(99, 102, 241, 0.5);
+            --accent-primary: #6366f1;
+            --accent-secondary: #ec4899;
+            --accent-tertiary: #06b6d4;
+            --accent-glow: rgba(99, 102, 241, 0.4);
+            --accent-glow-strong: rgba(99, 102, 241, 0.65);
+            --text-title: #f8fafc;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --success: #10b981;
+            --success-glow: rgba(16, 185, 129, 0.3);
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --card-radius: 16px;
+            --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 15px var(--accent-glow);
+        }
+
+        /* Theme 2: OLED Mint (Pure OLED Black + Electric Mint Glow) */
+        [data-theme="v2"] {
+            --theme-name: "2. OLED Mint";
+            --bg-base: #000000;
+            --bg-surface: #0a0a0a;
+            --bg-surface-hover: #141414;
+            --bg-card: #111111;
+            --bg-card-hover: #181818;
+            --bg-input: #050505;
+            --border-subtle: rgba(16, 185, 129, 0.22);
+            --border-glow: rgba(16, 185, 129, 0.6);
+            --accent-primary: #10b981;
+            --accent-secondary: #06b6d4;
+            --accent-tertiary: #3b82f6;
+            --accent-glow: rgba(16, 185, 129, 0.35);
+            --accent-glow-strong: rgba(16, 185, 129, 0.7);
+            --text-title: #ffffff;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-dim: #475569;
+            --success: #10b981;
+            --warning: #fbbf24;
+            --danger: #f87171;
+            --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.9), 0 0 12px var(--accent-glow);
+        }
+
+        /* Theme 3: Solar Gold (Warm Charcoal + Amber Gold & Flame Glow) */
+        [data-theme="v3"] {
+            --theme-name: "3. Solar Gold";
+            --bg-base: #0f0e13;
+            --bg-surface: #191720;
+            --bg-surface-hover: #24212d;
+            --bg-card: #1f1c29;
+            --bg-card-hover: #292536;
+            --bg-input: #13111a;
+            --border-subtle: rgba(245, 158, 11, 0.22);
+            --border-glow: rgba(245, 158, 11, 0.6);
+            --accent-primary: #f59e0b;
+            --accent-secondary: #f97316;
+            --accent-tertiary: #ef4444;
+            --accent-glow: rgba(245, 158, 11, 0.35);
+            --accent-glow-strong: rgba(245, 158, 11, 0.65);
+            --text-title: #fffbeb;
+            --text-main: #fef3c7;
+            --text-muted: #d97706;
+            --text-dim: #78350f;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 14px var(--accent-glow);
+        }
+
+        /* Theme 4: Synth Crimson (Dark Violet + Sunset Crimson & Magenta) */
+        [data-theme="v4"] {
+            --theme-name: "4. Synth Crimson";
+            --bg-base: #0b0714;
+            --bg-surface: #140d24;
+            --bg-surface-hover: #1e1336;
+            --bg-card: #1a112e;
+            --bg-card-hover: #23173e;
+            --bg-input: #0e0919;
+            --border-subtle: rgba(236, 72, 153, 0.22);
+            --border-glow: rgba(236, 72, 153, 0.6);
+            --accent-primary: #ec4899;
+            --accent-secondary: #8b5cf6;
+            --accent-tertiary: #d946ef;
+            --accent-glow: rgba(236, 72, 153, 0.4);
+            --accent-glow-strong: rgba(236, 72, 153, 0.7);
+            --text-title: #fdf2f8;
+            --text-main: #f472b6;
+            --text-muted: #c084fc;
+            --text-dim: #6b21a8;
+            --success: #34d399;
+            --warning: #fbbf24;
+            --danger: #f43f5e;
+            --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.85), 0 0 15px var(--accent-glow);
+        }
+
+        /* Theme 5: GitHub Slate (Deep Midnight Blue-Slate + Cyan Sky) */
+        [data-theme="v5"] {
+            --theme-name: "5. GitHub Slate";
+            --bg-base: #0d1117;
+            --bg-surface: #161b22;
+            --bg-surface-hover: #21262d;
+            --bg-card: #1c2128;
+            --bg-card-hover: #272e38;
+            --bg-input: #090d12;
+            --border-subtle: rgba(56, 189, 248, 0.2);
+            --border-glow: rgba(56, 189, 248, 0.55);
+            --accent-primary: #38bdf8;
+            --accent-secondary: #3182ce;
+            --accent-tertiary: #22d3ee;
+            --accent-glow: rgba(56, 189, 248, 0.3);
+            --accent-glow-strong: rgba(56, 189, 248, 0.6);
+            --text-title: #f0f6fc;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --text-dim: #484f58;
+            --success: #2ea043;
+            --warning: #d29922;
+            --danger: #f85149;
+            --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.75), 0 0 12px var(--accent-glow);
+        }
+
+        /* Theme 6: Tactical Lime (Tactical Carbon Gray + Vibrant Laser Lime) */
+        [data-theme="v6"] {
+            --theme-name: "6. Tactical Lime";
+            --bg-base: #111317;
+            --bg-surface: #191c23;
+            --bg-surface-hover: #232732;
+            --bg-card: #1e222b;
+            --bg-card-hover: #272c38;
+            --bg-input: #0d0f12;
+            --border-subtle: rgba(132, 204, 22, 0.25);
+            --border-glow: rgba(132, 204, 22, 0.65);
+            --accent-primary: #84cc16;
+            --accent-secondary: #10b981;
+            --accent-tertiary: #a3e635;
+            --accent-glow: rgba(132, 204, 22, 0.35);
+            --accent-glow-strong: rgba(132, 204, 22, 0.7);
+            --text-title: #f7fee7;
+            --text-main: #ecfdf5;
+            --text-muted: #a3e635;
+            --text-dim: #4d7c0f;
+            --success: #84cc16;
+            --warning: #eab308;
+            --danger: #ef4444;
+            --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 14px var(--accent-glow);
+        }
+
+        /* Global Reset & Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-base);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--bg-surface-hover);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-primary);
+        }
+
+        /* ==========================================================================
+           FIXED TOP-RIGHT 6-VERSION SWITCHER
+           ========================================================================== */
+        .version-switcher {
+            position: fixed;
+            top: 16px;
+            right: 20px;
+            z-index: 1100;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glow);
+            border-radius: 50px;
+            padding: 4px 8px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), 0 0 15px var(--accent-glow);
+            backdrop-filter: blur(12px);
+        }
+
+        .switcher-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            padding: 0 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .switcher-label::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            box-shadow: 0 0 8px var(--accent-primary);
+            animation: pulse-dot 1.8s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.25); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        .v-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .v-btn:hover {
+            color: var(--text-title);
+            background: var(--bg-surface-hover);
+        }
+
+        .v-btn.active {
+            background: var(--accent-primary);
+            color: #ffffff;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 12px var(--accent-glow-strong);
+        }
+
+        /* ==========================================================================
+           SIDEBAR WITH ACCORDION SUB-MENUS
+           ========================================================================== */
+        .sidebar {
+            width: 270px;
+            background: var(--bg-surface);
+            border-right: 1px solid var(--border-subtle);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            padding: 24px 16px;
+            overflow-y: auto;
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 8px 24px 8px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .brand-logo {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px var(--accent-glow-strong);
+            position: relative;
+        }
+
+        .brand-logo svg {
+            width: 22px;
+            height: 22px;
+            color: #ffffff;
+        }
+
+        .brand-text {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-title);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-badge {
+            font-size: 9px;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Accordion Menu */
+        .nav-accordion {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .nav-group-title {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--text-dim);
+            padding: 12px 12px 6px 12px;
+        }
+
+        .accordion-item {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            width: 100%;
+            padding: 10px 12px;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .accordion-header:hover {
+            background: var(--bg-surface-hover);
+            color: var(--text-title);
+        }
+
+        .accordion-header.active {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--accent-primary);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-icon {
+            width: 18px;
+            height: 18px;
+            color: var(--text-muted);
+            transition: color 0.2s ease;
+        }
+
+        .accordion-header.active .nav-icon {
+            color: var(--accent-primary);
+        }
+
+        .chevron {
+            width: 16px;
+            height: 16px;
+            color: var(--text-dim);
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-item.open .chevron {
+            transform: rotate(180deg);
+            color: var(--accent-primary);
+        }
+
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+            padding-left: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .accordion-item.open .accordion-body {
+            max-height: 200px;
+            padding-top: 6px;
+            padding-bottom: 6px;
+        }
+
+        .sub-nav-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .sub-nav-link:hover {
+            color: var(--text-title);
+            background: var(--bg-surface-hover);
+        }
+
+        .sub-nav-link.active {
+            color: var(--accent-primary);
+            font-weight: 600;
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .sub-pill {
+            font-size: 10px;
+            font-family: var(--font-mono);
+            padding: 2px 6px;
+            border-radius: 10px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-dim);
+        }
+
+        .sub-nav-link.active .sub-pill {
+            background: var(--accent-primary);
+            color: #ffffff;
+            border-color: var(--accent-primary);
+        }
+
+        /* Sidebar Bottom System Health Widget */
+        .sidebar-bottom {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .health-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .health-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+
+        .health-bar-container {
+            width: 100%;
+            height: 6px;
+            background: var(--bg-input);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .health-bar-fill {
+            height: 100%;
+            width: 99.8%;
+            background: linear-gradient(90deg, var(--accent-primary), var(--success));
+            box-shadow: 0 0 10px var(--accent-glow);
+            border-radius: 10px;
+        }
+
+        .toggle-switch-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 36px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--bg-input);
+            border: 1px solid var(--border-subtle);
+            transition: .3s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 2px;
+            bottom: 2px;
+            background-color: var(--text-muted);
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--accent-primary);
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(16px);
+            background-color: #ffffff;
+        }
+
+        /* ==========================================================================
+           MAIN LAYOUT & HEADER
+           ========================================================================== */
+        .main-wrapper {
+            margin-left: 270px;
+            flex: 1;
+            padding: 32px 36px 60px 36px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            max-width: 1650px;
+        }
+
+        /* Top Header */
+        .top-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .header-title-area h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--text-title);
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .theme-pill-badge {
+            font-size: 11px;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glow);
+            color: var(--accent-primary);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .header-title-area p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        /* Custom Dropdown Buttons */
+        .dropdown {
+            position: relative;
+        }
+
+        .btn-dropdown {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-main);
+            padding: 9px 16px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-dropdown:hover {
+            border-color: var(--accent-primary);
+            background: var(--bg-surface-hover);
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glow);
+            border-radius: 12px;
+            width: 220px;
+            padding: 8px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-glow);
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 500;
+        }
+
+        .dropdown-menu.show {
+            display: flex;
+            animation: fadeInDown 0.2s ease forwards;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-item {
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-muted);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background: var(--bg-surface-hover);
+            color: var(--text-title);
+        }
+
+        .dropdown-item.active {
+            color: var(--accent-primary);
+            font-weight: 600;
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        /* Profile Dropdown Specific */
+        .avatar-sm {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 11px;
+            border: 2px solid var(--accent-primary);
+        }
+
+        /* Primary Modal Trigger Button */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: #ffffff;
+            border: none;
+            padding: 9px 18px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px var(--accent-glow-strong);
+            transition: all 0.25s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px var(--accent-glow-strong);
+            filter: brightness(1.1);
+        }
+
+        /* ==========================================================================
+           DATA TIMEFRAME TABS (WITH SKELETON LOADER TRIGGER)
+           ========================================================================== */
+        .tab-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 6px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .tabs-group {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 8px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-title);
+            background: var(--bg-surface-hover);
+        }
+
+        .tab-btn.active {
+            background: var(--bg-card);
+            color: var(--accent-primary);
+            border: 1px solid var(--border-subtle);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4), 0 0 10px var(--accent-glow);
+        }
+
+        .tab-meta-info {
+            font-size: 12px;
+            font-family: var(--font-mono);
+            color: var(--text-dim);
+            padding-right: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--success);
+            box-shadow: 0 0 8px var(--success);
+        }
+
+        /* ==========================================================================
+           DRAGGABLE KPI METRIC CARDS & SKELETON LOADERS
+           ========================================================================== */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--card-radius);
+            padding: 22px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            cursor: grab;
+            user-select: none;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .kpi-card:active {
+            cursor: grabbing;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-glow);
+            box-shadow: var(--shadow-card);
+        }
+
+        .kpi-card.dragging {
+            opacity: 0.5;
+            border-style: dashed;
+            border-color: var(--accent-primary);
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+            opacity: 0.7;
+        }
+
+        .kpi-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .kpi-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .kpi-icon-wrap {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--bg-surface-hover);
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-primary);
+        }
+
+        .drag-handle {
+            color: var(--text-dim);
+            cursor: grab;
+            opacity: 0.4;
+            transition: opacity 0.2s ease;
+        }
+
+        .kpi-card:hover .drag-handle {
+            opacity: 1;
+        }
+
+        .kpi-body {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .kpi-value {
+            font-family: 'Plus Jakarta Sans', var(--font-sans);
+            font-size: 30px;
+            font-weight: 800;
+            color: var(--text-title);
+            letter-spacing: -0.5px;
+        }
+
+        .kpi-badge {
+            font-size: 12px;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .kpi-badge.up {
+            background: rgba(16, 185, 129, 0.12);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+        }
+
+        .kpi-badge.down {
+            background: rgba(239, 68, 68, 0.12);
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.25);
+        }
+
+        .kpi-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--text-dim);
+            border-top: 1px dashed var(--border-subtle);
+            padding-top: 10px;
+            margin-top: 4px;
+        }
+
+        .sparkline-svg {
+            width: 100px;
+            height: 24px;
+            overflow: visible;
+        }
+
+        /* Skeleton Loader Effect */
+        .skeleton {
+            background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-surface-hover) 50%, var(--bg-card) 75%);
+            background-size: 200% 100%;
+            animation: skeleton-wave 1.5s infinite ease-in-out;
+            border-radius: 6px;
+            color: transparent !important;
+            pointer-events: none;
+        }
+
+        @keyframes skeleton-wave {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* ==========================================================================
+           DRAGGABLE DASHBOARD WIDGETS & SVG CHARTS
+           ========================================================================== */
+        .widgets-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+        }
+
+        .widget-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--card-radius);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .widget-card:hover {
+            border-color: var(--border-glow);
+            box-shadow: var(--shadow-card);
+        }
+
+        .col-8 { grid-column: span 8; }
+        .col-4 { grid-column: span 4; }
+        .col-6 { grid-column: span 6; }
+        .col-12 { grid-column: span 12; }
+
+        @media (max-width: 1200px) {
+            .col-8, .col-4, .col-6 { grid-column: span 12; }
+        }
+
+        .widget-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .widget-title-group h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-title);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .widget-subtitle {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .chart-legend {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        /* Dynamic SVG Interactive Chart */
+        .svg-chart-container {
+            width: 100%;
+            height: 280px;
+            position: relative;
+        }
+
+        .interactive-chart {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        .chart-grid-line {
+            stroke: var(--border-subtle);
+            stroke-dasharray: 4 4;
+            stroke-width: 1;
+        }
+
+        .chart-area-fill {
+            transition: d 0.5s ease, fill 0.3s ease;
+        }
+
+        .chart-line-path {
+            fill: none;
+            stroke-width: 3;
+            stroke-linecap: round;
+            transition: d 0.5s ease, stroke 0.3s ease;
+            filter: drop-shadow(0px 4px 10px var(--accent-glow-strong));
+        }
+
+        .chart-data-node {
+            fill: var(--bg-card);
+            stroke-width: 3;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .chart-data-node:hover {
+            r: 7;
+            filter: drop-shadow(0 0 10px var(--accent-primary));
+        }
+
+        /* SVG Dynamic Hover Tooltip */
+        .chart-tooltip {
+            position: absolute;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glow);
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 12px;
+            font-family: var(--font-mono);
+            color: var(--text-title);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), 0 0 15px var(--accent-glow);
+            pointer-events: none;
+            opacity: 0;
+            transform: translate(-50%, -120%);
+            transition: opacity 0.15s ease, transform 0.15s ease;
+            z-index: 200;
+            white-space: nowrap;
+        }
+
+        .chart-tooltip.show {
+            opacity: 1;
+            transform: translate(-50%, -135%);
+        }
+
+        .tooltip-date {
+            font-size: 10px;
+            color: var(--text-dim);
+            margin-bottom: 2px;
+        }
+
+        .tooltip-val {
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
+
+        /* Bar Chart Widget */
+        .bar-chart-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 14px;
+            height: 240px;
+            padding-top: 20px;
+        }
+
+        .bar-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            height: 100%;
+            justify-content: flex-end;
+        }
+
+        .bar-track {
+            width: 100%;
+            max-width: 32px;
+            height: 100%;
+            background: var(--bg-input);
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            width: 100%;
+            background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 8px;
+            transition: height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 0 12px var(--accent-glow);
+            position: relative;
+        }
+
+        .bar-fill:hover {
+            filter: brightness(1.25);
+        }
+
+        .bar-label {
+            font-size: 11px;
+            font-family: var(--font-mono);
+            color: var(--text-dim);
+        }
+
+        /* Live Feed List Widget */
+        .feed-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .feed-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 14px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .feed-item:hover {
+            border-color: var(--border-glow);
+            background: var(--bg-surface-hover);
+        }
+
+        .feed-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .feed-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-primary);
+            font-weight: 700;
+        }
+
+        .feed-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feed-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-title);
+        }
+
+        .feed-time {
+            font-size: 11px;
+            color: var(--text-dim);
+        }
+
+        .feed-status {
+            font-size: 11px;
+            font-family: var(--font-mono);
+            padding: 3px 10px;
+            border-radius: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           MODAL SLIDE-OVER POPUP ("+ ADD PROJECT")
+           ========================================================================== */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-backdrop.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .slide-over-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            max-width: 480px;
+            background: var(--bg-surface);
+            border-left: 1px solid var(--border-glow);
+            z-index: 2010;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: -20px 0 50px rgba(0, 0, 0, 0.9), 0 0 30px var(--accent-glow);
+        }
+
+        .modal-backdrop.active .slide-over-panel {
+            transform: translateX(0);
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .panel-header h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-title);
+        }
+
+        .btn-close {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-close:hover {
+            color: var(--text-title);
+            border-color: var(--accent-primary);
+            background: var(--bg-surface-hover);
+        }
+
+        .panel-body {
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-title);
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-family: var(--font-sans);
+            font-size: 13px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+
+        .panel-footer {
+            padding-top: 20px;
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-main);
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-surface-hover);
+            color: var(--text-title);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glow);
+            border-radius: 12px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-glow);
+            z-index: 3000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--success);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================================================
+         FIXED TOP-RIGHT 6-VERSION SWITCHER
+         ========================================================================== -->
+    <div class="version-switcher" id="versionSwitcher">
+        <span class="switcher-label" id="currentThemeBadge">1. Cyber Neon</span>
+        <button class="v-btn active" data-theme="v1" title="Cyber Neon Theme">V1</button>
+        <button class="v-btn" data-theme="v2" title="OLED Mint Theme">V2</button>
+        <button class="v-btn" data-theme="v3" title="Solar Gold Theme">V3</button>
+        <button class="v-btn" data-theme="v4" title="Synth Crimson Theme">V4</button>
+        <button class="v-btn" data-theme="v5" title="GitHub Slate Theme">V5</button>
+        <button class="v-btn" data-theme="v6" title="Tactical Lime Theme">V6</button>
+    </div>
+
+    <!-- ==========================================================================
+         SIDEBAR WITH ACCORDION SUB-MENUS
+         ========================================================================== -->
+    <aside class="sidebar">
+        <div>
+            <div class="sidebar-brand">
+                <div class="brand-logo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    NEXUS AI
+                    <span class="brand-badge">Enterprise v4.8</span>
+                </div>
+            </div>
+
+            <!-- Accordion Navigation -->
+            <nav class="nav-accordion">
+                <div class="nav-group-title">Core Platform</div>
+
+                <!-- Accordion Item 1 (Analytics) -->
+                <div class="accordion-item open">
+                    <button class="accordion-header active" onclick="toggleAccordion(this)">
+                        <div class="header-left">
+                            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="20" x2="18" y2="10"></line>
+                                <line x1="12" y1="20" x2="12" y2="4"></line>
+                                <line x1="6" y1="20" x2="6" y2="14"></line>
+                            </svg>
+                            <span>Analytics</span>
+                        </div>
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="accordion-body">
+                        <a href="#" class="sub-nav-link active">Overview <span class="sub-pill">Live</span></a>
+                        <a href="#" class="sub-nav-link">Traffic Stream</a>
+                        <a href="#" class="sub-nav-link">Conversion Funnel</a>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 2 (Reports) -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="header-left">
+                            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                            </svg>
+                            <span>Reports</span>
+                        </div>
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="accordion-body">
+                        <a href="#" class="sub-nav-link">Executive Brief</a>
+                        <a href="#" class="sub-nav-link">Cost & Infrastructure</a>
+                        <a href="#" class="sub-nav-link">Automated PDF Exports</a>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 3 (Team & Access) -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="header-left">
+                            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            <span>Team & Access</span>
+                        </div>
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="accordion-body">
+                        <a href="#" class="sub-nav-link">Team Members <span class="sub-pill">18</span></a>
+                        <a href="#" class="sub-nav-link">Role Permissions</a>
+                        <a href="#" class="sub-nav-link">Security Audit Log</a>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 4 (Settings) -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <div class="header-left">
+                            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                            </svg>
+                            <span>Settings</span>
+                        </div>
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="accordion-body">
+                        <a href="#" class="sub-nav-link">API Keys</a>
+                        <a href="#" class="sub-nav-link">Webhooks & Endpoints</a>
+                        <a href="#" class="sub-nav-link">Billing & Invoices</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Sidebar Bottom Health Widget & Toggle Switch -->
+        <div class="sidebar-bottom">
+            <div class="health-card">
+                <div class="health-header">
+                    <span>SYSTEM HEALTH</span>
+                    <span style="color: var(--success); font-family: var(--font-mono);">99.98%</span>
+                </div>
+                <div class="health-bar-container">
+                    <div class="health-bar-fill"></div>
+                </div>
+                <div class="toggle-switch-container">
+                    <span>Live Sync Engine</span>
+                    <label class="switch">
+                        <input type="checkbox" checked id="liveSyncToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ==========================================================================
+         MAIN CONTENT AREA
+         ========================================================================== -->
+    <main class="main-wrapper">
+        <!-- Top Header & Controls -->
+        <header class="top-header">
+            <div class="header-title-area">
+                <h1>
+                    Performance Dashboard
+                    <span class="theme-pill-badge" id="themePillName">Cyber Neon v1</span>
+                </h1>
+                <p>Real-time metrics, system throughput, and predictive telemetry.</p>
+            </div>
+
+            <div class="header-controls">
+                <!-- Date Selector Dropdown -->
+                <div class="dropdown">
+                    <button class="btn-dropdown" onclick="toggleDropdown('dateDropdown')">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        <span id="selectedDateLabel">This Month</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="dropdown-menu" id="dateDropdown">
+                        <div class="dropdown-item" onclick="selectDateRange('Today')">Today</div>
+                        <div class="dropdown-item" onclick="selectDateRange('This Week')">This Week</div>
+                        <div class="dropdown-item active" onclick="selectDateRange('This Month')">This Month</div>
+                        <div class="dropdown-item" onclick="selectDateRange('This Year')">This Year</div>
+                    </div>
+                </div>
+
+                <!-- Profile Switcher Dropdown -->
+                <div class="dropdown">
+                    <button class="btn-dropdown" onclick="toggleDropdown('profileDropdown')">
+                        <div class="avatar-sm">AV</div>
+                        <span>Alex Vance</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div class="dropdown-menu" id="profileDropdown">
+                        <div class="dropdown-item active">
+                            <div class="avatar-sm" style="width: 22px; height: 22px; font-size: 9px;">AV</div>
+                            <span>Production Workspace</span>
+                        </div>
+                        <div class="dropdown-item">
+                            <div class="avatar-sm" style="width: 22px; height: 22px; font-size: 9px; background: var(--bg-card);">ST</div>
+                            <span>Staging Cluster</span>
+                        </div>
+                        <div class="dropdown-item" style="border-top: 1px dashed var(--border-subtle); margin-top: 4px; padding-top: 8px;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                            <span>Sign Out</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Action "+ Add Project" Button -->
+                <button class="btn-primary" onclick="openModal()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    + Add Project
+                </button>
+            </div>
+        </header>
+
+        <!-- Timeframe Tabs Bar -->
+        <div class="tab-bar">
+            <div class="tabs-group">
+                <button class="tab-btn" onclick="switchViewTab('daily', this)">Daily</button>
+                <button class="tab-btn active" onclick="switchViewTab('weekly', this)">Weekly</button>
+                <button class="tab-btn" onclick="switchViewTab('monthly', this)">Monthly</button>
+                <button class="tab-btn" onclick="switchViewTab('quarterly', this)">Quarterly</button>
+            </div>
+            <div class="tab-meta-info">
+                <span class="live-dot"></span>
+                <span>STREAM: ACTIVE (120 FPS TELEMETRY)</span>
+            </div>
+        </div>
+
+        <!-- ==========================================================================
+             DRAGGABLE KPI METRIC CARDS GRID
+             ========================================================================== -->
+        <section class="kpi-grid" id="kpiGrid">
+            <!-- Card 1: Total Revenue -->
+            <div class="kpi-card" draggable="true">
+                <div class="kpi-header">
+                    <span class="kpi-title">
+                        <div class="kpi-icon-wrap">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                        </div>
+                        Total Revenue (MRR)
+                    </span>
+                    <svg class="drag-handle" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"></circle><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="19" r="1"></circle><circle cx="15" cy="5" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="19" r="1"></circle></svg>
+                </div>
+                <div class="kpi-body">
+                    <div class="kpi-value" id="kpiValue1" data-val="128450" data-prefix="$">$128,450</div>
+                    <span class="kpi-badge up">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                        +14.8%
+                    </span>
+                </div>
+                <div class="kpi-footer">
+                    <span>vs. previous period</span>
+                    <svg class="sparkline-svg" viewBox="0 0 100 24">
+                        <path d="M0,18 Q25,5 50,14 T100,4" fill="none" stroke="var(--accent-primary)" stroke-width="2"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Card 2: Active Subscribers -->
+            <div class="kpi-card" draggable="true">
+                <div class="kpi-header">
+                    <span class="kpi-title">
+                        <div class="kpi-icon-wrap">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                        </div>
+                        Active Subscribers
+                    </span>
+                    <svg class="drag-handle" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"></circle><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="19" r="1"></circle><circle cx="15" cy="5" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="19" r="1"></circle></svg>
+                </div>
+                <div class="kpi-body">
+                    <div class="kpi-value" id="kpiValue2" data-val="14290" data-suffix=" users">14,290 users</div>
+                    <span class="kpi-badge up">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                        +8.4%
+                    </span>
+                </div>
+                <div class="kpi-footer">
+                    <span>Net new: +1,120</span>
+                    <svg class="sparkline-svg" viewBox="0 0 100 24">
+                        <path d="M0,20 Q30,15 60,8 T100,2" fill="none" stroke="var(--success)" stroke-width="2"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Card 3: Server Uptime -->
+            <div class="kpi-card" draggable="true">
+                <div class="kpi-header">
+                    <span class="kpi-title">
+                        <div class="kpi-icon-wrap">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                        </div>
+                        Cluster Uptime
+                    </span>
+                    <svg class="drag-handle" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"></circle><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="19" r="1"></circle><circle cx="15" cy="5" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="19" r="1"></circle></svg>
+                </div>
+                <div class="kpi-body">
+                    <div class="kpi-value" id="kpiValue3" data-val="99.98" data-suffix="%">99.98%</div>
+                    <span class="kpi-badge up" style="color: var(--success); background: rgba(16,185,129,0.12);">
+                        Optimal
+                    </span>
+                </div>
+                <div class="kpi-footer">
+                    <span>Avg Latency: 12ms</span>
+                    <svg class="sparkline-svg" viewBox="0 0 100 24">
+                        <path d="M0,10 L25,10 L30,4 L35,16 L40,10 L100,10" fill="none" stroke="var(--accent-secondary)" stroke-width="2"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Card 4: API Throughput -->
+            <div class="kpi-card" draggable="true">
+                <div class="kpi-header">
+                    <span class="kpi-title">
+                        <div class="kpi-icon-wrap">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                        </div>
+                        API Request Vol
+                    </span>
+                    <svg class="drag-handle" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"></circle><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="19" r="1"></circle><circle cx="15" cy="5" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="19" r="1"></circle></svg>
+                </div>
+                <div class="kpi-body">
+                    <div class="kpi-value" id="kpiValue4" data-val="42.8" data-suffix="M req">42.8M req</div>
+                    <span class="kpi-badge up">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                        +22.1%
+                    </span>
+                </div>
+                <div class="kpi-footer">
+                    <span>Error rate: 0.01%</span>
+                    <svg class="sparkline-svg" viewBox="0 0 100 24">
+                        <path d="M0,22 Q20,2 40,18 T80,6 T100,14" fill="none" stroke="var(--accent-primary)" stroke-width="2"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             DRAGGABLE DASHBOARD WIDGETS GRID
+             ========================================================================== -->
+        <section class="widgets-grid" id="widgetsGrid">
+            <!-- Main Interactive Dual-Line SVG Chart Widget (8 Cols) -->
+            <div class="widget-card col-8" draggable="true">
+                <div class="widget-header">
+                    <div class="widget-title-group">
+                        <h3>
+                            Revenue & Conversion Telemetry
+                            <svg class="drag-handle" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"></circle><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="19" r="1"></circle><circle cx="15" cy="5" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="19" r="1"></circle></svg>
+                        </h3>
+                        <div class="widget-subtitle">Real-time revenue curve compared to target projection.</div>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <span class="legend-dot" style="background: var(--accent-primary);"></span>
+                            Actual Revenue
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot" style="background: var(--accent-secondary);"></span>
+                            Target Trend
+                        </div>
+                    </div>
+                </div>
+
+                <div class="svg-chart-container" id="chartContainer">
+                    <!-- Glassmorphic Tooltip -->
+                    <div class="chart-tooltip" id="chartTooltip">
+                        <div class="tooltip-date" id="tooltipDate">Day 01</div>
+                        <div class="tooltip-val" id="tooltipVal">$12,400</div>
+                    </div>
+
+                    <svg class="interactive-chart" viewBox="0 0 800 260" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="primaryGradient" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="var(--accent-primary)" stop-opacity="0.45"/>
+                                <stop offset="100%" stop-color="var(--accent-primary)" stop-opacity="0"/>
+                            </linearGradient>
+                            <linearGradient id="secondaryGradient" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="var(--accent-secondary)" stop-opacity="0.3"/>
+                                <stop offset="100%" stop-color="var(--accent-secondary)" stop-opacity="0"/>
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Horizontal Grid Lines -->
+                        <line x1="0" y1="40" x2="800" y2="40" class="chart-grid-line"/>
+                        <line x1="0" y1="100" x2="800" y2="100" class="chart-grid-line"/>
+                        <line x1="0" y1="160" x2="800" y2="160" class="chart-grid-line"/>
+                        <line x1="0" y1="220" x2="800" y2="220" class="chart-grid-line"/>
+
+                        <!-- Gradient Fill Areas -->
+                        <path id="areaFillSecondary" class="chart-area-fill" fill="url(#secondaryGradient)" d="M 0,220 Q 150,180 300,130 T 600,90 T 800,50 L 800,220 L 0,220 Z"/>
+                        <path id="areaFillPrimary" class="chart-area-fill" fill="url(#primaryGradient)" d="M 0,220 Q 150,150 300,90 T 600,60 T 800,30 L 800,220 L 0,220 Z"/>
+
+                        <!-- Curved Line Paths -->
+                        <path id="linePathSecondary" class="chart-line-path" stroke="var(--accent-secondary)" d="M 0,220 Q 150,180 300,130 T 600,90 T 800,50" opacity="0.6" stroke-dasharray="4 4"/>
+                        <path id="linePathPrimary" class="chart-line-path" stroke="var(--accent-primary)" d="M 0,220 Q 150,150 300,90 T 600,60 T 800,30"/>
+
+                        <!-- Interactive Nodes for Hover Tooltips -->
+                        <g id="chartNodesGroup">
+                            <circle class="chart-data-node" cx="0" cy="220" r="5" stroke="var(--accent-primary)" data-date="Day 1" data-val="$18,200"/>
+                            <circle class="chart-data-node" cx="133" cy="160" r="5" stroke="var(--accent-primary)" data-date="Day 5" data-val="$34,500"/>
+                            <circle class="chart-data-node" cx="266" cy="110" r="5" stroke="var(--accent-primary)" data-date="Day 10" data-val="$52,100"/>
+                            <circle class="chart-data-node" cx="400" cy="85" r="5" stroke="var(--accent-primary)" data-date="Day 15" data-val="$78,900"/>
+                            <circle class="chart-data-node" cx="533" cy="65" r="5" stroke="var(--accent-primary)" data-date="Day 20" data-val="$94,200"/>
+                            <circle class="chart-data-node" cx="666" cy="45" r="5" stroke="var(--accent-primary)" data-date="Day 25" data-val="$112,000"/>
+                            <circle class="chart-data-node" cx="800" cy="30" r="5" stroke="var(--accent-primary)" data-date="Day 30" data-val="$128,450"/>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Traffic Distribution Bar Chart Widget (4 Cols) -->
+            <div class="widget-card col-4" draggable="true">
+                <div class="widget-header">
+                    <div class="widget-title-group">
+                        <h3>
+                            Acquisition Channels
+                            <svg class="drag-handle" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"></circle><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="19" r="1"></circle><circle cx="15" cy="5" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="19" r="1"></circle></svg>
+                        </h3>
+                        <div class="widget-subtitle">Traffic volume by source.</div>
+                    </div>
+                </div>
+
+                <div class="bar-chart-container">
+                    <div class="bar-col">
+                        <div class="bar-track">
+                            <div class="bar-fill" style="height: 82%;" title="Organic Search: 82%"></div>
+                        </div>
+                        <span class="bar-label">Organic</span>
+                    </div>
+                    <div class="bar-col">
+                        <div class="bar-track">
+                            <div class="bar-fill" style="height: 64%;" title="Direct Web: 64%"></div>
+                        </div>
+                        <span class="bar-label">Direct</span>
+                    </div>
+                    <div class="bar-col">
+                        <div class="bar-track">
+                            <div class="bar-fill" style="height: 45%;" title="Referral Links: 45%"></div>
+                        </div>
+                        <span class="bar-label">Referral</span>
+                    </div>
+                    <div class="bar-col">
+                        <div class="bar-track">
+                            <div class="bar-fill" style="height: 94%;" title="API Partner: 94%"></div>
+                        </div>
+                        <span class="bar-label">API</span>
+                    </div>
+                    <div class="bar-col">
+                        <div class="bar-track">
+                            <div class="bar-fill" style="height: 38%;" title="Paid Ads: 38%"></div>
+                        </div>
+                        <span class="bar-label">Paid</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Infrastructure Activity Log Widget (6 Cols) -->
+            <div class="widget-card col-6" draggable="true">
+                <div class="widget-header">
+                    <div class="widget-title-group">
+                        <h3>
+                            Infrastructure Activity Stream
+                            <svg class="drag-handle" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"></circle><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="19" r="1"></circle><circle cx="15" cy="5" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="19" r="1"></circle></svg>
+                        </h3>
+                        <div class="widget-subtitle">Real-time audit log of system events.</div>
+                    </div>
+                </div>
+
+                <div class="feed-list">
+                    <div class="feed-item">
+                        <div class="feed-left">
+                            <div class="feed-avatar">K8S</div>
+                            <div class="feed-text">
+                                <span class="feed-title">Pod Auto-scaled: us-east-1a</span>
+                                <span class="feed-time">2 mins ago • Cluster Autoscaler</span>
+                            </div>
+                        </div>
+                        <span class="feed-status" style="color: var(--success); border-color: rgba(16,185,129,0.3);">SUCCESS</span>
+                    </div>
+
+                    <div class="feed-item">
+                        <div class="feed-left">
+                            <div class="feed-avatar" style="color: var(--accent-secondary);">DB</div>
+                            <div class="feed-text">
+                                <span class="feed-title">PostgreSQL Read Replica Synced</span>
+                                <span class="feed-time">6 mins ago • Storage Sync</span>
+                            </div>
+                        </div>
+                        <span class="feed-status">COMPLETED</span>
+                    </div>
+
+                    <div class="feed-item">
+                        <div class="feed-left">
+                            <div class="feed-avatar" style="color: var(--warning);">SEC</div>
+                            <div class="feed-text">
+                                <span class="feed-title">API Token Regenerated by admin</span>
+                                <span class="feed-time">14 mins ago • Security Policy</span>
+                            </div>
+                        </div>
+                        <span class="feed-status" style="color: var(--warning); border-color: rgba(245,158,11,0.3);">AUDITED</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Server Node Performance Widget (6 Cols) -->
+            <div class="widget-card col-6" draggable="true">
+                <div class="widget-header">
+                    <div class="widget-title-group">
+                        <h3>
+                            Regional Latency Matrix
+                            <svg class="drag-handle" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="5" r="1"></circle><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="19" r="1"></circle><circle cx="15" cy="5" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="19" r="1"></circle></svg>
+                        </h3>
+                        <div class="widget-subtitle">Edge node response times across global POPs.</div>
+                    </div>
+                </div>
+
+                <div class="bar-chart-container" style="height: 180px;">
+                    <div class="bar-col">
+                        <div class="bar-track">
+                            <div class="bar-fill" style="height: 25%; background: var(--success);" title="US-East (N. Virginia): 12ms"></div>
+                        </div>
+                        <span class="bar-label">US-East</span>
+                    </div>
+                    <div class="bar-col">
+                        <div class="bar-track">
+                            <div class="bar-fill" style="height: 38%; background: var(--success);" title="EU-Central (Frankfurt): 18ms"></div>
+                        </div>
+                        <span class="bar-label">EU-Central</span>
+                    </div>
+                    <div class="bar-col">
+                        <div class="bar-track">
+                            <div class="bar-fill" style="height: 60%; background: var(--warning);" title="AP-Northeast (Tokyo): 42ms"></div>
+                        </div>
+                        <span class="bar-label">AP-Tokyo</span>
+                    </div>
+                    <div class="bar-col">
+                        <div class="bar-track">
+                            <div class="bar-fill" style="height: 75%; background: var(--warning);" title="SA-East (São Paulo): 65ms"></div>
+                        </div>
+                        <span class="bar-label">SA-East</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==========================================================================
+         MODAL SLIDE-OVER POPUP ("+ ADD PROJECT")
+         ========================================================================== -->
+    <div class="modal-backdrop" id="modalBackdrop" onclick="closeModalOnBackdrop(event)">
+        <div class="slide-over-panel" id="slideOverPanel">
+            <div>
+                <div class="panel-header">
+                    <h2>Deploy New Analytics Workflow</h2>
+                    <button class="btn-close" onclick="closeModal()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+
+                <form class="panel-body" id="projectForm" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <label>Workflow Title</label>
+                        <input type="text" class="form-input" placeholder="e.g. Real-time Churn Prediction Pipeline" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Target Infrastructure Cluster</label>
+                        <select class="form-select">
+                            <option>Production Cluster (us-east-1)</option>
+                            <option>EU Data Fortress (eu-central-1)</option>
+                            <option>APAC Edge Nodes (ap-northeast-1)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Telemetry Priority Level</label>
+                        <select class="form-select">
+                            <option>High Priority (Real-time 120Hz)</option>
+                            <option>Standard Priority (15m Batches)</option>
+                            <option>Low Priority (Daily Aggregation)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Data Sources & Webhooks</label>
+                        <textarea class="form-textarea" rows="3" placeholder="https://api.nexus.io/v1/telemetry/hooks..."></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="panel-footer">
+                <button class="btn-secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn-primary" onclick="submitForm()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    Deploy Pipeline
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toastNotification">
+        <div class="toast-icon">✓</div>
+        <div style="font-size: 13px; color: var(--text-title); font-weight: 600;">
+            Workflow Deployed Successfully!
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         JAVASCRIPT LOGIC
+         ========================================================================== -->
+    <script>
+        // --------------------------------------------------------------------------
+        // 1. TOP-RIGHT 6-VERSION THEME SWITCHER
+        // --------------------------------------------------------------------------
+        const vButtons = document.querySelectorAll('.v-btn');
+        const themePillName = document.getElementById('themePillName');
+        const currentThemeBadge = document.getElementById('currentThemeBadge');
+
+        const themeNames = {
+            'v1': '1. Cyber Neon',
+            'v2': '2. OLED Mint',
+            'v3': '3. Solar Gold',
+            'v4': '4. Synth Crimson',
+            'v5': '5. GitHub Slate',
+            'v6': '6. Tactical Lime'
+        };
+
+        vButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                vButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const theme = btn.getAttribute('data-theme');
+                if (theme === 'v1') {
+                    document.documentElement.removeAttribute('data-theme');
+                } else {
+                    document.documentElement.setAttribute('data-theme', theme);
+                }
+
+                const tName = themeNames[theme] || '1. Cyber Neon';
+                themePillName.textContent = tName;
+                currentThemeBadge.textContent = tName;
+
+                // Re-trigger countup & chart node update
+                triggerCountUp();
+            });
+        });
+
+        // --------------------------------------------------------------------------
+        // 2. ACCORDION SIDEBAR SUB-MENUS
+        // --------------------------------------------------------------------------
+        function toggleAccordion(headerBtn) {
+            const currentItem = headerBtn.closest('.accordion-item');
+            const isOpen = currentItem.classList.contains('open');
+
+            // Close all items
+            document.querySelectorAll('.accordion-item').forEach(item => {
+                item.classList.remove('open');
+                item.querySelector('.accordion-header').classList.remove('active');
+            });
+
+            // Open clicked item if it wasn't open
+            if (!isOpen) {
+                currentItem.classList.add('open');
+                headerBtn.classList.add('active');
+            }
+        }
+
+        // --------------------------------------------------------------------------
+        // 3. DROPDOWN CONTROLS (Date & Profile)
+        // --------------------------------------------------------------------------
+        function toggleDropdown(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+            const isShown = dropdown.classList.contains('show');
+            
+            // Close all dropdowns
+            document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('show'));
+
+            if (!isShown) {
+                dropdown.classList.add('show');
+            }
+        }
+
+        function selectDateRange(label) {
+            document.getElementById('selectedDateLabel').textContent = label;
+            document.querySelectorAll('#dateDropdown .dropdown-item').forEach(item => {
+                item.classList.toggle('active', item.textContent.trim() === label);
+            });
+            triggerSkeletonAndRefresh();
+        }
+
+        // Close dropdowns on outside click
+        window.addEventListener('click', (e) => {
+            if (!e.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('show'));
+            }
+        });
+
+        // --------------------------------------------------------------------------
+        // 4. TIMEFRAME TABS & SKELETON LOADING EFFECT
+        // --------------------------------------------------------------------------
+        function switchViewTab(mode, btnElement) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+            triggerSkeletonAndRefresh();
+        }
+
+        function triggerSkeletonAndRefresh() {
+            const kpiValues = document.querySelectorAll('.kpi-value');
+            const chartArea = document.getElementById('chartContainer');
+
+            // Apply skeleton animation
+            kpiValues.forEach(el => el.classList.add('skeleton'));
+            chartArea.style.opacity = '0.4';
+
+            setTimeout(() => {
+                kpiValues.forEach(el => el.classList.remove('skeleton'));
+                chartArea.style.opacity = '1';
+                
+                // Randomize data slightly for realistic tab switching
+                randomizeDataValues();
+                triggerCountUp();
+            }, 450);
+        }
+
+        function randomizeDataValues() {
+            const v1 = Math.floor(100000 + Math.random() * 50000);
+            const v2 = Math.floor(12000 + Math.random() * 5000);
+            const v4 = (35 + Math.random() * 20).toFixed(1);
+
+            document.getElementById('kpiValue1').setAttribute('data-val', v1);
+            document.getElementById('kpiValue2').setAttribute('data-val', v2);
+            document.getElementById('kpiValue4').setAttribute('data-val', v4);
+        }
+
+        // --------------------------------------------------------------------------
+        // 5. COUNT-UP ANIMATION FOR METRIC NUMBERS
+        // --------------------------------------------------------------------------
+        function triggerCountUp() {
+            const kpiValues = document.querySelectorAll('.kpi-value');
+            
+            kpiValues.forEach(el => {
+                const target = parseFloat(el.getAttribute('data-val'));
+                const prefix = el.getAttribute('data-prefix') || '';
+                const suffix = el.getAttribute('data-suffix') || '';
+                const isFloat = target % 1 !== 0;
+
+                let start = 0;
+                const duration = 800; // ms
+                const stepTime = 16;
+                const totalSteps = duration / stepTime;
+                const stepVal = target / totalSteps;
+
+                const timer = setInterval(() => {
+                    start += stepVal;
+                    if (start >= target) {
+                        start = target;
+                        clearInterval(timer);
+                    }
+                    const formatted = isFloat ? start.toFixed(2) : Math.floor(start).toLocaleString();
+                    el.textContent = `${prefix}${formatted}${suffix}`;
+                }, stepTime);
+            });
+        }
+
+        // Initial Count Up on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            triggerCountUp();
+            initChartTooltips();
+            initDragAndDrop();
+        });
+
+        // --------------------------------------------------------------------------
+        // 6. SVG DYNAMIC CHART & HOVER TOOLTIPS
+        // --------------------------------------------------------------------------
+        function initChartTooltips() {
+            const nodes = document.querySelectorAll('.chart-data-node');
+            const tooltip = document.getElementById('chartTooltip');
+            const tooltipDate = document.getElementById('tooltipDate');
+            const tooltipVal = document.getElementById('tooltipVal');
+            const chartContainer = document.getElementById('chartContainer');
+
+            nodes.forEach(node => {
+                node.addEventListener('mouseenter', (e) => {
+                    const date = node.getAttribute('data-date');
+                    const val = node.getAttribute('data-val');
+
+                    tooltipDate.textContent = date;
+                    tooltipVal.textContent = val;
+
+                    const nodeRect = node.getBoundingClientRect();
+                    const containerRect = chartContainer.getBoundingClientRect();
+
+                    const left = nodeRect.left - containerRect.left + nodeRect.width / 2;
+                    const top = nodeRect.top - containerRect.top;
+
+                    tooltip.style.left = `${left}px`;
+                    tooltip.style.top = `${top}px`;
+                    tooltip.classList.add('show');
+                });
+
+                node.addEventListener('mouseleave', () => {
+                    tooltip.classList.remove('show');
+                });
+            });
+        }
+
+        // --------------------------------------------------------------------------
+        // 7. DRAGGABLE KANBAN / WIDGET GRID (HTML5 DRAG & DROP)
+        // --------------------------------------------------------------------------
+        function initDragAndDrop() {
+            const draggables = document.querySelectorAll('[draggable="true"]');
+            
+            draggables.forEach(draggable => {
+                draggable.addEventListener('dragstart', (e) => {
+                    draggable.classList.add('dragging');
+                    e.dataTransfer.setData('text/plain', '');
+                });
+
+                draggable.addEventListener('dragend', () => {
+                    draggable.classList.remove('dragging');
+                });
+            });
+
+            const grids = [document.getElementById('kpiGrid'), document.getElementById('widgetsGrid')];
+
+            grids.forEach(grid => {
+                if (!grid) return;
+                grid.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    const afterElement = getDragAfterElement(grid, e.clientX, e.clientY);
+                    const dragging = document.querySelector('.dragging');
+                    if (dragging && grid.contains(dragging)) {
+                        if (afterElement == null) {
+                            grid.appendChild(dragging);
+                        } else {
+                            grid.insertBefore(dragging, afterElement);
+                        }
+                    }
+                });
+            });
+        }
+
+        function getDragAfterElement(container, x, y) {
+            const draggableElements = [...container.querySelectorAll('[draggable="true"]:not(.dragging)')];
+
+            return draggableElements.reduce((closest, child) => {
+                const box = child.getBoundingClientRect();
+                const offsetX = x - box.left - box.width / 2;
+                const offsetY = y - box.top - box.height / 2;
+                const offset = offsetX + offsetY * 2; // Priority weighting
+
+                if (offset < 0 && offset > closest.offset) {
+                    return { offset: offset, element: child };
+                } else {
+                    return closest;
+                }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+
+        // --------------------------------------------------------------------------
+        // 8. MODAL SLIDE-OVER POPUP ("+ ADD PROJECT")
+        // --------------------------------------------------------------------------
+        function openModal() {
+            document.getElementById('modalBackdrop').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modalBackdrop').classList.remove('active');
+        }
+
+        function closeModalOnBackdrop(e) {
+            if (e.target.id === 'modalBackdrop') {
+                closeModal();
+            }
+        }
+
+        function submitForm() {
+            const form = document.getElementById('projectForm');
+            if (form.checkValidity()) {
+                closeModal();
+                showToast();
+                form.reset();
+            } else {
+                form.reportValidity();
+            }
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            submitForm();
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toastNotification');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500);
+        }
+    </script>
+
+<!-- Draggable Theme Switcher Script -->
+<script>
+(function() {
+    function initDraggableSwitcher() {
+        const selectors = [
+            '.version-switcher', '.version-switcher-bar', '.version-switcher-box', 
+            '.theme-switcher-deck', '.top-switcher-bar', '#switcher', '#versionSwitcher',
+            '.theme-switcher', '.switcher-bar', '.version-deck', '[class*="switcher"]'
+        ];
+        let el = null;
+        for (const sel of selectors) {
+            const found = document.querySelector(sel);
+            if (found) {
+                const pos = getComputedStyle(found).position;
+                if (pos === 'fixed' || pos === 'absolute') {
+                    el = found;
+                    break;
+                }
+            }
+        }
+        if (!el) {
+            const allFixed = Array.from(document.querySelectorAll('*')).filter(e => {
+                const pos = getComputedStyle(e).position;
+                const z = parseInt(getComputedStyle(e).zIndex || 0);
+                return (pos === 'fixed' || pos === 'absolute') && z >= 90;
+            });
+            if (allFixed.length > 0) el = allFixed[0];
+        }
+        if (!el) return;
+
+        // Visual Drag Indicator
+        el.style.cursor = 'grab';
+        el.style.zIndex = '99999';
+        if (!el.querySelector('.drag-handle-hint')) {
+            const hint = document.createElement('span');
+            hint.className = 'drag-handle-hint';
+            hint.innerHTML = ' ⠿ ';
+            hint.title = '드래그하여 원하는 위치로 이동하세요';
+            hint.style.cssText = 'cursor:grab; font-weight:bold; opacity:0.7; margin-right:6px; user-select:none; display:inline-block; vertical-align:middle;';
+            el.insertBefore(hint, el.firstChild);
+        }
+
+        let isMouseDown = false;
+        let startX = 0, startY = 0;
+        let origLeft = 0, origTop = 0;
+        let hasMoved = false;
+
+        function startDrag(clientX, clientY) {
+            isMouseDown = true;
+            hasMoved = false;
+            startX = clientX;
+            startY = clientY;
+            const rect = el.getBoundingClientRect();
+            origLeft = rect.left;
+            origTop = rect.top;
+            el.style.cursor = 'grabbing';
+        }
+
+        function moveDrag(clientX, clientY, e) {
+            if (!isMouseDown) return;
+            const dx = clientX - startX;
+            const dy = clientY - startY;
+            if (Math.abs(dx) > 2 || Math.abs(dy) > 2) {
+                hasMoved = true;
+                if (e && e.cancelable) e.preventDefault();
+                el.style.right = 'auto';
+                el.style.bottom = 'auto';
+                let newLeft = Math.max(0, Math.min(window.innerWidth - el.offsetWidth, origLeft + dx));
+                let newTop = Math.max(0, Math.min(window.innerHeight - el.offsetHeight, origTop + dy));
+                el.style.left = newLeft + 'px';
+                el.style.top = newTop + 'px';
+            }
+        }
+
+        function stopDrag() {
+            isMouseDown = false;
+            el.style.cursor = 'grab';
+        }
+
+        el.addEventListener('mousedown', function(e) {
+            startDrag(e.clientX, e.clientY);
+            function onMouseMove(me) { moveDrag(me.clientX, me.clientY, me); }
+            function onMouseUp() {
+                stopDrag();
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+            }
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        });
+
+        el.addEventListener('touchstart', function(e) {
+            if (!e.touches || e.touches.length === 0) return;
+            startDrag(e.touches[0].clientX, e.touches[0].clientY);
+            function onTouchMove(te) {
+                if (te.touches && te.touches.length > 0) {
+                    moveDrag(te.touches[0].clientX, te.touches[0].clientY, te);
+                }
+            }
+            function onTouchEnd() {
+                stopDrag();
+                document.removeEventListener('touchmove', onTouchMove);
+                document.removeEventListener('touchend', onTouchEnd);
+            }
+            document.addEventListener('touchmove', onTouchMove, { passive: false });
+            document.addEventListener('touchend', onTouchEnd);
+        }, { passive: true });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initDraggableSwitcher);
+    } else {
+        initDraggableSwitcher();
+    }
+})();
+</script>
+
+</body>
+</html>
