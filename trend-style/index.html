@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Design Trends Showcase | Design Home</title>
+  <meta name="description" content="Explore 15 curated modern UI design trends from Skeuomorphism to Glassmorphism, Neumorphism, and Kinetic Typography." />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@700;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../shared/css/global-nav.css" />
+
   <style>
     :root {
       --bg: #0b0f19;
@@ -32,6 +37,26 @@
       padding-top: 100px;
       padding-bottom: 80px;
     }
+    :focus-visible {
+      outline: 3px solid #818cf8 !important;
+      outline-offset: 4px !important;
+    }
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 16px;
+      background: #6366f1;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      z-index: 100000;
+      text-decoration: none;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus {
+      top: 16px;
+    }
     .container {
       max-width: 1280px;
       margin: 0 auto;
@@ -44,7 +69,7 @@
     .header h1 {
       font-family: 'Outfit', sans-serif;
       font-size: 3rem;
-      font-weight: 800;
+      font-weight: 900;
       background: linear-gradient(135deg, #fff 30%, #a855f7 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -108,7 +133,7 @@
     .card-title {
       font-family: 'Outfit', sans-serif;
       font-size: 1.4rem;
-      font-weight: 700;
+      font-weight: 800;
       margin-bottom: 12px;
       line-height: 1.25;
     }
@@ -144,22 +169,26 @@
 </head>
 <body>
 
-  <div class="container">
-    <div class="header">
-      <h1>15 Modern Design Trends</h1>
-      <p>스큐어모피즘부터 글래스모피즘, 키네틱 타이포그래피까지 UI 디자인 트렌드의 정수를 탐색하세요.</p>
-    </div>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <div class="grid">
+  <header class="header">
+    <div class="container">
+      <h1>15 Modern Design Trends</h1>
+      <p>Explore live interactive demonstrations of 15 iconic UI design trends from Skeuomorphism to Kinetic Typography.</p>
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1" class="container">
+    <div class="grid" aria-label="Design Trends List">
       <a href="1_skeuomorphism.html" class="card">
         <div>
           <div class="card-num">Trend 01</div>
           <h2 class="card-title">Skeuomorphism</h2>
-          <p class="card-desc">현실 세계 물체의 질감, 입체감, 질감을 디지털 UI에 극적으로 재현한 정교한 스타일.</p>
+          <p class="card-desc">Realistic textures, shadows, and 3D depth mimicking physical objects in digital interfaces.</p>
         </div>
         <div class="card-footer">
           <span>Explore Style</span>
-          <div class="card-arrow">→</div>
+          <div class="card-arrow" aria-hidden="true">→</div>
         </div>
       </a>
 
@@ -167,11 +196,11 @@
         <div>
           <div class="card-num">Trend 02</div>
           <h2 class="card-title">Flat Design</h2>
-          <p class="card-desc">장식적 요소를 제거하고 명확한 미니멀리즘과 선명한 컬러에 집중한 디자인.</p>
+          <p class="card-desc">Minimalist, 2D aesthetic focusing on clean typography, vivid colors, and zero ornamental gradients.</p>
         </div>
         <div class="card-footer">
           <span>Explore Style</span>
-          <div class="card-arrow">→</div>
+          <div class="card-arrow" aria-hidden="true">→</div>
         </div>
       </a>
 
@@ -179,11 +208,11 @@
         <div>
           <div class="card-num">Trend 03</div>
           <h2 class="card-title">Material Design</h2>
-          <p class="card-desc">Google의 종이와 잉크 메타포 기반 그림자와 아늑한 애니메이션의 표준 가이드.</p>
+          <p class="card-desc">Google's paper-and-ink metaphor emphasizing tactile surfaces, subtle shadows, and motion physics.</p>
         </div>
         <div class="card-footer">
           <span>Explore Style</span>
-          <div class="card-arrow">→</div>
+          <div class="card-arrow" aria-hidden="true">→</div>
         </div>
       </a>
 
@@ -191,11 +220,11 @@
         <div>
           <div class="card-num">Trend 04</div>
           <h2 class="card-title">Glassmorphism</h2>
-          <p class="card-desc">반투명 블러 효과(Backdrop Blur)와 투명한 유리의 감각적인 레이어링 UI.</p>
+          <p class="card-desc">Translucent frosted-glass backdrop blur, vivid multi-layered floating surfaces, and subtle light borders.</p>
         </div>
         <div class="card-footer">
           <span>Explore Style</span>
-          <div class="card-arrow">→</div>
+          <div class="card-arrow" aria-hidden="true">→</div>
         </div>
       </a>
 
@@ -203,11 +232,11 @@
         <div>
           <div class="card-num">Trend 05</div>
           <h2 class="card-title">Neumorphism</h2>
-          <p class="card-desc">부드러운 음영 조절로 배경에서 버튼이 돌출되거나 음각으로 파인 매끄러운 3D 효과.</p>
+          <p class="card-desc">Soft extruded plastic UI created through dual inner and outer drop shadow pairs.</p>
         </div>
         <div class="card-footer">
           <span>Explore Style</span>
-          <div class="card-arrow">→</div>
+          <div class="card-arrow" aria-hidden="true">→</div>
         </div>
       </a>
 
@@ -215,11 +244,11 @@
         <div>
           <div class="card-num">Trend 06</div>
           <h2 class="card-title">Neo-Brutalism</h2>
-          <p class="card-desc">두꺼운 검은 테두리, 강렬한 대비, 그림자 offset을 활용한 개성 넘치는 스타일.</p>
+          <p class="card-desc">High-contrast bold black borders, hard offset shadows, vibrant primary colors, and quirky typography.</p>
         </div>
         <div class="card-footer">
           <span>Explore Style</span>
-          <div class="card-arrow">→</div>
+          <div class="card-arrow" aria-hidden="true">→</div>
         </div>
       </a>
 
@@ -227,11 +256,11 @@
         <div>
           <div class="card-num">Trend 07</div>
           <h2 class="card-title">Claymorphism</h2>
-          <p class="card-desc">말랑말랑한 점토(Clay) 느낌의 내/외부 둥근 그림자와 귀여운 3D 둥근 모서리 UI.</p>
+          <p class="card-desc">Soft, 3D clay-like rounded shapes with inner glows, inflatable corners, and pastel colors.</p>
         </div>
         <div class="card-footer">
           <span>Explore Style</span>
-          <div class="card-arrow">→</div>
+          <div class="card-arrow" aria-hidden="true">→</div>
         </div>
       </a>
 
@@ -239,11 +268,11 @@
         <div>
           <div class="card-num">Trend 08</div>
           <h2 class="card-title">Aurora UI</h2>
-          <p class="card-desc">몽환적이고 부드러운 오로라빛 메시 그래디언트 배경과 서정적 비주얼.</p>
+          <p class="card-desc">Ethereal, flowing aurora mesh gradients forming organic ambient lighting backdrops.</p>
         </div>
         <div class="card-footer">
           <span>Explore Style</span>
-          <div class="card-arrow">→</div>
+          <div class="card-arrow" aria-hidden="true">→</div>
         </div>
       </a>
 
@@ -251,11 +280,11 @@
         <div>
           <div class="card-num">Trend 09</div>
           <h2 class="card-title">Dark Mode UI</h2>
-          <p class="card-desc">눈의 피로도를 줄이고 OLED 디스플레이의 깊은 블랙과 형광 네온 컬러를 강조한 UI.</p>
+          <p class="card-desc">Deep OLED blacks, glowing neon accents, and eye-strain reducing dark color palettes.</p>
         </div>
         <div class="card-footer">
           <span>Explore Style</span>
-          <div class="card-arrow">→</div>
+          <div class="card-arrow" aria-hidden="true">→</div>
         </div>
       </a>
 
@@ -263,11 +292,11 @@
         <div>
           <div class="card-num">Trend 10</div>
           <h2 class="card-title">Brutalism</h2>
-          <p class="card-desc">정형화된 가이드라인을 거부하고 날것 그대로의 생생한 조형감을 표현한 디자이너의 예술적 UI.</p>
+          <p class="card-desc">Raw, unpolished Web 1.0 aesthetics challenging conventional UX design rules.</p>
         </div>
         <div class="card-footer">
           <span>Explore Style</span>
-          <div class="card-arrow">→</div>
+          <div class="card-arrow" aria-hidden="true">→</div>
         </div>
       </a>
 
@@ -275,11 +304,11 @@
         <div>
           <div class="card-num">Trend 11</div>
           <h2 class="card-title">Kinetic Typography</h2>
-          <p class="card-desc">움직이는 텍스트, 다이내믹 루핑 마키와 폰트 가변 애니메이션의 화려한 조화.</p>
+          <p class="card-desc">Dynamic moving text, continuous marquee loops, and variable font animations.</p>
         </div>
         <div class="card-footer">
           <span>Explore Style</span>
-          <div class="card-arrow">→</div>
+          <div class="card-arrow" aria-hidden="true">→</div>
         </div>
       </a>
 
@@ -287,11 +316,11 @@
         <div>
           <div class="card-num">Trend 12</div>
           <h2 class="card-title">Retro UI</h2>
-          <p class="card-desc">80~90년대 픽셀 아트, 윈도우 95 감성과 레트로 레트로 게임 콘솔 인터페이스.</p>
+          <p class="card-desc">80s & 90s pixel art, Windows 95 classic windows, and arcade console interfaces.</p>
         </div>
         <div class="card-footer">
           <span>Explore Style</span>
-          <div class="card-arrow">→</div>
+          <div class="card-arrow" aria-hidden="true">→</div>
         </div>
       </a>
 
@@ -299,11 +328,11 @@
         <div>
           <div class="card-num">Trend 13</div>
           <h2 class="card-title">Isometric UI</h2>
-          <p class="card-desc">3D 투시도 각도로 평면 UI에 입체 공간감을 불어넣는 등각 투영 비주얼.</p>
+          <p class="card-desc">3D pseudo-perspective 30-degree grid projections bringing 2D interfaces into 3D space.</p>
         </div>
         <div class="card-footer">
           <span>Explore Style</span>
-          <div class="card-arrow">→</div>
+          <div class="card-arrow" aria-hidden="true">→</div>
         </div>
       </a>
 
@@ -311,11 +340,11 @@
         <div>
           <div class="card-num">Trend 14</div>
           <h2 class="card-title">Biomorphic Organic</h2>
-          <p class="card-desc">자연의 유기적인 곡선, 미생물/물방울 형태(Blob)와 유연한 흐름의 디자인.</p>
+          <p class="card-desc">Fluid organic curves, natural liquid blobs, and bio-inspired smooth geometry.</p>
         </div>
         <div class="card-footer">
           <span>Explore Style</span>
-          <div class="card-arrow">→</div>
+          <div class="card-arrow" aria-hidden="true">→</div>
         </div>
       </a>
 
@@ -323,15 +352,15 @@
         <div>
           <div class="card-num">Trend 15</div>
           <h2 class="card-title">Micro Interaction</h2>
-          <p class="card-desc">사용자 액션에 즉각적으로 피드백을 주는 디테일하고 섬세한 마이크로 애니메이션.</p>
+          <p class="card-desc">Subtle micro-animations providing immediate, tactile visual feedback for user actions.</p>
         </div>
         <div class="card-footer">
           <span>Explore Style</span>
-          <div class="card-arrow">→</div>
+          <div class="card-arrow" aria-hidden="true">→</div>
         </div>
       </a>
     </div>
-  </div>
+  </main>
 
   <script src="../shared/js/global-nav.js" defer></script>
 </body>
