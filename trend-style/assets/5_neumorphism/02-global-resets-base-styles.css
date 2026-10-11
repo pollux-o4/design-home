@@ -1,0 +1,103 @@
+/* ----------------------------------------------------
+   Global Resets & Base Styles
+---------------------------------------------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    min-height: 100vh;
+    line-height: 1.5;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    overflow-x: hidden;
+}
+
+/* Standard Neumorphic Utilites */
+.neu-card {
+    background: var(--surface-color);
+    box-shadow: var(--shadow-outset);
+    border-radius: var(--card-radius);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.neu-card-sm {
+    background: var(--surface-color);
+    box-shadow: var(--shadow-outset-sm);
+    border-radius: 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.neu-inset {
+    background: var(--surface-color);
+    box-shadow: var(--shadow-inset);
+    border-radius: 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.neu-button {
+    background: var(--surface-color);
+    box-shadow: var(--shadow-outset-sm);
+    border: none;
+    color: var(--text-main);
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+}
+
+.neu-button:hover {
+    box-shadow: var(--shadow-outset);
+    color: var(--accent);
+    transform: translateY(-1px);
+}
+
+.neu-button:active, .neu-button.active {
+    box-shadow: var(--shadow-inset-sm);
+    transform: translateY(1px);
+    color: var(--accent);
+}
+
+.neu-button.primary {
+    background: var(--accent-gradient);
+    color: #ffffff !important;
+    box-shadow: var(--shadow-outset-sm), 0 4px 12px var(--accent-glow);
+}
+
+.neu-button.primary:hover {
+    box-shadow: var(--shadow-outset), 0 6px 16px var(--accent-glow);
+}
+
+.neu-button.primary:active {
+    box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.neu-icon-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.neu-icon-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}

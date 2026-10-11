@@ -1,0 +1,76 @@
+/* Reflow the original workspace without scaling its content. */
+.main-wrapper {
+    min-width: 0;
+    padding-top: 76px;
+}
+.widget-card, .kpi-card {
+    min-width: 0;
+}
+.header-controls, .widget-header, .header-title-area h1 {
+    flex-wrap: wrap;
+}
+.version-switcher {
+    max-width: calc(100% - 24px);
+    flex-wrap: wrap;
+}
+@media (max-width: 900px) {
+    body {
+        flex-direction: column;
+    }
+    .sidebar {
+        position: relative;
+        width: 100%;
+        top: auto;
+        bottom: auto;
+        border-right: 0;
+        padding-top: 76px;
+    }
+    .main-wrapper {
+        margin-left: 0;
+        width: 100%;
+        padding: 24px;
+    }
+}
+@media (max-width: 600px) {
+    .version-switcher {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: fit-content;
+        margin: 12px;
+    }
+    .sidebar {
+        padding: 16px;
+    }
+    .main-wrapper {
+        padding: 16px;
+    }
+    .kpi-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .widget-card {
+        padding: 16px;
+    }
+    .header-controls {
+        gap: 10px;
+    }
+    .timeframe-tabs {
+        flex-wrap: wrap;
+    }
+    .bar-chart-container {
+        gap: 8px;
+    }
+}
+.slide-over-panel {
+    height: 100dvh;
+    overflow-y: auto;
+}
+@media (max-width: 600px) {
+    .panel-header, .panel-footer {
+        flex-wrap: wrap;
+        padding: 16px;
+    }
+    .panel-body {
+        padding: 16px;
+    }
+}

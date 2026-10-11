@@ -1,0 +1,151 @@
+:root {
+    /* V1: Nordic Night (Default Theme) */
+    --bg-base: #030712;
+    --surface-glass: rgba(15, 23, 42, 0.55);
+    --surface-glass-hover: rgba(30, 41, 59, 0.75);
+    --border-glass: rgba(255, 255, 255, 0.12);
+    --border-glass-strong: rgba(255, 255, 255, 0.22);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --card-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+
+    --aurora-1: #3b82f6;
+    --aurora-2: #8b5cf6;
+    --aurora-3: #06b6d4;
+    --aurora-4: #ec4899;
+    --accent-glow: rgba(59, 130, 246, 0.4);
+
+    --dropdown-bg: #0f172a;
+    --tooltip-bg: rgba(15, 23, 42, 0.95);
+    --transition-speed: 0.6s;
+    --radius-lg: 20px;
+    --radius-md: 14px;
+    --radius-sm: 8px;
+}
+
+/* Variation 2: Dawn Glow (Warm Light Theme) */
+body.v2-dawn {
+    --bg-base: #faf8f5;
+    --surface-glass: rgba(255, 255, 255, 0.65);
+    --surface-glass-hover: rgba(255, 255, 255, 0.85);
+    --border-glass: rgba(217, 119, 6, 0.15);
+    --border-glass-strong: rgba(217, 119, 6, 0.3);
+    --text-main: #1e1b18;
+    --text-muted: #6b635b;
+    --text-dim: #9c9288;
+    --card-shadow: 0 12px 40px 0 rgba(217, 119, 6, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
+
+    --aurora-1: #f97316;
+    --aurora-2: #fb7185;
+    --aurora-3: #facc15;
+    --aurora-4: #c084fc;
+    --accent-glow: rgba(249, 115, 22, 0.35);
+
+    --dropdown-bg: #ffffff;
+    --tooltip-bg: rgba(255, 255, 255, 0.95);
+}
+
+/* Variation 3: Cyber Aurora (High-Contrast Cyberpunk Neon) */
+body.v3-cyber {
+    --bg-base: #05020a;
+    --surface-glass: rgba(20, 5, 35, 0.65);
+    --surface-glass-hover: rgba(40, 10, 65, 0.8);
+    --border-glass: rgba(0, 255, 204, 0.25);
+    --border-glass-strong: rgba(255, 0, 204, 0.4);
+    --text-main: #ffffff;
+    --text-muted: #cbd5e1;
+    --text-dim: #8b5cf6;
+    --card-shadow: 0 12px 40px 0 rgba(139, 92, 246, 0.3), inset 0 1px 0 0 rgba(0, 255, 204, 0.3);
+
+    --aurora-1: #00ffcc;
+    --aurora-2: #ff007f;
+    --aurora-3: #7928ca;
+    --aurora-4: #0070f3;
+    --accent-glow: rgba(0, 255, 204, 0.5);
+
+    --dropdown-bg: #0d041a;
+    --tooltip-bg: rgba(13, 4, 26, 0.95);
+}
+
+/* Variation 4: Emerald Forest (Lush Nature Glow) */
+body.v4-emerald {
+    --bg-base: #02140d;
+    --surface-glass: rgba(6, 44, 30, 0.6);
+    --surface-glass-hover: rgba(12, 65, 45, 0.8);
+    --border-glass: rgba(52, 211, 153, 0.2);
+    --border-glass-strong: rgba(52, 211, 153, 0.35);
+    --text-main: #f0fdf4;
+    --text-muted: #86efac;
+    --text-dim: #34d399;
+    --card-shadow: 0 12px 40px 0 rgba(6, 78, 59, 0.4), inset 0 1px 0 0 rgba(167, 243, 208, 0.2);
+
+    --aurora-1: #10b981;
+    --aurora-2: #059669;
+    --aurora-3: #84cc16;
+    --aurora-4: #06b6d4;
+    --accent-glow: rgba(16, 185, 129, 0.4);
+
+    --dropdown-bg: #042116;
+    --tooltip-bg: rgba(4, 33, 22, 0.95);
+}
+
+/* Variation 5: Monochrome Flow (Sleek Obsidian & Silver Glow) */
+body.v5-mono {
+    --bg-base: #09090b;
+    --surface-glass: rgba(24, 24, 27, 0.65);
+    --surface-glass-hover: rgba(39, 39, 42, 0.85);
+    --border-glass: rgba(255, 255, 255, 0.15);
+    --border-glass-strong: rgba(255, 255, 255, 0.3);
+    --text-main: #fafafa;
+    --text-muted: #a1a1aa;
+    --text-dim: #71717a;
+    --card-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+
+    --aurora-1: #52525b;
+    --aurora-2: #a1a1aa;
+    --aurora-3: #27272a;
+    --aurora-4: #e4e4e7;
+    --accent-glow: rgba(255, 255, 255, 0.25);
+
+    --dropdown-bg: #18181b;
+    --tooltip-bg: rgba(24, 24, 27, 0.95);
+}
+
+/* Variation 6: Dynamic Pastel (Dreamy Soft Aesthetic) */
+body.v6-pastel {
+    --bg-base: #f3f0ff;
+    --surface-glass: rgba(255, 255, 255, 0.7);
+    --surface-glass-hover: rgba(255, 255, 255, 0.9);
+    --border-glass: rgba(168, 85, 247, 0.18);
+    --border-glass-strong: rgba(168, 85, 247, 0.35);
+    --text-main: #2e1065;
+    --text-muted: #6b21a8;
+    --text-dim: #9333ea;
+    --card-shadow: 0 12px 40px 0 rgba(168, 85, 247, 0.12), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+
+    --aurora-1: #c084fc;
+    --aurora-2: #38bdf8;
+    --aurora-3: #f472b6;
+    --aurora-4: #4ade80;
+    --accent-glow: rgba(192, 132, 252, 0.35);
+
+    --dropdown-bg: #ffffff;
+    --tooltip-bg: rgba(255, 255, 255, 0.95);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+    position: relative;
+}

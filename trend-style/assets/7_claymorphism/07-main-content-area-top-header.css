@@ -1,0 +1,130 @@
+/* ==========================================================================
+   MAIN CONTENT AREA & TOP HEADER
+   ========================================================================== */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-width: 0;
+}
+
+/* Header Navigation Bar */
+.top-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 24px;
+}
+.search-box {
+    position: relative;
+    width: 280px;
+}
+.search-box input {
+    padding-left: 42px;
+}
+.search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* User Profile Pill */
+.profile-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 14px 6px 6px;
+    border-radius: 999px;
+    background: var(--clay-card-bg);
+    box-shadow: var(--outer-shadow-sm), var(--inner-shadow);
+    cursor: pointer;
+}
+.profile-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.15), inset 2px 2px 4px rgba(255,255,255,0.4);
+}
+.profile-info {
+    line-height: 1.2;
+}
+.profile-name {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+.profile-role {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+/* Dashboard Overview Banner & Time Tabs */
+.dash-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+.dash-title h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.1;
+}
+.dash-title p {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+/* Time Range Data Tabs */
+.time-tabs {
+    display: flex;
+    align-items: center;
+    background: var(--clay-card-secondary);
+    padding: 6px;
+    border-radius: 20px;
+    box-shadow: var(--inner-shadow-pressed);
+    gap: 4px;
+}
+.tab-btn {
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+.tab-btn:hover {
+    color: var(--text-primary);
+}
+.tab-btn.active {
+    background: var(--clay-card-bg);
+    color: var(--accent-primary);
+    box-shadow: var(--outer-shadow-sm), var(--inner-shadow);
+    font-weight: 700;
+}

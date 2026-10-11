@@ -1,0 +1,170 @@
+/* ==========================================================================
+   MAIN LAYOUT & HEADER
+   ========================================================================== */
+.main-wrapper {
+    margin-left: 270px;
+    flex: 1;
+    padding: 32px 36px 60px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    max-width: 1650px;
+}
+
+/* Top Header */
+.top-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.header-title-area h1 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text-title);
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.theme-pill-badge {
+    font-size: 11px;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-glow);
+    color: var(--accent-primary);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.header-title-area p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Custom Dropdown Buttons */
+.dropdown {
+    position: relative;
+}
+
+.btn-dropdown {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-main);
+    padding: 9px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-dropdown:hover {
+    border-color: var(--accent-primary);
+    background: var(--bg-surface-hover);
+    box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-glow);
+    border-radius: 12px;
+    width: 220px;
+    padding: 8px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 20px var(--accent-glow);
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 500;
+}
+
+.dropdown-menu.show {
+    display: flex;
+    animation: fadeInDown 0.2s ease forwards;
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-item {
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background: var(--bg-surface-hover);
+    color: var(--text-title);
+}
+
+.dropdown-item.active {
+    color: var(--accent-primary);
+    font-weight: 600;
+    background: rgba(99, 102, 241, 0.1);
+}
+
+/* Profile Dropdown Specific */
+.avatar-sm {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 11px;
+    border: 2px solid var(--accent-primary);
+}
+
+/* Primary Modal Trigger Button */
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: #ffffff;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px var(--accent-glow-strong);
+    transition: all 0.25s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px var(--accent-glow-strong);
+    filter: brightness(1.1);
+}

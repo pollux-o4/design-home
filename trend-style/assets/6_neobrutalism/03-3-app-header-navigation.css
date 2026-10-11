@@ -1,0 +1,206 @@
+/* ==========================================================================
+   3. APP HEADER & NAVIGATION
+   ========================================================================== */
+.header {
+    background: var(--surface-color);
+    border-bottom: var(--border-width) solid var(--border-color);
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.brand-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-logo {
+    background: var(--accent-primary);
+    color: #FFFFFF;
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 900;
+    padding: 8px 16px;
+    border: var(--border-width) solid var(--border-color);
+    box-shadow: 4px 4px 0 var(--border-color);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.brand-logo span {
+    background: var(--accent-secondary);
+    color: #000000;
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    border: 2px solid #000000;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Dropdowns & Selects */
+.select-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.brutal-select {
+    appearance: none;
+    background: var(--surface-secondary);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 8px 36px 8px 12px;
+    border: 3px solid var(--border-color);
+    box-shadow: 4px 4px 0 var(--border-color);
+    border-radius: var(--radius);
+    cursor: pointer;
+    outline: none;
+}
+
+.brutal-select:focus {
+    background: var(--surface-color);
+    box-shadow: 6px 6px 0 var(--accent-primary);
+}
+
+.select-wrapper::after {
+    content: '▼';
+    font-size: 0.75rem;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-weight: 900;
+}
+
+/* Action Buttons */
+.btn-brutal {
+    background: var(--accent-primary);
+    color: #FFFFFF;
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 800;
+    padding: 10px 20px;
+    border: 3px solid var(--border-color);
+    box-shadow: 4px 4px 0 var(--border-color);
+    border-radius: var(--radius);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    outline: none;
+}
+
+.btn-brutal:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--border-color);
+    background: var(--accent-secondary);
+    color: #000000;
+}
+
+.btn-brutal:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--border-color);
+}
+
+/* Live Sync Toggle Switch */
+.sync-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface-secondary);
+    border: 3px solid var(--border-color);
+    padding: 6px 12px;
+    box-shadow: 4px 4px 0 var(--border-color);
+    border-radius: var(--radius);
+}
+
+.sync-toggle label {
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #CCC;
+    border: 2px solid var(--border-color);
+    transition: .3s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: black;
+    border: 1px solid black;
+    transition: .3s;
+}
+
+input:checked + .slider {
+    background-color: var(--accent-tertiary);
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+    background-color: #000;
+}
+
+/* User Profile Badge */
+.profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface-color);
+    border: 3px solid var(--border-color);
+    padding: 6px 12px;
+    box-shadow: 4px 4px 0 var(--border-color);
+    border-radius: var(--radius);
+    cursor: pointer;
+}
+
+.profile-avatar {
+    width: 28px;
+    height: 28px;
+    background: var(--accent-secondary);
+    border: 2px solid #000;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+}

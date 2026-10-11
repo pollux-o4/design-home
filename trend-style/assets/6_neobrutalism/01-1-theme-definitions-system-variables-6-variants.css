@@ -1,0 +1,168 @@
+/* ==========================================================================
+   1. THEME DEFINITIONS & SYSTEM VARIABLES (6 VARIANTS)
+   ========================================================================== */
+:root {
+    /* Theme 1: Cyber Yellow & Electric Pink (Default Neobrutalism) */
+    --bg-color: #FFDE00;
+    --surface-color: #FFFFFF;
+    --surface-secondary: #FFF9D2;
+    --text-color: #000000;
+    --accent-primary: #FF3366;
+    --accent-secondary: #00F0FF;
+    --accent-tertiary: #CCFF00;
+    --border-color: #000000;
+    --border-width: 4px;
+    --shadow-x: 8px;
+    --shadow-y: 8px;
+    --shadow-color: #000000;
+    --radius: 0px;
+    --font-heading: 'Lexend Mega', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    --badge-bg: #00F0FF;
+    --badge-text: #000000;
+}
+
+[data-theme="2"] {
+    /* Theme 2: Acid Mint & Ultraviolet */
+    --bg-color: #A3E4D7;
+    --surface-color: #FFFFFF;
+    --surface-secondary: #E8F8F5;
+    --text-color: #111111;
+    --accent-primary: #8E44AD;
+    --accent-secondary: #CCFF00;
+    --accent-tertiary: #FF5722;
+    --border-color: #111111;
+    --border-width: 4px;
+    --shadow-x: -8px;
+    --shadow-y: 8px;
+    --shadow-color: #111111;
+    --radius: 12px;
+    --font-heading: 'Syne', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    --badge-bg: #8E44AD;
+    --badge-text: #FFFFFF;
+}
+
+[data-theme="3"] {
+    /* Theme 3: Electric Cyan & Pop Orange */
+    --bg-color: #00D2D3;
+    --surface-color: #FFFFFF;
+    --surface-secondary: #E0F7FA;
+    --text-color: #000000;
+    --accent-primary: #FF6B6B;
+    --accent-secondary: #FECA57;
+    --accent-tertiary: #10AC84;
+    --border-color: #000000;
+    --border-width: 5px;
+    --shadow-x: 6px;
+    --shadow-y: 6px;
+    --shadow-color: #000000;
+    --radius: 4px;
+    --font-heading: 'Lexend Mega', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    --badge-bg: #FF6B6B;
+    --badge-text: #FFFFFF;
+}
+
+[data-theme="4"] {
+    /* Theme 4: Bubblegum Pink & Toxic Green */
+    --bg-color: #FF9FF3;
+    --surface-color: #FECA57;
+    --surface-secondary: #FFF3CD;
+    --text-color: #000000;
+    --accent-primary: #54A0FF;
+    --accent-secondary: #10AC84;
+    --accent-tertiary: #FF4757;
+    --border-color: #000000;
+    --border-width: 4px;
+    --shadow-x: 10px;
+    --shadow-y: 10px;
+    --shadow-color: #000000;
+    --radius: 16px;
+    --font-heading: 'Syne', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    --badge-bg: #10AC84;
+    --badge-text: #FFFFFF;
+}
+
+[data-theme="5"] {
+    /* Theme 5: Monochrome Punk & Signal Red */
+    --bg-color: #F4F4F0;
+    --surface-color: #FFFFFF;
+    --surface-secondary: #E5E5E0;
+    --text-color: #000000;
+    --accent-primary: #FF2A2A;
+    --accent-secondary: #39FF14;
+    --accent-tertiary: #FFFF00;
+    --border-color: #000000;
+    --border-width: 5px;
+    --shadow-x: 12px;
+    --shadow-y: 12px;
+    --shadow-color: #000000;
+    --radius: 0px;
+    --font-heading: 'Lexend Mega', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    --badge-bg: #FF2A2A;
+    --badge-text: #FFFFFF;
+}
+
+[data-theme="6"] {
+    /* Theme 6: Dark Vapor Cyber */
+    --bg-color: #12131C;
+    --surface-color: #1E1F2E;
+    --surface-secondary: #292A3D;
+    --text-color: #FFFFFF;
+    --accent-primary: #FF007F;
+    --accent-secondary: #00F5D4;
+    --accent-tertiary: #FF9F1C;
+    --border-color: #00F5D4;
+    --border-width: 4px;
+    --shadow-x: 8px;
+    --shadow-y: 8px;
+    --shadow-color: #FF007F;
+    --radius: 8px;
+    --font-heading: 'Syne', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    --badge-bg: #FF007F;
+    --badge-text: #FFFFFF;
+}
+
+/* Reset & Global Standards */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    font-weight: 800;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+    border-left: var(--border-width) solid var(--border-color);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--accent-primary);
+    border: 3px solid var(--border-color);
+}

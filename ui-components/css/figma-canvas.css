@@ -635,3 +635,12 @@ body {
   from { opacity: 0; transform: scale(0.97); }
   to { opacity: 1; transform: scale(1); }
 }
+
+/* A focused sample uses the same renderer and controls as the full catalog. */
+body[data-view="specimen"] { padding-top:0; height:auto; min-height:100dvh; overflow:auto; }
+body[data-view="specimen"] .figma-header, body[data-view="specimen"] .figma-sidebar, body[data-view="specimen"] #dh-global-nav, body[data-view="specimen"] .artboard-header, body[data-view="specimen"] .subgroup-header { display:none; }
+body[data-view="specimen"] .figma-workspace { height:auto; min-height:100dvh; }
+body[data-view="specimen"] .figma-canvas-viewport { padding:16px; overflow:visible; min-width:0; }
+body[data-view="specimen"] .components-grid { grid-template-columns:minmax(0,1fr); }
+body[data-view="specimen"] .artboard-frame { padding:0; border:0; max-width:900px; margin:auto; }
+body[data-view="specimen"] .frame-content, body[data-view="specimen"] .subgroup-box { padding:0; margin:0; border:0; }

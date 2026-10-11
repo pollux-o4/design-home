@@ -1,0 +1,171 @@
+/* ==========================================================================
+   SKEUOMORPHIC DASHBOARD DESIGN SYSTEM & THEMES
+   ========================================================================== */
+
+:root {
+  /* Default Theme: 1. Classic Executive Leather & Brass */
+  --bg-texture: radial-gradient(circle at 50% 50%, #2b1f19 0%, #150d0a 100%);
+  --panel-bg: linear-gradient(145deg, #3d2c24, #261913);
+  --panel-border: 1px solid rgba(223, 183, 108, 0.3);
+  --panel-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+  --card-bg: linear-gradient(135deg, #34241d, #241610);
+  --card-shadow: 8px 8px 18px rgba(0, 0, 0, 0.6), -4px -4px 10px rgba(255, 255, 255, 0.04), inset 1px 1px 1px rgba(255, 225, 175, 0.12);
+  --text-main: #f0e6d6;
+  --text-muted: #ab9b85;
+  --accent-primary: #dfb76c;
+  --accent-metallic: linear-gradient(135deg, #f5d78a 0%, #dfb76c 50%, #9a722c 100%);
+  --accent-glow: #ffaa00;
+  --track-bg: #140b08;
+  --track-shadow: inset 3px 3px 6px rgba(0,0,0,0.8), inset -1px -1px 3px rgba(255,255,255,0.05);
+  --btn-bg: linear-gradient(180deg, #543b2f 0%, #36241b 100%);
+  --btn-shadow: 0 4px 8px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,230,180,0.3), inset 0 -2px 4px rgba(0,0,0,0.5);
+  --btn-active: linear-gradient(180deg, #241610 0%, #3d2b21 100%);
+  --led-on: #ffaa00;
+  --led-glow: 0 0 10px #ffaa00, 0 0 20px #ff7700;
+  --tooltip-bg: #1c110c;
+  --stitch-border: 2px dashed rgba(223, 183, 108, 0.35);
+  --screw-head: radial-gradient(circle at 30% 30%, #ecd097, #856125);
+  --chart-line: #dfb76c;
+  --chart-fill: rgba(223, 183, 108, 0.15);
+  --chart-bar: linear-gradient(180deg, #f5d78a, #ab7c31);
+}
+
+/* --- THEME VARIATION 2: Brushed Aluminium & Sapphire --- */
+body[data-theme="aluminium"] {
+  --bg-texture: radial-gradient(circle at 50% 50%, #2f343d 0%, #171a1f 100%);
+  --panel-bg: linear-gradient(145deg, #444b57, #292d35);
+  --panel-border: 1px solid rgba(255, 255, 255, 0.3);
+  --panel-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.4), inset 0 -1px 2px rgba(0,0,0,0.6);
+  --card-bg: linear-gradient(135deg, #3a404b, #252930);
+  --card-shadow: 8px 8px 20px rgba(0, 0, 0, 0.55), -4px -4px 10px rgba(255, 255, 255, 0.08), inset 1px 1px 1px rgba(255, 255, 255, 0.3);
+  --text-main: #f0f4f8;
+  --text-muted: #94a3b8;
+  --accent-primary: #38bdf8;
+  --accent-metallic: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 50%, #475569 100%);
+  --accent-glow: #38bdf8;
+  --track-bg: #121519;
+  --track-shadow: inset 3px 3px 6px rgba(0,0,0,0.85), inset -1px -1px 3px rgba(255,255,255,0.1);
+  --btn-bg: linear-gradient(180deg, #525c6c 0%, #333944 100%);
+  --btn-shadow: 0 4px 8px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.5), inset 0 -2px 4px rgba(0,0,0,0.4);
+  --btn-active: linear-gradient(180deg, #22262d 0%, #3b424e 100%);
+  --led-on: #00d2ff;
+  --led-glow: 0 0 12px #00d2ff, 0 0 24px #0066ff;
+  --tooltip-bg: #15181e;
+  --stitch-border: 1px solid rgba(56, 189, 248, 0.4);
+  --screw-head: radial-gradient(circle at 30% 30%, #ffffff, #64748b);
+  --chart-line: #38bdf8;
+  --chart-fill: rgba(56, 189, 248, 0.2);
+  --chart-bar: linear-gradient(180deg, #38bdf8, #0284c7);
+}
+
+/* --- THEME VARIATION 3: Vintage Studio Walnut & Cream --- */
+body[data-theme="walnut"] {
+  --bg-texture: radial-gradient(circle at 50% 50%, #2e1d14 0%, #120a06 100%);
+  --panel-bg: linear-gradient(145deg, #422a1d, #27170e);
+  --panel-border: 1px solid rgba(217, 119, 6, 0.4);
+  --panel-shadow: 0 15px 35px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255, 220, 180, 0.25);
+  --card-bg: linear-gradient(135deg, #f7f3e9, #eae3d2);
+  --card-shadow: 8px 8px 20px rgba(0, 0, 0, 0.7), -3px -3px 8px rgba(255, 255, 255, 0.05), inset 1px 1px 1px #ffffff;
+  --text-main: #2d1a0e;
+  --text-muted: #785c49;
+  --accent-primary: #d97706;
+  --accent-metallic: linear-gradient(135deg, #fbbf24 0%, #d97706 50%, #78350f 100%);
+  --accent-glow: #f59e0b;
+  --track-bg: #d1c7b5;
+  --track-shadow: inset 3px 3px 6px rgba(0,0,0,0.25), inset -1px -1px 3px rgba(255,255,255,0.7);
+  --btn-bg: linear-gradient(180deg, #faeed6 0%, #e2d3b5 100%);
+  --btn-shadow: 0 4px 8px rgba(0,0,0,0.4), inset 0 1px 0 #ffffff, inset 0 -2px 4px rgba(0,0,0,0.15);
+  --btn-active: linear-gradient(180deg, #cbb793 0%, #e6d7bc 100%);
+  --led-on: #ff8c00;
+  --led-glow: 0 0 12px #ff8c00, 0 0 24px #d97706;
+  --tooltip-bg: #2d1a0e;
+  --stitch-border: 2px dashed #b45309;
+  --screw-head: radial-gradient(circle at 30% 30%, #fef3c7, #92400e);
+  --chart-line: #d97706;
+  --chart-fill: rgba(217, 119, 6, 0.25);
+  --chart-bar: linear-gradient(180deg, #f59e0b, #b45309);
+}
+
+/* --- THEME VARIATION 4: Dark Carbon & Neon Amber --- */
+body[data-theme="carbon"] {
+  --bg-texture: radial-gradient(circle at 50% 50%, #1a1b20 0%, #0a0b0d 100%);
+  --panel-bg: linear-gradient(145deg, #24262e, #14151a);
+  --panel-border: 1px solid rgba(245, 158, 11, 0.4);
+  --panel-shadow: 0 15px 35px rgba(0, 0, 0, 0.9), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  --card-bg: linear-gradient(135deg, #1f2128, #131418);
+  --card-shadow: 8px 8px 20px rgba(0, 0, 0, 0.8), -3px -3px 8px rgba(255, 255, 255, 0.03), inset 1px 1px 1px rgba(245, 158, 11, 0.15);
+  --text-main: #fef3c7;
+  --text-muted: #9ca3af;
+  --accent-primary: #f59e0b;
+  --accent-metallic: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #92400e 100%);
+  --accent-glow: #f59e0b;
+  --track-bg: #090a0c;
+  --track-shadow: inset 3px 3px 6px rgba(0,0,0,0.9), inset -1px -1px 3px rgba(255,255,255,0.05);
+  --btn-bg: linear-gradient(180deg, #374151 0%, #1f2937 100%);
+  --btn-shadow: 0 4px 8px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.6);
+  --btn-active: linear-gradient(180deg, #111827 0%, #293548 100%);
+  --led-on: #f59e0b;
+  --led-glow: 0 0 14px #f59e0b, 0 0 28px #b45309;
+  --tooltip-bg: #111827;
+  --stitch-border: 1px solid rgba(245, 158, 11, 0.5);
+  --screw-head: radial-gradient(circle at 30% 30%, #9ca3af, #374151);
+  --chart-line: #f59e0b;
+  --chart-fill: rgba(245, 158, 11, 0.2);
+  --chart-bar: linear-gradient(180deg, #fbbf24, #d97706);
+}
+
+/* --- THEME VARIATION 5: Tactile Slate & Emerald --- */
+body[data-theme="slate"] {
+  --bg-texture: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%);
+  --panel-bg: linear-gradient(145deg, #334155, #1e293b);
+  --panel-border: 1px solid rgba(16, 185, 129, 0.4);
+  --panel-shadow: 0 15px 35px rgba(0, 0, 0, 0.75), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  --card-bg: linear-gradient(135deg, #283548, #182232);
+  --card-shadow: 8px 8px 20px rgba(0, 0, 0, 0.65), -3px -3px 8px rgba(255, 255, 255, 0.05), inset 1px 1px 1px rgba(16, 185, 129, 0.2);
+  --text-main: #ecfdf5;
+  --text-muted: #94a3b8;
+  --accent-primary: #10b981;
+  --accent-metallic: linear-gradient(135deg, #34d399 0%, #10b981 50%, #047857 100%);
+  --accent-glow: #10b981;
+  --track-bg: #0b1120;
+  --track-shadow: inset 3px 3px 6px rgba(0,0,0,0.85), inset -1px -1px 3px rgba(255,255,255,0.05);
+  --btn-bg: linear-gradient(180deg, #334155 0%, #1e293b 100%);
+  --btn-shadow: 0 4px 8px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -2px 4px rgba(0,0,0,0.5);
+  --btn-active: linear-gradient(180deg, #0f172a 0%, #253346 100%);
+  --led-on: #10b981;
+  --led-glow: 0 0 14px #10b981, 0 0 28px #059669;
+  --tooltip-bg: #0f172a;
+  --stitch-border: 1px dashed rgba(16, 185, 129, 0.6);
+  --screw-head: radial-gradient(circle at 30% 30%, #e2e8f0, #475569);
+  --chart-line: #10b981;
+  --chart-fill: rgba(16, 185, 129, 0.2);
+  --chart-bar: linear-gradient(180deg, #34d399, #047857);
+}
+
+/* --- THEME VARIATION 6: Retro Studio Rack & Crimson Nixie --- */
+body[data-theme="rack"] {
+  --bg-texture: radial-gradient(circle at 50% 50%, #241416 0%, #0c0607 100%);
+  --panel-bg: linear-gradient(145deg, #361b1e, #1f0e10);
+  --panel-border: 1px solid rgba(239, 68, 68, 0.4);
+  --panel-shadow: 0 15px 35px rgba(0, 0, 0, 0.85), inset 0 1px 1px rgba(255, 200, 200, 0.15);
+  --card-bg: linear-gradient(135deg, #2b1417, #180b0c);
+  --card-shadow: 8px 8px 20px rgba(0, 0, 0, 0.8), -3px -3px 8px rgba(255, 255, 255, 0.03), inset 1px 1px 1px rgba(239, 68, 68, 0.2);
+  --text-main: #fee2e2;
+  --text-muted: #9f7c81;
+  --accent-primary: #ef4444;
+  --accent-metallic: linear-gradient(135deg, #f87171 0%, #ef4444 50%, #991b1b 100%);
+  --accent-glow: #ef4444;
+  --track-bg: #0d0405;
+  --track-shadow: inset 3px 3px 6px rgba(0,0,0,0.95), inset -1px -1px 3px rgba(255,255,255,0.05);
+  --btn-bg: linear-gradient(180deg, #451a1d 0%, #2a0e10 100%);
+  --btn-shadow: 0 4px 8px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,180,180,0.3), inset 0 -2px 4px rgba(0,0,0,0.6);
+  --btn-active: linear-gradient(180deg, #170708 0%, #361417 100%);
+  --led-on: #ef4444;
+  --led-glow: 0 0 14px #ef4444, 0 0 28px #b91c1c;
+  --tooltip-bg: #180b0c;
+  --stitch-border: 1px solid rgba(239, 68, 68, 0.5);
+  --screw-head: radial-gradient(circle at 30% 30%, #e5e7eb, #4b5563);
+  --chart-line: #ef4444;
+  --chart-fill: rgba(239, 68, 68, 0.2);
+  --chart-bar: linear-gradient(180deg, #f87171, #991b1b);
+}

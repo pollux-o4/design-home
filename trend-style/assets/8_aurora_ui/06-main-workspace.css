@@ -1,0 +1,58 @@
+/* Main Workspace */
+.main-content {
+    grid-area: main;
+    padding: 2rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+/* Dashboard Top Toolbar */
+.dashboard-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.toolbar-title h2 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.toolbar-title p {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+}
+
+/* View Mode Tabs */
+.tabs-container {
+    display: flex;
+    background: var(--surface-glass);
+    border: 1px solid var(--border-glass);
+    padding: 0.25rem;
+    border-radius: var(--radius-md);
+    gap: 0.2rem;
+}
+
+.tab-btn {
+    padding: 0.45rem 1rem;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.25s;
+}
+
+.tab-btn.active {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--text-main);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}

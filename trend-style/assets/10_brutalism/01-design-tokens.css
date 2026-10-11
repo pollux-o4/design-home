@@ -1,0 +1,138 @@
+/* ==========================================================================
+   BRUTALISM DASHBOARD MASTER STYLESHEET
+   Supports 6 Themes via [data-theme="v1" .. "v6"]
+   ========================================================================== */
+
+:root {
+    /* Theme V1: Raw Red & Black (Default Classic Web Brutalism) */
+    --bg-main: #f4f4f0;
+    --bg-card: #ffffff;
+    --text-main: #000000;
+    --text-muted: #555555;
+    --accent-primary: #ff0000;
+    --accent-secondary: #000000;
+    --accent-hover: #cc0000;
+    --border-color: #000000;
+    --border-width: 3px;
+    --box-shadow: 4px 4px 0px #000000;
+    --font-head: 'Archivo Black', 'Space Mono', sans-serif;
+    --font-body: 'JetBrains Mono', monospace;
+    --font-mono: 'Space Mono', monospace;
+    --card-radius: 0px;
+    --btn-radius: 0px;
+    --chart-grid: #e0e0e0;
+    --chart-line: #ff0000;
+    --chart-bar: #000000;
+    --badge-bg: #ff0000;
+    --badge-text: #ffffff;
+}
+
+/* Theme V2: Cyber Electric Neobrutalism */
+body[data-theme="v2"] {
+    --bg-main: #ffe600;
+    --bg-card: #ffffff;
+    --text-main: #000000;
+    --text-muted: #333333;
+    --accent-primary: #ff007a;
+    --accent-secondary: #00f0ff;
+    --accent-hover: #d60066;
+    --border-color: #000000;
+    --border-width: 4px;
+    --box-shadow: 6px 6px 0px #000000;
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'Space Mono', monospace;
+    --font-mono: 'Space Mono', monospace;
+    --chart-grid: #cccccc;
+    --chart-line: #ff007a;
+    --chart-bar: #00f0ff;
+    --badge-bg: #000000;
+    --badge-text: #ffe600;
+}
+
+/* Theme V3: Terminal Monochrome / Industrial Matrix */
+body[data-theme="v3"] {
+    --bg-main: #0a0a0a;
+    --bg-card: #141414;
+    --text-main: #00ff66;
+    --text-muted: #00aa44;
+    --accent-primary: #ffb000;
+    --accent-secondary: #00ff66;
+    --accent-hover: #e09b00;
+    --border-color: #00ff66;
+    --border-width: 2px;
+    --box-shadow: 0px 0px 8px rgba(0, 255, 102, 0.4);
+    --font-head: 'JetBrains Mono', monospace;
+    --font-body: 'JetBrains Mono', monospace;
+    --font-mono: 'JetBrains Mono', monospace;
+    --chart-grid: #222222;
+    --chart-line: #ffb000;
+    --chart-bar: #00ff66;
+    --badge-bg: #ffb000;
+    --badge-text: #000000;
+}
+
+/* Theme V4: Swiss International Brutalism */
+body[data-theme="v4"] {
+    --bg-main: #ffffff;
+    --bg-card: #f8f8f8;
+    --text-main: #050505;
+    --text-muted: #666666;
+    --accent-primary: #002244;
+    --accent-secondary: #e63946;
+    --accent-hover: #001122;
+    --border-color: #050505;
+    --border-width: 3px;
+    --box-shadow: none;
+    --font-head: 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+    --chart-grid: #e5e5e5;
+    --chart-line: #e63946;
+    --chart-bar: #002244;
+    --badge-bg: #002244;
+    --badge-text: #ffffff;
+}
+
+/* Theme V5: Vintage Print Zine Brutalism */
+body[data-theme="v5"] {
+    --bg-main: #f2efe9;
+    --bg-card: #faf8f5;
+    --text-main: #1a1a1a;
+    --text-muted: #666055;
+    --accent-primary: #d32f2f;
+    --accent-secondary: #1976d2;
+    --accent-hover: #b71c1c;
+    --border-color: #1a1a1a;
+    --border-width: 3px;
+    --box-shadow: 4px 4px 0px #1a1a1a;
+    --font-head: 'Space Mono', serif;
+    --font-body: 'Space Mono', monospace;
+    --font-mono: 'Space Mono', monospace;
+    --chart-grid: #dcd7ce;
+    --chart-line: #d32f2f;
+    --chart-bar: #1976d2;
+    --badge-bg: #d32f2f;
+    --badge-text: #ffffff;
+}
+
+/* Theme V6: Obsidian Acid Highlight (Dark High-Contrast) */
+body[data-theme="v6"] {
+    --bg-main: #000000;
+    --bg-card: #0d0d0d;
+    --text-main: #ffffff;
+    --text-muted: #888888;
+    --accent-primary: #ccff00;
+    --accent-secondary: #ff1744;
+    --accent-hover: #b3e600;
+    --border-color: #ffffff;
+    --border-width: 3px;
+    --box-shadow: 4px 4px 0px #ccff00;
+    --font-head: 'Archivo Black', sans-serif;
+    --font-body: 'JetBrains Mono', monospace;
+    --font-mono: 'JetBrains Mono', monospace;
+    --chart-grid: #262626;
+    --chart-line: #ccff00;
+    --chart-bar: #ff1744;
+    --badge-bg: #ccff00;
+    --badge-text: #000000;
+}

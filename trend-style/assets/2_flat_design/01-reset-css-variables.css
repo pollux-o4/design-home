@@ -1,0 +1,46 @@
+/* ==========================================================================
+   RESET & CSS VARIABLES
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+:root {
+    /* Theme V1 (Default - Classic Swiss Flat) */
+    --bg-body: #f1f5f9;
+    --bg-card: #ffffff;
+    --bg-sidebar: #0f172a;
+    --bg-header: #ffffff;
+    --bg-hover: #e2e8f0;
+    --bg-accent-light: #eff6ff;
+
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --text-sidebar: #cbd5e1;
+    --text-sidebar-active: #ffffff;
+
+    --border-color: #e2e8f0;
+    --border-width: 1px;
+    --border-radius: 8px;
+    --button-radius: 6px;
+
+    --color-primary: #2563eb;
+    --color-primary-hover: #1d4ed8;
+    --color-success: #16a34a;
+    --color-warning: #d97706;
+    --color-danger: #dc2626;
+    --color-info: #0284c7;
+
+    --chart-line-1: #2563eb;
+    --chart-line-2: #16a34a;
+    --chart-bar-1: #3b82f6;
+    --chart-bar-2: #60a5fa;
+
+    --box-shadow: none;
+    --transform-hover: translateY(-2px);
+}

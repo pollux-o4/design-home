@@ -1,0 +1,84 @@
+/* ==========================================================================
+   11. RECENT BIO-FLOW ACTIVITIES TABLE / KANBAN WIDGET
+   ========================================================================== */
+.table-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1.5px solid var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bio-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.bio-table th {
+  padding: 12px 16px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+[data-theme="biolum"] .bio-table th, [data-theme="forest"] .bio-table th, [data-theme="cyberbio"] .bio-table th {
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.bio-table td {
+  padding: 14px 16px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-main);
+  border-bottom: 1px solid rgba(0,0,0,0.03);
+}
+
+.bio-table tr:last-child td {
+  border-bottom: none;
+}
+
+.node-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.node-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 40% 60% 50% 50% / 50% 40% 60% 50%;
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.78rem;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.status-active { background: rgba(82, 183, 136, 0.18); color: #2D6A4F; }
+.status-pending { background: rgba(242, 204, 143, 0.3); color: #D4A373; }
+.status-syncing { background: rgba(140, 158, 255, 0.2); color: #536DFE; }
+
+[data-theme="biolum"] .status-active { color: #00F2FE; }
+[data-theme="biolum"] .status-pending { color: #F2CC8F; }
+[data-theme="biolum"] .status-syncing { color: #8C9EFF; }

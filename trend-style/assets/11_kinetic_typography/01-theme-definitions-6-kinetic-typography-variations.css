@@ -1,0 +1,152 @@
+/* ==========================================================================
+   THEME DEFINITIONS (6 KINETIC TYPOGRAPHY VARIATIONS)
+   ========================================================================== */
+:root, [data-theme="1"] {
+    /* Theme 1: Cyber Kinetic Dark (Default) */
+    --bg-main: #0a0a0f;
+    --bg-card: #12121c;
+    --bg-sidebar: #0e0e17;
+    --bg-header: rgba(14, 14, 23, 0.85);
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --accent-primary: #ff2a5f;
+    --accent-secondary: #00f0ff;
+    --accent-tertiary: #00ff66;
+    --border-color: rgba(255, 42, 95, 0.25);
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    --font-heading: 'Syne', sans-serif;
+    --font-display: 'Oswald', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --ticker-bg: #ff2a5f;
+    --ticker-text: #0a0a0f;
+    --card-hover-border: #ff2a5f;
+    --chart-line: #00f0ff;
+    --chart-area: rgba(0, 240, 255, 0.15);
+    --badge-bg: rgba(0, 255, 102, 0.15);
+    --badge-text: #00ff66;
+}
+
+[data-theme="2"] {
+    /* Theme 2: Editorial Brutalist Kinetic */
+    --bg-main: #f5f2eb;
+    --bg-card: #ffffff;
+    --bg-sidebar: #eae6dd;
+    --bg-header: rgba(245, 242, 235, 0.9);
+    --text-primary: #0f0f0f;
+    --text-secondary: #555555;
+    --accent-primary: #e63946;
+    --accent-secondary: #1d3557;
+    --accent-tertiary: #ffb703;
+    --border-color: #0f0f0f;
+    --card-shadow: 6px 6px 0px #0f0f0f;
+    --font-heading: 'Playfair Display', serif;
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    --ticker-bg: #0f0f0f;
+    --ticker-text: #f5f2eb;
+    --card-hover-border: #e63946;
+    --chart-line: #e63946;
+    --chart-area: rgba(230, 57, 70, 0.15);
+    --badge-bg: #ffb703;
+    --badge-text: #0f0f0f;
+}
+
+[data-theme="3"] {
+    /* Theme 3: Swiss Precision Blue */
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-sidebar: #0f172a;
+    --bg-header: rgba(255, 255, 255, 0.9);
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --accent-primary: #2563eb;
+    --accent-secondary: #ff5722;
+    --accent-tertiary: #10b981;
+    --border-color: #cbd5e1;
+    --card-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+    --font-heading: 'Archivo Black', sans-serif;
+    --font-display: 'Archivo Black', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --ticker-bg: #2563eb;
+    --ticker-text: #ffffff;
+    --card-hover-border: #2563eb;
+    --chart-line: #2563eb;
+    --chart-area: rgba(37, 99, 235, 0.12);
+    --badge-bg: rgba(16, 185, 129, 0.15);
+    --badge-text: #047857;
+}
+
+[data-theme="4"] {
+    /* Theme 4: Monochrome Motion Tech */
+    --bg-main: #121215;
+    --bg-card: #1c1c22;
+    --bg-sidebar: #17171c;
+    --bg-header: rgba(18, 18, 21, 0.9);
+    --text-primary: #fafafa;
+    --text-secondary: #a1a1aa;
+    --accent-primary: #06b6d4;
+    --accent-secondary: #e4e4e7;
+    --accent-tertiary: #a855f7;
+    --border-color: #27272a;
+    --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-display: 'Oswald', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    --ticker-bg: #06b6d4;
+    --ticker-text: #121215;
+    --card-hover-border: #06b6d4;
+    --chart-line: #06b6d4;
+    --chart-area: rgba(6, 182, 212, 0.15);
+    --badge-bg: rgba(6, 182, 212, 0.15);
+    --badge-text: #06b6d4;
+}
+
+[data-theme="5"] {
+    /* Theme 5: Retro Pop Kinetic */
+    --bg-main: #2b1055;
+    --bg-card: #3c1975;
+    --bg-sidebar: #210a45;
+    --bg-header: rgba(43, 16, 85, 0.9);
+    --text-primary: #ffffff;
+    --text-secondary: #d8b4fe;
+    --accent-primary: #ffc700;
+    --accent-secondary: #ff007f;
+    --accent-tertiary: #00f5d4;
+    --border-color: rgba(255, 199, 0, 0.3);
+    --card-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    --font-heading: 'Syne', sans-serif;
+    --font-display: 'Oswald', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --ticker-bg: #ff007f;
+    --ticker-text: #ffffff;
+    --card-hover-border: #ffc700;
+    --chart-line: #ffc700;
+    --chart-area: rgba(255, 199, 0, 0.2);
+    --badge-bg: rgba(0, 245, 212, 0.2);
+    --badge-text: #00f5d4;
+}
+
+[data-theme="6"] {
+    /* Theme 6: Dark Acid Motion */
+    --bg-main: #050505;
+    --bg-card: #0d0e0d;
+    --bg-sidebar: #080908;
+    --bg-header: rgba(5, 5, 5, 0.9);
+    --text-primary: #ffffff;
+    --text-secondary: #888888;
+    --accent-primary: #b0ff00;
+    --accent-secondary: #ff0055;
+    --accent-tertiary: #00e5ff;
+    --border-color: rgba(176, 255, 0, 0.3);
+    --card-shadow: 0 0 25px rgba(176, 255, 0, 0.1);
+    --font-heading: 'Archivo Black', sans-serif;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --ticker-bg: #b0ff00;
+    --ticker-text: #050505;
+    --card-hover-border: #b0ff00;
+    --chart-line: #b0ff00;
+    --chart-area: rgba(176, 255, 0, 0.18);
+    --badge-bg: rgba(176, 255, 0, 0.2);
+    --badge-text: #b0ff00;
+}

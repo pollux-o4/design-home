@@ -1,0 +1,71 @@
+/* ==========================================
+   MAIN DASHBOARD WINDOW CONTAINER
+   ========================================== */
+.dashboard-window {
+  background: var(--surface);
+  border-top: 3px solid var(--light);
+  border-left: 3px solid var(--light);
+  border-right: 3px solid var(--dark-shadow);
+  border-bottom: 3px solid var(--dark-shadow);
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 85px);
+}
+
+/* Title Bar */
+.window-title-bar {
+  background: var(--title);
+  color: var(--title-text);
+  padding: 4px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+.title-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.window-controls {
+  display: flex;
+  gap: 4px;
+}
+.win-ctrl-btn {
+  width: 18px;
+  height: 18px;
+  background: var(--surface);
+  color: var(--text);
+  border-top: 1px solid var(--light);
+  border-left: 1px solid var(--light);
+  border-right: 1px solid var(--dark-shadow);
+  border-bottom: 1px solid var(--dark-shadow);
+  font-size: 11px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.win-ctrl-btn:active {
+  border-top: 1px solid var(--dark-shadow);
+  border-left: 1px solid var(--dark-shadow);
+  border-right: 1px solid var(--light);
+  border-bottom: 1px solid var(--light);
+}
+
+/* Main Grid Layout */
+.window-body {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  flex-grow: 1;
+  gap: 12px;
+  padding: 12px;
+}
+@media (max-width: 900px) {
+  .window-body {
+    grid-template-columns: 1fr;
+  }
+}

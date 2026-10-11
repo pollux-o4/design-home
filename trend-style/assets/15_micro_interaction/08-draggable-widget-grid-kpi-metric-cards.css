@@ -1,0 +1,185 @@
+/* --------------------------------------------------------------------------
+   DRAGGABLE WIDGET GRID & KPI METRIC CARDS
+   -------------------------------------------------------------------------- */
+.widget-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.widget-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  position: relative;
+  transition: transform 0.3s var(--spring-ease), box-shadow 0.3s ease, border-color 0.3s ease;
+  cursor: grab;
+}
+.widget-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.widget-card:active {
+  cursor: grabbing;
+}
+
+/* Drag and drop micro-states */
+.widget-card.dragging {
+  opacity: 0.4;
+  transform: scale(0.96) rotate(-2deg);
+  border: 2px dashed var(--primary);
+}
+.widget-card.drag-over {
+  border-color: var(--primary);
+  box-shadow: 0 0 25px var(--primary-light);
+  transform: scale(1.03);
+}
+
+.drag-handle {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  color: var(--text-muted);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.widget-card:hover .drag-handle {
+  opacity: 0.6;
+}
+
+.kpi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.kpi-title-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.kpi-icon {
+  font-size: 18px;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+}
+.kpi-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* Particle Burst Bookmark / Like Button */
+.like-burst-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: var(--radius-full);
+  transition: all 0.2s var(--spring-ease);
+  position: relative;
+}
+.like-burst-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: scale(1.1);
+}
+.heart-svg {
+  fill: transparent;
+  stroke: currentColor;
+  stroke-width: 2;
+  transition: all 0.3s var(--spring-ease);
+}
+.like-burst-btn.liked {
+  color: var(--accent-rose);
+}
+.like-burst-btn.liked .heart-svg {
+  fill: var(--accent-rose);
+  transform: scale(1.2);
+}
+.like-count {
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+/* Burst Particle DOM element */
+.burst-particle {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.kpi-value-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.kpi-num {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+}
+.trend-pill {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.trend-up {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--accent-emerald);
+}
+
+.sparkline-box {
+  height: 32px;
+  width: 100%;
+}
+.sparkline-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Skeleton Loading Shimmer Effect */
+.skeleton-loading .kpi-num,
+.skeleton-loading .sparkline-box,
+.skeleton-loading .bar-fill {
+  position: relative;
+  overflow: hidden;
+  color: transparent !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-radius: 4px;
+}
+.skeleton-loading .kpi-num::after,
+.skeleton-loading .sparkline-box::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  animation: shimmer 1.2s infinite;
+}
+@keyframes shimmer {
+  100% { left: 100%; }
+}

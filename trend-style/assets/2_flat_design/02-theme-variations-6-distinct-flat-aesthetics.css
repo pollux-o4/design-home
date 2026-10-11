@@ -1,0 +1,164 @@
+/* --------------------------------------------------------------------------
+   THEME VARIATIONS (6 Distinct Flat Aesthetics)
+   -------------------------------------------------------------------------- */
+
+/* V1: Classic Swiss Flat */
+body.theme-v1 {
+    --bg-body: #f1f5f9;
+    --bg-card: #ffffff;
+    --bg-sidebar: #0f172a;
+    --bg-header: #ffffff;
+    --bg-hover: #f1f5f9;
+    --bg-accent-light: #eff6ff;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --border-color: #e2e8f0;
+    --color-primary: #2563eb;
+    --color-primary-hover: #1d4ed8;
+    --color-success: #16a34a;
+    --color-danger: #dc2626;
+    --border-radius: 8px;
+    --box-shadow: none;
+}
+
+/* V2: Soft Pastel Flat */
+body.theme-v2 {
+    --bg-body: #faf5ff;
+    --bg-card: #ffffff;
+    --bg-sidebar: #4c1d95;
+    --bg-header: #ffffff;
+    --bg-hover: #f3e8ff;
+    --bg-accent-light: #f5f3ff;
+    --text-primary: #3b0764;
+    --text-secondary: #6b21a8;
+    --text-muted: #a855f7;
+    --text-sidebar: #e9d5ff;
+    --text-sidebar-active: #ffffff;
+    --border-color: #f3e8ff;
+    --color-primary: #9333ea;
+    --color-primary-hover: #7e22ce;
+    --color-success: #059669;
+    --color-warning: #d97706;
+    --color-danger: #e11d48;
+    --color-info: #0284c7;
+    --chart-line-1: #9333ea;
+    --chart-line-2: #059669;
+    --border-radius: 12px;
+    --box-shadow: none;
+}
+
+/* V3: Midnight Dark Flat */
+body.theme-v3 {
+    --bg-body: #090d16;
+    --bg-card: #111827;
+    --bg-sidebar: #0f172a;
+    --bg-header: #111827;
+    --bg-hover: #1f2937;
+    --bg-accent-light: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --text-sidebar: #94a3b8;
+    --text-sidebar-active: #38bdf8;
+    --border-color: #1e293b;
+    --color-primary: #38bdf8;
+    --color-primary-hover: #0284c7;
+    --color-success: #34d399;
+    --color-warning: #facc15;
+    --color-danger: #fb7185;
+    --color-info: #818cf8;
+    --chart-line-1: #38bdf8;
+    --chart-line-2: #34d399;
+    --border-radius: 8px;
+    --box-shadow: none;
+}
+
+/* V4: High-Contrast Corporate Flat */
+body.theme-v4 {
+    --bg-body: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-sidebar: #0284c7;
+    --bg-header: #ffffff;
+    --bg-hover: #e0f2fe;
+    --bg-accent-light: #f0f9ff;
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+    --text-sidebar: #e0f2fe;
+    --text-sidebar-active: #ffffff;
+    --border-color: #cbd5e1;
+    --border-width: 2px;
+    --color-primary: #ea580c;
+    --color-primary-hover: #c2410c;
+    --color-success: #15803d;
+    --color-warning: #b45309;
+    --color-danger: #b91c1c;
+    --color-info: #0369a1;
+    --chart-line-1: #ea580c;
+    --chart-line-2: #0284c7;
+    --border-radius: 4px;
+    --box-shadow: none;
+}
+
+/* V5: Geometric Memphis Flat */
+body.theme-v5 {
+    --bg-body: #fff7ed;
+    --bg-card: #ffffff;
+    --bg-sidebar: #0d9488;
+    --bg-header: #ffffff;
+    --bg-hover: #feefc3;
+    --bg-accent-light: #fef3c7;
+    --text-primary: #1e293b;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+    --text-sidebar: #ccfbf1;
+    --text-sidebar-active: #fef08a;
+    --border-color: #1e293b;
+    --border-width: 2px;
+    --color-primary: #0d9488;
+    --color-primary-hover: #0f766e;
+    --color-success: #16a34a;
+    --color-warning: #f59e0b;
+    --color-danger: #e11d48;
+    --color-info: #8b5cf6;
+    --chart-line-1: #0d9488;
+    --chart-line-2: #f59e0b;
+    --border-radius: 0px;
+    --box-shadow: 4px 4px 0px #1e293b;
+    --transform-hover: translate(-2px, -2px);
+}
+
+/* V6: Nordic Mono Flat */
+body.theme-v6 {
+    --bg-body: #e2e8f0;
+    --bg-card: #ffffff;
+    --bg-sidebar: #334155;
+    --bg-header: #ffffff;
+    --bg-hover: #cbd5e1;
+    --bg-accent-light: #f1f5f9;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --text-sidebar: #cbd5e1;
+    --text-sidebar-active: #ffffff;
+    --border-color: #94a3b8;
+    --color-primary: #0f172a;
+    --color-primary-hover: #1e293b;
+    --color-success: #334155;
+    --color-warning: #475569;
+    --color-danger: #0f172a;
+    --color-info: #64748b;
+    --chart-line-1: #0f172a;
+    --chart-line-2: #64748b;
+    --border-radius: 2px;
+    --box-shadow: none;
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}

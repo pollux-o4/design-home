@@ -1,0 +1,109 @@
+/* Aurora Mesh Background */
+.aurora-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    overflow: hidden;
+    filter: blur(80px);
+    opacity: 0.75;
+    pointer-events: none;
+}
+
+.aurora-blob {
+    position: absolute;
+    border-radius: 50%;
+    mix-blend-mode: screen;
+    animation: auroraFloat 22s infinite ease-in-out alternate;
+    transition: background var(--transition-speed) ease;
+}
+
+body.v2-dawn .aurora-blob,
+body.v6-pastel .aurora-blob {
+    mix-blend-mode: multiply;
+    opacity: 0.65;
+}
+
+.blob-1 {
+    width: 55vw;
+    height: 55vw;
+    background: radial-gradient(circle, var(--aurora-1) 0%, transparent 70%);
+    top: -15%;
+    left: -10%;
+    animation-delay: 0s;
+}
+
+.blob-2 {
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, var(--aurora-2) 0%, transparent 70%);
+    top: 15%;
+    right: -15%;
+    animation-delay: -5s;
+    animation-duration: 26s;
+}
+
+.blob-3 {
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, var(--aurora-3) 0%, transparent 70%);
+    bottom: -15%;
+    left: 15%;
+    animation-delay: -11s;
+    animation-duration: 20s;
+}
+
+.blob-4 {
+    width: 45vw;
+    height: 45vw;
+    background: radial-gradient(circle, var(--aurora-4) 0%, transparent 70%);
+    top: 35%;
+    left: 35%;
+    animation-delay: -16s;
+    animation-duration: 28s;
+    opacity: 0.5;
+}
+
+@keyframes auroraFloat {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    33% { transform: translate(8%, -8%) scale(1.12) rotate(8deg); }
+    66% { transform: translate(-6%, 12%) scale(0.92) rotate(-6deg); }
+    100% { transform: translate(-12%, -4%) scale(1.05) rotate(4deg); }
+}
+
+/* Glass Surface Styling */
+.glass-card {
+    background: var(--surface-glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+    transition: left 0.7s ease;
+    pointer-events: none;
+}
+
+.glass-card:hover::before {
+    left: 100%;
+}
+
+.glass-card:hover {
+    border-color: var(--border-glass-strong);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), 0 0 20px var(--accent-glow);
+    transform: translateY(-2px);
+}

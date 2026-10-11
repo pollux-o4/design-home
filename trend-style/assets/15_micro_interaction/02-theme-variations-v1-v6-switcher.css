@@ -1,0 +1,76 @@
+/* --------------------------------------------------------------------------
+   THEME VARIATIONS (V1 - V6 Switcher)
+   -------------------------------------------------------------------------- */
+/* V1: Kinetic Spring */
+body.theme-v1 {
+  --bg-main: #0b0f19;
+  --bg-sidebar: #111827;
+  --bg-card: rgba(17, 24, 39, 0.8);
+  --primary: #6366f1;
+  --border-color: rgba(99, 102, 241, 0.15);
+  --spring-ease: cubic-bezier(0.34, 1.7, 0.64, 1);
+}
+
+/* V2: Tactile Haptic Modern */
+body.theme-v2 {
+  --bg-main: #0d1117;
+  --bg-sidebar: #161b22;
+  --bg-card: #21262d;
+  --border-color: #30363d;
+  --primary: #10b981;
+  --primary-hover: #059669;
+  --primary-light: rgba(16, 185, 129, 0.15);
+  --shadow-md: 0 4px 0 0 #000, 0 8px 16px rgba(0, 0, 0, 0.4);
+  --spring-ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* V3: Fluid Liquid Morph */
+body.theme-v3 {
+  --bg-main: #13091e;
+  --bg-sidebar: #1d0f2f;
+  --bg-card: rgba(35, 18, 54, 0.7);
+  --border-color: rgba(236, 72, 153, 0.2);
+  --primary: #ec4899;
+  --primary-hover: #db2777;
+  --primary-light: rgba(236, 72, 153, 0.18);
+  --shadow-glow: 0 0 30px rgba(236, 72, 153, 0.35);
+  --spring-ease: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+/* V4: Quantum Particle Glow */
+body.theme-v4 {
+  --bg-main: #030712;
+  --bg-sidebar: #0b1329;
+  --bg-card: rgba(15, 23, 42, 0.85);
+  --border-color: rgba(56, 189, 248, 0.25);
+  --primary: #38bdf8;
+  --primary-hover: #0284c7;
+  --primary-light: rgba(56, 189, 248, 0.15);
+  --shadow-glow: 0 0 35px rgba(56, 189, 248, 0.4);
+}
+
+/* V5: Hyper-Minimal Glass */
+body.theme-v5 {
+  --bg-main: #090d16;
+  --bg-sidebar: rgba(15, 23, 42, 0.6);
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --border-color: rgba(255, 255, 255, 0.12);
+  --primary: #f8fafc;
+  --primary-hover: #e2e8f0;
+  --primary-light: rgba(255, 255, 255, 0.1);
+  --text-primary: #ffffff;
+  --shadow-md: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* V6: Cyberpunk Synthwave */
+body.theme-v6 {
+  --bg-main: #070012;
+  --bg-sidebar: #0e0024;
+  --bg-card: rgba(26, 0, 48, 0.85);
+  --border-color: #ff007f;
+  --primary: #ff007f;
+  --primary-hover: #d6006b;
+  --accent-cyan: #00f0ff;
+  --primary-light: rgba(255, 0, 127, 0.2);
+  --shadow-glow: 0 0 20px #ff007f, inset 0 0 10px rgba(0, 240, 255, 0.3);
+}

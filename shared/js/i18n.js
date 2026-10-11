@@ -85,6 +85,7 @@
   let currentLang = localStorage.getItem('dh_lang') || 'ko';
 
   function applyLanguage(lang) {
+    if (!Object.hasOwn(dictionary, lang)) return;
     currentLang = lang;
     localStorage.setItem('dh_lang', lang);
     document.documentElement.lang = lang;
@@ -116,6 +117,7 @@
   }
 
   window.setLanguage = applyLanguage;
+  document.addEventListener('dh:navigation-ready', () => applyLanguage(currentLang));
 
   document.addEventListener('DOMContentLoaded', () => {
     applyLanguage(currentLang);

@@ -1,0 +1,87 @@
+/* ==========================================================================
+   4. TOP-RIGHT THEME SWITCHER (FIXED)
+   ========================================================================== */
+.version-switcher-bar {
+  position: fixed;
+  top: 18px;
+  right: 24px;
+  z-index: 10000;
+  background: var(--card-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1.5px solid var(--card-border);
+  padding: 6px 10px;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--card-shadow);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition-theme);
+}
+
+.switcher-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.switcher-label svg {
+  width: 14px;
+  height: 14px;
+  fill: var(--accent-1);
+}
+
+.theme-btn {
+  background: transparent;
+  border: none;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-fluid);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.theme-btn .color-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  transition: transform 0.3s var(--ease-fluid);
+}
+
+.theme-btn[data-target="flora"] .color-dot { background: #FF80AB; }
+.theme-btn[data-target="biolum"] .color-dot { background: #00F2FE; }
+.theme-btn[data-target="terracotta"] .color-dot { background: #E07A5F; }
+.theme-btn[data-target="forest"] .color-dot { background: #52B788; }
+.theme-btn[data-target="cyberbio"] .color-dot { background: #00F5D4; }
+.theme-btn[data-target="coral"] .color-dot { background: #E29578; }
+
+.theme-btn:hover {
+  color: var(--text-main);
+  transform: translateY(-2px);
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.theme-btn.active {
+  background: var(--accent-gradient);
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  border-radius: var(--radius-pill);
+}
+
+.theme-btn.active .color-dot {
+  transform: scale(1.3);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8);
+}

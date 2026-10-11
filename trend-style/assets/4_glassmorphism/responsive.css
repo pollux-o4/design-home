@@ -1,0 +1,79 @@
+/* Adapt the source layout to its viewport. */
+ .app-layout {
+  grid-template-columns:270px minmax(0,1fr)
+}
+.main-content,.glass-panel {
+  min-width:0
+}
+.glass-modal {
+  max-height:calc(100dvh - 32px);
+  overflow-y:auto
+}
+
+.theme-switcher-bar {
+  position:relative;
+  top:auto;
+  right:auto;
+  margin:16px;
+  width:fit-content;
+  max-width:calc(100% - 32px);
+  flex-wrap:wrap
+}
+
+@media(max-width:1100px) {
+  .header-bar,.header-actions,.chart-header {
+  flex-wrap:wrap
+}
+.widgets-grid {
+  grid-template-columns:minmax(0,1fr)
+}
+
+}
+
+@media(max-width:800px) {
+  .app-layout {
+  grid-template-columns:minmax(0,1fr)
+}
+.sidebar {
+  padding:20px
+}
+
+}
+
+@media(max-width:540px) {
+  .main-content {
+  padding:16px
+}
+.header-actions {
+  width:100%
+}
+.tab-strip {
+  flex-wrap:wrap;
+  gap:12px
+}
+.kpi-grid {
+  grid-template-columns:minmax(0,1fr)
+}
+.glass-modal {
+  padding:20px
+}
+.modal-actions {
+  flex-wrap:wrap
+}
+.dropdown-menu {
+  max-width:calc(100vw - 32px)
+}
+
+}
+
+
+@media(max-width:800px) {
+  .sidebar {
+  display:flex
+}
+.glass-modal {
+  width:calc(100% - 32px)
+}
+
+}
+

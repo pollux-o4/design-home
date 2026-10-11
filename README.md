@@ -4,6 +4,7 @@
 
 - `impeccable/` — impeccable 디자인 스킬 (github: pbakaus/impeccable)
 - `mengto-skills/` — MengTo Skills 모음 (github: MengTo/Skills)
+- [`design-compare/`](design-compare/README.md) — 기준 컴포넌트·개발 페이지 시각/CSS 비교 CLI
 
 ## 📂 폴더 구조 개요
 

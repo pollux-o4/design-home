@@ -1,0 +1,270 @@
+/* --------------------------------------------------------------------------
+   SIDEBAR ACCORDION NAVIGATION
+   -------------------------------------------------------------------------- */
+.sidebar {
+  width: 260px;
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 100;
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 20px;
+}
+.brand-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--primary), var(--accent-purple));
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: var(--shadow-glow);
+  transition: transform 0.4s var(--spring-ease);
+}
+.brand-icon:hover {
+  transform: rotate(15deg) scale(1.1);
+}
+.brand-text {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+.brand-text span { color: var(--primary); }
+.live-pill {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 700;
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--accent-emerald);
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent-emerald);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-emerald);
+  animation: blink 1.5s infinite ease-in-out;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.7); }
+}
+
+/* Accordion Sub-Menu */
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+}
+.nav-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  padding-left: 8px;
+}
+
+.accordion-item {
+  margin-bottom: 6px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: background 0.2s ease;
+}
+.accordion-trigger {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  transition: all 0.2s var(--spring-ease);
+}
+.accordion-trigger:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(3px);
+}
+.nav-icon {
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+  transition: color 0.2s, transform 0.3s var(--spring-ease);
+}
+.accordion-trigger:hover .nav-icon {
+  color: var(--primary);
+  transform: scale(1.15);
+}
+.accordion-chevron {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s var(--spring-ease);
+}
+.accordion-item.open .accordion-chevron {
+  transform: rotate(180deg);
+}
+.accordion-item.open .accordion-trigger {
+  color: var(--text-primary);
+  background: var(--primary-light);
+}
+.accordion-item.open .nav-icon {
+  color: var(--primary);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s var(--liquid-ease), padding 0.3s ease;
+  padding: 0 12px 0 42px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.accordion-item.open .accordion-content {
+  max-height: 200px;
+  padding-top: 6px;
+  padding-bottom: 10px;
+}
+.nav-sub-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s var(--spring-ease);
+}
+.nav-sub-link:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateX(4px);
+}
+.nav-sub-link.active {
+  color: var(--primary);
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.08);
+}
+.bullet {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+/* Sidebar Footer Controls (Spring Switch & Storage) */
+.sidebar-footer {
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.switch-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Physical Spring Toggle Switch */
+.spring-switch {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  display: inline-block;
+}
+.spring-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.spring-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-full);
+  transition: background-color 0.3s ease;
+  border: 1px solid var(--border-color);
+}
+.spring-knob {
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.4s var(--spring-ease);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+.spring-switch input:checked + .spring-slider {
+  background-color: var(--primary);
+}
+.spring-switch input:checked + .spring-slider .spring-knob {
+  transform: translateX(20px) scale(1.1);
+}
+
+.storage-card {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 12px;
+}
+.storage-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+.storage-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.storage-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--primary));
+  border-radius: 3px;
+  transition: width 0.6s var(--spring-ease);
+}

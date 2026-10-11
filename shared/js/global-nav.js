@@ -11,6 +11,14 @@
     rootPrefix = '../';
   }
 
+  const destinations = [
+    { path: 'index.html', key: 'nav_home', label: '홈', icon: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z' },
+    { path: 'trend-style/index.html', key: 'nav_trends', label: '트렌드 스타일', icon: 'M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.2 19.54 10.56 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z' },
+    { path: 'ui-components/index.html', key: 'nav_components', label: 'UI 컴포넌트', icon: 'M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z' }
+  ];
+  const activePath = currentPath.includes('/trend-style/') ? 'trend-style/index.html'
+    : currentPath.includes('/ui-components/') ? 'ui-components/index.html' : 'index.html';
+
   const navHTML = `
     <nav id="dh-global-nav" aria-label="Global Navigation">
       <a href="${rootPrefix}index.html" class="dh-brand">
@@ -18,24 +26,13 @@
         <span>Design Home</span>
       </a>
       <ul class="dh-nav-links">
+        ${destinations.map(destination => `
         <li>
-          <a href="${rootPrefix}index.html" class="dh-nav-link ${currentPath.endsWith('index.html') && !currentPath.includes('/trend-style') && !currentPath.includes('/ui-components') ? 'active' : ''}">
-            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-            <span data-i18n="nav_home">홈</span>
+          <a href="${rootPrefix}${destination.path}" class="dh-nav-link ${activePath === destination.path ? 'active' : ''}">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="${destination.icon}"/></svg>
+            <span data-i18n="${destination.key}">${destination.label}</span>
           </a>
-        </li>
-        <li>
-          <a href="${rootPrefix}trend-style/index.html" class="dh-nav-link ${currentPath.includes('trend-style') ? 'active' : ''}">
-            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.2 19.54 10.56 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
-            <span data-i18n="nav_trends">트렌드 스타일</span>
-          </a>
-        </li>
-        <li>
-          <a href="${rootPrefix}ui-components/index.html" class="dh-nav-link ${currentPath.includes('ui-components') ? 'active' : ''}">
-            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
-            <span data-i18n="nav_components">UI 컴포넌트</span>
-          </a>
-        </li>
+        </li>`).join('')}
       </ul>
 
       <div class="dh-nav-right">
@@ -52,9 +49,11 @@
   `;
 
   function injectNav() {
+    if (document.getElementById('dh-global-nav')) return;
     const container = document.createElement('div');
     container.innerHTML = navHTML.trim();
     document.body.insertBefore(container.firstChild, document.body.firstChild);
+    document.dispatchEvent(new Event('dh:navigation-ready'));
   }
 
   if (document.readyState === 'loading') {
