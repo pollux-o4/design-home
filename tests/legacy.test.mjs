@@ -46,7 +46,8 @@ test('canvas registry supplies render counts, uniform description search and saf
     await page.route(/https?:\/\/(?!127\.0\.0\.1)/, route => route.abort());
   await page.goto(`${base}/ui-components/index.html`);
   const expected = await page.evaluate(() => Object.values(ComponentModules).flatMap(module => CanvasCatalog.create().components(module)).length);
-  assert.equal(await page.locator('.component-card').count(), expected);
+  assert.equal(await page.locator('.component-card').count(), await page.evaluate(() => CanvasCatalog.create().components(Object.values(ComponentModules)[0]).length));
+  assert.ok(expected > await page.locator('.component-card').count());
   assert.equal(await page.locator('.layer-item').count(), 5);
   await page.locator('#search-input').fill('GNB');
   assert.ok(await page.locator('.component-card').count() > 0);
@@ -87,6 +88,7 @@ test('feed reset reuses its catalog markup after load and global preference adap
   const page = await browser.newPage();
     await page.route(/https?:\/\/(?!127\.0\.0\.1)/, route => route.abort());
   await page.goto(`${base}/ui-components/index.html`);
+  await page.locator('[data-target="navigation"] button').click();
   const initial = await page.locator('#infinite-scroll-list').innerHTML();
   await page.evaluate(() => triggerInfiniteScroll());
   await page.waitForFunction(() => document.querySelectorAll('#infinite-scroll-list .infinite-item-card').length > 4);
@@ -105,6 +107,7 @@ test('feed render lifecycle resets exhausted state and cancels detached pending 
   const page = await browser.newPage();
   await page.route(/https?:\/\/(?!127\.0\.0\.1)/, route => route.abort());
   await page.goto(`${base}/ui-components/index.html`);
+  await page.locator('[data-target="navigation"] button').click();
   for (const count of [6, 8, 10]) {
     await page.evaluate(() => triggerInfiniteScroll());
     await page.waitForFunction(expected => document.querySelectorAll('#infinite-scroll-list .infinite-item-card').length === expected, count);

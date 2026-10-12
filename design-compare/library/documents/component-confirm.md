@@ -19,7 +19,10 @@
   "sourcePath": "ui-components/index.html",
   "sources": [
     "ui-components/js/components/popups-and-layers.js",
-    "ui-components/css/components.css"
+    "ui-components/js/sample-definition.js",
+    "ui-components/js/samples/layers.js",
+    "ui-components/css/controls/layers.css",
+    "shared/css/interface.css"
   ],
   "previewPath": "/ui-components/index.html?view=specimen&component=confirm",
   "tags": [

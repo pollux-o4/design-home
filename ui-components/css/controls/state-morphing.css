@@ -1,0 +1,119 @@
+.morph-stage {
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 12px;
+  background: var(--ui-bg);
+  border-radius: 18px;
+}
+.morph-action {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 156px;
+  min-height: 48px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ui-action);
+  color: white;
+  font-size: 14px;
+  transition:
+    width 0.35s var(--ui-ease),
+    border-radius 0.35s var(--ui-ease),
+    background 0.35s;
+}
+.morph-action[data-state="progress"] {
+  width: min(260px, 100%);
+  background: var(--ui-text);
+  border-radius: 16px;
+  cursor: progress;
+}
+.morph-action[data-state="done"] {
+  width: 210px;
+  background: var(--ui-success);
+}
+.morph-meter {
+  position: absolute;
+  inset: 0;
+  width: var(--morph-progress, 0%);
+  background: #ffffff25;
+  z-index: -1;
+  transition: width 0.25s linear;
+}
+.morph-island {
+  width: min(230px, 100%);
+  padding: 8px;
+  border-radius: 999px;
+  background: var(--ui-text);
+  color: white;
+  transition:
+    width 0.35s var(--ui-ease),
+    border-radius 0.35s var(--ui-ease);
+}
+.morph-island.is-expanded {
+  width: min(340px, 100%);
+  border-radius: 28px;
+}
+.island-summary {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 0;
+  padding: 8px;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+}
+.island-summary > span:nth-child(2) {
+  flex: 1;
+  min-width: 0;
+}
+.island-summary strong {
+  display: block;
+  font-size: 13px;
+}
+.island-summary small {
+  display: block;
+  color: #c6c6cb;
+  margin-top: 4px;
+  font-size: 11px;
+}
+.island-art {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #466971;
+  flex-shrink: 0;
+}
+.is-playing .island-art {
+  background: #367154;
+}
+.island-detail {
+  padding: 8px 12px 12px;
+}
+.island-detail p {
+  color: #c6c6cb;
+  font-size: 11px;
+  margin-bottom: 16px;
+}
+.island-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.island-controls button {
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: #ffffff20;
+  color: white;
+  font-size: 12px;
+}

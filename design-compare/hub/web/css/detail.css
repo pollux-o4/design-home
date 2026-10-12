@@ -1,0 +1,146 @@
+.detail-toolbar nav {
+  flex: 1 1 0%;
+  color: var(--ui-secondary);
+}
+
+.detail-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 20px;
+}
+
+.filters > summary::-webkit-details-marker {
+  display: none;
+}
+
+.detail-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12px;
+  min-height: 44px;
+  margin-bottom: 34px;
+}
+
+.quiet-button {
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--ui-blue);
+  border: 0px;
+  font-size: 12px;
+}
+
+#link-status {
+  color: var(--ui-hover);
+}
+
+.detail-heading > div {
+  max-width: 760px;
+}
+
+#summary {
+  color: var(--ui-secondary);
+  font-size: 16px;
+}
+
+.outline-link {
+  font-size: 12px;
+  border: 1px solid var(--ui-border);
+  text-decoration: none;
+  white-space: nowrap;
+  background: var(--ui-surface);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border-radius: 99px;
+  padding: 12px 18px;
+}
+
+.outline-link .ui-icon {
+  width: 14px;
+}
+
+.detail-tabs {
+  display: flex;
+  width: fit-content;
+  background: var(--ui-soft);
+  border-radius: 99px;
+  padding: 4px;
+  gap: 2px;
+  margin: 28px 0px;
+}
+
+.detail-tabs button {
+  border: 0px;
+  background: transparent;
+  border-radius: 99px;
+  padding: 9px 24px;
+  color: var(--ui-hover);
+}
+
+.detail-tabs button[aria-pressed="true"] {
+  border-color: var(--ui-action);
+  background: var(--ui-surface);
+  color: var(--ui-text);
+  box-shadow: rgba(0, 0, 0, 0.03) 0px 2px 6px;
+}main:has(#detail:not([hidden])) {
+  padding-top: 32px;
+}
+
+#detail .detail-heading h1 {
+  font-size: clamp(34px, 3.5vw, 48px);
+}
+
+#detail #title:focus {
+  outline: none;
+}
+
+#detail #summary {
+  margin: 12px 0px;
+}
+
+#detail .detail-tabs {
+  margin: 20px 0px;
+}
+
+#detail-toolbar {
+  margin-bottom: 22px;
+}
+
+@media (max-width: 760px) {
+  .detail-toolbar {
+    gap: 8px;
+  }
+
+  .detail-toolbar nav {
+    display: none;
+  }
+
+  .detail-toolbar #copy-link {
+    margin-left: auto;
+  }
+
+  .detail-heading {
+    display: block;
+  }
+
+  .detail-heading .outline-link {
+    margin-top: 8px;
+  }
+}
+@media (max-width: 640px) {
+  .detail-toolbar {
+    margin-bottom: 22px;
+  }
+
+  .detail-heading {
+    display: block;
+  }
+
+  #summary {
+    font-size: 14px;
+  }
+}

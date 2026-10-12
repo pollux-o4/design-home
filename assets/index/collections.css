@@ -1,0 +1,178 @@
+.hub-section {
+  padding-top: 110px;
+  padding-bottom: 80px;
+}
+
+.section-heading {
+  margin-bottom: 34px;
+}
+
+.eyebrow {
+  color: var(--ui-secondary);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  margin-bottom: 12px;
+}
+
+.section-heading h2, .library-invitation h2 {
+  font-size: 36px;
+  letter-spacing: -0.055em;
+  line-height: 1.25;
+}
+
+.section-heading > p:last-child, .library-invitation > div > p:last-child {
+  color: var(--ui-secondary);
+  margin-top: 14px;
+  font-size: 16px;
+}
+
+.hub-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0px, 1fr));
+  gap: 20px;
+}
+
+.hub-card {
+  background: var(--ui-surface); transition: transform 350ms var(--ui-ease), box-shadow 350ms;
+  border-radius: 24px;
+  overflow: hidden;
+  text-decoration: none;
+  background: white;
+}
+
+.hub-card:hover {
+  transform: translateY(-5px);
+  box-shadow: rgba(29, 29, 31, 0.047) 0px 18px 40px;
+}
+
+.hub-card:active {
+  transform: scale(0.99);
+}
+
+.card-art {
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow: hidden;
+}
+
+.card-art-1 {
+  background: rgb(229, 234, 243);
+}
+
+.card-art-2 {
+  background: rgb(236, 236, 241);
+}
+
+.card-art-3 {
+  background: rgb(247, 236, 239);
+}
+
+.card-art img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.133) 0px 10px 30px;
+  height: 100%;
+  object-fit: scale-down;
+}
+
+.card-copy {
+  padding: 25px 28px 30px;
+  position: relative;
+}
+
+.card-icon-box {
+  display: none;
+}
+
+.card-tag {
+  font-size: 11px;
+  color: var(--ui-secondary);
+  margin-bottom: 10px;
+}
+
+.card-heading {
+  font-size: 25px;
+  letter-spacing: -0.045em;
+}
+
+.card-body-text {
+  color: var(--ui-secondary);
+  font-size: 14px;
+  line-height: 1.65;
+  margin: 14px 0px 22px;
+  min-height: 70px;
+}
+
+.card-action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ui-blue);
+  font-size: 13px;
+}
+
+.card-action .ui-icon {
+  width: 14px;
+}
+
+.library-invitation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  padding: 64px 0px 8px;
+}
+
+@media (max-width: 900px) {
+  .card-art {
+    height: 180px;
+  }
+
+  .card-copy {
+    padding: 22px;
+  }
+
+  .card-heading {
+    font-size: 21px;
+  }
+}
+@media (max-width: 640px) {
+  .hub-section {
+    padding-top: 72px;
+  }
+
+  .section-heading h2, .library-invitation h2 {
+    font-size: 28px;
+  }
+
+  .hub-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-art {
+    height: 240px;
+    padding: 24px;
+  }
+
+  .card-copy {
+    padding: 28px;
+  }
+
+  .card-heading {
+    font-size: 26px;
+  }
+
+  .card-body-text {
+    min-height: 0px;
+  }
+
+  .library-invitation {
+    flex-direction: column;
+    align-items: start;
+    padding-top: 48px;
+  }
+}

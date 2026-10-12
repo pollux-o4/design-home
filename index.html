@@ -1,174 +1,273 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Design Home — 모던 UI/UX 아키텍처 & 쇼케이스 허브</title>
-  <meta name="description" content="Design Home은 15가지 최신 UI 디자인 트렌드, 피그마 캔버스 스타일 인터랙티브 컴포넌트 시스템, 디자인 토큰 가이드를 제공하는 큐레이션 허브입니다." />
-  <link rel="canonical" href="https://pollux-o4.github.io/design-home/" />
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://pollux-o4.github.io/design-home/" />
-  <meta property="og:title" content="Design Home — 모던 UI/UX 아키텍처 허브" />
-  <meta property="og:description" content="15가지 디자인 트렌드, 인터랙티브 컴포넌트 시스템, 시각적 디자인 가이드라인 탐색." />
-  <meta property="og:image" content="https://pollux-o4.github.io/design-home/shared/assets/og-image.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:site_name" content="Design Home" />
-  <meta property="og:locale" content="ko_KR" />
-
-  <!-- Twitter Cards -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://pollux-o4.github.io/design-home/" />
-  <meta name="twitter:title" content="Design Home — 모던 UI/UX 아키텍처 허브" />
-  <meta name="twitter:description" content="15가지 디자인 트렌드, 인터랙티브 컴포넌트 시스템, 시각적 디자인 가이드라인 탐색." />
-  <meta name="twitter:image" content="https://pollux-o4.github.io/design-home/shared/assets/og-image.png" />
-
-  <!-- Favicon & Theme -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❖</text></svg>" type="image/svg+xml" />
-  <meta name="theme-color" content="#07090e" />
-
-  <!-- Fonts Optimization -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@700;900&display=swap" />
-
-  <!-- Static Styles -->
-  <link rel="stylesheet" href="./shared/css/global-nav.css" />
-
-  <link rel="stylesheet" href="assets/index/styles.css">
-  <link rel="stylesheet" href="./shared/css/scrollbar.css">
-</head>
-<body>
-
-  <!-- Skip to Main Content for Accessibility -->
-  <a href="#main-content" class="skip-link">본문 영역으로 건너뛰기</a>
-
-  <!-- Ambient background glow elements -->
-  <div class="bg-glow-1" aria-hidden="true"></div>
-  <div class="bg-glow-2" aria-hidden="true"></div>
-
-  <!-- Header / Hero Landmark -->
-  <header class="hero">
-    <div class="container">
-      <div class="hero-badge">
-        <span class="hero-badge-spark" aria-hidden="true"></span>
-        <span data-i18n="hero_badge">디자인 시스템 & UX 아키텍처 허브</span>
-      </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Design Home — 모던 UI/UX 아키텍처
+      &
+      쇼케이스 허브
+    </title>
+    <meta name="description" content="Design Home은 15가지 최신 UI 디자인 트렌드, 피그마 캔버스 스타일 인터랙티브 컴포넌트 시스템, 디자인 토큰 가이드를 제공하는 큐레이션 허브입니다." />
+    <link rel="canonical" href="https://pollux-o4.github.io/design-home/" />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://pollux-o4.github.io/design-home/" />
+    <meta property="og:title" content="Design Home — 모던 UI/UX 아키텍처 허브" />
+    <meta property="og:description" content="15가지 디자인 트렌드, 인터랙티브 컴포넌트 시스템, 시각적 디자인 가이드라인 탐색." />
+    <meta property="og:image" content="https://pollux-o4.github.io/design-home/shared/assets/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Design Home" />
+    <meta property="og:locale" content="ko_KR" />
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://pollux-o4.github.io/design-home/" />
+    <meta name="twitter:title" content="Design Home — 모던 UI/UX 아키텍처 허브" />
+    <meta name="twitter:description" content="15가지 디자인 트렌드, 인터랙티브 컴포넌트 시스템, 시각적 디자인 가이드라인 탐색." />
+    <meta name="twitter:image" content="https://pollux-o4.github.io/design-home/shared/assets/og-image.png" />
+    <!-- Favicon & Theme -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><rect x=%223%22 y=%223%22 width=%2218%22 height=%2218%22 rx=%225%22 fill=%22%231d1d1f%22/><path d=%22M8 7v10h4a5 5 0 000-10z%22 fill=%22white%22/></svg>" type="image/svg+xml" />
+    <meta name="theme-color" content="#f5f5f7" />
+    <!-- Static Styles -->
+    <link rel="stylesheet" href="./shared/css/global-nav.css" />
+    <link rel="stylesheet" href="shared/css/interface.css">
+    <link rel="stylesheet" href="assets/index/styles.css">
+    <link rel="stylesheet" href="./shared/css/scrollbar.css">
+  </head>
+  <body class="home-page">
+    <a href="#main-content" class="skip-link">
+      본문 영역으로 건너뛰기
+    </a>
+    <header class="hero container">
+      <p class="hero-badge" data-i18n="hero_badge">
+        Design Home
+      </p>
       <h1 class="hero-title" data-i18n="hero_title">
-        모던 웹 인터페이스 & <br /><span>디자인 트렌드 아키텍처</span>
+        좋은 디자인의 시작.
+        <br>
+        <span>
+          여기, 한곳에서.
+        </span>
       </h1>
       <p class="hero-subtitle" data-i18n="hero_subtitle">
-        스큐어모피즘부터 글래스모피즘, 인터랙티브 캔버스 컴포넌트까지.<br />
-        최신 웹 UI/UX 모듈 아키텍처와 트렌드 디자인을 한곳에서 탐색하세요.
+        영감을 발견하고, 직접 경험하고, 내 것으로.
+        <br>
+        당신의 다음 화면을 위한 디자인 라이브러리.
       </p>
       <div class="hero-actions">
-        <a href="./trend-style/index.html" class="btn-primary">
-          <span data-i18n="hero_btn_primary">15가지 트렌드 탐색</span> <span aria-hidden="true">→</span>
+        <a href="./design-library/" class="btn-primary">
+          <span data-i18n="hero_btn_primary">
+            라이브러리 둘러보기
+          </span>
+          <svg class="ui-icon" aria-hidden="true">
+            <use href="./shared/assets/interface-icons.svg#arrow"/>
+          </svg>
         </a>
-        <a href="./ui-components/index.html" class="btn-secondary">
-          <span data-i18n="hero_btn_secondary">컴포넌트 캔버스</span> <span aria-hidden="true">🧩</span>
+        <a href="#main-content" class="btn-secondary">
+          <span data-i18n="hero_btn_secondary">
+            Design Home 살펴보기
+          </span>
+          <svg class="ui-icon" aria-hidden="true">
+            <use href="./shared/assets/interface-icons.svg#chevron"/>
+          </svg>
         </a>
       </div>
-    </div>
-  </header>
-
-  <!-- Main Content Landmark -->
-  <main id="main-content" tabindex="-1">
-    <section class="container hub-section" aria-label="메인 내비게이션 허브">
+      <div class="design-stage" aria-label="디자인 스타일 미리보기">
+        <div class="stage-orbit" aria-hidden="true">
+        </div>
+        <div class="stage-window">
+          <div class="window-chrome">
+            <span class="window-dots" aria-hidden="true">
+              <i>
+              </i>
+              <i>
+              </i>
+              <i>
+              </i>
+            </span>
+            <span id="stage-label"></span>
+            <span class="window-caption">
+              DESIGN PREVIEW
+            </span>
+          </div>
+          <a id="stage-link" href="./design-library/#/trends/flat-design" aria-label="선택한 디자인 상세 보기">
+            <img id="stage-image" src="./design-library/previews/flat-design.png" alt="플랫 디자인 화면 미리보기" width="640" height="450" fetchpriority="high">
+          </a>
+        </div>
+        <div class="stage-note">
+          <span class="note-dot" aria-hidden="true">
+          </span>
+          <span data-i18n="stage_note">
+            보기 좋은 디자인. 쓰기 좋은 경험.
+          </span>
+        </div>
+      </div>
+      <div class="style-picker" role="group" aria-label="디자인 미리보기 선택">
+        <button type="button" data-style="flat-design" data-title="Flat Design" aria-pressed="true">
+          <span class="swatch swatch-flat" aria-hidden="true">
+          </span>
+          <span data-i18n="style_flat">
+            미니멀
+          </span>
+        </button>
+        <button type="button" data-style="glassmorphism" data-title="Glassmorphism" aria-pressed="false">
+          <span class="swatch swatch-glass" aria-hidden="true">
+          </span>
+          <span data-i18n="style_glass">
+            글래스
+          </span>
+        </button>
+        <button type="button" data-style="claymorphism" data-title="Claymorphism" aria-pressed="false">
+          <span class="swatch swatch-clay" aria-hidden="true">
+          </span>
+          <span data-i18n="style_clay">
+            입체
+          </span>
+        </button>
+      </div>
+      <p class="stage-hint" data-i18n="stage_hint">
+        스타일을 선택하고, 화면을 눌러 직접 경험해보세요.
+      </p>
+    </header>
+    <main id="main-content" class="container hub-section" tabindex="-1">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="hub_eyebrow">
+          EXPLORE DESIGN HOME
+        </p>
+        <h2 data-i18n="hub_title">
+          아이디어에서 인터랙션까지.
+        </h2>
+        <p data-i18n="hub_subtitle">
+          지금 필요한 곳에서 시작하세요.
+        </p>
+      </div>
       <div class="hub-grid">
-        <!-- Card 1: Trend Styles Showcase -->
         <a href="./trend-style/index.html" class="hub-card">
-          <div>
-            <div class="card-icon-box" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.2 19.54 10.56 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
+          <div class="card-art card-art-1" aria-hidden="true">
+            <img src="./design-library/previews/aurora-ui.png" alt="" width="640" height="400" loading="lazy">
+          </div>
+          <div class="card-copy">
+            <div class="card-icon-box">
+              <svg class="ui-icon" aria-hidden="true">
+                <use href="./shared/assets/interface-icons.svg#layers"/>
+              </svg>
             </div>
-            <div class="card-tag" data-i18n="card1_tag">컬렉션</div>
-            <h2 class="card-heading" data-i18n="card1_title">15가지 디자인 트렌드</h2>
+            <p class="card-tag" data-i18n="card1_tag">
+              컬렉션
+            </p>
+            <h3 class="card-heading" data-i18n="card1_title">
+              디자인 트렌드
+            </h3>
             <p class="card-body-text" data-i18n="card1_desc">
-              스큐어모피즘, 글래스모피즘, 네오브루탈리즘, 키네틱 타이포그래피 등 15가지 핵심 디자인 트렌드 라이브 데모.
+              15가지 스타일. 서로 다른 질감과 분위기를 실제 화면으로 만나보세요.
             </p>
-          </div>
-          <div class="card-action">
-            <span data-i18n="card1_action">15가지 스타일 둘러보기</span>
-            <div class="card-action-arrow" aria-hidden="true">→</div>
+            <div class="card-action">
+              <span data-i18n="card1_action">
+                트렌드 탐색
+              </span>
+              <svg class="ui-icon" aria-hidden="true">
+                <use href="./shared/assets/interface-icons.svg#chevron"/>
+              </svg>
+            </div>
           </div>
         </a>
-
-        <!-- Card 2: UI Components Canvas -->
         <a href="./ui-components/index.html" class="hub-card">
-          <div>
-            <div class="card-icon-box" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+          <div class="card-art card-art-2" aria-hidden="true">
+            <img src="./shared/assets/component-preview.svg" alt="" width="640" height="400" loading="lazy">
+          </div>
+          <div class="card-copy">
+            <div class="card-icon-box">
+              <svg class="ui-icon" aria-hidden="true">
+                <use href="./shared/assets/interface-icons.svg#grid"/>
+              </svg>
             </div>
-            <div class="card-tag" data-i18n="card2_tag">인터랙티브 라이브러리</div>
-            <h2 class="card-heading" data-i18n="card2_title">UI 컴포넌트 캔버스</h2>
+            <p class="card-tag" data-i18n="card2_tag">
+              인터랙티브 라이브러리
+            </p>
+            <h3 class="card-heading" data-i18n="card2_title">
+              Patterns
+            </h3>
             <p class="card-body-text" data-i18n="card2_desc">
-              피그마(Figma) 캔버스 인터페이스 스타일의 인터랙티브 버튼, 토글, 모달, 네비게이션 컴포넌트 플레이그라운드.
+              컴포넌트부터 접근성까지. 구조를 살펴보고 직접 조작하며 배워보세요.
             </p>
-          </div>
-          <div class="card-action">
-            <span data-i18n="card2_action">컴포넌트 캔버스 실행</span>
-            <div class="card-action-arrow" aria-hidden="true">→</div>
-          </div>
-        </a>
-
-        <!-- Card 3: Design Library SPA -->
-        <a href="./design-library/" class="hub-card" aria-label="Design Library 열기">
-          <div>
-            <div class="card-icon-box" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+            <div class="card-action">
+              <span data-i18n="card2_action">
+                패턴 살펴보기
+              </span>
+              <svg class="ui-icon" aria-hidden="true">
+                <use href="./shared/assets/interface-icons.svg#chevron"/>
+              </svg>
             </div>
-            <div class="card-tag" data-i18n="card3_tag">디자인 라이브러리</div>
-            <h2 class="card-heading" data-i18n="card3_title">Design Library</h2>
-            <p class="card-body-text" data-i18n="card3_desc">
-              용도와 태그로 디자인을 찾고, 실제 동작과 구현 설명을 확인하세요.
-            </p>
           </div>
-          <div class="card-action">
-            <span data-i18n="card3_action">Design Library 열기</span>
-            <div class="card-action-arrow" aria-hidden="true">→</div>
+        </a>
+        <a href="./design-library/" class="hub-card">
+          <div class="card-art card-art-3" aria-hidden="true">
+            <img src="./design-library/previews/biomorphic-organic.png" alt="" width="640" height="400" loading="lazy">
+          </div>
+          <div class="card-copy">
+            <div class="card-icon-box">
+              <svg class="ui-icon" aria-hidden="true">
+                <use href="./shared/assets/interface-icons.svg#library"/>
+              </svg>
+            </div>
+            <p class="card-tag" data-i18n="card3_tag">
+              디자인 라이브러리
+            </p>
+            <h3 class="card-heading" data-i18n="card3_title">
+              Design Library
+            </h3>
+            <p class="card-body-text" data-i18n="card3_desc">
+              용도와 분위기로 찾고, 미리보기와 구현 설명을 한 흐름으로.
+            </p>
+            <div class="card-action">
+              <span data-i18n="card3_action">
+                Design Library 열기
+              </span>
+              <svg class="ui-icon" aria-hidden="true">
+                <use href="./shared/assets/interface-icons.svg#chevron"/>
+              </svg>
+            </div>
           </div>
         </a>
       </div>
-
-      <!-- Stats Telemetry Bar -->
-      <div class="stats-bar" aria-label="프로젝트 핵심 지표">
-        <div class="stat-item">
-          <div class="stat-value">15+</div>
-          <div class="stat-label" data-i18n="stat1_label">UI 디자인 트렌드</div>
+      <div class="library-invitation">
+        <div>
+          <p class="eyebrow">
+            DESIGN LIBRARY
+          </p>
+          <h2 data-i18n="invitation_title">
+            찾고 있던 느낌을 찾아보세요.
+          </h2>
+          <p data-i18n="invitation_desc">
+            분위기로 검색하고, 실제 화면으로 확인하세요.
+          </p>
         </div>
-        <div class="stat-item">
-          <div class="stat-value">50+</div>
-          <div class="stat-label" data-i18n="stat2_label">재사용 컴포넌트</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-value">100%</div>
-          <div class="stat-label" data-i18n="stat3_label">순수 HTML/CSS/JS</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-value">&lt; 10ms</div>
-          <div class="stat-label" data-i18n="stat4_label">초고속 렌더링 타임</div>
-        </div>
+        <a href="./design-library/" class="btn-primary">
+          <span data-i18n="card3_action">
+            Design Library 열기
+          </span>
+          <svg class="ui-icon" aria-hidden="true">
+            <use href="./shared/assets/interface-icons.svg#arrow"/>
+          </svg>
+        </a>
       </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <p data-i18n="footer_text">© 2026 Design Home. 높은 시각적 완성도와 WCAG 2.2 웹 접근성을 준수하여 제작되었습니다.</p>
-    </div>
-  </footer>
-
-  <!-- i18n Internationalization Engine -->
-  <script src="./shared/js/i18n.js"></script>
-
-  <!-- Universal Global Navigation Bar Script -->
-  <script src="./shared/js/global-nav.js" defer></script>
-
-  <!-- Interactive Spotlight Micro-interaction Script -->
-  <script src="assets/index/spotlight.js"></script>
-  <script type="module" src="./shared/js/scrollbar.js"></script>
-</body>
+    </main>
+    <footer class="container">
+      <a href="./index.html">
+        Design Home
+      </a>
+      <p data-i18n="footer_text">
+        © 2026 Design Home. 디자인을 탐색하는 더 좋은 방법.
+      </p>
+    </footer>
+    <script type="module" src="./shared/js/i18n.js">
+    </script>
+    <script src="./shared/js/global-nav.js" defer>
+    </script>
+    <script src="assets/index/preview.js" defer>
+    </script>
+    <script type="module" src="./shared/js/scrollbar.js">
+    </script>
+  </body>
 </html>

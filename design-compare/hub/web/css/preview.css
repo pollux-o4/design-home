@@ -1,0 +1,73 @@
+.preview-bar > div {
+  display: flex;
+  gap: 6px;
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: 0px;
+  background: var(--ui-surface);
+  flex-shrink: 0;
+}
+
+iframe.mobile {
+  width: 390px;
+  max-width: 100%;
+}
+
+.preview-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  background: var(--ui-surface);
+  padding: 12px 20px;
+  border: 0px;
+  border-radius: 20px 20px 0px 0px;
+}
+
+.preview-bar button {
+  min-height: 34px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  border: 0px;
+  background: var(--ui-bg);
+}
+
+.preview-bar button[aria-pressed="true"] {
+  border-color: var(--ui-action);
+  color: var(--ui-text);
+  background: var(--ui-soft);
+}
+
+.preview-stage {
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+  border: 0px;
+  border-radius: 0px 0px 20px 20px;
+  padding: 16px;
+  height: 600px;
+  background: var(--ui-soft);
+}
+
+#preview {
+  transition: width 300ms var(--ui-ease);
+  border-radius: 10px;
+}@media (max-width: 760px) {
+  .preview-stage {
+    height: 460px;
+  }
+}
+@media (max-width: 480px) {
+  .preview-stage {
+    height: 420px;
+  }
+}
+@media (max-width: 640px) {
+  .preview-stage {
+    padding: 8px;
+    height: 520px;
+  }
+}

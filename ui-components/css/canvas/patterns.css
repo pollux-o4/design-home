@@ -1,0 +1,309 @@
+[hidden] {
+  display: none !important;
+}
+.patterns-home {
+  color: var(--ui-text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+}
+.sidebar-section-title {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sidebar-section-title > span {
+  font-size: 11px;
+}
+.pattern-disclosure {
+  background: var(--ui-surface);
+  border: 1px solid var(--ui-line);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.pattern-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 16px;
+  padding: 22px 24px;
+  border: 0;
+  background: transparent;
+  color: var(--ui-text);
+  text-align: left;
+  cursor: pointer;
+}
+.pattern-summary:hover {
+  background: var(--ui-bg);
+}
+.pattern-summary-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.pattern-summary-title {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+}
+.pattern-summary-hint {
+  color: var(--ui-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.pattern-summary-chevron {
+  color: var(--ui-secondary);
+  width: 16px;
+  height: 16px;
+  transition: transform 0.24s var(--ui-ease);
+}
+.pattern-summary[aria-expanded="true"] .pattern-summary-chevron {
+  transform: rotate(90deg);
+}
+.pattern-panel {
+  overflow: hidden;
+}
+.canvas-grid > .pattern-disclosure > .pattern-panel > .pattern-panel-body {
+  padding: 0 24px 24px;
+}
+.layer-tree .pattern-disclosure {
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+}
+.layer-tree .pattern-summary {
+  padding: 14px 10px;
+  gap: 8px;
+  border-radius: 12px;
+}
+.layer-tree .pattern-summary-title {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.layer-tree .pattern-summary[aria-expanded="true"] {
+  background: var(--ui-soft);
+}
+.layer-tree .pattern-summary[aria-expanded="true"] .pattern-summary-title {
+  font-weight: 600;
+}
+.layer-tree .pattern-panel-body {
+  padding: 6px 8px 10px 20px;
+}
+.pattern-shortcut {
+  display: block;
+  padding: 10px 12px;
+  color: var(--ui-secondary);
+  text-decoration: none;
+  font-size: 12px;
+  border-radius: 10px;
+  line-height: 1.4;
+}
+.pattern-shortcut:hover,
+.pattern-shortcut[aria-current="page"] {
+  color: var(--ui-blue);
+  background: var(--ui-info-soft);
+}
+.pattern-overview {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.pattern-topic-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 32px;
+  border: 1px solid var(--ui-line);
+  border-radius: 24px;
+  background: var(--ui-surface);
+  color: var(--ui-text);
+  text-decoration: none;
+  transition:
+    box-shadow 0.2s var(--ui-ease),
+    border-color 0.2s;
+}
+.pattern-topic-card:hover {
+  border-color: var(--ui-border);
+  box-shadow: 0 8px 24px #00000008;
+}
+.pattern-topic-number {
+  color: var(--ui-secondary);
+  font-size: 12px;
+  margin-bottom: 28px;
+}
+.pattern-topic-card h2 {
+  font-size: 23px;
+  letter-spacing: -0.7px;
+}
+.pattern-topic-term {
+  color: var(--ui-secondary);
+  font-size: 13px;
+  margin-top: 6px;
+}
+.pattern-topic-desc {
+  color: var(--ui-secondary);
+  font-size: 14px;
+  line-height: 1.7;
+  margin-top: 18px;
+  flex: 1;
+}
+.pattern-topic-action {
+  color: var(--ui-blue);
+  font-size: 13px;
+  margin-top: 28px;
+}
+.pattern-breadcrumb {
+  font-size: 13px;
+  color: var(--ui-secondary);
+}
+.pattern-breadcrumb a {
+  color: var(--ui-blue);
+  text-decoration: none;
+}
+.pattern-topic-header h1 {
+  font-size: clamp(32px, 4vw, 44px);
+  letter-spacing: -1.5px;
+}
+.pattern-topic-header > p:last-child {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ui-secondary);
+  margin-top: 18px;
+}
+@media (max-width: 760px) {
+  .layer-tree {
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    gap: 0;
+  }
+  .layer-item {
+    flex-shrink: initial;
+  }
+  .layer-tree .pattern-summary {
+    white-space: normal;
+  }
+  .sidebar-section-title {
+    display: flex;
+  }
+  .pattern-overview {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .pattern-topic-card {
+    padding: 24px;
+  }
+  .pattern-summary {
+    padding: 18px;
+  }
+  .canvas-grid > .pattern-disclosure > .pattern-panel > .pattern-panel-body {
+    padding: 0 12px 12px;
+  }
+}
+
+.canvas-grid .pattern-summary {
+  scroll-margin-top: 96px;
+}
+
+.pattern-level-view {
+  display: grid;
+  gap: 40px;
+}
+.pattern-level-section + .pattern-level-section {
+  border-top: 1px solid var(--ui-line);
+  padding-top: 32px;
+}
+.pattern-level-heading {
+  font-size: 17px;
+  margin: 0 0 8px;
+  letter-spacing: -0.02em;
+}
+.pattern-level-description {
+  color: var(--ui-secondary);
+  font-size: 12px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.component-level {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: var(--ui-secondary);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+.components-grid > [hidden] {
+  display: none;
+}
+
+.pattern-summary:focus-visible {
+  outline-offset: -5px;
+  border-radius: 16px;
+}
+
+.pattern-view-switcher {
+  display: inline-flex;
+  align-self: flex-start;
+  gap: 4px;
+  margin: 0 0 24px;
+  padding: 4px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ui-soft);
+}
+.pattern-view-switcher label {
+  position: relative;
+  cursor: pointer;
+}
+.pattern-view-switcher input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.pattern-view-switcher span {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: var(--ui-secondary);
+  font-size: 13px;
+  transition:
+    background 0.2s var(--ui-ease),
+    color 0.2s var(--ui-ease);
+}
+.pattern-view-switcher input:checked + span {
+  background: var(--ui-surface);
+  color: var(--ui-text);
+  box-shadow: 0 1px 4px #00000010;
+}
+.pattern-view-switcher input:focus-visible + span {
+  outline: 3px solid var(--ui-action);
+  outline-offset: 2px;
+}
+body[data-view="specimen"] .pattern-view-switcher {
+  display: none;
+}
+
+.pattern-view-switcher legend {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.principle-reference {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: var(--ui-action);
+  font-size: 13px;
+  text-decoration: none;
+}
+.principle-reference:hover {
+  text-decoration: underline;
+}

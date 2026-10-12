@@ -1,5 +1,6 @@
-import { staticMode } from "./api.js";
+import { staticMode, getJSON } from "./api.js";
 import { startNavigation } from "./navigation.js";
+import { createLibrarySource } from "./library-source.js";
 import { createLibraryView } from "./library.js";
 import { createActivityView } from "./activity.js";
 
@@ -7,7 +8,7 @@ if (staticMode) {
   for (const link of document.querySelectorAll("[data-local-only]")) link.remove();
 }
 
-const library = createLibraryView(),
+const library = createLibraryView(createLibrarySource(getJSON)),
   activity = createActivityView();
 const views = { trends: library, components: library, work: library, activity };
 startNavigation((route, current) => views[route.category].show(route, current));

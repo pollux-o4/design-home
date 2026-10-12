@@ -1,76 +1,12 @@
 import { contextDownload, previewUrl } from "./api.js";
-export function element(tag, text, className) {
-  const node = document.createElement(tag);
-  if (text) node.textContent = text;
-  if (className) node.className = className;
-  return node;
-}
-export function renderResults(result, select) {
-  document.querySelector("#count").textContent = `${result.results.length}개`;
-  document.querySelector("#notice").textContent = result.unmatchedTerms?.length
-    ? `다른 표현으로도 검색해보세요: ${result.unmatchedTerms.join(", ")}`
-    : "";
-  const list = document.querySelector("#results");
-  list.replaceChildren();
-  if (!result.results.length)
-    list.append(
-      element(
-        "p",
-        "일치하는 디자인이 없습니다. 다른 용도나 분위기로 검색해보세요.",
-      ),
-    );
-  for (const design of result.results) {
-    const card = element("button", null, "design-card");
-    card.type = "button";
-    card.dataset.id = design.id;
-    if (design.kind !== 'work') {
-      const preview = element('img', null, 'design-thumbnail');
-      preview.src = previewUrl(`/design-library/previews/${encodeURIComponent(design.id)}.png`);
-      preview.alt = `${design.title} 미리보기`;
-      preview.loading = 'lazy'; preview.decoding = 'async';
-      preview.width = 640; preview.height = 400;
-      card.append(preview);
-    }
-    card.append(
-      element(
-        "span",
-        design.kind === "component"
-          ? "COMPONENT"
-          : design.kind === "work"
-            ? "YOUR WORK"
-            : "DESIGN TREND",
-        "card-label",
-      ),
-      element("strong", design.title),
-      element("p", design.summary),
-      element("span", "자세히 보기 ↗", "card-action"),
-    );
-    const reasons = design.reasons?.map((reason) =>
-      typeof reason === "string"
-        ? reason
-        : `${reason.term} → ${reason.matched}`,
-    );
-    if (reasons?.length) card.title = reasons.join(" · ");
-    const tags = element("div", null, "tags");
-    for (const tag of (design.tagDetails ?? []).slice(0, 2)) {
-      const badge = element("span", tag.label);
-      badge.title = `${tag.groupLabel} · ${tag.id}`;
-      tags.append(badge);
-    }
-    card.append(tags);
-    card.addEventListener("click", () => select(design.id, true));
-    list.append(card);
-  }
-}
+import { element } from "./dom.js";
+import { kindLabel } from "./design-presentation.js";
+
 export function renderContext(design) {
   const detail = document.querySelector("#detail");
   detail.hidden = false;
   document.querySelector("#detail-kind").textContent =
-    design.kind === "component"
-      ? "COMPONENT"
-      : design.kind === "work"
-        ? "YOUR WORK"
-        : "DESIGN TREND";
+    kindLabel(design.kind);
   document.querySelector("#title").textContent = design.title;
   document.querySelector("#summary").textContent = design.summary;
   const preview = document.querySelector("#preview");

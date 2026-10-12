@@ -1,4 +1,4 @@
-import { element } from "./render.js";
+import { element } from "./dom.js";
 const expandedGroups = new Set();
 const PREVIEW_COUNT = 3;
 

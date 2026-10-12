@@ -3,10 +3,7 @@ window.toggleSidebarAccordion = function(headerEl) {
   const accordion = headerEl.closest('.sidebar-accordion');
   if (!accordion) return;
   accordion.classList.toggle('collapsed');
-  const arrow = headerEl.querySelector('.accordion-arrow');
-  if (arrow) {
-    arrow.textContent = accordion.classList.contains('collapsed') ? '▼' : '▲';
-  }
+  headerEl.setAttribute('aria-expanded', String(!accordion.classList.contains('collapsed')));
 };
 
 // Global Font Family Change Handler
@@ -46,7 +43,7 @@ window.changeMinFontSize = function(fontSize, showToastMsg = false) {
 // Initialize Font (Noto Sans KR Default + Saved Font) & Min Font Size (12px Default)
 document.addEventListener('DOMContentLoaded', function() {
   // Load saved font or default to Noto Sans KR
-  const savedFont = localStorage.getItem('ui_canvas_font') || "'Noto Sans KR', sans-serif";
+  const savedFont = localStorage.getItem('ui_canvas_font') || "-apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif";
   changeFontFamily(savedFont, false);
 
   // Load saved min font size or default to 12px

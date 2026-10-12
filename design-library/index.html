@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Design Library · Design Home</title>
+    <link rel="stylesheet" href="../shared/css/interface.css" />
     <link rel="stylesheet" href="../design-compare/hub/web/styles.css" />
     <link rel="stylesheet" href="../shared/css/scrollbar.css">
 </head>
@@ -11,9 +12,9 @@
     <a class="skip-link" href="#main">본문으로</a>
     <header class="app-header">
       <a class="brand" href="#/trends"
-        ><span class="brand-mark">dh.</span
+        ><span class="brand-mark" aria-hidden="true"><svg class="ui-icon"><use href="../shared/assets/interface-icons.svg#library"/></svg></span
         ><span
-          >Design Library<small>모양을 찾고, 흐름을 확인하세요.</small></span
+          >Design Library<small>영감부터 구현까지.</small></span
         ></a
       >
       <a class="home-link" href="../index.html">Design Home</a>
@@ -35,7 +36,7 @@
           class="quiet-button"
           type="button"
         >
-          ← <span>목록으로</span>
+          <svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#back"/></svg> <span>목록으로</span>
         </button>
         <nav aria-label="현재 위치">
           <a id="parent-crumb"></a><span aria-hidden="true"> / </span
@@ -47,15 +48,16 @@
       </div>
       <section id="library-list" aria-label="자료 목록">
         <form id="search" role="search">
+          <svg class="ui-icon search-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#search"/></svg>
           <label class="sr-only" for="query">자료 검색</label
           ><input
-            id="query"
+            id="query" type="search"
             placeholder="미니멀, 다크, 입체…"
             autocomplete="off"
-          /><button type="submit">검색</button>
+          /><button id="clear-search" type="button" aria-label="검색과 필터 초기화" hidden><svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#close"/></svg></button><button type="submit">검색</button>
         </form>
         <details id="filters" class="filters">
-          <summary>필터 <span id="filter-count"></span></summary>
+          <summary>필터 <span id="filter-count"></span><svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#chevron"/></svg></summary>
           <div id="facets" aria-label="검색 태그"></div>
         </details>
         <div class="result-heading">
@@ -77,7 +79,7 @@
             target="_blank"
             rel="noopener"
             class="outline-link"
-            >원본 열기 ↗</a
+            >원본 열기 <svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#external"/></svg></a
           >
         </div>
         <div class="detail-tabs" role="group" aria-label="상세 보기">
@@ -131,5 +133,6 @@
     </main>
     <script type="module" src="../design-compare/hub/web/app.js"></script>
     <script type="module" src="../shared/js/scrollbar.js"></script>
+<footer class="library-footer"><span>Design Home</span><span>영감부터 구현까지. Design Library.</span></footer>
 </body>
 </html>

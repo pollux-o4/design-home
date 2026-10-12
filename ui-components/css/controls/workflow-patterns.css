@@ -1,0 +1,130 @@
+.workflow-panel,
+.workflow-panel *,
+.workflow-dialog,
+.workflow-dialog * {
+  box-sizing: border-box;
+}
+.workflow-panel {
+  display: grid;
+  gap: 18px;
+  width: 100%;
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid var(--ui-line);
+  border-radius: 20px;
+  background: var(--ui-surface);
+}
+.workflow-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.workflow-heading > div {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+.workflow-heading strong {
+  font-size: 17px;
+  overflow-wrap: anywhere;
+}
+.workflow-heading small {
+  color: var(--ui-secondary);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+.workflow-panel form {
+  display: grid;
+  gap: 16px;
+}
+.workflow-list {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+.workflow-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--ui-bg);
+}
+.workflow-item span {
+  overflow-wrap: anywhere;
+}
+.workflow-dialog {
+  width: min(420px, calc(100vw - 32px));
+  max-height: calc(100dvh - 40px);
+  overflow: auto;
+  padding: 24px;
+  border: 1px solid var(--ui-line);
+  border-radius: 24px;
+  color: var(--ui-text);
+  background: var(--ui-surface);
+  box-shadow: 0 24px 80px #0003;
+}
+.workflow-dialog::backdrop {
+  background: #15171d66;
+  backdrop-filter: blur(6px);
+}
+.workflow-dialog > * + * {
+  margin-top: 18px;
+}
+.workflow-command {
+  border: 0;
+  border-radius: 12px;
+  min-height: 44px;
+  padding: 12px;
+  text-align: left;
+  background: var(--ui-bg);
+  color: var(--ui-text);
+  font: inherit;
+  cursor: pointer;
+}
+.workflow-command[data-selected="true"] {
+  background: var(--ui-info-soft);
+  color: var(--ui-action);
+}
+.workflow-steps {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 24px;
+  color: var(--ui-secondary);
+}
+.workflow-steps [data-state="active"] {
+  color: var(--ui-action);
+  font-weight: 600;
+}
+.workflow-steps [data-state="done"] {
+  color: var(--ui-success);
+}
+.workflow-panel progress {
+  width: 100%;
+  accent-color: var(--ui-action);
+  height: 8px;
+}
+.workflow-notification {
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--ui-bg);
+}
+.workflow-panel [hidden] {
+  display: none !important;
+}
+.workflow-panel .sample-row {
+  flex-wrap: wrap;
+}
+@media (max-width: 480px) {
+  .workflow-panel {
+    padding: 16px;
+  }
+  .workflow-heading strong {
+    font-size: 15px;
+  }
+}

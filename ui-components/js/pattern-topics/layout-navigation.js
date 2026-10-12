@@ -1,0 +1,45 @@
+export default {
+  id: "layout-navigation",
+  title: "레이아웃·내비게이션",
+  term: "Layout & Navigation",
+  desc: "화면의 구조와 이동 경로를 설계합니다.",
+  groups: [
+    {
+      id: "structure",
+      title: "화면 구조",
+      desc: "그리드·스택·분할 화면에서 목록–상세와 대시보드까지.",
+      ids: [
+        "layout-grid",
+        "layout-stack",
+        "layout-split",
+        "gnb-bar",
+        "lnb-sidebar",
+        "integrated-nav-demo",
+        "breadcrumb-interactive",
+        "layout-master-detail",
+        "layout-dashboard",
+      ],
+    },
+    {
+      id: "content",
+      title: "콘텐츠 탐색",
+      desc: "보기와 페이지, 긴 목록을 탐색합니다.",
+      ids: [
+        "tab-bar",
+        "carousel",
+        "pagination",
+        "infinite-scroll",
+        "navigation-bottom-bar",
+        "motion-page-slide",
+        "motion-flip",
+        "motion-shared-element",
+      ],
+    },
+    {
+      id: "adaptive",
+      title: "반응형과 고정 영역",
+      desc: "좁은 화면의 탐색과 스크롤 중 유지할 조작.",
+      ids: ["drawer", "layout-adaptive-sidebar", "layout-sticky-panel"],
+    },
+  ],
+};

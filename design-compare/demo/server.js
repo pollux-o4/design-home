@@ -7,7 +7,7 @@ const home = resolve(fileURLToPath(new URL('../../', import.meta.url)));
 export function demoPage(variant) {
   const drift = variant === 'drift', renamed = variant === 'renamed';
   return `<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Design Compare · ${variant}</title>
-<link rel="stylesheet" href="/ui-components/css/components.css"><style>
+<link rel="stylesheet" href="/shared/css/interface.css"><link rel="stylesheet" href="/ui-components/css/components.css"><style>
 :root{--font-size-base:14px;--font-size-sm:12px;color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#edf0f3;color:#18293a;font-family:Arial,sans-serif}main{padding:48px 24px;max-width:1100px;margin:auto}header{margin-bottom:36px}h1{font-size:28px;margin:0}header p{color:#516073}article{width:360px;max-width:100%;padding:24px;background:#fff;border:1px solid #d7dde5;border-radius:16px;box-shadow:0 8px 24px #1b30420d}article h2{font-size:20px;line-height:1.4;margin:0 0 12px}article p{font-size:14px;line-height:1.6;color:#516073;margin:0 0 24px}.label{font-size:11px;color:#5c6372;letter-spacing:2px;font-weight:bold;margin-bottom:12px}.ui-btn:focus-visible{outline:3px solid #1241a5;outline-offset:4px}
 ${drift ? 'article{padding:32px;border-radius:4px}article h2{font-size:24px}.ui-btn-primary{background:#ef4444;box-shadow:none}' : ''}
 ${renamed ? '.new-card{isolation:isolate}' : ''}

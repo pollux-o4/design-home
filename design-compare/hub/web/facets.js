@@ -1,4 +1,4 @@
-import { element } from "./render.js";
+import { element } from "./dom.js";
 import { tagDisclosure } from "./tag-disclosure.js";
 
 function tagChip(tag, selected, clickable, toggle) {

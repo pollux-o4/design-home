@@ -1,4 +1,4 @@
-import { element } from "./render.js";
+import { element } from "./dom.js";
 import { getJSON } from "./api.js";
 const labels = {
   brief: "작업 전 자료",

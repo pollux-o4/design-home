@@ -1,3 +1,4 @@
+import { bindClipboard } from "../../../shared/js/clipboard.js";
 import { staticMode } from "./api.js";
 export function readRoute() {
   const [path, query = ""] = location.hash.slice(1).split("?");
@@ -62,9 +63,15 @@ function panels(active) {
     $(`#${name}`).hidden = name !== active;
   $("#error").hidden = true;
 }
+function setLoading(active) {
+  const main = document.querySelector('main');
+  main.setAttribute('aria-busy', String(active));
+  main.classList.toggle('is-loading', active);
+}
 export function startNavigation(show) {
   let generation = 0;
   async function update() {
+    setLoading(true);
     const version = ++generation,
       route = readRoute(),
       current = () => version === generation;
@@ -106,6 +113,10 @@ export function startNavigation(show) {
         $("#error").hidden = false;
         $("#error").textContent = error.message;
       }
+    } finally {
+      if (current()) {
+        setLoading(false);
+      }
     }
   }
   $("#back").addEventListener("click", () => {
@@ -114,14 +125,8 @@ export function startNavigation(show) {
     params.delete("view");
     navigate(route.category, null, params, true);
   });
-  $("#copy-link").addEventListener("click", async () => {
-    try {
-      await navigator.clipboard.writeText(location.href);
-      $("#link-status").textContent = "복사됨";
-    } catch {
-      $("#link-status").textContent = "주소 표시줄의 링크를 복사하세요.";
-    }
-  });
+  bindClipboard($("#copy-link"), $("#link-status"), () => location.href,
+    '주소 표시줄의 링크를 복사하세요.');
   window.addEventListener("hashchange", update);
   window.addEventListener("hubnavigate", update);
   update();

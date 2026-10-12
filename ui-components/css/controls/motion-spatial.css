@@ -1,0 +1,318 @@
+.spatial-scroll {
+  height: 260px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border-radius: 18px;
+  background: var(--ui-bg);
+}
+.spatial-scroll:focus-visible {
+  outline: 3px solid var(--ui-action);
+  outline-offset: 3px;
+}
+.spatial-scroll-intro {
+  padding: 36px 24px;
+  margin: 0;
+  min-height: 190px;
+  font-weight: 650;
+  font-size: 21px;
+  letter-spacing: -0.035em;
+}
+.spatial-scroll-intro small {
+  font-size: 13px;
+  font-weight: 400;
+  color: #63636b;
+}
+.spatial-reveal-item {
+  margin: 0 18px 22px;
+  padding: 24px 18px;
+  border-radius: 16px;
+  background: var(--ui-surface);
+  opacity: 0.35;
+}
+.spatial-reveal-item.is-revealed {
+  opacity: 1;
+}
+.spatial-reveal-item h4,
+.reading-scroll h4,
+.parallax-caption h4,
+.spatial-page h4,
+.spatial-stack-card h4 {
+  margin: 12px 0 6px;
+  font-size: 22px;
+  letter-spacing: -0.035em;
+}
+.spatial-reveal-item p,
+.reading-scroll p,
+.spatial-page p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #63636b;
+  margin: 0;
+}
+.spatial-orb {
+  display: block;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, #f3e8fa, #a084c9 70%);
+  box-shadow: inset -8px -8px 16px #8069a733;
+}
+.orb-1 {
+  background: radial-gradient(circle at 30% 25%, #e1f4ec, #71a993 70%);
+}
+.orb-2 {
+  background: radial-gradient(circle at 30% 25%, #fff1db, #c9a278 70%);
+}
+.spatial-reading {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--ui-bg);
+}
+.spatial-progress {
+  height: 4px;
+  background: #e5e5ea;
+}
+.spatial-progress span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--ui-action);
+}
+.reading-scroll {
+  height: 240px;
+  border-radius: 0;
+}
+.reading-scroll section {
+  padding: 26px 24px;
+  min-height: 180px;
+}
+.reading-scroll small {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: #63636b;
+}
+.reading-line {
+  display: block;
+  width: 45%;
+  height: 3px;
+  background: #d3d3da;
+  margin-top: 22px;
+  border-radius: 3px;
+}
+.spatial-reading output {
+  display: block;
+  padding: 8px 20px;
+  text-align: right;
+  font-size: 12px;
+  color: #63636b;
+  background: var(--ui-surface);
+  font-variant-numeric: tabular-nums;
+}
+.parallax-scroll {
+  background: #e5edf1;
+}
+.parallax-stage {
+  position: sticky;
+  top: 0;
+  height: 260px;
+  overflow: hidden;
+  background: linear-gradient(#e5edf1, #f5ece0);
+}
+.parallax-sun {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #e8bd82;
+  left: 60%;
+  top: 22px;
+}
+.parallax-ridge {
+  position: absolute;
+  width: 170%;
+  height: 230px;
+  left: -35%;
+  border-radius: 48% 65% 0 0;
+}
+.ridge-back {
+  top: 140px;
+  background: #789b94;
+  rotate: -10deg;
+}
+.ridge-front {
+  top: 185px;
+  background: #315a55;
+  rotate: 8deg;
+}
+.parallax-caption {
+  position: absolute;
+  inset: 20px 20px auto;
+  color: #223632;
+}
+.parallax-caption small {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+}
+.parallax-caption h4 {
+  font-size: 29px;
+}
+.parallax-caption p {
+  margin: 2px 0 0;
+  font-size: 12px;
+}
+.parallax-space {
+  height: 250px;
+}
+.spatial-controls {
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 16px;
+}
+.spatial-controls .ui-btn {
+  min-width: 34px;
+  padding-inline: 12px;
+}
+.tilt-stage {
+  display: grid;
+  place-items: center;
+  min-height: 258px;
+  perspective: 700px;
+  background: var(--ui-bg);
+  border-radius: 18px;
+  padding: 22px;
+}
+.spatial-tilt-card {
+  width: 190px;
+  max-width: 100%;
+  min-height: 218px;
+  padding: 20px;
+  border-radius: 18px;
+  background: #20202a;
+  color: #fff;
+  box-shadow: 0 14px 28px #25253824;
+  transform-style: preserve-3d;
+}
+.spatial-tilt-card small {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: #d3d0e2;
+}
+.spatial-tilt-card strong {
+  font-size: 22px;
+  line-height: 1.25;
+  display: block;
+  letter-spacing: -0.03em;
+}
+.tilt-art {
+  display: block;
+  height: 92px;
+  margin: 12px 0;
+  background: radial-gradient(
+    ellipse at 35% 30%,
+    #fcdbcf,
+    #a899ce 35%,
+    #57498a 65%,
+    transparent 66%
+  );
+  border-radius: 50%;
+  transform: translateZ(20px);
+}
+.spatial-page-stage {
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--ui-bg);
+}
+.spatial-page {
+  padding: 24px;
+  min-height: 265px;
+}
+.spatial-page small,
+.spatial-stack-card small {
+  color: #63636b;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  font-variant-numeric: tabular-nums;
+}
+.page-art {
+  width: 76px;
+  height: 76px;
+  display: block;
+  margin: 24px 0 16px;
+  border-radius: 26px;
+  background: linear-gradient(135deg, #d8e8f3, #8fafd0);
+}
+.spatial-page[data-step="1"] .page-art {
+  border-radius: 50%;
+  background: linear-gradient(135deg, #dbeadd, #91b39a);
+}
+.spatial-page[data-step="2"] .page-art {
+  border-radius: 16px 40px;
+  background: linear-gradient(135deg, #f2e1d2, #d3aa82);
+}
+.spatial-stack-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 22px 24px 32px;
+  min-height: 288px;
+  overflow: hidden;
+  background: var(--ui-bg);
+  border-radius: 18px;
+}
+.spatial-stack-shadow {
+  position: absolute;
+  inset: 35px 30px 24px;
+  border-radius: 18px;
+  background: #d9d4e2;
+  rotate: -5deg;
+}
+.spatial-stack-card {
+  position: relative;
+  width: 100%;
+  max-width: 230px;
+  padding: 20px;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 5px 20px #2420350d;
+  touch-action: pan-y;
+  user-select: none;
+  cursor: grab;
+}
+.spatial-stack-card:active {
+  cursor: grabbing;
+}
+.spatial-stack-card p {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: #63636b;
+  margin-bottom: 0;
+}
+.stack-art {
+  display: block;
+  height: 115px;
+  margin-top: 14px;
+  border-radius: 60% 40% 48% 52%;
+  background: conic-gradient(from 30deg, #dac4af, #f2e8de, #ad8673, #dac4af);
+}
+.spatial-stack-card[data-step="1"] .stack-art {
+  background: conic-gradient(from 90deg, #afc8c2, #e4eeeb, #71958d, #afc8c2);
+  border-radius: 40% 60% 50% 50%;
+}
+.spatial-stack-card[data-step="2"] .stack-art {
+  background: conic-gradient(from 180deg, #c0b5d8, #eae5f3, #8d7ba8, #c0b5d8);
+  border-radius: 50% 50% 30% 70%;
+}
+.spatial-stack-card[data-step="3"] .stack-art {
+  background: conic-gradient(from 270deg, #b3c6db, #e9eef7, #7d98b8, #b3c6db);
+  border-radius: 30% 70% 50% 50%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tilt-art {
+    transform: none;
+  }
+  .spatial-reveal-item {
+    opacity: 1;
+  }
+}

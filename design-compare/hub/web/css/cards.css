@@ -1,0 +1,114 @@
+.design-card > .card-label,
+.design-card > strong,
+.design-card > p,
+.design-card > .tags {
+  margin-left: 26px;
+  margin-right: 26px;
+}
+
+.card-action {
+  font-size: 11px;
+  color: var(--ui-secondary);
+  margin-top: 16px;
+}
+
+.tags {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.design-card {
+  transition: transform 350ms var(--ui-ease), box-shadow 350ms;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  min-width: 0px;
+  color: inherit;
+  position: relative;
+  padding: 0px 0px 26px;
+  border: 0px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--ui-surface);
+  box-shadow: rgba(29, 29, 31, 0.016) 0px 0px 0px 1px;
+}
+
+.design-card:hover {
+  border-color: rgb(161, 161, 166);
+  transform: translateY(-4px);
+  box-shadow: rgba(29, 29, 31, 0.05) 0px 14px 38px;
+}
+
+.design-card:active {
+  transform: scale(0.99);
+}
+
+.design-thumbnail {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.6 / 1;
+  border: 0px;
+  border-radius: 0px;
+  margin: 0px 0px 24px;
+  object-fit: scale-down;
+  object-position: center;
+  padding: 20px;
+  background: var(--ui-soft);
+}
+
+.card-label {
+  color: var(--ui-secondary);
+  font-size: 9px;
+  letter-spacing: 0.11em;
+}
+
+.design-card strong {
+  font-size: 23px;
+  letter-spacing: -0.04em;
+  margin-top: 9px;
+}
+
+.design-card p {
+  margin: 10px 26px 20px;
+  color: var(--ui-secondary);
+  font-size: 13px;
+}
+
+.design-card .tags {
+  gap: 6px;
+  padding-right: 24px;
+}
+
+.tags span {
+  background: var(--ui-bg);
+  border-radius: 99px;
+  padding: 5px 10px;
+  font-size: 10px;
+}
+
+.design-card .card-action {
+  position: absolute;
+  right: 22px;
+  bottom: 23px;
+  width: 28px;
+  height: 28px;
+  background: var(--ui-bg);
+  color: var(--ui-secondary);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: 0px;
+}
+
+.card-action .ui-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.design-card:hover .card-action {
+  background: var(--ui-action);
+  color: var(--ui-surface);
+}

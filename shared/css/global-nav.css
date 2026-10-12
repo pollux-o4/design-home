@@ -88,7 +88,9 @@
 #dh-global-nav .dh-nav-link svg {
   width: 15px;
   height: 15px;
-  fill: currentColor;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
 }
 
 #dh-global-nav .dh-nav-link:hover {

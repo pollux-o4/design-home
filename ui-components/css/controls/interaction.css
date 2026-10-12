@@ -1,0 +1,62 @@
+.ui-heart-btn {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--ui-border);
+  border-radius: 50%;
+  color: var(--ui-secondary);
+  background: var(--ui-surface);
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    transform 0.2s var(--ui-ease);
+}
+.ui-heart-btn.liked {
+  color: var(--ui-danger);
+  border-color: var(--ui-danger);
+  background: var(--ui-danger-soft);
+}
+.ui-heart-btn.liked .ui-icon {
+  fill: currentColor;
+}
+.ui-heart-btn:active {
+  transform: scale(0.92);
+}
+.ui-drag-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ui-drag-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--ui-border);
+  border-radius: 14px;
+  background: var(--ui-surface);
+  cursor: grab;
+}
+.ui-drag-item [data-title] {
+  flex: 1;
+  min-width: 0;
+}
+.ui-drag-item.dragging {
+  opacity: 0.5;
+}
+.ui-drag-item button {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  color: var(--ui-blue);
+  background: var(--ui-bg);
+  cursor: pointer;
+}
+.ui-drag-item .sample-row {
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  gap: 4px;
+}

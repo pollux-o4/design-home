@@ -1,49 +1,24 @@
-## 📂 폴더 구조 개요
+# Patterns
 
-- **`popups-and-layers`** (팝업과 레이어)
-  - 화면 위에 겹쳐서 뜨는 오버레이 요소
-    - Alert (얼럿 - 브라우저 기본 경고창)
-    - Confirm (컨펌 - 브라우저 기본 확인창)
-    - Modal / Dialog (모달 / 다이얼로그)
-    - Toast / Snackbar (토스트 / 스낵바)
-    - Drawer / Bottom Sheet (드로어 / 바텀시트)
-    - Popover (팝오버 - 특정 버튼 클릭 시 근처에 뜨는 미니 레이어)
+`index.html`에서 상위 분야 → 세부 주제 → Basic / Advanced → 샘플 순서로 탐색하거나 검색하며 88개 샘플을 직접 조작합니다. `?view=specimen&component=<id>`는 같은 정의의 단일 샘플을 보여줍니다.
 
-- **`inputs-and-controls`** (입력과 선택 컨트롤)
-  - 사용자가 조작하고 입력하는 요소
-    - Text Input & Textarea (텍스트 입력창 & 단문/장문 폼)
-    - Checkbox & Radio (체크박스 & 라디오 버튼)
-    - Dropdown / Select (드롭다운 / 셀렉트 박스)
-    - Accordion (아코디언)
-    - Toggle Switch (토글 스위치)
-    - Segmented Control (세그먼트 컨트롤)
-    - Stepper (스태퍼 - 수량/단계 조절)
-    - Slider / Range (슬라이더 - 범위 조절)
-    - Chip / Tag (칩 / 태그)
-    - File Uploader / Drag & Drop (파일 업로드 & 드래그 앤 드롭 영역)
-    - Date / Time Picker (날짜 & 시간 선택기)
+카테고리 정의는 `js/components/`, 동작은 `js/samples/`, 스타일은 `css/controls/`가 소유합니다. `sample-definition.js`의 Factory가 실제 HTML과 공식 문서 연결을 소유합니다. 자체 코드 복사 창과 예제 번들 생성 기능은 두지 않고, 각 카드에서 관련 공식 문서를 엽니다.
 
-- **`states-and-feedback`** (상태와 피드백)
-  - 시스템 상태와 결과를 전달하는 요소
-    - Alert Banner / Callout (화면 상단 안내 배너)
-    - Skeleton UI (스켈레톤 UI - 로딩 뼈대)
-    - Spinner / Progress Bar (스피너 / 진행 상태 바)
-    - Empty State (엠티 스테이트 - 데이터 없음 화면)
-    - Tooltip (툴팁 - 마우스 호버 설명창)
-    - Badge / Avatar (배지 / 프로필 아바타)
+새 샘플은 `define({ id, title, term, reference, desc, html, behavior, level })`로 등록합니다. 동작이 필요하면 `samples/runtime.js`의 Strategy에 연결하고, 루트와 scope를 사용해 이벤트·타이머·레이어를 해제합니다. 상태를 전역 변수에 두거나 코드 예제용 HTML을 따로 작성하지 않습니다.
 
-- **`navigation`** (화면 이동과 구조)
-  - 서비스 내 길찾기 및 위치 이동 요소
-    - GNB (Global Navigation Bar - 최상단 메인 메뉴)
-    - LNB / Sidebar (Local Navigation Bar - 서브/사이드 메뉴)
-    - Tab Bar (탭 바)
-    - Breadcrumb (브레드크럼 - 경로 안내)
-    - Carousel / Banner Slider (캐러셀 / 이미지 슬라이더)
-    - Infinite Scroll / Pagination (무한 스크롤 / 페이지네이션)
+기본 컨트롤은 네이티브 input·select·details·dialog·popover를 사용합니다. 공통 선택 동작은 탭·분할 선택·메뉴의 본문과 접근성 상태를 갱신합니다. 순서 변경은 드래그·위아래 버튼·Alt와 방향키를 지원합니다. 파일 선택은 서버 전송 없이 시연하며 재시도는 실패 후 성공하는 고정 시나리오입니다.
 
-- **`interactions`** (움직임과 반응)
-  - 사용자 행동에 대한 미세 모션 및 상태 반응
-    - Hover / Focus / Active (호버 / 포커스 / 액티브 상태)
-    - Disabled (디세이블드 - 비활성화 상태)
-    - Micro-interaction (마이크로 인터랙션 - 하트 뿅, 카운팅 모션 등)
-    - Drag & Drop / Reorder (요소 드래그로 순서 변경)a
+라이브러리의 분류와 설명은 `design-compare/library/documents/`에서 관리합니다. 등록 후 `design-compare`의 `build:library`로 정적 데이터와 Chromium 미리보기를 갱신합니다. 동작·문서 연결·반응형 검증은 `tests/component-behavior.test.mjs`, 모션과 난이도 전환 검증은 `tests/motion-behavior.test.mjs`에 있습니다.
+
+
+학습 분류는 `js/pattern-topics/`의 카테고리별 정의가 소유하고 `js/pattern-taxonomy.js`가 등록된 샘플에 연결합니다. 컴포넌트·레이아웃과 내비게이션·인터랙션·상태와 피드백·모션과 애니메이션·접근성의 여섯 분야에서 같은 원본 샘플을 ID로 연결합니다. 소스 모듈의 파일 분류와 학습용 탐색 분류를 별도로 유지하며 샘플 자체는 복제하지 않습니다.
+
+현재 위치는 `#/분야/세부주제`가 소유하고 검색은 해시의 `q`, 고급 난이도는 `level=advanced`에 기록합니다. 예: `#/motion/expressive?level=advanced`. 상위와 세부 주제는 각 단계에서 하나만 열립니다. 분야로 돌아오면 세션에서 마지막으로 본 세부 주제를 복원하고, 같은 분야 안에서 접힌 샘플의 조작 상태는 유지합니다. `/` 또는 Ctrl/⌘K는 검색으로 이동하며 Escape로 검색을 비웁니다. 실제 샘플 동작은 펼침 상태와 분리하며 분야를 떠날 때 정리합니다.
+
+모션은 타이밍과 리듬·화면과 레이아웃 전환·스크롤과 깊이·조작 반응·감각적인 표현·로딩으로 탐색합니다. 새 기법 18개는 원리·공간·표현 모듈로 나뉘며, 관련 학습 분야에서 같은 ID를 다시 연결합니다. 난이도가 하나뿐인 주제에는 빈 탭을 만들지 않습니다. `samples/motion-controller.js`가 실제 재생·취소·동작 줄이기·접힌 샘플의 정리를 맡고, 최종 상태는 각 동작이 별도로 소유합니다.
+
+화면 구조는 그리드·스택·분할 화면·목록–상세·대시보드·적응형 사이드바·고정 패널·하단 탐색을 포함합니다. 데이터와 복합 입력은 표·정렬·계층 탐색·검색 선택·연관 입력·단계별 폼으로 나뉩니다. 작업 흐름은 편집·일괄 선택·명령 팔레트와 진행·연결·낙관적 갱신·알림·자동 저장으로 구분합니다. 네트워크와 저장 동작은 카드 안의 시뮬레이션이며 외부 요청이나 저장소 쓰기를 하지 않습니다.
+
+접근성의 별도 예제는 본문 바로 이동·포커스와 다중 선택·200% 글자 확대·실제 색 대비 계산입니다. 기존 폼·레이어·복합 입력도 같은 원본 ID로 연결합니다. `tests/pattern-expansion.test.mjs`는 모든 샘플의 분류 도달 여부, 같은 카테고리 안의 ID 중복, 분야별 Basic/Advanced와 실제 흐름을 검증합니다.
+
+카테고리만 선택하면 샘플을 초기화하지 않습니다. 주제와 난이도를 처음 펼칠 때 생성·연결하고 이후에는 같은 인스턴스를 보관합니다. 동일한 검색어에 공백만 추가해도 예제를 재생성하지 않습니다. `tests/pattern-performance.test.mjs`는 지연 생성·상태 유지·텍스트 애니메이션의 불필요한 스크롤 레이아웃 검사를 검증합니다.

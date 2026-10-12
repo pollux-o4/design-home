@@ -3,16 +3,36 @@
   window.CanvasCatalog = {
     create(registry = {}) {
       const modules = Object.values(registry);
-      function components(module) {
-        return module.groups ? module.groups.flatMap(group => group.components) : (module.components || []);
+      function groups(module) {
+        return module.groups || [{ components: module.components || [] }];
       }
+      function components(module) {
+        return groups(module).flatMap((group) => group.components);
+      }
+      const byId = new Map(
+        modules
+          .flatMap(components)
+          .map((definition) => [definition.id, definition]),
+      );
       function filter(items, query) {
         const needle = query.trim().toLowerCase();
-        return items.filter(item => !needle || [item.id, item.title, item.desc]
-          .some(value => String(value || '').toLowerCase().includes(needle)));
+        return items.filter(
+          (item) =>
+            !needle ||
+            [item.id, item.title, item.term, item.desc].some((value) =>
+              String(value || "")
+                .toLowerCase()
+                .includes(needle),
+            ),
+        );
       }
-      function prepareRender() { modules.forEach(module => module.beforeRender?.()); }
-      return { modules, components, filter, prepareRender };
-    }
+      return {
+        modules,
+        groups,
+        components,
+        filter,
+        find: (id) => byId.get(id),
+      };
+    },
   };
 })();
