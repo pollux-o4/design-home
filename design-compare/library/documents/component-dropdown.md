@@ -21,7 +21,7 @@
     "ui-components/js/components/inputs-and-controls.js",
     "ui-components/css/components.css"
   ],
-  "previewPath": "/ui-components/index.html?view=specimen&component=dropdown",
+  "previewPath": "/ui-components/index.html?view=specimen&component=dropdown-select",
   "tags": [
     "feedback"
   ],
@@ -30,7 +30,7 @@
     "height": 900
   },
   "capture": {
-    "selector": ".component-card:has([data-comp-id=\"dropdown\"]) .component-body",
+    "selector": ".component-card:has([data-comp-id=\"dropdown-select\"]) .component-body",
     "parts": {}
   },
   "structure": [

@@ -6,6 +6,7 @@
 
 :root {
   --figma-bg: #1e1e1e;
+  --dh-scroll-ink: #a5adb8;
   --figma-panel-bg: #2c2c2c;
   --figma-border: #383838;
   --figma-border-light: #444444;
@@ -581,6 +582,7 @@ body {
 }
 
 .code-modal-body {
+  --dh-scroll-layer: 1000; /* Above the existing code dialog layer (999). */
   padding: 16px 20px;
   overflow-y: auto;
   background: #0d0d0f;

@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../shared/css/global-nav.css">
   <link rel="stylesheet" href="css/figma-canvas.css">
   <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="../shared/css/scrollbar.css">
 </head>
 <body>
 
@@ -74,13 +75,13 @@
       </div>
 
       <div class="sidebar-section-title">Layers / Artboards</div>
-      <ul class="layer-tree" id="layer-tree">
+      <ul class="layer-tree" data-scroll-region id="layer-tree">
         <!-- Dynamically rendered layer items -->
       </ul>
     </aside>
 
     <!-- Canvas Viewport with Dot Grid -->
-    <main class="figma-canvas-viewport">
+    <main class="figma-canvas-viewport" data-scroll-region>
       <div class="canvas-grid" id="canvas-grid">
         <!-- Dynamically rendered Figma Artboard Frames -->
       </div>
@@ -94,7 +95,7 @@
         <div class="code-modal-title" id="code-modal-title">&lt; ComponentCode /&gt;</div>
         <button class="btn-icon" id="btn-close-modal">✕</button>
       </div>
-      <pre class="code-modal-body" id="code-modal-body"></pre>
+      <pre class="code-modal-body" data-scroll-region id="code-modal-body"></pre>
       <div class="code-modal-footer">
         <button class="btn-close" id="btn-close-modal-footer" onclick="document.getElementById('code-modal-overlay').classList.remove('open')">닫기</button>
         <button class="btn-copy" id="btn-copy-code">Copy Code</button>
@@ -123,5 +124,6 @@
   <!-- Global Navigation -->
   <script src="../shared/js/i18n.js"></script>
   <script src="../shared/js/global-nav.js" defer></script>
+  <script type="module" src="../shared/js/scrollbar.js"></script>
 </body>
 </html>

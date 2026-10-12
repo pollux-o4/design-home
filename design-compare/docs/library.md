@@ -1,0 +1,31 @@
+# 디자인 문서와 메타데이터
+
+[`library/documents/`](../library/documents/)가 디자인 이름·설명·태그·원본 연결·권장 화면 크기·사용 설명의 단일 원본이다. 첫 JSON 코드 블록은 구조화된 메타데이터이고, 그 아래 Markdown은 설명이다. 문서 본문은 웹에서 제목·문단·목록으로 표시하며 CLI `context --json`에도 제공한다. HTML과 스크립트는 실행하지 않는다.
+
+웹과 CLI는 `src/library/index.js`의 `createLibrary({ documentsRoot, sourceRoot })`를 사용한다. 설명·분류를 변경하려면 Markdown만 수정한다. 요청할 때 다시 읽으므로 서버 재시작 없이 다음 조회에 반영된다. 문서 ID·필수 필드·태그·원본 경로·화면 크기·중복 ID를 검증한다.
+
+- `src/library/`: 문서 해석·검색·원본 조회. 웹 UI나 프로젝트 폴더 구조에 의존하지 않는다.
+- `library/documents/`: AI가 관리하는 디자인 문서와 메타데이터.
+- `src/hub/`, `hub/`: 현재 프로젝트 연결 설정과 웹 화면.
+- `src/cli/`: 같은 기능을 명령으로 호출한다.
+
+다른 프로젝트에서 쓰려면 해당 프로젝트 경로를 `sourceRoot`로 전달한다. 현재 CLI·웹은 `DESIGN_HOME_ROOT=/프로젝트`와 `DESIGN_DOCUMENTS_ROOT=/문서폴더`로 같은 설정을 받을 수 있다. 원본 HTML·CSS·JS는 연결된 프로젝트가 소유하며, 모듈만 복사해도 그 원본까지 함께 옮겨지는 것은 아니다. 독립 실행용으로 가져갈 때 Node 패키지·CLI와 문서를 함께 가져가고 원본 경로를 설정한다.
+
+새 디자인 문서는 [유기적 UI 문서](../library/documents/biomorphic-organic.md)처럼 작성한다. 기존 문서의 JSON을 복사해 ID·분류·상대 원본 경로·미리보기 경로를 바꾸고, 필요한 설명을 아래에 추가한다. 웹 목록용으로 같은 내용을 JavaScript에 재등록하지 않는다.
+
+허브의 정적 파일 제공 경로는 현재 Design Home 저장소 기준이다. `DESIGN_HOME_ROOT`는 원본 조회 경로만 바꾸므로, 외부 프로젝트 화면은 별도 개발 서버에서 제공해야 한다.
+
+
+## 의도 선택과 등록 자료
+
+문서의 `kind`는 페이지 또는 컴포넌트를 구분하고 `keywords`·`useCases`는 의도 선택의 근거다. `capture`에는 캡처할 선택자·부분 매핑·필요한 샘플 열기 선택자를 둔다. 명칭·분류·캡처 동작을 CLI 코드에 재등록하지 않는다.
+
+Library의 선택 로직을 검색과 `brief`가 함께 사용한다. `brief`는 선택한 문서의 레시피로 이미지를 만들고, 사용자에게 ID 조합을 요구하지 않는다. 등록된 작업물의 메타데이터는 store의 `references/<ID>/reference.json`이 원본이며 같은 선택 로직으로 검색한다.
+
+작업 전 자료에서 만든 비교 연결은 내부 준비 자료로 표시한다. 이후 추천이나 웹 제품 목록에 다시 포함하지 않으므로 준비할 때마다 동일 자료가 추천 목록에 늘어나지 않는다.
+
+## 목록 미리보기와 공통 스크롤바
+
+목록은 `design-library/previews/<ID>.png`의 실제 샘플 이미지를 표시한다. `npm run build:library`가 문서 기반 JSON과 Chromium 미리보기를 함께 갱신한다. 외부 폰트 요청을 끊은 동일한 로컬 환경에서 문서의 viewport·선택자를 사용하며, 컴포넌트는 조작 요소를 잘라 보여준다. 미리보기 이미지는 탐색용이고 비교 기준은 기존 CLI의 실시간 캡처다.
+
+`component-scrollbar`는 공통 `shared/js/scrollbar.js`와 `shared/css/scrollbar.css`에 연결된다. 랜딩·라이브러리·캔버스에서 같은 모듈을 사용하며 내부 영역은 `data-scroll-region`으로 등록한다. 가로·세로 트랙은 내용 크기를 따라 갱신되고, 제거한 영역의 이벤트·트랙도 해제된다. 샘플은 `ui-components/scrollbar/index.html`에서 직접 조작할 수 있다.

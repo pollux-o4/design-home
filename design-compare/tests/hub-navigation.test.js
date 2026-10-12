@@ -1,0 +1,51 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { chromium } from 'playwright';
+import { createHubServer } from '../hub/server.js';
+import { mkdtemp, rm } from 'node:fs/promises';
+import { join } from 'node:path';
+import { tmpdir } from 'node:os';
+
+test('mobile follows category → list → detail, restores the list and supports a direct detail shortcut', async () => {
+  const store = await mkdtemp(join(tmpdir(), 'hub-navigation-'));
+  const server = createHubServer({ store }); await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  const base = `http://127.0.0.1:${server.address().port}`, browser = await chromium.launch();
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 } }); const errors = [];
+  page.on('pageerror', error => errors.push(error.message)); await page.route('https://**/*', route => route.abort());
+  try {
+    await page.goto(base);
+    await page.locator(".hub-card").filter({ hasText: "Design Library" }).click();
+    await page.getByRole('heading', { name: '디자인 트렌드', exact: true }).waitFor();
+    await page.locator('.design-card').first().waitFor();
+    assert.equal(await page.locator('.design-card').count(), 15);
+    assert.equal(await page.locator('#detail').isVisible(), false);
+    assert.equal(await page.locator('#activity-list').isVisible(), false);
+    await page.getByRole('link', { name: '컴포넌트', exact: true }).click();
+    await page.getByRole('heading', { name: '컴포넌트', exact: true }).waitFor();
+    const modal = page.locator('.design-card[data-id="component-modal"]'); await modal.waitFor();
+    assert.equal(await page.locator('.design-card').count(), 9);
+    await modal.click(); await page.locator('#title').filter({ hasText: '프로젝트 입력 모달' }).waitFor();
+    await page.frameLocator('#preview').locator('#demo-modal').waitFor();
+    assert.equal(await page.frameLocator('#preview').locator('.component-card').count(), 1);
+    assert.match(page.url(), /#\/components\/component-modal/);
+    assert.equal(await page.locator('#results').isVisible(), false);
+    assert.equal(await page.locator('#search').isVisible(), false);
+    assert.equal(await page.locator('#guide-panel').isVisible(), false);
+    await page.getByRole('button', { name: '설명', exact: true }).click();
+    assert.equal(await page.locator('#preview-panel').isVisible(), false);
+    assert.equal(await page.locator('#guide-panel').isVisible(), true);
+    await page.getByRole('button', { name: '목록으로', exact: true }).click(); await modal.waitFor();
+    assert.equal(await page.locator('#detail').isVisible(), false);
+    assert.equal(await modal.evaluate(node => node === document.activeElement), true);
+    await page.goto(`${base}/design-library/#/components/component-modal`); await page.locator('#title').filter({ hasText: '프로젝트 입력 모달' }).waitFor();
+    assert.equal(await page.locator('#results').isVisible(), false);
+    await page.setViewportSize({ width: 1280, height: 900 });
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    await page.setViewportSize({ width: 390, height: 844 });
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    await page.getByRole('link', { name: '호출 기록', exact: true }).click();
+    await page.getByRole('heading', { name: '최근 AI 호출', exact: true }).waitFor();
+    assert.equal(await page.locator('#results').isVisible(), false);
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); await new Promise(resolve => server.close(resolve)); await rm(store, { recursive: true, force: true }); }
+});

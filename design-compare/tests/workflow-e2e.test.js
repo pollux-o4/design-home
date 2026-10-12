@@ -57,7 +57,7 @@ test('AI registers completed work with metadata, compares it and the user sees t
   const browser = await chromium.launch(), page = await browser.newPage(), hubUrl = `http://127.0.0.1:${hub.address().port}`;
   try {
     await page.route('https://**/*', route => route.abort());
-    await page.goto(`${hubUrl}/#/activity`);
+    await page.goto(`${hubUrl}/design-library/#/activity`);
     await page.getByRole('heading', { name: '최근 AI 호출', exact: true }).waitFor();
     const entry = page.locator(`[data-activity-id="${comparison.activity.id}"]`);
     await entry.getByRole('link', { name: '기록 보기', exact: true }).click();

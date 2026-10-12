@@ -25,10 +25,10 @@
       card2_desc: "피그마(Figma) 캔버스 인터페이스 스타일의 인터랙티브 버튼, 토글, 모달, 네비게이션 컴포넌트 플레이그라운드.",
       card2_action: "컴포넌트 캔버스 실행",
 
-      card3_tag: "저장소 & 문서",
-      card3_title: "디자인 아키텍처",
-      card3_desc: "클린 CSS 아키텍처, 디자인 토큰, 에이전트 스킬 세트 가이드 문서 및 오픈소스 GitHub 저장소.",
-      card3_action: "GitHub 저장소 보기",
+      card3_tag: "디자인 라이브러리",
+      card3_title: "Design Library",
+      card3_desc: "용도와 태그로 디자인을 찾고, 실제 동작과 구현 설명을 확인하세요.",
+      card3_action: "Design Library 열기",
 
       stat1_label: "UI 디자인 트렌드",
       stat2_label: "재사용 컴포넌트",
@@ -63,10 +63,10 @@
       card2_desc: "Interactive playground featuring buttons, toggles, modals, and navigation components in a Figma-canvas layout.",
       card2_action: "Launch Component Canvas",
 
-      card3_tag: "Repository & Docs",
-      card3_title: "Design Architecture",
-      card3_desc: "Clean CSS architecture, design tokens, agent skills documentation, and open-source GitHub repository.",
-      card3_action: "View GitHub Repository",
+      card3_tag: "Design Library",
+      card3_title: "Design Library",
+      card3_desc: "Find designs by purpose and tags, then explore working previews and implementation guidance.",
+      card3_action: "Open Design Library",
 
       stat1_label: "UI Design Trends",
       stat2_label: "Reusable Components",

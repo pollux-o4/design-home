@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ko" data-mode="static">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Design Library · Design Home</title>
+    <link rel="stylesheet" href="../design-compare/hub/web/styles.css" />
+    <link rel="stylesheet" href="../shared/css/scrollbar.css">
+</head>
+  <body>
+    <a class="skip-link" href="#main">본문으로</a>
+    <header class="app-header">
+      <a class="brand" href="#/trends"
+        ><span class="brand-mark">dh.</span
+        ><span
+          >Design Library<small>모양을 찾고, 흐름을 확인하세요.</small></span
+        ></a
+      >
+      <a class="home-link" href="../index.html">Design Home</a>
+      <nav aria-label="주요 메뉴">
+        <a href="#/trends">디자인 트렌드</a><a href="#/components">컴포넌트</a
+        ><a data-local-only href="#/work">등록된 작업</a><a data-local-only href="#/activity">호출 기록</a>
+      </nav>
+    </header>
+    <main id="main">
+      <section id="screen-heading" class="screen-heading">
+        <p id="eyebrow" class="eyebrow">DESIGN LIBRARY</p>
+        <h1 id="screen-title">디자인 트렌드</h1>
+        <p id="screen-description">화면의 색, 질감, 분위기를 살펴보세요.</p>
+      </section>
+      <div id="detail-toolbar" class="detail-toolbar" hidden>
+        <button
+          id="back"
+          aria-label="목록으로"
+          class="quiet-button"
+          type="button"
+        >
+          ← <span>목록으로</span>
+        </button>
+        <nav aria-label="현재 위치">
+          <a id="parent-crumb"></a><span aria-hidden="true"> / </span
+          ><span>상세</span>
+        </nav>
+        <button id="copy-link" class="quiet-button" type="button">
+          링크 복사</button
+        ><span id="link-status" role="status"></span>
+      </div>
+      <section id="library-list" aria-label="자료 목록">
+        <form id="search" role="search">
+          <label class="sr-only" for="query">자료 검색</label
+          ><input
+            id="query"
+            placeholder="미니멀, 다크, 입체…"
+            autocomplete="off"
+          /><button type="submit">검색</button>
+        </form>
+        <details id="filters" class="filters">
+          <summary>필터 <span id="filter-count"></span></summary>
+          <div id="facets" aria-label="검색 태그"></div>
+        </details>
+        <div class="result-heading">
+          <h2 id="list-title">전체 트렌드</h2>
+          <span id="count" role="status" aria-live="polite"></span>
+        </div>
+        <p id="notice" class="muted"></p>
+        <div id="results"></div>
+      </section>
+      <section id="detail" aria-label="선택한 자료" hidden>
+        <div class="detail-heading">
+          <div>
+            <p id="detail-kind" class="eyebrow"></p>
+            <h1 id="title" tabindex="-1"></h1>
+            <p id="summary"></p>
+          </div>
+          <a
+            id="open-preview"
+            target="_blank"
+            rel="noopener"
+            class="outline-link"
+            >원본 열기 ↗</a
+          >
+        </div>
+        <div class="detail-tabs" role="group" aria-label="상세 보기">
+          <button id="show-preview" type="button" aria-pressed="true">
+            미리보기</button
+          ><button id="show-guide" type="button" aria-pressed="false">
+            설명
+          </button>
+        </div>
+        <div id="preview-panel">
+          <div class="preview-bar">
+            <span>실제 동작</span>
+            <div role="group" aria-label="미리보기 크기">
+              <button id="desktop" aria-pressed="true">기본</button
+              ><button id="mobile" aria-pressed="false">모바일</button>
+            </div>
+          </div>
+          <div class="preview-stage">
+            <iframe
+              id="preview"
+              title="선택한 자료 미리보기"
+              src="about:blank"
+            ></iframe>
+          </div>
+        </div>
+        <div id="guide-panel" hidden>
+          <div id="context"></div>
+          <details class="handoff">
+            <summary>CLI와 원본 자료</summary>
+            <div>
+              <code id="command"></code
+              ><button id="copy" type="button">명령 복사</button
+              ><a id="download">자료 JSON 받기</a
+              ><span id="copy-status" role="status"></span>
+            </div>
+          </details>
+        </div>
+      </section>
+      <section id="activity-section" aria-label="AI 호출 기록" hidden>
+        <div class="result-heading">
+          <h2>최근 10건</h2>
+          <button id="refresh-activity" class="quiet-button" type="button">
+            새로고침
+          </button>
+        </div>
+        <p id="activity-status" role="status"></p>
+        <div id="activity-list"></div>
+      </section>
+      <section id="activity-detail" aria-label="선택한 호출" hidden></section>
+      <div id="error" class="empty-state" role="alert" hidden></div>
+    </main>
+    <script type="module" src="../design-compare/hub/web/app.js"></script>
+    <script type="module" src="../shared/js/scrollbar.js"></script>
+</body>
+</html>

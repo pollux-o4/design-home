@@ -1,0 +1,16 @@
+:root { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #263c31; background: #f6f8f6; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+.sample { max-width: 680px; margin: auto; padding: 32px; }
+.sample-label { font-size: 11px; font-weight: 600; color: #607368; letter-spacing: .06em; }
+h1 { font-size: 27px; letter-spacing: -.025em; margin: 12px 0; }
+header p { font-size: 13px; line-height: 1.6; color: #586c60; margin: 0 0 24px; }
+.scroll-sample { --dh-scroll-ink: #506c59; height: 280px; overflow: auto; background: #fff; border: 1px solid #dce5dd; border-radius: 16px; outline-offset: 3px; }
+.sample-content { padding: 10px 26px; }
+section { display: flex; gap: 18px; padding: 26px 0; border-bottom: 1px solid #e8eee9; }
+section:last-child { border-bottom: 0; }
+section > span { color: #708275; font-size: 12px; padding-top: 4px; }
+h2 { font-size: 17px; margin: 0 0 8px; letter-spacing: -.02em; }
+section p { font-size: 13px; color: #5b6d61; line-height: 1.7; margin: 0; }
+footer { font-size: 11px; color: #687d6d; text-align: center; margin-top: 20px; }
+@media(max-width: 480px) { .sample { padding: 22px 16px; } h1 { font-size: 24px; } .sample-content { padding: 6px 20px; } }
