@@ -23,7 +23,7 @@ test('mobile follows category → list → detail, restores the list and support
     await page.getByRole('link', { name: '컴포넌트', exact: true }).click();
     await page.getByRole('heading', { name: '컴포넌트', exact: true }).waitFor();
     const modal = page.locator('.design-card[data-id="component-modal"]'); await modal.waitFor();
-    assert.equal(await page.locator('.design-card').count(), 9);
+    assert.equal(await page.locator('.design-card').count(), 13);
     await modal.click(); await page.locator('#title').filter({ hasText: '프로젝트 입력 모달' }).waitFor();
     await page.frameLocator('#preview').locator('#demo-modal').waitFor();
     assert.equal(await page.frameLocator('#preview').locator('.component-card').count(), 1);

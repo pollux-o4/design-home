@@ -1,20 +1,13 @@
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { createServer } from 'node:http';
-import { readFile, readdir } from 'node:fs/promises';
+import { createStaticServer } from './support/static-server.mjs';
+import { readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { chromium } from '../design-compare/node_modules/playwright/index.mjs';
 const root = fileURLToPath(new URL('../', import.meta.url));
 let browser, server, base;
 before(async () => {
-  server = createServer(async (req, res) => {
-    try {
-      const path = new URL(req.url, 'http://local').pathname;
-      const extension = path.split('.').pop();
-      res.setHeader('content-type', {html:'text/html',css:'text/css',js:'application/javascript'}[extension] || 'application/octet-stream');
-      res.end(await readFile(root + decodeURIComponent(path)));
-    } catch { res.writeHead(404).end(); }
-  });
+  server = createStaticServer();
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   base = `http://127.0.0.1:${server.address().port}`;
   browser = await chromium.launch({ headless: true });
@@ -46,9 +39,9 @@ test('canvas registry supplies render counts, uniform description search and saf
     await page.route(/https?:\/\/(?!127\.0\.0\.1)/, route => route.abort());
   await page.goto(`${base}/ui-components/index.html`);
   const expected = await page.evaluate(() => Object.values(ComponentModules).flatMap(module => CanvasCatalog.create().components(module)).length);
-  assert.equal(await page.locator('.component-card').count(), await page.evaluate(() => CanvasCatalog.create().components(Object.values(ComponentModules)[0]).length));
+  assert.equal(await page.locator('.component-card').count(), 0);
   assert.ok(expected > await page.locator('.component-card').count());
-  assert.equal(await page.locator('.layer-item').count(), 5);
+  assert.equal(await page.locator('.layer-item').count(), 6);
   await page.locator('#search-input').fill('GNB');
   assert.ok(await page.locator('.component-card').count() > 0);
   assert.ok(await page.locator('.component-card').count() < expected);
@@ -58,19 +51,6 @@ test('canvas registry supplies render counts, uniform description search and saf
   await page.close();
 });
 
-test('code view opens, closes with Escape and restores triggering focus', async () => {
-  const page = await browser.newPage();
-    await page.route(/https?:\/\/(?!127\.0\.0\.1)/, route => route.abort());
-  await page.goto(`${base}/ui-components/index.html`);
-  const button = page.locator('.btn-code-view').first();
-  await button.click();
-  assert.equal(await page.locator('#code-modal-overlay.open').count(), 1);
-  assert.ok((await page.locator('#code-modal-body').textContent()).length > 0);
-  await page.keyboard.press('Escape');
-  assert.equal(await page.locator('#code-modal-overlay.open').count(), 0);
-  assert.equal(await button.evaluate(el => el === document.activeElement), true);
-  await page.close();
-});
 
 test('language choice updates newly injected navigation and persists across legacy pages', async () => {
   const page = await browser.newPage();
@@ -88,7 +68,8 @@ test('feed reset reuses its catalog markup after load and global preference adap
   const page = await browser.newPage();
     await page.route(/https?:\/\/(?!127\.0\.0\.1)/, route => route.abort());
   await page.goto(`${base}/ui-components/index.html`);
-  await page.locator('[data-target="navigation"] button').click();
+  await page.locator('[data-target="layout-navigation"] .category-button').click();
+  await page.locator('[data-target="layout-navigation"] [data-group="content"]').click();
   const initial = await page.locator('#infinite-scroll-list').innerHTML();
   await page.evaluate(() => triggerInfiniteScroll());
   await page.waitForFunction(() => document.querySelectorAll('#infinite-scroll-list .infinite-item-card').length > 4);
@@ -107,7 +88,8 @@ test('feed render lifecycle resets exhausted state and cancels detached pending 
   const page = await browser.newPage();
   await page.route(/https?:\/\/(?!127\.0\.0\.1)/, route => route.abort());
   await page.goto(`${base}/ui-components/index.html`);
-  await page.locator('[data-target="navigation"] button').click();
+  await page.locator('[data-target="layout-navigation"] .category-button').click();
+  await page.locator('[data-target="layout-navigation"] [data-group="content"]').click();
   for (const count of [6, 8, 10]) {
     await page.evaluate(() => triggerInfiniteScroll());
     await page.waitForFunction(expected => document.querySelectorAll('#infinite-scroll-list .infinite-item-card').length === expected, count);

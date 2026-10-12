@@ -1,22 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createServer } from 'node:http';
-import { readFile, mkdir } from 'node:fs/promises';
-import { resolve, extname } from 'node:path';
+import { createStaticServer } from '../../tests/support/static-server.mjs';
+import { mkdir } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import { chromium } from 'playwright';
 
 test('Pages landing → library → filtered detail → interactive preview and restored deep link', async () => {
   const root = resolve('..');
-  const server = createServer(async (req, res) => {
-    try {
-      const path = new URL(req.url, 'http://localhost').pathname;
-      if (!path.startsWith('/design-home/')) throw new Error();
-      const file = resolve(root, `.${path.slice('/design-home'.length)}${path.endsWith('/') ? 'index.html' : ''}`);
-      if (!file.startsWith(root + '/')) throw new Error();
-      const data = await readFile(file);
-      res.setHeader('Content-Type', { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json' }[extname(file)] ?? 'application/octet-stream'); res.end(data);
-    } catch { res.writeHead(404); res.end(); }
-  });
+  const server = createStaticServer({ prefix: '/design-home/' });
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   const base = `http://127.0.0.1:${server.address().port}/design-home/`;
   const browser = await chromium.launch(), page = await browser.newPage(); page.setDefaultTimeout(5000);

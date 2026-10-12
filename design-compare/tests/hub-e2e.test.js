@@ -33,7 +33,7 @@ test('hub search → actual interactive preview → CLI source context; responsi
     await page.emulateMedia({reducedMotion:'reduce'});
     await disclosure.click(); assert.equal(await extra.isVisible(),true);
     assert.equal(await mood.locator('.disclosure-chips').evaluate(node=>getComputedStyle(node).transitionDuration),'0s');
-    await page.locator('#query').fill('정보가 많은 관리 화면'); await page.locator('#search button').click();
+    await page.locator('#query').fill('정보가 많은 관리 화면'); await page.locator('#search button[type=submit]').click();
     await page.locator('.design-card[data-id="material-design"]').waitFor();
     await page.locator('#filters summary').click();
     await page.locator('#facets button[data-tag="minimal"]').click();
@@ -52,9 +52,9 @@ test('hub search → actual interactive preview → CLI source context; responsi
     assert.ok(activity.id); assert.deepEqual(context, cliContext); assert.ok(cli.sourceFiles.some(file=>file.role==='styles')); assert.ok(cli.sourceFiles.some(file=>file.role==='interaction'));
     await page.setViewportSize({width:390,height:844}); assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
     await page.getByRole('button',{name:'목록으로',exact:true}).click();
-    await page.locator('#query').fill('우주선엔진'); await page.locator('#search button').click(); await page.getByText('일치하는 디자인이 없습니다.',{exact:false}).waitFor();
+    await page.locator('#query').fill('우주선엔진'); await page.locator('#search button[type=submit]').click(); await page.getByText('일치하는 디자인이 없습니다.',{exact:false}).waitFor();
     assert.equal(await page.locator('#detail').isVisible(),false);
-    await page.locator('#query').fill('<img src=x onerror=alert(1)>'); await page.locator('#search button').click(); await page.waitForTimeout(100);
+    await page.locator('#query').fill('<img src=x onerror=alert(1)>'); await page.locator('#search button[type=submit]').click(); await page.waitForTimeout(100);
     assert.equal(await page.locator('#results img').count(),0); assert.deepEqual(errors,[]);
     assert.equal((await page.request.get(`${base}/api/context?id=unknown`)).status(),400);
   } finally { await browser.close(); await new Promise(resolve=>server.close(resolve)); }

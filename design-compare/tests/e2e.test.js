@@ -53,7 +53,7 @@ test('same component passes; renamed classes also pass', async () => {
 test('intentional drift fails with precise CSS, geometry and image artifacts', async () => {
   assert.equal(drift.status, 'fail');
   assert.ok(drift.findings.some(f => f.part === '$root' && f.property === 'padding-top' && f.expected === '24px' && f.actual === '32px'));
-  assert.ok(drift.findings.some(f => f.part === 'action' && f.property === 'background-image'));
+  assert.ok(drift.findings.some(f => f.part === 'action' && f.property === 'background-color' && f.expected === 'rgb(0, 113, 227)' && f.actual === 'rgb(239, 68, 68)'));
   assert.ok(drift.findings.some(f => f.kind === 'geometry'));
   assert.ok(drift.visual.ratio > 0.01);
   const report = JSON.parse(await readFile(drift.jsonPath, 'utf8'));

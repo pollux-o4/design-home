@@ -9,7 +9,9 @@ test('intent search ranks explicit design facets and explains evidence without i
   assert.equal(result.results[0].id, 'material-design');
   assert.ok(result.results[0].reasons.some(reason => reason.matched === '관리'));
   assert.equal(searchDesigns('블로그 글 상세').results.length, 0);
-  assert.equal(searchDesigns('차분하고 미니멀한 화면').results.length, 3);
+  const minimal = searchDesigns('차분하고 미니멀한 화면').results;
+  assert.equal(minimal.length, 7);
+  for (const id of ['component-form-validation', 'component-password-field', 'component-searchable-list', 'component-error-retry']) assert.ok(minimal.some(item => item.id === id));
   assert.ok(searchDesigns('강렬한 타이포그래피').results.some(item => item.id === 'kinetic-typography'));
   assert.equal(searchDesigns('').results.filter(item => item.kind === 'trend').length, 15);
   assert.ok(searchDesigns('').results.some(item => item.id === 'component-modal'));
