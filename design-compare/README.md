@@ -7,7 +7,7 @@ cd design-compare
 mise trust
 mise run setup
 ./design --help
-npm run hub
+mise run hub
 ```
 
 - [문서 안내](docs/README.md): 작업별 설명과 C1~C3 구조
@@ -21,4 +21,4 @@ C4는 실제 코드로 확인한다.
 
 ## Design Library 사용자 화면
 
-Design Home 랜딩에서 **Design Library**로 진입합니다. 로컬은 `http://127.0.0.1:4174/design-library/`, GitHub Pages는 `/design-home/design-library/`를 사용합니다. SPA는 로컬 API와 정적 JSON 모드를 공유합니다. 공개 데이터 갱신은 `npm run build:library`, 전체 E2E 포함 검증은 `npm test`로 실행합니다. 내부 비교 모듈·CLI 이름은 Design Compare입니다.
+Design Home 랜딩에서 **Design Library**로 진입합니다. 로컬은 `http://127.0.0.1:4184/design-library/`, GitHub Pages는 `/design-home/design-library/`를 사용합니다. SPA는 로컬 API와 정적 JSON 모드를 공유합니다. 공개 데이터 갱신은 `npm run build:library`, 전체 E2E 포함 검증은 `npm test`로 실행합니다. 내부 비교 모듈·CLI 이름은 Design Compare입니다.

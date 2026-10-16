@@ -49,6 +49,6 @@ export function createHubServer({ store = process.env.DESIGN_STORE } = {}) {
   });
 }
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const port = Number(process.env.PORT ?? 4174);
+  const port = Number(process.env.PORT ?? 4184);
   createHubServer().listen(port, '127.0.0.1', () => console.log(`Design Library: http://127.0.0.1:${port}/design-library/`));
 }

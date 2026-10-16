@@ -18,7 +18,7 @@ ${Object.values(commands).map(command => command.usage).join('\n')}
 
 처음 사용: ./design brief --intent "프로젝트 입력 모달을 만들려고 해" --json
 공통: --store 경로 (기본 .design-compare / DESIGN_STORE) · --task ID (같은 작업 연결) · --json
-자료: --base-url URL (기본 DESIGN_BASE_URL 또는 http://127.0.0.1:4174) · --limit 1~6 (기본 3)
+자료: --base-url URL (기본 DESIGN_BASE_URL 또는 http://127.0.0.1:4184) · --limit 1~6 (기본 3)
 등록: --viewport 1280x900 · --theme light|dark · --state default|hover|focus
 비교: --ignore CSS속성 (반복 가능) · --pixel-budget 0~1 (기본 ${DEFAULT_PIXEL_BUDGET})
 AI 출력: --json 요약·부분별 개수·파일 경로 / --json --details 전체 차이
