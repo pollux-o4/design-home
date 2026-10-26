@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>용어집 · Design Home</title>
+  <meta name="description" content="UI·UX와 모션·효과 용어를 작은 도식과 직접 조작하는 예시로 배웁니다.">
+  <link rel="stylesheet" href="../shared/css/interface.css">
+  <link rel="stylesheet" href="../shared/css/global-nav.css">
+  <link rel="stylesheet" href="../assets/index/navigation.css">
+  <link rel="stylesheet" href="../ui-components/css/components.css">
+  <link rel="stylesheet" href="css/glossary.css">
+  <script src="../shared/js/global-nav.js" defer></script>
+  <script type="module" src="../shared/js/i18n.js"></script>
+</head>
+<body class="home-page">
+  <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+  <main id="main-content" tabindex="-1" lang="ko">
+    <div id="list-view">
+      <header class="glossary-intro">
+        <p class="eyebrow">DESIGN DICTIONARY</p>
+        <h1>용어를, 눈으로.</h1>
+        <p>펼쳐 보고, 움직여 보고, 이해하기.</p>
+        <div class="intro-sketches" aria-hidden="true"><span>UI</span><i></i><span>UX</span><i></i><b>아하!</b></div>
+      </header>
+      <form class="search-bar" role="search">
+        <label for="term-search"><svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#search"></use></svg><span class="sr-only">UI·UX·모션·효과 용어 검색</span></label>
+        <input id="term-search" type="search" placeholder="용어 찾기 · 한글 / English" autocomplete="off">
+        <button id="clear-search" type="button" hidden>지우기</button>
+        <span class="search-shortcut" aria-hidden="true">/</span>
+      </form>
+      <div class="list-meta"><span>용어 <b id="term-count"></b></span><span>도식으로 훑고 · 펼쳐서 체험</span></div>
+      <div id="categories"></div>
+      <div id="empty-state" class="empty-search" hidden><span aria-hidden="true">⌕</span><h2>일치하는 용어가 없어요.</h2><p>다른 단어로 찾아보세요.</p><button type="button" id="reset-search">검색 초기화</button></div>
+    </div>
+    <section id="detail-view" hidden></section>
+    <p id="route-status" role="status" class="sr-only"></p>
+    <noscript>용어집의 검색과 체험에는 JavaScript가 필요합니다.</noscript>
+    <footer class="glossary-footer"><span>DESIGN HOME / GLOSSARY</span><span>읽는 것에서, 경험하는 것으로.</span></footer>
+  </main>
+  <script src="../ui-components/js/sample-definition.js"></script>
+  <script src="../ui-components/js/components/popups-and-layers.js"></script>
+  <script src="../ui-components/js/components/inputs-and-controls.js"></script>
+  <script src="../ui-components/js/components/states-and-feedback.js"></script>
+  <script src="../ui-components/js/components/navigation.js"></script>
+  <script src="../ui-components/js/components/interactions.js"></script>
+  <script src="../ui-components/js/components/motion-foundations.js"></script>
+  <script src="../ui-components/js/components/state-morphing.js"></script>
+  <script src="../ui-components/js/components/motion-spatial.js"></script>
+  <script src="../ui-components/js/components/motion-expressive.js"></script>
+  <script src="../ui-components/js/components/layout-patterns.js"></script>
+  <script src="../ui-components/js/components/data-patterns.js"></script>
+  <script src="../ui-components/js/components/workflow-patterns.js"></script>
+  <script src="../ui-components/js/components/accessibility-patterns.js"></script>
+  <script src="../ui-components/js/catalog.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

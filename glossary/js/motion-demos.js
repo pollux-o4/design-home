@@ -1,0 +1,494 @@
+const ref = "https://developer.mozilla.org/en-US/docs/Web/API/Element/animate";
+const items = [
+  [
+    "fade",
+    "페이드 인·아웃",
+    "Fade In / Out",
+    "투명도로 나타나고 사라집니다.",
+    "fade",
+  ],
+  [
+    "slide",
+    "슬라이드",
+    "Slide",
+    "형태를 유지한 채 방향을 따라 이동합니다.",
+    "slide",
+  ],
+  [
+    "scale",
+    "스케일",
+    "Scale",
+    "크기를 바꿔 등장이나 중요도를 표현합니다.",
+    "scale",
+  ],
+  [
+    "rotate",
+    "회전",
+    "Rotate",
+    "축을 중심으로 돌며 방향 또는 변화를 보여줍니다.",
+    "rotate",
+  ],
+  ["flip", "플립", "Flip", "카드 면을 뒤집어 앞뒤 상태를 전환합니다.", "flip"],
+  ["wipe", "와이프", "Wipe", "한쪽에서 다른 장면을 밀어 넣습니다.", "wipe"],
+  [
+    "mask-reveal",
+    "마스크 리빌",
+    "Mask Reveal",
+    "가려진 영역을 넓혀 콘텐츠를 드러냅니다.",
+    "reveal",
+  ],
+  ["blur", "블러", "Blur", "경계를 흐려 초점의 전환을 보여줍니다.", "blur"],
+  ["easing", "이징", "Easing", "출발과 도착의 속도 곡선을 정합니다.", "easing"],
+  [
+    "bounce",
+    "바운스",
+    "Bounce",
+    "도착 지점에서 튕기며 가벼운 반응을 만듭니다.",
+    "bounce",
+  ],
+  [
+    "overshoot",
+    "오버슈트",
+    "Overshoot",
+    "목표를 살짝 지나쳤다가 되돌아옵니다.",
+    "overshoot",
+  ],
+  [
+    "morph",
+    "모핑",
+    "Morphing",
+    "한 형태가 끊기지 않고 다른 형태가 됩니다.",
+    "morph",
+  ],
+  [
+    "fan-out",
+    "팬아웃",
+    "Fan-out",
+    "한 지점의 항목이 부채꼴로 펼쳐집니다.",
+    "fanout",
+  ],
+  [
+    "radial-menu",
+    "래디얼 메뉴",
+    "Radial Menu",
+    "중심 조작에서 원형으로 선택지가 열립니다.",
+    "radial",
+  ],
+  [
+    "accordion-expand",
+    "아코디언 확장",
+    "Accordion Expansion",
+    "한 줄의 정보가 아래로 확장됩니다.",
+    "accordion",
+  ],
+  [
+    "ripple",
+    "리플",
+    "Ripple",
+    "누른 지점에서 파문이 퍼져 입력을 확인합니다.",
+    "ripple",
+  ],
+  [
+    "pulse",
+    "펄스",
+    "Pulse",
+    "반복되는 팽창으로 주의를 부드럽게 끕니다.",
+    "pulse",
+  ],
+  [
+    "shake",
+    "셰이크",
+    "Shake",
+    "짧은 흔들림으로 오류나 거부를 알립니다.",
+    "shake",
+  ],
+  [
+    "shimmer",
+    "시머",
+    "Shimmer",
+    "빛줄기가 지나가며 불러오는 중임을 알립니다.",
+    "shimmer",
+  ],
+  [
+    "glow",
+    "글로우",
+    "Glow",
+    "빛 번짐을 변화시켜 활성 상태를 강조합니다.",
+    "glow",
+  ],
+  [
+    "gooey",
+    "구이 효과",
+    "Gooey",
+    "가까운 도형이 액체처럼 붙고 떨어집니다.",
+    "gooey",
+  ],
+  [
+    "drag-inertia",
+    "드래그 관성",
+    "Drag Inertia",
+    "놓은 뒤에도 속도를 이어가며 멈춥니다.",
+    "inertia",
+  ],
+  ["snap", "스냅", "Snap", "가까운 기준점으로 정렬되며 멈춥니다.", "snap"],
+  [
+    "rubber-band",
+    "러버 밴드",
+    "Rubber-band",
+    "경계를 넘을 때 늘어났다가 원래 자리로 돌아옵니다.",
+    "rubber",
+  ],
+  [
+    "magnetic",
+    "자석 효과",
+    "Magnetic Cursor",
+    "포인터 가까이의 요소가 살짝 끌려옵니다.",
+    "magnetic",
+  ],
+];
+const frames = {
+  fade: [{ opacity: 0 }, { opacity: 1 }],
+  slide: [
+    { transform: "translateX(-72px)" },
+    { transform: "translateX(72px)" },
+  ],
+  scale: [{ transform: "scale(.35)" }, { transform: "scale(1)" }],
+  rotate: [{ transform: "rotate(0)" }, { transform: "rotate(360deg)" }],
+  flip: [
+    { transform: "perspective(240px) rotateY(0)" },
+    { transform: "perspective(240px) rotateY(180deg)" },
+  ],
+  wipe: [{ clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0)" }],
+  reveal: [
+    { clipPath: "circle(0 at 50% 50%)" },
+    { clipPath: "circle(75% at 50% 50%)" },
+  ],
+  blur: [{ filter: "blur(12px)" }, { filter: "blur(0)" }],
+  easing: [
+    { transform: "translateX(-72px)" },
+    { transform: "translateX(72px)" },
+  ],
+  bounce: [
+    { transform: "translateY(-58px)" },
+    { transform: "translateY(0)" },
+    { transform: "translateY(-18px)" },
+    { transform: "translateY(0)" },
+  ],
+  overshoot: [
+    { transform: "translateX(-70px)" },
+    { transform: "translateX(78px)" },
+    { transform: "translateX(64px)" },
+  ],
+  morph: [
+    { borderRadius: "50%", transform: "rotate(0)" },
+    { borderRadius: "10%", transform: "rotate(90deg)" },
+  ],
+  accordion: [
+    { transform: "scaleY(.2)", opacity: 0.2 },
+    { transform: "scaleY(1)", opacity: 1 },
+  ],
+  ripple: [
+    { transform: "scale(.2)", opacity: 0.8 },
+    { transform: "scale(2.8)", opacity: 0 },
+  ],
+  pulse: [
+    { transform: "scale(.75)", opacity: 0.5 },
+    { transform: "scale(1.25)", opacity: 1 },
+    { transform: "scale(.75)", opacity: 0.5 },
+  ],
+  shake: [
+    { transform: "translateX(0)" },
+    { transform: "translateX(-20px)" },
+    { transform: "translateX(18px)" },
+    { transform: "translateX(0)" },
+  ],
+  shimmer: [
+    { transform: "translateX(-160px)" },
+    { transform: "translateX(160px)" },
+  ],
+  glow: [
+    { boxShadow: "0 0 0 #39866e00" },
+    { boxShadow: "0 0 32px #39866ecc" },
+    { boxShadow: "0 0 0 #39866e00" },
+  ],
+  gooey: [
+    { transform: "translateX(-44px)" },
+    { transform: "translateX(0)" },
+    { transform: "translateX(-44px)" },
+  ],
+  inertia: [
+    { transform: "translateX(-76px)" },
+    { transform: "translateX(66px)" },
+    { transform: "translateX(50px)" },
+  ],
+  snap: [
+    { transform: "translateX(-70px)" },
+    { transform: "translateX(0)" },
+    { transform: "translateX(70px)" },
+  ],
+  rubber: [
+    { transform: "scaleX(.55)" },
+    { transform: "scaleX(1.18)" },
+    { transform: "scaleX(1)" },
+  ],
+  magnetic: [
+    { transform: "translateX(-42px)" },
+    { transform: "translateX(20px)" },
+    { transform: "translateX(0)" },
+  ],
+};
+function objects(type) {
+  if (["fanout", "radial"].includes(type))
+    return Array.from(
+      { length: 5 },
+      (_, i) =>
+        `<span class="motion-object object-${i}">${i ? "" : "+"}</span>`,
+    ).join("");
+  if (type === "gooey")
+    return '<span class="motion-object object-0"></span><span class="motion-object object-1"></span>';
+  if (type === "accordion")
+    return '<span class="motion-object"></span><span class="motion-object"></span><span class="motion-object"></span>';
+  if (type === "ripple")
+    return '<span class="motion-object"></span><span class="motion-ripple"></span>';
+  if (type === "shimmer")
+    return '<span class="motion-object"></span><span class="motion-shine"></span>';
+  return '<span class="motion-object"></span>';
+}
+export const motionDemos = items.map(([name, title, term, desc, type]) => ({
+  id: `motion-${name}`,
+  category: "motion",
+  title,
+  term,
+  desc,
+  visual: `motion-${type}`,
+  samples: [`motion-${name}`],
+  reference:
+    name === "blur"
+      ? "https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/blur"
+      : name === "gooey"
+        ? "https://developer.mozilla.org/en-US/docs/Web/SVG/Element/feColorMatrix"
+        : ref,
+  render() {
+    const filter =
+      type === "gooey"
+        ? '<svg class="gooey-filter" aria-hidden="true"><defs><filter id="glossary-gooey"><feGaussianBlur in="SourceGraphic" stdDeviation="8"/><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 20 -9"/></filter></defs></svg>'
+        : "";
+    return `<div class="sample motion-experiment motion-demo-${type}">${filter}<div class="motion-lab" role="img" aria-label="${desc}"><div class="motion-objects">${objects(type)}</div></div><button type="button" class="ui-btn ui-btn-primary" data-play>재생</button><details class="motion-more"><summary>무엇이 달라지나요?</summary><p>${desc}</p></details><p class="sr-only" role="status" data-motion-status></p></div>`;
+  },
+  mount(root) {
+    let animations = [];
+    const play = root.querySelector("[data-play]");
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+    const cancel = () => {
+      animations.forEach((a) => a.cancel());
+      animations = [];
+    };
+    const run = () => {
+      cancel();
+      [
+        ...root.querySelectorAll(
+          ".motion-object, .motion-ripple, .motion-shine",
+        ),
+      ].forEach((object, index) => {
+        let keyframes = frames[type] || frames.fade;
+        const options = {
+          duration: reduced.matches ? 1 : 1200,
+          fill: "forwards",
+          easing: type === "easing" ? "cubic-bezier(.2,.8,.2,1)" : "ease-out",
+        };
+        if (["fanout", "radial"].includes(type)) {
+          const angle =
+            (type === "fanout" ? -120 : -90) +
+            index * (type === "fanout" ? 60 : 72);
+          const d = index ? 68 : 0;
+          keyframes = [
+            { transform: "scale(.2)", opacity: 0 },
+            {
+              transform: `translate(${Math.cos((angle * Math.PI) / 180) * d}px, ${Math.sin((angle * Math.PI) / 180) * d}px) scale(1)`,
+              opacity: 1,
+            },
+          ];
+          options.delay = index * 65;
+        }
+        if (type === "gooey" && index)
+          keyframes = frames.gooey.map(({ transform }) => ({
+            transform: transform.replace("-44", "44"),
+          }));
+        if (type === "accordion") options.delay = index * 120;
+        if (type === "ripple" && index) keyframes = frames.ripple;
+        if (type === "shimmer" && index) keyframes = frames.shimmer;
+        animations.push(object.animate(keyframes, options));
+      });
+      root.querySelector("[data-motion-status]").textContent = reduced.matches
+        ? "움직임 줄이기: 변화 후 상태를 표시합니다."
+        : `${title} 재생`;
+    };
+    play.addEventListener("click", run);
+    reduced.addEventListener("change", cancel);
+    return () => {
+      cancel();
+      play.removeEventListener("click", run);
+      reduced.removeEventListener("change", cancel);
+    };
+  },
+}));
+const patterns = [
+  [
+    "motion-easing",
+    "이징 곡선",
+    "Easing Curves",
+    "같은 거리의 여러 속도 곡선을 비교합니다.",
+  ],
+  [
+    "motion-stagger",
+    "순차적 등장",
+    "Staggered Reveal",
+    "요소가 시간차를 두고 차례로 나타납니다.",
+  ],
+  [
+    "motion-spring",
+    "스프링",
+    "Damped Spring",
+    "탄성과 감쇠를 가진 움직임입니다.",
+  ],
+  [
+    "motion-flip",
+    "FLIP 레이아웃 전환",
+    "FLIP Layout Transition",
+    "이전 위치와 다음 위치를 연결해 재배치합니다.",
+  ],
+  [
+    "motion-crossfade",
+    "크로스페이드",
+    "Crossfade",
+    "두 장면을 겹치며 전환합니다.",
+  ],
+  [
+    "motion-shared-element",
+    "공유 요소 전환",
+    "Shared Element Transition",
+    "같은 요소가 화면 사이를 이어 줍니다.",
+  ],
+  [
+    "motion-scroll-reveal",
+    "스크롤 등장",
+    "Scroll Reveal",
+    "스크롤 위치에서 필요한 콘텐츠를 드러냅니다.",
+  ],
+  [
+    "motion-scroll-progress",
+    "스크롤 진행률",
+    "Scroll-linked Progress",
+    "읽은 위치를 진행 막대로 보여줍니다.",
+  ],
+  [
+    "motion-parallax",
+    "패럴랙스",
+    "Layered Parallax",
+    "레이어를 서로 다른 속도로 움직여 깊이를 만듭니다.",
+  ],
+  [
+    "motion-card-tilt",
+    "카드 틸트",
+    "Perspective Tilt",
+    "포인터를 따라 원근감 있게 기울어집니다.",
+  ],
+  [
+    "motion-page-slide",
+    "방향성 화면 전환",
+    "Directional Page Transition",
+    "앞뒤 탐색 방향을 움직임으로 설명합니다.",
+  ],
+  [
+    "motion-swipe-stack",
+    "스와이프 카드 스택",
+    "Swipe Card Stack",
+    "카드를 넘겨 다음 항목으로 이동합니다.",
+  ],
+  [
+    "motion-svg-draw",
+    "SVG 선 그리기",
+    "SVG Path Drawing",
+    "선이 그려지며 기호나 일러스트를 완성합니다.",
+  ],
+  [
+    "motion-counter",
+    "카운트업",
+    "Animated Metric / Count-up",
+    "수치의 변화를 연속적인 숫자로 보여줍니다.",
+  ],
+  [
+    "motion-text-reveal",
+    "텍스트 리빌",
+    "Staggered Typography Reveal",
+    "단어 또는 문장이 순서대로 나타납니다.",
+  ],
+  [
+    "motion-gradient",
+    "애니메이티드 메쉬 그라디언트",
+    "Animated Mesh Gradient",
+    "색과 빛의 위치가 변하며 분위기를 만듭니다.",
+  ],
+  [
+    "motion-orbit",
+    "오비트 구성",
+    "Orbital Product Composition",
+    "중심 요소 주위를 궤도로 움직입니다.",
+  ],
+  [
+    "motion-success-burst",
+    "컨페티",
+    "Success Burst / Confetti",
+    "완료 순간에 짧은 파티클을 터뜨립니다.",
+  ],
+  [
+    "morph-action",
+    "상태 모핑",
+    "State-driven Morphing Action",
+    "버튼이 진행과 완료 상태로 변합니다.",
+  ],
+  [
+    "morph-island",
+    "적응형 상태 아일랜드",
+    "Adaptive Status Island",
+    "작은 상태 표시가 조작 영역으로 확장됩니다.",
+  ],
+];
+const patternVisuals = {
+  "motion-easing": "easing",
+  "motion-stagger": "stagger",
+  "motion-spring": "spring",
+  "motion-flip": "flip",
+  "motion-crossfade": "crossfade",
+  "motion-shared-element": "scale",
+  "motion-scroll-reveal": "reveal",
+  "motion-scroll-progress": "easing",
+  "motion-parallax": "slide",
+  "motion-card-tilt": "flip",
+  "motion-page-slide": "slide",
+  "motion-swipe-stack": "fanout",
+  "motion-svg-draw": "wipe",
+  "motion-counter": "scale",
+  "motion-text-reveal": "stagger",
+  "motion-gradient": "glow",
+  "motion-orbit": "radial",
+  "motion-success-burst": "radial",
+  "morph-action": "morph",
+  "morph-island": "accordion",
+};
+export function createPatternMotionEntries(catalog) {
+  return patterns.map(([id, title, term, desc]) => {
+    const definition = catalog.find(id);
+    if (!definition) throw new Error(`Missing motion glossary sample: ${id}`);
+    return {
+      ...definition,
+      id: `glossary-${id}`,
+      category: "motion",
+      title,
+      term,
+      desc,
+      visual: `motion-${patternVisuals[id]}`,
+      samples: [id],
+    };
+  });
+}
