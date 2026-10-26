@@ -1,4 +1,4 @@
-const ref = "https://developer.mozilla.org/en-US/docs/Web/API/Element/animate";
+import { createMotionDemo } from "./motion-demo-view.js";
 const items = [
   [
     "fade",
@@ -237,101 +237,9 @@ const frames = {
     { transform: "translateX(0)" },
   ],
 };
-function objects(type) {
-  if (["fanout", "radial"].includes(type))
-    return Array.from(
-      { length: 5 },
-      (_, i) =>
-        `<span class="motion-object object-${i}">${i ? "" : "+"}</span>`,
-    ).join("");
-  if (type === "gooey")
-    return '<span class="motion-object object-0"></span><span class="motion-object object-1"></span>';
-  if (type === "accordion")
-    return '<span class="motion-object"></span><span class="motion-object"></span><span class="motion-object"></span>';
-  if (type === "ripple")
-    return '<span class="motion-object"></span><span class="motion-ripple"></span>';
-  if (type === "shimmer")
-    return '<span class="motion-object"></span><span class="motion-shine"></span>';
-  return '<span class="motion-object"></span>';
-}
-export const motionDemos = items.map(([name, title, term, desc, type]) => ({
-  id: `motion-${name}`,
-  category: "motion",
-  title,
-  term,
-  desc,
-  visual: `motion-${type}`,
-  samples: [`motion-${name}`],
-  reference:
-    name === "blur"
-      ? "https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/blur"
-      : name === "gooey"
-        ? "https://developer.mozilla.org/en-US/docs/Web/SVG/Element/feColorMatrix"
-        : ref,
-  render() {
-    const filter =
-      type === "gooey"
-        ? '<svg class="gooey-filter" aria-hidden="true"><defs><filter id="glossary-gooey"><feGaussianBlur in="SourceGraphic" stdDeviation="8"/><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 20 -9"/></filter></defs></svg>'
-        : "";
-    return `<div class="sample motion-experiment motion-demo-${type}">${filter}<div class="motion-lab" role="img" aria-label="${desc}"><div class="motion-objects">${objects(type)}</div></div><button type="button" class="ui-btn ui-btn-primary" data-play>재생</button><details class="motion-more"><summary>무엇이 달라지나요?</summary><p>${desc}</p></details><p class="sr-only" role="status" data-motion-status></p></div>`;
-  },
-  mount(root) {
-    let animations = [];
-    const play = root.querySelector("[data-play]");
-    const reduced = matchMedia("(prefers-reduced-motion: reduce)");
-    const cancel = () => {
-      animations.forEach((a) => a.cancel());
-      animations = [];
-    };
-    const run = () => {
-      cancel();
-      [
-        ...root.querySelectorAll(
-          ".motion-object, .motion-ripple, .motion-shine",
-        ),
-      ].forEach((object, index) => {
-        let keyframes = frames[type] || frames.fade;
-        const options = {
-          duration: reduced.matches ? 1 : 1200,
-          fill: "forwards",
-          easing: type === "easing" ? "cubic-bezier(.2,.8,.2,1)" : "ease-out",
-        };
-        if (["fanout", "radial"].includes(type)) {
-          const angle =
-            (type === "fanout" ? -120 : -90) +
-            index * (type === "fanout" ? 60 : 72);
-          const d = index ? 68 : 0;
-          keyframes = [
-            { transform: "scale(.2)", opacity: 0 },
-            {
-              transform: `translate(${Math.cos((angle * Math.PI) / 180) * d}px, ${Math.sin((angle * Math.PI) / 180) * d}px) scale(1)`,
-              opacity: 1,
-            },
-          ];
-          options.delay = index * 65;
-        }
-        if (type === "gooey" && index)
-          keyframes = frames.gooey.map(({ transform }) => ({
-            transform: transform.replace("-44", "44"),
-          }));
-        if (type === "accordion") options.delay = index * 120;
-        if (type === "ripple" && index) keyframes = frames.ripple;
-        if (type === "shimmer" && index) keyframes = frames.shimmer;
-        animations.push(object.animate(keyframes, options));
-      });
-      root.querySelector("[data-motion-status]").textContent = reduced.matches
-        ? "움직임 줄이기: 변화 후 상태를 표시합니다."
-        : `${title} 재생`;
-    };
-    play.addEventListener("click", run);
-    reduced.addEventListener("change", cancel);
-    return () => {
-      cancel();
-      play.removeEventListener("click", run);
-      reduced.removeEventListener("change", cancel);
-    };
-  },
-}));
+export const motionDemos = items.map((definition) =>
+  createMotionDemo(definition, frames),
+);
 const patterns = [
   [
     "motion-easing",
