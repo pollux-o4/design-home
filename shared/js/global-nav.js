@@ -57,6 +57,14 @@
         <li><a href="${href("design-library/")}" class="dh-nav-link ${inLibrary ? "active" : ""}" ${inLibrary ? 'aria-current="page"' : ""}><span>Design Library</span></a></li>
       </ul>
       <div class="dh-nav-right">
+        <label class="dh-theme-switcher">
+          <span class="sr-only" data-i18n="theme_label">색상 테마</span>
+          <select id="dh-theme-select" class="dh-theme-select">
+            <option value="system" data-i18n="theme_system">시스템</option>
+            <option value="light" data-i18n="theme_light">라이트</option>
+            <option value="dark" data-i18n="theme_dark">다크</option>
+          </select>
+        </label>
         <div class="dh-lang-switcher" aria-label="Language Selector">
           <button type="button" id="dh-lang-ko" class="dh-lang-btn" aria-label="한국어로 변경">KO</button>
           <button type="button" id="dh-lang-en" class="dh-lang-btn" aria-label="Switch to English">EN</button>
@@ -102,6 +110,13 @@
         .querySelector(`#dh-lang-${language}`)
         .addEventListener("click", () => window.setLanguage?.(language));
     }
+    const themeSelect = nav.querySelector("#dh-theme-select");
+    const updateThemeSelect = (event) => {
+      themeSelect.value = event.detail?.preference ?? window.getTheme?.() ?? "system";
+    };
+    themeSelect.addEventListener("change", () => window.setTheme?.(themeSelect.value));
+    document.addEventListener("dh:theme-change", updateThemeSelect);
+    updateThemeSelect(new CustomEvent("dh:theme-change"));
     document.dispatchEvent(new Event("dh:navigation-ready"));
   }
   if (document.readyState === "loading")

@@ -6,6 +6,10 @@ export default {
   nav_components: "Patterns",
   nav_libraries: "Libraries",
   nav_github: "GitHub Repository",
+  theme_label: "Color theme",
+  theme_system: "System",
+  theme_light: "Light",
+  theme_dark: "Dark",
   hero_badge: "Design Home",
   hero_title: "Great design starts here.<br><span>Make it yours.</span>",
   hero_subtitle:

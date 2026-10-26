@@ -89,7 +89,7 @@
   left: 3px;
   top: 3px;
   border-radius: 50%;
-  background: white;
+  background: var(--ui-surface);
   box-shadow: 0 1px 3px #0000001a;
   transition: transform 0.2s var(--ui-ease);
 }

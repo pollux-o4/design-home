@@ -302,3 +302,42 @@ for (const [name, engine] of Object.entries({ chromium, firefox, webkit })) {
     }
   });
 }
+
+test("theme preference follows the system and persists explicit choices", async () => {
+  const browser = await chromium.launch();
+  const context = await browser.newContext({ colorScheme: "dark" });
+  const page = await context.newPage();
+  page.setDefaultTimeout(7000);
+  await page.route("https://**/*", (route) => route.abort());
+  try {
+    await page.goto(bases[0]);
+    await page.locator("#dh-theme-select").waitFor();
+    assert.equal(await page.locator("html").getAttribute("data-theme"), null);
+    assert.equal(await page.locator("#dh-theme-select").inputValue(), "system");
+    assert.equal(
+      await page.evaluate(() => getComputedStyle(document.body).backgroundColor),
+      "rgb(22, 22, 24)",
+    );
+
+    await page.locator("#dh-theme-select").selectOption("light");
+    assert.equal(await page.locator("html").getAttribute("data-theme"), "light");
+    assert.equal(
+      await page.evaluate(() => localStorage.getItem("dh_theme")),
+      "light",
+    );
+    await page.reload();
+    assert.equal(await page.locator("#dh-theme-select").inputValue(), "light");
+
+    await page.locator("#dh-theme-select").selectOption("system");
+    assert.equal(await page.locator("html").getAttribute("data-theme"), null);
+    await page.emulateMedia({ colorScheme: "light" });
+    await page.waitForFunction(
+      () => getComputedStyle(document.body).backgroundColor === "rgb(245, 245, 247)",
+    );
+    await page.locator("#dh-theme-select").selectOption("dark");
+    await page.emulateMedia({ colorScheme: "light" });
+    assert.equal(await page.locator("html").getAttribute("data-theme"), "dark");
+  } finally {
+    await browser.close();
+  }
+});

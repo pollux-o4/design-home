@@ -129,7 +129,6 @@
 
 .style-picker button[aria-pressed="true"] {
   background: var(--ui-surface);
-  background: white;
   color: var(--ui-text);
   box-shadow: rgba(0, 0, 0, 0.047) 0px 2px 6px;
 }

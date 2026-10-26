@@ -38,7 +38,7 @@
   border-radius: 24px;
   overflow: hidden;
   text-decoration: none;
-  background: white;
+  background: var(--ui-surface);
 }
 
 .hub-card:hover {
