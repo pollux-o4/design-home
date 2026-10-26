@@ -1,62 +1,160 @@
-import { test } from 'node:test';
-import assert from 'node:assert/strict';
-import { chromium } from 'playwright';
-import { createHubServer } from '../hub/server.js';
-import { execFile } from 'node:child_process';
-import { promisify } from 'node:util';
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { chromium } from "playwright";
+import { createHubServer } from "../hub/server.js";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 const run = promisify(execFile);
-test('hub search → actual interactive preview → CLI source context; responsive and empty state', async () => {
-  const server = createHubServer(); await new Promise(resolve => server.listen(0,'127.0.0.1',resolve));
+test("hub search → actual interactive preview → CLI source context; responsive and empty state", async () => {
+  const server = createHubServer();
+  await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
   const base = `http://127.0.0.1:${server.address().port}`;
-  const browser = await chromium.launch(); const page = await browser.newPage(); const errors=[];
-  page.on('pageerror',error=>errors.push(error.message)); await page.route('https://**/*',route=>route.abort());
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.route("https://**/*", (route) => route.abort());
   try {
-    await page.goto(`${base}/design-library/`); await page.locator('.design-card').first().waitFor();
-    await page.locator('#filters summary').click();
-    assert.equal(await page.locator('.facet-section[aria-label="연관 태그"] .facet-row').count(),5);
-    assert.equal(await page.locator('.facet-row[data-group="density"] button[data-tag="minimal"]').count(),1);
-    assert.equal(await page.locator('.facet-row[data-group="mood"] button[data-tag="minimal"]').count(),0);
-    const mood = page.locator('.facet-section[aria-label="연관 태그"] .facet-row[data-group="mood"]');
-    assert.equal(await mood.locator('.facet-chips').first().locator('button').count(),3);
-    const extra = mood.locator('.disclosure-chips button').first();
-    assert.equal(await mood.locator('.disclosure-panel').evaluate(node=>node.inert),true);
-    const disclosure = mood.locator('.disclosure-trigger'); await disclosure.focus(); await page.keyboard.press('Enter');
-    const panel = mood.locator('.disclosure-panel');
-    // shortcut: 병렬 고부하에서 고정 대기 기반 중간 높이 검증이 간헐 실패, 애니메이션 검증 개선 시 브라우저 타임라인 기반으로 전환
-    const startHeight = await panel.evaluate(node=>node.getBoundingClientRect().height);
-    await page.waitForTimeout(90);
-    const middleHeight = await panel.evaluate(node=>node.getBoundingClientRect().height);
-    await page.waitForTimeout(260);
-    const endHeight = await panel.evaluate(node=>node.getBoundingClientRect().height);
-    assert.ok(middleHeight > startHeight && middleHeight < endHeight, `height transition: ${startHeight}, ${middleHeight}, ${endHeight}`);
-    assert.equal(await extra.isVisible(),true);
-    await page.keyboard.press('Enter'); assert.equal(await mood.locator('.disclosure-panel').evaluate(node=>node.inert),true);
-    await page.emulateMedia({reducedMotion:'reduce'});
-    await disclosure.click(); assert.equal(await extra.isVisible(),true);
-    assert.equal(await mood.locator('.disclosure-chips').evaluate(node=>getComputedStyle(node).transitionDuration),'0s');
-    await page.locator('#query').fill('정보가 많은 관리 화면'); await page.locator('#search button[type=submit]').click();
+    await page.goto(`${base}/design-library/`);
+    await page.locator(".design-card").first().waitFor();
+    await page.locator("#filters summary").click();
+    assert.equal(
+      await page
+        .locator('.facet-section[aria-label="연관 태그"] .facet-row')
+        .count(),
+      5,
+    );
+    assert.equal(
+      await page
+        .locator('.facet-row[data-group="density"] button[data-tag="minimal"]')
+        .count(),
+      1,
+    );
+    assert.equal(
+      await page
+        .locator('.facet-row[data-group="mood"] button[data-tag="minimal"]')
+        .count(),
+      0,
+    );
+    const mood = page.locator(
+      '.facet-section[aria-label="연관 태그"] .facet-row[data-group="mood"]',
+    );
+    assert.equal(
+      await mood.locator(".facet-chips").first().locator("button").count(),
+      3,
+    );
+    const extra = mood.locator(".disclosure-chips button").first();
+    assert.equal(
+      await mood.locator(".disclosure-panel").evaluate((node) => node.inert),
+      true,
+    );
+    const disclosure = mood.locator(".disclosure-trigger");
+    await disclosure.focus();
+    const panel = mood.locator(".disclosure-panel");
+    const startHeight = await panel.evaluate(
+      (node) => node.getBoundingClientRect().height,
+    );
+    await page.keyboard.press("Enter");
+    await page.waitForFunction(
+      (start) =>
+        document
+          .querySelector(
+            '.facet-section[aria-label="연관 태그"] .disclosure-panel',
+          )
+          .getBoundingClientRect().height > start,
+      startHeight,
+    );
+    const endHeight = await panel.evaluate(
+      (node) => node.getBoundingClientRect().height,
+    );
+    assert.ok(
+      endHeight > startHeight,
+      `height transition: ${startHeight}, ${endHeight}`,
+    );
+    assert.equal(await extra.isVisible(), true);
+    await page.keyboard.press("Enter");
+    assert.equal(
+      await mood.locator(".disclosure-panel").evaluate((node) => node.inert),
+      true,
+    );
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await disclosure.click();
+    assert.equal(await extra.isVisible(), true);
+    assert.equal(
+      await mood
+        .locator(".disclosure-chips")
+        .evaluate((node) => getComputedStyle(node).transitionDuration),
+      "0s",
+    );
+    await page.locator("#query").fill("정보가 많은 관리 화면");
+    await page.locator("#search button[type=submit]").click();
     await page.locator('.design-card[data-id="material-design"]').waitFor();
-    await page.locator('#filters summary').click();
+    await page.locator("#filters summary").click();
     await page.locator('#facets button[data-tag="minimal"]').click();
     await page.locator('.design-card[data-id="flat-design"]').waitFor();
-    assert.equal(await page.locator('.design-card').count(),1);
+    assert.equal(await page.locator(".design-card").count(), 1);
     await page.locator('#facets button[data-tag="minimal"]').click();
     await page.locator('.design-card[data-id="material-design"]').click();
-    await page.locator('#title').filter({hasText:'머티리얼 디자인'}).waitFor();
-    const command = await page.locator('#command').textContent(); assert.equal(command,'./design context --id material-design --json');
-    const frame = page.frameLocator('#preview'); await frame.locator('body').waitFor();
-    await frame.locator('.theme-btn').nth(1).click(); assert.match(await frame.locator('body').getAttribute('data-theme'),/v2/);
-    await page.getByRole('button',{name:'모바일',exact:true}).click(); assert.equal(await page.locator('#preview').evaluate(node=>node.clientWidth),390);
-    const response = await page.request.get(`${base}/api/context?id=material-design`); const context = await response.json();
-    const cli=JSON.parse((await run(process.execPath,['src/cli.js','context','--id','material-design','--json'])).stdout);
+    await page
+      .locator("#title")
+      .filter({ hasText: "머티리얼 디자인" })
+      .waitFor();
+    const command = await page.locator("#command").textContent();
+    assert.equal(command, "./design context --id material-design --json");
+    const frame = page.frameLocator("#preview");
+    await frame.locator("body").waitFor();
+    await frame.locator(".theme-btn").nth(1).click();
+    assert.match(await frame.locator("body").getAttribute("data-theme"), /v2/);
+    await page.getByRole("button", { name: "모바일", exact: true }).click();
+    assert.equal(
+      await page.locator("#preview").evaluate((node) => node.clientWidth),
+      390,
+    );
+    const response = await page.request.get(
+      `${base}/api/context?id=material-design`,
+    );
+    const context = await response.json();
+    const cli = JSON.parse(
+      (
+        await run(process.execPath, [
+          "src/cli.js",
+          "context",
+          "--id",
+          "material-design",
+          "--json",
+        ])
+      ).stdout,
+    );
     const { taskId, activity, ...cliContext } = cli;
-    assert.ok(activity.id); assert.deepEqual(context, cliContext); assert.ok(cli.sourceFiles.some(file=>file.role==='styles')); assert.ok(cli.sourceFiles.some(file=>file.role==='interaction'));
-    await page.setViewportSize({width:390,height:844}); assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
-    await page.getByRole('button',{name:'목록으로',exact:true}).click();
-    await page.locator('#query').fill('우주선엔진'); await page.locator('#search button[type=submit]').click(); await page.getByText('일치하는 디자인이 없습니다.',{exact:false}).waitFor();
-    assert.equal(await page.locator('#detail').isVisible(),false);
-    await page.locator('#query').fill('<img src=x onerror=alert(1)>'); await page.locator('#search button[type=submit]').click(); await page.waitForTimeout(100);
-    assert.equal(await page.locator('#results img').count(),0); assert.deepEqual(errors,[]);
-    assert.equal((await page.request.get(`${base}/api/context?id=unknown`)).status(),400);
-  } finally { await browser.close(); await new Promise(resolve=>server.close(resolve)); }
+    assert.ok(activity.id);
+    assert.deepEqual(context, cliContext);
+    assert.ok(cli.sourceFiles.some((file) => file.role === "styles"));
+    assert.ok(cli.sourceFiles.some((file) => file.role === "interaction"));
+    await page.setViewportSize({ width: 390, height: 844 });
+    assert.equal(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+      true,
+    );
+    await page.getByRole("button", { name: "목록으로", exact: true }).click();
+    await page.locator("#query").fill("우주선엔진");
+    await page.locator("#search button[type=submit]").click();
+    await page
+      .getByText("일치하는 디자인이 없습니다.", { exact: false })
+      .waitFor();
+    assert.equal(await page.locator("#detail").isVisible(), false);
+    await page.locator("#query").fill("<img src=x onerror=alert(1)>");
+    await page.locator("#search button[type=submit]").click();
+    await page.waitForTimeout(100);
+    assert.equal(await page.locator("#results img").count(), 0);
+    assert.deepEqual(errors, []);
+    assert.equal(
+      (await page.request.get(`${base}/api/context?id=unknown`)).status(),
+      400,
+    );
+  } finally {
+    await browser.close();
+    await new Promise((resolve) => server.close(resolve));
+  }
 });

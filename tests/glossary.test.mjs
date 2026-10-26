@@ -50,7 +50,7 @@ test("glossary navigation, live examples, search, keyboard, history and responsi
       await page.locator(".category-toggle[aria-expanded=true]").count(),
       0,
     );
-    assert.equal(await page.locator("#term-count").innerText(), "78");
+    assert.equal(await page.locator("#term-count").innerText(), "77");
     await page.screenshot({ path: ".legacy-review/glossary-overview.png" });
     await page.locator("#category-ui").focus();
     await page.keyboard.press("Enter");
@@ -263,7 +263,7 @@ test("glossary navigation, live examples, search, keyboard, history and responsi
     );
     await page.emulateMedia({ reducedMotion: "no-preference" });
     await page.goto(base + "glossary/index.html#/motion");
-    assert.equal(await page.locator("#panel-motion .term-row").count(), 45);
+    assert.equal(await page.locator("#panel-motion .term-row").count(), 44);
     assert.equal(await page.locator(".expanded-row:visible").count(), 0);
     await page.screenshot({
       path: ".legacy-review/glossary-motion-list.png",
@@ -272,7 +272,7 @@ test("glossary navigation, live examples, search, keyboard, history and responsi
     const motionTerms = await page
       .locator("[data-expand]")
       .evaluateAll((nodes) => nodes.map((node) => node.dataset.expand));
-    assert.equal(motionTerms.length, 45);
+    assert.equal(motionTerms.length, 44);
     for (const id of motionTerms) {
       await page.locator(`[data-expand="${id}"]`).click();
       assert.equal(
@@ -300,6 +300,24 @@ test("glossary navigation, live examples, search, keyboard, history and responsi
         );
       }
     }
+    await page.locator("[data-expand=motion-ripple]").click();
+    await page
+      .locator("[data-motion-lab]")
+      .click({ position: { x: 40, y: 60 } });
+    assert.notEqual(
+      await page.locator(".motion-ripple").evaluate((node) => node.style.left),
+      "",
+    );
+    await page.locator("[data-expand=motion-magnetic]").click();
+    await page
+      .locator("[data-motion-lab]")
+      .hover({ position: { x: 10, y: 10 } });
+    assert.match(
+      await page
+        .locator(".motion-object")
+        .evaluate((node) => node.style.transform),
+      /translate/,
+    );
     await page.locator("[data-expand=motion-gooey]").click();
     await page.screenshot({
       path: ".legacy-review/glossary-motion-gooey.png",

@@ -38,7 +38,6 @@ const items = [
     "reveal",
   ],
   ["blur", "블러", "Blur", "경계를 흐려 초점의 전환을 보여줍니다.", "blur"],
-  ["easing", "이징", "Easing", "출발과 도착의 속도 곡선을 정합니다.", "easing"],
   [
     "bounce",
     "바운스",

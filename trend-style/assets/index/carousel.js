@@ -46,8 +46,12 @@ export function mountCarousel(carousel) {
   });
   carousel.addEventListener("mouseenter", schedule);
   carousel.addEventListener("mouseleave", schedule);
-  carousel.addEventListener("focusin", schedule);
-  carousel.addEventListener("focusout", () => queueMicrotask(schedule));
+  carousel.addEventListener("focusin", (event) => {
+    if (event.target === play) return;
+    paused = true;
+    updatePlay();
+    schedule();
+  });
   document.addEventListener("visibilitychange", schedule);
   reduced.addEventListener("change", () => {
     paused = reduced.matches;

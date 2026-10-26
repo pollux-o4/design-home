@@ -78,11 +78,13 @@ export function createMotionDemo([name, title, term, desc, type], frames) {
         type === "gooey"
           ? '<svg class="gooey-filter" aria-hidden="true"><defs><filter id="glossary-gooey"><feGaussianBlur in="SourceGraphic" stdDeviation="8"/><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 20 -9"/></filter></defs></svg>'
           : "";
-      return `<div class="sample motion-experiment motion-demo-${type}">${filter}<div class="motion-lab" role="img" aria-label="${desc}"><div class="motion-objects">${markup(type)}</div></div><button type="button" class="ui-btn ui-btn-primary" data-play>재생</button><details class="motion-more"><summary>무엇이 달라지나요?</summary><p>${desc}</p></details><p class="sr-only" role="status" data-motion-status></p></div>`;
+      const interactive = ["ripple", "magnetic"].includes(type);
+      return `<div class="sample motion-experiment motion-demo-${type}">${filter}<div class="motion-lab" data-motion-lab${interactive ? ' tabindex="0"' : ""} role="${interactive ? "button" : "img"}" aria-label="${interactive ? `${desc} 이 영역을 조작해 보세요.` : desc}"><div class="motion-objects">${markup(type)}</div></div><button type="button" class="ui-btn ui-btn-primary" data-play>재생</button><details class="motion-more"><summary>무엇이 달라지나요?</summary><p>${desc}</p></details><p class="sr-only" role="status" data-motion-status></p></div>`;
     },
     mount(root) {
       let animations = [];
       const play = root.querySelector("[data-play]");
+      const lab = root.querySelector("[data-motion-lab]");
       const reduced = matchMedia("(prefers-reduced-motion: reduce)");
       const cancel = () => {
         animations.forEach((animation) => animation.cancel());
@@ -109,10 +111,37 @@ export function createMotionDemo([name, title, term, desc, type], frames) {
           : `${title} 재생`;
       };
       play.addEventListener("click", run);
+      const startRipple = (event) => {
+        const rect = lab.getBoundingClientRect();
+        const ripple = root.querySelector(".motion-ripple");
+        ripple.style.left = `${event.clientX - rect.left - ripple.offsetWidth / 2}px`;
+        ripple.style.top = `${event.clientY - rect.top - ripple.offsetHeight / 2}px`;
+        run();
+      };
+      const followPointer = (event) => {
+        const rect = lab.getBoundingClientRect();
+        const object = root.querySelector(".motion-object");
+        const x = event.clientX - rect.left - rect.width / 2;
+        const y = event.clientY - rect.top - rect.height / 2;
+        const distance = Math.hypot(x, y);
+        const pull = Math.max(0, 1 - distance / 180) * 24;
+        object.style.transform = `translate(${(x / (distance || 1)) * pull}px, ${(y / (distance || 1)) * pull}px)`;
+      };
+      if (type === "ripple") lab.addEventListener("pointerdown", startRipple);
+      if (type === "magnetic") {
+        lab.addEventListener("pointermove", followPointer);
+        lab.addEventListener("pointerleave", () => {
+          root.querySelector(".motion-object").style.transform = "";
+        });
+      }
       reduced.addEventListener("change", cancel);
       return () => {
         cancel();
         play.removeEventListener("click", run);
+        if (type === "ripple")
+          lab.removeEventListener("pointerdown", startRipple);
+        if (type === "magnetic")
+          lab.removeEventListener("pointermove", followPointer);
         reduced.removeEventListener("change", cancel);
       };
     },
