@@ -113,3 +113,92 @@ test('preview commits only the latest successful selection and preserves the vis
     assert.match(await page.locator('#stage-image').getAttribute('alt'), /글래스/);
   } finally { await page.close(); }
 });
+
+test('trend collection continues the home shell across mobile and desktop', async () => {
+  const page = await browser.newPage();
+  const failures = [];
+  page.on('response', response => {
+    if (response.url().startsWith(bases[1]) && response.status() >= 400) failures.push(response.url());
+  });
+  try {
+    await page.goto(`${bases[1]}/index.html`);
+    const shell = () => page.evaluate(() => ({
+      background: getComputedStyle(document.body).backgroundColor,
+      font: getComputedStyle(document.body).fontFamily,
+      nav: getComputedStyle(document.querySelector('#dh-global-nav')).borderRadius,
+    }));
+    const home = await shell();
+    await page.locator('.hub-card').first().click();
+    assert.equal(await page.locator('.grid .card').count(), 15);
+    assert.deepEqual(await shell(), home);
+    for (const width of [320, 390, 768, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `trends overflow ${width}`);
+    }
+    for (const image of await page.locator('.card-art img').all()) {
+      await image.scrollIntoViewIfNeeded();
+      await image.evaluate(node => node.decode());
+    }
+    await page.locator('#dh-lang-en').click();
+    assert.match(await page.locator('.hero-title').innerText(), /Fifteen possibilities/);
+    await page.locator('#dh-lang-ko').click();
+    assert.match(await page.locator('.hero-title').innerText(), /열다섯 가지/);
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    assert.equal(await page.locator('.card').first().evaluate(node => getComputedStyle(node).transitionDuration), '0s');
+    await page.locator('.card').first().focus();
+    await page.keyboard.press('Enter');
+    await page.waitForURL('**/1_skeuomorphism.html');
+    assert.deepEqual(failures, []);
+  } finally { await page.close(); }
+});
+
+test('spotlight rotates, pauses, and mood filters work within the collection', async () => {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1100 } });
+  try {
+    await page.goto(`${bases[1]}/trend-style/`);
+    const active = page.locator('[data-slide]:visible h2');
+    assert.equal(await active.innerText(), 'Aurora UI');
+    await page.waitForFunction(() => document.querySelector('[data-slide-to="1"]').getAttribute('aria-pressed') === 'true', { timeout: 8000 });
+    assert.equal(await active.innerText(), 'Glassmorphism');
+    await page.locator('.carousel-play').click();
+    await page.locator('[data-slide-to="2"]').click();
+    assert.equal(await active.innerText(), 'Claymorphism');
+    await page.mouse.move(0, 0);
+    await page.waitForTimeout(5200);
+    assert.equal(await active.innerText(), 'Claymorphism');
+    await page.locator('[data-mood="minimal"]').click();
+    assert.equal(await page.locator('.grid .card:visible').count(), 3);
+    assert.equal(await page.locator('.collection-count').innerText(), '3 / 15');
+    await page.locator('[data-mood="all"]').click();
+    assert.equal(await page.locator('.grid .card:visible').count(), 15);
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    assert.equal(await page.locator('.carousel-play').getAttribute('aria-pressed'), 'true');
+    for (const width of [320, 390, 768, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `carousel overflow ${width}`);
+    }
+    await page.screenshot({ path: '/tmp/trends-carousel.png', fullPage: true });
+  } finally { await page.close(); }
+});
+
+test('collection search combines with mood and recovers from empty results', async () => {
+  const page = await browser.newPage();
+  try {
+    await page.goto(`${bases[1]}/trend-style/`);
+    const search = page.locator('#style-search');
+    await search.fill('GLASS');
+    assert.equal(await page.locator('.grid .card:visible').count(), 1);
+    await page.locator('[data-mood="minimal"]').click();
+    assert.equal(await page.locator('.grid .card:visible').count(), 0);
+    assert.equal(await page.locator('.collection-empty').isVisible(), true);
+    await page.locator('[data-mood="all"]').click();
+    assert.equal(await page.locator('.grid .card:visible').count(), 1);
+    await search.fill('미니멀');
+    assert.equal(await page.locator('.grid .card:visible').count(), 3);
+    await search.fill('');
+    assert.equal(await page.locator('.grid .card:visible').count(), 15);
+    assert.equal(await page.locator('.collection-empty').isVisible(), false);
+    await page.setViewportSize({ width: 320, height: 800 });
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  } finally { await page.close(); }
+});
