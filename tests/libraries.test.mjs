@@ -36,7 +36,7 @@ test("Libraries supports exclusive categories, search, comparison and responsive
     );
     assert.equal(
       await page
-        .locator("#dh-global-nav .dh-nav-link.active")
+        .locator("#dh-global-nav .dh-study-link.active")
         .textContent()
         .then((s) => s.trim()),
       "Libraries",

@@ -57,10 +57,10 @@ test('language choice updates newly injected navigation and persists across lega
     await page.route(/https?:\/\/(?!127\.0\.0\.1)/, route => route.abort());
   await page.goto(`${base}/index.html`);
   await page.locator('#dh-lang-en').click();
-  assert.equal(await page.locator('[data-i18n="nav_home"]').textContent(), 'Home');
+  assert.equal(await page.locator('[data-i18n="nav_trends"]').textContent(), 'Trend Styles');
   await page.goto(`${base}/ui-components/index.html`);
   assert.equal(await page.locator('#dh-lang-en').getAttribute('aria-current'), 'true');
-  assert.equal(await page.locator('[data-i18n="nav_home"]').textContent(), 'Home');
+  assert.equal(await page.locator('[data-i18n="nav_trends"]').textContent(), 'Trend Styles');
   await page.close();
 });
 

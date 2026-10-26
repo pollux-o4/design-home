@@ -204,7 +204,7 @@
 }
 
 .canvas-grid .pattern-summary {
-  scroll-margin-top: 96px;
+  scroll-margin-top: calc(var(--dh-nav-height, 64px) + 24px);
 }
 
 .pattern-level-view {

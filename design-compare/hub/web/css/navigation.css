@@ -69,17 +69,7 @@
   color: var(--ui-secondary);
 }
 
-.home-link {
-  margin-left: auto;
-  color: var(--ui-hover);
-  text-decoration: none;
-  font-size: 12px;
-  white-space: nowrap;
-}
 
-.home-link:hover {
-  color: var(--ui-blue);
-}
 
 .app-header nav {
   display: flex;
@@ -166,9 +156,6 @@
     font-size: 11px;
   }
 
-  .home-link {
-    font-size: 11px;
-  }
 
   .library-footer {
     margin: 0px 20px;
@@ -176,3 +163,7 @@
     gap: 8px;
   }
 }
+
+/* Keep workspace navigation below the shared site header. */
+.design-workspace { padding-top: var(--dh-nav-height); }
+.design-workspace .app-header { top: var(--dh-nav-height); }
