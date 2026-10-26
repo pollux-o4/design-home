@@ -1,0 +1,8 @@
+[tools]
+node = "24.21.0"
+
+[tasks.hub]
+description = "Start Design Library at http://127.0.0.1:4184/design-library/"
+dir = "{{config_root}}/design-compare"
+env = { PORT = "4184" }
+run = "npm run hub"

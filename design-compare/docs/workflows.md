@@ -7,7 +7,7 @@
 ```bash
 mise trust
 mise run setup
-npm run hub
+mise run hub
 ```
 
 웹 허브는 디자인 예제의 개발 서버도 겸한다. 외부 프로젝트는 자체 개발 서버를 띄우고, 다음 명령은 다른 터미널에서 실행한다.
@@ -25,7 +25,7 @@ CLI가 문서의 용도·검색어·이름·태그와 등록된 작업물을 같
 - `registrationTemplate`: 완성한 작업물의 등록 자료를 작성하는 출발점.
 - `nextActions`: 등록·비교 명령의 인자 배열. store와 task ID를 포함한다.
 
-AI가 사전에 디자인 ID나 폴더를 조사할 필요가 없다. 반환된 이미지를 읽고 설명과 제약을 참고해 구현한다. `--limit 1~6`으로 자료 수를 제한하며, `--base-url` 또는 `DESIGN_BASE_URL`로 예제 서버를 지정한다. 기본 서버는 `http://127.0.0.1:4174`다.
+AI가 사전에 디자인 ID나 폴더를 조사할 필요가 없다. 반환된 이미지를 읽고 설명과 제약을 참고해 구현한다. `--limit 1~6`으로 자료 수를 제한하며, `--base-url` 또는 `DESIGN_BASE_URL`로 예제 서버를 지정한다. 기본 서버는 `http://127.0.0.1:4184`다.
 
 `no-match`는 없는 용도를 임의 자료로 채우지 않고 가능한 용도를 안내한다. 일부 캡처만 성공하면 `partial`과 실패 원인을 함께 반환한다. 모두 실패하면 오류로 종료한다.
 
@@ -84,7 +84,7 @@ AI가 `registrationTemplate`의 이름·설명·분류·태그·검색어·실�
 
 ## Design Home → Design Library
 
-`npm run hub`로 실행하면 `/`의 기존 랜딩에서 Design Library로 이동할 수 있다. 직접 진입 주소는 `http://127.0.0.1:4174/design-library/`다.
+`mise run hub`로 실행하면 `/`의 기존 랜딩에서 Design Library로 이동할 수 있다. 직접 진입 주소는 `http://127.0.0.1:4184/design-library/`다.
 
 GitHub Pages에서는 `/design-home/design-library/`로 진입한다. 문서·원본을 수정한 뒤 `design-compare/`에서 `npm run build:library`를 실행하고 생성된 `../design-library/data/`와 `../design-library/previews/`를 소스 변경과 함께 커밋한다. 기존 저장소 Pages 배포를 사용하며 별도 Node 서버는 필요 없다. 공개 배포에 로컬 작업물이나 호출 기록을 포함하지 않는다.
 

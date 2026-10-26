@@ -41,6 +41,8 @@ flowchart TB
 | 디자인 문서 저장소 | [`library/documents/`](../../library/documents/) | 분류·설명·원본 연결의 단일 원본 |
 | 기준·보고서 저장소 | [`src/catalog/index.js`](../../src/catalog/index.js) | 연결 정보 또는 사진 기준, 실행별 비교 결과와 호출 기록 |
 
+저장소 루트에서 `mise run hub`로 웹 서버를 실행한다. Node.js 24.21.0을 사용하며 로컬 주소는 `http://127.0.0.1:4184/design-library/`다. CLI 자료 조회의 기본 서버 주소도 같은 포트를 사용한다.
+
 ## 실행 관계
 
 허브의 트렌드 미리보기는 허브가 제공하는 같은 저장소의 정적 HTML을 iframe으로 연다. 외부 프로젝트는 자체 개발 서버가 필요하다. 캡처는 CLI에서 실행하며 허브에는 비교 실행 HTTP 엔드포인트가 없다. 비교 보고서는 정적 HTML이라 생성 후 서버 요청 없이 파일로 검토할 수 있다.

@@ -169,3 +169,10 @@ Patterns의 종류별 분류는 `pattern-topics/*`, UX 관점의 원칙 분류�
 상태 변형 예제는 `components/state-morphing.js`의 정의, `samples/state-morphing.js`의 상태·취소·포커스 처리, `controls/state-morphing.css`의 표현으로 나뉜다. 재생·전송은 명시적인 로컬 시뮬레이션이며 타이머는 기존 scope가 해제한다. 원칙별 그룹은 같은 카테고리 내 샘플 ID를 중복 배치하지 않아 캐시된 DOM의 ID와 동작을 격리한다.
 
 주제 선택 정책은 `pattern-route.js`의 `selectPatternGroup`이 소유하며 아코디언과 숏컷이 같은 선택 명령을 사용한다. Libraries의 카테고리 투영·접힘 수명은 `category-view.js`, 카드와 비교 표의 표시 항목 스키마는 `fields.js`가 소유한다. `app.js`는 URL 전환·화면 조립·이벤트 연결만 맡는다. 상태 변형 버튼의 phase는 동작 모듈 안에 한 번만 존재하고 DOM 속성과 텍스트는 render 함수가 파생한다.
+
+
+## 용어집의 시각적 학습
+
+`glossary/js/catalog.js`는 UI 용어의 큐레이션과 UX 원리의 샘플 연결만 소유한다. UI 정의와 동작은 기존 Patterns의 Definition Factory·카탈로그·runtime, UX 원리는 `pattern-principles.js`를 참조한다. 용어집은 예시를 복제하지 않는다. 피츠·힉·근접성의 원리별 비교 실험만 `glossary/js/ux-demos.js`가 소유하며 같은 수명주기 scope로 해제한다.
+
+`route.js`의 해시 경로가 분류·용어 상세·검색의 원본이다. `app.js`는 접힌 UI/UX 분류, 세 열 표, 한 번에 하나의 행 내 체험, 고유 주소의 상세 화면을 조립한다. 검색은 두 분류를 함께 탐색한다. 도식은 `visual.js`, 반응형 표시와 체험 영역 스타일은 `css/glossary.css`가 소유한다. 체험을 바꾸거나 화면을 떠나면 이전 이벤트·타이머·레이어를 해제하고 BFCache 복원 시 다시 연결한다. 정적 호스트에서도 같은 상대 경로와 해시 주소를 사용한다.

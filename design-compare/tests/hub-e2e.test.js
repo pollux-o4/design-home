@@ -22,6 +22,7 @@ test('hub search → actual interactive preview → CLI source context; responsi
     assert.equal(await mood.locator('.disclosure-panel').evaluate(node=>node.inert),true);
     const disclosure = mood.locator('.disclosure-trigger'); await disclosure.focus(); await page.keyboard.press('Enter');
     const panel = mood.locator('.disclosure-panel');
+    // shortcut: 병렬 고부하에서 고정 대기 기반 중간 높이 검증이 간헐 실패, 애니메이션 검증 개선 시 브라우저 타임라인 기반으로 전환
     const startHeight = await panel.evaluate(node=>node.getBoundingClientRect().height);
     await page.waitForTimeout(90);
     const middleHeight = await panel.evaluate(node=>node.getBoundingClientRect().height);

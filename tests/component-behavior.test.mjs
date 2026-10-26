@@ -343,7 +343,7 @@ test("all sample definitions keep accessible labels and responsive bounds", asyn
       new Set(definitions.map((d) => d.id)).size,
       definitions.length,
     );
-    assert.equal(definitions.length, 88);
+    assert.equal(definitions.length, 90);
     for (const definition of definitions) {
       assert.equal(
         /on(click|change|input|drop)=|style=|\p{Extended_Pictographic}/u.test(
