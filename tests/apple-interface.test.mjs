@@ -43,20 +43,8 @@ for (const mode of [0, 1])
     await page.route("https://**/*", (route) => route.abort());
     try {
       await page.goto(`${base}/index.html`);
-      await page.locator('[data-style="glassmorphism"]').focus();
-      await page.keyboard.press("Enter");
-      await page.waitForFunction(() =>
-        document
-          .querySelector("#stage-image")
-          .src.endsWith("/glassmorphism.png"),
-      );
-      assert.equal(
-        await page
-          .locator('[data-style="glassmorphism"]')
-          .getAttribute("aria-pressed"),
-        "true",
-      );
-      await page.locator("#stage-link").click();
+      assert.equal(await page.locator('.hub-grid .hub-card').count(), 4);
+      await page.goto(`${base}/design-library/#/trends/glassmorphism`);
       await page
         .locator("#title")
         .filter({ hasText: "글래스모피즘" })
@@ -174,63 +162,22 @@ for (const mode of [0, 1])
     }
   });
 
-test("preview commits only the latest successful selection and preserves the visible state on failure", async () => {
+test("home routes to four learning areas and keeps project review separate", async () => {
   const page = await browser.newPage();
   try {
-    let releaseGlass;
-    const glassGate = new Promise((resolve) => {
-      releaseGlass = resolve;
-    });
-    await page.route("**/previews/glassmorphism.png", async (route) => {
-      await glassGate;
-      await route.continue();
-    });
-    await page.route("**/previews/claymorphism.png", async (route) => {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      await route.abort();
-    });
-    await page.goto(`${bases[0]}/index.html`, {
-      waitUntil: "domcontentloaded",
-    });
-    await page.locator("[data-style=glassmorphism]").click();
-    await page.locator("[data-style=claymorphism]").click();
-    releaseGlass();
-    await page.waitForFunction(
-      () => document.querySelector("#stage-image").style.opacity === "1",
-    );
-    assert.equal(
-      await page
-        .locator("[data-style=flat-design]")
-        .getAttribute("aria-pressed"),
-      "true",
-    );
-    assert.match(
-      await page.locator("#stage-link").getAttribute("href"),
-      /flat-design$/,
-    );
-    await page.locator("[data-style=glassmorphism]").click();
-    await page.waitForFunction(() =>
-      document.querySelector("#stage-image").src.endsWith("glassmorphism.png"),
-    );
-    assert.equal(
-      await page
-        .locator("[data-style=glassmorphism]")
-        .getAttribute("aria-pressed"),
-      "true",
-    );
-    await page.locator("#dh-lang-en").click();
-    await page.locator("#dh-lang-ko").click();
-    assert.match(
-      await page.locator(".hero-title").innerText(),
-      /좋은 디자인의 시작/,
-    );
-    assert.match(
-      await page.locator("#stage-image").getAttribute("alt"),
-      /글래스/,
-    );
-  } finally {
-    await page.close();
-  }
+    await page.goto(`${bases[0]}/index.html`);
+    assert.equal(await page.locator('.design-stage, .style-picker, .hero-actions .btn-secondary').count(), 0);
+    assert.deepEqual(await page.locator('.hub-grid .hub-card').evaluateAll(nodes => nodes.map(node => node.getAttribute('href'))),
+      ['./trend-style/index.html', './ui-components/index.html', './glossary/index.html', './libraries/index.html']);
+    assert.equal(await page.locator('.library-invitation a[href="./design-library/"]').count(), 1);
+    await page.locator('#dh-lang-en').click();
+    assert.match(await page.locator('.hub-grid').innerText(), /Glossary/);
+    await page.locator('#dh-lang-ko').click();
+    assert.match(await page.locator('.hero-title').innerText(), /디자인을 보고/);
+    await page.locator('.hero-actions .btn-primary').click();
+    await page.waitForURL('**/ui-components/index.html');
+    await page.locator('.pattern-overview').waitFor();
+  } finally { await page.close(); }
 });
 
 test("trend collection continues the home shell across mobile and desktop", async () => {
@@ -242,13 +189,15 @@ test("trend collection continues the home shell across mobile and desktop", asyn
   });
   try {
     await page.goto(`${bases[1]}/index.html`);
-    const shell = () =>
-      page.evaluate(() => ({
+    const shell = async () => {
+      await page.locator('#dh-global-nav').waitFor();
+      return page.evaluate(() => ({
         background: getComputedStyle(document.body).backgroundColor,
         font: getComputedStyle(document.body).fontFamily,
         nav: getComputedStyle(document.querySelector("#dh-global-nav"))
           .borderRadius,
       }));
+    };
     const home = await shell();
     await page.locator(".hub-card").first().click();
     assert.equal(await page.locator(".grid .card").count(), 15);

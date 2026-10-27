@@ -14,7 +14,7 @@ test('mobile follows category → list → detail, restores the list and support
   page.on('pageerror', error => errors.push(error.message)); await page.route('https://**/*', route => route.abort());
   try {
     await page.goto(base);
-    await page.locator(".hub-card").filter({ hasText: "Design System Library" }).click();
+    await page.locator('.library-invitation a').click();
     await page.getByRole('heading', { name: '제공 기능', exact: true }).waitFor();
     await page.getByRole('link', { name: /프로젝트 화면/ }).click();
     await page.getByRole('heading', { name: '프로젝트 화면', exact: true }).waitFor();

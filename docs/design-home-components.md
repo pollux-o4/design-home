@@ -2,6 +2,10 @@
 
 이 문서는 Design Home이 소유한 학습 화면·예제의 코드 구조를 설명한다. 프로젝트 검토 도구의 구조는 [Design System Library C1~C4](../design-compare/docs/README.md)에서 관리한다.
 
+## 학습 홈
+
+`index.html`은 트렌드·Patterns·용어집·라이브러리 가이드로 연결하는 학습 진입점이다. 스타일 체험은 트렌드 화면이 소유하고 홈은 시각 표식과 짧은 목적 설명만 제공한다. 별도 제품인 Design System Library는 학습 영역 아래의 단일 안내에서 연결한다. 홈 전용 미리보기 상태와 스크립트는 없다. `assets/index/`는 기본·히어로·학습 카드·탐색 스타일, `shared/js/messages/en.js`는 영어 문구를 소유한다. 링크·테마·언어·반응형 흐름은 `tests/apple-interface.test.mjs`와 `tests/home-dark-theme.test.mjs`에서 검증한다.
+
 ## 내부 컴포넌트 샘플
 
 `ui-components/js/sample-definition.js`의 Definition Factory가 실제 HTML과 공식 문서 연결을 소유한다. 코드 복사 창과 별도 예제 생성 파이프라인은 두지 않는다. 카테고리 파일은 선언적 정의를 등록하고, `canvas-renderer.js`는 전달받은 `mount` 함수를 통해 조작을 연결한다. 표시 코드에 전역 핸들러나 인라인 스타일을 넣지 않는다.

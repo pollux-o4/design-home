@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 import { chromium } from "../design-compare/node_modules/playwright/index.mjs";
 import { createStaticServer } from "./support/static-server.mjs";
 
-test("home preview shell uses dark surfaces when the system is dark", async () => {
+test("home learning cards use dark surfaces when the system is dark", async () => {
   const server = createStaticServer();
   await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
   const browser = await chromium.launch();
@@ -15,17 +15,13 @@ test("home preview shell uses dark surfaces when the system is dark", async () =
     const surfaces = await page.evaluate(() => {
       const color = (selector) => getComputedStyle(document.querySelector(selector)).backgroundColor;
       return {
-        stage: color(".stage-window"),
-        note: color(".stage-note"),
-        picker: color(".style-picker"),
-        selected: color('.style-picker button[aria-pressed="true"]'),
+        card: color(".hub-card"),
+        art: color(".learning-art--patterns"),
       };
     });
     assert.deepEqual(surfaces, {
-      stage: "rgb(32, 32, 36)",
-      note: "rgb(32, 32, 36)",
-      picker: "rgb(48, 48, 53)",
-      selected: "rgb(32, 32, 36)",
+      card: "rgb(32, 32, 36)",
+      art: "rgb(48, 48, 53)",
     });
   } finally {
     await context.close();

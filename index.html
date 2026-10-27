@@ -4,11 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-      Design Home — 모던 UI/UX 아키텍처
-      &
-      쇼케이스 허브
+      Design Home — 보고, 조작하며 배우는 디자인
     </title>
-    <meta name="description" content="Design Home은 15가지 최신 UI 디자인 트렌드, 피그마 캔버스 스타일 인터랙티브 컴포넌트 시스템, 디자인 토큰 가이드를 제공하는 큐레이션 허브입니다." />
+    <meta name="description" content="디자인 트렌드, 인터랙션 패턴, UI·UX·모션 용어와 도구를 눈으로 보고 직접 조작하며 배우는 디자인 공부방." />
     <link rel="canonical" href="https://pollux-o4.github.io/design-home/" />
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -41,218 +39,62 @@
       본문 영역으로 건너뛰기
     </a>
     <header class="hero container">
-      <p class="hero-badge" data-i18n="hero_badge">
-        Design Home
-      </p>
-      <h1 class="hero-title" data-i18n="hero_title">
-        좋은 디자인의 시작.
-        <br>
-        <span>
-          여기, 한곳에서.
-        </span>
-      </h1>
-      <p class="hero-subtitle" data-i18n="hero_subtitle">
-        영감을 발견하고, 직접 경험하고, 내 것으로.
-        <br>
-        눈으로 보고, 직접 조작하며 배우는 디자인 공부방.
-      </p>
+      <p class="hero-badge" data-i18n="hero_badge">Design Home</p>
+      <h1 class="hero-title" data-i18n="hero_title">디자인을 보고.<br><span>직접 해보며 배우기.</span></h1>
+      <p class="hero-subtitle" data-i18n="hero_subtitle">스타일, 인터랙션, 용어와 도구.<br>지금 궁금한 것부터 시작하세요.</p>
       <div class="hero-actions">
-        <a href="./ui-components/index.html" class="btn-primary">
-          <span data-i18n="hero_btn_primary">
-            디자인 공부 시작하기
-          </span>
-          <svg class="ui-icon" aria-hidden="true">
-            <use href="./shared/assets/interface-icons.svg#arrow"/>
-          </svg>
-        </a>
-        <a href="#main-content" class="btn-secondary">
-          <span data-i18n="hero_btn_secondary">
-            Design Home 살펴보기
-          </span>
-          <svg class="ui-icon" aria-hidden="true">
-            <use href="./shared/assets/interface-icons.svg#chevron"/>
-          </svg>
-        </a>
+        <a href="./ui-components/index.html" class="btn-primary"><span data-i18n="hero_btn_primary">패턴으로 시작하기</span><svg class="ui-icon" aria-hidden="true"><use href="./shared/assets/interface-icons.svg#arrow"/></svg></a>
       </div>
-      <div class="design-stage" aria-label="디자인 스타일 미리보기">
-        <div class="stage-orbit" aria-hidden="true">
-        </div>
-        <div class="stage-window">
-          <div class="window-chrome">
-            <span class="window-dots" aria-hidden="true">
-              <i>
-              </i>
-              <i>
-              </i>
-              <i>
-              </i>
-            </span>
-            <span id="stage-label"></span>
-            <span class="window-caption">
-              DESIGN PREVIEW
-            </span>
-          </div>
-          <a id="stage-link" href="./design-library/#/trends/flat-design" aria-label="선택한 디자인 상세 보기">
-            <img id="stage-image" src="./design-library/previews/flat-design.png" alt="플랫 디자인 화면 미리보기" width="640" height="450" fetchpriority="high">
-          </a>
-        </div>
-        <div class="stage-note">
-          <span class="note-dot" aria-hidden="true">
-          </span>
-          <span data-i18n="stage_note">
-            보기 좋은 디자인. 쓰기 좋은 경험.
-          </span>
-        </div>
-      </div>
-      <div class="style-picker" role="group" aria-label="디자인 미리보기 선택">
-        <button type="button" data-style="flat-design" data-title="Flat Design" aria-pressed="true">
-          <span class="swatch swatch-flat" aria-hidden="true">
-          </span>
-          <span data-i18n="style_flat">
-            미니멀
-          </span>
-        </button>
-        <button type="button" data-style="glassmorphism" data-title="Glassmorphism" aria-pressed="false">
-          <span class="swatch swatch-glass" aria-hidden="true">
-          </span>
-          <span data-i18n="style_glass">
-            글래스
-          </span>
-        </button>
-        <button type="button" data-style="claymorphism" data-title="Claymorphism" aria-pressed="false">
-          <span class="swatch swatch-clay" aria-hidden="true">
-          </span>
-          <span data-i18n="style_clay">
-            입체
-          </span>
-        </button>
-      </div>
-      <p class="stage-hint" data-i18n="stage_hint">
-        스타일을 선택하고, 화면을 눌러 직접 경험해보세요.
-      </p>
     </header>
     <main id="main-content" class="container hub-section" tabindex="-1">
-      <div class="section-heading">
-        <p class="eyebrow" data-i18n="hub_eyebrow">
-          EXPLORE DESIGN HOME
-        </p>
-        <h2 data-i18n="hub_title">
-          아이디어에서 인터랙션까지.
-        </h2>
-        <p data-i18n="hub_subtitle">
-          지금 필요한 곳에서 시작하세요.
-        </p>
-      </div>
-      <div class="hub-grid">
+      <section aria-labelledby="learning-title">
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="hub_eyebrow">EXPLORE & LEARN</p>
+          <h2 id="learning-title" data-i18n="hub_title">무엇부터 살펴볼까요?</h2>
+        </div>
+        <div class="hub-grid">
         <a href="./trend-style/index.html" class="hub-card">
-          <div class="card-art card-art-1" aria-hidden="true">
-            <img src="./design-library/previews/aurora-ui.png" alt="" width="640" height="400" loading="lazy">
-          </div>
+          <div class="card-art learning-art learning-art--trends" aria-hidden="true"><i></i><i></i><i></i></div>
           <div class="card-copy">
-            <div class="card-icon-box">
-              <svg class="ui-icon" aria-hidden="true">
-                <use href="./shared/assets/interface-icons.svg#layers"/>
-              </svg>
-            </div>
-            <p class="card-tag" data-i18n="card1_tag">
-              컬렉션
-            </p>
-            <h3 class="card-heading" data-i18n="card1_title">
-              디자인 트렌드
-            </h3>
-            <p class="card-body-text" data-i18n="card1_desc">
-              15가지 스타일. 서로 다른 질감과 분위기를 실제 화면으로 만나보세요.
-            </p>
-            <div class="card-action">
-              <span data-i18n="card1_action">
-                트렌드 탐색
-              </span>
-              <svg class="ui-icon" aria-hidden="true">
-                <use href="./shared/assets/interface-icons.svg#chevron"/>
-              </svg>
-            </div>
+            <h3 class="card-heading" data-i18n="card1_title">디자인 트렌드</h3>
+            <p class="card-body-text" data-i18n="card1_desc">색과 질감이 만드는 화면의 차이.</p>
+            <span class="card-action"><span data-i18n="card1_action">스타일 비교하기</span><svg class="ui-icon" aria-hidden="true"><use href="./shared/assets/interface-icons.svg#arrow"/></svg></span>
           </div>
         </a>
         <a href="./ui-components/index.html" class="hub-card">
-          <div class="card-art card-art-2" aria-hidden="true">
-            <img src="./shared/assets/component-preview.svg" alt="" width="640" height="400" loading="lazy">
-          </div>
+          <div class="card-art learning-art learning-art--patterns" aria-hidden="true"><i></i><i></i><i></i></div>
           <div class="card-copy">
-            <div class="card-icon-box">
-              <svg class="ui-icon" aria-hidden="true">
-                <use href="./shared/assets/interface-icons.svg#grid"/>
-              </svg>
-            </div>
-            <p class="card-tag" data-i18n="card2_tag">
-              인터랙티브 라이브러리
-            </p>
-            <h3 class="card-heading" data-i18n="card2_title">
-              Patterns
-            </h3>
-            <p class="card-body-text" data-i18n="card2_desc">
-              컴포넌트부터 접근성까지. 구조를 살펴보고 직접 조작하며 배워보세요.
-            </p>
-            <div class="card-action">
-              <span data-i18n="card2_action">
-                패턴 살펴보기
-              </span>
-              <svg class="ui-icon" aria-hidden="true">
-                <use href="./shared/assets/interface-icons.svg#chevron"/>
-              </svg>
-            </div>
+            <h3 class="card-heading" data-i18n="card2_title">Patterns</h3>
+            <p class="card-body-text" data-i18n="card2_desc">입력과 피드백을 직접 조작하며 익히기.</p>
+            <span class="card-action"><span data-i18n="card2_action">패턴 체험하기</span><svg class="ui-icon" aria-hidden="true"><use href="./shared/assets/interface-icons.svg#arrow"/></svg></span>
           </div>
         </a>
-        <a href="./design-library/" class="hub-card">
-          <div class="card-art card-art-3" aria-hidden="true">
-            <img src="./design-library/previews/biomorphic-organic.png" alt="" width="640" height="400" loading="lazy">
-          </div>
+        <a href="./glossary/index.html" class="hub-card">
+          <div class="card-art learning-art learning-art--glossary" aria-hidden="true"><i>UI</i><i>UX</i></div>
           <div class="card-copy">
-            <div class="card-icon-box">
-              <svg class="ui-icon" aria-hidden="true">
-                <use href="./shared/assets/interface-icons.svg#library"/>
-              </svg>
-            </div>
-            <p class="card-tag" data-i18n="card3_tag">
-              프로젝트 검토 도구
-            </p>
-            <h3 class="card-heading" data-i18n="card3_title">
-              Design System Library
-            </h3>
-            <p class="card-body-text" data-i18n="card3_desc">
-              내 프로젝트의 화면과 기준을 연결하고, 디자인 품질을 검토하세요.
-            </p>
-            <div class="card-action">
-              <span data-i18n="card3_action">
-                Design System Library 열기
-              </span>
-              <svg class="ui-icon" aria-hidden="true">
-                <use href="./shared/assets/interface-icons.svg#chevron"/>
-              </svg>
-            </div>
+            <h3 class="card-heading" data-i18n="home_glossary_title">용어집</h3>
+            <p class="card-body-text" data-i18n="home_glossary_desc">UI·UX·모션 용어를 눈으로 이해하기.</p>
+            <span class="card-action"><span data-i18n="home_glossary_action">용어 찾아보기</span><svg class="ui-icon" aria-hidden="true"><use href="./shared/assets/interface-icons.svg#arrow"/></svg></span>
           </div>
         </a>
-      </div>
-      <div class="library-invitation">
-        <div>
-          <p class="eyebrow">
-            DESIGN SYSTEM LIBRARY
-          </p>
-          <h2 data-i18n="invitation_title">
-            내 프로젝트에서도 확인해보세요.
-          </h2>
-          <p data-i18n="invitation_desc">
-            프로젝트의 화면과 기준을 연결하고, 차이를 검토하세요.
-          </p>
+        <a href="./libraries/index.html" class="hub-card">
+          <div class="card-art learning-art learning-art--tools" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="card-copy">
+            <h3 class="card-heading" data-i18n="home_tools_title">라이브러리 가이드</h3>
+            <p class="card-body-text" data-i18n="home_tools_desc">역할과 장단점을 비교해 도구 선택하기.</p>
+            <span class="card-action"><span data-i18n="home_tools_action">도구 비교하기</span><svg class="ui-icon" aria-hidden="true"><use href="./shared/assets/interface-icons.svg#arrow"/></svg></span>
+          </div>
+        </a>
         </div>
-        <a href="./design-library/" class="btn-primary">
-          <span data-i18n="card3_action">
-            Design System Library 열기
-          </span>
-          <svg class="ui-icon" aria-hidden="true">
-            <use href="./shared/assets/interface-icons.svg#arrow"/>
-          </svg>
-        </a>
-      </div>
+      </section>
+      <section class="library-invitation" aria-labelledby="review-title">
+        <div>
+          <p class="eyebrow">DESIGN SYSTEM LIBRARY</p>
+          <h2 id="review-title" data-i18n="invitation_title">내 프로젝트를 검토할 때.</h2>
+          <p data-i18n="invitation_desc">화면과 기준을 연결하고, 디자인 차이를 확인하세요.</p>
+        </div>
+        <a href="./design-library/" class="btn-secondary"><span data-i18n="card3_action">프로젝트 검토 도구 열기</span><svg class="ui-icon" aria-hidden="true"><use href="./shared/assets/interface-icons.svg#arrow"/></svg></a>
+      </section>
     </main>
     <footer class="container">
       <a href="./index.html">
@@ -265,8 +107,6 @@
     <script type="module" src="./shared/js/i18n.js">
     </script>
     <script src="./shared/js/global-nav.js" defer>
-    </script>
-    <script src="assets/index/preview.js" defer>
     </script>
     <script type="module" src="./shared/js/scrollbar.js">
     </script>
