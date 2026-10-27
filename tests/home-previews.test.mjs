@@ -26,7 +26,7 @@ test('home previews: hover, keyboard dismissal, touch hold/cancel, links and red
     await entry.locator('.preview-screen').waitFor({state:'visible'});
     await page.waitForFunction(() => document.querySelector('.preview-screen img').naturalWidth > 0);
     assert.equal(previewRequests.length, 1, 'opening one preview fetches only that image');
-    assert.equal(await entry.locator('.preview-screen img').getAttribute('src'), `${base}/assets/index/previews/trends.png`);
+    assert.equal(await entry.locator('.preview-screen img').first().getAttribute('src'), `${base}/assets/index/previews/trends.png`);
     const bounds = await entry.boundingBox();
     const previewBounds = await entry.locator('.preview-screen').boundingBox();
     assert.ok(previewBounds.x >= 0 && previewBounds.y >= 0);
@@ -154,5 +154,36 @@ test('home previews: hover, keyboard dismissal, touch hold/cancel, links and red
   } finally {
     await browser.close();
     await new Promise((resolve) => server.close(resolve));
+  }
+});
+
+test('preview slides rotate on dwell, mark the current dot and stop when closed or motion is reduced', async () => {
+  const server = createStaticServer();
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage({viewport:{width:1280,height:1100}});
+    await page.goto(`http://127.0.0.1:${server.address().port}/index.html`);
+    const entry = page.locator('.learning-entry').first();
+    await entry.hover();
+    await page.waitForFunction(() => document.querySelector('.learning-entry').classList.contains('is-preview-ready'));
+    assert.equal(await entry.locator('.preview-dots span').count(), 3);
+    await page.waitForFunction(() => document.querySelector('.preview-screen').dataset.slide === '1', null, {timeout:5000});
+    assert.equal(await entry.locator('.preview-dots .is-current').evaluate(el => [...el.parentElement.children].indexOf(el)), 1);
+    assert.equal(await entry.locator('.preview-slide.is-current').getAttribute('src'),
+      `http://127.0.0.1:${server.address().port}/assets/index/previews/glassmorphism.png`);
+    await page.waitForFunction(() => document.querySelector('.preview-screen').dataset.slide === '2', null, {timeout:5000});
+    await page.mouse.move(0, 0);
+    await page.waitForTimeout(200);
+    await page.waitForTimeout(2800);
+    assert.equal(await entry.locator('.preview-screen').getAttribute('data-slide'), '0');
+    assert.equal(await entry.locator('.preview-screen').isVisible(), false);
+    await page.emulateMedia({reducedMotion:'reduce'});
+    await entry.hover();
+    await page.waitForTimeout(2900);
+    assert.equal(await entry.locator('.preview-screen').getAttribute('data-slide'), '0');
+  } finally {
+    await browser.close();
+    await new Promise(resolve => server.close(resolve));
   }
 });

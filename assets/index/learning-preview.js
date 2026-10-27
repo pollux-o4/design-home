@@ -1,20 +1,11 @@
 import { previewMotion } from './preview-motion.js';
+import { previewSlides } from './preview-slides.js';
 
 const entries = [...document.querySelectorAll('.learning-entry')];
 let activePreview;
 const states = entries.map((entry) => {
-  // shortcut: 실제 화면의 정적 스냅샷 사용, 목적지의 주요 화면이 바뀌면 previews 이미지를 함께 갱신.
-  const screen = document.createElement('span');
-  screen.className = 'preview-screen';
-  screen.hidden = true;
-  screen.setAttribute('aria-hidden', 'true');
-  const image = document.createElement('img');
-  image.alt = '';
-  image.decoding = 'async';
-  image.addEventListener('load', () => entry.classList.add('is-preview-ready'));
-  const caption = document.createElement('span');
-  caption.className = 'preview-screen-caption';
-  screen.append(image, caption);
+  const slides = previewSlides(entry);
+  const { screen } = slides;
   entry.querySelector('a').append(screen);
   let hovered = false, focused = false, pinned = false, held = false, dismissed = false;
   let timer, hoverTimer, leaveTimer, origin, pointerId;
@@ -37,9 +28,7 @@ const states = entries.map((entry) => {
       }
       activePreview = controller;
     } else if (activePreview?.entry === entry) activePreview = undefined;
-    if (playing && !image.hasAttribute('src')) {
-      image.src = new URL(`./previews/${entry.dataset.preview}.png`, import.meta.url).href;
-    }
+    slides.show(playing, playing && (hovered || pinned || held));
     entry.classList.toggle('is-previewing', playing);
     screen.hidden = !playing;
     movePreview(playing);
