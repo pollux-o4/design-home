@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="shared/css/interface.css">
     <link rel="stylesheet" href="./assets/index/base.css">
     <link rel="stylesheet" href="./assets/index/hero.css">
+    <link rel="stylesheet" href="./assets/index/hero-atmosphere.css">
     <link rel="stylesheet" href="./assets/index/collections.css">
     <link rel="stylesheet" href="./assets/index/learning-preview.css">
   </head>
@@ -41,11 +42,21 @@
       본문 영역으로 건너뛰기
     </a>
     <header class="hero container">
+      <div class="hero-copy">
       <p class="hero-badge" data-i18n="hero_badge">Design Home</p>
       <h1 class="hero-title" data-i18n="hero_title">디자인을 보고.<br><span>직접 해보며 배우기.</span></h1>
       <p class="hero-subtitle" data-i18n="hero_subtitle">스타일, 인터랙션, 용어와 도구.<br>지금 궁금한 것부터 시작하세요.</p>
       <div class="hero-actions">
         <a href="./ui-components/index.html" class="btn-primary"><span data-i18n="hero_btn_primary">패턴으로 시작하기</span><svg class="ui-icon" aria-hidden="true"><use href="./shared/assets/interface-icons.svg#arrow"/></svg></a>
+      </div>
+      </div>
+      <div class="hero-atmosphere" aria-hidden="true">
+        <div class="atmosphere-bloom atmosphere-bloom--blue"></div>
+        <div class="atmosphere-bloom atmosphere-bloom--violet"></div>
+        <div class="atmosphere-orbit"></div>
+        <div class="atmosphere-tiles"><span>UI</span><span>UX</span><span>✦</span></div>
+        <div class="atmosphere-horizon"></div>
+        <div class="atmosphere-sparkles"></div>
       </div>
     </header>
     <main id="main-content" class="container hub-section" tabindex="-1">
@@ -116,6 +127,7 @@
       </p>
     </footer>
     <script type="module" src="./assets/index/learning-preview.js"></script>
+    <script type="module" src="./assets/index/hero-atmosphere.js"></script>
     <script type="module" src="./shared/js/i18n.js">
     </script>
     <script src="./shared/js/global-nav.js" defer>
