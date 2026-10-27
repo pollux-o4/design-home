@@ -13,8 +13,8 @@
 
 처음 사용하는 AI의 작업 준비는 `brief --intent`에서 시작한다.
 
-디자인 예제 정보는 `library/documents/*.md`에서 관리하고 완성 작업물은 `link`로 등록한다. 웹과 CLI는 `src/library/`의 같은 자료를 읽는다. 프로젝트 경로 설정은 호스트 Adapter가 맡는다.
+프로젝트 설정·배포·격리를 바꾸면 [C4 코드 계약](docs/architecture/c4-code.md)과 `tests/project-boundary.test.js`를 확인한다. 자료는 프로젝트 설정의 `documentsRoot`에서 관리한다. Design Home 자료는 도구 밖의 `../design-home-library/documents/`에 있다. 완성 작업물은 `link`로 등록하며 웹과 CLI는 같은 프로젝트 설정을 읽는다.
 
 변경 검증은 해당 모듈의 `tests/`에서 시작한다. 캡처·보고서·웹 미리보기를 바꾸면 실제 Chromium 또는 브라우저에서 해당 화면과 주요 조작을 확인한다. 실행 명령은 `package.json`과 `mise.toml`에서 확인한다.
 
-책임·실행 단위·의존성이 바뀌면 해당 C1~C3 문서를 코드에 맞춰 갱신한다. 함수·클래스 수준의 C4는 코드가 소유한다.
+책임·실행 단위·의존성이 바뀌면 해당 C1~C3 문서를 갱신한다. 프로젝트 경계의 공개 계약을 바꾸면 C4 지도와 연결된 테스트도 갱신한다.

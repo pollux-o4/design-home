@@ -6,12 +6,14 @@ import { createApplication } from '../application.js';
 import { parseInvocation, help } from './parser.js';
 import { failure } from './recovery.js';
 import { nextActions, jsonOutput, textOutput, errorOutput } from './presentation.js';
+import { loadProject } from '../project.js';
 
-export async function runCli(args, { app = createApplication(), stdout = console.log, stderr = console.error } = {}) {
+export async function runCli(args, { app, stdout = console.log, stderr = console.error } = {}) {
   let json = args.includes('--json'), context = { stage: 'arguments' }, operation;
   try {
     const invocation = parseInvocation(args);
     if (invocation.help) { stdout(help); return 0; }
+    app ??= createApplication();
     const { name, command, request, values } = invocation;
     json = !!values.json;
     context = { stage: command.stage(request), store: values.store };
@@ -44,8 +46,10 @@ export async function runCli(args, { app = createApplication(), stdout = console
     const failed = failure(error, context);
     if (!operation && args.length && args[0] !== 'history') {
       const storeIndex = args.indexOf('--store');
-      const requestedStore = args.find(value => value.startsWith('--store='))?.slice(8) ?? (storeIndex >= 0 && !args[storeIndex + 1]?.startsWith('--') ? args[storeIndex + 1] : process.env.DESIGN_STORE);
-      try { operation = await activityStore(requestedStore).begin({ command: args[0], args }); } catch { /* Storage failures are returned on the normal error channel. */ }
+      try {
+        const requestedStore = args.find(value => value.startsWith('--store='))?.slice(8) ?? (storeIndex >= 0 && !args[storeIndex + 1]?.startsWith('--') ? args[storeIndex + 1] : loadProject().store);
+        operation = await activityStore(requestedStore).begin({ command: args[0], args });
+      } catch { /* Storage/configuration failures stay on the normal error channel. */ }
     }
     let result = failed;
     if (operation) {

@@ -1,19 +1,42 @@
 # 디자인 문서와 메타데이터
 
-[`library/documents/`](../library/documents/)가 디자인 이름·설명·태그·원본 연결·권장 화면 크기·사용 설명의 단일 원본이다. 첫 JSON 코드 블록은 구조화된 메타데이터이고, 그 아래 Markdown은 설명이다. 문서 본문은 웹에서 제목·문단·목록으로 표시하며 CLI `context --json`에도 제공한다. HTML과 스크립트는 실행하지 않는다.
+프로젝트 설정의 `documentsRoot`가 디자인 이름·설명·태그·원본 연결·권장 화면 크기·사용 설명의 단일 원본이다. Design Home은 도구 밖의 [`design-home-library/documents/`](../../design-home-library/documents/)를 연결한다. 첫 JSON 코드 블록은 구조화된 메타데이터이고, 그 아래 Markdown은 설명이다. 문서 본문은 웹에서 제목·문단·목록으로 표시하며 CLI `context --json`에도 제공한다. HTML과 스크립트는 실행하지 않는다.
 
 웹과 CLI는 `src/library/index.js`의 `createLibrary({ documentsRoot, sourceRoot })`를 사용한다. 설명·분류를 변경하려면 Markdown만 수정한다. 요청할 때 다시 읽으므로 서버 재시작 없이 다음 조회에 반영된다. 문서 ID·필수 필드·태그·원본 경로·화면 크기·중복 ID를 검증한다.
 
 - `src/library/`: 문서 해석·검색·원본 조회. 웹 UI나 프로젝트 폴더 구조에 의존하지 않는다.
-- `library/documents/`: AI가 관리하는 디자인 문서와 메타데이터.
+- 프로젝트의 `documentsRoot`: AI가 관리하는 디자인 문서와 메타데이터.
 - `src/hub/`, `hub/`: 현재 프로젝트 연결 설정과 웹 화면.
 - `src/cli/`: 같은 기능을 명령으로 호출한다.
 
-다른 프로젝트에서 쓰려면 해당 프로젝트 경로를 `sourceRoot`로 전달한다. 현재 CLI·웹은 `DESIGN_HOME_ROOT=/프로젝트`와 `DESIGN_DOCUMENTS_ROOT=/문서폴더`로 같은 설정을 받을 수 있다. 원본 HTML·CSS·JS는 연결된 프로젝트가 소유하며, 모듈만 복사해도 그 원본까지 함께 옮겨지는 것은 아니다. 독립 실행용으로 가져갈 때 Node 패키지·CLI와 문서를 함께 가져가고 원본 경로를 설정한다.
+다른 프로젝트에서는 도구 배포 묶음을 설치하고 프로젝트 루트의 `design-system.config.json`에 `sourceRoot`, `documentsRoot`, `store`, `baseUrl`을 설정한다. 경로는 설정 파일 기준이며 CLI·웹이 공유한다. 기존 `DESIGN_HOME_ROOT`, `DESIGN_DOCUMENTS_ROOT`, `DESIGN_STORE`, `DESIGN_BASE_URL`은 실행 시 재정의용으로 유지한다. 원본과 문서는 프로젝트가 소유하고 배포 도구에는 포함하지 않는다.
 
-새 디자인 문서는 [유기적 UI 문서](../library/documents/biomorphic-organic.md)처럼 작성한다. 기존 문서의 JSON을 복사해 ID·분류·상대 원본 경로·미리보기 경로를 바꾸고, 필요한 설명을 아래에 추가한다. 웹 목록용으로 같은 내용을 JavaScript에 재등록하지 않는다.
+새 디자인 문서는 [유기적 UI 문서](../../design-home-library/documents/biomorphic-organic.md)처럼 작성한다. 기존 문서의 JSON을 복사해 ID·분류·상대 원본 경로·미리보기 경로를 바꾸고, 필요한 설명을 아래에 추가한다. 웹 목록용으로 같은 내용을 JavaScript에 재등록하지 않는다.
 
-허브의 정적 파일 제공 경로는 현재 Design Home 저장소 기준이다. `DESIGN_HOME_ROOT`는 원본 조회 경로만 바꾸므로, 외부 프로젝트 화면은 별도 개발 서버에서 제공해야 한다.
+독립 설치본에서는 프로젝트 문서 폴더에 다음과 같은 Markdown 파일로 시작할 수 있다. `sourcePath`는 sourceRoot 내부 파일이고, `previewPath`는 baseUrl 서버의 경로다.
+
+````markdown
+```json
+{
+  "schemaVersion": 1,
+  "id": "checkout",
+  "title": "결제 화면",
+  "summary": "주문 확인과 결제",
+  "sourcePath": "src/checkout.html",
+  "previewPath": "/checkout",
+  "tags": ["minimal"],
+  "structure": [],
+  "interactions": [],
+  "constraints": [],
+  "viewport": { "width": 1280, "height": 900 }
+}
+```
+
+## 사용 안내
+이 프로젝트의 결제 화면 검토 기준.
+````
+
+외부 설치본은 공통 UI만 제공한다. 프로젝트 화면은 별도 개발 서버가 제공하며 `baseUrl`로 미리보기를 연결한다. 소스 조회 설정으로 프로젝트 파일 전체를 HTTP에 노출하지 않는다.
 
 
 ## 의도 선택과 등록 자료

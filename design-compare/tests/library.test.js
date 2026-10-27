@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
+import { mkdtemp, mkdir, writeFile, rm, symlink } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { createLibrary, parseDesignDocument } from '../src/library/index.js';
@@ -34,6 +34,21 @@ test('invalid metadata is rejected with its document path', () => {
   assert.throws(() => parseDesignDocument('# No metadata', 'bad.md'), /bad.md/);
   assert.throws(() => parseDesignDocument(doc({ ...metadata, sourcePath: '../secret' })), /상대 경로/);
   assert.throws(() => parseDesignDocument(doc({ ...metadata, previewPath: '//external.test' })), /같은 서버/);
+  for (const previewPath of ['/\\external.test/secret', '/\n/external.test/secret', '/\t/external.test/secret']) {
+    assert.throws(() => parseDesignDocument(doc({ ...metadata, previewPath })), /같은 서버/);
+  }
   assert.throws(() => parseDesignDocument(doc({ ...metadata, viewport: {} })), /viewport/);
   assert.throws(() => parseDesignDocument(doc({ ...metadata, tags: ['unknown'] })), /정의되지 않은/);
+});
+
+test('context rejects symlinked source files outside the configured project root', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'design-source-boundary-'));
+  try {
+    const sourceRoot = join(root, 'source'), documentsRoot = join(root, 'docs');
+    await mkdir(sourceRoot); await mkdir(documentsRoot);
+    await writeFile(join(root, 'private.txt'), 'private material');
+    await symlink(join(root, 'private.txt'), join(sourceRoot, 'sample.html'));
+    await writeFile(join(documentsRoot, 'sample.md'), doc(metadata));
+    await assert.rejects(createLibrary({ sourceRoot, documentsRoot }).context('fixture'), /sourceRoot 내부/);
+  } finally { await rm(root, { recursive: true, force: true }); }
 });

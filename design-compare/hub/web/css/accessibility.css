@@ -1,4 +1,12 @@
 #accessibility-section { max-width: 920px; }
+.project-context { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; margin-bottom: 30px; padding: 14px 18px; border: 1px solid var(--ui-line); border-radius: 14px; background: var(--ui-surface); font-size: 13px; }
+.project-context > span:last-child { color: var(--ui-secondary); }
+.project-indicator { width: 7px; height: 7px; border-radius: 50%; background: var(--ui-blue); }
+.workspace-theme { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ui-secondary); }
+.workspace-theme select { min-height: 36px; padding: 6px 10px; border: 1px solid var(--ui-border); border-radius: 99px; color: var(--ui-text); background: var(--ui-surface); font: inherit; }
+.project-setup { max-width: 760px; margin: 0 0 24px; color: var(--ui-secondary); font-size: 13px; }
+.project-setup summary { cursor: pointer; padding: 10px 0; color: var(--ui-blue); }
+.project-setup pre { overflow-x: auto; padding: 18px; background: var(--ui-surface); border: 1px solid var(--ui-line); border-radius: 12px; }
 .feature-list { display: grid; max-width: 760px; border-top: 1px solid var(--ui-line); }
 .feature-row { display: grid; grid-template-columns: 68px minmax(0, 1fr) 24px; align-items: center; gap: 18px; min-height: 106px; padding: 16px 8px; border-bottom: 1px solid var(--ui-line); color: var(--ui-text); text-decoration: none; }
 .feature-row:hover { background: var(--ui-soft); }

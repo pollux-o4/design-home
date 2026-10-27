@@ -1,7 +1,7 @@
 const labels = {
   component: 'COMPONENT',
   work: 'YOUR WORK',
-  trend: 'DESIGN TREND',
+  trend: 'PROJECT SCREEN',
 };
 
 export function kindLabel(kind) {

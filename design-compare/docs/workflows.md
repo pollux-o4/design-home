@@ -70,7 +70,7 @@ AI가 `registrationTemplate`의 이름·설명·분류·태그·검색어·실�
 - `inspect --reference ID --json`: 사진 기준은 저장된 측정값, 원본 연결은 메타데이터·선택자·조건 조회.
 - `inspect --report /비교결과/report.json --part title --json`: 필요한 부분의 수정 근거와 보관 이미지 조회. 조회 종료 코드는 0이고 비교 판정은 `comparisonStatus`에 있다.
 
-`./design`은 도구 폴더에서 실행되며, 등록 JSON·보고서·프로젝트 경로는 절대 경로로 전달한다. CLI와 웹의 store를 맞추려면 `DESIGN_STORE`를 공통으로 지정한다.
+`./design`은 호출한 현재 폴더를 유지한다. 프로젝트 설정 파일의 상위 탐색과 상대 경로 해석은 CLI·웹이 공유한다. 등록 JSON·보고서 인자는 호출 폴더 기준이며 절대 경로를 권장한다. 명시적인 `--store`가 없으면 설정의 store를 사용한다. 다른 프로젝트에서는 설치한 `design-compare`와 `design-system-library` 명령을 사용한다.
 
 ## 저장된 사진 기준 데모
 

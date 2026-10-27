@@ -1,9 +1,7 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { resolve, relative, isAbsolute } from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { validateTags, tagDetails } from './tags.js';
 
-export const defaultDocumentsRoot = fileURLToPath(new URL('../../library/documents/', import.meta.url));
 const textList = value => Array.isArray(value) && value.every(item => typeof item === 'string');
 
 export function parseDesignDocument(text, documentPath = '<document>') {
@@ -17,7 +15,7 @@ export function parseDesignDocument(text, documentPath = '<document>') {
     if (typeof data[key] !== 'string' || !data[key].trim()) throw new Error(`${documentPath}: ${key} 필요`);
   }
   if (isAbsolute(data.sourcePath) || data.sourcePath.includes('\\') || data.sourcePath.split('/').includes('..')) throw new Error(`${documentPath}: sourcePath는 프로젝트 내부 상대 경로 필요`);
-  if (!data.previewPath.startsWith('/') || data.previewPath.startsWith('//')) throw new Error(`${documentPath}: previewPath는 같은 서버의 경로 필요`);
+  if (!data.previewPath.startsWith('/') || data.previewPath.startsWith('//') || /[\\\u0000-\u0020]/u.test(data.previewPath)) throw new Error(`${documentPath}: previewPath는 같은 서버의 경로 필요`);
   for (const key of ['structure', 'interactions', 'constraints']) if (!textList(data[key])) throw new Error(`${documentPath}: ${key} 문자열 목록 필요`);
   if (!data.viewport || !['width','height'].every(key => Number.isInteger(data.viewport[key]) && data.viewport[key] >= 200 && data.viewport[key] <= 3000)) throw new Error(`${documentPath}: viewport 정수 200~3000 필요`);
   for (const key of ['keywords', 'useCases', 'sources']) if (data[key] !== undefined && !textList(data[key])) throw new Error(`${documentPath}: ${key} 문자열 목록 필요`);
@@ -26,7 +24,8 @@ export function parseDesignDocument(text, documentPath = '<document>') {
   return { ...data, kind: data.kind === 'page' || !data.kind ? 'trend' : data.kind, tags, tagDetails: details, intent: details.map(tag => tag.label), documentation: text.slice(match[0].length).trim(), documentPath };
 }
 
-export function loadDesigns(documentsRoot = defaultDocumentsRoot) {
+export function loadDesigns(documentsRoot) {
+  if (!documentsRoot) return [];
   const root = resolve(documentsRoot), ids = new Set();
   return readdirSync(root).filter(name => name.endsWith('.md')).sort().map(name => {
     const path = resolve(root, name);

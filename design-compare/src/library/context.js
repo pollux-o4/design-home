@@ -1,12 +1,12 @@
-import { readFile } from 'node:fs/promises';
-import { dirname, resolve, relative } from 'node:path';
+import { readFile, realpath } from 'node:fs/promises';
+import { dirname, resolve, relative, isAbsolute, sep } from 'node:path';
 import { loadDesigns } from './catalog.js';
 
 const MAX_TEXT = 24000;
 const links = (text, pattern) => [...text.matchAll(pattern)].map(match => match[1]);
 export async function getDesignContext(id, { sourceRoot, documentsRoot } = {}) {
   if (!sourceRoot) throw new Error('원본 프로젝트 sourceRoot 설정 필요');
-  const root = resolve(sourceRoot), designs = loadDesigns(documentsRoot);
+  const root = await realpath(resolve(sourceRoot)), designs = loadDesigns(documentsRoot);
   const design = designs.find(item => item.id === id);
   if (!design) throw Object.assign(new Error(`없는 디자인 ID: ${id}`), { code: 'DESIGN_NOT_FOUND' });
   const visited = new Set(), sourceFiles = [], remote = new Set();
@@ -15,6 +15,8 @@ export async function getDesignContext(id, { sourceRoot, documentsRoot } = {}) {
     if (/^(https?:)?\/\//.test(path)) { remote.add(path); return; }
     const fullPath = resolve(root, path), localPath = relative(root, fullPath);
     if (localPath.startsWith('..') || visited.has(localPath)) return;
+    const actualPath = await realpath(fullPath), actualRelative = relative(root, actualPath);
+    if (actualRelative === '..' || actualRelative.startsWith(`..${sep}`) || isAbsolute(actualRelative)) throw new Error('원본 파일은 sourceRoot 내부에 있어야 합니다.');
     visited.add(localPath);
     const text = await readFile(fullPath, 'utf8');
     const excerpt = text.slice(0, Math.min(remaining, localPath.endsWith('.html') ? 3000 : 1000)); remaining -= excerpt.length;

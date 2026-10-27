@@ -1,58 +1,42 @@
 # C2 · 컨테이너
 
-Design Compare는 한 Node 패키지의 모듈을 CLI 프로세스와 웹 서버 프로세스가 공유한다. 별도 모듈마다 서버를 띄우는 구조가 아니다. 브라우저 클라이언트와 캡처용 Chromium은 서로 다른 실행 환경이다.
+독립 배포 단위는 `design-compare` Node 패키지다. CLI와 HTTP 서버는 공통 모듈을 공유하고, 브라우저 UI와 캡처용 Chromium은 별도 실행 환경이다. 프로젝트별 설치는 서버나 저장소를 공유하지 않는다.
 
 ```mermaid
 flowchart TB
-  user["사용자 / 코딩 AI"]
-  target["외부 프로젝트 개발 서버"]
-  sources["외부 프로젝트 소스 파일"]
-  subgraph system["Design Compare"]
-    cli["CLI 프로세스\nNode.js · src/cli.js"]
-    hub["웹 허브 서버\nNode.js HTTP · hub/server.js"]
-    web["웹 클라이언트\nHTML / CSS / JavaScript"]
-    chromium["캡처용 Chromium\nPlaywright가 실행·종료"]
-    documents[("디자인 문서\nlibrary/documents/*.md")]
-    store[("기준·보고서·호출 기록 저장소\n.design-compare 또는 지정 경로")]
+  config[("프로젝트 설정\ndesign-system.config.json")]
+  docs[("프로젝트 문서 / 소스")]
+  store[("프로젝트 검토 기록\n설정의 store")]
+  target["프로젝트 개발 서버"]
+  subgraph tool["Design System Library 배포 패키지"]
+    cli["CLI · Node.js\nsrc/cli.js"]
+    server["HTTP 서버 · Node.js\nhub/server.js"]
+    web["브라우저 UI\nHTML / CSS / ES Modules"]
+    capture["캡처 프로세스\nPlaywright / Chromium"]
   end
-  user -->|명령 실행| cli
-  user -->|브라우저 조작| web
-  web -->|HTTP GET /api/*| hub
-  hub -->|정적 파일 제공| web
-  web -->|iframe 미리보기 · 원본 링크| target
-  cli -->|검색 · 조회| documents
-  hub -->|검색 · 조회| documents
-  cli -->|원본 조회 · 후보 수집| sources
-  hub -->|원본 조회| sources
-  cli -->|등록 · 결과 발행 · 조회| store
-  hub -->|기준 목록 · 호출 기록 조회| store
-  cli -->|캡처 실행| chromium
-  chromium -->|HTTP 화면 로드| target
+  cli -->|파일 읽기| config
+  server -->|파일 읽기| config
+  cli -->|문서 / 소스 읽기| docs
+  server -->|문서 / 소스 읽기| docs
+  cli -->|파일 저장 / 조회| store
+  server -->|파일 조회| store
+  web -->|HTTP GET /api/*| server
+  server -->|HTTP 정적 자원| web
+  web -->|HTTP iframe / 새 창| target
+  cli -->|프로세스 실행| capture
+  capture -->|HTTP 화면 캡처| target
 ```
 
-## 실행·저장 단위
-
-| 단위 | 구현 진입점 | 역할 |
+| 실행 단위 | 진입점 | 책임 |
 |---|---|---|
-| CLI 프로세스 | [`src/cli.js`](../../src/cli.js), [`design`](../../design) | 입력·JSON 출력·종료 코드와 수집·등록·비교 작업 |
-| 웹 서버 | [`hub/server.js`](../../hub/server.js) | GET 검색·원본 조회·기준·호출 기록 조회와 정적 파일 제공 |
-| 웹 클라이언트 | [`hub/web/app.js`](../../hub/web/app.js) | 태그 탐색·iframe·문서 표시·제품 원본 링크·클라이언트 접근성 점검 |
-| Chromium 프로세스 | [`src/capture/index.js`](../../src/capture/index.js) | 실제 DOM 측정과 안정적인 이미지 캡처 |
-| 디자인 문서 저장소 | [`library/documents/`](../../library/documents/) | 분류·설명·원본 연결의 단일 원본 |
-| 기준·보고서 저장소 | [`src/catalog/index.js`](../../src/catalog/index.js) | 연결 정보 또는 사진 기준, 실행별 비교 결과와 호출 기록 |
+| CLI | `design-compare` / `src/cli.js` | JSON·종료 코드·조회·등록·비교 |
+| HTTP 서버 | `design-system-library` / `hub/server.js` | 프로젝트 정보·자료·기록 API와 공통 UI 제공 |
+| 브라우저 UI | `hub/web/app.js` | 현재 프로젝트 표시·자료 탐색·시각 검수·품질 도구 |
+| Chromium | `src/capture/index.js` | 조건 고정·DOM 측정·캡처 |
+| 프로젝트 저장소 | 설정의 `documentsRoot`, `sourceRoot`, `store` | 프로젝트 소유 데이터. 도구 배포물에 포함하지 않음 |
 
-저장소 루트에서 `mise run hub`로 웹 서버를 실행한다. Node.js 24.21.0을 사용하며 로컬 주소는 `http://127.0.0.1:4184/design-library/`다. CLI 자료 조회의 기본 서버 주소도 같은 포트를 사용한다.
+`npm pack`의 `prepack`이 공통 UI와 공유 자원을 `dist/runtime`에 묶는다. 설치본은 이 자원만 제공하고 프로젝트 개발 서버는 `baseUrl`로 연결한다. Design Home의 문서·미리보기·학습 사이트는 배포물에 포함하지 않는다. 설정이 없으면 빈 프로젝트로 시작하며 공통 품질 도구는 사용 가능하다.
 
-## 실행 관계
+저장소 내 개발에서는 Design Home 호스트가 같은 UI를 `/design-library/`에 연결한다. `design-home-library/documents`와 프로젝트 설정은 Design Home 소유다. 정적 Pages용 export는 해당 프로젝트의 읽기 전용 카탈로그·맥락·프로젝트 이름을 내보낸다. 로컬 기록은 공개 export에 포함하지 않는다.
 
-허브의 트렌드 미리보기는 허브가 제공하는 같은 저장소의 정적 HTML을 iframe으로 연다. 외부 프로젝트는 자체 개발 서버가 필요하다. 캡처는 CLI에서 실행하며 허브에는 비교 실행 HTTP 엔드포인트가 없다. 비교 보고서는 정적 HTML이라 생성 후 서버 요청 없이 파일로 검토할 수 있다.
-
-문서 경로와 소스 경로, 저장소 설정은 [문서와 메타데이터](../library.md)와 [작업 흐름](../workflows.md)에서 확인한다.
-
-다음 단계: [C3 · 컴포넌트](c3-components.md).
-
-## 정적 Pages 배포
-
-`npm run build:library`가 Library 문서와 맥락을 `design-library/data/` JSON으로 내보낸다. 저장소 루트의 `design-library/index.html`은 로컬과 Pages가 공유하는 SPA 셸이다. Pages 브라우저는 정적 JSON과 순수 검색 함수를 사용하며 Node API를 호출하지 않는다. 미리보기는 재현 가능한 비교를 위해 라이트 색상 체계로 캡처하고, 미리보기 경로는 저장소 배포 접두사 기준으로 변환한다. URL의 hash 경로로 분류·상세·검색 상태를 유지해 새로고침과 직접 링크가 정적 서버에서 동작한다.
-
-로컬 서버 `/`는 Design Home 랜딩, `/design-library/`는 API 모드의 같은 SPA를 제공한다. 등록 작업·호출 기록은 로컬 모드에서만 표시한다.
+다음 단계: [C3 · 모듈](c3-components.md).

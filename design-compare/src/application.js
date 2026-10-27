@@ -2,7 +2,8 @@ import { rankReferences } from './library/index.js';
 import { activityStore } from './activity/index.js';
 import { prepareBrief } from './application/brief.js';
 import { inventory } from './application/inventory.js';
-import { searchDesigns, getDesignContext } from './hub/index.js';
+import { createLibrary } from './library/index.js';
+import { loadProject } from './project.js';
 import { readFile } from 'node:fs/promises';
 import { catalog } from './catalog/index.js';
 import { validateId } from './domain/identifiers.js';
@@ -11,11 +12,12 @@ import { inspectReference, inspectReport } from './application/queries.js';
 import { comparePage as compareWorkflow } from './application/compare.js';
 
 // Composition root: production adapters are replaceable by concrete test adapters.
-export function createApplication({ repositoryFor = catalog, capturePage = capture, read = readFile, now = () => new Date().toISOString() } = {}) {
+export function createApplication({ repositoryFor = catalog, capturePage = capture, read = readFile, now = () => new Date().toISOString(), project = loadProject() } = {}) {
+  const library = createLibrary(project);
   return {
     inventory,
     history: async ({ store }) => ({ schemaVersion: 1, status: 'history', entries: await activityStore(store).recent() }),
-    prepareBrief: request => prepareBrief(request, { repository: repositoryFor(request.store), capture: capturePage, documentsRoot: process.env.DESIGN_DOCUMENTS_ROOT }),
+    prepareBrief: request => prepareBrief(request, { repository: repositoryFor(request.store), capture: capturePage, documentsRoot: project.documentsRoot }),
     async link({ manifest, store }) {
       const fields = JSON.parse(await read(manifest, 'utf8'));
       const record = { ...fields, schemaVersion: 1, mode: 'live', createdAt: now() };
@@ -23,11 +25,11 @@ export function createApplication({ repositoryFor = catalog, capturePage = captu
       return { status: 'linked', referenceId: record.id, directory, metadata: record };
     },
     async searchDesigns({ query, tags = [], store }) {
-      const result = searchDesigns(query, tags);
+      const result = library.search(query, tags);
       const registered = rankReferences(query ?? '', (await repositoryFor(store).list()).filter(item => item.mode === 'live' && item.status === 'ready' && !item.transient), tags).results;
       return { ...result, registered };
     },
-    getDesignContext: ({ id }) => getDesignContext(id),
+    getDesignContext: ({ id }) => library.context(id),
     async listReferences({ store }) {
       return { schemaVersion: 1, status: 'listed', references: await repositoryFor(store).list() };
     },
@@ -46,4 +48,7 @@ export function createApplication({ repositoryFor = catalog, capturePage = captu
   };
 }
 
-export const { listReferences, inspect, register, comparePage } = createApplication();
+export const listReferences = request => createApplication().listReferences(request);
+export const inspect = request => createApplication().inspect(request);
+export const register = request => createApplication().register(request);
+export const comparePage = request => createApplication().comparePage(request);

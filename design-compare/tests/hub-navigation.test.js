@@ -16,15 +16,15 @@ test('mobile follows category → list → detail, restores the list and support
     await page.goto(base);
     await page.locator(".hub-card").filter({ hasText: "Design System Library" }).click();
     await page.getByRole('heading', { name: '제공 기능', exact: true }).waitFor();
-    await page.getByRole('link', { name: /디자인 트렌드/ }).click();
-    await page.getByRole('heading', { name: '디자인 트렌드', exact: true }).waitFor();
+    await page.getByRole('link', { name: /프로젝트 화면/ }).click();
+    await page.getByRole('heading', { name: '프로젝트 화면', exact: true }).waitFor();
     await page.locator('.design-card').first().waitFor();
     assert.equal(await page.locator('.design-card').count(), 15);
     assert.equal(await page.locator('#detail').isVisible(), false);
     assert.equal(await page.locator('#activity-list').isVisible(), false);
     await page.getByRole('link', { name: '제공 기능', exact: true }).click();
     await page.getByRole('link', { name: /컴포넌트/ }).click();
-    await page.getByRole('heading', { name: '컴포넌트', exact: true }).waitFor();
+    await page.getByRole('heading', { name: '프로젝트 컴포넌트', exact: true }).waitFor();
     const modal = page.locator('.design-card[data-id="component-modal"]'); await modal.waitFor();
     assert.equal(await page.locator('.design-card').count(), 13);
     await modal.click(); await page.locator('#title').filter({ hasText: '프로젝트 입력 모달' }).waitFor();

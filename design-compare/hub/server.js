@@ -1,18 +1,29 @@
+#!/usr/bin/env node
 import { activityStore } from '../src/activity/index.js';
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { resolve, sep, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createApplication } from '../src/application.js';
-import { searchDesigns, getDesignContext } from '../src/hub/index.js';
-const home = fileURLToPath(new URL('../../', import.meta.url));
+import { createLibrary } from '../src/library/index.js';
+import { loadProject } from '../src/project.js';
+import { existsSync } from 'node:fs';
+const runtime = fileURLToPath(new URL('../dist/runtime/', import.meta.url));
+const workspace = fileURLToPath(new URL('../../', import.meta.url));
+const home = existsSync(resolve(workspace, 'design-library/index.html')) ? workspace : runtime;
+const standalone = home === runtime;
 const web = fileURLToPath(new URL('./web/', import.meta.url));
-export function createHubServer({ store = process.env.DESIGN_STORE } = {}) {
-  const app = createApplication(), activity = activityStore(store);
+export function createHubServer({ project = loadProject(), store = project.store } = {}) {
+  const app = createApplication({ project }), library = createLibrary(project), activity = activityStore(store);
+  const hosted = !standalone && project.sourceRoot === resolve(workspace);
   return createServer(async (request, response) => {
     try {
       const url = new URL(request.url, 'http://localhost');
       if (request.method !== 'GET') { response.writeHead(405); response.end(); return; }
+      if (url.pathname === '/api/project') {
+        response.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' });
+        response.end(JSON.stringify({ name: project.name, configured: project.configured })); return;
+      }
       if (url.pathname === '/api/activity' || url.pathname.startsWith('/api/activity/')) {
         const segments = url.pathname.split('/').slice(3).map(decodeURIComponent);
         if (segments.length === 3 && segments[1] === 'files') {
@@ -29,17 +40,22 @@ export function createHubServer({ store = process.env.DESIGN_STORE } = {}) {
         response.writeHead(200, {'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'}); response.end(JSON.stringify(result)); return;
       }
       if (url.pathname === '/api/search' || url.pathname === '/api/context') {
-        const result = url.pathname === '/api/search' ? await searchDesigns(url.searchParams.get('q') ?? '', url.searchParams.getAll('tag'), url.searchParams.get('kind')) : await getDesignContext(url.searchParams.get('id') ?? '');
+        const result = url.pathname === '/api/search' ? library.search(url.searchParams.get('q') ?? '', url.searchParams.getAll('tag'), url.searchParams.get('kind')) : await library.context(url.searchParams.get('id') ?? '');
+        if (!hosted) {
+          if (result.results) result.results = result.results.map(item => ({ ...item, thumbnail: null }));
+          else result.previewPath = new URL(result.previewPath, project.baseUrl).href;
+        }
         response.writeHead(200, {'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'}); response.end(JSON.stringify(result)); return;
       }
       const path = decodeURIComponent(url.pathname);
       if (path === '/design-library') { response.writeHead(302, { Location: '/design-library/' }); response.end(); return; }
       if (path === '/design-library/' || path === '/design-library/index.html') {
-        const html = await readFile(resolve(home, 'design-library/index.html'), 'utf8');
+        const html = await readFile(hosted ? resolve(home, 'design-library/index.html') : fileURLToPath(new URL('./index.html', import.meta.url)), 'utf8');
         response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
         response.end(html.replace('data-mode="static"', 'data-mode="local"')); return;
       }
       const base = path.startsWith('/hub-assets/') ? web : home;
+      if (path === '/' && !hosted) { response.writeHead(302, { Location: '/design-library/' }); response.end(); return; }
       const relative = path === '/' ? 'index.html' : path.startsWith('/hub-assets/') ? path.slice(12) : `.${path}`;
       const file = resolve(base, relative);
       if (!file.startsWith(resolve(base) + sep)) { response.writeHead(403); response.end(); return; }

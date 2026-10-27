@@ -2,6 +2,10 @@
 
 디자인 스킬/레퍼런스 모음.
 
+Design Home은 디자인 학습 제품이다. `design-compare/`의 Design System Library는 프로젝트별 디자인 검토 도구이며, 루트 `design-system.config.json`이 이 프로젝트의 자료와 검토 저장소를 연결한다. 학습 문서는 `design-home-library/documents/`가 소유한다.
+
+학습 화면의 구조는 [Design Home 컴포넌트 지도](docs/design-home-components.md), 검토 도구는 [Design System Library C1~C4](design-compare/docs/README.md)에서 확인한다.
+
 ## 로컬 서버 실행
 
 저장소 루트에서 `mise run hub`로 실행한다. 처음 실행할 때는 `mise trust`로 설정을 신뢰한다.

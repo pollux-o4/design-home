@@ -1,6 +1,7 @@
 import { parseArgs } from 'node:util';
 import { commands } from './commands.js';
 import { DEFAULT_PIXEL_BUDGET } from '../comparison/policy.js';
+import { loadProject } from '../project.js';
 
 const string = { type: 'string' };
 const options = {
@@ -36,6 +37,6 @@ export function parseInvocation(args) {
   const command = commands[name];
   for (const key of Object.keys(values)) if (!['store', 'task'].includes(key) && !command.options.includes(key)) throw new Error(`${name}에서 --${key} 사용 불가`);
   if (values.details && !values.json) throw new Error('--details는 --json과 함께 사용');
-  values.store ??= process.env.DESIGN_STORE;
+  values.store ??= loadProject().store;
   return { name, command, values, request: { ...command.prepare(values), store: values.store } };
 }

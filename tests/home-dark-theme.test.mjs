@@ -40,7 +40,7 @@ test("core dark-mode entry screens have no color contrast violations", async () 
   const browser = await chromium.launch();
   const context = await browser.newContext({ colorScheme: "dark" });
   const page = await context.newPage();
-  const axe = await readFile("./design-compare/node_modules/axe-core/axe.min.js", "utf8");
+  const axe = await readFile(new URL("../design-compare/node_modules/axe-core/axe.min.js", import.meta.url), "utf8");
   try {
     for (const path of ["index.html", "design-library/#/features", "glossary/index.html", "libraries/index.html", "ui-components/index.html"]) {
       await page.goto(`http://127.0.0.1:${server.address().port}/${path}`);

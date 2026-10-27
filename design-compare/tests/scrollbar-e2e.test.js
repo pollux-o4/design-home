@@ -21,6 +21,7 @@ test('page keeps the native scrollbar while an embedded scrollbar supports drag 
     assert.equal(await page.evaluate(() => document.scrollingElement.classList.contains('dh-scroll-native')), false);
     await card.click();
     const frame = page.frameLocator('#preview');
+    await page.locator('#preview').scrollIntoViewIfNeeded();
     const region = frame.locator('[data-scroll-region]'); await region.waitFor();
     const rail = frame.locator('.dh-scroll-rail[data-axis="y"]');
     await rail.hover(); await page.waitForTimeout(220);

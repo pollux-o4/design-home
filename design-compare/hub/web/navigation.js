@@ -29,19 +29,19 @@ export function navigate(category, id, params, replace = false) {
 const sections = {
   features: [
     "제공 기능",
-    "필요한 기능을 고르고, 다음 화면에서 실제 예시를 확인하세요.",
+    "연결된 프로젝트의 기준과 품질을 검토하세요.",
     "DESIGN SYSTEM LIBRARY",
     "제공 기능",
   ],
   trends: [
-    "디자인 트렌드",
-    "화면의 색, 질감, 분위기를 살펴보세요.",
-    "TREND LIBRARY",
-    "전체 트렌드",
+    "프로젝트 화면",
+    "이 프로젝트에 연결된 화면과 구현 정보를 확인하세요.",
+    "PROJECT SCREENS",
+    "전체 화면",
   ],
   components: [
-    "컴포넌트",
-    "입력, 탐색, 피드백에 필요한 조작 요소를 찾으세요.",
+    "프로젝트 컴포넌트",
+    "이 프로젝트에 연결된 조작 요소를 검토하세요.",
     "COMPONENT LIBRARY",
     "전체 컴포넌트",
   ],

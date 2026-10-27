@@ -1,3 +1,4 @@
 import { createLibrary } from '../library/index.js';
-const library = createLibrary({ documentsRoot: process.env.DESIGN_DOCUMENTS_ROOT });
+import { loadProject } from '../project.js';
+const library = createLibrary(loadProject());
 export const searchDesigns = (query, tags, kind) => library.search(query, tags, kind);

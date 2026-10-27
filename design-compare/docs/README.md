@@ -16,6 +16,6 @@
 | C1 Context | 시스템을 쓰는 사람·AI와 외부 시스템 | [시스템 맥락](architecture/c1-context.md) |
 | C2 Container | 실행되는 애플리케이션과 데이터 저장소 | [컨테이너](architecture/c2-containers.md) |
 | C3 Component | 컨테이너 내부의 주요 모듈과 의존성 | [컴포넌트](architecture/c3-components.md) |
-| C4 Code | 실제 구현 | [`src/`](../src/) · [`hub/`](../hub/) |
+| C4 Code | 프로젝트 경계의 코드 계약·검증 | [코드 지도](architecture/c4-code.md) · [`src/`](../src/) · [`hub/`](../hub/) |
 
-C1~C3는 현재 구현을 설명한다. 계획한 구조나 C4 함수 목록을 별도 문서로 유지하지 않는다. 여기서 Container는 C4의 실행·저장 단위이며 Docker 컨테이너를 뜻하지 않는다.
+C1~C4는 현재 구현을 설명한다. C4는 핵심 계약과 코드·검증을 연결하고 전체 함수 목록은 복제하지 않는다. 여기서 Container는 실행·저장 단위이며 Docker 컨테이너를 뜻하지 않는다.

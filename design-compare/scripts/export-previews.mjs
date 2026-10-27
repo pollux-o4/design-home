@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import { chromium } from 'playwright';
 import { loadDesigns } from '../src/library/index.js';
 import { createHubServer } from '../hub/server.js';
+import { loadProject } from '../src/project.js';
 
 const output = fileURLToPath(new URL('../../design-library/previews/', import.meta.url));
 const server = createHubServer();
@@ -13,7 +14,7 @@ let browser;
 try {
   browser = await chromium.launch();
   await rm(output, { recursive: true, force: true }); await mkdir(output, { recursive: true });
-  for (const design of loadDesigns()) {
+  for (const design of loadDesigns(loadProject().documentsRoot)) {
     const page = await browser.newPage({ viewport: design.viewport, deviceScaleFactor: 1, colorScheme: 'light' });
     await page.route('https://**/*', route => route.abort());
     await page.goto(`${base}${design.previewPath}`);

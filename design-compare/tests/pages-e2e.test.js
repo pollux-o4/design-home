@@ -18,7 +18,7 @@ test('Pages landing → library → filtered detail → interactive preview and 
   await page.route('https://**/*', route => route.abort());
   try {
     await page.goto(base); await page.locator('.hub-card').filter({ hasText: 'Design System Library' }).click();
-    await page.getByRole('link', { name: /디자인 트렌드/ }).click();
+    await page.getByRole('link', { name: /프로젝트 화면/ }).click();
     await page.locator('.design-card').first().waitFor(); assert.equal(await page.locator('.design-card').count(), 15);
     assert.match(await page.locator('.brand').textContent(), /Design System Library/);
     await mkdir(resolve(root, '.legacy-review'), { recursive: true });

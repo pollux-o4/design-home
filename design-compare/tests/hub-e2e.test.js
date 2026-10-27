@@ -59,7 +59,7 @@ test("hub search → actual interactive preview → CLI source context; responsi
       (start) =>
         document
           .querySelector(
-            '.facet-section[aria-label="연관 태그"] .disclosure-panel',
+            '.facet-section[aria-label="연관 태그"] .facet-row[data-group="mood"] .disclosure-panel',
           )
           .getBoundingClientRect().height > start,
       startHeight,

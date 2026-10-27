@@ -4,10 +4,13 @@
   "private": true,
   "type": "module",
   "bin": {
-    "design-compare": "src/cli.js"
+    "design-compare": "src/cli.js",
+    "design-system-library": "hub/server.js"
   },
+  "files": ["src", "hub", "dist/runtime", "docs", "README.md"],
   "scripts": {
-    "test": "node --test tests/*.test.js ../tests/*.test.mjs",
+    "prepack": "node scripts/package-runtime.mjs",
+    "test": "node --test --test-concurrency=4 tests/*.test.js ../tests/*.test.mjs",
     "demo": "node demo/server.js",
     "compare": "node src/cli.js",
     "hub": "node hub/server.js",

@@ -13,8 +13,8 @@ export default {
   hero_badge: "Design Home",
   hero_title: "Great design starts here.<br><span>Make it yours.</span>",
   hero_subtitle:
-    "Find inspiration. Feel the interaction.<br>A design system library for your next great interface.",
-  hero_btn_primary: "Explore the library",
+    "Find inspiration. Feel the interaction.<br>Learn design by seeing and trying it yourself.",
+  hero_btn_primary: "Start learning design",
   hero_btn_secondary: "Discover Design Home",
   card1_tag: "Collection",
   card1_title: "Design trends",
@@ -26,10 +26,10 @@ export default {
   card2_desc:
     "From components to accessibility. Explore the structure and learn through interaction.",
   card2_action: "Explore patterns",
-  card3_tag: "Design System Library",
+  card3_tag: "Project review tool",
   card3_title: "Design System Library",
   card3_desc:
-    "Search by purpose and mood. Go from a working preview to implementation.",
+    "Connect your project’s screens and standards to review design quality.",
   card3_action: "Open Design System Library",
   footer_text: "© 2026 Design Home. A better way to explore design.",
   trend_search_label: "Search styles",
@@ -91,6 +91,6 @@ export default {
   hub_eyebrow: "EXPLORE DESIGN HOME",
   hub_title: "From ideas to interactions.",
   hub_subtitle: "Start with what you need.",
-  invitation_title: "Find the feeling you’re looking for.",
-  invitation_desc: "Search by mood. Explore it in a real interface.",
+  invitation_title: "Review it in your own project.",
+  invitation_desc: "Connect your screens and standards. Inspect the differences.",
 };

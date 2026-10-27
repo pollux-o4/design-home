@@ -1,30 +1,22 @@
 # C1 · 시스템 맥락
 
-Design Compare는 디자인 자료를 찾아 AI에 전달하고, 원본과 개발 화면의 차이를 검사하는 로컬 시스템이다. 사람은 화면과 제품 맥락을 검수하고, 코딩 AI는 자료 조회·분류·등록·수정·재검사를 수행한다.
+Design System Library는 프로젝트마다 설치해 디자인 기준과 개발 화면을 검토하는 도구다. Design Home은 디자인을 공부하는 별도 제품이며 이 도구를 사용하는 프로젝트 중 하나다.
 
 ```mermaid
 flowchart LR
-  human["사용자 / 검수자"]
-  agent["코딩 AI / 개발자"]
-  system["Design Compare\n의도 자료 선택 · 화면 비교 · 호출 기록"]
-  project["외부 프로젝트\n컴포넌트 소스 · 샘플 · 개발 서버"]
-  human -->|웹 탐색 · 최근 호출 시각 검수| system
-  agent -->|의도 준비 · AI 등록 · 비교 명령| system
-  system -->|원본 파일 읽기 · 화면 렌더링| project
-  agent -->|샘플 연결 · 코드 수정| project
-  system -->|판정 · 차이 근거 · 다음 명령| agent
+  reviewer["프로젝트 검수자"]
+  ai["코딩 AI / 개발자"]
+  tool["Design System Library\n프로젝트별 자료 조회 · 비교 · 품질 점검"]
+  project["연결 프로젝트\n설정 · 문서 · 소스 · 개발 화면 · 검토 기록 소유"]
+  home["Design Home\n디자인 학습 제품 / 연결 프로젝트의 한 사례"]
+  reviewer -->|화면 확인 · 검수| tool
+  ai -->|CLI 조회 · 등록 · 비교| tool
+  tool -->|프로젝트 설정에 따라 조회 · 기록| project
+  home -->|자기 자료와 기준 연결| tool
 ```
 
-## 관계와 책임
+프로젝트가 자료·브랜드·기준·저장 위치를 소유한다. 도구는 학습용 콘텐츠나 Design Home 서버를 기본 의존성으로 갖지 않는다. 각 설치본은 자기 설정과 기록을 사용하며 중앙 서비스나 Git 훅이 필요하지 않다. CI가 필요하면 같은 CLI의 종료 코드를 사용한다.
 
-- Design Home의 트렌드 예제와 실마리 compos는 연결할 수 있는 원본이다. 컴포넌트 자체는 연결된 프로젝트가 소유한다.
-- CLI가 의도에 맞는 자료를 선택해 이미지와 설명을 제공하고, 코딩 AI가 구현과 등록 자료 작성을 수행한다. CLI는 AI 서비스를 호출하지 않으며 프로젝트 코드를 자동 수정하지 않는다.
-- 비교 자료는 로컬 파일에 저장한다. CLI가 외부 AI API에 결과를 전송하는 흐름은 없다.
-- 검사 통과는 정한 스타일·좌표·픽셀 조건의 통과다. 사용성과 디자인 적합성은 검수자가 판단한다.
-- Design System Library의 색 대비와 기본 UI 점검은 프로젝트에 적용할 공용 클라이언트 검사다. 결과는 자동 수정이나 합격 판정이 아니라 검수할 신호다.
+사람은 사용성과 적합성을 판단하고 AI는 자료 조회·구현·재검사를 수행한다. 스타일·좌표·픽셀 검사 통과는 해당 비교 조건의 통과이며, 기본 UI 신호는 검토 대상이다.
 
-다음 단계: [C2 · 컨테이너](c2-containers.md).
-
-## 공개 Design System Library
-
-사용자 화면 이름은 Design System Library이며, 내부 비교 모듈과 CLI는 Design Compare를 유지한다. Design Home 랜딩에서 `/design-library/`로 진입한다. GitHub Pages에서는 공개 디자인 문서·미리보기만 제공하고, 등록 작업과 호출 기록은 로컬 서버에서 조회한다.
+다음 단계: [C2 · 실행 단위](c2-containers.md) → [C3 · 모듈](c3-components.md) → [C4 · 코드 계약](c4-code.md).

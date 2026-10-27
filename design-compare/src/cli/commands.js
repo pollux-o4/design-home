@@ -1,5 +1,6 @@
 import { DEFAULT_PIXEL_BUDGET } from '../comparison/policy.js';
 import { isIdentifier } from '../domain/identifiers.js';
+import { loadProject } from '../project.js';
 
 function parts(entries) {
   const mapping = {};
@@ -21,7 +22,7 @@ export const commands = {
     options: ['intent', 'base-url', 'limit', 'task', 'store', 'json'], stage: () => 'capture',
     prepare(values) {
       if (!values.intent?.trim()) throw new Error('brief: --intent 필요');
-      const baseUrl = values['base-url'] ?? process.env.DESIGN_BASE_URL ?? 'http://127.0.0.1:4184';
+      const baseUrl = values['base-url'] ?? loadProject().baseUrl;
       const url = new URL(baseUrl); if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) throw new Error('인증정보 없는 HTTP(S) base URL 필요');
       const limit = Number(values.limit ?? 3); if (!Number.isInteger(limit) || limit < 1 || limit > 6) throw new Error('--limit: 정수 1~6');
       return { intent: values.intent, baseUrl, limit, store: values.store };

@@ -113,6 +113,7 @@ test("layout and shared-element transitions change real content, recover focus a
     });
     await page.locator("[data-target=components] .category-button").click();
     assert.equal(await page.evaluate(() => removedSample.isConnected), false);
+    await page.waitForFunction(() => removedAnimations.every(animation => animation.playState === 'idle'));
     assert.equal(
       await page.evaluate(() =>
         removedAnimations.every((animation) => animation.playState === "idle"),

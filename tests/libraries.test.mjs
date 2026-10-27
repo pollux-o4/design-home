@@ -93,7 +93,7 @@ test("Libraries supports exclusive categories, search, comparison and responsive
       fullPage: true,
     });
     await page.locator("#summary-library-graphics").click();
-    await page.waitForTimeout(300);
+    await page.locator('#panel-library-motion').waitFor({ state: 'hidden' });
     assert.equal(
       await page.locator(".pattern-summary[aria-expanded=true]").count(),
       1,

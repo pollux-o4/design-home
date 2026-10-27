@@ -20,7 +20,7 @@ export function renderResults(result, { select, reset }) {
     const card = element("button", null, "design-card");
     card.type = "button";
     card.dataset.id = design.id;
-    if (design.kind !== 'work') {
+    if (design.kind !== 'work' && design.thumbnail !== null) {
       const preview = element('img', null, 'design-thumbnail');
       preview.src = previewUrl(`/design-library/previews/${encodeURIComponent(design.id)}.png`);
       preview.alt = `${design.title} 미리보기`;
