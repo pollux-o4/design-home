@@ -60,6 +60,7 @@ export function createHubServer({ project = loadProject(), store = project.store
       const file = resolve(base, relative);
       if (!file.startsWith(resolve(base) + sep)) { response.writeHead(403); response.end(); return; }
       const data = await readFile(file);
+      // shortcut: 로컬 편집 서버는 압축·장기 캐시 없이 원본 응답, 공용 배포 시 정적 호스트의 압축과 버전별 자산 캐시 확인.
       response.writeHead(200, {'Content-Type':{'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/javascript','.svg':'image/svg+xml','.png':'image/png'}[extname(file)] ?? 'application/octet-stream'}); response.end(data);
     } catch (error) { response.writeHead(error.code === 'ENOENT' ? 404 : 400, {'Content-Type':'application/json; charset=utf-8'}); response.end(JSON.stringify({error:error.message})); }
   });

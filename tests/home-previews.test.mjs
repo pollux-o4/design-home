@@ -10,11 +10,19 @@ test('home previews: hover, keyboard pause, touch hold/cancel, links and reduced
   const base = `http://127.0.0.1:${server.address().port}`;
   try {
     const page = await browser.newPage();
+    const previewRequests = [];
+    page.on('request', (request) => {
+      if (request.url().includes('/assets/index/previews/')) previewRequests.push(request.url());
+    });
     await page.goto(base);
     const entry = page.locator('.learning-entry').first();
     const toggle = entry.locator('button');
     await toggle.waitFor();
+    await page.waitForTimeout(200);
+    assert.equal(previewRequests.length, 0, 'idle home must not fetch hidden previews');
     await toggle.click();
+    await page.waitForFunction(() => document.querySelector('.preview-screen img').naturalWidth > 0);
+    assert.equal(previewRequests.length, 1, 'opening one preview fetches only that image');
     assert.equal(await toggle.getAttribute('aria-pressed'), 'true');
     await toggle.click();
     assert.equal(await toggle.getAttribute('aria-pressed'), 'false');

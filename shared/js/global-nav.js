@@ -66,8 +66,8 @@
           </select>
         </label>
         <div class="dh-lang-switcher" aria-label="Language Selector">
-          <button type="button" id="dh-lang-ko" class="dh-lang-btn" aria-label="한국어로 변경">KO</button>
-          <button type="button" id="dh-lang-en" class="dh-lang-btn" aria-label="Switch to English">EN</button>
+          <button type="button" id="dh-lang-ko" class="dh-lang-btn" aria-label="KO · 한국어로 변경">KO</button>
+          <button type="button" id="dh-lang-en" class="dh-lang-btn" aria-label="EN · Switch to English">EN</button>
         </div>
         <a href="https://github.com/pollux-o4/design-home" target="_blank" rel="noopener" class="dh-nav-btn" aria-label="GitHub Repository (opens in a new tab)">${icon("github")}<span>GitHub</span></a>
       </div>

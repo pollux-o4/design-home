@@ -9,8 +9,8 @@ const states = entries.map((entry) => {
   screen.setAttribute('aria-hidden', 'true');
   const image = document.createElement('img');
   image.alt = '';
-  image.loading = 'lazy';
-  image.src = new URL(`./previews/${entry.dataset.preview}.png`, import.meta.url).href;
+  image.decoding = 'async';
+  image.addEventListener('load', () => entry.classList.add('is-preview-ready'));
   const caption = document.createElement('span');
   caption.className = 'preview-screen-caption';
   screen.append(image, caption);
@@ -20,6 +20,9 @@ const states = entries.map((entry) => {
   let timer, hoverTimer, leaveTimer, origin, pointerId;
   const render = () => {
     const playing = !dismissed && (hovered || focused || pinned || held);
+    if (playing && !image.hasAttribute('src')) {
+      image.src = new URL(`./previews/${entry.dataset.preview}.png`, import.meta.url).href;
+    }
     entry.classList.toggle('is-previewing', playing);
     button.setAttribute('aria-pressed', String(playing));
     movePreview(playing);

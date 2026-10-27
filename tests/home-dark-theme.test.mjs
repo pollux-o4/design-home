@@ -38,6 +38,13 @@ test("core dark-mode entry screens have no color contrast violations", async () 
   const page = await context.newPage();
   const axe = await readFile(new URL("../design-compare/node_modules/axe-core/axe.min.js", import.meta.url), "utf8");
   try {
+    await page.emulateMedia({ colorScheme: "light" });
+    await page.goto(`http://127.0.0.1:${server.address().port}/index.html`);
+    await page.addScriptTag({ content: axe });
+    assert.deepEqual(await page.evaluate(async () =>
+      (await axe.run(document, { runOnly: { type: "rule", values: ["color-contrast", "label-content-name-mismatch"] } })).violations,
+    ), [], "light home contrast and visible labels");
+    await page.emulateMedia({ colorScheme: "dark" });
     for (const path of ["index.html", "design-library/#/features", "glossary/index.html", "libraries/index.html", "ui-components/index.html"]) {
       await page.goto(`http://127.0.0.1:${server.address().port}/${path}`);
       await page.addScriptTag({ content: axe });
