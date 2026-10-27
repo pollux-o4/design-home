@@ -27,6 +27,16 @@
 .learning-art--tools i { width: 15px; height: 52px; border-radius: 5px; background: var(--ui-secondary); }
 .learning-art--tools i:nth-of-type(2) { height: 36px; background: var(--ui-blue); }
 .learning-art--tools i:last-child { height: 44px; background: var(--ui-tertiary); }
+.home-page:not(.trends-page) .hub-card {
+  border-color: color-mix(in srgb, var(--ui-text) 10%, transparent);
+  box-shadow: 0 8px 28px #172c7005, inset 0 1px 0 #ffffff0d;
+}
+.home-page:not(.trends-page) .hub-card:hover {
+  border-color: color-mix(in srgb, var(--ui-blue) 48%, var(--ui-line));
+  box-shadow: 0 12px 32px #172c7010, inset 0 1px 0 #ffffff18;
+}
+.home-page:not(.trends-page) .card-action .ui-icon { transition: transform 180ms var(--ui-ease); }
+.home-page:not(.trends-page) .hub-card:hover .card-action .ui-icon { transform: translateX(3px); }
 .library-invitation { display: flex; justify-content: space-between; align-items: center; gap: 32px; margin-top: 64px; padding-top: 36px; border-top: 1px solid var(--ui-border); }
 .library-invitation p:last-child { color: var(--ui-secondary); font-size: 14px; line-height: 1.65; margin-top: 12px; }
 .library-invitation > a { flex-shrink: 0; }
