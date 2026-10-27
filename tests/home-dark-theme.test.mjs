@@ -47,6 +47,10 @@ test("core dark-mode entry screens have no color contrast violations", async () 
     await page.emulateMedia({ colorScheme: "dark" });
     for (const path of ["index.html", "design-library/#/features", "glossary/index.html", "libraries/index.html", "ui-components/index.html"]) {
       await page.goto(`http://127.0.0.1:${server.address().port}/${path}`);
+      if (path === "glossary/index.html") {
+        await page.locator("#category-ui").click();
+        await page.locator(".term-row").first().hover();
+      }
       await page.addScriptTag({ content: axe });
       const violations = await page.evaluate(async () =>
         (await axe.run(document, { runOnly: { type: "rule", values: ["color-contrast"] } })).violations,
