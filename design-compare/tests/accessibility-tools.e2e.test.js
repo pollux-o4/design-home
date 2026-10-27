@@ -14,14 +14,25 @@ test("Design System Library exposes contrast and baseline-control checks without
   page.on("pageerror", (error) => errors.push(error.message));
   await page.route("https://**/*", (route) => route.abort());
   try {
-    await page.goto(`${base}/design-library/#/accessibility`);
-    await page.getByRole("heading", { name: "접근성 점검", exact: true }).waitFor();
+    await page.goto(`${base}/design-library/#/features`);
+    assert.deepEqual(
+      await page.locator("#feature-index .feature-row").evaluateAll((rows) => rows.map((row) => row.getAttribute("href"))),
+      ["#/trends", "#/components", "#/accessibility", "#/work", "#/activity"],
+    );
+    await page.getByRole("link", { name: /품질 점검/ }).click();
+    assert.deepEqual(
+      await page.locator("#accessibility-index .feature-row").evaluateAll((rows) => rows.map((row) => row.getAttribute("href"))),
+      ["#/accessibility/contrast", "#/accessibility/controls"],
+    );
+    await page.goto(`${base}/design-library/#/accessibility/contrast`);
+    await page.locator("#screen-title").filter({ hasText: "색 대비 검사" }).waitFor();
     await page.locator("#contrast-foreground").fill("#777777");
     await page.locator("#contrast-checker").evaluate((form) => form.requestSubmit());
     assert.match(await page.locator("#contrast-result").textContent(), /4\.48:1 · AA 미달/);
     await page.locator("#contrast-foreground").fill("#000000");
     await page.locator("#contrast-checker").evaluate((form) => form.requestSubmit());
     assert.match(await page.locator("#contrast-result").textContent(), /21\.00:1 · AA 통과 · AAA 통과/);
+    await page.goto(`${base}/design-library/#/accessibility/controls`);
     await page.getByRole("button", { name: "이 예시 점검", exact: true }).click();
     assert.match(await page.locator("#control-audit-results").textContent(), /사각형 컨트롤.*기본 select/s);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);

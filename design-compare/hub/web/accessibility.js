@@ -44,7 +44,7 @@ function renderAudit() {
 export function createAccessibilityView() {
   let mounted = false;
   return {
-    show() {
+    show({ id }) {
       if (!mounted) {
         $("#contrast-checker").addEventListener("submit", (event) => {
           event.preventDefault();
@@ -53,8 +53,8 @@ export function createAccessibilityView() {
         $("#run-control-audit").addEventListener("click", renderAudit);
         mounted = true;
       }
-      renderContrast();
-      renderAudit();
+      if (id === "contrast") renderContrast();
+      if (id === "controls") renderAudit();
     },
   };
 }

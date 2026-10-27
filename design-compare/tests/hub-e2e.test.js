@@ -15,7 +15,7 @@ test("hub search → actual interactive preview → CLI source context; responsi
   page.on("pageerror", (error) => errors.push(error.message));
   await page.route("https://**/*", (route) => route.abort());
   try {
-    await page.goto(`${base}/design-library/`);
+    await page.goto(`${base}/design-library/#/trends`);
     await page.locator(".design-card").first().waitFor();
     await page.locator("#filters summary").click();
     assert.equal(

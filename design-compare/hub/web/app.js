@@ -12,5 +12,5 @@ if (staticMode) {
 const library = createLibraryView(createLibrarySource(getJSON)),
   activity = createActivityView(),
   accessibility = createAccessibilityView();
-const views = { trends: library, components: library, work: library, activity, accessibility };
+const views = { features: { show() {} }, trends: library, components: library, work: library, activity, accessibility };
 startNavigation((route, current) => views[route.category].show(route, current));

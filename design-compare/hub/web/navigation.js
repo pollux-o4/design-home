@@ -3,7 +3,7 @@ import { staticMode } from "./api.js";
 export function readRoute() {
   const [path, query = ""] = location.hash.slice(1).split("?");
   const parts = (path ?? "").split("/").filter(Boolean);
-  const category = Object.hasOwn(sections, parts[0]) ? parts[0] : "trends";
+  const category = Object.hasOwn(sections, parts[0]) ? parts[0] : "features";
   let id;
   try {
     id = parts[1] ? decodeURIComponent(parts[1]) : null;
@@ -27,6 +27,12 @@ export function navigate(category, id, params, replace = false) {
 }
 
 const sections = {
+  features: [
+    "제공 기능",
+    "필요한 기능을 고르고, 다음 화면에서 실제 예시를 확인하세요.",
+    "DESIGN SYSTEM LIBRARY",
+    "제공 기능",
+  ],
   trends: [
     "디자인 트렌드",
     "화면의 색, 질감, 분위기를 살펴보세요.",
@@ -52,8 +58,8 @@ const sections = {
     "최근 10건",
   ],
   accessibility: [
-    "접근성 점검",
-    "색 대비와 기본 UI 신호를 확인하고 프로젝트에 적용하세요.",
+    "품질 점검",
+    "필요한 점검을 고른 뒤 프로젝트에 적용하세요.",
     "QUALITY CHECKS",
     "접근성 점검",
   ],
@@ -62,10 +68,12 @@ const $ = (selector) => document.querySelector(selector);
 function panels(active) {
   for (const name of [
     "library-list",
+    "feature-index",
     "detail",
     "activity-section",
     "activity-detail",
     "accessibility-section",
+    "accessibility-index",
   ])
     $(`#${name}`).hidden = name !== active;
   $("#error").hidden = true;
@@ -94,16 +102,29 @@ export function startNavigation(show) {
     $("#screen-description").textContent = description;
     $("#eyebrow").textContent = eyebrow;
     $("#list-title").textContent = listTitle;
-    $("#screen-heading").hidden = !!id;
+    $("#screen-heading").hidden = !!id && category !== "accessibility";
     $("#detail-toolbar").hidden = !id;
     $("#parent-crumb").textContent =
       category === "activity" ? "호출 기록" : title;
     $("#parent-crumb").href = routeUrl(category, null, params);
     $("#link-status").textContent = "";
     $("#preview").src = "about:blank";
+    const accessibilityTool = { contrast: "contrast-tool", controls: "controls-tool" }[id];
+    $("#contrast-tool").hidden = accessibilityTool !== "contrast-tool";
+    $("#controls-tool").hidden = accessibilityTool !== "controls-tool";
+    if (accessibilityTool) {
+      const [toolTitle, toolDescription] = accessibilityTool === "contrast-tool"
+        ? ["색 대비 검사", "색 조합의 읽기 쉬운 정도를 즉시 확인하세요."]
+        : ["기본 UI 점검", "기본 형태로 남은 조작 요소를 찾아보세요."];
+      $("#screen-title").textContent = toolTitle;
+      $("#screen-description").textContent = toolDescription;
+      document.title = `${toolTitle} · Design System Library`;
+    }
     panels(
-      category === "accessibility"
-        ? "accessibility-section"
+      category === "features"
+        ? "feature-index"
+        : category === "accessibility"
+        ? accessibilityTool ? "accessibility-section" : "accessibility-index"
         : category === "activity"
         ? id
           ? "activity-detail"
@@ -113,6 +134,7 @@ export function startNavigation(show) {
           : "library-list",
     );
     try {
+      if (category === "accessibility" && id && !accessibilityTool) throw new Error("없는 품질 점검 기능입니다.");
       if (staticMode && ["work", "activity"].includes(category)) throw new Error("등록 작업과 호출 기록은 로컬 Design System Library에서 확인하세요.");
       await show(route, current);
       if (current() && id) window.scrollTo({ top: 0, behavior: "instant" });

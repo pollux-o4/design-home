@@ -15,12 +15,15 @@ test('mobile follows category → list → detail, restores the list and support
   try {
     await page.goto(base);
     await page.locator(".hub-card").filter({ hasText: "Design System Library" }).click();
+    await page.getByRole('heading', { name: '제공 기능', exact: true }).waitFor();
+    await page.getByRole('link', { name: /디자인 트렌드/ }).click();
     await page.getByRole('heading', { name: '디자인 트렌드', exact: true }).waitFor();
     await page.locator('.design-card').first().waitFor();
     assert.equal(await page.locator('.design-card').count(), 15);
     assert.equal(await page.locator('#detail').isVisible(), false);
     assert.equal(await page.locator('#activity-list').isVisible(), false);
-    await page.getByRole('link', { name: '컴포넌트', exact: true }).click();
+    await page.getByRole('link', { name: '제공 기능', exact: true }).click();
+    await page.getByRole('link', { name: /컴포넌트/ }).click();
     await page.getByRole('heading', { name: '컴포넌트', exact: true }).waitFor();
     const modal = page.locator('.design-card[data-id="component-modal"]'); await modal.waitFor();
     assert.equal(await page.locator('.design-card').count(), 13);
@@ -43,7 +46,8 @@ test('mobile follows category → list → detail, restores the list and support
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
     await page.setViewportSize({ width: 390, height: 844 });
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
-    await page.getByRole('link', { name: '호출 기록', exact: true }).click();
+    await page.getByRole('link', { name: '제공 기능', exact: true }).click();
+    await page.getByRole('link', { name: /호출 기록/ }).click();
     await page.getByRole('heading', { name: '최근 AI 호출', exact: true }).waitFor();
     assert.equal(await page.locator('#results').isVisible(), false);
     assert.deepEqual(errors, []);

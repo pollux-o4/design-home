@@ -15,14 +15,14 @@
   <body class="design-workspace">
     <a class="skip-link" href="#main">본문으로</a>
     <header class="app-header">
-      <a class="brand" href="#/trends"
+      <a class="brand" href="#/features"
         ><span class="brand-mark" aria-hidden="true"><svg class="ui-icon"><use href="../shared/assets/interface-icons.svg#library"/></svg></span
         ><span
           >Design System Library<small>기준부터 검증까지.</small></span
         ></a
       >
       <nav aria-label="주요 메뉴">
-        <a href="#/trends">디자인 트렌드</a><a href="#/components">컴포넌트</a><a href="#/accessibility">접근성 점검</a><a data-local-only href="#/work">등록된 작업</a><a data-local-only href="#/activity">호출 기록</a>
+        <a href="#/features">제공 기능</a>
       </nav>
     </header>
     <main id="main">
@@ -68,6 +68,35 @@
         </div>
         <p id="notice" class="muted"></p>
         <div id="results"></div>
+      </section>
+      <section id="feature-index" aria-label="제공 기능" hidden>
+        <div class="feature-list">
+          <a class="feature-row" href="#/trends">
+            <span class="feature-visual feature-visual--trends" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span><strong>디자인 트렌드</strong><small>화면 분위기를 빠르게 비교</small></span>
+            <svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#arrow"/></svg>
+          </a>
+          <a class="feature-row" href="#/components">
+            <span class="feature-visual feature-visual--components" aria-hidden="true"><i></i><i></i></span>
+            <span><strong>컴포넌트</strong><small>입력과 피드백의 실제 예시</small></span>
+            <svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#arrow"/></svg>
+          </a>
+          <a class="feature-row" href="#/accessibility">
+            <span class="feature-visual feature-visual--checks" aria-hidden="true"><i>AA</i><i></i></span>
+            <span><strong>품질 점검</strong><small>색 대비와 기본 UI 신호 확인</small></span>
+            <svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#arrow"/></svg>
+          </a>
+          <a class="feature-row" data-local-only href="#/work">
+            <span class="feature-visual feature-visual--work" aria-hidden="true"><i></i><i></i></span>
+            <span><strong>등록된 작업</strong><small>프로젝트 자료와 구현 정보</small></span>
+            <svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#arrow"/></svg>
+          </a>
+          <a class="feature-row" data-local-only href="#/activity">
+            <span class="feature-visual feature-visual--activity" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span><strong>호출 기록</strong><small>AI 검수 흐름 다시 보기</small></span>
+            <svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#arrow"/></svg>
+          </a>
+        </div>
       </section>
       <section id="detail" aria-label="선택한 자료" hidden>
         <div class="detail-heading">
@@ -131,9 +160,23 @@
         <div id="activity-list"></div>
       </section>
       <section id="activity-detail" aria-label="선택한 호출" hidden></section>
+      <section id="accessibility-index" aria-label="품질 점검 기능" hidden>
+        <div class="feature-list tool-list">
+          <a class="feature-row" href="#/accessibility/contrast">
+            <span class="feature-visual feature-visual--contrast" aria-hidden="true"><i>Aa</i><i>Aa</i></span>
+            <span><strong>색 대비 검사</strong><small>읽기 쉬운 색 조합인지 확인</small></span>
+            <svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#arrow"/></svg>
+          </a>
+          <a class="feature-row" href="#/accessibility/controls">
+            <span class="feature-visual feature-visual--controls" aria-hidden="true"><i></i><i></i></span>
+            <span><strong>기본 UI 점검</strong><small>사각형과 기본 드롭다운 신호 찾기</small></span>
+            <svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#arrow"/></svg>
+          </a>
+        </div>
+      </section>
       <section id="accessibility-section" aria-label="접근성 점검 도구" hidden>
         <div class="tool-grid">
-          <section class="tool-card" aria-labelledby="contrast-title">
+          <section id="contrast-tool" class="tool-card" aria-labelledby="contrast-title" hidden>
             <h2 id="contrast-title">색 대비 검사</h2>
             <p>WCAG 기준으로 텍스트와 배경의 읽기 쉬운 정도를 확인합니다.</p>
             <form id="contrast-checker" class="tool-form">
@@ -145,7 +188,7 @@
             <div id="contrast-sample">이 텍스트가 충분히 읽히는지 확인합니다.</div>
             <output id="contrast-result" for="contrast-foreground contrast-background"></output>
           </section>
-          <section class="tool-card" aria-labelledby="audit-title">
+          <section id="controls-tool" class="tool-card" aria-labelledby="audit-title" hidden>
             <h2 id="audit-title">기본 UI 점검</h2>
             <p>사각형 컨트롤과 브라우저 기본 select를 찾아 시각적 검토 대상으로 표시합니다.</p>
             <div id="control-audit-sample" class="audit-sample" aria-label="점검 예시">

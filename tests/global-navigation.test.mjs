@@ -156,6 +156,7 @@ for (const [name, engine] of Object.entries({ chromium, firefox, webkit })) {
           .getByRole("link", { name: "Design System Library", exact: true })
           .click();
         await page.waitForURL("**/design-library/**");
+        await page.getByRole("link", { name: /디자인 트렌드/ }).click();
         await page.locator(".design-card").first().waitFor();
         assert.equal(
           await page.locator(".dh-nav-link[aria-current=page]").innerText(),

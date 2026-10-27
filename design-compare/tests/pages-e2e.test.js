@@ -18,6 +18,7 @@ test('Pages landing → library → filtered detail → interactive preview and 
   await page.route('https://**/*', route => route.abort());
   try {
     await page.goto(base); await page.locator('.hub-card').filter({ hasText: 'Design System Library' }).click();
+    await page.getByRole('link', { name: /디자인 트렌드/ }).click();
     await page.locator('.design-card').first().waitFor(); assert.equal(await page.locator('.design-card').count(), 15);
     assert.match(await page.locator('.brand').textContent(), /Design System Library/);
     await mkdir(resolve(root, '.legacy-review'), { recursive: true });
@@ -37,7 +38,8 @@ test('Pages landing → library → filtered detail → interactive preview and 
     assert.ok(downloaded.sourceFiles.every(file => !Object.hasOwn(file, 'absolutePath')));
     await page.getByRole('button', { name: '목록으로', exact: true }).click();
     assert.equal(await page.locator('#query').inputValue(), '정보가 많은 관리 화면');
-    await page.getByRole('link', { name: '컴포넌트', exact: true }).click();
+    await page.getByRole('link', { name: '제공 기능', exact: true }).click();
+    await page.getByRole('link', { name: /컴포넌트/ }).click();
     await page.locator('.design-card[data-id="component-modal"]').click(); await page.frameLocator('#preview').locator('#demo-modal').waitFor();
     assert.equal(await page.frameLocator('#preview').locator('.component-card').count(), 1);
     await page.setViewportSize({ width: 390, height: 844 });

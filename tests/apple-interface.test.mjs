@@ -133,7 +133,7 @@ for (const mode of [0, 1])
           ),
           false,
         );
-        await page.goto(`${base}/design-library/`);
+        await page.goto(`${base}/design-library/#/trends`);
         await page.locator(".design-card").first().waitFor();
       }
       await page.emulateMedia({ reducedMotion: "reduce" });
