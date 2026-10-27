@@ -34,6 +34,12 @@ test('page gradient follows the pointer while title sparkles pause offscreen and
       const bounds = await scene.boundingBox();
       assert.ok(bounds.x >= 0 && bounds.x + bounds.width <= width);
     }
+    await page.getByRole('button', {name:'EN · Switch to English'}).click();
+    const nav = await page.locator('#dh-global-nav').boundingBox();
+    for (const selector of ['.dh-brand', '.dh-nav-right', '.dh-nav-links']) {
+      const bounds = await page.locator(`#dh-global-nav ${selector}`).boundingBox();
+      assert.ok(bounds.y + bounds.height <= nav.y + nav.height, `${selector} stays inside the small English header`);
+    }
     await page.locator('footer').scrollIntoViewIfNeeded();
     await page.waitForFunction(() => !document.querySelector('.hero.is-title-visible'));
     assert.ok(await scene.evaluate(element => element.getAnimations({subtree:true}).every(animation => animation.playState === 'paused')));

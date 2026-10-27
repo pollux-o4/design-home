@@ -288,6 +288,9 @@
     transform: none;
   }
 }
+@media (max-width: 360px) {
+  #dh-global-nav { gap: 0 8px; padding-inline: 12px; }
+}
 @media (prefers-reduced-motion: reduce) {
   #dh-global-nav * {
     transition: none;
