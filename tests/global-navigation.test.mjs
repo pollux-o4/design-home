@@ -108,7 +108,7 @@ for (const [name, engine] of Object.entries({ chromium, firefox, webkit })) {
         await page.keyboard.press("Tab");
         assert.equal(
           await page.evaluate(() => document.activeElement.textContent.trim()),
-          "Design Library",
+          "Design System Library",
         );
         await page.locator(".hero-actions .btn-primary").focus();
         assert.equal(await panel.isVisible(), false);
@@ -153,13 +153,13 @@ for (const [name, engine] of Object.entries({ chromium, firefox, webkit })) {
         await page.waitForURL("**/trend-style/index.html");
         await page.locator("#dh-study-toggle").click();
         await page
-          .getByRole("link", { name: "Design Library", exact: true })
+          .getByRole("link", { name: "Design System Library", exact: true })
           .click();
         await page.waitForURL("**/design-library/**");
         await page.locator(".design-card").first().waitFor();
         assert.equal(
           await page.locator(".dh-nav-link[aria-current=page]").innerText(),
-          "Design Library",
+          "Design System Library",
         );
         const headers = await page.evaluate(() => ({
           global: document

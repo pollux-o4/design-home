@@ -72,6 +72,7 @@ flowchart LR
   app --> source["library-source.js · 조회 Adapter / Strategy"]
   app --> library["library.js · 자료 탐색 Facade"]
   app --> activity["activity.js · 기록 목록 / 상세"]
+  app --> accessibility["accessibility.js · 대비 / 기본 UI 점검"]
   library --> list["list.js · 검색 / 목록 / 복원"]
   library --> detail["detail.js · 상세 탭 / 미리보기 조작"]
   list --> source
@@ -90,6 +91,8 @@ flowchart LR
 ```
 
 [`hub/web/`](../../hub/web/)는 Library를 직접 import하지 않고 HTTP 결과를 표시한다. 비교 보고서의 브라우저 동작은 Reporting이 생성하는 정적 HTML 내부에 포함된다.
+
+`accessibility.js`는 표시와 사용자 입력만 소유하고, `shared/js/design-system-audit.js`는 WCAG 대비 계산과 전달받은 DOM 루트의 기본 컨트롤 신호 검사를 소유한다. 이 순수 계산과 DOM 검사는 Design System Library와 연결된 프로젝트가 함께 사용한다.
 
 CLI가 AI에게 출력하는 지점에서 Activity 기록을 발행한다. 작업 전 준비의 PNG와 비교·조회 근거는 해당 호출에 보관하며, 웹은 보관된 자료를 읽는다.
 

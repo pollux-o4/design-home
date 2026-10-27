@@ -31,5 +31,5 @@ export async function getJSON(url) {
     if (!designs.some(design => design.id === id)) throw new Error(`없는 디자인 ID: ${id}`);
     return fetchJSON(contextDownload(id));
   }
-  throw new Error('등록 작업과 호출 기록은 로컬 Design Library에서 확인하세요.');
+  throw new Error('등록 작업과 호출 기록은 로컬 Design System Library에서 확인하세요.');
 }

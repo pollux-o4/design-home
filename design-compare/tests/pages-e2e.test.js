@@ -17,9 +17,9 @@ test('Pages landing → library → filtered detail → interactive preview and 
   page.on('request', request => { if (new URL(request.url()).pathname.includes('/api/')) apiRequests.push(request.url()); });
   await page.route('https://**/*', route => route.abort());
   try {
-    await page.goto(base); await page.locator('.hub-card').filter({ hasText: 'Design Library' }).click();
+    await page.goto(base); await page.locator('.hub-card').filter({ hasText: 'Design System Library' }).click();
     await page.locator('.design-card').first().waitFor(); assert.equal(await page.locator('.design-card').count(), 15);
-    assert.match(await page.locator('.brand').textContent(), /Design Library/);
+    assert.match(await page.locator('.brand').textContent(), /Design System Library/);
     await mkdir(resolve(root, '.legacy-review'), { recursive: true });
     await page.screenshot({ path: resolve(root, '.legacy-review/design-library-desktop.png'), fullPage: true });
     await page.locator('#query').fill('정보가 많은 관리 화면'); await page.locator('#search').evaluate(form => form.requestSubmit());
@@ -53,7 +53,7 @@ test('Pages landing → library → filtered detail → interactive preview and 
     await page.goto(`${base}design-library/#/trends?q=우주선엔진`);
     await page.getByText('일치하는 디자인이 없습니다.', { exact: false }).waitFor();
     await page.goto(`${base}design-library/#/activity`);
-    await page.locator('#error').filter({ hasText: '로컬 Design Library' }).waitFor();
+    await page.locator('#error').filter({ hasText: '로컬 Design System Library' }).waitFor();
     await page.goto(`${base}design-library/#/trends/unknown`); await page.locator('#error').filter({ hasText: '없는 디자인 ID' }).waitFor();
     await page.getByRole('link', { name: 'Design Home', exact: true }).click(); await page.locator('.hero-title').waitFor();
     assert.deepEqual(errors, []); assert.deepEqual(failures, []); assert.deepEqual(apiRequests, []);

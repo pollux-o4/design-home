@@ -11,6 +11,6 @@ run = "npm test"
 run = "npm run demo"
 
 [tasks.hub]
-description = "Start Design Library at http://127.0.0.1:4184/design-library/"
+description = "Start Design System Library at http://127.0.0.1:4184/design-library/"
 env = { PORT = "4184" }
 run = "npm run hub"

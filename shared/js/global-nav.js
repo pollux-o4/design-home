@@ -1,4 +1,4 @@
-/** Shared site navigation: study resources disclose; Design Library stays one click away. */
+/** Shared site navigation: study resources disclose; Design System Library stays one click away. */
 (function () {
   if (document.getElementById("dh-global-nav")) return;
 
@@ -54,7 +54,7 @@
             ${studies.map((item) => `<li><a href="${href(`${item.path}index.html`)}" class="dh-study-link ${activeStudy === item ? "active" : ""}" ${activeStudy === item ? 'aria-current="page"' : ""}>${icon(item.icon)}<span data-i18n="${item.key}">${item.label}</span></a></li>`).join("")}
           </ul>
         </li>
-        <li><a href="${href("design-library/")}" class="dh-nav-link ${inLibrary ? "active" : ""}" ${inLibrary ? 'aria-current="page"' : ""}><span>Design Library</span></a></li>
+        <li><a href="${href("design-library/")}" class="dh-nav-link ${inLibrary ? "active" : ""}" ${inLibrary ? 'aria-current="page"' : ""}><span>Design System Library</span></a></li>
       </ul>
       <div class="dh-nav-right">
         <label class="dh-theme-switcher">

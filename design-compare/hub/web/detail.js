@@ -45,7 +45,7 @@ export function createDetailView(source) {
       applyTab();
       $('#copy-status').textContent = '';
       $('#title').focus({ preventScroll: true });
-      document.title = `${design.title} · Design Library`;
+      document.title = `${design.title} · Design System Library`;
     },
   };
 }

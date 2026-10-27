@@ -14,4 +14,4 @@ for (const design of designs) {
   context.sourceFiles = context.sourceFiles.map(({ absolutePath, ...file }) => file);
   await writeFile(join(output, 'contexts', `${design.id}.json`), JSON.stringify(context));
 }
-console.log(`Design Library: ${designs.length} designs exported`);
+console.log(`Design System Library: ${designs.length} designs exported`);

@@ -14,7 +14,7 @@ test('mobile follows category → list → detail, restores the list and support
   page.on('pageerror', error => errors.push(error.message)); await page.route('https://**/*', route => route.abort());
   try {
     await page.goto(base);
-    await page.locator(".hub-card").filter({ hasText: "Design Library" }).click();
+    await page.locator(".hub-card").filter({ hasText: "Design System Library" }).click();
     await page.getByRole('heading', { name: '디자인 트렌드', exact: true }).waitFor();
     await page.locator('.design-card').first().waitFor();
     assert.equal(await page.locator('.design-card').count(), 15);

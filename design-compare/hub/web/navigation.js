@@ -51,6 +51,12 @@ const sections = {
     "REVIEW JOURNAL",
     "최근 10건",
   ],
+  accessibility: [
+    "접근성 점검",
+    "색 대비와 기본 UI 신호를 확인하고 프로젝트에 적용하세요.",
+    "QUALITY CHECKS",
+    "접근성 점검",
+  ],
 };
 const $ = (selector) => document.querySelector(selector);
 function panels(active) {
@@ -59,6 +65,7 @@ function panels(active) {
     "detail",
     "activity-section",
     "activity-detail",
+    "accessibility-section",
   ])
     $(`#${name}`).hidden = name !== active;
   $("#error").hidden = true;
@@ -77,7 +84,7 @@ export function startNavigation(show) {
       current = () => version === generation;
     const { category, id, params } = route,
       [title, description, eyebrow, listTitle] = sections[category];
-    document.title = `${title} · Design Library`;
+    document.title = `${title} · Design System Library`;
     for (const link of document.querySelectorAll(".app-header nav a"))
       link.setAttribute(
         "aria-current",
@@ -95,7 +102,9 @@ export function startNavigation(show) {
     $("#link-status").textContent = "";
     $("#preview").src = "about:blank";
     panels(
-      category === "activity"
+      category === "accessibility"
+        ? "accessibility-section"
+        : category === "activity"
         ? id
           ? "activity-detail"
           : "activity-section"
@@ -104,7 +113,7 @@ export function startNavigation(show) {
           : "library-list",
     );
     try {
-      if (staticMode && ["work", "activity"].includes(category)) throw new Error("등록 작업과 호출 기록은 로컬 Design Library에서 확인하세요.");
+      if (staticMode && ["work", "activity"].includes(category)) throw new Error("등록 작업과 호출 기록은 로컬 Design System Library에서 확인하세요.");
       await show(route, current);
       if (current() && id) window.scrollTo({ top: 0, behavior: "instant" });
     } catch (error) {

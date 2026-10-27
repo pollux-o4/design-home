@@ -5,7 +5,7 @@
 ## 로컬 서버 실행
 
 저장소 루트에서 `mise run hub`로 실행한다. 처음 실행할 때는 `mise trust`로 설정을 신뢰한다.
-Design Library 주소는 `http://127.0.0.1:4184/design-library/`다. 종료는 실행한 터미널에서 `Ctrl+C`를 누른다.
+Design System Library 주소는 `http://127.0.0.1:4184/design-library/`다. 종료는 실행한 터미널에서 `Ctrl+C`를 누른다.
 
 - `impeccable/` — impeccable 디자인 스킬 (github: pbakaus/impeccable)
 - `mengto-skills/` — MengTo Skills 모음 (github: MengTo/Skills)

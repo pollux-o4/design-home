@@ -174,7 +174,7 @@ export function createActivityView() {
         entries = history.entries;
       }
       renderDetail(entry);
-      document.title = `${activityTitle(entry)} · Design Library`;
+      document.title = `${activityTitle(entry)} · Design System Library`;
       const steps = entries
         .filter((item) => item.taskId === entry.taskId)
         .reverse();

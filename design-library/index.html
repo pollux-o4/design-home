@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Design Library · Design Home</title>
+    <title>Design System Library · Design Home</title>
     <link rel="stylesheet" href="../shared/css/interface.css" />
     <link rel="stylesheet" href="../shared/css/global-nav.css" />
     <script src="../shared/js/theme.js"></script>
@@ -18,17 +18,16 @@
       <a class="brand" href="#/trends"
         ><span class="brand-mark" aria-hidden="true"><svg class="ui-icon"><use href="../shared/assets/interface-icons.svg#library"/></svg></span
         ><span
-          >Design Library<small>영감부터 구현까지.</small></span
+          >Design System Library<small>기준부터 검증까지.</small></span
         ></a
       >
       <nav aria-label="주요 메뉴">
-        <a href="#/trends">디자인 트렌드</a><a href="#/components">컴포넌트</a
-        ><a data-local-only href="#/work">등록된 작업</a><a data-local-only href="#/activity">호출 기록</a>
+        <a href="#/trends">디자인 트렌드</a><a href="#/components">컴포넌트</a><a href="#/accessibility">접근성 점검</a><a data-local-only href="#/work">등록된 작업</a><a data-local-only href="#/activity">호출 기록</a>
       </nav>
     </header>
     <main id="main">
       <section id="screen-heading" class="screen-heading">
-        <p id="eyebrow" class="eyebrow">DESIGN LIBRARY</p>
+        <p id="eyebrow" class="eyebrow">DESIGN SYSTEM LIBRARY</p>
         <h1 id="screen-title">디자인 트렌드</h1>
         <p id="screen-description">화면의 색, 질감, 분위기를 살펴보세요.</p>
       </section>
@@ -132,10 +131,40 @@
         <div id="activity-list"></div>
       </section>
       <section id="activity-detail" aria-label="선택한 호출" hidden></section>
+      <section id="accessibility-section" aria-label="접근성 점검 도구" hidden>
+        <div class="tool-grid">
+          <section class="tool-card" aria-labelledby="contrast-title">
+            <h2 id="contrast-title">색 대비 검사</h2>
+            <p>WCAG 기준으로 텍스트와 배경의 읽기 쉬운 정도를 확인합니다.</p>
+            <form id="contrast-checker" class="tool-form">
+              <label>글자색 <input id="contrast-foreground" type="text" value="#1D1D1F" autocomplete="off" spellcheck="false" /></label>
+              <label>배경색 <input id="contrast-background" type="text" value="#FFFFFF" autocomplete="off" spellcheck="false" /></label>
+              <fieldset class="contrast-targets"><legend>검사 대상</legend><label><input type="radio" name="contrast-target" value="text" checked />일반 텍스트</label><label><input type="radio" name="contrast-target" value="large" />큰 텍스트</label><label><input type="radio" name="contrast-target" value="component" />UI 컴포넌트</label></fieldset>
+              <button type="submit">대비 검사</button>
+            </form>
+            <div id="contrast-sample">이 텍스트가 충분히 읽히는지 확인합니다.</div>
+            <output id="contrast-result" for="contrast-foreground contrast-background"></output>
+          </section>
+          <section class="tool-card" aria-labelledby="audit-title">
+            <h2 id="audit-title">기본 UI 점검</h2>
+            <p>사각형 컨트롤과 브라우저 기본 select를 찾아 시각적 검토 대상으로 표시합니다.</p>
+            <div id="control-audit-sample" class="audit-sample" aria-label="점검 예시">
+              <button type="button" style="border-radius: 0">사각형 버튼</button>
+              <select aria-label="기본 드롭다운"><option>기본 select</option></select>
+              <input aria-label="개선된 입력" class="modern-control" value="개선된 입력" />
+            </div>
+            <button id="run-control-audit" type="button">이 예시 점검</button>
+            <div id="control-audit-results" role="status" aria-live="polite"></div>
+            <p class="tool-note">신호는 오류가 아닙니다. 제품의 의도와 브랜드 규칙에 맞는지 검토하세요.</p>
+            <code class="tool-code">import { inspectControlBaseline } from "/shared/js/design-system-audit.js";
+inspectControlBaseline(document.querySelector("#app"));</code>
+          </section>
+        </div>
+      </section>
       <div id="error" class="empty-state" role="alert" hidden></div>
     </main>
     <script type="module" src="../design-compare/hub/web/app.js"></script>
     <script type="module" src="../shared/js/scrollbar.js"></script>
-<footer class="library-footer"><span>Design Home</span><span>영감부터 구현까지. Design Library.</span></footer>
+<footer class="library-footer"><span>Design Home</span><span>기준부터 검증까지. Design System Library.</span></footer>
 </body>
 </html>

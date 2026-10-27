@@ -14,7 +14,7 @@ try {
   browser = await chromium.launch();
   await rm(output, { recursive: true, force: true }); await mkdir(output, { recursive: true });
   for (const design of loadDesigns()) {
-    const page = await browser.newPage({ viewport: design.viewport, deviceScaleFactor: 1 });
+    const page = await browser.newPage({ viewport: design.viewport, deviceScaleFactor: 1, colorScheme: 'light' });
     await page.route('https://**/*', route => route.abort());
     await page.goto(`${base}${design.previewPath}`);
     await page.evaluate(() => document.fonts.ready);
@@ -28,7 +28,7 @@ try {
     else await page.screenshot({ path, animations: 'disabled' });
     await page.close();
   }
-  console.log('Design Library: preview images exported');
+  console.log('Design System Library: preview images exported');
 } finally {
   await browser?.close(); await new Promise(resolve => server.close(resolve));
 }

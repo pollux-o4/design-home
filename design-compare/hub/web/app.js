@@ -3,12 +3,14 @@ import { startNavigation } from "./navigation.js";
 import { createLibrarySource } from "./library-source.js";
 import { createLibraryView } from "./library.js";
 import { createActivityView } from "./activity.js";
+import { createAccessibilityView } from "./accessibility.js";
 
 if (staticMode) {
   for (const link of document.querySelectorAll("[data-local-only]")) link.remove();
 }
 
 const library = createLibraryView(createLibrarySource(getJSON)),
-  activity = createActivityView();
-const views = { trends: library, components: library, work: library, activity };
+  activity = createActivityView(),
+  accessibility = createAccessibilityView();
+const views = { trends: library, components: library, work: library, activity, accessibility };
 startNavigation((route, current) => views[route.category].show(route, current));
