@@ -2,7 +2,6 @@ import { previewMotion } from './preview-motion.js';
 
 const entries = [...document.querySelectorAll('.learning-entry')];
 const states = entries.map((entry) => {
-  const button = entry.querySelector('.preview-toggle');
   // shortcut: 실제 화면의 정적 스냅샷 사용, 목적지의 주요 화면이 바뀌면 previews 이미지를 함께 갱신.
   const screen = document.createElement('span');
   screen.className = 'preview-screen';
@@ -24,7 +23,6 @@ const states = entries.map((entry) => {
       image.src = new URL(`./previews/${entry.dataset.preview}.png`, import.meta.url).href;
     }
     entry.classList.toggle('is-previewing', playing);
-    button.setAttribute('aria-pressed', String(playing));
     movePreview(playing);
   };
   const reset = () => {
@@ -82,19 +80,12 @@ const states = entries.map((entry) => {
     cancelPress();
     if (!entry.contains(event.target)) { held = false; render(); }
   });
-  entry.addEventListener('contextmenu', (event) => { if (held || event.target.closest('button')) event.preventDefault(); });
+  entry.addEventListener('contextmenu', (event) => { if (held) event.preventDefault(); });
   entry.addEventListener('click', (event) => {
-    if (!held || event.target.closest('button')) return;
+    if (!held) return;
     event.preventDefault();
     pinned = true;
     held = false;
-    render();
-  });
-  button.addEventListener('click', () => {
-    clearTimeout(hoverTimer);
-    pinned = held || !entry.classList.contains('is-previewing');
-    held = false;
-    dismissed = !pinned;
     render();
   });
   return { reset, dismiss() { reset(); dismissed = true; render(); } };
@@ -104,7 +95,6 @@ function translate() {
   const english = document.documentElement.lang === 'en';
   for (const entry of entries) {
     const title = entry.querySelector('h3').textContent;
-    entry.querySelector('button').setAttribute('aria-label', english ? `${title}: toggle preview` : `${title}: 미리보기 열기·닫기`);
     entry.querySelector('.preview-screen-caption').textContent = english ? `${title} · Screen preview →` : `${title} · 실제 화면 미리보기 →`;
     const note = entry.querySelector('.preview-note');
     note.textContent = english ? note.dataset.previewEn : note.dataset.previewKo;

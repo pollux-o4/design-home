@@ -84,7 +84,7 @@ export default {
   trend_card_15: "Small, immediate motion feedback for a user's action.",
   hub_eyebrow: "EXPLORE & LEARN",
   hub_title: "What would you like to explore?",
-  home_preview_hint: "Hover or hold to see inside · ▶ to open or close",
+  home_preview_hint: "Hover or hold to see inside",
   invitation_title: "When it’s time to review your project.",
   invitation_desc: "Connect screens and standards. Inspect design differences.",
   home_glossary_title: "Glossary",
