@@ -12,15 +12,15 @@
   inset: 30% 0px -5%;
   z-index: -1;
   border-radius: 50%;
-  background: radial-gradient(rgba(185, 203, 234, 0.44), transparent 68%);
+  background: radial-gradient(color-mix(in srgb, var(--ui-blue) 24%, transparent), transparent 68%);
 }
 
 .stage-window {
-  border: 1px solid var(--ui-surface);
+  border: 1px solid var(--ui-border);
   padding: 7px;
   border-radius: 19px;
-  background: rgba(255, 255, 255, 0.72);
-  box-shadow: rgba(37, 63, 108, 0.333) 0px 34px 65px -28px, rgba(29, 29, 31, 0.03) 0px 0px 0px 1px;
+  background: var(--ui-surface);
+  box-shadow: rgba(0, 0, 0, 0.32) 0px 34px 65px -28px, color-mix(in srgb, var(--ui-text) 8%, transparent) 0px 0px 0px 1px;
   transform: perspective(1600px) rotateX(4deg);
 }
 
@@ -56,7 +56,7 @@
   display: block;
   overflow: hidden;
   border-radius: 11px;
-  background: rgb(238, 241, 245);
+  background: var(--ui-subtle);
 }
 
 #stage-image {
@@ -69,7 +69,7 @@
 }
 
 .stage-note {
-  border: 1px solid var(--ui-surface);
+  border: 1px solid var(--ui-border);
   position: static;
   width: fit-content;
   margin: 16px auto 0;
@@ -78,23 +78,23 @@
   gap: 9px;
   font-size: 12px;
   padding: 16px 20px;
-  background: rgba(255, 255, 255, 0.93);
+  background: var(--ui-surface);
   border-radius: 16px;
-  box-shadow: rgba(29, 29, 31, 0.05) 0px 8px 32px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 8px 32px;
 }
 
 .note-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: rgb(36, 135, 91);
+  background: var(--ui-success);
 }
 
 .style-picker {
   display: inline-flex;
   padding: 5px;
-  border: 1px solid rgb(226, 226, 230);
-  background: rgb(235, 235, 238);
+  border: 1px solid var(--ui-border);
+  background: var(--ui-soft);
   border-radius: 99px;
   gap: 3px;
   margin-top: 4px;
@@ -130,14 +130,14 @@
 .style-picker button[aria-pressed="true"] {
   background: var(--ui-surface);
   color: var(--ui-text);
-  box-shadow: rgba(0, 0, 0, 0.047) 0px 2px 6px;
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 6px;
 }
 
 .swatch {
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.07);
+  border: 1px solid var(--ui-border);
 }
 
 .swatch-flat {

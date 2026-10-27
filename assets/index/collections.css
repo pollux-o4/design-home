@@ -43,7 +43,7 @@
 
 .hub-card:hover {
   transform: translateY(-5px);
-  box-shadow: rgba(29, 29, 31, 0.047) 0px 18px 40px;
+  box-shadow: rgba(0, 0, 0, 0.28) 0px 18px 40px;
 }
 
 .hub-card:active {
@@ -60,15 +60,15 @@
 }
 
 .card-art-1 {
-  background: rgb(229, 234, 243);
+  background: color-mix(in srgb, var(--ui-blue) 13%, var(--ui-soft));
 }
 
 .card-art-2 {
-  background: rgb(236, 236, 241);
+  background: var(--ui-soft);
 }
 
 .card-art-3 {
-  background: rgb(247, 236, 239);
+  background: color-mix(in srgb, #d987a0 12%, var(--ui-soft));
 }
 
 .card-art img {

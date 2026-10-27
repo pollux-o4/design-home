@@ -82,18 +82,18 @@ h1 {
   height: 62px;
   border-radius: 18px;
   font-size: 20px;
-  background: white;
+  background: var(--ui-surface);
   border: 1px solid var(--ui-line);
   box-shadow: 0 6px 12px #1d1d1f04;
 }
 .intro-sketches span:nth-of-type(2) {
-  background: #edf1ff;
-  color: #4654a4;
+  background: color-mix(in srgb, var(--ui-blue) 10%, var(--ui-surface));
+  color: var(--ui-blue);
   transform: rotate(10deg);
 }
 .intro-sketches b {
-  background: var(--ui-text);
-  color: white;
+  background: var(--ui-soft);
+  color: var(--ui-text);
   font-size: 16px;
   transform: rotate(5deg);
 }

@@ -1,0 +1,58 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import { chromium } from "../design-compare/node_modules/playwright/index.mjs";
+import { createStaticServer } from "./support/static-server.mjs";
+
+test("home preview shell uses dark surfaces when the system is dark", async () => {
+  const server = createStaticServer();
+  await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+  const browser = await chromium.launch();
+  const context = await browser.newContext({ colorScheme: "dark" });
+  const page = await context.newPage();
+  try {
+    await page.goto(`http://127.0.0.1:${server.address().port}/index.html`);
+    const surfaces = await page.evaluate(() => {
+      const color = (selector) => getComputedStyle(document.querySelector(selector)).backgroundColor;
+      return {
+        stage: color(".stage-window"),
+        note: color(".stage-note"),
+        picker: color(".style-picker"),
+        selected: color('.style-picker button[aria-pressed="true"]'),
+      };
+    });
+    assert.deepEqual(surfaces, {
+      stage: "rgb(32, 32, 36)",
+      note: "rgb(32, 32, 36)",
+      picker: "rgb(48, 48, 53)",
+      selected: "rgb(32, 32, 36)",
+    });
+  } finally {
+    await context.close();
+    await browser.close();
+    await new Promise((resolve) => server.close(resolve));
+  }
+});
+
+test("core dark-mode entry screens have no color contrast violations", async () => {
+  const server = createStaticServer();
+  await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+  const browser = await chromium.launch();
+  const context = await browser.newContext({ colorScheme: "dark" });
+  const page = await context.newPage();
+  const axe = await readFile("./design-compare/node_modules/axe-core/axe.min.js", "utf8");
+  try {
+    for (const path of ["index.html", "design-library/#/features", "glossary/index.html", "libraries/index.html", "ui-components/index.html"]) {
+      await page.goto(`http://127.0.0.1:${server.address().port}/${path}`);
+      await page.addScriptTag({ content: axe });
+      const violations = await page.evaluate(async () =>
+        (await axe.run(document, { runOnly: { type: "rule", values: ["color-contrast"] } })).violations,
+      );
+      assert.deepEqual(violations, [], path);
+    }
+  } finally {
+    await context.close();
+    await browser.close();
+    await new Promise((resolve) => server.close(resolve));
+  }
+});

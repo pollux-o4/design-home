@@ -21,6 +21,9 @@
   function applyTheme(preference = getTheme()) {
     if (preference === "system") root.removeAttribute("data-theme");
     else root.dataset.theme = preference;
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute("content", resolvedTheme(preference) === "dark" ? "#161618" : "#f5f5f7");
     document.dispatchEvent(
       new CustomEvent("dh:theme-change", {
         detail: { preference, resolved: resolvedTheme(preference) },
