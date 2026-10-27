@@ -1,10 +1,12 @@
 import { previewMotion } from './preview-motion.js';
 
 const entries = [...document.querySelectorAll('.learning-entry')];
+let activePreview;
 const states = entries.map((entry) => {
   // shortcut: 실제 화면의 정적 스냅샷 사용, 목적지의 주요 화면이 바뀌면 previews 이미지를 함께 갱신.
   const screen = document.createElement('span');
   screen.className = 'preview-screen';
+  screen.hidden = true;
   screen.setAttribute('aria-hidden', 'true');
   const image = document.createElement('img');
   image.alt = '';
@@ -18,7 +20,7 @@ const states = entries.map((entry) => {
   let timer, hoverTimer, leaveTimer, origin, pointerId;
   const scheduleLeave = () => {
     if (leaveTimer) return;
-    leaveTimer = setTimeout(() => { leaveTimer = undefined; hovered = false; render(); }, 160);
+    leaveTimer = setTimeout(() => { leaveTimer = undefined; hovered = false; render(); }, 80);
   };
   const movePreview = previewMotion(entry, screen, (inside) => {
     if (!inside) { scheduleLeave(); return; }
@@ -29,11 +31,18 @@ const states = entries.map((entry) => {
   });
   const render = () => {
     const playing = !dismissed && (hovered || focused || pinned || held);
+    if (playing) {
+      if (activePreview?.entry !== entry) {
+        for (const state of states) if (state.entry !== entry) state.reset();
+      }
+      activePreview = controller;
+    } else if (activePreview?.entry === entry) activePreview = undefined;
     if (playing && !image.hasAttribute('src')) {
       image.src = new URL(`./previews/${entry.dataset.preview}.png`, import.meta.url).href;
     }
     entry.classList.toggle('is-previewing', playing);
-    movePreview.show(playing);
+    screen.hidden = !playing;
+    movePreview(playing);
   };
   const reset = () => {
     clearTimeout(timer);
@@ -48,20 +57,21 @@ const states = entries.map((entry) => {
     render();
   };
   function requestHover(event) {
-    if (event.pointerType !== 'mouse' || dismissed || hovered || hoverTimer ||
-      states.some(state => state.entry !== entry && state.containsPreview(event))) return;
+    if (event.pointerType !== 'mouse' || dismissed || hovered || hoverTimer) return;
     hoverTimer = setTimeout(() => {
       hoverTimer = undefined;
-      if (states.some(state => state.entry !== entry && state.containsPreview(event))) return;
       hovered = true;
       render();
     }, 160);
   }
   entry.addEventListener('pointerenter', (event) => {
     if (event.pointerType !== 'mouse') return;
+    const switching = activePreview && activePreview.entry !== entry;
+    if (switching) activePreview.reset();
     clearTimeout(leaveTimer);
     leaveTimer = undefined;
     dismissed = false;
+    if (switching) { hovered = true; render(); return; }
     requestHover(event);
   });
   entry.addEventListener('pointermove', requestHover);
@@ -113,7 +123,16 @@ const states = entries.map((entry) => {
     held = false;
     render();
   });
-  return { entry, containsPreview: movePreview.containsPreview, reset, dismiss() { reset(); dismissed = true; render(); } };
+  const controller = {
+    entry, reset,
+    dismiss() { reset(); dismissed = true; render(); },
+    scroll() {
+      const keepFocus = focused && entry.contains(document.activeElement);
+      reset();
+      if (keepFocus) { focused = true; render(); }
+    },
+  };
+  return controller;
 });
 
 function translate() {
@@ -144,3 +163,4 @@ const visibility = new IntersectionObserver((changes) => {
 });
 entries.forEach((entry) => visibility.observe(entry));
 window.addEventListener('resize', () => states.forEach((state) => state.reset()));
+window.addEventListener('scroll', () => states.forEach((state) => state.scroll()), { passive: true });

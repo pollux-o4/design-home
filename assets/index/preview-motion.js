@@ -42,7 +42,7 @@ export function previewMotion(entry, screen, onPreviewHover) {
     onPreviewHover(overPreview || overEntry);
     if (overPreview || overEntry) track(event);
   });
-  return { containsPreview, show(show) {
+  return (show) => {
     if (show === visible) return;
     visible = show;
     if (show) {
@@ -54,5 +54,5 @@ export function previewMotion(entry, screen, onPreviewHover) {
       last = 0;
       x = y = targetX = targetY = undefined;
     }
-  } };
+  };
 }

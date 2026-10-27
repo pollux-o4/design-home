@@ -10,6 +10,7 @@ test('home previews: hover, keyboard dismissal, touch hold/cancel, links and red
   const base = `http://127.0.0.1:${server.address().port}`;
   try {
     const page = await browser.newPage();
+    await page.setViewportSize({width:1280,height:1100});
     const previewRequests = [];
     page.on('request', (request) => {
       if (request.url().includes('/assets/index/previews/')) previewRequests.push(request.url());
@@ -49,7 +50,7 @@ test('home previews: hover, keyboard dismissal, touch hold/cancel, links and red
     await page.mouse.move(bounds.x + bounds.width / 2, bounds.y + 100);
     await page.waitForTimeout(300);
     const outside = await entry.locator('.preview-screen').boundingBox();
-    const outsidePoint = { x: Math.min(outside.x + outside.width - 20, bounds.x + bounds.width + 35),
+    const outsidePoint = { x: Math.min(outside.x + outside.width - 20, bounds.x + bounds.width + 8),
       y: Math.max(bounds.y, outside.y) + 65 };
     assert.ok(outsidePoint.x > bounds.x + bounds.width, 'test reaches preview beyond the source card');
     await page.mouse.move(outsidePoint.x, outsidePoint.y);
@@ -62,6 +63,46 @@ test('home previews: hover, keyboard dismissal, touch hold/cancel, links and red
     await page.waitForTimeout(220);
     assert.equal(await entry.evaluate(el => el.classList.contains('is-previewing')), false,
       'leaving both the card and preview dismisses it');
+    await page.evaluate(() => {
+      window.previewOverlapFrames = 0;
+      const sample = () => {
+        const visible = [...document.querySelectorAll('.preview-screen')].filter(el => {
+          const css = getComputedStyle(el);
+          return css.display !== 'none' && css.visibility !== 'hidden' && Number(css.opacity) > .01;
+        });
+        if (visible.length > 1) window.previewOverlapFrames++;
+        window.previewSampleFrame = requestAnimationFrame(sample);
+      };
+      sample();
+    });
+    for (const index of [0, 2, 0, 2]) {
+      const target = page.locator('.learning-entry').nth(index);
+      await target.hover();
+      await page.waitForTimeout(220);
+      assert.equal(await target.evaluate(el => el.classList.contains('is-previewing')), true,
+        'entering the next row transfers preview ownership');
+      assert.equal(await page.locator('.learning-entry.is-previewing').count(), 1);
+    }
+    for (const index of [0, 2, 0, 2]) {
+      await page.locator('.learning-entry').nth(index).hover();
+      await page.waitForTimeout(40);
+      assert.equal(await page.locator('.learning-entry.is-previewing').count(), 1,
+        'rapid direction changes retain one preview');
+    }
+    assert.equal(await page.evaluate(() => {
+      cancelAnimationFrame(window.previewSampleFrame);
+      return window.previewOverlapFrames;
+    }), 0, 'no rendered frame may contain overlapping previews');
+    await page.mouse.move(0, 0);
+    await page.waitForTimeout(110);
+    assert.equal(await page.locator('.preview-screen:visible').count(), 0,
+      'leaving the preview region must not leave a fading stale image');
+    await entry.hover();
+    await page.waitForFunction(() => document.querySelector('.learning-entry').classList.contains('is-previewing'));
+    await page.mouse.wheel(0, 140);
+    await page.waitForTimeout(100);
+    assert.equal(await page.locator('.learning-entry.is-previewing').count(), 0,
+      'scrolling clears old previews and pending timers');
     await page.keyboard.press('Escape');
     assert.equal(await entry.evaluate((el) => el.classList.contains('is-previewing')), false);
     const closedBounds = await entry.boundingBox();
@@ -70,6 +111,11 @@ test('home previews: hover, keyboard dismissal, touch hold/cancel, links and red
     await page.mouse.move(0, 0);
     await entry.locator('a').focus();
     assert.equal(await entry.evaluate((el) => el.classList.contains('is-previewing')), true);
+    await page.locator('.learning-entry a').last().focus();
+    await page.waitForTimeout(100);
+    assert.equal(await page.locator('.learning-entry').last().evaluate(el => el.classList.contains('is-previewing')),
+      true, 'keyboard auto-scroll keeps the newly focused preview');
+    assert.equal(await page.locator('.learning-entry.is-previewing').count(), 1);
     await page.keyboard.press('Escape');
     assert.equal(await entry.evaluate((el) => el.classList.contains('is-previewing')), false);
     await page.locator('#dh-lang-en').click();
