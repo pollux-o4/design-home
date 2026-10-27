@@ -4,7 +4,7 @@
 
 ## 학습 홈
 
-`index.html`은 트렌드·Patterns·용어집·라이브러리 가이드로 연결하는 학습 진입점이다. 스타일 체험은 트렌드 화면이 소유하고 홈은 시각 표식과 짧은 목적 설명만 제공한다. 별도 제품인 Design System Library는 학습 영역 아래의 단일 안내에서 연결한다. 홈 전용 미리보기 상태와 스크립트는 없다. `assets/index/`는 기본·히어로·학습 카드·탐색 스타일, `shared/js/messages/en.js`는 영어 문구를 소유한다. 링크·테마·언어·반응형 흐름은 `tests/apple-interface.test.mjs`와 `tests/home-dark-theme.test.mjs`에서 검증한다.
+`index.html`은 트렌드·Patterns·용어집·라이브러리 가이드로 연결하는 학습 진입점이다. 각 카드의 작은 도식은 학습 주제를 짧게 예고하고 실제 학습 예제와 카탈로그는 해당 화면이 소유한다. 별도 제품인 Design System Library는 학습 영역 아래의 단일 안내에서 연결한다. `assets/index/learning-preview.js`는 호버·포커스·길게 누르기·명시적 재생의 수명과 취소를 담당하고 `learning-preview.css`는 카드 크기를 유지하는 도식 애니메이션과 동작 줄이기 설정을 담당한다. 링크와 재생 버튼은 형제 요소로 분리하며 기본 링크 탐색을 보존한다. 영어 안내는 `shared/js/messages/en.js`, 도식의 짧은 양언어 캡션은 마크업이 소유한다. 링크·테마·언어·반응형 흐름은 `tests/apple-interface.test.mjs`와 `tests/home-dark-theme.test.mjs`, 입력별 미리보기는 `tests/home-previews.test.mjs`에서 검증한다.
 
 ## 내부 컴포넌트 샘플
 

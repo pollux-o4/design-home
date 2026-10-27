@@ -1,0 +1,76 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { chromium } from '../design-compare/node_modules/playwright/index.mjs';
+import { createStaticServer } from './support/static-server.mjs';
+
+test('home previews: hover, keyboard pause, touch hold/cancel, links and reduced motion', async () => {
+  const server = createStaticServer();
+  await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
+  const browser = await chromium.launch();
+  const base = `http://127.0.0.1:${server.address().port}`;
+  try {
+    const page = await browser.newPage();
+    await page.goto(base);
+    const entry = page.locator('.learning-entry').first();
+    const toggle = entry.locator('button');
+    await toggle.waitFor();
+    await toggle.click();
+    assert.equal(await toggle.getAttribute('aria-pressed'), 'true');
+    await toggle.click();
+    assert.equal(await toggle.getAttribute('aria-pressed'), 'false');
+    await page.mouse.move(0, 0);
+    await entry.hover();
+    await page.waitForFunction(() => document.querySelector('.learning-entry').classList.contains('is-previewing'));
+    assert.equal(await entry.evaluate((el) => el.getAnimations({subtree:true}).length > 0), true);
+    assert.equal(await toggle.getAttribute('aria-pressed'), 'true');
+    await toggle.click();
+    assert.equal(await entry.evaluate((el) => el.classList.contains('is-previewing')), false);
+    await entry.locator('a').focus();
+    await page.keyboard.press('Escape');
+    assert.equal(await entry.evaluate((el) => el.classList.contains('is-previewing')), false);
+    await page.mouse.move(0, 0);
+    await toggle.focus();
+    await page.keyboard.press('Space');
+    assert.equal(await toggle.getAttribute('aria-pressed'), 'true');
+    await page.keyboard.press('Space');
+    assert.equal(await entry.evaluate((el) => el.classList.contains('is-previewing')), false);
+    await page.locator('#dh-lang-en').click();
+    assert.match(await toggle.getAttribute('aria-label'), /toggle preview/);
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await entry.hover();
+    await page.waitForFunction(() => document.querySelector('.learning-entry').classList.contains('is-previewing'));
+    assert.equal(await entry.locator('i').first().evaluate((el) => getComputedStyle(el).animationName), 'none');
+
+    const mobile = await browser.newContext({ viewport: {width:390,height:844}, isMobile:true, hasTouch:true });
+    const touch = await mobile.newPage();
+    await touch.goto(base);
+    const card = touch.locator('.learning-entry').first();
+    const link = card.locator('a');
+    const button = card.locator('button');
+    await button.waitFor();
+    await card.scrollIntoViewIfNeeded();
+    const cdp = await mobile.newCDPSession(touch);
+    const box = await link.boundingBox();
+    const x = box.x + box.width - 25, y = box.y + 45;
+    await cdp.send('Input.dispatchTouchEvent', {type:'touchStart', touchPoints:[{x,y}]});
+    await touch.waitForTimeout(480);
+    assert.equal(await card.evaluate((el) => el.classList.contains('is-previewing')), true);
+    await cdp.send('Input.dispatchTouchEvent', {type:'touchEnd', touchPoints:[]});
+    assert.equal(new URL(touch.url()).pathname, '/');
+    assert.equal(await button.getAttribute('aria-pressed'), 'true');
+    await button.tap();
+    assert.equal(await card.evaluate((el) => el.classList.contains('is-previewing')), false);
+    await cdp.send('Input.dispatchTouchEvent', {type:'touchStart', touchPoints:[{x,y}]});
+    await cdp.send('Input.dispatchTouchEvent', {type:'touchMove', touchPoints:[{x,y:y-70}]});
+    await cdp.send('Input.dispatchTouchEvent', {type:'touchCancel', touchPoints:[]});
+    await touch.waitForTimeout(450);
+    assert.equal(await button.getAttribute('aria-pressed'), 'false');
+    assert.equal(await touch.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    await link.tap();
+    await touch.waitForURL('**/trend-style/index.html');
+    await mobile.close();
+  } finally {
+    await browser.close();
+    await new Promise((resolve) => server.close(resolve));
+  }
+});

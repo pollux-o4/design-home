@@ -51,40 +51,53 @@
         <div class="section-heading">
           <p class="eyebrow" data-i18n="hub_eyebrow">EXPLORE & LEARN</p>
           <h2 id="learning-title" data-i18n="hub_title">무엇부터 살펴볼까요?</h2>
+          <p class="preview-hint" data-i18n="home_preview_hint">올려두거나 꾹 눌러 미리보기 · ▶로 재생·정지</p>
         </div>
         <div class="hub-grid">
+        <div class="learning-entry" data-preview="trends">
         <a href="./trend-style/index.html" class="hub-card">
-          <div class="card-art learning-art learning-art--trends" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="card-art learning-art learning-art--trends" aria-hidden="true"><span class="preview-note" data-preview-ko="색과 질감" data-preview-en="Color & texture">색과 질감</span><i></i><i></i><i></i></div>
           <div class="card-copy">
             <h3 class="card-heading" data-i18n="card1_title">디자인 트렌드</h3>
             <p class="card-body-text" data-i18n="card1_desc">색과 질감이 만드는 화면의 차이.</p>
             <span class="card-action"><span data-i18n="card1_action">스타일 비교하기</span><svg class="ui-icon" aria-hidden="true"><use href="./shared/assets/interface-icons.svg#arrow"/></svg></span>
           </div>
         </a>
+          <button class="preview-toggle" type="button" aria-pressed="false"><span aria-hidden="true">▶</span></button>
+        </div>
+        <div class="learning-entry" data-preview="patterns">
         <a href="./ui-components/index.html" class="hub-card">
-          <div class="card-art learning-art learning-art--patterns" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="card-art learning-art learning-art--patterns" aria-hidden="true"><span class="preview-note" data-preview-ko="입력 → 완료" data-preview-en="Input → done">입력 → 완료</span><i></i><i></i><i></i></div>
           <div class="card-copy">
             <h3 class="card-heading" data-i18n="card2_title">Patterns</h3>
             <p class="card-body-text" data-i18n="card2_desc">입력과 피드백을 직접 조작하며 익히기.</p>
             <span class="card-action"><span data-i18n="card2_action">패턴 체험하기</span><svg class="ui-icon" aria-hidden="true"><use href="./shared/assets/interface-icons.svg#arrow"/></svg></span>
           </div>
         </a>
+          <button class="preview-toggle" type="button" aria-pressed="false"><span aria-hidden="true">▶</span></button>
+        </div>
+        <div class="learning-entry" data-preview="glossary">
         <a href="./glossary/index.html" class="hub-card">
-          <div class="card-art learning-art learning-art--glossary" aria-hidden="true"><i>UI</i><i>UX</i></div>
+          <div class="card-art learning-art learning-art--glossary" aria-hidden="true"><span class="preview-note" data-preview-ko="페이드 · Fade" data-preview-en="Fade in & out">페이드 · Fade</span><i>UI</i><i>UX</i></div>
           <div class="card-copy">
             <h3 class="card-heading" data-i18n="home_glossary_title">용어집</h3>
             <p class="card-body-text" data-i18n="home_glossary_desc">UI·UX·모션 용어를 눈으로 이해하기.</p>
             <span class="card-action"><span data-i18n="home_glossary_action">용어 찾아보기</span><svg class="ui-icon" aria-hidden="true"><use href="./shared/assets/interface-icons.svg#arrow"/></svg></span>
           </div>
         </a>
+          <button class="preview-toggle" type="button" aria-pressed="false"><span aria-hidden="true">▶</span></button>
+        </div>
+        <div class="learning-entry" data-preview="tools">
         <a href="./libraries/index.html" class="hub-card">
-          <div class="card-art learning-art learning-art--tools" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="card-art learning-art learning-art--tools" aria-hidden="true"><span class="preview-note" data-preview-ko="기준별 비교" data-preview-en="Compare by criteria">기준별 비교</span><i></i><i></i><i></i></div>
           <div class="card-copy">
             <h3 class="card-heading" data-i18n="home_tools_title">라이브러리 가이드</h3>
             <p class="card-body-text" data-i18n="home_tools_desc">역할과 장단점을 비교해 도구 선택하기.</p>
             <span class="card-action"><span data-i18n="home_tools_action">도구 비교하기</span><svg class="ui-icon" aria-hidden="true"><use href="./shared/assets/interface-icons.svg#arrow"/></svg></span>
           </div>
         </a>
+          <button class="preview-toggle" type="button" aria-pressed="false"><span aria-hidden="true">▶</span></button>
+        </div>
         </div>
       </section>
       <section class="library-invitation" aria-labelledby="review-title">
@@ -104,6 +117,7 @@
         © 2026 Design Home. 디자인을 탐색하는 더 좋은 방법.
       </p>
     </footer>
+    <script type="module" src="./assets/index/learning-preview.js"></script>
     <script type="module" src="./shared/js/i18n.js">
     </script>
     <script src="./shared/js/global-nav.js" defer>
