@@ -21,6 +21,8 @@ test('home previews: hover, keyboard dismissal, touch hold/cancel, links and red
     assert.equal(await page.locator('.preview-toggle').count(), 0);
     await page.waitForTimeout(200);
     assert.equal(previewRequests.length, 0, 'idle home must not fetch hidden previews');
+    // Keep both rows visible so handoff checks exercise pointer movement, not scrolling dismissal.
+    await page.evaluate(() => window.scrollTo({top: document.querySelector('.hub-section').offsetTop - 110, behavior: 'instant'}));
     await entry.hover();
     await page.waitForFunction(() => document.querySelector('.learning-entry').classList.contains('is-previewing'));
     await entry.locator('.preview-screen').waitFor({state:'visible'});
@@ -99,7 +101,8 @@ test('home previews: hover, keyboard dismissal, touch hold/cancel, links and red
       'leaving the preview region must not leave a fading stale image');
     await entry.hover();
     await page.waitForFunction(() => document.querySelector('.learning-entry').classList.contains('is-previewing'));
-    await page.mouse.wheel(0, 140);
+    // The learning grid may already be at the document's lower scroll limit.
+    await page.mouse.wheel(0, -140);
     await page.waitForTimeout(100);
     assert.equal(await page.locator('.learning-entry.is-previewing').count(), 0,
       'scrolling clears old previews and pending timers');
