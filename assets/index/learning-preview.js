@@ -14,36 +14,61 @@ const states = entries.map((entry) => {
   caption.className = 'preview-screen-caption';
   screen.append(image, caption);
   entry.querySelector('a').append(screen);
-  const movePreview = previewMotion(entry, screen);
   let hovered = false, focused = false, pinned = false, held = false, dismissed = false;
   let timer, hoverTimer, leaveTimer, origin, pointerId;
+  const scheduleLeave = () => {
+    if (leaveTimer) return;
+    leaveTimer = setTimeout(() => { leaveTimer = undefined; hovered = false; render(); }, 160);
+  };
+  const movePreview = previewMotion(entry, screen, (inside) => {
+    if (!inside) { scheduleLeave(); return; }
+    clearTimeout(leaveTimer);
+    leaveTimer = undefined;
+    hovered = true;
+    render();
+  });
   const render = () => {
     const playing = !dismissed && (hovered || focused || pinned || held);
     if (playing && !image.hasAttribute('src')) {
       image.src = new URL(`./previews/${entry.dataset.preview}.png`, import.meta.url).href;
     }
     entry.classList.toggle('is-previewing', playing);
-    movePreview(playing);
+    movePreview.show(playing);
   };
   const reset = () => {
     clearTimeout(timer);
     clearTimeout(hoverTimer);
+    hoverTimer = undefined;
     clearTimeout(leaveTimer);
+    leaveTimer = undefined;
     hovered = focused = pinned = held = false;
     origin = undefined;
     pointerId = undefined;
     dismissed = false;
     render();
   };
+  function requestHover(event) {
+    if (event.pointerType !== 'mouse' || dismissed || hovered || hoverTimer ||
+      states.some(state => state.entry !== entry && state.containsPreview(event))) return;
+    hoverTimer = setTimeout(() => {
+      hoverTimer = undefined;
+      if (states.some(state => state.entry !== entry && state.containsPreview(event))) return;
+      hovered = true;
+      render();
+    }, 160);
+  }
   entry.addEventListener('pointerenter', (event) => {
     if (event.pointerType !== 'mouse') return;
     clearTimeout(leaveTimer);
+    leaveTimer = undefined;
     dismissed = false;
-    hoverTimer = setTimeout(() => { hovered = true; render(); }, 160);
+    requestHover(event);
   });
+  entry.addEventListener('pointermove', requestHover);
   entry.addEventListener('pointerleave', () => {
     clearTimeout(hoverTimer);
-    leaveTimer = setTimeout(() => { hovered = false; render(); }, 160);
+    hoverTimer = undefined;
+    scheduleLeave();
   });
   entry.addEventListener('focusin', (event) => {
     focused = event.target.matches('a');
@@ -88,7 +113,7 @@ const states = entries.map((entry) => {
     held = false;
     render();
   });
-  return { reset, dismiss() { reset(); dismissed = true; render(); } };
+  return { entry, containsPreview: movePreview.containsPreview, reset, dismiss() { reset(); dismissed = true; render(); } };
 });
 
 function translate() {

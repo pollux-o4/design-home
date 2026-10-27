@@ -1,4 +1,4 @@
-export function previewMotion(entry, screen) {
+export function previewMotion(entry, screen, onPreviewHover) {
   const desktop = matchMedia('(min-width: 641px) and (hover: hover) and (pointer: fine)');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let frame, visible = false, x, y, targetX, targetY, last = 0;
@@ -15,7 +15,7 @@ export function previewMotion(entry, screen) {
     else { frame = undefined; screen.style.setProperty('--preview-tilt', '0deg'); }
   }
   function track(event) {
-    if (!desktop.matches || event?.target?.closest('.preview-screen')) return;
+    if (!desktop.matches) return;
     const bounds = entry.getBoundingClientRect();
     const px = reduced.matches ? bounds.right - 30 : event?.clientX ?? bounds.right - 30;
     const py = reduced.matches ? bounds.top + bounds.height / 2 : event?.clientY ?? bounds.top + bounds.height / 2;
@@ -25,9 +25,24 @@ export function previewMotion(entry, screen) {
     if (!visible || x === undefined) { x = targetX; y = targetY; }
     if (visible && !frame) frame = requestAnimationFrame(paint);
   }
-  entry.addEventListener('pointermove', (event) => { if (event.pointerType === 'mouse') track(event); });
+  function containsPreview(event) {
+    if (!visible || !desktop.matches) return false;
+    const rect = screen.getBoundingClientRect();
+    return event.clientX >= rect.left && event.clientX <= rect.right &&
+      event.clientY >= rect.top && event.clientY <= rect.bottom;
+  }
+  entry.addEventListener('pointermove', (event) => { if (!visible && event.pointerType === 'mouse') track(event); });
   entry.addEventListener('pointerenter', (event) => { if (event.pointerType === 'mouse') track(event); });
-  return (show) => {
+  window.addEventListener('pointermove', (event) => {
+    if (!visible || !desktop.matches || event.pointerType !== 'mouse') return;
+    const overPreview = containsPreview(event);
+    const rect = entry.getBoundingClientRect();
+    const overEntry = event.clientX >= rect.left && event.clientX <= rect.right &&
+      event.clientY >= rect.top && event.clientY <= rect.bottom;
+    onPreviewHover(overPreview || overEntry);
+    if (overPreview || overEntry) track(event);
+  });
+  return { containsPreview, show(show) {
     if (show === visible) return;
     visible = show;
     if (show) {
@@ -39,5 +54,5 @@ export function previewMotion(entry, screen) {
       last = 0;
       x = y = targetX = targetY = undefined;
     }
-  };
+  } };
 }

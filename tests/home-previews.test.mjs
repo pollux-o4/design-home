@@ -37,6 +37,31 @@ test('home previews: hover, keyboard dismissal, touch hold/cancel, links and red
     await page.waitForTimeout(200);
     const moved = await entry.locator('.preview-screen').boundingBox();
     assert.ok(Math.abs(moved.x - followed.x) > 5, 'preview follows pointer movement');
+    const overlap = { x: Math.max(bounds.x, moved.x) + 45, y: Math.max(bounds.y, moved.y) + 45 };
+    assert.equal(await page.evaluate(({x,y}) =>
+      document.elementFromPoint(x,y)?.closest('.preview-screen') === null, overlap),
+    true, 'visual preview must not intercept the pointer');
+    await page.mouse.move(overlap.x, overlap.y);
+    await page.waitForTimeout(200);
+    const throughPreview = await entry.locator('.preview-screen').boundingBox();
+    assert.ok(Math.abs(throughPreview.x - moved.x) + Math.abs(throughPreview.y - moved.y) > 5,
+      'tracking continues when the pointer crosses the displayed preview');
+    await page.mouse.move(bounds.x + bounds.width / 2, bounds.y + 100);
+    await page.waitForTimeout(300);
+    const outside = await entry.locator('.preview-screen').boundingBox();
+    const outsidePoint = { x: Math.min(outside.x + outside.width - 20, bounds.x + bounds.width + 35),
+      y: Math.max(bounds.y, outside.y) + 65 };
+    assert.ok(outsidePoint.x > bounds.x + bounds.width, 'test reaches preview beyond the source card');
+    await page.mouse.move(outsidePoint.x, outsidePoint.y);
+    await page.waitForTimeout(280);
+    assert.equal(await entry.evaluate(el => el.classList.contains('is-previewing')), true,
+      'preview-only area keeps the source preview tracking');
+    assert.equal(await page.locator('.learning-entry.is-previewing').count(), 1,
+      'crossing the preview must not activate an obscured adjacent card');
+    await page.mouse.move(0, 0);
+    await page.waitForTimeout(220);
+    assert.equal(await entry.evaluate(el => el.classList.contains('is-previewing')), false,
+      'leaving both the card and preview dismisses it');
     await page.keyboard.press('Escape');
     assert.equal(await entry.evaluate((el) => el.classList.contains('is-previewing')), false);
     const closedBounds = await entry.boundingBox();
