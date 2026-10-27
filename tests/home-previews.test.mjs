@@ -21,10 +21,26 @@ test('home previews: hover, keyboard pause, touch hold/cancel, links and reduced
     await page.mouse.move(0, 0);
     await entry.hover();
     await page.waitForFunction(() => document.querySelector('.learning-entry').classList.contains('is-previewing'));
-    assert.equal(await entry.evaluate((el) => el.getAnimations({subtree:true}).length > 0), true);
+    await entry.locator('.preview-screen').waitFor({state:'visible'});
+    await page.waitForFunction(() => document.querySelector('.preview-screen img').naturalWidth > 0);
+    assert.equal(await entry.locator('.preview-screen img').getAttribute('src'), `${base}/assets/index/previews/trends.png`);
+    const bounds = await entry.boundingBox();
+    const previewBounds = await entry.locator('.preview-screen').boundingBox();
+    assert.ok(previewBounds.x >= 0 && previewBounds.y >= 0);
+    assert.ok(previewBounds.x + previewBounds.width <= 1280);
+    await page.mouse.move(bounds.x + 80, bounds.y + 70);
+    await page.waitForTimeout(200);
+    const followed = await entry.locator('.preview-screen').boundingBox();
+    await page.mouse.move(bounds.x + 40, bounds.y + 70);
+    await page.waitForTimeout(200);
+    const moved = await entry.locator('.preview-screen').boundingBox();
+    assert.ok(Math.abs(moved.x - followed.x) > 5, 'preview follows pointer movement');
     assert.equal(await toggle.getAttribute('aria-pressed'), 'true');
     await toggle.click();
     assert.equal(await entry.evaluate((el) => el.classList.contains('is-previewing')), false);
+    const closedBounds = await entry.boundingBox();
+    assert.equal(closedBounds.width, bounds.width);
+    assert.equal(closedBounds.height, bounds.height);
     await entry.locator('a').focus();
     await page.keyboard.press('Escape');
     assert.equal(await entry.evaluate((el) => el.classList.contains('is-previewing')), false);
@@ -39,7 +55,7 @@ test('home previews: hover, keyboard pause, touch hold/cancel, links and reduced
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await entry.hover();
     await page.waitForFunction(() => document.querySelector('.learning-entry').classList.contains('is-previewing'));
-    assert.equal(await entry.locator('i').first().evaluate((el) => getComputedStyle(el).animationName), 'none');
+    assert.equal(await entry.locator('.preview-screen').evaluate((el) => getComputedStyle(el).transitionDuration), '0s');
 
     const mobile = await browser.newContext({ viewport: {width:390,height:844}, isMobile:true, hasTouch:true });
     const touch = await mobile.newPage();
@@ -51,7 +67,7 @@ test('home previews: hover, keyboard pause, touch hold/cancel, links and reduced
     await card.scrollIntoViewIfNeeded();
     const cdp = await mobile.newCDPSession(touch);
     const box = await link.boundingBox();
-    const x = box.x + box.width - 25, y = box.y + 45;
+    const x = box.x + box.width - 65, y = box.y + box.height - 65;
     await cdp.send('Input.dispatchTouchEvent', {type:'touchStart', touchPoints:[{x,y}]});
     await touch.waitForTimeout(480);
     assert.equal(await card.evaluate((el) => el.classList.contains('is-previewing')), true);

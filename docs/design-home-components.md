@@ -4,7 +4,7 @@
 
 ## 학습 홈
 
-`index.html`은 트렌드·Patterns·용어집·라이브러리 가이드로 연결하는 학습 진입점이다. 각 카드의 작은 도식은 학습 주제를 짧게 예고하고 실제 학습 예제와 카탈로그는 해당 화면이 소유한다. 별도 제품인 Design System Library는 학습 영역 아래의 단일 안내에서 연결한다. `assets/index/learning-preview.js`는 호버·포커스·길게 누르기·명시적 재생의 수명과 취소를 담당하고 `learning-preview.css`는 카드 크기를 유지하는 도식 애니메이션과 동작 줄이기 설정을 담당한다. 링크와 재생 버튼은 형제 요소로 분리하며 기본 링크 탐색을 보존한다. 영어 안내는 `shared/js/messages/en.js`, 도식의 짧은 양언어 캡션은 마크업이 소유한다. 링크·테마·언어·반응형 흐름은 `tests/apple-interface.test.mjs`와 `tests/home-dark-theme.test.mjs`, 입력별 미리보기는 `tests/home-previews.test.mjs`에서 검증한다.
+`index.html`은 트렌드·Patterns·용어집·라이브러리 가이드로 연결하는 학습 진입점이다. 각 카드는 호버·포커스·길게 누르기에 실제 목적지 화면의 스냅샷을 표시하고 실제 학습 예제와 카탈로그는 해당 화면이 소유한다. 별도 제품인 Design System Library는 학습 영역 아래의 단일 안내에서 연결한다. `assets/index/learning-preview.js`는 호버·포커스·길게 누르기·명시적 재생의 수명과 취소를 담당하고 `preview-motion.js`는 데스크톱 포인터 추적·감쇠·화면 경계 제한을, `learning-preview.css`는 데스크톱 플로팅·모바일 카드 내부 표시와 동작 줄이기 설정을 담당한다. `assets/index/previews/`는 실제 화면 캡처를 소유하며 목적지의 주요 화면 변경 시 함께 갱신한다. 홈에서 목적지 런타임을 동시에 실행하지 않는다. 링크와 미리보기 버튼은 형제 요소로 분리하며 기본 링크 탐색을 보존한다. 영어 안내는 `shared/js/messages/en.js`, 도식의 짧은 양언어 캡션은 마크업이 소유한다. 링크·테마·언어·반응형 흐름은 `tests/apple-interface.test.mjs`와 `tests/home-dark-theme.test.mjs`, 입력별 미리보기는 `tests/home-previews.test.mjs`에서 검증한다.
 
 ## 내부 컴포넌트 샘플
 

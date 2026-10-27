@@ -1,16 +1,33 @@
+import { previewMotion } from './preview-motion.js';
+
 const entries = [...document.querySelectorAll('.learning-entry')];
 const states = entries.map((entry) => {
   const button = entry.querySelector('.preview-toggle');
+  // shortcut: 실제 화면의 정적 스냅샷 사용, 목적지의 주요 화면이 바뀌면 previews 이미지를 함께 갱신.
+  const screen = document.createElement('span');
+  screen.className = 'preview-screen';
+  screen.setAttribute('aria-hidden', 'true');
+  const image = document.createElement('img');
+  image.alt = '';
+  image.loading = 'lazy';
+  image.src = new URL(`./previews/${entry.dataset.preview}.png`, import.meta.url).href;
+  const caption = document.createElement('span');
+  caption.className = 'preview-screen-caption';
+  screen.append(image, caption);
+  entry.querySelector('a').append(screen);
+  const movePreview = previewMotion(entry, screen);
   let hovered = false, focused = false, pinned = false, held = false, dismissed = false;
-  let timer, hoverTimer, origin, pointerId;
+  let timer, hoverTimer, leaveTimer, origin, pointerId;
   const render = () => {
     const playing = !dismissed && (hovered || focused || pinned || held);
     entry.classList.toggle('is-previewing', playing);
     button.setAttribute('aria-pressed', String(playing));
+    movePreview(playing);
   };
   const reset = () => {
     clearTimeout(timer);
     clearTimeout(hoverTimer);
+    clearTimeout(leaveTimer);
     hovered = focused = pinned = held = false;
     origin = undefined;
     pointerId = undefined;
@@ -19,10 +36,14 @@ const states = entries.map((entry) => {
   };
   entry.addEventListener('pointerenter', (event) => {
     if (event.pointerType !== 'mouse') return;
+    clearTimeout(leaveTimer);
     dismissed = false;
     hoverTimer = setTimeout(() => { hovered = true; render(); }, 160);
   });
-  entry.addEventListener('pointerleave', () => { clearTimeout(hoverTimer); hovered = false; render(); });
+  entry.addEventListener('pointerleave', () => {
+    clearTimeout(hoverTimer);
+    leaveTimer = setTimeout(() => { hovered = false; render(); }, 160);
+  });
   entry.addEventListener('focusin', (event) => {
     focused = event.target.matches('a');
     if (focused) dismissed = false;
@@ -80,7 +101,8 @@ function translate() {
   const english = document.documentElement.lang === 'en';
   for (const entry of entries) {
     const title = entry.querySelector('h3').textContent;
-    entry.querySelector('button').setAttribute('aria-label', english ? `${title}: toggle preview` : `${title}: 미리보기 재생·정지`);
+    entry.querySelector('button').setAttribute('aria-label', english ? `${title}: toggle preview` : `${title}: 미리보기 열기·닫기`);
+    entry.querySelector('.preview-screen-caption').textContent = english ? `${title} · Screen preview →` : `${title} · 실제 화면 미리보기 →`;
     const note = entry.querySelector('.preview-note');
     note.textContent = english ? note.dataset.previewEn : note.dataset.previewKo;
   }
@@ -103,3 +125,4 @@ const visibility = new IntersectionObserver((changes) => {
   }
 });
 entries.forEach((entry) => visibility.observe(entry));
+window.addEventListener('resize', () => states.forEach((state) => state.reset()));
