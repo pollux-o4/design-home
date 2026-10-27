@@ -147,6 +147,4 @@ new MutationObserver((records) => {
   attributes: true,
   attributeFilter: ["hidden", "inert"],
 });
-if (!document.documentElement.hasAttribute("data-scroll-demo"))
-  mountScrollbar(document.scrollingElement, { root: true });
 discover(document.body);

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
 import { createHubServer } from '../hub/server.js';
 
-test('registered scrollbar hides at rest, expands near the edge, supports drag and keyboard, and previews appear in the gallery', async () => {
+test('page keeps the native scrollbar while an embedded scrollbar supports drag and keyboard', async () => {
   const server = createHubServer(); await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   const base = `http://127.0.0.1:${server.address().port}`, browser = await chromium.launch();
   const page = await browser.newPage(); page.setDefaultTimeout(5000);
@@ -17,15 +17,8 @@ test('registered scrollbar hides at rest, expands near the edge, supports drag a
     await page.evaluate(() => scrollTo(0, 0));
     assert.ok(await image.evaluate(node => node.complete && node.naturalWidth > 0));
     await page.screenshot({ path: '../.legacy-review/design-library-components.png', fullPage: true });
-    const rootRail = page.locator('.dh-scroll-rail[data-root][data-axis="y"]');
-    await rootRail.waitFor({ state: 'attached' });
-    await page.waitForTimeout(1200);
-    assert.equal(await rootRail.evaluate(node => getComputedStyle(node).opacity), '0');
-    await page.mouse.wheel(0, 250);
-    await page.waitForTimeout(100);
-    assert.equal(await rootRail.evaluate(node => node.classList.contains('is-active')), true);
-    await page.mouse.move(10, 10); await page.waitForTimeout(1300);
-    assert.equal(await rootRail.evaluate(node => getComputedStyle(node).opacity), '0');
+    assert.equal(await page.locator('.dh-scroll-rail[data-root]').count(), 0);
+    assert.equal(await page.evaluate(() => document.scrollingElement.classList.contains('dh-scroll-native')), false);
     await card.click();
     const frame = page.frameLocator('#preview');
     const region = frame.locator('[data-scroll-region]'); await region.waitFor();
