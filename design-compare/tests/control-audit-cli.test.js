@@ -59,12 +59,12 @@ test("audit waits for a routed tool and reports browser-native controls while ho
   }
 });
 
-test("the real Design Home theme selector exposes its native menu in the audit", async () => {
+test("the real Design Home theme selector no longer exposes a native menu", async () => {
   const server = createHubServer();
   await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
   try {
     const result = await auditUi({ url: `http://127.0.0.1:${server.address().port}/index.html` });
-    assert.ok(result.findings.some(({ kind, target, name }) => kind === "native-select-popup" && target === "#dh-theme-select" && name === "색상 테마"));
+    assert.equal(result.findings.some(({ kind, target }) => kind === "native-select-popup" && target === "#dh-theme-select"), false);
   } finally {
     await new Promise((resolve) => server.close(resolve));
   }

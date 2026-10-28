@@ -313,7 +313,9 @@ test("collection search combines with mood and recovers from empty results", asy
     assert.equal(await page.locator(".grid .card:visible").count(), 1);
     await search.fill("미니멀");
     assert.equal(await page.locator(".grid .card:visible").count(), 3);
-    await search.fill("");
+    await page.locator("#style-search-clear").click();
+    assert.equal(await search.inputValue(), "");
+    assert.equal(await search.evaluate(node => node === document.activeElement), true);
     assert.equal(await page.locator(".grid .card:visible").count(), 15);
     assert.equal(await page.locator(".collection-empty").isVisible(), false);
     await page.setViewportSize({ width: 320, height: 800 });

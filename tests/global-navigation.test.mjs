@@ -293,7 +293,7 @@ for (const [name, engine] of Object.entries({ chromium, firefox, webkit })) {
       await page.locator("#dh-study-toggle").click();
       assert.equal(
         await page
-          .locator(".dh-disclosure-caret")
+          .locator("#dh-study-toggle .dh-disclosure-caret")
           .evaluate((node) => getComputedStyle(node).transitionDuration),
         "0s",
       );
@@ -312,30 +312,38 @@ test("theme preference follows the system and persists explicit choices", async 
   await page.route("https://**/*", (route) => route.abort());
   try {
     await page.goto(bases[0]);
-    await page.locator("#dh-theme-select").waitFor();
+    await page.locator("#dh-theme-toggle").waitFor();
     assert.equal(await page.locator("html").getAttribute("data-theme"), null);
-    assert.equal(await page.locator("#dh-theme-select").inputValue(), "system");
+    assert.equal(await page.locator('[data-theme-choice="system"]').getAttribute('aria-pressed'), 'true');
     assert.equal(
       await page.evaluate(() => getComputedStyle(document.body).backgroundColor),
       "rgb(22, 22, 24)",
     );
 
-    await page.locator("#dh-theme-select").selectOption("light");
+    await page.locator("#dh-theme-toggle").click();
+    await page.locator('[data-theme-choice="light"]').click();
     assert.equal(await page.locator("html").getAttribute("data-theme"), "light");
     assert.equal(
       await page.evaluate(() => localStorage.getItem("dh_theme")),
       "light",
     );
     await page.reload();
-    assert.equal(await page.locator("#dh-theme-select").inputValue(), "light");
+    assert.equal(await page.locator('[data-theme-choice="light"]').getAttribute('aria-pressed'), 'true');
 
-    await page.locator("#dh-theme-select").selectOption("system");
+    await page.locator("#dh-theme-toggle").click();
+    await page.locator('[data-theme-choice="system"]').click();
     assert.equal(await page.locator("html").getAttribute("data-theme"), null);
     await page.emulateMedia({ colorScheme: "light" });
     await page.waitForFunction(
       () => getComputedStyle(document.body).backgroundColor === "rgb(245, 245, 247)",
     );
-    await page.locator("#dh-theme-select").selectOption("dark");
+    await page.locator("#dh-theme-toggle").focus();
+    await page.keyboard.press("Enter");
+    await page.keyboard.press("Escape");
+    assert.equal(await page.locator("#dh-theme-panel").isVisible(), false);
+    assert.equal(await page.locator("#dh-theme-toggle").evaluate(node => node === document.activeElement), true);
+    await page.locator("#dh-theme-toggle").click();
+    await page.locator('[data-theme-choice="dark"]').click();
     await page.emulateMedia({ colorScheme: "light" });
     assert.equal(await page.locator("html").getAttribute("data-theme"), "dark");
   } finally {

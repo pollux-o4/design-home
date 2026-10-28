@@ -9,9 +9,11 @@ export function mountCollectionFilter(root = document) {
   const filters = [...root.querySelectorAll("[data-mood]")];
   const cards = [...root.querySelectorAll(".grid .card")];
   const search = root.querySelector("#style-search");
+  const clear = root.querySelector("#style-search-clear");
   const empty = root.querySelector(".collection-empty");
   const count = root.querySelector(".collection-count");
   function filterCollection() {
+    clear.hidden = !search.value;
     const mood = filters.find(
       (filter) => filter.getAttribute("aria-pressed") === "true",
     ).dataset.mood;
@@ -41,5 +43,6 @@ export function mountCollectionFilter(root = document) {
     }),
   );
   search.addEventListener("input", filterCollection);
+  clear.addEventListener("click", () => { search.value = ""; filterCollection(); search.focus(); });
   document.addEventListener("dh:language-change", filterCollection);
 }

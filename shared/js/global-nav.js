@@ -57,14 +57,14 @@
         <li><a href="${href("design-library/")}" class="dh-nav-link ${inLibrary ? "active" : ""}" ${inLibrary ? 'aria-current="page"' : ""}><span>Design System Library</span></a></li>
       </ul>
       <div class="dh-nav-right">
-        <label class="dh-theme-switcher">
-          <span class="sr-only" data-i18n="theme_label">색상 테마</span>
-          <select id="dh-theme-select" class="dh-theme-select">
-            <option value="system" data-i18n="theme_system">시스템</option>
-            <option value="light" data-i18n="theme_light">라이트</option>
-            <option value="dark" data-i18n="theme_dark">다크</option>
-          </select>
-        </label>
+        <div class="dh-theme-switcher">
+          <button type="button" id="dh-theme-toggle" class="dh-theme-toggle" aria-expanded="false" aria-controls="dh-theme-panel"><span class="sr-only" data-i18n="theme_label">색상 테마</span><span id="dh-theme-current" aria-hidden="true">시스템</span><span class="dh-disclosure-caret" aria-hidden="true"></span></button>
+          <div id="dh-theme-panel" class="dh-theme-panel" role="group" aria-label="색상 테마" hidden>
+            <button type="button" data-theme-choice="system" aria-pressed="true"><span data-i18n="theme_system">시스템</span><span aria-hidden="true">✓</span></button>
+            <button type="button" data-theme-choice="light" aria-pressed="false"><span data-i18n="theme_light">라이트</span><span aria-hidden="true">✓</span></button>
+            <button type="button" data-theme-choice="dark" aria-pressed="false"><span data-i18n="theme_dark">다크</span><span aria-hidden="true">✓</span></button>
+          </div>
+        </div>
         <div class="dh-lang-switcher" aria-label="Language Selector">
           <button type="button" id="dh-lang-ko" class="dh-lang-btn" aria-label="KO · 한국어로 변경">KO</button>
           <button type="button" id="dh-lang-en" class="dh-lang-btn" aria-label="EN · Switch to English">EN</button>
@@ -110,13 +110,25 @@
         .querySelector(`#dh-lang-${language}`)
         .addEventListener("click", () => window.setLanguage?.(language));
     }
-    const themeSelect = nav.querySelector("#dh-theme-select");
-    const updateThemeSelect = (event) => {
-      themeSelect.value = event.detail?.preference ?? window.getTheme?.() ?? "system";
+    const themeToggle = nav.querySelector("#dh-theme-toggle");
+    const themePanel = nav.querySelector("#dh-theme-panel");
+    const themeChoices = [...themePanel.querySelectorAll("[data-theme-choice]")];
+    const setThemeOpen = (open) => { themePanel.hidden = !open; themeToggle.setAttribute("aria-expanded", String(open)); };
+    const updateTheme = () => {
+      const preference = window.getTheme?.() ?? "system";
+      for (const choice of themeChoices) choice.setAttribute("aria-pressed", String(choice.dataset.themeChoice === preference));
+      nav.querySelector("#dh-theme-current").textContent = themeChoices.find(choice => choice.dataset.themeChoice === preference).firstElementChild.textContent;
+      themePanel.setAttribute("aria-label", nav.querySelector('[data-i18n="theme_label"]').textContent);
+      themeToggle.setAttribute("aria-label", `${themePanel.getAttribute("aria-label")}: ${nav.querySelector("#dh-theme-current").textContent}`);
     };
-    themeSelect.addEventListener("change", () => window.setTheme?.(themeSelect.value));
-    document.addEventListener("dh:theme-change", updateThemeSelect);
-    updateThemeSelect(new CustomEvent("dh:theme-change"));
+    themeToggle.addEventListener("click", () => setThemeOpen(themePanel.hidden));
+    themeChoices.forEach(choice => choice.addEventListener("click", () => { window.setTheme?.(choice.dataset.themeChoice); setThemeOpen(false); themeToggle.focus(); }));
+    nav.addEventListener("keydown", event => { if (event.key === "Escape" && !themePanel.hidden) { event.preventDefault(); setThemeOpen(false); themeToggle.focus(); } });
+    nav.addEventListener("focusout", event => { if (!event.relatedTarget?.closest?.(".dh-theme-switcher")) setThemeOpen(false); });
+    document.addEventListener("click", event => { if (!event.target.closest(".dh-theme-switcher")) setThemeOpen(false); });
+    document.addEventListener("dh:theme-change", updateTheme);
+    document.addEventListener("dh:language-change", updateTheme);
+    updateTheme();
     document.dispatchEvent(new Event("dh:navigation-ready"));
   }
   if (document.readyState === "loading")

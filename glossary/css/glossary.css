@@ -110,6 +110,7 @@ h1 {
   border-radius: 14px;
   background: var(--ui-surface);
   min-height: 56px;
+  transition: border-color 180ms, box-shadow 180ms;
 }
 .search-bar:focus-within {
   border-color: var(--ui-action);
@@ -122,20 +123,27 @@ h1 {
 .search-bar input {
   flex: 1;
   min-width: 0;
+  appearance: none;
   border: 0;
+  border-radius: inherit;
   outline: 0;
   padding: 12px 0;
   font-size: 15px;
   background: transparent;
   color: var(--ui-text);
 }
+.search-bar input::-webkit-search-cancel-button { display: none; }
 .search-bar button {
   border: 0;
   background: var(--ui-bg);
   padding: 10px;
   border-radius: 8px;
   font-size: 12px;
+  transition: background 160ms, transform 160ms;
 }
+.search-bar button:hover { background: var(--ui-line); transform: scale(1.04); }
+.search-bar button:focus-visible { outline: 2px solid var(--ui-action); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .search-bar, .search-bar button { transition: none; } .search-bar button:hover { transform: none; } }
 .search-shortcut {
   border: 1px solid var(--ui-line);
   border-radius: 5px;

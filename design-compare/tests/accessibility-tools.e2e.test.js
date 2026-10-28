@@ -40,7 +40,7 @@ test("Design System Library exposes contrast and native-UI consistency checks wi
     const auditCases = await page.evaluate(async () => {
       const { inspectControlBaseline } = await import('/shared/js/design-system-audit.js');
       const host = document.createElement('div');
-      host.innerHTML = '<input type="file" aria-label="숨긴 파일" style="opacity:0"><select id="field:one" aria-label="보이는 선택"><option>선택</option></select><div data-scroll-region aria-label="스크롤 영역" style="height:30px;overflow:auto"><div style="height:200px"></div></div>';
+      host.innerHTML = '<input type="file" aria-label="숨긴 파일" style="opacity:0"><select id="field:one" aria-label="보이는 선택"><option>선택</option></select><div data-scroll-region aria-label="스크롤 영역" style="height:30px;overflow:auto;scrollbar-color:auto;scrollbar-width:auto"><div style="height:200px"></div></div>';
       document.body.append(host);
       const findings = inspectControlBaseline(host, { strict: true });
       host.remove();
