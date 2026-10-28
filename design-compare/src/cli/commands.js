@@ -102,9 +102,13 @@ export const commands = {
     execute: (app, request) => app.auditUi(request),
   },
   motion: {
-    usage: './design motion --url URL --action CSS [--viewport 390x844] [--theme light|dark] [--json]',
-    options: ['url', 'action', 'viewport', 'theme', 'store', 'json'], stage: () => 'capture',
+    usage: './design motion (--scenario 파일.json | --url URL --action CSS) [--viewport 390x844] [--theme light|dark] [--strict] [--json]',
+    options: ['scenario', 'url', 'action', 'viewport', 'theme', 'strict', 'store', 'json'], stage: () => 'capture',
     prepare(values) {
+      if (values.scenario) {
+        if (values.url || values.action || values.viewport || values.theme) throw new Error('--scenario는 --url, --action, --viewport, --theme와 함께 사용할 수 없음');
+        return { scenario: values.scenario };
+      }
       if (!values.url || !values.action) throw new Error('motion: --url, --action 필요');
       const url = new URL(values.url);
       if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) throw new Error('인증정보 없는 HTTP(S) URL 필요');

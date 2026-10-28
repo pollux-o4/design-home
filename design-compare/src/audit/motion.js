@@ -1,51 +1,90 @@
 import { chromium } from 'playwright';
-import pixelmatch from 'pixelmatch';
-import { PNG } from 'pngjs';
+import { performance } from 'node:perf_hooks';
+import { motionScenario } from './motion-scenario.js';
+import { compareFrames } from './motion-evidence.js';
 
-// A bounded observation is a review signal, not a judgement of visual quality.
-export async function auditMotion({ url, action, viewport = { width: 1280, height: 900 }, theme = 'light' }) {
-  const parsed = new URL(url);
-  if (!['http:', 'https:'].includes(parsed.protocol) || parsed.username || parsed.password) throw new Error('인증정보 없는 HTTP(S) URL 필요');
-  if (!action) throw new Error('전환을 확인할 --action 선택자 필요');
-  if (!['light', 'dark'].includes(theme)) throw new Error('--theme: light 또는 dark 필요');
+export async function auditMotion(request) {
+  const scenario = await motionScenario(request);
+  const { url, action, viewport, theme, reducedMotion, observationMs, expectation, region, expected, history } = scenario;
   const browser = await chromium.launch({ headless: true });
   let collecting = false;
   const events = [];
+  let eventsTruncated = false;
   try {
-    const context = await browser.newContext({ viewport, colorScheme: theme, locale: 'ko-KR', timezoneId: 'Asia/Seoul' });
-    await context.exposeBinding('__designMotionObserved', (source, event) => { if (collecting && events.length < 200) events.push({ ...event, url: source.frame.url() }); });
-    await context.addInitScript(() => {
+    const context = await browser.newContext({ viewport, colorScheme: theme, reducedMotion, locale: 'ko-KR', timezoneId: 'Asia/Seoul' });
+    await context.exposeBinding('__designMotionObserved', (source, event) => {
+      if (collecting) {
+        if (events.length < 200) events.push({ ...event, url: source.frame.url() });
+        else eventsTruncated = true;
+      }
+    });
+    await context.addInitScript(({ region }) => {
       for (const type of ['transitionrun', 'animationstart']) document.addEventListener(type, event => {
         if (!event.isTrusted) return;
-        window.__designMotionObserved({ type, name: event.propertyName || event.animationName || '', target: event.target?.tagName?.toLowerCase() || '' });
+        const root = region ? document.querySelector(region) : null;
+        const related = root ? root === event.target || root.contains(event.target) : null;
+        window.__designMotionObserved({ type, name: event.propertyName || event.animationName || '', target: event.target?.id ? `#${CSS.escape(event.target.id)}` : event.target?.tagName?.toLowerCase() || '', related, timestamp: performance.now() });
       }, true);
-    });
+    }, { region });
     const page = await context.newPage();
     page.setDefaultTimeout(10000);
-    const response = await page.goto(parsed.href, { waitUntil: 'domcontentloaded', timeout: 20000 });
-    if (!response?.ok()) throw new Error(`페이지 로드 실패: HTTP ${response?.status() ?? 'unknown'}`);
+    for (const address of [url, ...history]) {
+      const response = await page.goto(address, { waitUntil: 'domcontentloaded', timeout: 20000 });
+      if (!response?.ok()) throw new Error(`페이지 로드 실패: HTTP ${response?.status() ?? 'unknown'}`);
+    }
     await page.evaluate(() => document.fonts.ready);
-    const trigger = page.locator(action);
-    if (await trigger.count() !== 1) throw new Error('동작 선택자는 정확히 1개 필요');
-    await trigger.waitFor({ state: 'visible' });
-    await trigger.scrollIntoViewIfNeeded();
-    await trigger.hover();
-    await page.waitForTimeout(300);
+    if (region) await page.evaluate(selector => document.querySelector(selector), region);
+    let trigger;
+    if (action.type !== 'back') {
+      trigger = page.locator(action.selector);
+      if (await trigger.count() !== 1) throw new Error('동작 선택자는 정확히 1개 필요');
+      await trigger.waitFor({ state: 'visible' });
+      await trigger.scrollIntoViewIfNeeded();
+      if (action.type === 'click') { await trigger.hover(); await page.waitForTimeout(300); }
+      if (action.type === 'press') await trigger.focus();
+    }
+    const regionLocator = region ? page.locator(region) : null;
+    if (regionLocator && await regionLocator.count() > 1) throw new Error('관찰 영역은 최대 1개 필요');
+    const box = regionLocator && await regionLocator.isVisible() ? await regionLocator.boundingBox() : null;
+    const clip = box && box.x >= 0 && box.y >= 0 && box.x + box.width <= viewport.width && box.y + box.height <= viewport.height ? box : undefined;
+    // shortcut: 닫힌 Shadow DOM과 운영체제 팝업은 브라우저 캡처로 완전 관찰할 수 없음, 브라우저 지원이 바뀌면 재검토.
+    const screenshot = () => page.screenshot({ caret: 'hide', scale: 'css', ...(clip ? { clip } : {}) });
     const initialUrl = page.url();
-    const before = await page.screenshot({ caret: 'hide', scale: 'css' });
+    const baseline = await screenshot();
+    await page.waitForTimeout(160);
+    const frames = [await screenshot()];
+    const started = performance.now();
+    const sampleTimesMs = [0];
     collecting = true;
-    await trigger.click();
-    await page.waitForTimeout(600);
+    if (action.type === 'click') await trigger.click({ noWaitAfter: true });
+    else if (action.type === 'hover') await trigger.hover();
+    else if (action.type === 'press') await trigger.press(action.key, { noWaitAfter: true });
+    else await page.goBack({ waitUntil: 'domcontentloaded' });
+    for (let index = 1; index <= 5; index++) {
+      const remaining = started + index * observationMs / 5 - performance.now();
+      if (remaining > 0) await page.waitForTimeout(remaining);
+      frames.push(await screenshot());
+      sampleTimesMs.push(Math.round(performance.now() - started));
+    }
     collecting = false;
-    const after = await page.screenshot({ caret: 'hide', scale: 'css' });
-    const first = PNG.sync.read(before), second = PNG.sync.read(after);
-    if (first.width !== second.width || first.height !== second.height) throw new Error('화면 크기가 변경되어 비교할 수 없음');
-    const changed = pixelmatch(first.data, second.data, null, first.width, first.height, { threshold: 0.1, includeAA: false });
-    const ratio = changed / (first.width * first.height);
-    // shortcut: JS·canvas 영상과 브라우저 외부 팝업의 움직임은 이벤트로 식별 불가, 프레임 기반 검사가 도입될 때 재검토.
+    const actualDurationMs = Math.round(performance.now() - started);
+    let expectedAfterWindow = false;
+    if (expected) {
+      const outcome = page.locator(expected.selector);
+      expectedAfterWindow = expected.state === 'visible' ? !await outcome.isVisible() : !await outcome.isHidden();
+      await outcome.waitFor({ state: expected.state, timeout: 3000 });
+    }
     const finalUrl = page.url();
-    const relevantEvents = initialUrl === finalUrl ? events : events.filter(event => event.url === finalUrl);
-    const outcome = ratio < 0.001 ? 'inconclusive' : relevantEvents.length ? 'motion-observed' : 'review';
-    return { schemaVersion: 1, status: outcome, target: { url: parsed.href, action, viewport, theme }, finalUrl, changedPixels: changed, changeRatio: ratio, observationMs: 600, events: relevantEvents, screenshots: { before, after } };
+    const relevantEvents = events.filter(event => event.related !== false && (initialUrl === finalUrl || event.url === finalUrl));
+    const navigation = initialUrl !== finalUrl;
+    const evaluation = compareFrames(frames, expectation, relevantEvents, baseline, navigation);
+    if (expectedAfterWindow) evaluation.status = 'inconclusive';
+    return {
+      schemaVersion: 1, ...evaluation,
+      target: { url, action: action.type === 'click' ? action.selector : action, viewport, theme, reducedMotion, ...(region ? { region } : {}) },
+      scenario: { action, expectation, observationMs, ...(expected ? { expected } : {}), ...(history.length ? { history } : {}) },
+      finalUrl, observationMs, events, screenshots: { before: frames[0], ...Object.fromEntries(frames.slice(1, -1).map((frame, i) => [`frame-${i + 1}`, frame])), after: frames.at(-1) },
+      coverage: { frameSamples: frames.length, sampleTimesMs, actualDurationMs, eventsTruncated, eventScope: region ? 'region' : 'page', imageScope: clip ? 'region' : 'viewport', expectedAfterWindow, navigation, note: navigation ? '페이지 이동 중 로딩 변화는 움직임의 증거로 단정하지 않음' : region && !clip ? '초기 영역이 보이지 않아 전체 화면을 캡처함' : region ? '영역 내 이벤트도 동작과의 인과관계는 확인이 필요함' : '페이지 전체 이벤트는 동작과 무관할 수 있음' },
+    };
   } finally { await browser.close(); }
 }

@@ -35,7 +35,7 @@ const textPresenters = {
     return `${state} · 시스템 기본 UI ${result.summary.platform}개 · 형태·조작 영역 ${result.summary.review}개\n${result.findings.map(({ kind, name, target, framePath = [], shadowPath = [] }) => `${kind}: ${name} (${[...framePath, ...shadowPath, target].join(' → ')})`).join('\n')}${result.coverage?.length ? `\n검사하지 못한 프레임: ${result.coverage.map(item => item.framePath.join(' → ')).join(', ')}` : ''}`;
   },
   motion(result) {
-    const label = { review: '화면 전환 검토 필요', 'motion-observed': 'CSS 움직임 관찰됨 · 화면 전환과의 연관성 확인 필요', inconclusive: '화면 변화 확인 불가' }[result.status];
+    const label = { review: '화면 전환 검토 필요', 'motion-observed': '움직임 신호 관찰됨 · 품질 확인 필요', inconclusive: '화면 변화 확인 불가', accepted: '프로젝트에서 즉시 전환 허용' }[result.status];
     return `${label} · 화면 차이 ${(result.changeRatio * 100).toFixed(2)}% · 전환 이벤트 ${result.events.length}개`;
   },
   compare(result) {

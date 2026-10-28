@@ -7,7 +7,7 @@
     "design-compare": "src/cli.js",
     "design-system-library": "hub/server.js"
   },
-  "files": ["src", "hub", "dist/runtime", "docs", "README.md"],
+  "files": ["src", "hub", "dist/runtime", "docs", "examples", "README.md"],
   "scripts": {
     "prepack": "node scripts/package-runtime.mjs",
     "test": "node --test --test-concurrency=4 tests/*.test.js ../tests/*.test.mjs",

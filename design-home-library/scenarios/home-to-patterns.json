@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "url": "http://127.0.0.1:4184/index.html",
+  "action": { "type": "click", "selector": ".hero-actions .btn-primary" },
+  "expected": { "selector": "#canvas-grid", "state": "visible" },
+  "viewport": { "width": 1280, "height": 900 },
+  "theme": "light",
+  "observationMs": 900,
+  "expectation": "review"
+}

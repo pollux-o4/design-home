@@ -23,16 +23,17 @@ export async function runCli(args, { app, stdout = console.log, stderr = console
     operation = await activityStore(values.store).begin({ command: name, args, taskId: values.task });
     const result = await command.execute(app, name === 'brief' ? { ...request, operation } : request);
     const output = name === 'compare' ? { ...result, nextActions: nextActions(result, args) } : result;
-    const exitCode = result.status === 'fail' ? 1 : result.status === 'error' ? 2 : 0;
+    const policyGate = name === 'motion' && values.strict && ['motion', 'instant'].includes(result.expectation);
+    const exitCode = result.status === 'error' || (policyGate && result.status === 'inconclusive') ? 2 : result.status === 'fail' || (policyGate && result.status === 'review') ? 1 : 0;
     const projected = jsonOutput(name, output, values);
     if (name === 'motion') {
       const { screenshots, ...summary } = projected;
       Object.assign(projected, summary);
       delete projected.screenshots;
-      projected.evidence = { images: {
-        before: await operation.image('before.png', screenshots.before, '동작 전'),
-        after: await operation.image('after.png', screenshots.after, '동작 후'),
-      } };
+      const images = { before: await operation.image('before.png', screenshots.before, '동작 전') };
+      for (const i of [1, 2, 3, 4]) if (screenshots[`frame-${i}`]) images[`frame-${i}`] = await operation.image(`frame-${i}.png`, screenshots[`frame-${i}`], `동작 중 ${i}`);
+      images.after = await operation.image('after.png', screenshots.after, '동작 후');
+      projected.evidence = { ...summary.evidence, images };
     }
     if (name === 'compare') {
       const images = {};

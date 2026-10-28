@@ -9,6 +9,7 @@ const labels = {
   inventory: "후보 수집",
   inspect: "세부 조회",
   register: "기준 등록",
+  motion: "화면 변화 관찰",
 };
 const states = {
   prepared: "준비 완료",
@@ -18,6 +19,10 @@ const states = {
   fail: "차이 발견",
   error: "실행 오류",
   linked: "등록 완료",
+  review: "검토 필요",
+  "motion-observed": "움직임 관찰됨",
+  inconclusive: "판정 보류",
+  accepted: "즉시 전환 확인",
 };
 export const activityTitle = (entry) =>
   `${labels[entry.command] ?? entry.command} · ${states[entry.output.status] ?? entry.output.status}`;
@@ -70,6 +75,11 @@ function renderDetail(entry) {
   const intent = entry.output.intent ?? entry.output.metadata?.title;
   if (intent) card.append(element("p", intent));
   if (entry.output.message) card.append(element("p", entry.output.message));
+  if (entry.command === "motion" && entry.output.coverage) {
+    const { coverage, evidence } = entry.output;
+    card.append(element("p", `화면 ${coverage.frameSamples}장 · 변화 ${(entry.output.changeRatio * 100).toFixed(1)}% · 관찰 ${coverage.actualDurationMs}ms`));
+    card.append(element("p", `CSS 이벤트 ${evidence?.cssEvents ?? 0}개 · ${coverage.note}`, "muted"));
+  }
   for (const failure of entry.output.failures ?? [])
     card.append(element("p", `${failure.title}: ${failure.message}`));
   const images = element("div", null, "activity-images"),

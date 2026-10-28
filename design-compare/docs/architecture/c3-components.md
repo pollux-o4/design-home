@@ -74,7 +74,7 @@ flowchart TB
 | Inventory | [`src/application/inventory.js`](../../src/application/inventory.js) | 프로젝트 파일의 내보낸 이름과 미리보기 파일을 정적 수집 |
 | Catalog | [`src/catalog/index.js`](../../src/catalog/index.js), [`linked.js`](../../src/catalog/linked.js) | 사진·연결 기준 저장, 자료 검증, 실행별 파일 발행 |
 | Capture | [`src/capture/index.js`](../../src/capture/index.js), [`page.js`](../../src/capture/page.js) | Chromium 실행·종료, 조건 고정, 샘플 열기, 측정·이미지 준비 |
-| Motion audit | [`src/audit/motion.js`](../../src/audit/motion.js) | 지정한 클릭 전후의 화면 차이와 전환 이벤트 관찰; 판단은 호출자에 남김 |
+| Motion audit | [`src/audit/motion.js`](../../src/audit/motion.js) | 프로젝트 시나리오를 실행하고 화면 프레임과 전환 이벤트를 관찰 |
 | Comparison | [`src/comparison/index.js`](../../src/comparison/index.js) | 순수 측정값·이미지 비교, 허용 정책과 판정; 수정 방향은 차이에서 파생 |
 | Reporting | [`src/reporting/artifacts.js`](../../src/reporting/artifacts.js) | 판정에서 정적 HTML·report.json·repair.json·이미지 생성 |
 | Domain | [`src/domain/records.js`](../../src/domain/records.js)와 같은 폴더 | 기준·보고서·ID·부분 매핑·파일명 공통 계약 |
@@ -115,7 +115,7 @@ flowchart LR
 
 `accessibility.js`는 표시와 사용자 입력만 소유한다. `shared/js/design-system-audit-runtime.js`는 WCAG 대비 계산과 DOM 루트·열린 Shadow DOM의 기본 컨트롤·스크롤바 신호 검사를 소유하며, `design-system-audit.js`는 웹의 module facade다. `audit/ui.js`는 같은 runtime으로 지정한 화면 크기·테마·열기 상태의 프레임들을 검사해 CLI 결과를 만든다. 프레임 실패는 `coverage`에 노출한다. `data-ds-native="allow"`와 CLI `--allow`는 의도적인 시스템 UI의 정책 경계이고, `--strict`만 platform 분류를 게이트 실패로 바꾼다.
 
-`audit/motion.js`는 컨트롤 검사와 독립적으로 클릭 전후 화면과 CSS 이벤트만 관찰한다. CLI는 결과와 이미지를 Activity에 보관하고 프로젝트에는 런타임 의존성이나 게이트를 추가하지 않는다.
+`audit/motion-scenario.js`는 프로젝트 시나리오를 검증하고, `audit/motion.js`는 독립 브라우저에서 관찰하며, `audit/motion-evidence.js`는 근거를 비교한다. CLI는 결과와 프레임을 Activity에 보관하고 선택적인 정책 게이트를 제공한다. 프로젝트 런타임에 의존성을 추가하지 않는다.
 
 CLI가 AI에게 출력하는 지점에서 Activity 기록을 발행한다. 작업 전 준비의 PNG와 비교·조회 근거는 해당 호출에 보관하며, 웹은 보관된 자료를 읽는다.
 
