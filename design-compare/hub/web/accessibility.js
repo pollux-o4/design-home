@@ -5,6 +5,8 @@ const targetLabels = { text: "일반 텍스트", large: "큰 텍스트", compone
 const findingLabels = {
   "square-control": "사각형 컨트롤",
   "native-select": "기본 select",
+  "native-select-popup": "기본 선택 목록",
+  "native-datalist": "기본 자동완성 목록",
   "native-date-picker": "기본 날짜 선택",
   "native-file-input": "기본 파일 선택",
   "native-color-input": "기본 색 선택",

@@ -200,10 +200,11 @@
           </section>
           <section id="controls-tool" class="tool-card" aria-labelledby="audit-title" hidden>
             <h2 id="audit-title">디자인 일관성 검사</h2>
-            <p>기본 선택·날짜·파일·색·범위 입력과 스크롤바를 찾아 검토 대상으로 표시합니다.</p>
+            <p>기본 선택 목록·날짜·파일·색·범위 입력과 스크롤바를 찾아 검토 대상으로 표시합니다.</p>
             <div id="control-audit-sample" class="audit-sample" aria-label="점검 예시">
               <button type="button" style="border-radius: 0">사각형 버튼</button>
               <select aria-label="기본 드롭다운"><option>기본 select</option></select>
+              <select aria-label="꾸민 선택기의 기본 목록" style="appearance: none; border-radius: 12px"><option>꾸민 선택기</option></select>
               <input type="date" aria-label="기본 날짜 선택" />
               <input type="file" aria-label="기본 파일 선택" />
               <input type="color" aria-label="기본 색 선택" value="#0071e3" />
@@ -216,7 +217,7 @@
             </div>
             <button id="run-control-audit" type="button">이 예시 점검</button>
             <div id="control-audit-results" role="status" aria-live="polite"></div>
-            <p class="tool-note">신호는 자동 오류가 아닙니다. 의도적으로 시스템 UI를 쓴 곳은 <code>data-ds-native="allow"</code>로 제외하세요.</p>
+            <p class="tool-note">꾸민 선택기도 열리는 목록은 시스템 UI일 수 있습니다. 의도적인 사용은 <code>data-ds-native="allow"</code>로 제외하세요.</p>
             <code class="tool-code">import { inspectControlBaseline } from "/shared/js/design-system-audit.js";
 inspectControlBaseline(document.querySelector("#app"), {
   allow: ["[data-ds-native='allow']"],

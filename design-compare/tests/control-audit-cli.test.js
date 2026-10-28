@@ -57,6 +57,17 @@ test("audit waits for a routed tool and reports browser-native controls while ho
   }
 });
 
+test("the real Design Home theme selector exposes its native menu in the audit", async () => {
+  const server = createHubServer();
+  await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+  try {
+    const result = await auditUi({ url: `http://127.0.0.1:${server.address().port}/index.html` });
+    assert.ok(result.findings.some(({ kind, target, name }) => kind === "native-select-popup" && target === "#dh-theme-select" && name === "색상 테마"));
+  } finally {
+    await new Promise((resolve) => server.close(resolve));
+  }
+});
+
 test("audit works with strict CSP and includes a styled date input selected as the root", async () => {
   const server = createServer((_request, response) => {
     response.writeHead(200, { 'Content-Type': 'text/html', 'Content-Security-Policy': "default-src 'none'; style-src 'unsafe-inline'" });
@@ -67,6 +78,24 @@ test("audit works with strict CSP and includes a styled date input selected as t
     const result = await auditUi({ url: `http://127.0.0.1:${server.address().port}/`, selector: '#booking', strict: true });
     assert.equal(result.status, 'fail');
     assert.ok(result.findings.some(({ kind }) => kind === 'native-date-picker'));
+  } finally {
+    await new Promise((resolve) => server.close(resolve));
+  }
+});
+
+test("styled native select, color picker and datalist remain discoverable in a project scan", async () => {
+  const server = createServer((_request, response) => {
+    response.writeHead(200, { 'Content-Type': 'text/html' });
+    response.end('<style>#custom, #custom::picker(select) { appearance: base-select; }</style><select id="theme" aria-label="색상 테마" style="appearance:none"><option>시스템</option><option>다크</option></select><input id="color" type="color" style="appearance:none"><input id="search" list="items"><datalist id="items"><option value="one"></datalist><select id="list" multiple><option>목록</option></select><select id="custom"><option>커스텀</option></select>');
+  });
+  await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
+  try {
+    const result = await auditUi({ url: `http://127.0.0.1:${server.address().port}/` });
+    assert.ok(result.findings.some(({ kind, target }) => kind === 'native-select-popup' && target === '#theme'));
+    assert.ok(result.findings.some(({ kind, target }) => kind === 'native-color-input' && target === '#color'));
+    assert.ok(result.findings.some(({ kind, target }) => kind === 'native-datalist' && target === '#search'));
+    assert.equal(result.findings.some(({ kind, target }) => kind === 'native-select-popup' && target === '#list'), false);
+    assert.equal(result.findings.some(({ category, target }) => category === 'platform' && target === '#custom'), false);
   } finally {
     await new Promise((resolve) => server.close(resolve));
   }

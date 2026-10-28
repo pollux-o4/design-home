@@ -32,8 +32,10 @@
 
   function nameOf(element) {
     if (element === document.scrollingElement) return "페이지 스크롤바";
+    const label = element.labels?.[0]?.cloneNode(true);
+    label?.querySelectorAll("input, select, textarea, button").forEach((control) => control.remove());
     return element.getAttribute("aria-label")
-      || element.labels?.[0]?.textContent?.trim()
+      || label?.textContent?.trim()
       || element.getAttribute("placeholder")
       || element.getAttribute("name")
       || (element.matches("button, select") ? element.textContent.trim().slice(0, 100) : "")
@@ -59,7 +61,7 @@
       if (currentStyle.display === "none" || Number(currentStyle.opacity) === 0) return false;
       if (currentStyle.clipPath === "inset(50%)" || currentStyle.clip === "rect(0px, 0px, 0px, 0px)") return false;
     }
-    return bounds.right > 0 && bounds.bottom > 0;
+    return bounds.right + scrollX > 0 && bounds.bottom + scrollY > 0;
   }
 
   function isAllowed(element, allow) {
@@ -68,7 +70,13 @@
   }
 
   function nativeAppearance(style) {
-    return !["", "none"].includes(String(style.appearance).toLowerCase());
+    return !["", "none", "base-select"].includes(String(style.appearance).toLowerCase());
+  }
+
+  function hasNativeSelectPopup(element, style) {
+    if (element.multiple || element.size > 1) return false;
+    const picker = getComputedStyle(element, "::picker(select)");
+    return style.appearance !== "base-select" || picker.appearance !== "base-select";
   }
 
   function finding(kind, category, element, policy) {
@@ -133,8 +141,14 @@
       if (element.matches("select") && nativeAppearance(style)) {
         findings.push(finding("native-select", "platform", element, policy));
       }
+      if (element.matches("select") && hasNativeSelectPopup(element, style)) {
+        findings.push(finding("native-select-popup", "platform", element, policy));
+      }
+      if (element.matches("input[list]") && element.list) {
+        findings.push(finding("native-datalist", "platform", element, policy));
+      }
       const nativeKind = nativeInputKinds.get(element.type);
-      if (nativeKind && (["native-file-input", "native-date-picker"].includes(nativeKind) || nativeAppearance(style))) {
+      if (nativeKind && (["native-file-input", "native-date-picker", "native-color-input"].includes(nativeKind) || nativeAppearance(style))) {
         findings.push(finding(nativeKind, "platform", element, policy));
       }
       const bounds = element.getBoundingClientRect();
