@@ -112,7 +112,7 @@ flowchart LR
 
 [`hub/web/`](../../hub/web/)는 Library를 직접 import하지 않고 HTTP 결과를 표시한다. 비교 보고서의 브라우저 동작은 Reporting이 생성하는 정적 HTML 내부에 포함된다.
 
-`accessibility.js`는 표시와 사용자 입력만 소유한다. `shared/js/design-system-audit-runtime.js`는 WCAG 대비 계산과 전달받은 DOM 루트의 기본 컨트롤·스크롤바 신호 검사를 소유하며, `design-system-audit.js`는 웹의 module facade다. `audit/ui.js`는 같은 runtime을 검사 대상 페이지에 주입해 CLI 결과를 만든다. 따라서 화면과 CLI는 탐지 규칙을 복제하지 않는다. `data-ds-native="allow"`와 CLI `--allow`는 의도적인 시스템 UI의 정책 경계이고, `--strict`만 platform 분류를 게이트 실패로 바꾼다.
+`accessibility.js`는 표시와 사용자 입력만 소유한다. `shared/js/design-system-audit-runtime.js`는 WCAG 대비 계산과 DOM 루트·열린 Shadow DOM의 기본 컨트롤·스크롤바 신호 검사를 소유하며, `design-system-audit.js`는 웹의 module facade다. `audit/ui.js`는 같은 runtime으로 지정한 화면 크기·테마·열기 상태의 프레임들을 검사해 CLI 결과를 만든다. 프레임 실패는 `coverage`에 노출한다. `data-ds-native="allow"`와 CLI `--allow`는 의도적인 시스템 UI의 정책 경계이고, `--strict`만 platform 분류를 게이트 실패로 바꾼다.
 
 CLI가 AI에게 출력하는 지점에서 Activity 기록을 발행한다. 작업 전 준비의 PNG와 비교·조회 근거는 해당 호출에 보관하며, 웹은 보관된 자료를 읽는다.
 

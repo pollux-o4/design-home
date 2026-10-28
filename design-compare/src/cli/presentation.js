@@ -31,8 +31,8 @@ const textPresenters = {
   inspect: result => JSON.stringify(result, null, 2),
   register: result => `기준 등록: ${result.referenceId}\n${result.directory}\n다음: ./design inspect --reference ${result.referenceId}`,
   audit(result) {
-    const state = result.status === 'pass' ? '일관성 검사 통과' : result.status === 'fail' ? '시스템 기본 UI 발견' : '검토할 UI 신호 발견';
-    return `${state} · 시스템 기본 UI ${result.summary.platform}개 · 형태·조작 영역 ${result.summary.review}개\n${result.findings.map(({ kind, name, target }) => `${kind}: ${name} (${target})`).join('\n')}`;
+    const state = result.status === 'pass' ? '일관성 검사 통과' : result.status === 'fail' ? '시스템 기본 UI 발견' : result.status === 'error' ? '일부 화면 검사 실패' : '검토할 UI 신호 발견';
+    return `${state} · 시스템 기본 UI ${result.summary.platform}개 · 형태·조작 영역 ${result.summary.review}개\n${result.findings.map(({ kind, name, target, framePath = [], shadowPath = [] }) => `${kind}: ${name} (${[...framePath, ...shadowPath, target].join(' → ')})`).join('\n')}${result.coverage?.length ? `\n검사하지 못한 프레임: ${result.coverage.map(item => item.framePath.join(' → ')).join(', ')}` : ''}`;
   },
   compare(result) {
     const parts = result.repair.filter(group => group.violations).map(group => `${group.part} ${group.violations}개`).join(' · ');

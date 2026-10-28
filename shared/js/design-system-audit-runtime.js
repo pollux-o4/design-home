@@ -56,7 +56,7 @@
   function isVisible(element, style) {
     const bounds = element.getBoundingClientRect();
     if (bounds.width <= 0 || bounds.height <= 0 || style.visibility !== "visible" || element.closest("[hidden], [inert]")) return false;
-    for (let current = element; current; current = current.parentElement) {
+    for (let current = element; current; current = current.parentElement || current.getRootNode().host) {
       const currentStyle = current === element ? style : getComputedStyle(current);
       if (currentStyle.display === "none" || Number(currentStyle.opacity) === 0) return false;
       if (currentStyle.clipPath === "inset(50%)" || currentStyle.clip === "rect(0px, 0px, 0px, 0px)") return false;
@@ -65,8 +65,11 @@
   }
 
   function isAllowed(element, allow) {
-    if (element.closest('[data-ds-native="allow"]')) return true;
-    return allow.some((selector) => element.matches(selector) || element.closest(selector));
+    for (let current = element; current; current = current.getRootNode().host) {
+      if (current.closest('[data-ds-native="allow"]')) return true;
+      if (allow.some((selector) => current.matches(selector) || current.closest(selector))) return true;
+    }
+    return false;
   }
 
   function nativeAppearance(style) {
@@ -117,7 +120,7 @@
   }
 
   function controlsWithin(root) {
-    // shortcut: 닫힌 Shadow DOM과 OS 팝업은 DOM으로 관찰할 수 없음, 상태별 브라우저 검증을 도입할 때 범위 재검토.
+    // shortcut: 닫힌 Shadow DOM과 OS 팝업 내부는 DOM으로 관찰할 수 없음, 플랫폼 검사 지원 시 재검토.
     const selector = "button, select, input:not([type=hidden]), textarea";
     return [...(root.matches?.(selector) ? [root] : []), ...root.querySelectorAll(selector)];
   }
@@ -132,38 +135,39 @@
   function inspectControlBaseline(root = document, options = {}) {
     const policy = normalizedPolicy(options);
     const findings = [];
-    for (const element of controlsWithin(root)) {
-      const style = getComputedStyle(element);
-      if (!isVisible(element, style) || isAllowed(element, policy.allow)) continue;
-      if (parseFloat(style.borderTopLeftRadius) <= 2 && (!element.matches("select") || style.appearance === "none")) {
-        findings.push(finding("square-control", "shape", element, policy));
-      }
-      if (element.matches("select") && nativeAppearance(style)) {
-        findings.push(finding("native-select", "platform", element, policy));
-      }
-      if (element.matches("select") && hasNativeSelectPopup(element, style)) {
-        findings.push(finding("native-select-popup", "platform", element, policy));
-      }
-      if (element.matches("input[list]") && element.list) {
-        findings.push(finding("native-datalist", "platform", element, policy));
-      }
-      const nativeKind = nativeInputKinds.get(element.type);
-      if (nativeKind && (["native-file-input", "native-date-picker", "native-color-input"].includes(nativeKind) || nativeAppearance(style))) {
-        findings.push(finding(nativeKind, "platform", element, policy));
-      }
-      const bounds = element.getBoundingClientRect();
-      if (bounds.width < 24 || bounds.height < 24) {
-        findings.push(finding("small-target", "target", element, policy));
-      }
-    }
-    if (policy.scrollbars) {
-      for (const element of scrollablesWithin(root)) {
-        const style = getComputedStyle(element);
-        if (!isVisible(element, style) || isAllowed(element, policy.allow)) continue;
-        if (isScrollable(element, style) && !hasCustomScrollbar(element, style)) {
-          findings.push(finding("native-scrollbar", "platform", element, policy));
+    const roots = [{ root, shadowPath: [] }];
+    for (let index = 0; index < roots.length; index++) {
+      const entry = roots[index];
+      const nodes = [...(entry.root.nodeType === 1 ? [entry.root] : []), ...entry.root.querySelectorAll('*')];
+      for (const node of nodes) {
+        if (node.shadowRoot && isVisible(node, getComputedStyle(node)) && !isAllowed(node, policy.allow)) {
+          roots.push({ root: node.shadowRoot, shadowPath: [...entry.shadowPath, targetOf(node)] });
         }
       }
+    }
+    for (const entry of roots) {
+      const begin = findings.length;
+      for (const element of controlsWithin(entry.root)) {
+        const style = getComputedStyle(element);
+        if (!isVisible(element, style) || isAllowed(element, policy.allow)) continue;
+        if (parseFloat(style.borderTopLeftRadius) <= 2 && (!element.matches("select") || style.appearance === "none")) findings.push(finding("square-control", "shape", element, policy));
+        if (element.matches("select") && nativeAppearance(style)) findings.push(finding("native-select", "platform", element, policy));
+        if (element.matches("select") && hasNativeSelectPopup(element, style)) findings.push(finding("native-select-popup", "platform", element, policy));
+        if (element.matches("input[list]") && element.list) findings.push(finding("native-datalist", "platform", element, policy));
+        const nativeKind = nativeInputKinds.get(element.type);
+        if (nativeKind && (["native-file-input", "native-date-picker", "native-color-input"].includes(nativeKind) || nativeAppearance(style))) findings.push(finding(nativeKind, "platform", element, policy));
+        const bounds = element.getBoundingClientRect();
+        if (bounds.width < 24 || bounds.height < 24) findings.push(finding("small-target", "target", element, policy));
+      }
+      if (policy.scrollbars) {
+        for (const element of scrollablesWithin(entry.root)) {
+          if (element.nodeType !== 1) continue;
+          const style = getComputedStyle(element);
+          if (!isVisible(element, style) || isAllowed(element, policy.allow)) continue;
+          if (isScrollable(element, style) && !hasCustomScrollbar(element, style)) findings.push(finding("native-scrollbar", "platform", element, policy));
+        }
+      }
+      if (entry.shadowPath.length) for (const item of findings.slice(begin)) item.shadowPath = entry.shadowPath;
     }
     return findings;
   }

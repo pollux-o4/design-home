@@ -69,9 +69,9 @@ AI가 `registrationTemplate`의 이름·설명·분류·태그·검색어·실�
 - `list --json`: 저장된 기준 목록.
 - `inspect --reference ID --json`: 사진 기준은 저장된 측정값, 원본 연결은 메타데이터·선택자·조건 조회.
 - `inspect --report /비교결과/report.json --part title --json`: 필요한 부분의 수정 근거와 보관 이미지 조회. 조회 종료 코드는 0이고 비교 판정은 `comparisonStatus`에 있다.
-- `audit --url http://localhost:3000 --selector '#app' --json`: 기본 select·날짜·파일·색·범위·숫자·검색 입력과 스크롤바, 사각형·작은 조작 영역을 검사한다. `data-ds-native="allow"` 또는 `--allow '[data-ds-native=allow]'`는 의도적인 시스템 UI를 제외한다. 기본은 검토 결과와 종료 코드 0이며, `--strict`일 때만 시스템 기본 UI가 종료 코드 1이 된다.
+- `audit --url http://localhost:3000 --selector '#app' --viewport 390x844 --theme dark --open-selector '#open-menu' --json`: 지정한 화면 크기·테마와 열기 동작 후 기본 UI를 검사한다. 보이는 iframe과 열린 Shadow DOM도 검사하며 `framePath`·`shadowPath`로 위치를 식별한다. `data-ds-native="allow"` 또는 `--allow '[data-ds-native=allow]'`는 의도적인 시스템 UI를 제외한다. 기본은 검토 결과와 종료 코드 0이며, `--strict`일 때만 시스템 기본 UI가 종료 코드 1이 된다. 프레임 검사가 실패하면 `coverage`에 사유가 남고 종료 코드 2로 불완전함을 알린다. `--open-selector`는 실제 클릭이므로 검사 환경에서 안전한 UI 열기 동작에만 사용한다.
 
-검사는 Chromium에서 현재 렌더링된 상태의 DOM과 계산된 스타일을 기준으로 한다. 선택기·날짜·파일·색 입력은 외형을 꾸며도 시스템 선택기가 열릴 수 있어 검토 대상으로 포함한다. 선택기와 `::picker(select)`가 모두 `appearance: base-select`이면 커스텀 목록으로 구분한다. 네이티브 팝업 내부, 닫힌 메뉴, 다른 브라우저·기기와 Shadow DOM 내부는 이 검사만으로 보증할 수 없으므로 필요한 화면과 상태를 별도로 검토한다. CSS 스크롤바 판정도 근거가 제한적이므로 프로젝트에서 의도적으로 사용한 영역은 허용 규칙으로 명시한다.
+검사는 Chromium에서 현재 렌더링된 상태의 DOM과 계산된 스타일을 기준으로 한다. 열기 후 비동기로 표시되는 영역은 `--selector`에 해당 영역을 지정해 표시될 때까지 기다린다. 선택기·날짜·파일·색 입력은 외형을 꾸며도 시스템 선택기가 열릴 수 있어 검토 대상으로 포함한다. 선택기와 `::picker(select)`가 모두 `appearance: base-select`이면 커스텀 목록으로 구분한다. 네이티브 팝업 내부, 닫힌 Shadow DOM, 별도로 열지 않은 메뉴와 다른 브라우저·기기는 이 검사만으로 보증할 수 없다. CSS 스크롤바 판정도 근거가 제한적이므로 프로젝트에서 의도적으로 사용한 영역은 허용 규칙으로 명시한다.
 
 `./design`은 호출한 현재 폴더를 유지한다. 프로젝트 설정 파일의 상위 탐색과 상대 경로 해석은 CLI·웹이 공유한다. 등록 JSON·보고서 인자는 호출 폴더 기준이며 절대 경로를 권장한다. 명시적인 `--store`가 없으면 설정의 store를 사용한다. 다른 프로젝트에서는 설치한 `design-compare`와 `design-system-library` 명령을 사용한다.
 

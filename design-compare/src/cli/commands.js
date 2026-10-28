@@ -87,14 +87,17 @@ export const commands = {
     execute: (app, request) => app.comparePage(request),
   },
   audit: {
-    usage: './design audit --url URL [--selector body] [--allow CSS ...] [--theme light|dark] [--strict] [--json]',
-    options: ['url', 'selector', 'allow', 'theme', 'strict', 'store', 'json'], stage: () => 'audit',
+    usage: './design audit --url URL [--selector body] [--open-selector CSS] [--viewport 390x844] [--allow CSS ...] [--theme light|dark] [--strict] [--json]',
+    options: ['url', 'selector', 'open-selector', 'viewport', 'allow', 'theme', 'strict', 'store', 'json'], stage: () => 'audit',
     prepare(values) {
       if (!values.url) throw new Error('audit: --url 필요');
       const url = new URL(values.url);
       if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) throw new Error('인증정보 없는 HTTP(S) URL 필요');
       if (values.theme && !['light', 'dark'].includes(values.theme)) throw new Error('--theme: light 또는 dark 필요');
-      return { url: values.url, selector: values.selector ?? 'body', allow: values.allow ?? [], strict: Boolean(values.strict), theme: values.theme ?? 'light', store: values.store };
+      const dimensions = values.viewport && /^(\d+)x(\d+)$/.exec(values.viewport);
+      if (values.viewport && (!dimensions || Number(dimensions[1]) < 1 || Number(dimensions[2]) < 1 || Number(dimensions[1]) > 4096 || Number(dimensions[2]) > 4096)) throw new Error('--viewport 형식: 390x844 (1~4096)');
+      return { url: values.url, selector: values.selector ?? 'body', allow: values.allow ?? [], strict: Boolean(values.strict), theme: values.theme ?? 'light', store: values.store,
+        ...(dimensions ? { viewport: { width: Number(dimensions[1]), height: Number(dimensions[2]) } } : {}), ...(values['open-selector'] ? { openSelector: values['open-selector'] } : {}) };
     },
     execute: (app, request) => app.auditUi(request),
   },

@@ -16,7 +16,7 @@ test("audit passes its project policy to the UI consistency scanner and fails on
   const output = [];
   const exit = await runCli([
     "audit", "--url", "http://127.0.0.1:4184", "--selector", "#app",
-    "--allow", "[data-ds-native=allow]", "--strict", "--json",
+    "--allow", "[data-ds-native=allow]", "--viewport", "390x844", "--open-selector", "#open", "--strict", "--json",
   ], { app, stdout: (value) => output.push(JSON.parse(value)) });
 
   assert.equal(exit, 1);
@@ -27,6 +27,8 @@ test("audit passes its project policy to the UI consistency scanner and fails on
     strict: true,
     theme: "light",
     store: requests[0].store,
+    viewport: { width: 390, height: 844 },
+    openSelector: "#open",
   }]);
   assert.equal(output[0].status, "fail");
 });
@@ -98,5 +100,44 @@ test("styled native select, color picker and datalist remain discoverable in a p
     assert.equal(result.findings.some(({ category, target }) => category === 'platform' && target === '#custom'), false);
   } finally {
     await new Promise((resolve) => server.close(resolve));
+  }
+});
+
+test("audit scans open shadow roots and visible iframe content in an explicitly opened mobile state", async () => {
+  const server = createServer((_request, response) => {
+    response.writeHead(200, { 'Content-Type': 'text/html' });
+    response.end(`<!doctype html><button id="open" onclick="document.querySelector('#panel').hidden=false">열기</button>
+      <section id="panel" hidden><div id="host"></div><iframe id="frame" srcdoc='<select id="inside"><option>A</option></select>'></iframe></section>
+      <script>document.querySelector('#host').attachShadow({mode:'open'}).innerHTML='<select id="shadow"><option>A</option></select>'</script>`);
+  });
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  try {
+    const url = `http://127.0.0.1:${server.address().port}/`;
+    const result = await auditUi({ url, openSelector: '#open', viewport: { width: 390, height: 844 }, theme: 'dark' });
+    assert.deepEqual(result.target.viewport, { width: 390, height: 844 });
+    assert.equal(result.target.theme, 'dark');
+    assert.ok(result.findings.some(finding => finding.kind === 'native-select-popup' && finding.target === '#shadow' && finding.shadowPath?.[0] === '#host'));
+    assert.ok(result.findings.some(finding => finding.kind === 'native-select-popup' && finding.target === '#inside' && finding.framePath?.[0] === '#frame'));
+    assert.deepEqual(result.coverage, []);
+    const closed = await auditUi({ url });
+    assert.equal(closed.findings.some(finding => finding.target === '#shadow' || finding.target === '#inside'), false);
+  } finally {
+    await new Promise(resolve => server.close(resolve));
+  }
+});
+
+test("a sandboxed iframe is inspected when the browser can access it", async () => {
+  const server = createServer((_request, response) => {
+    response.writeHead(200, { 'Content-Type': 'text/html' });
+    response.end('<iframe id="restricted" sandbox srcdoc="<select><option>A</option></select>"></iframe>');
+  });
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  try {
+    const result = await auditUi({ url: `http://127.0.0.1:${server.address().port}/` });
+    assert.equal(result.status, 'review');
+    assert.ok(result.findings.some(item => item.kind === 'native-select-popup' && item.framePath?.[0] === '#restricted'));
+    assert.deepEqual(result.coverage, []);
+  } finally {
+    await new Promise(resolve => server.close(resolve));
   }
 });
