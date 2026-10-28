@@ -90,6 +90,16 @@
   color-scheme: light;
 }
 
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 220ms;
+  animation-timing-function: ease-in-out;
+}
+
 .ui-icon {
   width: 20px;
   height: 20px;
@@ -108,6 +118,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0s;
+  }
+
   *,
   *::before,
   *::after {
