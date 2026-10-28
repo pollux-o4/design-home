@@ -221,6 +221,7 @@ inspectControlBaseline(document.querySelector("#app"), {
   allow: ["[data-ds-native='allow']"],
 });</code>
             <details class="audit-usage"><summary>프로젝트와 CI에서 검사하기</summary><code class="tool-code">design-compare audit --url http://localhost:3000 --selector "#app" --strict --json</code></details>
+            <details class="audit-usage"><summary>화면 전환 검토하기</summary><p class="tool-note">클릭 전후 화면과 실제 움직임을 함께 확인합니다. 결과는 검토 신호입니다.</p><code class="tool-code">design-compare motion --url http://localhost:3000 --action "#open-page" --json</code></details>
           </section>
         </div>
       </section>

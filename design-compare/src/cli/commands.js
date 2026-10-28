@@ -101,4 +101,18 @@ export const commands = {
     },
     execute: (app, request) => app.auditUi(request),
   },
+  motion: {
+    usage: './design motion --url URL --action CSS [--viewport 390x844] [--theme light|dark] [--json]',
+    options: ['url', 'action', 'viewport', 'theme', 'store', 'json'], stage: () => 'capture',
+    prepare(values) {
+      if (!values.url || !values.action) throw new Error('motion: --url, --action 필요');
+      const url = new URL(values.url);
+      if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) throw new Error('인증정보 없는 HTTP(S) URL 필요');
+      if (values.theme && !['light', 'dark'].includes(values.theme)) throw new Error('--theme: light 또는 dark 필요');
+      const dimensions = values.viewport && /^(\d+)x(\d+)$/.exec(values.viewport);
+      if (values.viewport && (!dimensions || Number(dimensions[1]) < 1 || Number(dimensions[2]) < 1 || Number(dimensions[1]) > 4096 || Number(dimensions[2]) > 4096)) throw new Error('--viewport 형식: 390x844 (1~4096)');
+      return { url: values.url, action: values.action, theme: values.theme ?? 'light', ...(dimensions ? { viewport: { width: Number(dimensions[1]), height: Number(dimensions[2]) } } : {}) };
+    },
+    execute: (app, request) => app.auditMotion(request),
+  },
 };

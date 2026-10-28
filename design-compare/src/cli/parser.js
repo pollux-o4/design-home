@@ -7,7 +7,7 @@ const string = { type: 'string' };
 const options = {
   help: { type: 'boolean', short: 'h' }, json: { type: 'boolean' }, details: { type: 'boolean' }, strict: { type: 'boolean' },
   intent: string, 'base-url': string, limit: string, task: string,
-  'open-selector': string, project: string, manifest: string,
+  'open-selector': string, action: string, project: string, manifest: string,
   tag: { type: 'string', multiple: true }, query: string, id: string, reference: string, candidate: string, report: string, url: string, selector: string, store: string,
   allow: { type: 'string', multiple: true },
   part: { type: 'string', multiple: true }, ignore: { type: 'string', multiple: true },
@@ -25,6 +25,7 @@ ${Object.values(commands).map(command => command.usage).join('\n')}
 비교: --ignore CSS속성 (반복 가능) · --pixel-budget 0~1 (기본 ${DEFAULT_PIXEL_BUDGET})
 일관성: audit --url URL [--selector body] [--open-selector CSS] [--viewport 390x844] [--theme dark] [--allow CSS] [--strict]
 검사하지 못한 iframe이 있으면 종료 코드 2 · strict일 때 시스템 기본 UI가 종료 코드 1
+전환: motion --url URL --action CSS · 클릭 전후 화면과 CSS 전환 신호를 검토
 AI 출력: --json 요약·부분별 개수·파일 경로 / --json --details 전체 차이
 부분 선택자는 루트 내부 기준. 동일한 이름으로 1:1 매핑.
 뷰포트·테마·상태는 등록 조건으로 고정. 별도 조건은 별도 ID로 등록.

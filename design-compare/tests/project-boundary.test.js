@@ -96,6 +96,10 @@ test('packed tool runs in an unrelated project without Design Home content or na
     assert.match(await page.locator('#control-audit-results').textContent(), /기본 날짜 선택/);
     const audit = await run(process.execPath, [join(packageRoot, 'src/cli.js'), 'audit', '--url', `http://127.0.0.1:${server.address().port}/design-library/#/accessibility/controls`, '--selector', '#control-audit-sample', '--json'], { cwd: projectRoot });
     assert.ok(JSON.parse(audit.stdout).findings.some(finding => finding.kind === 'native-date-picker'));
+    const motion = await run(process.execPath, [join(packageRoot, 'src/cli.js'), 'motion', '--url', `http://127.0.0.1:${server.address().port}/design-library/#/features`, '--action', 'a[href="#/accessibility"]', '--json'], { cwd: projectRoot });
+    const motionResult = JSON.parse(motion.stdout);
+    assert.ok(['review', 'motion-observed', 'inconclusive'].includes(motionResult.status));
+    assert.ok((await readFile(motionResult.evidence.images.before)).length > 0);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
     assert.deepEqual(errors, []);
     const html = await readFile(join(packageRoot, 'dist/runtime/design-library/index.html'), 'utf8');

@@ -25,6 +25,15 @@ export async function runCli(args, { app, stdout = console.log, stderr = console
     const output = name === 'compare' ? { ...result, nextActions: nextActions(result, args) } : result;
     const exitCode = result.status === 'fail' ? 1 : result.status === 'error' ? 2 : 0;
     const projected = jsonOutput(name, output, values);
+    if (name === 'motion') {
+      const { screenshots, ...summary } = projected;
+      Object.assign(projected, summary);
+      delete projected.screenshots;
+      projected.evidence = { images: {
+        before: await operation.image('before.png', screenshots.before, '동작 전'),
+        after: await operation.image('after.png', screenshots.after, '동작 후'),
+      } };
+    }
     if (name === 'compare') {
       const images = {};
       for (const [key, label] of [['reference', '기준 화면'], ['candidate', '개발 화면'], ['diff', '차이 화면']]) images[key] = await operation.image(FILES[key], await readFile(join(result.directory, FILES[key])), label);

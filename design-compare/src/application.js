@@ -11,6 +11,7 @@ import { capture } from './capture/index.js';
 import { inspectReference, inspectReport } from './application/queries.js';
 import { comparePage as compareWorkflow } from './application/compare.js';
 import { auditUi } from './audit/ui.js';
+import { auditMotion } from './audit/motion.js';
 
 // Composition root: production adapters are replaceable by concrete test adapters.
 export function createApplication({ repositoryFor = catalog, capturePage = capture, read = readFile, now = () => new Date().toISOString(), project = loadProject() } = {}) {
@@ -47,6 +48,7 @@ export function createApplication({ repositoryFor = catalog, capturePage = captu
       return compareWorkflow(request, { repository: repositoryFor(request.store), capture: capturePage, read, now });
     },
     auditUi,
+    auditMotion,
   };
 }
 
