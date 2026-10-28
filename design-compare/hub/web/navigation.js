@@ -115,7 +115,7 @@ export function startNavigation(show) {
     if (accessibilityTool) {
       const [toolTitle, toolDescription] = accessibilityTool === "contrast-tool"
         ? ["색 대비 검사", "색 조합의 읽기 쉬운 정도를 즉시 확인하세요."]
-        : ["기본 UI 점검", "기본 형태로 남은 조작 요소를 찾아보세요."];
+        : ["디자인 일관성 검사", "시스템 기본 UI와 형태가 남은 조작 요소를 찾아보세요."];
       $("#screen-title").textContent = toolTitle;
       $("#screen-description").textContent = toolDescription;
       document.title = `${toolTitle} · Design System Library`;

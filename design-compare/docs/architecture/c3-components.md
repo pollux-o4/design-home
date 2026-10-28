@@ -31,6 +31,7 @@ flowchart TB
   catalog["Catalog\n기준 로드 · 등록 · 결과 발행"]
   capture["Capture\n페이지 준비 · DOM 측정 · 캡처"]
   comparison["Comparison\n스타일 · 좌표 · 픽셀 판정"]
+  audit["UI Consistency Audit\n시스템 기본 UI 신호 판정"]
   reporting["Reporting\nHTML · JSON · 이미지 자료 구성"]
   activity["Activity\n호출 결과 · 근거 이미지 보관 · 최근 기록"]
   domain["Domain\nID · 측정 자료 · 파일 계약"]
@@ -48,6 +49,7 @@ flowchart TB
   app --> catalog
   app --> capture
   app --> comparison
+  app --> audit
   app --> reporting
   reporting --> comparison
   app --> domain
@@ -65,7 +67,7 @@ flowchart TB
 |---|---|---|
 | CLI Adapter | [`src/cli/index.js`](../../src/cli/index.js), [`commands.js`](../../src/cli/commands.js) | 명령을 Application에 전달하고 종료 코드·요약·복구 안내 제공 |
 | Hub HTTP Adapter | [`hub/server.js`](../../hub/server.js) | 검색·맥락 조회는 호스트 Adapter, 기준 조회는 Application, 호출 기록은 Activity 호출 |
-| Application | [`src/application.js`](../../src/application.js), [`application/compare.js`](../../src/application/compare.js) | 저장소·캡처·파일 읽기·시간 Adapter를 조립하고 작업 흐름 실행 |
+| Application | [`src/application.js`](../../src/application.js), [`application/compare.js`](../../src/application/compare.js), [`audit/ui.js`](../../src/audit/ui.js) | 저장소·캡처·파일 읽기·시간 Adapter를 조립하고 비교·UI 일관성 작업 흐름 실행 |
 | Hub 호스트 Adapter | [`src/hub/index.js`](../../src/hub/index.js), [`context.js`](../../src/hub/context.js), [`search.js`](../../src/hub/search.js) | 현재 프로젝트 위치를 Library 설정으로 변환 |
 | Library | [`src/library/index.js`](../../src/library/index.js) | `createLibrary`의 검색·의도 선택·조회로 문서와 원본 접근; 태그·문서 검증도 내부 소유 |
 | Activity | [`src/activity/index.js`](../../src/activity/index.js) | CLI 출력과 제공 이미지의 보관·최근 10건 조회·허용 파일 읽기 |
@@ -110,7 +112,7 @@ flowchart LR
 
 [`hub/web/`](../../hub/web/)는 Library를 직접 import하지 않고 HTTP 결과를 표시한다. 비교 보고서의 브라우저 동작은 Reporting이 생성하는 정적 HTML 내부에 포함된다.
 
-`accessibility.js`는 표시와 사용자 입력만 소유하고, `shared/js/design-system-audit.js`는 WCAG 대비 계산과 전달받은 DOM 루트의 기본 컨트롤 신호 검사를 소유한다. 이 순수 계산과 DOM 검사는 Design System Library와 연결된 프로젝트가 함께 사용한다.
+`accessibility.js`는 표시와 사용자 입력만 소유한다. `shared/js/design-system-audit-runtime.js`는 WCAG 대비 계산과 전달받은 DOM 루트의 기본 컨트롤·스크롤바 신호 검사를 소유하며, `design-system-audit.js`는 웹의 module facade다. `audit/ui.js`는 같은 runtime을 검사 대상 페이지에 주입해 CLI 결과를 만든다. 따라서 화면과 CLI는 탐지 규칙을 복제하지 않는다. `data-ds-native="allow"`와 CLI `--allow`는 의도적인 시스템 UI의 정책 경계이고, `--strict`만 platform 분류를 게이트 실패로 바꾼다.
 
 CLI가 AI에게 출력하는 지점에서 Activity 기록을 발행한다. 작업 전 준비의 PNG와 비교·조회 근거는 해당 호출에 보관하며, 웹은 보관된 자료를 읽는다.
 

@@ -86,4 +86,16 @@ export const commands = {
     },
     execute: (app, request) => app.comparePage(request),
   },
+  audit: {
+    usage: './design audit --url URL [--selector body] [--allow CSS ...] [--theme light|dark] [--strict] [--json]',
+    options: ['url', 'selector', 'allow', 'theme', 'strict', 'store', 'json'], stage: () => 'audit',
+    prepare(values) {
+      if (!values.url) throw new Error('audit: --url 필요');
+      const url = new URL(values.url);
+      if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) throw new Error('인증정보 없는 HTTP(S) URL 필요');
+      if (values.theme && !['light', 'dark'].includes(values.theme)) throw new Error('--theme: light 또는 dark 필요');
+      return { url: values.url, selector: values.selector ?? 'body', allow: values.allow ?? [], strict: Boolean(values.strict), theme: values.theme ?? 'light', store: values.store };
+    },
+    execute: (app, request) => app.auditUi(request),
+  },
 };

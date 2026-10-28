@@ -10,6 +10,7 @@ import { validateId } from './domain/identifiers.js';
 import { capture } from './capture/index.js';
 import { inspectReference, inspectReport } from './application/queries.js';
 import { comparePage as compareWorkflow } from './application/compare.js';
+import { auditUi } from './audit/ui.js';
 
 // Composition root: production adapters are replaceable by concrete test adapters.
 export function createApplication({ repositoryFor = catalog, capturePage = capture, read = readFile, now = () => new Date().toISOString(), project = loadProject() } = {}) {
@@ -45,6 +46,7 @@ export function createApplication({ repositoryFor = catalog, capturePage = captu
     comparePage(request) {
       return compareWorkflow(request, { repository: repositoryFor(request.store), capture: capturePage, read, now });
     },
+    auditUi,
   };
 }
 

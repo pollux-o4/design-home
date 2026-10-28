@@ -10,7 +10,7 @@ await mkdir(resolve(output, 'design-library'), { recursive: true });
 await cp(resolve(packageRoot, 'hub/index.html'), resolve(output, 'design-library/index.html'));
 for (const file of [
   'css/interface.css', 'css/global-nav.css', 'css/scrollbar.css',
-  'js/theme.js', 'js/clipboard.js', 'js/icons.js', 'js/design-system-audit.js',
+  'js/theme.js', 'js/clipboard.js', 'js/icons.js', 'js/design-system-audit.js', 'js/design-system-audit-runtime.js',
   'js/scrollbar.js', 'js/scrollbar-axis.js', 'js/scrollbar-frame.js',
   'assets/interface-icons.svg',
 ]) {

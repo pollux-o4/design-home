@@ -91,6 +91,11 @@ test('packed tool runs in an unrelated project without Design Home content or na
     await page.locator('#contrast-foreground').fill('#777777');
     await page.locator('#contrast-checker').evaluate(form => form.requestSubmit());
     assert.match(await page.locator('#contrast-result').textContent(), /AA 미달/);
+    await page.goto(`http://127.0.0.1:${server.address().port}/design-library/#/accessibility/controls`);
+    await page.getByRole('button', { name: '이 예시 점검', exact: true }).click();
+    assert.match(await page.locator('#control-audit-results').textContent(), /기본 날짜 선택/);
+    const audit = await run(process.execPath, [join(packageRoot, 'src/cli.js'), 'audit', '--url', `http://127.0.0.1:${server.address().port}/design-library/#/accessibility/controls`, '--selector', '#control-audit-sample', '--json'], { cwd: projectRoot });
+    assert.ok(JSON.parse(audit.stdout).findings.some(finding => finding.kind === 'native-date-picker'));
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
     assert.deepEqual(errors, []);
     const html = await readFile(join(packageRoot, 'dist/runtime/design-library/index.html'), 'utf8');

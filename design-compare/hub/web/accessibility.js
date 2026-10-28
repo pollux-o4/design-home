@@ -1,8 +1,19 @@
-import { contrastResult, inspectControlBaseline } from "../../../shared/js/design-system-audit.js";
+import { contrastResult, inspectControlBaseline, summarizeControlAudit } from "../../../shared/js/design-system-audit.js";
 
 const $ = (selector) => document.querySelector(selector);
 const targetLabels = { text: "일반 텍스트", large: "큰 텍스트", component: "UI 컴포넌트" };
-const findingLabels = { "square-control": "사각형 컨트롤", "native-select": "기본 select", "small-target": "작은 조작 영역" };
+const findingLabels = {
+  "square-control": "사각형 컨트롤",
+  "native-select": "기본 select",
+  "native-date-picker": "기본 날짜 선택",
+  "native-file-input": "기본 파일 선택",
+  "native-color-input": "기본 색 선택",
+  "native-range-input": "기본 범위 입력",
+  "native-number-spinner": "기본 숫자 스피너",
+  "native-search-input": "기본 검색 입력",
+  "native-scrollbar": "기본 스크롤바",
+  "small-target": "작은 조작 영역",
+};
 
 function renderContrast() {
   const foreground = $("#contrast-foreground").value.trim();
@@ -32,6 +43,11 @@ function renderAudit() {
     results.textContent = "검토할 기본 UI 신호가 없습니다.";
     return;
   }
+  const summary = summarizeControlAudit(findings);
+  const headline = document.createElement("p");
+  headline.className = "audit-summary";
+  headline.textContent = `시스템 기본 UI ${summary.platform}개 · 형태·조작 영역 ${summary.review}개`;
+  results.append(headline);
   const list = document.createElement("ul");
   for (const finding of findings) {
     const item = document.createElement("li");

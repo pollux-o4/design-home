@@ -26,6 +26,10 @@ classDiagram
     prepareBrief(request)
     searchDesigns(request)
     comparePage(request)
+    auditUi(request)
+  }
+  class UiConsistencyAudit {
+    auditUi(url, selector, allow, strict, theme)
   }
   class Hub {
     createHubServer(project, store)
@@ -33,6 +37,7 @@ classDiagram
   ProjectLoader --> Project : validates and resolves
   Application --> Project : composition input
   Application --> Library : one project catalog
+  Application --> UiConsistencyAudit : composes
   Hub --> Project : instance input
   Hub --> Application : composes
   Hub --> Library : instance catalog
@@ -46,6 +51,7 @@ classDiagram
 | 프로젝트 없는 빈 카탈로그 | [`loadDesigns`](../../src/library/catalog.js) | 외부 설치본 검색 결과에 Design Home 자료 없음 |
 | 학습 사이트 없는 배포 UI | [`package-runtime.mjs`](../../scripts/package-runtime.mjs) | npm pack → 임시 폴더 설치 → 브라우저 품질 점검 |
 | 화면 원본과 호스트 연결 | [`hub/index.html`](../../hub/index.html), [`export-library.mjs`](../../scripts/export-library.mjs) | 공개 Pages와 독립 설치본의 같은 도구 화면 |
+| 시스템 기본 UI 신호와 선택적 게이트 | [`shared/js/design-system-audit-runtime.js`](../../../shared/js/design-system-audit-runtime.js), [`audit/ui.js`](../../src/audit/ui.js), [`commands.js`](../../src/cli/commands.js) | 실제 Chromium으로 기본 컨트롤·스크롤바 확인, `--strict`에서만 실패 |
 
 프로젝트별 설정은 단일 원본이다. store 명시 인자와 기존 환경 변수는 실행 시 재정의에 사용한다. 자료 메타데이터는 프로젝트 문서, 비교 조건은 등록 레코드가 소유한다. UI 표시 상태는 URL에서 파생한다.
 
