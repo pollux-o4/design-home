@@ -20,8 +20,10 @@ export function createOverview(topics, view) {
     description.textContent = topic.desc;
     const action = document.createElement("span");
     action.className = "pattern-topic-action";
-    action.textContent = "살펴보기 →";
-    link.append(number, title, term, description, action);
+    action.textContent = document.documentElement.lang === "en" ? "Explore →" : "살펴보기 →";
+    link.append(number, title);
+    if (document.documentElement.lang !== "en") link.append(term);
+    link.append(description, action);
     grid.append(link);
   }
   return grid;

@@ -20,7 +20,7 @@
 .spatial-scroll-intro small {
   font-size: 13px;
   font-weight: 400;
-  color: #63636b;
+  color: var(--ui-secondary);
 }
 .spatial-reveal-item {
   margin: 0 18px 22px;
@@ -46,7 +46,7 @@
 .spatial-page p {
   font-size: 13px;
   line-height: 1.7;
-  color: #63636b;
+  color: var(--ui-secondary);
   margin: 0;
 }
 .spatial-orb {
@@ -71,7 +71,7 @@
 }
 .spatial-progress {
   height: 4px;
-  background: #e5e5ea;
+  background: var(--ui-line);
 }
 .spatial-progress span {
   display: block;
@@ -90,13 +90,13 @@
 .reading-scroll small {
   font-size: 10px;
   letter-spacing: 0.14em;
-  color: #63636b;
+  color: var(--ui-secondary);
 }
 .reading-line {
   display: block;
   width: 45%;
   height: 3px;
-  background: #d3d3da;
+  background: var(--ui-border);
   margin-top: 22px;
   border-radius: 3px;
 }
@@ -105,7 +105,7 @@
   padding: 8px 20px;
   text-align: right;
   font-size: 12px;
-  color: #63636b;
+  color: var(--ui-secondary);
   background: var(--ui-surface);
   font-variant-numeric: tabular-nums;
 }
@@ -149,6 +149,9 @@
   position: absolute;
   inset: 20px 20px auto;
   color: #223632;
+  background: #e5edf1;
+  border-radius: 12px;
+  padding: 8px 12px;
 }
 .parallax-caption small {
   font-size: 9px;
@@ -230,7 +233,7 @@
 }
 .spatial-page small,
 .spatial-stack-card small {
-  color: #63636b;
+  color: var(--ui-secondary);
   font-size: 10px;
   letter-spacing: 0.12em;
   font-variant-numeric: tabular-nums;
@@ -274,7 +277,8 @@
   max-width: 230px;
   padding: 20px;
   border-radius: 18px;
-  background: #fff;
+  background: var(--ui-surface);
+  color: var(--ui-text);
   box-shadow: 0 5px 20px #2420350d;
   touch-action: pan-y;
   user-select: none;
@@ -286,7 +290,7 @@
 .spatial-stack-card p {
   font-size: 9px;
   letter-spacing: 0.12em;
-  color: #63636b;
+  color: var(--ui-secondary);
   margin-bottom: 0;
 }
 .stack-art {

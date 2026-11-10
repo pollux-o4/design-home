@@ -85,6 +85,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   navigation.start();
+  document.addEventListener("dh:language-change", () => {
+    const english = document.documentElement.lang === "en";
+    search.placeholder = english ? "Search patterns · /" : "패턴 검색 · /";
+    search.setAttribute("aria-label", english ? "Search patterns" : "패턴 검색");
+    tree.invalidate();
+    renderer.reset();
+    apply(state, state, { syncSearch: false });
+  });
   if (specimen && componentId === "modal")
     document.querySelector("[data-open-dialog]").click();
 });

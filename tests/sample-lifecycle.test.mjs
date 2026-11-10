@@ -19,3 +19,18 @@ test("disposed samples release once and reject asynchronous work registered afte
   assert.equal(calls, 0);
   assert.equal(cleanups, 2);
 });
+
+test("cleanup failures do not prevent remaining sample resources from releasing", () => {
+  const scope = createScope(new EventTarget());
+  const calls = [];
+  scope.own(() => calls.push("first"));
+  scope.own(() => {
+    calls.push("throws");
+    throw new Error("cleanup failed");
+  });
+  scope.own(() => calls.push("last"));
+
+  assert.throws(() => scope.dispose(), AggregateError);
+  assert.deepEqual(calls, ["last", "throws", "first"]);
+  assert.doesNotThrow(() => scope.dispose());
+});

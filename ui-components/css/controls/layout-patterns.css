@@ -60,6 +60,10 @@
 .lp-tile:nth-child(2n) {
   background: var(--ui-soft);
 }
+.lp-tile:nth-child(2n) .lp-eyebrow,
+.lp-tile:nth-child(2n) p {
+  color: var(--ui-text);
+}
 .lp-eyebrow {
   color: var(--ui-secondary);
   font-size: 9px;

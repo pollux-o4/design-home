@@ -14,7 +14,7 @@
   color: var(--ui-secondary);
 }
 .expressive-draw {
-  background: #eef4ef;
+  background: color-mix(in srgb, var(--ui-surface) 92%, #7ca78d);
 }
 .expressive-draw svg {
   width: min(90%, 260px);
@@ -22,7 +22,7 @@
 }
 .expressive-draw path {
   fill: none;
-  stroke: #426351;
+  stroke: var(--ui-success);
   stroke-width: 3;
   stroke-linejoin: round;
   stroke-linecap: round;
@@ -47,7 +47,8 @@
   align-items: flex-start;
   padding: 28px;
   box-sizing: border-box;
-  background: #f1eee8;
+  background: color-mix(in srgb, var(--ui-surface) 92%, #b9a17c);
+  color: var(--ui-text);
 }
 .expressive-type p {
   font-size: clamp(28px, 4vw, 40px);
@@ -62,10 +63,11 @@
 .expressive-type em {
   font-family: Georgia, serif;
   font-weight: 400;
-  color: #736547;
+  color: var(--ui-secondary);
 }
 .expressive-mesh {
   background: #d8e8f6;
+  color: #233442;
 }
 .mesh-light {
   position: absolute;
@@ -118,7 +120,7 @@
 }
 .expressive-orbit {
   min-height: 280px;
-  background: radial-gradient(ellipse at center, #fff 0, #edf0f4 70%);
+  background: radial-gradient(ellipse at center, var(--ui-surface) 0, var(--ui-subtle) 70%);
 }
 .orbit-track {
   position: absolute;
@@ -184,7 +186,8 @@
   bottom: 20px;
 }
 .expressive-success {
-  background: #edf4f0;
+  background: color-mix(in srgb, var(--ui-surface) 92%, #7ca78d);
+  color: var(--ui-text);
   gap: 18px;
 }
 .success-seal {

@@ -143,7 +143,7 @@
 }
 .dp-steps [aria-current="step"] {
   background: var(--ui-info-soft);
-  color: var(--ui-action);
+  color: var(--ui-blue);
   font-weight: 600;
 }
 .sample [data-review],

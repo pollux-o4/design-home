@@ -31,8 +31,17 @@ export function createScope(root) {
       abort.abort();
       timers.forEach(clearTimeout);
       timers.clear();
-      cleanup.reverse().forEach((dispose) => dispose());
+      const errors = [];
+      for (const dispose of cleanup.reverse()) {
+        try {
+          dispose();
+        } catch (error) {
+          errors.push(error);
+        }
+      }
       cleanup.length = 0;
+      if (errors.length)
+        throw new AggregateError(errors, "Sample cleanup failed");
     },
   };
 }

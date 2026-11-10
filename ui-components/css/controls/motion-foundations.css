@@ -2,7 +2,8 @@
   isolation: isolate;
   min-width: 0;
   padding: 20px;
-  background: #f2f5f8;
+  background: var(--ui-bg);
+  color: var(--ui-text);
 }
 .mf-curves {
   display: grid;
@@ -48,8 +49,8 @@
   align-items: center;
   gap: 6px 10px;
   padding: 15px;
-  background: #fff;
-  border: 1px solid #e1e7ec;
+  background: var(--ui-surface);
+  border: 1px solid var(--ui-line);
   border-radius: 14px;
 }
 .mf-reveal strong {
@@ -57,7 +58,7 @@
 }
 .mf-number {
   grid-row: span 2;
-  color: #25877e;
+  color: var(--ui-secondary);
   font-size: 11px;
 }
 .mf-mini-line {
@@ -88,7 +89,7 @@
   font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.5px;
-  background: radial-gradient(circle at 32% 26%, #91e3ea, #15748a 65%, #155164);
+  background: radial-gradient(circle at 32% 26%, #286c79, #155164 65%, #103d4c);
   box-shadow:
     0 17px 27px #19586c30,
     inset 0 1px 4px #ffffff70;
@@ -150,11 +151,13 @@
 }
 .mf-ocean {
   background:
+    linear-gradient(#0009, #0009),
     radial-gradient(ellipse at 90% 0, #afd9e7 0, transparent 55%),
     linear-gradient(150deg, #4d9ab9, #164262);
 }
 .mf-forest {
   background:
+    linear-gradient(#0009, #0009),
     radial-gradient(ellipse at 10% 20%, #a5c8a6 0, transparent 60%),
     linear-gradient(145deg, #6f9b87, #244a47);
 }
@@ -176,6 +179,7 @@
   transform-origin: top left;
   border-radius: 20px;
   background:
+    linear-gradient(#0009, #0009),
     radial-gradient(ellipse at 80% 20%, #f5ddbc, transparent 55%),
     linear-gradient(155deg, #bdcfd0, #43787c);
   color: #fff;
@@ -220,6 +224,6 @@
   }
 }
 .mf-shared-art > span {
-  color: #21484b;
+  color: #fff;
   font-weight: 600;
 }

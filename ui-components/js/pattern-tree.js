@@ -37,6 +37,7 @@ export function createPatternTree(root, model, navigate) {
     });
   }
   return {
+    invalidate() { currentView = undefined; },
     update(state) {
       if (currentView !== state.view) build(state.view);
       for (const entry of entries) {

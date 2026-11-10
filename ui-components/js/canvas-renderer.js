@@ -11,6 +11,7 @@ export function createRenderer({
   mount,
   navigate,
   focusSearch,
+  onError = (error) => console.error(error),
 }) {
   let disposers = [],
     topicView,
@@ -18,14 +19,33 @@ export function createRenderer({
     renderKey;
   let mounted = new WeakSet();
   function clear() {
-    disposers.forEach((dispose) => dispose());
+    const pendingDisposers = disposers;
     disposers = [];
+    const errors = [];
+    for (const dispose of pendingDisposers) {
+      try {
+        dispose();
+      } catch (error) {
+        errors.push(error);
+      }
+    }
     mounted = new WeakSet();
-    topicView?.dispose();
+    try {
+      topicView?.dispose();
+    } catch (error) {
+      errors.push(error);
+    }
     topicView = null;
     currentTopic = null;
     renderKey = null;
     canvasGrid.replaceChildren();
+    if (errors.length) {
+      try {
+        onError(new AggregateError(errors, "Sample teardown failed"));
+      } catch (error) {
+        console.error(error);
+      }
+    }
   }
   function activate() {
     for (const sample of canvasGrid.querySelectorAll("[data-sample-id]")) {
@@ -83,6 +103,7 @@ export function createRenderer({
     activate();
   }
   return {
+    reset: clear,
     render,
     groupTarget: (id) => topicView?.groupTarget(id),
     settled: () => topicView?.settled() ?? Promise.resolve(),

@@ -37,7 +37,7 @@ const running = (page) =>
           ).length,
     );
 
-test("Basic and Advanced stay visible in reading order and preserve sample state", async () => {
+test("ux_001: Basic and Advanced stay visible in reading order and preserve sample state", async () => {
   const page = await pageAt("#/motion/expressive?level=advanced");
   try {
     assert.equal(await page.locator(".component-card:visible").count(), 6);

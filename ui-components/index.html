@@ -21,7 +21,7 @@
   <div class="figma-workspace">
     <!-- Left Layers Sidebar -->
     <aside class="figma-sidebar">
-      <fieldset class="pattern-view-switcher" id="pattern-view-switcher"><legend class="sr-only">패턴 탐색 기준</legend><label><input type="radio" name="pattern-view" value="kind" checked><span>UI 관점</span></label><label><input type="radio" name="pattern-view" value="purpose"><span>UX 관점</span></label></fieldset>
+      <fieldset class="pattern-view-switcher" id="pattern-view-switcher"><legend class="sr-only" data-i18n="patterns_view_legend">패턴 탐색 기준</legend><label><input type="radio" name="pattern-view" value="kind" checked><span data-i18n="patterns_ui_view">UI 관점</span></label><label><input type="radio" name="pattern-view" value="purpose"><span data-i18n="patterns_ux_view">UX 관점</span></label></fieldset>
       <div class="sidebar-search">
         <div class="search-box">
           <span class="search-icon"><svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#search"></use></svg></span>
@@ -32,15 +32,15 @@
       <!-- Settings Accordion -->
       <div class="sidebar-accordion collapsed">
         <button type="button" class="sidebar-accordion-header" aria-expanded="false" onclick="toggleSidebarAccordion(this)">
-          <span>표시 설정</span>
+          <span data-i18n="patterns_settings">표시 설정</span>
           <span class="accordion-arrow"><svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#chevron"></use></svg></span>
         </button>
         <div class="sidebar-accordion-body" id="settings-accordion-body">
           <!-- 폰트 설정 (Noto Sans KR 기본 + 스타일리시 폰트 3종) -->
           <div class="setting-item">
-            <label class="ui-label" style="font-size:11px; margin-bottom:4px; font-weight:600; color:var(--figma-text-secondary);">서체</label>
+            <label class="ui-label" data-i18n="patterns_font" style="font-size:11px; margin-bottom:4px; font-weight:600; color:var(--figma-text-secondary);">서체</label>
             <select class="ui-select" id="font-family-select" style="padding:6px 8px; font-size:11px; width:100%;" onchange="changeFontFamily(this.value, true)">
-              <option value="-apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif" selected>시스템 서체 (기본)</option>
+              <option value="-apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif" data-i18n="patterns_system_font" selected>시스템 서체 (기본)</option>
               <option value="'Poppins', sans-serif">2. Poppins (Stylish Geometric)</option>
               <option value="'Plus Jakarta Sans', sans-serif">3. Plus Jakarta Sans (Trendy Neo-Grotesque)</option>
               <option value="'Space Grotesk', sans-serif">4. Space Grotesk (Futuristic Display)</option>
@@ -50,20 +50,20 @@
           <!-- 최소 글자 크기 슬라이더 (디폴트 12px, 범위 8px ~ 16px) -->
           <div class="setting-item" style="margin-top:14px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-              <label class="ui-label" style="font-size:11px; font-weight:600; color:var(--figma-text-secondary);">최소 글자 크기</label>
+              <label class="ui-label" data-i18n="patterns_min_font" style="font-size:11px; font-weight:600; color:var(--figma-text-secondary);">최소 글자 크기</label>
               <span id="min-font-size-value" style="font-size:11px; font-weight:700; color:var(--figma-accent); background:rgba(13,153,255,0.15); padding:2px 6px; border-radius:4px;">12px</span>
             </div>
             <input type="range" id="min-font-size-slider" min="8" max="16" step="1" value="12" style="width:100%; accent-color:var(--figma-accent); cursor:pointer;" oninput="changeMinFontSize(this.value + 'px')" />
             <div style="display:flex; justify-content:space-between; font-size:9px; color:var(--figma-text-muted); margin-top:3px;">
               <span>8px</span>
-              <span style="color:var(--figma-accent); font-weight:600;">12px (기본)</span>
+              <span data-i18n="patterns_default_size" style="color:var(--figma-accent); font-weight:600;">12px (기본)</span>
               <span>16px</span>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="sidebar-section-title"><a href="#/" class="patterns-home">Patterns</a><span> / 또는 Ctrl/⌘K로 검색</span></div>
+      <div class="sidebar-section-title"><a href="#/" class="patterns-home">Patterns</a><span data-i18n="patterns_search_hint"> / 또는 Ctrl/⌘K로 검색</span></div>
       <ul class="layer-tree" data-scroll-region id="layer-tree">
         <!-- Dynamically rendered layer items -->
       </ul>
@@ -72,7 +72,7 @@
     <!-- Canvas Viewport with Dot Grid -->
     <main class="figma-canvas-viewport" data-scroll-region>
 
-      <section class="canvas-intro"><p class="eyebrow">DESIGN HOME</p><h1>Patterns.<br>경험을 만드는 디테일.</h1><p>큰 그림부터 작은 동작까지.<br>분야를 선택하고, 세부 주제를 펼쳐 직접 살펴보세요.</p></section>
+      <section class="canvas-intro"><p class="eyebrow">DESIGN HOME</p><h1 data-i18n="patterns_intro_title">Patterns.<br>경험을 만드는 디테일.</h1><p data-i18n="patterns_intro_desc">큰 그림부터 작은 동작까지.<br>분야를 선택하고, 세부 주제를 펼쳐 직접 살펴보세요.</p></section>
       <div class="canvas-grid" id="canvas-grid">
         <!-- Dynamically rendered Figma Artboard Frames -->
       </div>
