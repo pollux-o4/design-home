@@ -18,14 +18,7 @@ const descriptions = {
 };
 
 // Learning topics reference canonical samples; markup and behavior are never duplicated.
-export const topics = [
-  components,
-  layoutNavigation,
-  interaction,
-  feedback,
-  motion,
-  accessibility,
-];
+export const topics = [components, layoutNavigation, interaction, feedback, motion, accessibility];
 
 export function createPatternModel(catalog) {
   const resolve = (definitions) =>
@@ -46,7 +39,13 @@ export function createPatternModel(catalog) {
     const source = view === "purpose" ? principleTopics : resolved;
     if (globalThis.document?.documentElement.lang !== "en") return source;
     // shortcut: 세부 그룹과 체험 예제는 번역 자료가 없어 한국어 유지, 콘텐츠별 영문 검수가 준비되면 확장.
-    return source.map((topic) => ({ ...topic, title: topic.term, term: topic.title, desc: descriptions[topic.id], groups: topic.groups.map((group) => ({ ...group, title: group.term || group.title })) }));
+    return source.map((topic) => ({
+      ...topic,
+      title: topic.term,
+      term: topic.title,
+      desc: descriptions[topic.id],
+      groups: topic.groups.map((group) => ({ ...group, title: group.term || group.title })),
+    }));
   };
   return {
     topics: resolved,
@@ -54,11 +53,7 @@ export function createPatternModel(catalog) {
     find: (id, view) => topicsFor(view).find((topic) => topic.id === id),
     search: (query, view) =>
       topicsFor(view).filter((topic) =>
-        [
-          topic.title,
-          topic.term,
-          ...topic.groups.flatMap((group) => [group.title, group.term]),
-        ]
+        [topic.title, topic.term, ...topic.groups.flatMap((group) => [group.title, group.term])]
           .filter(Boolean)
           .some((text) => text.toLowerCase().includes(query.toLowerCase())),
       ),

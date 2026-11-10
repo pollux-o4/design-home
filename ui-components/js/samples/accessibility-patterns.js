@@ -11,10 +11,8 @@ export function accessibleSkip(root, scope) {
   scope.on(root, "click", (event) => {
     const menu = event.target.closest("[data-skip-menu]");
     if (menu)
-      root.querySelector("[data-skip-title]").textContent =
-        `${menu.dataset.skipMenu}의 기록`;
-    if (event.target.closest("[data-skip-action]"))
-      announce(root, "본문의 기록을 열었습니다.");
+      root.querySelector("[data-skip-title]").textContent = `${menu.dataset.skipMenu}의 기록`;
+    if (event.target.closest("[data-skip-action]")) announce(root, "본문의 기록을 열었습니다.");
   });
 }
 export function accessibleListbox(root, scope) {
@@ -71,19 +69,11 @@ export function accessibleListbox(root, scope) {
             ? options.length - 1
             : Math.max(
                 0,
-                Math.min(
-                  options.length - 1,
-                  active + (event.key === "ArrowDown" ? 1 : -1),
-                ),
+                Math.min(options.length - 1, active + (event.key === "ArrowDown" ? 1 : -1)),
               );
       update();
       options[active].scrollIntoView({ block: "nearest" });
-    } else if (
-      event.key.length === 1 &&
-      !event.ctrlKey &&
-      !event.metaKey &&
-      !event.altKey
-    ) {
+    } else if (event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey) {
       const now = performance.now();
       typed = now - lastTyped > 700 ? event.key : typed + event.key;
       lastTyped = now;
@@ -114,9 +104,7 @@ export function accessibleTextScale(root, scope) {
 function luminance(hex) {
   const channels = [1, 3, 5].map((start) => {
     const value = parseInt(hex.slice(start, start + 2), 16) / 255;
-    return value <= 0.04045
-      ? value / 12.92
-      : Math.pow((value + 0.055) / 1.055, 2.4);
+    return value <= 0.04045 ? value / 12.92 : Math.pow((value + 0.055) / 1.055, 2.4);
   });
   return channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722;
 }
@@ -129,12 +117,10 @@ export function accessibleContrast(root, scope) {
     preview.style.backgroundColor = background.value;
     const light = luminance(foreground.value),
       dark = luminance(background.value);
-    const ratio =
-      (Math.max(light, dark) + 0.05) / (Math.min(light, dark) + 0.05);
+    const ratio = (Math.max(light, dark) + 0.05) / (Math.min(light, dark) + 0.05);
     root.querySelector("[data-contrast-ratio]").value = `${ratio.toFixed(2)}:1`;
     const result = root.querySelector("[data-contrast-result]");
-    result.textContent =
-      ratio >= 4.5 ? "일반 텍스트 AA 기준 충족" : "일반 텍스트 AA 기준 미달";
+    result.textContent = ratio >= 4.5 ? "일반 텍스트 AA 기준 충족" : "일반 텍스트 AA 기준 미달";
     result.dataset.pass = String(ratio >= 4.5);
     announce(root, `대비 ${ratio.toFixed(2)} 대 1. ${result.textContent}`);
   }

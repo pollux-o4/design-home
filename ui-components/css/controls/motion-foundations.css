@@ -151,14 +151,12 @@
 }
 .mf-ocean {
   background:
-    linear-gradient(#0009, #0009),
-    radial-gradient(ellipse at 90% 0, #afd9e7 0, transparent 55%),
+    linear-gradient(#0009, #0009), radial-gradient(ellipse at 90% 0, #afd9e7 0, transparent 55%),
     linear-gradient(150deg, #4d9ab9, #164262);
 }
 .mf-forest {
   background:
-    linear-gradient(#0009, #0009),
-    radial-gradient(ellipse at 10% 20%, #a5c8a6 0, transparent 60%),
+    linear-gradient(#0009, #0009), radial-gradient(ellipse at 10% 20%, #a5c8a6 0, transparent 60%),
     linear-gradient(145deg, #6f9b87, #244a47);
 }
 .mf-shared {
@@ -179,8 +177,7 @@
   transform-origin: top left;
   border-radius: 20px;
   background:
-    linear-gradient(#0009, #0009),
-    radial-gradient(ellipse at 80% 20%, #f5ddbc, transparent 55%),
+    linear-gradient(#0009, #0009), radial-gradient(ellipse at 80% 20%, #f5ddbc, transparent 55%),
     linear-gradient(155deg, #bdcfd0, #43787c);
   color: #fff;
 }

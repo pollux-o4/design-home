@@ -10,8 +10,7 @@ export function taskSteps(root, scope) {
     progress.value = stage;
     steps.forEach(
       (step, index) =>
-        (step.dataset.state =
-          index < stage ? "done" : index === stage ? "active" : "waiting"),
+        (step.dataset.state = index < stage ? "done" : index === stage ? "active" : "waiting"),
     );
   }
   function advance() {
@@ -55,9 +54,7 @@ export function connectionState(root, scope) {
     const online = select.value === "online";
     save.disabled = !online;
     queue.disabled = online || queued;
-    root.querySelector("[data-connection]").textContent = online
-      ? "연결됨"
-      : "연결 끊김";
+    root.querySelector("[data-connection]").textContent = online ? "연결됨" : "연결 끊김";
     if (online && queued) {
       queued = false;
       announce(root, "연결 복구. 대기 중인 변경을 저장했습니다.");
@@ -70,9 +67,7 @@ export function connectionState(root, scope) {
       );
   }
   scope.on(select, "change", update);
-  scope.on(save, "click", () =>
-    announce(root, "변경 사항을 저장했습니다. (시뮬레이션)"),
-  );
+  scope.on(save, "click", () => announce(root, "변경 사항을 저장했습니다. (시뮬레이션)"));
   scope.on(queue, "click", () => {
     queued = true;
     queue.disabled = true;
@@ -107,16 +102,11 @@ export function optimisticSave(root, scope) {
         project(saved);
         failedTarget = target;
         retry.disabled = false;
-        announce(
-          root,
-          "저장 실패. 이전 상태로 복구했습니다. 다시 시도할 수 있습니다.",
-        );
+        announce(root, "저장 실패. 이전 상태로 복구했습니다. 다시 시도할 수 있습니다.");
       }
     }, 650);
   }
-  scope.on(favorite, "click", () =>
-    persist(!saved, scenario.value === "success"),
-  );
+  scope.on(favorite, "click", () => persist(!saved, scenario.value === "success"));
   scope.on(retry, "click", () => {
     if (failedTarget !== null) persist(failedTarget, true);
   });
@@ -188,9 +178,7 @@ export function notificationCenter(root, scope) {
     unread.focus();
     announce(
       root,
-      button.dataset.read
-        ? "읽음 처리했습니다."
-        : "알림을 지웠습니다. 복구할 수 있습니다.",
+      button.dataset.read ? "읽음 처리했습니다." : "알림을 지웠습니다. 복구할 수 있습니다.",
     );
   });
   scope.on(restore, "click", () => {
@@ -222,10 +210,7 @@ export function autosave(root, scope) {
         announce(root, "모든 변경 사항을 저장했습니다.");
       } else {
         retry.disabled = false;
-        announce(
-          root,
-          "저장 실패. 입력 내용은 유지됩니다. 저장 결과를 바꿔 다시 시도하세요.",
-        );
+        announce(root, "저장 실패. 입력 내용은 유지됩니다. 저장 결과를 바꿔 다시 시도하세요.");
       }
     }, 550);
   }

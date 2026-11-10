@@ -29,8 +29,7 @@ export function createMotionController(root, scope) {
   });
   function play(target, keyframes, options = {}) {
     animations.get(target)?.cancel();
-    if (disposed || reduced() || root.closest("[hidden], [inert]"))
-      return Promise.resolve();
+    if (disposed || reduced() || root.closest("[hidden], [inert]")) return Promise.resolve();
     const animation = target.animate(keyframes, {
       duration: 500,
       easing: getComputedStyle(root).getPropertyValue("--ui-ease").trim(),

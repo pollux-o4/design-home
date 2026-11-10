@@ -109,7 +109,9 @@ button {
   background: var(--ui-surface);
   color: inherit;
   padding: 9px 14px;
-  transition: background 180ms, transform 180ms;
+  transition:
+    background 180ms,
+    transform 180ms;
 }
 
 button:active {
@@ -119,7 +121,8 @@ button:active {
 summary:focus-visible {
   outline: var(--ui-action) solid 3px;
   outline-offset: 4px;
-}@media (max-width: 760px) {
+}
+@media (max-width: 760px) {
   main {
     padding: 26px 16px 50px;
   }

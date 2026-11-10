@@ -1,1 +1,1 @@
-export * from '../library/tags.js';
+export * from "../library/tags.js";

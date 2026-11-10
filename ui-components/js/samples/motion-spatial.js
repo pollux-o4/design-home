@@ -13,11 +13,7 @@ export function spatialScrollReveal(root, scope) {
   const update = () => {
     const viewport = scroller.getBoundingClientRect();
     items.forEach((item) => {
-      if (
-        revealed.has(item) ||
-        item.getBoundingClientRect().top >= viewport.bottom - 20
-      )
-        return;
+      if (revealed.has(item) || item.getBoundingClientRect().top >= viewport.bottom - 20) return;
       revealed.add(item);
       item.classList.add("is-revealed");
       motion.play(item, [
@@ -44,9 +40,7 @@ export function spatialScrollProgress(root, scope) {
   scope.on(scroller, "scroll", update);
   const resize = new ResizeObserver(update);
   resize.observe(scroller);
-  scroller
-    .querySelectorAll("section")
-    .forEach((section) => resize.observe(section));
+  scroller.querySelectorAll("section").forEach((section) => resize.observe(section));
   scope.own(() => resize.disconnect());
   update();
 }
@@ -71,9 +65,7 @@ export function spatialCardTilt(root, scope) {
   const motion = createMotionController(root, scope);
   let pointerDriven = false;
   const tilt = (x, y) => {
-    card.style.transform = motion.reduced()
-      ? ""
-      : `rotateX(${y}deg) rotateY(${x}deg)`;
+    card.style.transform = motion.reduced() ? "" : `rotateX(${y}deg) rotateY(${x}deg)`;
   };
   scope.on(stage, "pointermove", (event) => {
     if (event.pointerType === "touch") return;
@@ -87,13 +79,9 @@ export function spatialCardTilt(root, scope) {
   scope.on(stage, "pointerleave", () => {
     if (pointerDriven) tilt(0, 0);
   });
-  scope.on(
-    matchMedia("(prefers-reduced-motion: reduce)"),
-    "change",
-    (event) => {
-      if (event.matches) tilt(0, 0);
-    },
-  );
+  scope.on(matchMedia("(prefers-reduced-motion: reduce)"), "change", (event) => {
+    if (event.matches) tilt(0, 0);
+  });
   scope.on(root, "click", (event) => {
     const button = event.target.closest("[data-tilt]");
     if (!button) return;
@@ -197,11 +185,7 @@ export function spatialSwipeStack(root, scope) {
     const vertical = Math.abs(event.clientY - pointer.y);
     pointer = null;
     card.style.transform = "";
-    if (
-      event.type === "pointerup" &&
-      Math.abs(delta) > 45 &&
-      Math.abs(delta) > vertical
-    )
+    if (event.type === "pointerup" && Math.abs(delta) > 45 && Math.abs(delta) > vertical)
       move(delta < 0 ? 1 : -1);
   };
   scope.on(card, "pointerup", finish);

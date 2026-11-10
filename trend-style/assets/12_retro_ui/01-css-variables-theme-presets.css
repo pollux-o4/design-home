@@ -13,7 +13,7 @@
   --win95-title-text: #ffffff;
   --win95-accent: #008000;
   --win95-card-bg: #c0c0c0;
-  --win95-font: 'Tahoma', 'VT323', monospace;
+  --win95-font: "Tahoma", "VT323", monospace;
 
   /* Theme 2: CRT Terminal / Matrix Green */
   --cyber-bg: #030c03;
@@ -26,7 +26,7 @@
   --cyber-title-text: #33ff66;
   --cyber-accent: #00ffcc;
   --cyber-card-bg: #051205;
-  --cyber-font: 'VT323', monospace;
+  --cyber-font: "VT323", monospace;
 
   /* Theme 3: 8-Bit Synth Arcade */
   --arcade-bg: #12092b;
@@ -39,7 +39,7 @@
   --arcade-title-text: #ffffff;
   --arcade-accent: #ffe600;
   --arcade-card-bg: #1c0e3b;
-  --arcade-font: 'Press Start 2P', cursive;
+  --arcade-font: "Press Start 2P", cursive;
 
   /* Theme 4: Game Boy DMG-01 */
   --gb-bg: #8bac0f;
@@ -52,7 +52,7 @@
   --gb-title-text: #9bbc0f;
   --gb-accent: #0f380f;
   --gb-card-bg: #8bac0f;
-  --gb-font: 'DotGothic16', monospace;
+  --gb-font: "DotGothic16", monospace;
 
   /* Theme 5: Vaporwave GeoCities */
   --vapor-bg: #2b1055;
@@ -65,7 +65,7 @@
   --vapor-title-text: #ffff00;
   --vapor-accent: #00ffff;
   --vapor-card-bg: #3d1e6d;
-  --vapor-font: 'Silkscreen', cursive;
+  --vapor-font: "Silkscreen", cursive;
 
   /* Theme 6: DOS / C64 Blue */
   --dos-bg: #0000aa;
@@ -78,7 +78,7 @@
   --dos-title-text: #0000aa;
   --dos-accent: #55ffff;
   --dos-card-bg: #000088;
-  --dos-font: 'Share Tech Mono', monospace;
+  --dos-font: "Share Tech Mono", monospace;
 }
 
 /* Active Theme Class Mapping */
@@ -175,12 +175,16 @@ body {
   font-family: var(--font-main);
   overflow-x: hidden;
   padding: 12px;
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
   position: relative;
 }
 
 /* Pixelated image rendering */
-img, svg, canvas {
+img,
+svg,
+canvas {
   image-rendering: pixelated;
   image-rendering: crisp-edges;
 }

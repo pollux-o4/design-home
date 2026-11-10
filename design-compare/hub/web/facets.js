@@ -39,20 +39,16 @@ export function renderFacets(result, toggle) {
       row.append(element("span", group.label, "facet-label"));
       if (title === "연관 태그") {
         row.append(
-          tagDisclosure(members, group, (tag) =>
-            tagChip(tag, selected, clickable, toggle),
-          ),
+          tagDisclosure(members, group, (tag) => tagChip(tag, selected, clickable, toggle)),
         );
       } else {
         const chips = element("div", null, "facet-chips");
-        for (const tag of members)
-          chips.append(tagChip(tag, selected, clickable, toggle));
+        for (const tag of members) chips.append(tagChip(tag, selected, clickable, toggle));
         row.append(chips);
       }
       section.append(row);
     }
     container.append(section);
   }
-  if (result.relatedTags.length)
-    container.append(element("p", result.relationBasis, "facet-help"));
+  if (result.relatedTags.length) container.append(element("p", result.relationBasis, "facet-help"));
 }

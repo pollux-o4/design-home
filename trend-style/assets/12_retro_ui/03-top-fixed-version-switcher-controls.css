@@ -51,7 +51,8 @@
   font-size: 0.9rem;
 }
 
-.retro-select, .retro-input {
+.retro-select,
+.retro-input {
   font-family: var(--font-main);
   font-size: 0.9rem;
   background: var(--light);
@@ -105,7 +106,8 @@
   outline: none;
   transition: all 0.05s;
 }
-.retro-btn:active, .retro-btn.active {
+.retro-btn:active,
+.retro-btn.active {
   border-top: 2px solid var(--dark-shadow);
   border-left: 2px solid var(--dark-shadow);
   border-right: 2px solid var(--light);

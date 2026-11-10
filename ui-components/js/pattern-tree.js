@@ -37,7 +37,9 @@ export function createPatternTree(root, model, navigate) {
     });
   }
   return {
-    invalidate() { currentView = undefined; },
+    invalidate() {
+      currentView = undefined;
+    },
     update(state) {
       if (currentView !== state.view) build(state.view);
       for (const entry of entries) {
@@ -45,9 +47,7 @@ export function createPatternTree(root, model, navigate) {
         entry.setOpen(selected);
         entry.button.setAttribute("aria-current", selected ? "true" : "false");
         for (const link of entry.panel.querySelectorAll("a")) {
-          link.href = routeHref(
-            selectPatternGroup(state, entry.topic.id, link.dataset.group),
-          );
+          link.href = routeHref(selectPatternGroup(state, entry.topic.id, link.dataset.group));
           if (selected && link.dataset.group === state.group)
             link.setAttribute("aria-current", "page");
           else link.removeAttribute("aria-current");

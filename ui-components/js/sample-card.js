@@ -39,8 +39,6 @@ export function createSampleCard(definition) {
 export function createSampleGrid(definitions) {
   const grid = document.createElement("div");
   grid.className = "components-grid";
-  definitions.forEach((definition) =>
-    grid.append(createSampleCard(definition)),
-  );
+  definitions.forEach((definition) => grid.append(createSampleCard(definition)));
   return grid;
 }

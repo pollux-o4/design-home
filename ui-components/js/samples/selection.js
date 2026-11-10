@@ -13,9 +13,7 @@ export function selection(root, scope) {
       } else item.setAttribute("aria-pressed", String(selected));
     }
     if (panel && button.id) panel.setAttribute("aria-labelledby", button.id);
-    if (panel)
-      panel.textContent =
-        button.dataset.content || `${button.textContent.trim()} 선택됨`;
+    if (panel) panel.textContent = button.dataset.content || `${button.textContent.trim()} 선택됨`;
     if (focus) button.focus();
   }
   scope.on(root, "click", (event) => {
@@ -25,24 +23,17 @@ export function selection(root, scope) {
   scope.on(root, "keydown", (event) => {
     const visible = buttons.filter((button) => button.checkVisibility());
     const index = visible.indexOf(event.target);
-    if (
-      index < 0 ||
-      !["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)
-    )
-      return;
+    if (index < 0 || !["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
     event.preventDefault();
     const next =
       event.key === "Home"
         ? 0
         : event.key === "End"
           ? visible.length - 1
-          : (index + (event.key === "ArrowRight" ? 1 : -1) + visible.length) %
-            visible.length;
+          : (index + (event.key === "ArrowRight" ? 1 : -1) + visible.length) % visible.length;
     select(visible[next], true);
   });
-  select(
-    buttons.find((button) => button.classList.contains("active")) || buttons[0],
-  );
+  select(buttons.find((button) => button.classList.contains("active")) || buttons[0]);
 }
 export function toggle(root, scope) {
   const input = root.querySelector("input");
@@ -57,10 +48,7 @@ export function chips(root, scope) {
     const chip = button.closest(".ui-chip");
     const title = chip.querySelector("span").textContent;
     chip.remove();
-    (
-      root.querySelector("[data-remove]") ||
-      root.querySelector("[data-add-chip]")
-    ).focus();
+    (root.querySelector("[data-remove]") || root.querySelector("[data-add-chip]")).focus();
     announce(root, `${title} 필터 삭제됨`);
   });
   const add = root.querySelector("[data-add-chip]");

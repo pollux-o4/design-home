@@ -14,7 +14,7 @@
 }
 
 .sidebar-title {
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 1px;
@@ -39,7 +39,7 @@
   overflow: hidden;
   background: var(--card-bg);
   box-shadow: var(--card-shadow);
-  border: 1px solid rgba(255,255,255,0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .accordion-header {
@@ -55,7 +55,7 @@
 }
 
 .accordion-header:hover {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .accordion-header .icon-wrap {
@@ -103,9 +103,10 @@
   transition: all 0.2s;
 }
 
-.sub-menu-link:hover, .sub-menu-link.active {
+.sub-menu-link:hover,
+.sub-menu-link.active {
   color: var(--accent-primary);
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   padding-left: 14px;
 }
 
@@ -118,7 +119,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .control-label-text {
@@ -129,7 +130,7 @@
 .control-sub-text {
   font-size: 10px;
   color: var(--text-muted);
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
 }
 
 .metallic-toggle {
@@ -140,7 +141,7 @@
   border-radius: 14px;
   position: relative;
   cursor: pointer;
-  border: 1px solid rgba(0,0,0,0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
 }
 
 .toggle-switch-thumb {
@@ -160,7 +161,7 @@
 }
 
 .toggle-switch-thumb::after {
-  content: '';
+  content: "";
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -186,15 +187,15 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  border: 1px solid rgba(255,255,255,0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .vu-display {
   width: 100%;
   height: 50px;
   background: #111;
-  border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.9);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.9);
   border-radius: 6px;
   position: relative;
   overflow: hidden;
@@ -209,7 +210,7 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  border: 2px dashed rgba(255,255,255,0.2);
+  border: 2px dashed rgba(255, 255, 255, 0.2);
   top: 10px;
 }
 
@@ -226,7 +227,7 @@
 }
 
 .vu-needle::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: -4px;

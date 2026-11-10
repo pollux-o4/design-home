@@ -2,157 +2,169 @@
    DRAGGABLE KPI METRIC CARDS & SKELETON LOADERS
    ========================================================================== */
 .kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
 }
 
 .kpi-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--card-radius);
-    padding: 22px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    cursor: grab;
-    user-select: none;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--card-radius);
+  padding: 22px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  cursor: grab;
+  user-select: none;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .kpi-card:active {
-    cursor: grabbing;
+  cursor: grabbing;
 }
 
 .kpi-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--border-glow);
-    box-shadow: var(--shadow-card);
+  transform: translateY(-4px);
+  border-color: var(--border-glow);
+  box-shadow: var(--shadow-card);
 }
 
 .kpi-card.dragging {
-    opacity: 0.5;
-    border-style: dashed;
-    border-color: var(--accent-primary);
+  opacity: 0.5;
+  border-style: dashed;
+  border-color: var(--accent-primary);
 }
 
 .kpi-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
-    opacity: 0.7;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+  opacity: 0.7;
 }
 
 .kpi-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .kpi-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-muted);
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .kpi-icon-wrap {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    background: var(--bg-surface-hover);
-    border: 1px solid var(--border-subtle);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--accent-primary);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--bg-surface-hover);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-primary);
 }
 
 .drag-handle {
-    color: var(--text-dim);
-    cursor: grab;
-    opacity: 0.4;
-    transition: opacity 0.2s ease;
+  color: var(--text-dim);
+  cursor: grab;
+  opacity: 0.4;
+  transition: opacity 0.2s ease;
 }
 
 .kpi-card:hover .drag-handle {
-    opacity: 1;
+  opacity: 1;
 }
 
 .kpi-body {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 10px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .kpi-value {
-    font-family: 'Plus Jakarta Sans', var(--font-sans);
-    font-size: 30px;
-    font-weight: 800;
-    color: var(--text-title);
-    letter-spacing: -0.5px;
+  font-family: "Plus Jakarta Sans", var(--font-sans);
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--text-title);
+  letter-spacing: -0.5px;
 }
 
 .kpi-badge {
-    font-size: 12px;
-    font-family: var(--font-mono);
-    font-weight: 700;
-    padding: 3px 8px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .kpi-badge.up {
-    background: rgba(16, 185, 129, 0.12);
-    color: var(--success);
-    border: 1px solid rgba(16, 185, 129, 0.25);
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--success);
+  border: 1px solid rgba(16, 185, 129, 0.25);
 }
 
 .kpi-badge.down {
-    background: rgba(239, 68, 68, 0.12);
-    color: var(--danger);
-    border: 1px solid rgba(239, 68, 68, 0.25);
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--danger);
+  border: 1px solid rgba(239, 68, 68, 0.25);
 }
 
 .kpi-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 11px;
-    color: var(--text-dim);
-    border-top: 1px dashed var(--border-subtle);
-    padding-top: 10px;
-    margin-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-dim);
+  border-top: 1px dashed var(--border-subtle);
+  padding-top: 10px;
+  margin-top: 4px;
 }
 
 .sparkline-svg {
-    width: 100px;
-    height: 24px;
-    overflow: visible;
+  width: 100px;
+  height: 24px;
+  overflow: visible;
 }
 
 /* Skeleton Loader Effect */
 .skeleton {
-    background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-surface-hover) 50%, var(--bg-card) 75%);
-    background-size: 200% 100%;
-    animation: skeleton-wave 1.5s infinite ease-in-out;
-    border-radius: 6px;
-    color: transparent !important;
-    pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    var(--bg-card) 25%,
+    var(--bg-surface-hover) 50%,
+    var(--bg-card) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-wave 1.5s infinite ease-in-out;
+  border-radius: 6px;
+  color: transparent !important;
+  pointer-events: none;
 }
 
 @keyframes skeleton-wave {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }

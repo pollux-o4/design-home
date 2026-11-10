@@ -11,11 +11,7 @@
   }
 
   function resolvedTheme(preference = getTheme()) {
-    return preference === "system"
-      ? systemTheme.matches
-        ? "dark"
-        : "light"
-      : preference;
+    return preference === "system" ? (systemTheme.matches ? "dark" : "light") : preference;
   }
 
   function applyTheme(preference = getTheme()) {

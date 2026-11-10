@@ -10,9 +10,7 @@ export function createLevelView({ id, definitions, createCard }) {
       if (!active || created) return;
       created = true;
       for (const level of levels) {
-        const items = definitions.filter(
-          (definition) => definition.level === level.id,
-        );
+        const items = definitions.filter((definition) => definition.level === level.id);
         if (!items.length) continue;
         const section = document.createElement("section");
         section.className = "pattern-level-section";

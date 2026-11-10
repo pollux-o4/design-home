@@ -12,7 +12,9 @@
   top: 0;
   height: 100vh;
   z-index: 100;
-  transition: background-color 0.4s ease, border-color 0.4s ease;
+  transition:
+    background-color 0.4s ease,
+    border-color 0.4s ease;
 }
 
 .sidebar-brand {
@@ -43,7 +45,9 @@
   font-weight: 800;
   letter-spacing: -0.5px;
 }
-.brand-text span { color: var(--primary); }
+.brand-text span {
+  color: var(--primary);
+}
 .live-pill {
   margin-left: auto;
   font-size: 10px;
@@ -66,8 +70,15 @@
   animation: blink 1.5s infinite ease-in-out;
 }
 @keyframes blink {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.3; transform: scale(0.7); }
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(0.7);
+  }
 }
 
 /* Accordion Sub-Menu */
@@ -115,7 +126,9 @@
   display: flex;
   align-items: center;
   color: var(--text-muted);
-  transition: color 0.2s, transform 0.3s var(--spring-ease);
+  transition:
+    color 0.2s,
+    transform 0.3s var(--spring-ease);
 }
 .accordion-trigger:hover .nav-icon {
   color: var(--primary);
@@ -141,7 +154,9 @@
 .accordion-content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.35s var(--liquid-ease), padding 0.3s ease;
+  transition:
+    max-height 0.35s var(--liquid-ease),
+    padding 0.3s ease;
   padding: 0 12px 0 42px;
   display: flex;
   flex-direction: column;
@@ -219,7 +234,10 @@
 .spring-slider {
   position: absolute;
   cursor: pointer;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-full);
   transition: background-color 0.3s ease;

@@ -20,22 +20,13 @@ export default {
       id: "transitions",
       title: "화면과 레이아웃 전환",
       desc: "겹침과 방향, 카드와 상세 사이의 연속성.",
-      ids: [
-        "motion-crossfade",
-        "motion-page-slide",
-        "motion-flip",
-        "motion-shared-element",
-      ],
+      ids: ["motion-crossfade", "motion-page-slide", "motion-flip", "motion-shared-element"],
     },
     {
       id: "spatial",
       title: "스크롤과 깊이",
       desc: "등장·진행·패럴랙스로 스크롤에 응답합니다.",
-      ids: [
-        "motion-scroll-reveal",
-        "motion-scroll-progress",
-        "motion-parallax",
-      ],
+      ids: ["motion-scroll-reveal", "motion-scroll-progress", "motion-parallax"],
     },
     {
       id: "responses",

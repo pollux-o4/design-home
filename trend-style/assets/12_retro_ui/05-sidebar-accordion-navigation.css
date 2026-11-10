@@ -68,7 +68,8 @@
   align-items: center;
   gap: 6px;
 }
-.accordion-subitem:hover, .accordion-subitem.active {
+.accordion-subitem:hover,
+.accordion-subitem.active {
   background: var(--title);
   color: var(--title-text);
 }

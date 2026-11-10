@@ -1,9 +1,6 @@
 import { announce } from "./lifecycle.js";
 /* Feedback Command keeps status text, optional Undo and expiry in one place. */
-export function notify(
-  message,
-  { action, actionLabel = "실행 취소", kind = "success" } = {},
-) {
+export function notify(message, { action, actionLabel = "실행 취소", kind = "success" } = {}) {
   let stack = document.getElementById("toast-container");
   if (!stack) {
     stack = document.createElement("div");
@@ -58,8 +55,7 @@ export function notify(
 export function toast(root, scope) {
   scope.on(root, "click", (event) => {
     const button = event.target.closest("[data-notify]");
-    if (button)
-      scope.own(notify(button.dataset.notify, { kind: button.dataset.kind }));
+    if (button) scope.own(notify(button.dataset.notify, { kind: button.dataset.kind }));
   });
 }
 export function snackbar(root, scope) {
@@ -84,8 +80,7 @@ export function snackbar(root, scope) {
 export function empty(root, scope) {
   scope.on(root.querySelector("button"), "click", () => {
     root.querySelector("[data-empty-title]").textContent = "첫 번째 리포트";
-    root.querySelector("[data-empty-desc]").textContent =
-      "새 리포트가 생성되었습니다.";
+    root.querySelector("[data-empty-desc]").textContent = "새 리포트가 생성되었습니다.";
     root.querySelector("button").disabled = true;
     root.querySelector("button").textContent = "생성 완료";
   });

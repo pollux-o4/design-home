@@ -46,14 +46,10 @@ test("native dialogs validate, isolate background, cancel and restore focus", as
     assert.equal(await dialog.evaluate((e) => e.matches(":modal")), true);
     await p.keyboard.press("Escape");
     await p.waitForFunction(
-      () =>
-        document.querySelector("[data-open-dialog]") === document.activeElement,
+      () => document.querySelector("[data-open-dialog]") === document.activeElement,
     );
     const open = p.locator("[data-open-dialog]");
-    assert.equal(
-      await open.evaluate((e) => e === document.activeElement),
-      true,
-    );
+    assert.equal(await open.evaluate((e) => e === document.activeElement), true);
     await open.click();
     await dialog.getByRole("button", { name: "생성", exact: true }).click();
     assert.equal(await dialog.evaluate((e) => e.open), true);
@@ -68,10 +64,7 @@ test("native dialogs validate, isolate background, cancel and restore focus", as
     const p = await sample(id);
     try {
       await p.locator("[data-open-dialog]").click();
-      assert.equal(
-        await p.locator("dialog").evaluate((e) => e.matches(":modal")),
-        true,
-      );
+      assert.equal(await p.locator("dialog").evaluate((e) => e.matches(":modal")), true);
       await p.keyboard.press("Escape");
       assert.equal(await p.locator("dialog").evaluate((e) => e.open), false);
     } finally {
@@ -84,16 +77,10 @@ test("input validation, password visibility, upload reset and searchable empty r
   try {
     await p.locator(".sample input").fill("bad-email");
     await p.getByRole("button", { name: "저장" }).click();
-    assert.equal(
-      await p.locator(".sample input").getAttribute("aria-invalid"),
-      "true",
-    );
+    assert.equal(await p.locator(".sample input").getAttribute("aria-invalid"), "true");
     await p.locator(".sample input").fill("team@example.com");
     await p.getByRole("button", { name: "저장" }).click();
-    assert.equal(
-      await p.locator(".sample input").getAttribute("aria-invalid"),
-      "false",
-    );
+    assert.equal(await p.locator(".sample input").getAttribute("aria-invalid"), "false");
     assert.match(await p.locator("[data-status]").textContent(), /저장/);
   } finally {
     await p.close();
@@ -104,14 +91,8 @@ test("input validation, password visibility, upload reset and searchable empty r
     await p.getByRole("button", { name: "표시", exact: true }).click();
     assert.equal(await p.locator(".sample input").getAttribute("type"), "text");
     await p.getByRole("button", { name: "숨기기" }).click();
-    assert.equal(
-      await p.locator(".sample input").inputValue(),
-      "sample-password",
-    );
-    assert.equal(
-      await p.locator(".sample input").getAttribute("type"),
-      "password",
-    );
+    assert.equal(await p.locator(".sample input").inputValue(), "sample-password");
+    assert.equal(await p.locator(".sample input").getAttribute("type"), "password");
   } finally {
     await p.close();
   }
@@ -122,20 +103,12 @@ test("input validation, password visibility, upload reset and searchable empty r
       mimeType: "text/plain",
       buffer: Buffer.from("hello"),
     });
-    assert.match(
-      await p.locator("[data-filename]").textContent(),
-      /a-very-long/,
-    );
+    assert.match(await p.locator("[data-filename]").textContent(), /a-very-long/);
     await p.getByRole("button", { name: "선택 취소" }).click();
-    assert.equal(
-      await p.locator(".sample input").evaluate((e) => e.files.length),
-      0,
-    );
+    assert.equal(await p.locator(".sample input").evaluate((e) => e.files.length), 0);
     await p.locator("[data-drop-zone]").evaluate((zone) => {
       const transfer = new DataTransfer();
-      transfer.items.add(
-        new File(["drop"], "dropped-file.txt", { type: "text/plain" }),
-      );
+      transfer.items.add(new File(["drop"], "dropped-file.txt", { type: "text/plain" }));
       zone.dispatchEvent(
         new DragEvent("drop", {
           bubbles: true,
@@ -148,10 +121,7 @@ test("input validation, password visibility, upload reset and searchable empty r
       await p.locator(".sample input").evaluate((input) => input.files[0].name),
       "dropped-file.txt",
     );
-    assert.match(
-      await p.locator("[data-filename]").textContent(),
-      /dropped-file/,
-    );
+    assert.match(await p.locator("[data-filename]").textContent(), /dropped-file/);
   } finally {
     await p.close();
   }
@@ -173,10 +143,7 @@ test("navigation changes real content and rerenders with fresh instance state", 
     await p.getByRole("button", { name: "2페이지", exact: true }).click();
     assert.notEqual(await p.locator("[data-page-items]").textContent(), before);
     await p.getByRole("button", { name: "3페이지", exact: true }).click();
-    assert.equal(
-      await p.getByRole("button", { name: "다음 페이지" }).isDisabled(),
-      true,
-    );
+    assert.equal(await p.getByRole("button", { name: "다음 페이지" }).isDisabled(), true);
   } finally {
     await p.close();
   }
@@ -184,10 +151,7 @@ test("navigation changes real content and rerenders with fresh instance state", 
   try {
     await p.locator("[role=tab]").first().focus();
     await p.keyboard.press("ArrowRight");
-    assert.equal(
-      await p.locator("[role=tab]").nth(1).getAttribute("aria-selected"),
-      "true",
-    );
+    assert.equal(await p.locator("[role=tab]").nth(1).getAttribute("aria-selected"), "true");
     assert.match(await p.locator("[role=tabpanel]").textContent(), /진행/);
     assert.equal(
       await p.locator("[role=tabpanel]").getAttribute("aria-labelledby"),
@@ -202,14 +166,8 @@ test("navigation changes real content and rerenders with fresh instance state", 
       .locator("[data-main-menu]")
       .getByRole("button", { name: "사용자", exact: true })
       .click();
-    await p
-      .locator("[data-sub-menu]")
-      .getByRole("button", { name: "권한 그룹" })
-      .click();
-    assert.equal(
-      await p.locator("[data-view-title]").textContent(),
-      "권한 그룹",
-    );
+    await p.locator("[data-sub-menu]").getByRole("button", { name: "권한 그룹" }).click();
+    assert.equal(await p.locator("[data-view-title]").textContent(), "권한 그룹");
   } finally {
     await p.close();
   }
@@ -225,10 +183,7 @@ test("navigation changes real content and rerenders with fresh instance state", 
     await p.locator('[data-target="interaction"] .category-button').click();
     await p.locator('[data-target="layout-navigation"] .category-button').click();
     await p.locator('[data-target="layout-navigation"] [data-group="content"]').click();
-    assert.notEqual(
-      await p.locator("[data-slide-title]").textContent(),
-      second,
-    );
+    assert.notEqual(await p.locator("[data-slide-title]").textContent(), second);
     await next.click();
     assert.equal(await p.locator("[data-slide-title]").textContent(), second);
   } finally {
@@ -250,28 +205,20 @@ test("undo restores a real item, retry recovers and progress finishes", async ()
   try {
     const button = p.getByRole("button", { name: "다시 시도" });
     await button.click();
-    await p.waitForFunction(
-      () => !document.querySelector(".sample button").disabled,
-    );
+    await p.waitForFunction(() => !document.querySelector(".sample button").disabled);
     assert.match(await p.locator("[data-status]").textContent(), /한 번 더/);
     await button.click();
     await p.waitForFunction(
-      () =>
-        document.querySelector(".sample button").textContent === "연결 완료",
+      () => document.querySelector(".sample button").textContent === "연결 완료",
     );
-    assert.match(
-      await p.locator("[data-status]").textContent(),
-      /연결되었습니다/,
-    );
+    assert.match(await p.locator("[data-status]").textContent(), /연결되었습니다/);
   } finally {
     await p.close();
   }
   p = await sample("progress-bar");
   try {
     await p.getByRole("button", { name: "실행", exact: true }).click();
-    await p.waitForFunction(
-      () => document.querySelector("progress").value === 100,
-    );
+    await p.waitForFunction(() => document.querySelector("progress").value === 100);
     assert.equal(await p.locator("output").textContent(), "100%");
   } finally {
     await p.close();
@@ -281,15 +228,9 @@ test("popover light dismiss, tooltip keyboard, chip recovery and stepper bounds"
   let p = await sample("popover");
   try {
     await p.getByRole("button", { name: "프로필 정보" }).click();
-    assert.equal(
-      await p.locator("[popover]").evaluate((e) => e.matches(":popover-open")),
-      true,
-    );
+    assert.equal(await p.locator("[popover]").evaluate((e) => e.matches(":popover-open")), true);
     await p.keyboard.press("Escape");
-    assert.equal(
-      await p.locator("[popover]").evaluate((e) => e.matches(":popover-open")),
-      false,
-    );
+    assert.equal(await p.locator("[popover]").evaluate((e) => e.matches(":popover-open")), false);
   } finally {
     await p.close();
   }
@@ -312,17 +253,11 @@ test("popover light dismiss, tooltip keyboard, chip recovery and stepper bounds"
   }
   p = await sample("stepper");
   try {
-    assert.equal(
-      await p.getByRole("button", { name: "수량 감소" }).isDisabled(),
-      true,
-    );
+    assert.equal(await p.getByRole("button", { name: "수량 감소" }).isDisabled(), true);
     await p.getByRole("button", { name: "수량 증가" }).click();
     assert.equal(await p.locator("output").textContent(), "2");
     await p.getByRole("button", { name: "수량 감소" }).click();
-    assert.equal(
-      await p.getByRole("button", { name: "수량 감소" }).isDisabled(),
-      true,
-    );
+    assert.equal(await p.getByRole("button", { name: "수량 감소" }).isDisabled(), true);
   } finally {
     await p.close();
   }
@@ -339,16 +274,11 @@ test("all sample definitions keep accessible labels and responsive bounds", asyn
         .flatMap((m) => CanvasCatalog.create().components(m))
         .map((c) => ({ id: c.id, render: c.render() })),
     );
-    assert.equal(
-      new Set(definitions.map((d) => d.id)).size,
-      definitions.length,
-    );
+    assert.equal(new Set(definitions.map((d) => d.id)).size, definitions.length);
     assert.equal(definitions.length, 90);
     for (const definition of definitions) {
       assert.equal(
-        /on(click|change|input|drop)=|style=|\p{Extended_Pictographic}/u.test(
-          definition.render,
-        ),
+        /on(click|change|input|drop)=|style=|\p{Extended_Pictographic}/u.test(definition.render),
         false,
         definition.id,
       );
@@ -361,9 +291,7 @@ test("all sample definitions keep accessible labels and responsive bounds", asyn
           return {
             overflow: root.scrollWidth > root.clientWidth + 1,
             inputs: [...root.querySelectorAll("input,select,textarea")]
-              .filter(
-                (e) => !e.closest("label") && !e.getAttribute("aria-label"),
-              )
+              .filter((e) => !e.closest("label") && !e.getAttribute("aria-label"))
               .map((e) => e.outerHTML),
             body: document.body.scrollWidth > innerWidth,
           };
@@ -444,10 +372,7 @@ test("sidebar stays alongside content while a drawer opens as a dismissible laye
   const drawer = await sample("drawer");
   try {
     await drawer.locator("[data-open-dialog]").click();
-    assert.equal(
-      await drawer.locator("dialog").evaluate((e) => e.matches(":modal")),
-      true,
-    );
+    assert.equal(await drawer.locator("dialog").evaluate((e) => e.matches(":modal")), true);
     await drawer.keyboard.press("Escape");
     await drawer.waitForFunction(() => !document.querySelector("dialog").open);
   } finally {

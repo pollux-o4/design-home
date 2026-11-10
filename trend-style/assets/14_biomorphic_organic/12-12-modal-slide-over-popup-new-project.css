@@ -73,7 +73,7 @@
 
 .modal-close-btn:hover {
   background: var(--accent-1);
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .form-group {
@@ -90,7 +90,8 @@
   color: var(--text-muted);
 }
 
-.form-input, .form-select {
+.form-input,
+.form-select {
   background: rgba(0, 0, 0, 0.03);
   border: 1.5px solid rgba(0, 0, 0, 0.08);
   padding: 12px 18px;
@@ -101,14 +102,18 @@
   transition: all 0.3s var(--ease-smooth);
 }
 
-[data-theme="biolum"] .form-input, [data-theme="biolum"] .form-select,
-[data-theme="forest"] .form-input, [data-theme="forest"] .form-select,
-[data-theme="cyberbio"] .form-input, [data-theme="cyberbio"] .form-select {
+[data-theme="biolum"] .form-input,
+[data-theme="biolum"] .form-select,
+[data-theme="forest"] .form-input,
+[data-theme="forest"] .form-select,
+[data-theme="cyberbio"] .form-input,
+[data-theme="cyberbio"] .form-select {
   background: rgba(255, 255, 255, 0.06);
   border: 1.5px solid rgba(255, 255, 255, 0.12);
 }
 
-.form-input:focus, .form-select:focus {
+.form-input:focus,
+.form-select:focus {
   border-color: var(--accent-1);
   box-shadow: 0 0 0 3px var(--badge-bg);
 }

@@ -10,9 +10,7 @@ export function createCategoryView(category, items, { onToggle, onCompare }) {
     subtitle: `${category.term} · ${items.length}개`,
     onToggle,
   });
-  view.content.append(
-    element("p", "category-description", category.description),
-  );
+  view.content.append(element("p", "category-description", category.description));
   const grid = element("div", "library-grid");
   const cards = items.map((item) => ({
     item,
@@ -28,10 +26,7 @@ export function createCategoryView(category, items, { onToggle, onCompare }) {
       for (const card of cards) {
         card.element.hidden = !matches(card.item, state.query);
         if (!card.element.hidden) visible++;
-        card.update(
-          state.compare.includes(card.item.id),
-          state.compare.length === comparisonLimit,
-        );
+        card.update(state.compare.includes(card.item.id), state.compare.length === comparisonLimit);
       }
       view.element.hidden = !visible;
       view.setOpen(!!visible && state.category === category.id, !initial);

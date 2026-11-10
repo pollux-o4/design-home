@@ -1,34 +1,28 @@
-const reference =
-  "https://developer.mozilla.org/en-US/docs/Web/API/Element/animate";
+const reference = "https://developer.mozilla.org/en-US/docs/Web/API/Element/animate";
 const objects = {
   fanout: () =>
     Array.from(
       { length: 5 },
-      (_, index) =>
-        `<span class="motion-object object-${index}">${index ? "" : "+"}</span>`,
+      (_, index) => `<span class="motion-object object-${index}">${index ? "" : "+"}</span>`,
     ).join(""),
   radial: () =>
     Array.from(
       { length: 5 },
-      (_, index) =>
-        `<span class="motion-object object-${index}">${index ? "" : "+"}</span>`,
+      (_, index) => `<span class="motion-object object-${index}">${index ? "" : "+"}</span>`,
     ).join(""),
   gooey: () =>
     '<span class="motion-object object-0"></span><span class="motion-object object-1"></span>',
   accordion: () =>
     '<span class="motion-object"></span><span class="motion-object"></span><span class="motion-object"></span>',
-  ripple: () =>
-    '<span class="motion-object"></span><span class="motion-ripple"></span>',
-  shimmer: () =>
-    '<span class="motion-object"></span><span class="motion-shine"></span>',
+  ripple: () => '<span class="motion-object"></span><span class="motion-ripple"></span>',
+  shimmer: () => '<span class="motion-object"></span><span class="motion-shine"></span>',
 };
 
 function markup(type) {
   return (objects[type] || (() => '<span class="motion-object"></span>'))();
 }
 function radialFrames(type, index) {
-  const angle =
-    (type === "fanout" ? -120 : -90) + index * (type === "fanout" ? 60 : 72);
+  const angle = (type === "fanout" ? -120 : -90) + index * (type === "fanout" ? 60 : 72);
   const distance = index ? 68 : 0;
   return [
     { transform: "scale(.2)", opacity: 0 },
@@ -100,8 +94,7 @@ export function createMotionDemo([name, title, term, desc, type], frames) {
               object.animate(animation.keyframes, {
                 duration: reduced.matches ? 1 : 1200,
                 fill: "forwards",
-                easing:
-                  type === "easing" ? "cubic-bezier(.2,.8,.2,1)" : "ease-out",
+                easing: type === "easing" ? "cubic-bezier(.2,.8,.2,1)" : "ease-out",
                 ...animation.options,
               }),
             );
@@ -138,10 +131,8 @@ export function createMotionDemo([name, title, term, desc, type], frames) {
       return () => {
         cancel();
         play.removeEventListener("click", run);
-        if (type === "ripple")
-          lab.removeEventListener("pointerdown", startRipple);
-        if (type === "magnetic")
-          lab.removeEventListener("pointermove", followPointer);
+        if (type === "ripple") lab.removeEventListener("pointerdown", startRipple);
+        if (type === "magnetic") lab.removeEventListener("pointermove", followPointer);
         reduced.removeEventListener("change", cancel);
       };
     },

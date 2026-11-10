@@ -9,8 +9,7 @@ export function createPatternNavigation({ model, browser = window, onChange }) {
     const previous = state?.view === route.view ? state?.category : null;
     const topic = model.find(route.category, route.view);
     if (!topic) route.category = null;
-    if (!topic?.groups.some((group) => group.id === route.group))
-      route.group = null;
+    if (!topic?.groups.some((group) => group.id === route.group)) route.group = null;
     if (
       route.category &&
       !route.group &&
@@ -22,10 +21,8 @@ export function createPatternNavigation({ model, browser = window, onChange }) {
       browser.history.replaceState(null, "", routeHref(route));
     }
     if (route.category && !route.query) {
-      if (route.group)
-        lastGroups.set(`${route.view}/${route.category}`, route.group);
-      else if (previous === route.category)
-        lastGroups.delete(`${route.view}/${route.category}`);
+      if (route.group) lastGroups.set(`${route.view}/${route.category}`, route.group);
+      else if (previous === route.category) lastGroups.delete(`${route.view}/${route.category}`);
     }
     const previousState = state;
     state = route;

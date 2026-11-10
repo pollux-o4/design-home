@@ -3,11 +3,7 @@ import { createMotionController } from "./motion-controller.js";
 
 export function motionEasing(root, scope) {
   const motion = createMotionController(root, scope);
-  const curves = [
-    "linear",
-    "cubic-bezier(.65,0,.35,1)",
-    "cubic-bezier(.16,1,.3,1)",
-  ];
+  const curves = ["linear", "cubic-bezier(.65,0,.35,1)", "cubic-bezier(.16,1,.3,1)"];
   scope.on(root.querySelector("[data-replay]"), "click", () => {
     motion.cancel();
     root.querySelectorAll("[data-curve]").forEach((dot, index) => {
@@ -50,19 +46,14 @@ export function motionSpring(root, scope) {
     const frames = Array.from({ length: 61 }, (_, index) => {
       const time = index / 60;
       const displacement =
-        index === 60
-          ? 0
-          : -82 * Math.exp(-Number(damping.value) * time) * Math.cos(15 * time);
+        index === 60 ? 0 : -82 * Math.exp(-Number(damping.value) * time) * Math.cos(15 * time);
       return { transform: `translateX(${displacement}px)`, offset: time };
     });
     motion.play(root.querySelector("[data-orb]"), frames, {
       duration: 1400,
       easing: "linear",
     });
-    announce(
-      root,
-      `감쇠 ${damping.value}의 스프링입니다. 값이 높을수록 빨리 안정됩니다.`,
-    );
+    announce(root, `감쇠 ${damping.value}의 스프링입니다. 값이 높을수록 빨리 안정됩니다.`);
   }
   scope.on(root.querySelector("[data-replay]"), "click", replay);
   scope.on(damping, "change", replay);
@@ -88,10 +79,7 @@ export function motionFlip(root, scope) {
         { duration: 650 },
       );
     });
-    announce(
-      root,
-      `첫 번째 카드가 ${grid.firstElementChild.textContent.trim()}로 바뀌었습니다.`,
-    );
+    announce(root, `첫 번째 카드가 ${grid.firstElementChild.textContent.trim()}로 바뀌었습니다.`);
   });
 }
 export function motionCrossfade(root, scope) {
@@ -122,12 +110,7 @@ export function motionCrossfade(root, scope) {
     ]);
     if (turn !== revision) return;
     scenes[previous].hidden = true;
-    announce(
-      root,
-      selected
-        ? "초록의 장면으로 전환했습니다."
-        : "파랑의 장면으로 전환했습니다.",
-    );
+    announce(root, selected ? "초록의 장면으로 전환했습니다." : "파랑의 장면으로 전환했습니다.");
   });
 }
 export function motionSharedElement(root, scope) {
@@ -177,10 +160,7 @@ export function motionSharedElement(root, scope) {
     ]);
     if (turn !== revision) return;
     if (next && document.activeElement === open) close.focus();
-    announce(
-      root,
-      next ? "카드 상세 정보를 열었습니다." : "카드로 돌아왔습니다.",
-    );
+    announce(root, next ? "카드 상세 정보를 열었습니다." : "카드로 돌아왔습니다.");
   }
   scope.on(open, "click", () => change(!expanded));
   scope.on(close, "click", () => change(false));

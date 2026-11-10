@@ -2,82 +2,84 @@
    RECENT PROJECTS / DATA TABLE WIDGET
    ========================================================================== */
 .table-widget {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 14px;
-    padding: 25px;
-    box-shadow: var(--card-shadow);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 25px;
+  box-shadow: var(--card-shadow);
 }
 
 .table-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .data-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
 }
 
 .data-table th {
-    font-family: var(--font-display);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--text-secondary);
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border-color);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .data-table td {
-    padding: 14px 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    font-size: 13px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 13px;
 }
 
 .data-table tbody tr {
-    transition: background 0.2s ease, transform 0.2s ease;
-    cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+  cursor: pointer;
 }
 
 .data-table tbody tr:hover {
-    background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 /* Kinetic Row Hover distortion */
 .data-table tbody tr:hover td.project-name {
-    font-weight: 800;
-    color: var(--accent-primary);
-    letter-spacing: 0.5px;
-    transform: translateX(4px);
+  font-weight: 800;
+  color: var(--accent-primary);
+  letter-spacing: 0.5px;
+  transform: translateX(4px);
 }
 
 .status-pill {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 700;
-    font-family: var(--font-display);
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--font-display);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .status-pill.active {
-    background: rgba(0, 255, 102, 0.15);
-    color: #00ff66;
+  background: rgba(0, 255, 102, 0.15);
+  color: #00ff66;
 }
 
 .status-pill.pending {
-    background: rgba(255, 199, 0, 0.15);
-    color: #ffc700;
+  background: rgba(255, 199, 0, 0.15);
+  color: #ffc700;
 }
 
 .status-pill.deploying {
-    background: rgba(0, 240, 255, 0.15);
-    color: #00f0ff;
+  background: rgba(0, 240, 255, 0.15);
+  color: #00f0ff;
 }

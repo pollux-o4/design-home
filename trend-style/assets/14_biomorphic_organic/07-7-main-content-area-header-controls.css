@@ -50,7 +50,7 @@
 }
 
 .bio-pulse-dot::after {
-  content: '';
+  content: "";
   position: absolute;
   top: -4px;
   left: -4px;
@@ -62,8 +62,14 @@
 }
 
 @keyframes pulseHalo {
-  0% { transform: scale(0.8); opacity: 1; }
-  100% { transform: scale(2.2); opacity: 0; }
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
 }
 
 .dashboard-subtitle {
@@ -98,7 +104,9 @@
   transition: all 0.3s var(--ease-fluid);
 }
 
-[data-theme="biolum"] .dropdown-btn, [data-theme="forest"] .dropdown-btn, [data-theme="cyberbio"] .dropdown-btn {
+[data-theme="biolum"] .dropdown-btn,
+[data-theme="forest"] .dropdown-btn,
+[data-theme="cyberbio"] .dropdown-btn {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -134,8 +142,14 @@
 }
 
 @keyframes dropdownFade {
-  from { opacity: 0; transform: translateY(-8px) scale(0.95); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .dropdown-menu.show {
@@ -155,15 +169,16 @@
   justify-content: space-between;
 }
 
-.dropdown-option:hover, .dropdown-option.selected {
+.dropdown-option:hover,
+.dropdown-option.selected {
   background: var(--accent-1);
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 /* Action Trigger Button (+ New Project) */
 .btn-action-primary {
   background: var(--accent-gradient);
-  color: #FFFFFF;
+  color: #ffffff;
   border: none;
   padding: 10px 20px;
   border-radius: var(--radius-pill);
@@ -187,7 +202,7 @@
 .btn-action-primary svg {
   width: 16px;
   height: 16px;
-  fill: #FFFFFF;
+  fill: #ffffff;
 }
 
 /* Profile Switcher Quick Avatar */
@@ -202,7 +217,9 @@
   cursor: pointer;
 }
 
-[data-theme="biolum"] .profile-pill, [data-theme="forest"] .profile-pill, [data-theme="cyberbio"] .profile-pill {
+[data-theme="biolum"] .profile-pill,
+[data-theme="forest"] .profile-pill,
+[data-theme="cyberbio"] .profile-pill {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -215,7 +232,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #FFFFFF;
+  color: #ffffff;
   font-weight: 800;
   font-size: 0.8rem;
 }

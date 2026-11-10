@@ -10,7 +10,6 @@
 
 라이브러리의 분류와 설명은 `design-compare/library/documents/`에서 관리합니다. 등록 후 `design-compare`의 `build:library`로 정적 데이터와 Chromium 미리보기를 갱신합니다. 동작·문서 연결·반응형 검증은 `tests/component-behavior.test.mjs`, 모션과 난이도 전환 검증은 `tests/motion-behavior.test.mjs`에 있습니다.
 
-
 학습 분류는 `js/pattern-topics/`의 카테고리별 정의가 소유하고 `js/pattern-taxonomy.js`가 등록된 샘플에 연결합니다. 컴포넌트·레이아웃과 내비게이션·인터랙션·상태와 피드백·모션과 애니메이션·접근성의 여섯 분야에서 같은 원본 샘플을 ID로 연결합니다. 소스 모듈의 파일 분류와 학습용 탐색 분류를 별도로 유지하며 샘플 자체는 복제하지 않습니다.
 
 현재 위치는 `#/분야/세부주제`가 소유하고 검색은 해시의 `q`, 고급 난이도는 `level=advanced`에 기록합니다. 예: `#/motion/expressive?level=advanced`. 상위와 세부 주제는 각 단계에서 하나만 열립니다. 분야로 돌아오면 세션에서 마지막으로 본 세부 주제를 복원하고, 같은 분야 안에서 접힌 샘플의 조작 상태는 유지합니다. `/` 또는 Ctrl/⌘K는 검색으로 이동하며 Escape로 검색을 비웁니다. 실제 샘플 동작은 펼침 상태와 분리하며 분야를 떠날 때 정리합니다.

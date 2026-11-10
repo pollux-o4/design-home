@@ -1,7 +1,7 @@
 /* ==========================================================================
    Count-Up Number Animation
    ========================================================================== */
-function animateValue(obj, start, end, duration, prefix = '', suffix = '', decimals = 0) {
+function animateValue(obj, start, end, duration, prefix = "", suffix = "", decimals = 0) {
   let startTimestamp = null;
   const step = (timestamp) => {
     if (!startTimestamp) startTimestamp = timestamp;
@@ -19,11 +19,11 @@ function animateValue(obj, start, end, duration, prefix = '', suffix = '', decim
 }
 
 function runAllCountUps() {
-  document.querySelectorAll('.kpi-number').forEach(el => {
-    const target = parseFloat(el.getAttribute('data-target'));
-    const prefix = el.getAttribute('data-prefix') || '';
-    const suffix = el.getAttribute('data-suffix') || '';
-    const decimals = parseInt(el.getAttribute('data-decimals') || '0');
+  document.querySelectorAll(".kpi-number").forEach((el) => {
+    const target = parseFloat(el.getAttribute("data-target"));
+    const prefix = el.getAttribute("data-prefix") || "";
+    const suffix = el.getAttribute("data-suffix") || "";
+    const decimals = parseInt(el.getAttribute("data-decimals") || "0");
     animateValue(el, 0, target, 1000, prefix, suffix, decimals);
   });
 }
@@ -32,33 +32,33 @@ function runAllCountUps() {
    Data Tabs & Skeleton Loading Trigger
    ========================================================================== */
 function switchDataTab(mode, btnEl) {
-  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-  btnEl.classList.add('active');
+  document.querySelectorAll(".tab-btn").forEach((btn) => btn.classList.remove("active"));
+  btnEl.classList.add("active");
 
   // Update KPI target numbers based on tab mode
-  const revEl = document.getElementById('val-revenue');
-  const usrEl = document.getElementById('val-users');
+  const revEl = document.getElementById("val-revenue");
+  const usrEl = document.getElementById("val-users");
 
-  if (mode === 'daily') {
-    revEl.setAttribute('data-target', '18420');
-    usrEl.setAttribute('data-target', '6210');
-  } else if (mode === 'weekly') {
-    revEl.setAttribute('data-target', '128450');
-    usrEl.setAttribute('data-target', '48290');
-  } else if (mode === 'monthly') {
-    revEl.setAttribute('data-target', '542100');
-    usrEl.setAttribute('data-target', '194200');
+  if (mode === "daily") {
+    revEl.setAttribute("data-target", "18420");
+    usrEl.setAttribute("data-target", "6210");
+  } else if (mode === "weekly") {
+    revEl.setAttribute("data-target", "128450");
+    usrEl.setAttribute("data-target", "48290");
+  } else if (mode === "monthly") {
+    revEl.setAttribute("data-target", "542100");
+    usrEl.setAttribute("data-target", "194200");
   }
 
   triggerSkeletonReload();
 }
 
 function triggerSkeletonReload() {
-  const panels = document.querySelectorAll('.glass-panel');
-  panels.forEach(p => p.classList.add('loading'));
+  const panels = document.querySelectorAll(".glass-panel");
+  panels.forEach((p) => p.classList.add("loading"));
 
   setTimeout(() => {
-    panels.forEach(p => p.classList.remove('loading'));
+    panels.forEach((p) => p.classList.remove("loading"));
     runAllCountUps();
   }, 450);
 }

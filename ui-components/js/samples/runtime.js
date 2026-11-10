@@ -41,8 +41,7 @@ export function mount(root, behavior) {
   const commands = behavior ? strategies[behavior](root, scope) : {};
   active.set(root.dataset.sampleId, { root, commands });
   scope.own(() => {
-    if (active.get(root.dataset.sampleId)?.root === root)
-      active.delete(root.dataset.sampleId);
+    if (active.get(root.dataset.sampleId)?.root === root) active.delete(root.dataset.sampleId);
   });
   return scope.dispose;
 }

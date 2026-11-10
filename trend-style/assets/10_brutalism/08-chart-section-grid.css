@@ -1,158 +1,162 @@
 /* Chart Section Grid */
 .charts-row {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 20px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
 }
 
 @media (max-width: 1024px) {
-    .charts-row {
-        grid-template-columns: 1fr;
-    }
+  .charts-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 .chart-card {
-    background: var(--bg-card);
-    border: var(--border-width) solid var(--border-color);
-    box-shadow: var(--box-shadow);
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  background: var(--bg-card);
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--box-shadow);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .chart-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 12px;
 }
 
 .chart-title-group h3 {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .chart-title-group p {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
 }
 
 /* Interactive SVG Chart Container */
 .svg-chart-wrapper {
-    position: relative;
-    width: 100%;
-    height: 280px;
+  position: relative;
+  width: 100%;
+  height: 280px;
 }
 
 .main-svg-chart {
-    width: 100%;
-    height: 100%;
-    overflow: visible;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
 }
 
 /* Chart Elements */
 .chart-grid-line {
-    stroke: var(--chart-grid);
-    stroke-width: 1;
-    stroke-dasharray: 4,4;
+  stroke: var(--chart-grid);
+  stroke-width: 1;
+  stroke-dasharray: 4, 4;
 }
 
 .chart-bar-rect {
-    fill: var(--chart-bar);
-    stroke: var(--border-color);
-    stroke-width: 2;
-    transition: opacity 0.1s ease, fill 0.1s ease;
-    cursor: pointer;
+  fill: var(--chart-bar);
+  stroke: var(--border-color);
+  stroke-width: 2;
+  transition:
+    opacity 0.1s ease,
+    fill 0.1s ease;
+  cursor: pointer;
 }
 
 .chart-bar-rect:hover {
-    fill: var(--accent-primary);
+  fill: var(--accent-primary);
 }
 
 .chart-line-path {
-    fill: none;
-    stroke: var(--chart-line);
-    stroke-width: 4;
-    stroke-linecap: square;
+  fill: none;
+  stroke: var(--chart-line);
+  stroke-width: 4;
+  stroke-linecap: square;
 }
 
 .chart-node {
-    fill: var(--bg-card);
-    stroke: var(--accent-primary);
-    stroke-width: 3;
-    cursor: pointer;
-    transition: r 0.15s ease;
+  fill: var(--bg-card);
+  stroke: var(--accent-primary);
+  stroke-width: 3;
+  cursor: pointer;
+  transition: r 0.15s ease;
 }
 
 .chart-node:hover {
-    r: 7;
-    fill: var(--accent-primary);
+  r: 7;
+  fill: var(--accent-primary);
 }
 
 /* Custom Interactive Tooltip */
 .brutal-tooltip {
-    position: absolute;
-    background: #000000;
-    color: #ffffff;
-    border: 2px solid #ffffff;
-    padding: 8px 12px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: bold;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.1s ease, transform 0.1s ease;
-    transform: translate(-50%, -120%);
-    box-shadow: 4px 4px 0px rgba(255,255,255,0.3);
-    z-index: 100;
-    white-space: nowrap;
+  position: absolute;
+  background: #000000;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  padding: 8px 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: bold;
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    opacity 0.1s ease,
+    transform 0.1s ease;
+  transform: translate(-50%, -120%);
+  box-shadow: 4px 4px 0px rgba(255, 255, 255, 0.3);
+  z-index: 100;
+  white-space: nowrap;
 }
 
 body[data-theme="v3"] .brutal-tooltip {
-    background: #141414;
-    color: #00ff66;
-    border-color: #00ff66;
+  background: #141414;
+  color: #00ff66;
+  border-color: #00ff66;
 }
 
 .brutal-tooltip.show {
-    opacity: 1;
+  opacity: 1;
 }
 
 /* Conversion Funnel Bar Component */
 .funnel-container {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
 }
 
 .funnel-stage {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .funnel-label {
-    display: flex;
-    justify-content: space-between;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 800;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
 }
 
 .funnel-bar-outer {
-    height: 24px;
-    background: var(--bg-main);
-    border: 2px solid var(--border-color);
-    position: relative;
-    overflow: hidden;
+  height: 24px;
+  background: var(--bg-main);
+  border: 2px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
 }
 
 .funnel-bar-inner {
-    height: 100%;
-    background: var(--accent-primary);
-    border-right: 2px solid var(--border-color);
-    transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  height: 100%;
+  background: var(--accent-primary);
+  border-right: 2px solid var(--border-color);
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }

@@ -1,96 +1,98 @@
 /* Widget Draggable Grid */
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
 
 .widget-card {
-    background-color: var(--md-sys-color-surface);
-    border: 1px solid var(--md-sys-color-outline-variant);
-    border-radius: var(--md-shape-radius);
-    padding: 20px;
-    box-shadow: var(--md-elevation-1);
-    position: relative;
-    cursor: grab;
-    transition: all 0.2s ease, box-shadow 0.3s ease;
+  background-color: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-shape-radius);
+  padding: 20px;
+  box-shadow: var(--md-elevation-1);
+  position: relative;
+  cursor: grab;
+  transition:
+    all 0.2s ease,
+    box-shadow 0.3s ease;
 }
 
 .widget-card:hover {
-    box-shadow: var(--md-elevation-2);
+  box-shadow: var(--md-elevation-2);
 }
 
 .widget-card.dragging {
-    opacity: 0.4;
-    transform: scale(0.98);
-    border: 2px dashed var(--md-sys-color-primary);
+  opacity: 0.4;
+  transform: scale(0.98);
+  border: 2px dashed var(--md-sys-color-primary);
 }
 
 .widget-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
 }
 
 .widget-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--md-sys-color-on-surface-variant);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--md-sys-color-on-surface-variant);
 }
 
 .widget-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background-color: var(--md-sys-color-secondary-container);
-    color: var(--md-sys-color-on-secondary-container);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .widget-icon svg {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
 }
 
 .metric-value {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--md-sys-color-on-surface);
-    letter-spacing: -0.5px;
-    margin-bottom: 6px;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--md-sys-color-on-surface);
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
 }
 
 .metric-footer {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
 }
 
 .badge-trend {
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-weight: 700;
-    font-size: 11px;
-    display: inline-flex;
-    align-items: center;
-    gap: 2px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
 }
 
 .badge-up {
-    background-color: rgba(46, 125, 50, 0.12);
-    color: #2E7D32;
+  background-color: rgba(46, 125, 50, 0.12);
+  color: #2e7d32;
 }
 
 .badge-down {
-    background-color: rgba(198, 40, 40, 0.12);
-    color: #C62828;
+  background-color: rgba(198, 40, 40, 0.12);
+  color: #c62828;
 }
 
 .trend-text {
-    color: var(--md-sys-color-on-surface-variant);
+  color: var(--md-sys-color-on-surface-variant);
 }

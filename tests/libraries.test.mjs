@@ -6,9 +6,7 @@ import { libraries } from "../libraries/js/catalog.js";
 import { readRoute, routeUrl } from "../libraries/js/route.js";
 
 test("library routes validate category and comparison IDs", () => {
-  const state = readRoute(
-    "#/unknown?compare=motion,motion,gsap,bad,anime-js,lenis",
-  );
+  const state = readRoute("#/unknown?compare=motion,motion,gsap,bad,anime-js,lenis");
   assert.deepEqual(state, {
     category: "",
     query: "",
@@ -27,13 +25,8 @@ test("Libraries supports exclusive categories, search, comparison and responsive
       }),
       errors = [];
     page.on("pageerror", (e) => errors.push(e.message));
-    await page.goto(
-      `http://127.0.0.1:${server.address().port}/libraries/index.html`,
-    );
-    assert.equal(
-      await page.locator(".pattern-summary[aria-expanded=true]").count(),
-      0,
-    );
+    await page.goto(`http://127.0.0.1:${server.address().port}/libraries/index.html`);
+    assert.equal(await page.locator(".pattern-summary[aria-expanded=true]").count(), 0);
     assert.equal(
       await page
         .locator("#dh-global-nav .dh-study-link.active")
@@ -44,10 +37,7 @@ test("Libraries supports exclusive categories, search, comparison and responsive
     await page.locator("#summary-library-motion").click();
     for (const item of libraries) {
       const card = page.locator(`[data-library="${item.id}"]`);
-      assert.equal(
-        await card.locator(".outcomes-description").textContent(),
-        item.capabilities,
-      );
+      assert.equal(await card.locator(".outcomes-description").textContent(), item.capabilities);
       const example = card.locator(".example-link");
       assert.equal(await example.getAttribute("href"), item.examples);
       assert.equal(await example.getAttribute("target"), "_blank");
@@ -66,25 +56,14 @@ test("Libraries supports exclusive categories, search, comparison and responsive
     assert.equal(popup.url(), "https://motion.dev/examples");
     await popup.close();
 
-    await page
-      .getByRole("button", { name: "Motion 비교에 추가", exact: true })
-      .click();
-    await page
-      .getByRole("button", { name: "GSAP 비교에 추가", exact: true })
-      .click();
-    await page
-      .getByRole("button", { name: "Anime.js 비교에 추가", exact: true })
-      .click();
-    assert.equal(
-      await page.locator("[data-library=lenis] .compare-button").isDisabled(),
-      true,
-    );
+    await page.getByRole("button", { name: "Motion 비교에 추가", exact: true }).click();
+    await page.getByRole("button", { name: "GSAP 비교에 추가", exact: true }).click();
+    await page.getByRole("button", { name: "Anime.js 비교에 추가", exact: true }).click();
+    assert.equal(await page.locator("[data-library=lenis] .compare-button").isDisabled(), true);
     assert.equal(await page.locator("#comparison thead th").count(), 4);
     await page.locator("[data-library=motion] summary").click();
     assert.equal(
-      await page
-        .locator("[data-library=motion] .official-link")
-        .getAttribute("href"),
+      await page.locator("[data-library=motion] .official-link").getAttribute("href"),
       "https://motion.dev/docs",
     );
     await page.evaluate(() => scrollTo(0, 0));
@@ -93,42 +72,27 @@ test("Libraries supports exclusive categories, search, comparison and responsive
       fullPage: true,
     });
     await page.locator("#summary-library-graphics").click();
-    await page.locator('#panel-library-motion').waitFor({ state: 'hidden' });
-    assert.equal(
-      await page.locator(".pattern-summary[aria-expanded=true]").count(),
-      1,
-    );
-    assert.equal(
-      await page.locator("#panel-library-motion").isVisible(),
-      false,
-    );
+    await page.locator("#panel-library-motion").waitFor({ state: "hidden" });
+    assert.equal(await page.locator(".pattern-summary[aria-expanded=true]").count(), 1);
+    assert.equal(await page.locator("#panel-library-motion").isVisible(), false);
     await page.goBack();
     assert.equal(
-      await page
-        .locator("#summary-library-motion")
-        .getAttribute("aria-expanded"),
+      await page.locator("#summary-library-motion").getAttribute("aria-expanded"),
       "true",
     );
     await page.goForward();
     assert.equal(
-      await page
-        .locator("#summary-library-graphics")
-        .getAttribute("aria-expanded"),
+      await page.locator("#summary-library-graphics").getAttribute("aria-expanded"),
       "true",
     );
     await page.reload();
     assert.equal(await page.locator("#comparison thead th").count(), 4);
     await page.locator("#library-search").fill("React Aria");
     assert.equal(await page.locator(".library-card:visible").count(), 1);
-    assert.equal(
-      await page.locator(".library-card:visible h3").textContent(),
-      "React Aria",
-    );
+    assert.equal(await page.locator(".library-card:visible h3").textContent(), "React Aria");
     await page.locator("#summary-library-headless").click();
     assert.equal(
-      await page
-        .locator("#summary-library-headless")
-        .getAttribute("aria-expanded"),
+      await page.locator("#summary-library-headless").getAttribute("aria-expanded"),
       "false",
     );
     await page.locator("#summary-library-headless").click();
@@ -142,22 +106,14 @@ test("Libraries supports exclusive categories, search, comparison and responsive
       await page.locator("#summary-library-motion").click();
       await page.waitForTimeout(300);
       assert.equal(
-        await page.evaluate(
-          () => document.documentElement.scrollWidth <= innerWidth,
-        ),
+        await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
         true,
         `overflow at ${width}`,
       );
-      await page
-        .getByRole("button", { name: "Motion 비교에 추가", exact: true })
-        .click();
-      await page
-        .getByRole("button", { name: "GSAP 비교에 추가", exact: true })
-        .click();
+      await page.getByRole("button", { name: "Motion 비교에 추가", exact: true }).click();
+      await page.getByRole("button", { name: "GSAP 비교에 추가", exact: true }).click();
       assert.equal(
-        await page.evaluate(
-          () => document.documentElement.scrollWidth <= innerWidth,
-        ),
+        await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
         true,
         `comparison overflow at ${width}`,
       );
@@ -173,10 +129,7 @@ test("Libraries supports exclusive categories, search, comparison and responsive
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.locator("#summary-library-headless").click();
     await page.locator("#summary-library-kits").click();
-    assert.equal(
-      await page.locator("#panel-library-headless").isVisible(),
-      false,
-    );
+    assert.equal(await page.locator("#panel-library-headless").isVisible(), false);
     assert.deepEqual(errors, []);
   } finally {
     await browser.close();

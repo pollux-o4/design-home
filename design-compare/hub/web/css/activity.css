@@ -81,7 +81,6 @@
   color: var(--ui-surface);
 }
 
-
 @media (max-width: 760px) {
   .activity-images {
     grid-template-columns: 1fr;

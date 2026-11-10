@@ -6,29 +6,12 @@
   "summary": "스크롤할 때 나타나고 가까이 가면 넓어지는 오버레이 스크롤바",
   "kind": "component",
   "category": "navigation",
-  "keywords": [
-    "스크롤",
-    "스크롤바",
-    "scrollbar",
-    "자동 숨김",
-    "오버레이"
-  ],
-  "useCases": [
-    "스크롤",
-    "스크롤바",
-    "긴 목록",
-    "패널 탐색"
-  ],
+  "keywords": ["스크롤", "스크롤바", "scrollbar", "자동 숨김", "오버레이"],
+  "useCases": ["스크롤", "스크롤바", "긴 목록", "패널 탐색"],
   "sourcePath": "ui-components/scrollbar/index.html",
-  "sources": [
-    "shared/js/scrollbar.js",
-    "shared/css/scrollbar.css"
-  ],
+  "sources": ["shared/js/scrollbar.js", "shared/css/scrollbar.css"],
   "previewPath": "/ui-components/scrollbar/index.html",
-  "tags": [
-    "minimal",
-    "feedback"
-  ],
+  "tags": ["minimal", "feedback"],
   "viewport": {
     "width": 800,
     "height": 600
@@ -39,10 +22,7 @@
       "region": ".scroll-sample"
     }
   },
-  "structure": [
-    "고정 높이의 스크롤 영역",
-    "콘텐츠 폭을 차지하지 않는 오버레이 트랙과 핸들"
-  ],
+  "structure": ["고정 높이의 스크롤 영역", "콘텐츠 폭을 차지하지 않는 오버레이 트랙과 핸들"],
   "interactions": [
     "스크롤 중 표시, 멈춘 뒤 900ms 후 숨김",
     "트랙에 접근하면 4px에서 8px로 확장",

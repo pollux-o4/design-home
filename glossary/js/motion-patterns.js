@@ -1,34 +1,14 @@
 const patterns = [
-  [
-    "motion-easing",
-    "이징 곡선",
-    "Easing Curves",
-    "같은 거리의 여러 속도 곡선을 비교합니다.",
-  ],
-  [
-    "motion-stagger",
-    "순차적 등장",
-    "Staggered Reveal",
-    "요소가 시간차를 두고 차례로 나타납니다.",
-  ],
-  [
-    "motion-spring",
-    "스프링",
-    "Damped Spring",
-    "탄성과 감쇠를 가진 움직임입니다.",
-  ],
+  ["motion-easing", "이징 곡선", "Easing Curves", "같은 거리의 여러 속도 곡선을 비교합니다."],
+  ["motion-stagger", "순차적 등장", "Staggered Reveal", "요소가 시간차를 두고 차례로 나타납니다."],
+  ["motion-spring", "스프링", "Damped Spring", "탄성과 감쇠를 가진 움직임입니다."],
   [
     "motion-flip",
     "FLIP 레이아웃 전환",
     "FLIP Layout Transition",
     "이전 위치와 다음 위치를 연결해 재배치합니다.",
   ],
-  [
-    "motion-crossfade",
-    "크로스페이드",
-    "Crossfade",
-    "두 장면을 겹치며 전환합니다.",
-  ],
+  ["motion-crossfade", "크로스페이드", "Crossfade", "두 장면을 겹치며 전환합니다."],
   [
     "motion-shared-element",
     "공유 요소 전환",
@@ -53,12 +33,7 @@ const patterns = [
     "Layered Parallax",
     "레이어를 서로 다른 속도로 움직여 깊이를 만듭니다.",
   ],
-  [
-    "motion-card-tilt",
-    "카드 틸트",
-    "Perspective Tilt",
-    "포인터를 따라 원근감 있게 기울어집니다.",
-  ],
+  ["motion-card-tilt", "카드 틸트", "Perspective Tilt", "포인터를 따라 원근감 있게 기울어집니다."],
   [
     "motion-page-slide",
     "방향성 화면 전환",

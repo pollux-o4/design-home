@@ -11,22 +11,16 @@ export function createPatternViewport({ viewport, renderer }) {
         viewport.scrollTo({ top: 0, behavior: scrollBehavior() });
       if (
         !state.group ||
-        (previous?.category === state.category &&
-          previous?.group === state.group)
+        (previous?.category === state.category && previous?.group === state.group)
       )
         return;
       const target = renderer.groupTarget(state.group);
       if (!target) return;
       const originFocus = document.activeElement;
       renderer.settled().then(() => {
-        if (
-          current !== revision ||
-          !target.isConnected ||
-          document.activeElement !== originFocus
-        )
+        if (current !== revision || !target.isConnected || document.activeElement !== originFocus)
           return;
-        if (document.activeElement !== target)
-          target.focus({ preventScroll: true });
+        if (document.activeElement !== target) target.focus({ preventScroll: true });
         target.scrollIntoView({ block: "start", behavior: scrollBehavior() });
       });
     },

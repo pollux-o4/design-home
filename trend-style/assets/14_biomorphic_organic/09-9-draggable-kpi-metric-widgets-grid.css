@@ -8,10 +8,14 @@
 }
 
 @media (max-width: 1200px) {
-  .widget-grid { grid-template-columns: repeat(2, 1fr); }
+  .widget-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 @media (max-width: 640px) {
-  .widget-grid { grid-template-columns: 1fr; }
+  .widget-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .kpi-card {
@@ -30,7 +34,10 @@
   overflow: hidden;
   cursor: grab;
   user-select: none;
-  transition: transform 0.3s var(--ease-fluid), box-shadow 0.3s var(--ease-fluid), border-color 0.3s var(--ease-smooth);
+  transition:
+    transform 0.3s var(--ease-fluid),
+    box-shadow 0.3s var(--ease-fluid),
+    border-color 0.3s var(--ease-smooth);
 }
 
 .kpi-card:hover {
@@ -156,7 +163,7 @@
 
 .skeleton .kpi-value::after,
 .skeleton .kpi-title::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -167,5 +174,7 @@
 }
 
 @keyframes skeletonSweep {
-  100% { left: 100%; }
+  100% {
+    left: 100%;
+  }
 }

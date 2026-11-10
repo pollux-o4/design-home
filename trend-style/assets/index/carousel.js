@@ -25,17 +25,12 @@ export function mountCarousel(carousel) {
     slides.forEach((slide, i) => {
       slide.hidden = i !== index;
     });
-    dots.forEach((dot, i) =>
-      dot.setAttribute("aria-pressed", String(i === index)),
-    );
+    dots.forEach((dot, i) => dot.setAttribute("aria-pressed", String(i === index)));
     schedule();
   }
   function updatePlay() {
     play.setAttribute("aria-pressed", String(paused));
-    play.setAttribute(
-      "aria-label",
-      paused ? "Play slideshow" : "Pause slideshow",
-    );
+    play.setAttribute("aria-label", paused ? "Play slideshow" : "Pause slideshow");
     play.textContent = paused ? "▷" : "Ⅱ";
   }
   dots.forEach((dot, i) => dot.addEventListener("click", () => select(i)));

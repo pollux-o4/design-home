@@ -38,14 +38,7 @@ export default {
       id: "layers",
       title: "대화상자와 레이어",
       desc: "집중이 필요한 결정과 부가 정보.",
-      ids: [
-        "modal",
-        "confirm",
-        "alert",
-        "drawer",
-        "popover",
-        "interaction-command-palette",
-      ],
+      ids: ["modal", "confirm", "alert", "drawer", "popover", "interaction-command-palette"],
     },
     {
       id: "forms",

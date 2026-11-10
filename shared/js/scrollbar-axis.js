@@ -43,10 +43,7 @@ export function createScrollbarAxis(region, { root, axis, schedule }) {
     const visible = snapshot[vertical ? "visibleY" : "visibleX"];
     const total = snapshot[vertical ? "totalY" : "totalX"];
     const length = Math.max(0, (vertical ? rect.height : rect.width) - 16);
-    const size = Math.min(
-      length,
-      Math.max(32, length * (total ? visible / total : 1)),
-    );
+    const size = Math.min(length, Math.max(32, length * (total ? visible / total : 1)));
     metrics = {
       max: Math.max(0, total - visible),
       length,
@@ -76,9 +73,7 @@ export function createScrollbarAxis(region, { root, axis, schedule }) {
     if (!thumb.contains(event.target)) {
       const rect = rail.getBoundingClientRect();
       move(
-        ((coordinate(event) -
-          (vertical ? rect.top : rect.left) -
-          metrics.size / 2) /
+        ((coordinate(event) - (vertical ? rect.top : rect.left) - metrics.size / 2) /
           metrics.travel) *
           metrics.max,
       );
@@ -91,10 +86,7 @@ export function createScrollbarAxis(region, { root, axis, schedule }) {
   });
   rail.addEventListener("pointermove", (event) => {
     if (drag && metrics.travel)
-      move(
-        drag.position +
-          ((coordinate(event) - drag.start) / metrics.travel) * metrics.max,
-      );
+      move(drag.position + ((coordinate(event) - drag.start) / metrics.travel) * metrics.max);
   });
   function stopDrag() {
     drag = null;
@@ -107,9 +99,7 @@ export function createScrollbarAxis(region, { root, axis, schedule }) {
   rail.addEventListener("lostpointercapture", stopDrag);
   rail.addEventListener("keydown", (event) => {
     const page = (vertical ? region.clientHeight : region.clientWidth) * 0.85;
-    const deltas = vertical
-      ? { ArrowDown: 40, ArrowUp: -40 }
-      : { ArrowRight: 40, ArrowLeft: -40 };
+    const deltas = vertical ? { ArrowDown: 40, ArrowUp: -40 } : { ArrowRight: 40, ArrowLeft: -40 };
     if (
       event.key === "Home" ||
       event.key === "End" ||

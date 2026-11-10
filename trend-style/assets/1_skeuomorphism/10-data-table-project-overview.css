@@ -7,7 +7,7 @@
   box-shadow: var(--card-shadow);
   border-radius: 16px;
   padding: 20px;
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .table-wrap {
@@ -22,7 +22,7 @@
 }
 
 .skeuo-table th {
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   font-size: 11px;
   font-weight: 700;
   color: var(--accent-primary);
@@ -34,13 +34,17 @@
 
 .skeuo-table tr.table-row {
   background: var(--panel-bg);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transition: transform 0.15s ease;
 }
 
 .skeuo-table tr.table-row:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.2);
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .skeuo-table td {
@@ -69,7 +73,7 @@
   padding: 4px 8px;
   border-radius: 10px;
   background: var(--track-bg);
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .status-dot {

@@ -22,7 +22,6 @@
 
 사이드바 샘플은 본문과 같은 레이아웃의 지속형 탐색 영역을 보여주고, 드로어 샘플은 열기·닫기·Escape가 있는 오버레이 패널을 보여준다. 사이드바의 모양·레이아웃과 드로어의 표시 방식이 구분되도록 시연 맥락을 제공한다.
 
-
 ## Patterns의 단계별 탐색
 
 `pattern-topics/`의 카테고리별 정의는 여섯 학습 분야와 세부 주제가 참조하는 원본 샘플 ID를 소유하고, `pattern-taxonomy.js`가 등록된 정의를 연결한다. 모션·접근성에서 기존 샘플을 다시 연결하지만 HTML·동작·스타일을 복제하지 않는다. `pattern-route.js`의 해시 경로가 분야·세부 주제·검색 상태의 단일 원본이다. `pattern-navigation.js`는 경로 검증과 세션별 마지막 세부 주제 복원을 소유하고 명시적인 URL로 반영한다. 브라우저 history 이벤트가 같은 URL을 중복 전달하면 다시 렌더링하지 않는다. 조립 진입점은 이 탐색 계약을 화면에 연결한다.
@@ -62,7 +61,6 @@ Patterns의 종류별 분류는 `pattern-topics/*`, UX 관점의 원칙 분류�
 상태 변형 예제는 `components/state-morphing.js`의 정의, `samples/state-morphing.js`의 상태·취소·포커스 처리, `controls/state-morphing.css`의 표현으로 나뉜다. 재생·전송은 명시적인 로컬 시뮬레이션이며 타이머는 기존 scope가 해제한다. 원칙별 그룹은 같은 카테고리 내 샘플 ID를 중복 배치하지 않아 캐시된 DOM의 ID와 동작을 격리한다.
 
 주제 선택 정책은 `pattern-route.js`의 `selectPatternGroup`이 소유하며 아코디언과 숏컷이 같은 선택 명령을 사용한다. Libraries의 카테고리 투영·접힘 수명은 `category-view.js`, 카드와 비교 표의 표시 항목 스키마는 `fields.js`가 소유한다. `app.js`는 URL 전환·화면 조립·이벤트 연결만 맡는다. 상태 변형 버튼의 phase는 동작 모듈 안에 한 번만 존재하고 DOM 속성과 텍스트는 render 함수가 파생한다.
-
 
 ## 용어집의 시각적 학습
 

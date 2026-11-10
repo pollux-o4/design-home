@@ -1,6 +1,6 @@
-import { createTextLocalizer } from '../../shared/js/text-localizer.js';
-import descriptions from './entry-messages-en.js';
-import interfaceMessages from './messages-en.js';
+import { createTextLocalizer } from "../../shared/js/text-localizer.js";
+import descriptions from "./entry-messages-en.js";
+import interfaceMessages from "./messages-en.js";
 
 export function localizeGlossary(entries, root) {
   const messages = { ...interfaceMessages };
@@ -9,7 +9,7 @@ export function localizeGlossary(entries, root) {
     if (descriptions[entry.id]) messages[entry.desc] = descriptions[entry.id];
   }
   const phrases = Object.keys(messages).sort((a, b) => b.length - a.length);
-  const translate = source => {
+  const translate = (source) => {
     const trimmed = source.trim();
     if (messages[trimmed]) return source.replace(trimmed, messages[trimmed]);
     const example = /^(.*) 예시 체험$/.exec(trimmed);
@@ -31,30 +31,39 @@ export function localizeGlossary(entries, root) {
     let text = source;
     for (const phrase of phrases) text = text.replaceAll(phrase, messages[phrase]);
     return text
-      .replace(/(\d+)페이지/g, 'Page $1')
-      .replace(/(\d+\s*\/\s*\d+) 페이지/g, 'Page $1')
-      .replace(/(\d+)명/g, '$1 members')
-      .replace(/(\d+)열/g, '$1 columns')
-      .replace(/용어\s*(\d+)개/g, '$1 terms')
-      .replace(/용어\s*$/g, 'Terms ')
-      .replace(/Terms\s*(\d+)개/g, '$1 terms')
-      .replace(/ 예시 체험/g, ' example')
-      .replace(/ 공식 자료 \(새 탭\)/g, ' official reference (new tab)')
-      .replace(/ 체험 화면/g, ' example')
-      .replace(/ 체험/g, ' example')
-      .replace(/ 재생/g, ' playing')
-      .replace(/움직임 줄이기: 변화 후 상태를 표시합니다\./g, 'Reduced motion: showing the final state.');
+      .replace(/(\d+)페이지/g, "Page $1")
+      .replace(/(\d+\s*\/\s*\d+) 페이지/g, "Page $1")
+      .replace(/(\d+)명/g, "$1 members")
+      .replace(/(\d+)열/g, "$1 columns")
+      .replace(/용어\s*(\d+)개/g, "$1 terms")
+      .replace(/용어\s*$/g, "Terms ")
+      .replace(/Terms\s*(\d+)개/g, "$1 terms")
+      .replace(/ 예시 체험/g, " example")
+      .replace(/ 공식 자료 \(새 탭\)/g, " official reference (new tab)")
+      .replace(/ 체험 화면/g, " example")
+      .replace(/ 체험/g, " example")
+      .replace(/ 재생/g, " playing")
+      .replace(
+        /움직임 줄이기: 변화 후 상태를 표시합니다\./g,
+        "Reduced motion: showing the final state.",
+      );
   };
-  const language = () => document.documentElement.lang === 'en' ? 'en' : 'ko';
-  const localizer = createTextLocalizer(root, (text, lang) => lang === 'en' ? translate(text) : text, language);
-  let sourceTitle = document.title, outputTitle = document.title;
+  const language = () => (document.documentElement.lang === "en" ? "en" : "ko");
+  const localizer = createTextLocalizer(
+    root,
+    (text, lang) => (lang === "en" ? translate(text) : text),
+    language,
+  );
+  let sourceTitle = document.title,
+    outputTitle = document.title;
   const update = () => {
     localizer.update();
     if (document.title !== outputTitle) sourceTitle = document.title;
-    outputTitle = language() === 'en' ? translate(sourceTitle).replace('용어집', 'Glossary') : sourceTitle;
+    outputTitle =
+      language() === "en" ? translate(sourceTitle).replace("용어집", "Glossary") : sourceTitle;
     document.title = outputTitle;
   };
-  document.addEventListener('dh:language-change', update);
+  document.addEventListener("dh:language-change", update);
   update();
   return { update };
 }

@@ -27,7 +27,15 @@ test("renderer reports teardown failures and mounts the replacement content", as
       const definitions = new Map(
         ["first", "second"].map((id) => [
           id,
-          { id, title: id, term: id, desc: "", level: "basic", reference: "#", render: () => `<div data-sample-id="${id}"></div>` },
+          {
+            id,
+            title: id,
+            term: id,
+            desc: "",
+            level: "basic",
+            reference: "#",
+            render: () => `<div data-sample-id="${id}"></div>`,
+          },
         ]),
       );
       const renderer = createRenderer({

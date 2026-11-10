@@ -1,22 +1,46 @@
-import { parseArgs } from 'node:util';
-import { commands } from './commands.js';
-import { DEFAULT_PIXEL_BUDGET } from '../comparison/policy.js';
-import { loadProject } from '../project.js';
+import { parseArgs } from "node:util";
+import { commands } from "./commands.js";
+import { DEFAULT_PIXEL_BUDGET } from "../comparison/policy.js";
+import { loadProject } from "../project.js";
 
-const string = { type: 'string' };
+const string = { type: "string" };
 const options = {
-  help: { type: 'boolean', short: 'h' }, json: { type: 'boolean' }, details: { type: 'boolean' }, strict: { type: 'boolean' },
-  intent: string, 'base-url': string, limit: string, task: string,
-  'open-selector': string, action: string, scenario: string, project: string, manifest: string,
-  tag: { type: 'string', multiple: true }, query: string, id: string, reference: string, candidate: string, report: string, url: string, selector: string, store: string,
-  allow: { type: 'string', multiple: true },
-  part: { type: 'string', multiple: true }, ignore: { type: 'string', multiple: true },
-  viewport: string, theme: string, state: string, 'pixel-budget': string,
+  help: { type: "boolean", short: "h" },
+  json: { type: "boolean" },
+  details: { type: "boolean" },
+  strict: { type: "boolean" },
+  intent: string,
+  "base-url": string,
+  limit: string,
+  task: string,
+  "open-selector": string,
+  action: string,
+  scenario: string,
+  project: string,
+  manifest: string,
+  tag: { type: "string", multiple: true },
+  query: string,
+  id: string,
+  reference: string,
+  candidate: string,
+  report: string,
+  url: string,
+  selector: string,
+  store: string,
+  allow: { type: "string", multiple: true },
+  part: { type: "string", multiple: true },
+  ignore: { type: "string", multiple: true },
+  viewport: string,
+  theme: string,
+  state: string,
+  "pixel-budget": string,
 };
 
 export const help = `Design Compare — 의도 입력 → 자료 이미지 → 작업 등록 → 비교 → 최근 호출 검수
 
-${Object.values(commands).map(command => command.usage).join('\n')}
+${Object.values(commands)
+  .map((command) => command.usage)
+  .join("\n")}
 
 처음 사용: ./design brief --intent "프로젝트 입력 모달을 만들려고 해" --json
 공통: --store 경로 (기본 .design-compare / DESIGN_STORE) · --task ID (같은 작업 연결) · --json
@@ -37,10 +61,13 @@ export function parseInvocation(args) {
   const { values, positionals } = parseArgs({ args, allowPositionals: true, options });
   if (values.help || args.length === 0) return { help: true, values };
   const [name, ...extra] = positionals;
-  if (extra.length || !Object.hasOwn(commands, name ?? '')) throw new Error(`명령: ${Object.keys(commands).join(', ')} (--help 참고)`);
+  if (extra.length || !Object.hasOwn(commands, name ?? ""))
+    throw new Error(`명령: ${Object.keys(commands).join(", ")} (--help 참고)`);
   const command = commands[name];
-  for (const key of Object.keys(values)) if (!['store', 'task'].includes(key) && !command.options.includes(key)) throw new Error(`${name}에서 --${key} 사용 불가`);
-  if (values.details && !values.json) throw new Error('--details는 --json과 함께 사용');
+  for (const key of Object.keys(values))
+    if (!["store", "task"].includes(key) && !command.options.includes(key))
+      throw new Error(`${name}에서 --${key} 사용 불가`);
+  if (values.details && !values.json) throw new Error("--details는 --json과 함께 사용");
   values.store ??= loadProject().store;
   return { name, command, values, request: { ...command.prepare(values), store: values.store } };
 }

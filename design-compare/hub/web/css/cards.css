@@ -20,7 +20,9 @@
 }
 
 .design-card {
-  transition: transform 350ms var(--ui-ease), box-shadow 350ms;
+  transition:
+    transform 350ms var(--ui-ease),
+    box-shadow 350ms;
   display: flex;
   flex-direction: column;
   text-align: left;

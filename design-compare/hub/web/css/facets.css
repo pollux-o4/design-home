@@ -87,7 +87,9 @@
   display: grid;
   grid-template-rows: 0fr;
   opacity: 0;
-  transition: grid-template-rows 280ms var(--ui-ease), opacity 220ms;
+  transition:
+    grid-template-rows 280ms var(--ui-ease),
+    opacity 220ms;
 }
 
 .disclosure-clip {
@@ -152,7 +154,10 @@ button.facet-chip[aria-pressed="true"]:hover {
   border-radius: 20px;
   padding: 6px 10px;
   color: var(--ui-hover);
-  transition: background-color 160ms, border-color 160ms, transform 160ms;
+  transition:
+    background-color 160ms,
+    border-color 160ms,
+    transform 160ms;
   min-height: 36px;
 }
 
@@ -163,9 +168,7 @@ button.facet-chip[aria-pressed="true"]:hover {
   line-height: 1.7;
 }
 
-
 @media (max-width: 480px) {
-
   .facet-row {
     grid-template-columns: 65px minmax(0px, 1fr);
     gap: 6px;

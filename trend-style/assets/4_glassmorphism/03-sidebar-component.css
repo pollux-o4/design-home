@@ -93,9 +93,18 @@
 }
 
 @keyframes pulseGlow {
-  0% { opacity: 0.4; transform: scale(0.9); }
-  50% { opacity: 1; transform: scale(1.25); }
-  100% { opacity: 0.4; transform: scale(0.9); }
+  0% {
+    opacity: 0.4;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+  100% {
+    opacity: 0.4;
+    transform: scale(0.9);
+  }
 }
 
 /* Toggle Switch Component */
@@ -166,7 +175,8 @@
   transition: all 0.25s ease;
 }
 
-.accordion-header:hover, .accordion-header.active {
+.accordion-header:hover,
+.accordion-header.active {
   color: var(--text-main);
   background: rgba(255, 255, 255, 0.1);
 }
@@ -224,7 +234,8 @@
   display: block;
 }
 
-.subnav-link:hover, .subnav-link.active {
+.subnav-link:hover,
+.subnav-link.active {
   color: var(--accent);
   background: rgba(255, 255, 255, 0.08);
 }

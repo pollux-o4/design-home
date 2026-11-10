@@ -18,11 +18,7 @@ export function routeUrl(category, id, params = new URLSearchParams()) {
 }
 export function navigate(category, id, params, replace = false) {
   const url = routeUrl(category, id, params);
-  history[replace ? "replaceState" : "pushState"](
-    { hub: true, from: location.hash },
-    "",
-    url,
-  );
+  history[replace ? "replaceState" : "pushState"]({ hub: true, from: location.hash }, "", url);
   window.dispatchEvent(new Event("hubnavigate"));
 }
 
@@ -79,9 +75,9 @@ function panels(active) {
   $("#error").hidden = true;
 }
 function setLoading(active) {
-  const main = document.querySelector('main');
-  main.setAttribute('aria-busy', String(active));
-  main.classList.toggle('is-loading', active);
+  const main = document.querySelector("main");
+  main.setAttribute("aria-busy", String(active));
+  main.classList.toggle("is-loading", active);
 }
 export function startNavigation(show) {
   let generation = 0;
@@ -94,18 +90,14 @@ export function startNavigation(show) {
       [title, description, eyebrow, listTitle] = sections[category];
     document.title = `${title} · Design System Library`;
     for (const link of document.querySelectorAll(".app-header nav a"))
-      link.setAttribute(
-        "aria-current",
-        link.hash === `#/${category}` ? "page" : "false",
-      );
+      link.setAttribute("aria-current", link.hash === `#/${category}` ? "page" : "false");
     $("#screen-title").textContent = title;
     $("#screen-description").textContent = description;
     $("#eyebrow").textContent = eyebrow;
     $("#list-title").textContent = listTitle;
     $("#screen-heading").hidden = !!id && category !== "accessibility";
     $("#detail-toolbar").hidden = !id;
-    $("#parent-crumb").textContent =
-      category === "activity" ? "호출 기록" : title;
+    $("#parent-crumb").textContent = category === "activity" ? "호출 기록" : title;
     $("#parent-crumb").href = routeUrl(category, null, params);
     $("#link-status").textContent = "";
     $("#preview").src = "about:blank";
@@ -113,9 +105,10 @@ export function startNavigation(show) {
     $("#contrast-tool").hidden = accessibilityTool !== "contrast-tool";
     $("#controls-tool").hidden = accessibilityTool !== "controls-tool";
     if (accessibilityTool) {
-      const [toolTitle, toolDescription] = accessibilityTool === "contrast-tool"
-        ? ["색 대비 검사", "색 조합의 읽기 쉬운 정도를 즉시 확인하세요."]
-        : ["디자인 일관성 검사", "시스템 기본 UI와 형태가 남은 조작 요소를 찾아보세요."];
+      const [toolTitle, toolDescription] =
+        accessibilityTool === "contrast-tool"
+          ? ["색 대비 검사", "색 조합의 읽기 쉬운 정도를 즉시 확인하세요."]
+          : ["디자인 일관성 검사", "시스템 기본 UI와 형태가 남은 조작 요소를 찾아보세요."];
       $("#screen-title").textContent = toolTitle;
       $("#screen-description").textContent = toolDescription;
       document.title = `${toolTitle} · Design System Library`;
@@ -124,18 +117,22 @@ export function startNavigation(show) {
       category === "features"
         ? "feature-index"
         : category === "accessibility"
-        ? accessibilityTool ? "accessibility-section" : "accessibility-index"
-        : category === "activity"
-        ? id
-          ? "activity-detail"
-          : "activity-section"
-        : id
-          ? "detail"
-          : "library-list",
+          ? accessibilityTool
+            ? "accessibility-section"
+            : "accessibility-index"
+          : category === "activity"
+            ? id
+              ? "activity-detail"
+              : "activity-section"
+            : id
+              ? "detail"
+              : "library-list",
     );
     try {
-      if (category === "accessibility" && id && !accessibilityTool) throw new Error("없는 품질 점검 기능입니다.");
-      if (staticMode && ["work", "activity"].includes(category)) throw new Error("등록 작업과 호출 기록은 로컬 Design System Library에서 확인하세요.");
+      if (category === "accessibility" && id && !accessibilityTool)
+        throw new Error("없는 품질 점검 기능입니다.");
+      if (staticMode && ["work", "activity"].includes(category))
+        throw new Error("등록 작업과 호출 기록은 로컬 Design System Library에서 확인하세요.");
       await show(route, current);
       if (current() && id) window.scrollTo({ top: 0, behavior: "instant" });
     } catch (error) {
@@ -156,8 +153,12 @@ export function startNavigation(show) {
     params.delete("view");
     navigate(route.category, null, params, true);
   });
-  bindClipboard($("#copy-link"), $("#link-status"), () => location.href,
-    '주소 표시줄의 링크를 복사하세요.');
+  bindClipboard(
+    $("#copy-link"),
+    $("#link-status"),
+    () => location.href,
+    "주소 표시줄의 링크를 복사하세요.",
+  );
   window.addEventListener("hashchange", update);
   window.addEventListener("hubnavigate", update);
   update();

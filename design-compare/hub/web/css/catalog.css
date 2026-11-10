@@ -180,7 +180,6 @@ main.is-loading #results:empty {
   #results {
     grid-template-columns: 1fr;
   }
-
 }
 @media (max-width: 900px) {
   #results {

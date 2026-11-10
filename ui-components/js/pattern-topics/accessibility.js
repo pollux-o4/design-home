@@ -21,13 +21,7 @@ export default {
       id: "forms",
       title: "레이블과 상태 안내",
       desc: "입력 목적과 오류, 선택 상태를 전달합니다.",
-      ids: [
-        "text-input",
-        "form-validation",
-        "radio",
-        "toggle-switch",
-        "form-stepper",
-      ],
+      ids: ["text-input", "form-validation", "radio", "toggle-switch", "form-stepper"],
     },
     {
       id: "focus",

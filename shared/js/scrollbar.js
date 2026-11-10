@@ -47,9 +47,7 @@ export function mountScrollbar(region, { root = false } = {}) {
         visibleX: root ? innerWidth : region.clientWidth,
         totalY: region.scrollHeight,
         totalX: region.scrollWidth,
-        hidden:
-          !!region.closest("[hidden], [inert]") ||
-          (!root && !region.getClientRects().length),
+        hidden: !!region.closest("[hidden], [inert]") || (!root && !region.getClientRects().length),
       };
     },
     write(snapshot) {
@@ -90,8 +88,7 @@ export function mountScrollbar(region, { root = false } = {}) {
     axes.forEach((axis) => axis.reveal());
   }
   region.addEventListener("scroll", onScroll, { passive: true });
-  if (root)
-    document.addEventListener("scroll", onRootScroll, { passive: true });
+  if (root) document.addEventListener("scroll", onRootScroll, { passive: true });
   function onRootScroll(event) {
     if (event.target === document) onScroll();
   }
@@ -112,9 +109,7 @@ document.addEventListener("scroll", updateAll, {
 });
 function discover(node) {
   if (node.matches("[data-scroll-region]")) mountScrollbar(node);
-  node
-    .querySelectorAll("[data-scroll-region]")
-    .forEach((region) => mountScrollbar(region));
+  node.querySelectorAll("[data-scroll-region]").forEach((region) => mountScrollbar(region));
 }
 new MutationObserver((records) => {
   let structural = false;
@@ -133,14 +128,11 @@ new MutationObserver((records) => {
     if (!changed.length) continue;
     structural = true;
     for (const node of record.addedNodes)
-      if (node.nodeType === 1 && !node.matches(".dh-scroll-rail"))
-        discover(node);
+      if (node.nodeType === 1 && !node.matches(".dh-scroll-rail")) discover(node);
     const region = record.target.closest?.(".dh-scroll-native");
     mounted.get(region)?.refresh();
   }
-  if (structural)
-    for (const [region, handle] of mounted)
-      if (!region.isConnected) handle.dispose();
+  if (structural) for (const [region, handle] of mounted) if (!region.isConnected) handle.dispose();
 }).observe(document.body, {
   childList: true,
   subtree: true,

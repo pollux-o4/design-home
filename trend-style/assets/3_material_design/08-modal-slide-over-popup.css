@@ -1,111 +1,113 @@
 /* Modal Slide-over Popup */
 .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    z-index: 2000;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 2000;
 }
 
 .modal-overlay.open {
-    opacity: 1;
-    pointer-events: auto;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .modal-container {
-    background-color: var(--md-sys-color-surface);
-    border: 1px solid var(--md-sys-color-outline-variant);
-    border-radius: var(--md-shape-radius);
-    width: 90%;
-    max-width: 520px;
-    padding: 32px;
-    box-shadow: var(--md-elevation-3);
-    transform: translateY(20px) scale(0.95);
-    transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1);
+  background-color: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-shape-radius);
+  width: 90%;
+  max-width: 520px;
+  padding: 32px;
+  box-shadow: var(--md-elevation-3);
+  transform: translateY(20px) scale(0.95);
+  transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1);
 }
 
 .modal-overlay.open .modal-container {
-    transform: translateY(0) scale(1);
+  transform: translateY(0) scale(1);
 }
 
 .modal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .modal-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--md-sys-color-on-surface);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--md-sys-color-on-surface);
 }
 
 .btn-close {
-    background: transparent;
-    border: none;
-    color: var(--md-sys-color-on-surface-variant);
-    cursor: pointer;
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--md-sys-color-on-surface-variant);
+  cursor: pointer;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .form-group {
-    margin-bottom: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .form-label {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--md-sys-color-on-surface-variant);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--md-sys-color-on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.form-input, .form-select {
-    background-color: var(--md-sys-color-surface-variant);
-    border: 1px solid var(--md-sys-color-outline-variant);
-    color: var(--md-sys-color-on-surface);
-    padding: 12px 16px;
-    border-radius: var(--md-shape-radius);
-    font-size: 14px;
-    outline: none;
-    width: 100%;
+.form-input,
+.form-select {
+  background-color: var(--md-sys-color-surface-variant);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  color: var(--md-sys-color-on-surface);
+  padding: 12px 16px;
+  border-radius: var(--md-shape-radius);
+  font-size: 14px;
+  outline: none;
+  width: 100%;
 }
 
-.form-input:focus, .form-select:focus {
-    border-color: var(--md-sys-color-primary);
-    box-shadow: 0 0 0 2px rgba(103, 80, 164, 0.2);
+.form-input:focus,
+.form-select:focus {
+  border-color: var(--md-sys-color-primary);
+  box-shadow: 0 0 0 2px rgba(103, 80, 164, 0.2);
 }
 
 .modal-actions {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 12px;
-    margin-top: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 28px;
 }
 
 .btn-text {
-    background: transparent;
-    border: none;
-    color: var(--md-sys-color-primary);
-    padding: 10px 18px;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 14px;
-    cursor: pointer;
+  background: transparent;
+  border: none;
+  color: var(--md-sys-color-primary);
+  padding: 10px 18px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
 }

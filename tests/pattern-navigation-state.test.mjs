@@ -20,8 +20,7 @@ test("navigation restores subgroups and coalesces duplicate browser history noti
     removeEventListener: events.removeEventListener.bind(events),
   };
   const model = {
-    find: (id) =>
-      ["a", "b"].includes(id) ? { groups: [{ id: "one" }] } : undefined,
+    find: (id) => (["a", "b"].includes(id) ? { groups: [{ id: "one" }] } : undefined),
   };
   const changes = [];
   const navigation = createPatternNavigation({

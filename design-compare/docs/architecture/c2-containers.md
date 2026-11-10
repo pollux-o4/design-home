@@ -27,12 +27,12 @@ flowchart TB
   capture -->|HTTP 화면 캡처| target
 ```
 
-| 실행 단위 | 진입점 | 책임 |
-|---|---|---|
-| CLI | `design-compare` / `src/cli.js` | JSON·종료 코드·조회·등록·비교 |
-| HTTP 서버 | `design-system-library` / `hub/server.js` | 프로젝트 정보·자료·기록 API와 공통 UI 제공 |
-| 브라우저 UI | `hub/web/app.js` | 현재 프로젝트 표시·자료 탐색·시각 검수·품질 도구 |
-| Chromium | `src/capture/index.js` | 조건 고정·DOM 측정·캡처 |
+| 실행 단위       | 진입점                                        | 책임                                              |
+| --------------- | --------------------------------------------- | ------------------------------------------------- |
+| CLI             | `design-compare` / `src/cli.js`               | JSON·종료 코드·조회·등록·비교                     |
+| HTTP 서버       | `design-system-library` / `hub/server.js`     | 프로젝트 정보·자료·기록 API와 공통 UI 제공        |
+| 브라우저 UI     | `hub/web/app.js`                              | 현재 프로젝트 표시·자료 탐색·시각 검수·품질 도구  |
+| Chromium        | `src/capture/index.js`                        | 조건 고정·DOM 측정·캡처                           |
 | 프로젝트 저장소 | 설정의 `documentsRoot`, `sourceRoot`, `store` | 프로젝트 소유 데이터. 도구 배포물에 포함하지 않음 |
 
 `npm pack`의 `prepack`이 공통 UI와 공유 자원을 `dist/runtime`에 묶는다. 설치본은 이 자원만 제공하고 프로젝트 개발 서버는 `baseUrl`로 연결한다. Design Home의 문서·미리보기·학습 사이트는 배포물에 포함하지 않는다. 설정이 없으면 빈 프로젝트로 시작하며 공통 품질 도구는 사용 가능하다.

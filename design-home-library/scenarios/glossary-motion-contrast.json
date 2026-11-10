@@ -4,7 +4,11 @@
   "themes": ["light", "dark"],
   "themeOpen": "#dh-theme-toggle",
   "themeControls": { "light": "[data-theme-choice=light]", "dark": "[data-theme-choice=dark]" },
-  "themeVerification": { "selector": "html", "attribute": "data-theme", "values": { "light": "light", "dark": "dark" } },
+  "themeVerification": {
+    "selector": "html",
+    "attribute": "data-theme",
+    "values": { "light": "light", "dark": "dark" }
+  },
   "openEach": "#panel-motion [data-expand]",
   "afterEach": "button[data-motion-play], button[data-play]",
   "scope": ".expanded-row .example"

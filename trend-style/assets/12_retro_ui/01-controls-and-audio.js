@@ -3,15 +3,15 @@
    ------------------------------------------ */
 let audioCtx = null;
 
-function playBeep(freq = 440, duration = 0.08, type = 'square') {
-  const soundCheck = document.getElementById('sound-check');
+function playBeep(freq = 440, duration = 0.08, type = "square") {
+  const soundCheck = document.getElementById("sound-check");
   if (!soundCheck || !soundCheck.checked) return;
 
   try {
     if (!audioCtx) {
       audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     }
-    if (audioCtx.state === 'suspended') {
+    if (audioCtx.state === "suspended") {
       audioCtx.resume();
     }
     const osc = audioCtx.createOscillator();
@@ -38,16 +38,16 @@ function playBeep(freq = 440, duration = 0.08, type = 'square') {
    ------------------------------------------ */
 function switchTheme(themeClass) {
   document.body.className = themeClass;
-  playBeep(520, 0.1, 'sine');
+  playBeep(520, 0.1, "sine");
   appendTerminalLog(`THEME SWITCHED TO: ${themeClass.toUpperCase()}`);
 }
 
 function toggleCRT(enabled) {
-  const overlay = document.getElementById('crt-overlay');
+  const overlay = document.getElementById("crt-overlay");
   if (enabled) {
-    overlay.classList.remove('disabled');
+    overlay.classList.remove("disabled");
   } else {
-    overlay.classList.add('disabled');
+    overlay.classList.add("disabled");
   }
   playBeep(350, 0.05);
 }
@@ -57,26 +57,26 @@ function toggleCRT(enabled) {
    ------------------------------------------ */
 function toggleAccordion(headerEl) {
   const item = headerEl.parentElement;
-  const isOpen = item.classList.contains('open');
+  const isOpen = item.classList.contains("open");
 
   // Close all accordion items
-  document.querySelectorAll('.accordion-item').forEach(el => {
-    el.classList.remove('open');
-    const icon = el.querySelector('.acc-icon');
-    if (icon) icon.textContent = '+';
+  document.querySelectorAll(".accordion-item").forEach((el) => {
+    el.classList.remove("open");
+    const icon = el.querySelector(".acc-icon");
+    if (icon) icon.textContent = "+";
   });
 
   if (!isOpen) {
-    item.classList.add('open');
-    const icon = item.querySelector('.acc-icon');
-    if (icon) icon.textContent = '-';
+    item.classList.add("open");
+    const icon = item.querySelector(".acc-icon");
+    if (icon) icon.textContent = "-";
   }
   playBeep(450, 0.05);
 }
 
 function selectSubmenu(subitemEl) {
-  document.querySelectorAll('.accordion-subitem').forEach(el => el.classList.remove('active'));
-  subitemEl.classList.add('active');
+  document.querySelectorAll(".accordion-subitem").forEach((el) => el.classList.remove("active"));
+  subitemEl.classList.add("active");
   playBeep(650, 0.05);
   triggerDataRefresh();
 }

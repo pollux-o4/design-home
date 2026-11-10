@@ -32,28 +32,19 @@ const running = (page) =>
       (roots) =>
         roots
           .flatMap((root) => root.getAnimations({ subtree: true }))
-          .filter((animation) =>
-            ["running", "paused"].includes(animation.playState),
-          ).length,
+          .filter((animation) => ["running", "paused"].includes(animation.playState)).length,
     );
 
 test("ux_001: Basic and Advanced stay visible in reading order and preserve sample state", async () => {
   const page = await pageAt("#/motion/expressive?level=advanced");
   try {
     assert.equal(await page.locator(".component-card:visible").count(), 6);
-    assert.equal(
-      await page.locator(".pattern-level-view [role=tab]").count(),
-      0,
-    );
-    await page
-      .locator("[data-sample-id=motion-counter] [data-motion-play]")
-      .click();
+    assert.equal(await page.locator(".pattern-level-view [role=tab]").count(), 0);
+    await page.locator("[data-sample-id=motion-counter] [data-motion-play]").click();
     await page.waitForFunction(
       () => document.querySelector("[data-metric]").textContent === "12,000",
     );
-    await page
-      .locator(".pattern-level-section[data-level=advanced]")
-      .scrollIntoViewIfNeeded();
+    await page.locator(".pattern-level-section[data-level=advanced]").scrollIntoViewIfNeeded();
     assert.equal(await page.locator("[data-metric]").textContent(), "12,000");
     await page.locator("#summary-content-motion-expressive").click();
     await page.locator("#summary-content-motion-expressive").click();
@@ -72,48 +63,37 @@ test("layout and shared-element transitions change real content, recover focus a
     await specimen(page, "motion-flip");
     const first = await page.locator("[data-tile]").first().textContent();
     await page.locator("[data-reorder]").click();
-    assert.notEqual(
-      await page.locator("[data-tile]").first().textContent(),
-      first,
-    );
+    assert.notEqual(await page.locator("[data-tile]").first().textContent(), first);
     assert.ok((await running(page)) > 0);
     await specimen(page, "motion-crossfade");
     await page.locator("[data-next]").click();
     await page.locator("[data-next]").click();
     await page.waitForFunction(
       () =>
-        [...document.querySelectorAll("[data-scene]")].filter(
-          (scene) => !scene.hidden,
-        ).length === 1,
+        [...document.querySelectorAll("[data-scene]")].filter((scene) => !scene.hidden).length ===
+        1,
     );
-    assert.match(
-      await page.locator("[data-scene]:visible").textContent(),
-      /OCEAN/,
-    );
+    assert.match(await page.locator("[data-scene]:visible").textContent(), /OCEAN/);
     await specimen(page, "motion-shared-element");
     await page.locator("[data-open]").click();
-    await page.waitForFunction(() =>
-      document.activeElement?.hasAttribute("data-close"),
-    );
+    await page.waitForFunction(() => document.activeElement?.hasAttribute("data-close"));
     await page.keyboard.press("Escape");
     assert.equal(await page.locator("[data-detail]").isVisible(), false);
     assert.equal(
-      await page
-        .locator("[data-open]")
-        .evaluate((element) => document.activeElement === element),
+      await page.locator("[data-open]").evaluate((element) => document.activeElement === element),
       true,
     );
     await page.goto(base + "#/motion/foundations");
     await page.locator("[data-sample-id=motion-stagger] [data-replay]").click();
     await page.evaluate(() => {
-      window.removedSample = document.querySelector(
-        '[data-sample-id="motion-stagger"]',
-      );
+      window.removedSample = document.querySelector('[data-sample-id="motion-stagger"]');
       window.removedAnimations = removedSample.getAnimations({ subtree: true });
     });
     await page.locator("[data-target=components] .category-button").click();
     assert.equal(await page.evaluate(() => removedSample.isConnected), false);
-    await page.waitForFunction(() => removedAnimations.every(animation => animation.playState === 'idle'));
+    await page.waitForFunction(() =>
+      removedAnimations.every((animation) => animation.playState === "idle"),
+    );
     assert.equal(
       await page.evaluate(() =>
         removedAnimations.every((animation) => animation.playState === "idle"),
@@ -133,55 +113,33 @@ test("scroll demos follow actual scroll and spatial controls support keyboard an
     await page.locator(".reading-scroll").focus();
     await page.keyboard.press("End");
     await page.waitForFunction(
-      () =>
-        document
-          .querySelector('[role="progressbar"]')
-          .getAttribute("aria-valuenow") === "100",
+      () => document.querySelector('[role="progressbar"]').getAttribute("aria-valuenow") === "100",
     );
-    assert.equal(
-      await page.locator("[data-reading-output]").textContent(),
-      "100%",
-    );
+    assert.equal(await page.locator("[data-reading-output]").textContent(), "100%");
     await page.locator(".reading-scroll").evaluate((element) => {
       element.style.height = "180px";
     });
     await page.waitForFunction(() => {
       const scroller = document.querySelector(".reading-scroll");
       return (
-        Number(
-          document
-            .querySelector('[role="progressbar"]')
-            .getAttribute("aria-valuenow"),
-        ) ===
-        Math.round(
-          (scroller.scrollTop /
-            (scroller.scrollHeight - scroller.clientHeight)) *
-            100,
-        )
+        Number(document.querySelector('[role="progressbar"]').getAttribute("aria-valuenow")) ===
+        Math.round((scroller.scrollTop / (scroller.scrollHeight - scroller.clientHeight)) * 100)
       );
     });
     assert.ok(
-      Number(
-        await page
-          .locator('[role="progressbar"]')
-          .getAttribute("aria-valuenow"),
-      ) < 100,
+      Number(await page.locator('[role="progressbar"]').getAttribute("aria-valuenow")) < 100,
     );
     await specimen(page, "motion-scroll-reveal");
     await page.locator(".reveal-scroll").evaluate((element) => {
       element.scrollTop = element.scrollHeight;
     });
-    await page.waitForFunction(
-      () => document.querySelectorAll(".is-revealed").length === 3,
-    );
+    await page.waitForFunction(() => document.querySelectorAll(".is-revealed").length === 3);
     await specimen(page, "motion-parallax");
     await page.locator(".parallax-scroll").evaluate((element) => {
       element.scrollTop = 150;
     });
     await page.waitForFunction(
-      () =>
-        document.querySelector("[data-depth]").style.transform !==
-        "translateY(0px)",
+      () => document.querySelector("[data-depth]").style.transform !== "translateY(0px)",
     );
     const moved = await page
       .locator("[data-depth]")
@@ -192,15 +150,11 @@ test("scroll demos follow actual scroll and spatial controls support keyboard an
       element.scrollTop = element.scrollHeight;
     });
     await page.waitForFunction(
-      () =>
-        document.querySelector("[data-depth='0.55']").style.transform ===
-        "translateY(-55px)",
+      () => document.querySelector("[data-depth='0.55']").style.transform === "translateY(-55px)",
     );
     assert.equal(
       await page.locator("[data-depth]").evaluateAll((layers) => {
-        const stage = document
-          .querySelector(".parallax-stage")
-          .getBoundingClientRect();
+        const stage = document.querySelector(".parallax-stage").getBoundingClientRect();
         return layers.every((layer) => {
           const bounds = layer.getBoundingClientRect();
           return bounds.bottom > stage.top && bounds.top < stage.bottom;
@@ -209,17 +163,13 @@ test("scroll demos follow actual scroll and spatial controls support keyboard an
       true,
     );
     await page.emulateMedia({ reducedMotion: "reduce" });
-    await page.waitForFunction(
-      () => document.querySelector("[data-depth]").style.transform === "",
-    );
+    await page.waitForFunction(() => document.querySelector("[data-depth]").style.transform === "");
     await specimen(page, "motion-card-tilt");
     await page.emulateMedia({ reducedMotion: "no-preference" });
     await page.locator('[data-tilt="left"]').focus();
     await page.keyboard.press("Enter");
     assert.match(
-      await page
-        .locator("[data-tilt-card]")
-        .evaluate((element) => element.style.transform),
+      await page.locator("[data-tilt-card]").evaluate((element) => element.style.transform),
       /-9deg/,
     );
     await page.emulateMedia({ reducedMotion: "reduce" });
@@ -228,15 +178,9 @@ test("scroll demos follow actual scroll and spatial controls support keyboard an
     );
     await specimen(page, "motion-swipe-stack");
     await page.locator("[data-next]").click();
-    assert.equal(
-      await page.locator("[data-stack-count]").textContent(),
-      "02 / 04",
-    );
+    assert.equal(await page.locator("[data-stack-count]").textContent(), "02 / 04");
     await page.locator("[data-previous]").click();
-    assert.equal(
-      await page.locator("[data-stack-count]").textContent(),
-      "01 / 04",
-    );
+    assert.equal(await page.locator("[data-stack-count]").textContent(), "01 / 04");
     const card = await page.locator("[data-swipe-card]").boundingBox();
     const x = card.x + card.width / 2,
       y = card.y + card.height / 2;
@@ -244,18 +188,12 @@ test("scroll demos follow actual scroll and spatial controls support keyboard an
     await page.mouse.down();
     await page.mouse.move(x + 60, y + 110, { steps: 6 });
     await page.mouse.up();
-    assert.equal(
-      await page.locator("[data-stack-count]").textContent(),
-      "01 / 04",
-    );
+    assert.equal(await page.locator("[data-stack-count]").textContent(), "01 / 04");
     await page.mouse.move(x, y);
     await page.mouse.down();
     await page.mouse.move(x - 90, y, { steps: 6 });
     await page.mouse.up();
-    assert.equal(
-      await page.locator("[data-stack-count]").textContent(),
-      "02 / 04",
-    );
+    assert.equal(await page.locator("[data-stack-count]").textContent(), "02 / 04");
   } finally {
     await page.close();
   }
@@ -283,32 +221,21 @@ test("expressive motion can pause, replay and fold topics without leaving hidden
       "running",
     );
     await orbit.locator("[data-motion-play]").click();
-    await page
-      .locator("[data-sample-id=motion-gradient] [data-motion-play]")
-      .click();
+    await page.locator("[data-sample-id=motion-gradient] [data-motion-play]").click();
     assert.equal(
       await page
         .locator("[data-mesh]")
         .evaluate((element) => element.classList.contains("mesh-alternate")),
       true,
     );
-    await page
-      .locator("[data-sample-id=motion-success-burst] [data-motion-play]")
-      .click();
-    assert.equal(
-      await page.locator("[data-success-label]").textContent(),
-      "모두 완료했어요.",
-    );
+    await page.locator("[data-sample-id=motion-success-burst] [data-motion-play]").click();
+    assert.equal(await page.locator("[data-success-label]").textContent(), "모두 완료했어요.");
     await page.locator("#summary-content-motion-expressive").click();
     await page.waitForFunction(() =>
-      [...document.querySelectorAll(".pattern-panel[hidden] .sample")].every(
-        (root) =>
-          root
-            .getAnimations({ subtree: true })
-            .every(
-              (animation) =>
-                !["running", "paused"].includes(animation.playState),
-            ),
+      [...document.querySelectorAll(".pattern-panel[hidden] .sample")].every((root) =>
+        root
+          .getAnimations({ subtree: true })
+          .every((animation) => !["running", "paused"].includes(animation.playState)),
       ),
     );
     await page.locator("#summary-content-motion-expressive").click();
@@ -330,17 +257,11 @@ test("all eighteen added techniques remain functional with reduced motion and pr
         .filter((definition) => definition.id.startsWith("motion-")),
     );
     assert.equal(definitions.length, 18);
-    assert.equal(
-      definitions.filter((definition) => definition.level === "advanced")
-        .length,
-      9,
-    );
+    assert.equal(definitions.filter((definition) => definition.level === "advanced").length, 9);
     await page.emulateMedia({ reducedMotion: "reduce" });
     for (const definition of definitions) {
       await specimen(page, definition.id);
-      for (const control of await page
-        .locator(".sample button:visible:not(:disabled)")
-        .all()) {
+      for (const control of await page.locator(".sample button:visible:not(:disabled)").all()) {
         if (await control.isVisible()) await control.click();
       }
       assert.equal(await running(page), 0, definition.id);

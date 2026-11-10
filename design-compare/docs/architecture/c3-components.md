@@ -62,23 +62,23 @@ flowchart TB
 
 ## 모듈별 코드 진입점
 
-| 컴포넌트 | 코드 | 책임 |
-|---|---|---|
-| CLI Adapter | [`src/cli/index.js`](../../src/cli/index.js), [`commands.js`](../../src/cli/commands.js) | 명령을 Application에 전달하고 종료 코드·요약·복구 안내 제공 |
-| Hub HTTP Adapter | [`hub/server.js`](../../hub/server.js) | 서버는 전송·정적 파일·오류 처리, api.js는 주입된 Application·Library·Activity를 HTTP 응답으로 변환 |
-| Application | [`src/application.js`](../../src/application.js), [`application/compare.js`](../../src/application/compare.js), [`audit/ui.js`](../../src/audit/ui.js) | 저장소·캡처·파일 읽기·시간 Adapter를 조립하고 비교·UI 일관성 작업 흐름 실행 |
-| Hub 호스트 Adapter | [`src/hub/index.js`](../../src/hub/index.js), [`context.js`](../../src/hub/context.js), [`search.js`](../../src/hub/search.js) | 현재 프로젝트 위치를 Library 설정으로 변환 |
-| Library | [`src/library/index.js`](../../src/library/index.js) | `createLibrary`의 검색·의도 선택·조회로 문서와 원본 접근; 태그·문서 검증도 내부 소유 |
-| Activity | [`src/activity/index.js`](../../src/activity/index.js) | CLI 출력과 제공 이미지의 보관·최근 10건 조회·허용 파일 읽기 |
-| Inventory | [`src/application/inventory.js`](../../src/application/inventory.js) | 프로젝트 파일의 내보낸 이름과 미리보기 파일을 정적 수집 |
-| Catalog | [`src/catalog/index.js`](../../src/catalog/index.js), [`linked.js`](../../src/catalog/linked.js) | 사진·연결 기준 저장, 자료 검증, 실행별 파일 발행 |
-| Capture | [`src/capture/index.js`](../../src/capture/index.js), [`page.js`](../../src/capture/page.js) | Chromium 실행·종료, 조건 고정, 샘플 열기, 측정·이미지 준비 |
-| Motion audit | [`src/audit/motion.js`](../../src/audit/motion.js) | 프로젝트 시나리오를 실행하고 화면 프레임과 전환 이벤트를 관찰 |
-| Contrast audit | [`src/audit/contrast.js`](../../src/audit/contrast.js) | 프로젝트가 지정한 상태와 테마를 열고 axe-core 대비 검사·미확인 근거를 제공 |
-| Localization audit | [`src/audit/localization.js`](../../src/audit/localization.js) | 프로젝트 언어 버튼·본문 범위·누락 패턴으로 전환과 새로고침 후 표시를 검증 |
-| Comparison | [`src/comparison/index.js`](../../src/comparison/index.js) | 순수 측정값·이미지 비교, 허용 정책과 판정; 수정 방향은 차이에서 파생 |
-| Reporting | [`src/reporting/artifacts.js`](../../src/reporting/artifacts.js) | 판정에서 정적 HTML·report.json·repair.json·이미지 생성 |
-| Domain | [`src/domain/records.js`](../../src/domain/records.js)와 같은 폴더 | 기준·보고서·ID·부분 매핑·파일명 공통 계약 |
+| 컴포넌트           | 코드                                                                                                                                                   | 책임                                                                                               |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| CLI Adapter        | [`src/cli/index.js`](../../src/cli/index.js), [`commands.js`](../../src/cli/commands.js)                                                               | 명령을 Application에 전달하고 종료 코드·요약·복구 안내 제공                                        |
+| Hub HTTP Adapter   | [`hub/server.js`](../../hub/server.js)                                                                                                                 | 서버는 전송·정적 파일·오류 처리, api.js는 주입된 Application·Library·Activity를 HTTP 응답으로 변환 |
+| Application        | [`src/application.js`](../../src/application.js), [`application/compare.js`](../../src/application/compare.js), [`audit/ui.js`](../../src/audit/ui.js) | 저장소·캡처·파일 읽기·시간 Adapter를 조립하고 비교·UI 일관성 작업 흐름 실행                        |
+| Hub 호스트 Adapter | [`src/hub/index.js`](../../src/hub/index.js), [`context.js`](../../src/hub/context.js), [`search.js`](../../src/hub/search.js)                         | 현재 프로젝트 위치를 Library 설정으로 변환                                                         |
+| Library            | [`src/library/index.js`](../../src/library/index.js)                                                                                                   | `createLibrary`의 검색·의도 선택·조회로 문서와 원본 접근; 태그·문서 검증도 내부 소유               |
+| Activity           | [`src/activity/index.js`](../../src/activity/index.js)                                                                                                 | CLI 출력과 제공 이미지의 보관·최근 10건 조회·허용 파일 읽기                                        |
+| Inventory          | [`src/application/inventory.js`](../../src/application/inventory.js)                                                                                   | 프로젝트 파일의 내보낸 이름과 미리보기 파일을 정적 수집                                            |
+| Catalog            | [`src/catalog/index.js`](../../src/catalog/index.js), [`linked.js`](../../src/catalog/linked.js)                                                       | 사진·연결 기준 저장, 자료 검증, 실행별 파일 발행                                                   |
+| Capture            | [`src/capture/index.js`](../../src/capture/index.js), [`page.js`](../../src/capture/page.js)                                                           | Chromium 실행·종료, 조건 고정, 샘플 열기, 측정·이미지 준비                                         |
+| Motion audit       | [`src/audit/motion.js`](../../src/audit/motion.js)                                                                                                     | 프로젝트 시나리오를 실행하고 화면 프레임과 전환 이벤트를 관찰                                      |
+| Contrast audit     | [`src/audit/contrast.js`](../../src/audit/contrast.js)                                                                                                 | 프로젝트가 지정한 상태와 테마를 열고 axe-core 대비 검사·미확인 근거를 제공                         |
+| Localization audit | [`src/audit/localization.js`](../../src/audit/localization.js)                                                                                         | 프로젝트 언어 버튼·본문 범위·누락 패턴으로 전환과 새로고침 후 표시를 검증                          |
+| Comparison         | [`src/comparison/index.js`](../../src/comparison/index.js)                                                                                             | 순수 측정값·이미지 비교, 허용 정책과 판정; 수정 방향은 차이에서 파생                               |
+| Reporting          | [`src/reporting/artifacts.js`](../../src/reporting/artifacts.js)                                                                                       | 판정에서 정적 HTML·report.json·repair.json·이미지 생성                                             |
+| Domain             | [`src/domain/records.js`](../../src/domain/records.js)와 같은 폴더                                                                                     | 기준·보고서·ID·부분 매핑·파일명 공통 계약                                                          |
 
 Library는 웹 DOM·CLI 출력·현재 저장소의 디렉터리 구조를 모른다. 원본 위치는 호스트가 전달하고 문서는 Library가 읽는다. Catalog의 실행 결과 저장과 Library의 디자인 문서 관리는 서로 다른 책임이다. Domain이 캡처 조건·스타일 측정 계약을 소유하고 Capture가 이를 참조한다. 기존 capture/contract 진입점은 동일한 export를 제공하는 호환 Facade다. MOD-001이 역방향 의존을 검증한다.
 

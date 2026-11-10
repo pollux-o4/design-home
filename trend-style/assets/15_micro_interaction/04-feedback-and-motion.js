@@ -2,33 +2,33 @@
    8. MODAL & SLIDE-OVER DRAWER LOGIC
    -------------------------------------------------------------------------- */
 function openModal(e) {
-  if(e) createRipple(e);
-  document.getElementById('modalBackdrop').classList.add('open');
+  if (e) createRipple(e);
+  document.getElementById("modalBackdrop").classList.add("open");
 }
 
 function closeModal() {
-  document.getElementById('modalBackdrop').classList.remove('open');
+  document.getElementById("modalBackdrop").classList.remove("open");
 }
 
 function closeModalOnBackdrop(e) {
-  if (e.target.id === 'modalBackdrop') closeModal();
+  if (e.target.id === "modalBackdrop") closeModal();
 }
 
 function selectRadioPill(pill) {
-  document.querySelectorAll('.radio-pill').forEach(p => p.classList.remove('active'));
-  pill.classList.add('active');
+  document.querySelectorAll(".radio-pill").forEach((p) => p.classList.remove("active"));
+  pill.classList.add("active");
 }
 
 function handleProjectSubmit(e) {
   e.preventDefault();
-  const btn = document.getElementById('submitBtn');
-  btn.classList.add('loading');
+  const btn = document.getElementById("submitBtn");
+  btn.classList.add("loading");
 
   setTimeout(() => {
-    btn.classList.remove('loading');
-    btn.classList.add('success');
+    btn.classList.remove("loading");
+    btn.classList.add("success");
     setTimeout(() => {
-      btn.classList.remove('success');
+      btn.classList.remove("success");
       closeModal();
     }, 1200);
   }, 1200);
@@ -39,29 +39,29 @@ function handleProjectSubmit(e) {
    -------------------------------------------------------------------------- */
 function createRipple(e) {
   const btn = e.currentTarget || e.target;
-  if(!btn) return;
+  if (!btn) return;
   const rect = btn.getBoundingClientRect();
-  const circle = document.createElement('span');
+  const circle = document.createElement("span");
   const diameter = Math.max(rect.width, rect.height);
   circle.style.width = circle.style.height = `${diameter}px`;
   circle.style.left = `${e.clientX - rect.left - diameter / 2}px`;
   circle.style.top = `${e.clientY - rect.top - diameter / 2}px`;
-  circle.classList.add('ripple-effect');
+  circle.classList.add("ripple-effect");
 
-  const existing = btn.querySelector('.ripple-effect');
+  const existing = btn.querySelector(".ripple-effect");
   if (existing) existing.remove();
   btn.appendChild(circle);
 }
 
-document.querySelectorAll('.liquid-btn').forEach(b => {
-  b.addEventListener('click', createRipple);
+document.querySelectorAll(".liquid-btn").forEach((b) => {
+  b.addEventListener("click", createRipple);
 });
 
 // Custom Cursor Magnetic Follow
-const dot = document.getElementById('cursorDot');
-const ring = document.getElementById('cursorRing');
+const dot = document.getElementById("cursorDot");
+const ring = document.getElementById("cursorRing");
 
-window.addEventListener('mousemove', (e) => {
+window.addEventListener("mousemove", (e) => {
   dot.style.left = `${e.clientX}px`;
   dot.style.top = `${e.clientY}px`;
   ring.style.left = `${e.clientX}px`;
@@ -72,8 +72,8 @@ window.addEventListener('mousemove', (e) => {
    10. QUANTUM CANVAS PARTICLE ENGINE (V4)
    -------------------------------------------------------------------------- */
 function initQuantumCanvas() {
-  const canvas = document.getElementById('quantumCanvas');
-  const ctx = canvas.getContext('2d');
+  const canvas = document.getElementById("quantumCanvas");
+  const ctx = canvas.getContext("2d");
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
@@ -82,16 +82,17 @@ function initQuantumCanvas() {
     y: Math.random() * canvas.height,
     vx: (Math.random() - 0.5) * 0.8,
     vy: (Math.random() - 0.5) * 0.8,
-    radius: Math.random() * 2 + 1
+    radius: Math.random() * 2 + 1,
   }));
 
   function loop() {
-    if (!document.body.classList.contains('theme-v4')) return;
+    if (!document.body.classList.contains("theme-v4")) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'rgba(56, 189, 248, 0.6)';
+    ctx.fillStyle = "rgba(56, 189, 248, 0.6)";
 
-    particles.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
+    particles.forEach((p) => {
+      p.x += p.vx;
+      p.y += p.vy;
       if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
       if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
       ctx.beginPath();

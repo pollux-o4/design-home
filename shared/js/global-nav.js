@@ -35,9 +35,7 @@
   const activeStudy = studies.find((item) =>
     currentPath.startsWith(new URL(item.path, root).pathname),
   );
-  const inLibrary = currentPath.startsWith(
-    new URL("design-library/", root).pathname,
-  );
+  const inLibrary = currentPath.startsWith(new URL("design-library/", root).pathname);
   const icon = (name) =>
     `<svg aria-hidden="true" viewBox="0 0 24 24"><use href="${href("shared/assets/interface-icons.svg")}#${name}"/></svg>`;
   const navHTML = `
@@ -113,25 +111,52 @@
     const themeToggle = nav.querySelector("#dh-theme-toggle");
     const themePanel = nav.querySelector("#dh-theme-panel");
     const themeChoices = [...themePanel.querySelectorAll("[data-theme-choice]")];
-    const setThemeOpen = (open) => { themePanel.hidden = !open; themeToggle.setAttribute("aria-expanded", String(open)); };
+    const setThemeOpen = (open) => {
+      themePanel.hidden = !open;
+      themeToggle.setAttribute("aria-expanded", String(open));
+    };
     const updateTheme = () => {
       const preference = window.getTheme?.() ?? "system";
-      for (const choice of themeChoices) choice.setAttribute("aria-pressed", String(choice.dataset.themeChoice === preference));
-      nav.querySelector("#dh-theme-current").textContent = themeChoices.find(choice => choice.dataset.themeChoice === preference).firstElementChild.textContent;
-      themePanel.setAttribute("aria-label", nav.querySelector('[data-i18n="theme_label"]').textContent);
-      themeToggle.setAttribute("aria-label", `${themePanel.getAttribute("aria-label")}: ${nav.querySelector("#dh-theme-current").textContent}`);
+      for (const choice of themeChoices)
+        choice.setAttribute("aria-pressed", String(choice.dataset.themeChoice === preference));
+      nav.querySelector("#dh-theme-current").textContent = themeChoices.find(
+        (choice) => choice.dataset.themeChoice === preference,
+      ).firstElementChild.textContent;
+      themePanel.setAttribute(
+        "aria-label",
+        nav.querySelector('[data-i18n="theme_label"]').textContent,
+      );
+      themeToggle.setAttribute(
+        "aria-label",
+        `${themePanel.getAttribute("aria-label")}: ${nav.querySelector("#dh-theme-current").textContent}`,
+      );
     };
     themeToggle.addEventListener("click", () => setThemeOpen(themePanel.hidden));
-    themeChoices.forEach(choice => choice.addEventListener("click", () => { window.setTheme?.(choice.dataset.themeChoice); setThemeOpen(false); themeToggle.focus(); }));
-    nav.addEventListener("keydown", event => { if (event.key === "Escape" && !themePanel.hidden) { event.preventDefault(); setThemeOpen(false); themeToggle.focus(); } });
-    nav.addEventListener("focusout", event => { if (!event.relatedTarget?.closest?.(".dh-theme-switcher")) setThemeOpen(false); });
-    document.addEventListener("click", event => { if (!event.target.closest(".dh-theme-switcher")) setThemeOpen(false); });
+    themeChoices.forEach((choice) =>
+      choice.addEventListener("click", () => {
+        window.setTheme?.(choice.dataset.themeChoice);
+        setThemeOpen(false);
+        themeToggle.focus();
+      }),
+    );
+    nav.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !themePanel.hidden) {
+        event.preventDefault();
+        setThemeOpen(false);
+        themeToggle.focus();
+      }
+    });
+    nav.addEventListener("focusout", (event) => {
+      if (!event.relatedTarget?.closest?.(".dh-theme-switcher")) setThemeOpen(false);
+    });
+    document.addEventListener("click", (event) => {
+      if (!event.target.closest(".dh-theme-switcher")) setThemeOpen(false);
+    });
     document.addEventListener("dh:theme-change", updateTheme);
     document.addEventListener("dh:language-change", updateTheme);
     updateTheme();
     document.dispatchEvent(new Event("dh:navigation-ready"));
   }
-  if (document.readyState === "loading")
-    document.addEventListener("DOMContentLoaded", injectNav);
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", injectNav);
   else injectNav();
 })();

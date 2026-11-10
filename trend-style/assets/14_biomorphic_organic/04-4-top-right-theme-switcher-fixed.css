@@ -61,12 +61,24 @@
   transition: transform 0.3s var(--ease-fluid);
 }
 
-.theme-btn[data-target="flora"] .color-dot { background: #FF80AB; }
-.theme-btn[data-target="biolum"] .color-dot { background: #00F2FE; }
-.theme-btn[data-target="terracotta"] .color-dot { background: #E07A5F; }
-.theme-btn[data-target="forest"] .color-dot { background: #52B788; }
-.theme-btn[data-target="cyberbio"] .color-dot { background: #00F5D4; }
-.theme-btn[data-target="coral"] .color-dot { background: #E29578; }
+.theme-btn[data-target="flora"] .color-dot {
+  background: #ff80ab;
+}
+.theme-btn[data-target="biolum"] .color-dot {
+  background: #00f2fe;
+}
+.theme-btn[data-target="terracotta"] .color-dot {
+  background: #e07a5f;
+}
+.theme-btn[data-target="forest"] .color-dot {
+  background: #52b788;
+}
+.theme-btn[data-target="cyberbio"] .color-dot {
+  background: #00f5d4;
+}
+.theme-btn[data-target="coral"] .color-dot {
+  background: #e29578;
+}
 
 .theme-btn:hover {
   color: var(--text-main);
@@ -76,7 +88,7 @@
 
 .theme-btn.active {
   background: var(--accent-gradient);
-  color: #FFFFFF !important;
+  color: #ffffff !important;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   border-radius: var(--radius-pill);
 }

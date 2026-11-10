@@ -7,10 +7,7 @@ export function like(root, scope) {
     button.setAttribute("aria-pressed", String(liked));
     button.classList.toggle("liked", liked);
     output.value = (1240 + Number(liked)).toLocaleString();
-    announce(
-      root,
-      liked ? "좋아요가 반영되었습니다." : "좋아요가 취소되었습니다.",
-    );
+    announce(root, liked ? "좋아요가 반영되었습니다." : "좋아요가 취소되었습니다.");
   });
 }
 export function reorder(root, scope) {
@@ -37,8 +34,7 @@ export function reorder(root, scope) {
       move(
         dragged,
         target,
-        event.clientY >
-          target.getBoundingClientRect().top + target.offsetHeight / 2,
+        event.clientY > target.getBoundingClientRect().top + target.offsetHeight / 2,
       );
   });
   scope.on(list, "dragend", () => {
@@ -47,14 +43,11 @@ export function reorder(root, scope) {
   });
   scope.on(list, "keydown", (event) => {
     const item = event.target.closest(".ui-drag-item");
-    if (!item || !event.altKey || !["ArrowUp", "ArrowDown"].includes(event.key))
-      return;
+    if (!item || !event.altKey || !["ArrowUp", "ArrowDown"].includes(event.key)) return;
     event.preventDefault();
     move(
       item,
-      event.key === "ArrowDown"
-        ? item.nextElementSibling
-        : item.previousElementSibling,
+      event.key === "ArrowDown" ? item.nextElementSibling : item.previousElementSibling,
       event.key === "ArrowDown",
     );
     item.focus();
@@ -64,11 +57,7 @@ export function reorder(root, scope) {
     if (!button) return;
     const item = button.closest(".ui-drag-item");
     const down = button.dataset.move === "down";
-    move(
-      item,
-      down ? item.nextElementSibling : item.previousElementSibling,
-      down,
-    );
+    move(item, down ? item.nextElementSibling : item.previousElementSibling, down);
     button.focus();
   });
 }

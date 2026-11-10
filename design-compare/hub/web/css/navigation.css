@@ -69,8 +69,6 @@
   color: var(--ui-secondary);
 }
 
-
-
 .app-header nav {
   display: flex;
   gap: 2px;
@@ -86,7 +84,9 @@
   border-radius: 99px;
   color: var(--ui-hover);
   font-size: 12px;
-  transition: background 180ms, box-shadow 180ms;
+  transition:
+    background 180ms,
+    box-shadow 180ms;
 }
 
 .app-header nav a[aria-current="page"] {
@@ -113,7 +113,6 @@
   color: var(--ui-text);
   font-weight: 600;
 }
-
 
 @media (max-width: 900px) {
   .app-header {
@@ -157,7 +156,6 @@
     white-space: normal;
   }
 
-
   .library-footer {
     margin: 0px 20px;
     flex-direction: column;
@@ -166,5 +164,9 @@
 }
 
 /* Keep workspace navigation below the shared site header. */
-.design-workspace { padding-top: var(--dh-nav-height); }
-.design-workspace .app-header { top: var(--dh-nav-height); }
+.design-workspace {
+  padding-top: var(--dh-nav-height);
+}
+.design-workspace .app-header {
+  top: var(--dh-nav-height);
+}

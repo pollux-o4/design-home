@@ -3,7 +3,10 @@
    ========================================== */
 .modal-backdrop {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: rgba(0, 0, 0, 0.65);
   z-index: 10000;
   display: none;
@@ -21,7 +24,7 @@
   border-left: 3px solid var(--light);
   border-right: 3px solid var(--dark-shadow);
   border-bottom: 3px solid var(--dark-shadow);
-  box-shadow: 10px 10px 0px rgba(0,0,0,0.6);
+  box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.6);
   width: 100%;
   max-width: 480px;
   display: flex;

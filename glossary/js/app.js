@@ -15,7 +15,7 @@ const catalog = {
     patterns.find(id),
 };
 const entries = createGlossary(catalog);
-const localization = localizeGlossary(entries, document.querySelector('#main-content'));
+const localization = localizeGlossary(entries, document.querySelector("#main-content"));
 const search = document.querySelector("#term-search");
 const list = document.querySelector("#list-view");
 const detail = document.querySelector("#detail-view");
@@ -60,9 +60,7 @@ function demo(entry, large = false, initialExample = state.example) {
   const choices = el("div", "example-choices");
   choices.setAttribute("role", "group");
   choices.setAttribute("aria-label", "체험 예시 선택");
-  let selected = entry.samples.includes(initialExample)
-      ? initialExample
-      : entry.samples[0],
+  let selected = entry.samples.includes(initialExample) ? initialExample : entry.samples[0],
     dispose = () => {};
   function show(id) {
     dispose();
@@ -90,15 +88,11 @@ function demo(entry, large = false, initialExample = state.example) {
       : mount(sample.firstElementChild, definition.behavior);
     choices
       .querySelectorAll("button")
-      .forEach((item) =>
-        item.setAttribute("aria-pressed", String(item.dataset.sample === id)),
-      );
+      .forEach((item) => item.setAttribute("aria-pressed", String(item.dataset.sample === id)));
   }
   if (entry.samples.length > 1) {
     entry.samples.forEach((id) => {
-      const choice = button(catalog.find(id).title, "example-choice", () =>
-        show(id),
-      );
+      const choice = button(catalog.find(id).title, "example-choice", () => show(id));
       choice.dataset.sample = id;
       choices.append(choice);
     });
@@ -108,9 +102,7 @@ function demo(entry, large = false, initialExample = state.example) {
   if (choices.childElementCount) root.append(choices);
   root.append(stage);
   const bottom = el("div", "example-bottom");
-  bottom.append(
-    el("span", "simulation-note", "학습용 예시 · 실제 데이터에 영향 없음"),
-  );
+  bottom.append(el("span", "simulation-note", "학습용 예시 · 실제 데이터에 영향 없음"));
   if (!large)
     bottom.append(
       link(
@@ -146,7 +138,17 @@ function openInline(entry, row, trigger, initialExample = "") {
 }
 function renderList() {
   renderGlossaryList({
-    state, entries, categories, search, container, status, el, button, link, visual, navigate,
+    state,
+    entries,
+    categories,
+    search,
+    container,
+    status,
+    el,
+    button,
+    link,
+    visual,
+    navigate,
     onExpand: openInline,
   });
 }
@@ -159,21 +161,12 @@ function renderDetail(entry) {
     "back-link",
   );
   const header = el("header", "detail-heading");
-  const label = el(
-    "p",
-    "eyebrow",
-    `${entry.category.toUpperCase()} / GLOSSARY`,
-  );
+  const label = el("p", "eyebrow", `${entry.category.toUpperCase()} / GLOSSARY`);
   const title = el("h1", "", entry.title);
   title.tabIndex = -1;
   const english = el("p", "detail-english", entry.term);
   english.lang = "en";
-  header.append(
-    label,
-    title,
-    english,
-    el("p", "detail-definition", entry.desc),
-  );
+  header.append(label, title, english, el("p", "detail-definition", entry.desc));
   detail.append(back, header, demo(entry, true));
   const footer = el("div", "detail-resources");
   const source = el("a", "", "공식 자료 ↗");
@@ -213,13 +206,28 @@ function render() {
   } else {
     detail.replaceChildren();
     renderList();
-    if (previous && !previous.id && state.category && previous.category !== state.category && !state.query && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (
+      previous &&
+      !previous.id &&
+      state.category &&
+      previous.category !== state.category &&
+      !state.query &&
+      !matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
       const panel = document.getElementById(`panel-${state.category}`);
       if (panel && !panel.hidden) {
         const height = panel.getBoundingClientRect().height;
         panel.style.overflow = "hidden";
-        const animation = panel.animate([{ height: "0px", opacity: 0 }, { height: `${height}px`, opacity: 1 }], { duration: 280, easing: "cubic-bezier(.22,1,.36,1)" });
-        animation.onfinish = () => { panel.style.overflow = ""; };
+        const animation = panel.animate(
+          [
+            { height: "0px", opacity: 0 },
+            { height: `${height}px`, opacity: 1 },
+          ],
+          { duration: 280, easing: "cubic-bezier(.22,1,.36,1)" },
+        );
+        animation.onfinish = () => {
+          panel.style.overflow = "";
+        };
       }
     }
     if (previous?.id && lastList) {
@@ -228,8 +236,7 @@ function render() {
       );
       if (trigger && lastList.expanded) {
         const entry = entries.find((item) => item.id === lastList.expanded);
-        if (entry)
-          openInline(entry, trigger.closest("tr"), trigger, lastList.example);
+        if (entry) openInline(entry, trigger.closest("tr"), trigger, lastList.example);
       }
       trigger?.focus({ preventScroll: true });
       window.scrollTo(0, lastList.scroll);
@@ -239,9 +246,7 @@ function render() {
   }
   localization.update();
 }
-search.addEventListener("input", () =>
-  navigate({ ...state, id: "", query: search.value }, true),
-);
+search.addEventListener("input", () => navigate({ ...state, id: "", query: search.value }, true));
 search.form.addEventListener("submit", (event) => event.preventDefault());
 function clearSearch() {
   navigate({ ...state, query: "" }, true);
@@ -259,8 +264,7 @@ document.addEventListener("keydown", (event) => {
     event.preventDefault();
     search.focus();
   }
-  if (event.key === "Escape" && document.activeElement === search)
-    clearSearch();
+  if (event.key === "Escape" && document.activeElement === search) clearSearch();
 });
 window.addEventListener("hashchange", render);
 window.addEventListener("pagehide", () => disposeDemo());

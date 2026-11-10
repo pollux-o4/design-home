@@ -6,9 +6,7 @@ import { readRoute, routeHref } from "../ui-components/js/pattern-route.js";
 import { chromium } from "../design-compare/node_modules/playwright/index.mjs";
 import { createStaticServer } from "./support/static-server.mjs";
 test("UX principles refer to existing samples without duplicates within a category", () => {
-  const originals = new Set(
-    topics.flatMap((topic) => topic.groups.flatMap((group) => group.ids)),
-  );
+  const originals = new Set(topics.flatMap((topic) => topic.groups.flatMap((group) => group.ids)));
   for (const topic of principles) {
     const ids = topic.groups.flatMap((group) => group.ids);
     assert.equal(new Set(ids).size, ids.length, topic.id);
@@ -38,16 +36,12 @@ test("view switcher preserves search and restores deep links with native keyboar
       }),
       errors = [];
     page.on("pageerror", (e) => errors.push(e.message));
-    await page.goto(
-      `http://127.0.0.1:${server.address().port}/ui-components/index.html`,
-    );
+    await page.goto(`http://127.0.0.1:${server.address().port}/ui-components/index.html`);
     await page.getByRole("radio", { name: "UX 관점" }).check();
     assert.equal(await page.locator(".layer-item").count(), 2);
     await page.locator("[data-target=heuristics] .category-button").click();
     await page.locator("#summary-content-heuristics-minimalism").click();
-    assert.ok(
-      await page.locator("[data-sample-id=motion-shared-element]").isVisible(),
-    );
+    assert.ok(await page.locator("[data-sample-id=motion-shared-element]").isVisible());
     assert.equal(await page.locator(".sample:visible").count(), 4);
     await page.reload();
     assert.ok(await page.getByRole("radio", { name: "UX 관점" }).isChecked());
@@ -55,16 +49,11 @@ test("view switcher preserves search and restores deep links with native keyboar
     await page.getByRole("radio", { name: "UI 관점" }).check();
     assert.equal(await page.locator(".layer-item").count(), 6);
     await page.goBack();
-    assert.ok(
-      await page.locator("[data-sample-id=motion-shared-element]").isVisible(),
-    );
+    assert.ok(await page.locator("[data-sample-id=motion-shared-element]").isVisible());
     await page.locator(".pattern-breadcrumb a").click();
     assert.ok(page.url().includes("view=purpose"));
     await page.locator("#search-input").fill("Fitts");
-    assert.equal(
-      await page.locator(".pattern-topic-card h2").textContent(),
-      "인지·행동 법칙",
-    );
+    assert.equal(await page.locator(".pattern-topic-card h2").textContent(), "인지·행동 법칙");
     await page.locator("#search-input").fill("accordion");
     await page.getByRole("radio", { name: "UI 관점" }).check();
     assert.equal(await page.locator("#search-input").inputValue(), "accordion");
@@ -75,11 +64,7 @@ test("view switcher preserves search and restores deep links with native keyboar
     assert.ok(await page.getByRole("radio", { name: "UX 관점" }).isChecked());
     for (const width of [320, 390, 768]) {
       await page.setViewportSize({ width, height: 900 });
-      assert.ok(
-        await page.evaluate(
-          () => document.documentElement.scrollWidth <= innerWidth,
-        ),
-      );
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
     }
     await page.setViewportSize({ width: 390, height: 900 });
     await page.screenshot({ path: "/tmp/pattern-purpose-mobile.png" });

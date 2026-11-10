@@ -36,13 +36,7 @@ export function createTopicView(topic, navigate) {
       title: group.title,
       subtitle: group.term ? `${group.term} · ${group.desc}` : group.desc,
       onToggle: (nextOpen) => {
-        navigate(
-          selectPatternGroup(
-            currentState,
-            topic.id,
-            nextOpen ? group.id : null,
-          ),
-        );
+        navigate(selectPatternGroup(currentState, topic.id, nextOpen ? group.id : null));
       },
     });
     const collection = createLevelView({
@@ -76,10 +70,8 @@ export function createTopicView(topic, navigate) {
   return {
     element,
     update,
-    groupTarget: (id) =>
-      groups.find((group) => group.id === id)?.disclosure.button,
-    settled: () =>
-      Promise.all(groups.map(({ disclosure }) => disclosure.settled())),
+    groupTarget: (id) => groups.find((group) => group.id === id)?.disclosure.button,
+    settled: () => Promise.all(groups.map(({ disclosure }) => disclosure.settled())),
     dispose: () =>
       groups.forEach(({ disclosure }) => {
         disclosure.dispose();

@@ -29,14 +29,14 @@
   border-radius: 10px;
   display: flex;
   gap: 4px;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .tab-btn {
   background: transparent;
   border: none;
   color: var(--text-muted);
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 12px;
   font-weight: 700;
   padding: 8px 16px;
@@ -53,7 +53,7 @@
 }
 
 .live-indicator {
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   font-size: 11px;
   color: var(--text-muted);
   display: flex;

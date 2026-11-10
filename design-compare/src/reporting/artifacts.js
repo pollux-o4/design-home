@@ -1,6 +1,6 @@
-import { FILES } from '../domain/artifacts.js';
-import { renderReport } from './index.js';
-import { repairPlan } from '../comparison/review.js';
+import { FILES } from "../domain/artifacts.js";
+import { renderReport } from "./index.js";
+import { repairPlan } from "../comparison/review.js";
 
 // Artifact schema belongs to reporting; storage only persists the resulting files.
 export function createReportArtifacts(report, images) {

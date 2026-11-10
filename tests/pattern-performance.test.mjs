@@ -9,16 +9,12 @@ test("collapsed categories create no samples and opening a topic creates both di
   try {
     const page = await browser.newPage();
     await page.route(/https?:\/\/(?!127\.0\.0\.1)/, (r) => r.abort());
-    await page.goto(
-      `http://127.0.0.1:${server.address().port}/ui-components/index.html`,
-    );
+    await page.goto(`http://127.0.0.1:${server.address().port}/ui-components/index.html`);
     await page.locator("[data-target=motion] .category-button").click();
     assert.equal(await page.locator(".sample").count(), 0);
     await page.locator("#summary-content-motion-expressive").click();
     assert.equal(await page.locator(".sample").count(), 6);
-    await page
-      .locator("[data-sample-id=motion-counter] [data-motion-play]")
-      .click();
+    await page.locator("[data-sample-id=motion-counter] [data-motion-play]").click();
     await page.waitForFunction(
       () => document.querySelector("[data-metric]").textContent === "12,000",
     );
@@ -51,17 +47,12 @@ test("fixed-size text animation does not trigger document-wide scrollbar geometr
     );
     await page.locator("[data-metric]").waitFor({ state: "visible" });
     await page.evaluate(
-      () =>
-        new Promise((resolve) =>
-          requestAnimationFrame(() => requestAnimationFrame(resolve)),
-        ),
+      () => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))),
     );
     const reads = await page.evaluate(async () => {
       scrollGeometryReads = 0;
       for (let frame = 0; frame < 25; frame++) {
-        document.querySelector("[data-metric]").textContent = String(
-          8420 + frame,
-        );
+        document.querySelector("[data-metric]").textContent = String(8420 + frame);
         await new Promise(requestAnimationFrame);
       }
       return scrollGeometryReads;
@@ -80,9 +71,7 @@ test("unchanged normalized search preserves sample state instead of remounting i
   try {
     const page = await browser.newPage();
     await page.route(/https?:\/\/(?!127\.0\.0\.1)/, (r) => r.abort());
-    await page.goto(
-      `http://127.0.0.1:${server.address().port}/ui-components/index.html`,
-    );
+    await page.goto(`http://127.0.0.1:${server.address().port}/ui-components/index.html`);
     await page.locator("#search-input").fill("Checkbox");
     const checkbox = page.locator("[data-sample-id=checkbox] input").first();
     await checkbox.uncheck();

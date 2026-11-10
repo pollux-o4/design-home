@@ -31,25 +31,16 @@ test("glossary navigation, live examples, search, keyboard, history and responsi
     failures = [];
   page.on("pageerror", (error) => errors.push(error.message));
   page.on("response", (response) => {
-    if (response.url().startsWith(base) && response.status() >= 400)
-      failures.push(response.url());
+    if (response.url().startsWith(base) && response.status() >= 400) failures.push(response.url());
   });
   try {
     await mkdir(".legacy-review", { recursive: true });
     await page.goto(base);
-    await page
-      .getByRole("button", { name: "Design Study", exact: true })
-      .click();
+    await page.getByRole("button", { name: "Design Study", exact: true }).click();
     await page.getByRole("link", { name: "용어집", exact: true }).click();
     await page.locator("#category-ui").waitFor();
-    assert.equal(
-      await page.locator("#dh-global-nav [aria-current=page]").innerText(),
-      "용어집",
-    );
-    assert.equal(
-      await page.locator(".category-toggle[aria-expanded=true]").count(),
-      0,
-    );
+    assert.equal(await page.locator("#dh-global-nav [aria-current=page]").innerText(), "용어집");
+    assert.equal(await page.locator(".category-toggle[aria-expanded=true]").count(), 0);
     assert.equal(await page.locator("#term-count").innerText(), "77");
     await page.screenshot({ path: ".legacy-review/glossary-overview.png" });
     await page.locator("#category-ui").focus();
@@ -84,24 +75,16 @@ test("glossary navigation, live examples, search, keyboard, history and responsi
     await page.locator(".detail-link").click();
     await page.waitForURL("**#/ui/tooltip?q=tooltip*");
     await page.locator("#detail-view h1").waitFor();
-    assert.equal(
-      await page.locator("#detail-view h1").innerText(),
-      "도움말 툴팁",
-    );
+    assert.equal(await page.locator("#detail-view h1").innerText(), "도움말 툴팁");
     await page.locator(".skip-link").focus();
     await page.keyboard.press("Enter");
     assert.match(page.url(), /#\/ui\/tooltip/);
     assert.equal(
-      await page
-        .locator("#main-content")
-        .evaluate((node) => node === document.activeElement),
+      await page.locator("#main-content").evaluate((node) => node === document.activeElement),
       true,
     );
     await page.reload();
-    assert.equal(
-      await page.locator("#detail-view h1").innerText(),
-      "도움말 툴팁",
-    );
+    assert.equal(await page.locator("#detail-view h1").innerText(), "도움말 툴팁");
     await page.locator(".back-link").click();
     await page.locator("#list-view").waitFor();
     assert.equal(await page.locator("#term-search").inputValue(), "tooltip");
@@ -118,19 +101,10 @@ test("glossary navigation, live examples, search, keyboard, history and responsi
     assert.equal(terms.length, 15);
     for (const id of terms) {
       await page.locator(`[data-expand="${id}"]`).click();
-      const choices = await page
-        .locator(".expanded-row:visible .example-choice")
-        .count();
+      const choices = await page.locator(".expanded-row:visible .example-choice").count();
       for (let i = 0; i < choices; i++)
-        await page
-          .locator(".expanded-row:visible .example-choice")
-          .nth(i)
-          .click();
-      assert.equal(
-        await page.locator(".expanded-row:visible .sample").count(),
-        1,
-        id,
-      );
+        await page.locator(".expanded-row:visible .example-choice").nth(i).click();
+      assert.equal(await page.locator(".expanded-row:visible .sample").count(), 1, id);
     }
     await page.goto(base + "glossary/index.html#/ux?q=피츠");
     await page.locator("[data-expand=fitts]").click();
@@ -141,36 +115,27 @@ test("glossary navigation, live examples, search, keyboard, history and responsi
     await page.locator(".detail-link").click();
     await page.locator("#detail-view h1").waitFor();
     assert.equal(
-      await page
-        .locator(".example-choice[aria-pressed=true]")
-        .getAttribute("data-sample"),
+      await page.locator(".example-choice[aria-pressed=true]").getAttribute("data-sample"),
       selectedExample,
     );
     await page.goBack();
     await page.locator(".expanded-row:visible").waitFor();
     assert.equal(
-      await page
-        .locator(".example-choice[aria-pressed=true]")
-        .getAttribute("data-sample"),
+      await page.locator(".example-choice[aria-pressed=true]").getAttribute("data-sample"),
       selectedExample,
     );
     await page.locator(".detail-link").click();
     await page.locator("#detail-view h1").waitFor();
     await page.reload();
     assert.equal(
-      await page
-        .locator(".example-choice[aria-pressed=true]")
-        .getAttribute("data-sample"),
+      await page.locator(".example-choice[aria-pressed=true]").getAttribute("data-sample"),
       selectedExample,
     );
     await page.goto(base + "glossary/index.html#/ux/fitts");
     await page.getByLabel("대상 크기").fill("80");
     await page.getByLabel("이동 거리").fill("75");
     await page.getByRole("button", { name: "대상 선택" }).click();
-    assert.match(
-      await page.locator("[data-status]").innerText(),
-      /선택했습니다/,
-    );
+    assert.match(await page.locator("[data-status]").innerText(), /선택했습니다/);
     await page.goto(base + "glossary/index.html#/ux/hick");
     await page.getByRole("switch", { name: "선택지 그룹화" }).click();
     await page.getByText("따뜻한 음료", { exact: true }).click();
@@ -181,9 +146,7 @@ test("glossary navigation, live examples, search, keyboard, history and responsi
     assert.equal(await page.locator(".proximity-field.is-grouped").count(), 1);
     await page.goto(base + "glossary/index.html#/ui/toggle-switch");
     await page.locator(".detail-resources a").first().click();
-    await page.waitForURL(
-      "**/ui-components/index.html?component=toggle-switch",
-    );
+    await page.waitForURL("**/ui-components/index.html?component=toggle-switch");
     await page.goBack();
     await page.getByRole("switch").click();
     assert.equal(await page.getByRole("switch").isChecked(), false);
@@ -193,40 +156,25 @@ test("glossary navigation, live examples, search, keyboard, history and responsi
       .evaluateAll((nodes) => nodes.map((node) => node.dataset.expand));
     for (const id of uiTerms) {
       await page.locator(`[data-expand="${id}"]`).click();
-      assert.equal(
-        await page.locator(".expanded-row:visible .sample").count(),
-        1,
-        id,
-      );
+      assert.equal(await page.locator(".expanded-row:visible .sample").count(), 1, id);
     }
     for (const width of [320, 390, 768, 1440]) {
       await page.setViewportSize({ width, height: 1000 });
       await page.goto(base + "glossary/index.html#/ui");
       await page.evaluate(() => scrollTo(0, 0));
       assert.equal(
-        await page.evaluate(
-          () => document.documentElement.scrollWidth <= innerWidth,
-        ),
+        await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
         true,
         `list overflow ${width}`,
       );
       await page.screenshot({
         path: `.legacy-review/glossary-list-${width}.png`,
       });
-      if (
-        (await page
-          .locator("[data-expand=accordion]")
-          .getAttribute("aria-expanded")) !== "true"
-      )
+      if ((await page.locator("[data-expand=accordion]").getAttribute("aria-expanded")) !== "true")
         await page.locator("[data-expand=accordion]").click();
-      await page
-        .locator(".expanded-row:visible .sample summary")
-        .first()
-        .click();
+      await page.locator(".expanded-row:visible .sample summary").first().click();
       assert.equal(
-        await page.evaluate(
-          () => document.documentElement.scrollWidth <= innerWidth,
-        ),
+        await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
         true,
         `inline overflow ${width}`,
       );
@@ -236,16 +184,12 @@ test("glossary navigation, live examples, search, keyboard, history and responsi
         fullPage: true,
       });
       assert.equal(
-        await page.evaluate(
-          () => document.documentElement.scrollWidth <= innerWidth,
-        ),
+        await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
         true,
         `detail overflow ${width}`,
       );
       const duplicates = await page.evaluate(() => {
-        const ids = [...document.querySelectorAll("[id]")].map(
-          (node) => node.id,
-        );
+        const ids = [...document.querySelectorAll("[id]")].map((node) => node.id);
         return ids.filter((id, index) => ids.indexOf(id) !== index);
       });
       assert.deepEqual(duplicates, []);
@@ -257,14 +201,13 @@ test("glossary navigation, live examples, search, keyboard, history and responsi
     await page.locator("#detail-view h1").waitFor();
     await page.goBack();
     await page.locator(".expanded-row:visible").waitFor();
-    assert.equal(
-      await page.locator("[data-expand=control]").getAttribute("aria-expanded"),
-      "true",
-    );
+    assert.equal(await page.locator("[data-expand=control]").getAttribute("aria-expanded"), "true");
     await page.emulateMedia({ reducedMotion: "no-preference" });
     await page.goto(base + "glossary/index.html#/motion");
     assert.equal(await page.locator("#panel-motion .term-row").count(), 44);
-    const sketches = await page.locator("#panel-motion .term-sketch svg").evaluateAll(nodes => nodes.map(node => node.innerHTML.trim()));
+    const sketches = await page
+      .locator("#panel-motion .term-sketch svg")
+      .evaluateAll((nodes) => nodes.map((node) => node.innerHTML.trim()));
     assert.equal(sketches.length, 44);
     assert.ok(sketches.every(Boolean), "Each motion term needs a diagram");
     assert.equal(new Set(sketches).size, 44, "Different motions need distinguishable diagrams");
@@ -279,47 +222,26 @@ test("glossary navigation, live examples, search, keyboard, history and responsi
     assert.equal(motionTerms.length, 44);
     for (const id of motionTerms) {
       await page.locator(`[data-expand="${id}"]`).click();
-      assert.equal(
-        await page.locator(".expanded-row:visible .sample").count(),
-        1,
-        id,
-      );
+      assert.equal(await page.locator(".expanded-row:visible .sample").count(), 1, id);
       if (!id.startsWith("glossary-")) {
-        assert.equal(
-          await page.locator(".motion-more").getAttribute("open"),
-          null,
-        );
+        assert.equal(await page.locator(".motion-more").getAttribute("open"), null);
         await page.locator("[data-play]").click();
         assert.ok(
           await page
             .locator(".motion-object")
-            .evaluateAll((nodes) =>
-              nodes.some((node) => node.getAnimations().length),
-            ),
+            .evaluateAll((nodes) => nodes.some((node) => node.getAnimations().length)),
         );
         await page.locator(".motion-more summary").click();
-        assert.equal(
-          await page.locator(".motion-more").getAttribute("open"),
-          "",
-        );
+        assert.equal(await page.locator(".motion-more").getAttribute("open"), "");
       }
     }
     await page.locator("[data-expand=motion-ripple]").click();
-    await page
-      .locator("[data-motion-lab]")
-      .click({ position: { x: 40, y: 60 } });
-    assert.notEqual(
-      await page.locator(".motion-ripple").evaluate((node) => node.style.left),
-      "",
-    );
+    await page.locator("[data-motion-lab]").click({ position: { x: 40, y: 60 } });
+    assert.notEqual(await page.locator(".motion-ripple").evaluate((node) => node.style.left), "");
     await page.locator("[data-expand=motion-magnetic]").click();
-    await page
-      .locator("[data-motion-lab]")
-      .hover({ position: { x: 10, y: 10 } });
+    await page.locator("[data-motion-lab]").hover({ position: { x: 10, y: 10 } });
     assert.match(
-      await page
-        .locator(".motion-object")
-        .evaluate((node) => node.style.transform),
+      await page.locator(".motion-object").evaluate((node) => node.style.transform),
       /translate/,
     );
     await page.locator("[data-expand=motion-gooey]").click();
@@ -329,25 +251,17 @@ test("glossary navigation, live examples, search, keyboard, history and responsi
     });
     await page.locator(".detail-link").click();
     await page.reload();
-    assert.equal(
-      await page.locator("#detail-view h1").innerText(),
-      "구이 효과",
-    );
+    assert.equal(await page.locator("#detail-view h1").innerText(), "구이 효과");
     assert.equal(await page.locator(".detail-resources a").count(), 1);
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.locator("[data-play]").click();
-    assert.match(
-      await page.locator("[data-motion-status]").innerText(),
-      /움직임 줄이기/,
-    );
+    assert.match(await page.locator("[data-motion-status]").innerText(), /움직임 줄이기/);
     for (const width of [320, 390, 768, 1440]) {
       await page.setViewportSize({ width, height: 1000 });
       await page.goto(base + "glossary/index.html#/motion");
       await page.locator("[data-expand=motion-gooey]").click();
       assert.equal(
-        await page.evaluate(
-          () => document.documentElement.scrollWidth <= innerWidth,
-        ),
+        await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
         true,
         `motion overflow ${width}`,
       );

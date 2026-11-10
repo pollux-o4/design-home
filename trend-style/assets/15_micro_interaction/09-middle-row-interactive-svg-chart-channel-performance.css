@@ -82,7 +82,10 @@
   stroke: var(--primary);
   stroke-width: 3;
   cursor: pointer;
-  transition: transform 0.25s var(--spring-ease), fill 0.2s, stroke-width 0.2s;
+  transition:
+    transform 0.25s var(--spring-ease),
+    fill 0.2s,
+    stroke-width 0.2s;
 }
 .chart-node-circle:hover {
   transform: scale(1.8);
@@ -102,7 +105,9 @@
   pointer-events: none;
   opacity: 0;
   transform: translate(-50%, -120%) scale(0.9);
-  transition: opacity 0.2s ease, transform 0.2s var(--spring-ease);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s var(--spring-ease);
   box-shadow: var(--shadow-lg);
   z-index: 300;
 }
@@ -110,9 +115,22 @@
   opacity: 1;
   transform: translate(-50%, -125%) scale(1);
 }
-.tt-date { font-size: 11px; font-weight: 700; color: var(--text-muted); }
-.tt-value { font-size: 16px; font-weight: 800; color: var(--text-primary); font-family: var(--font-mono); }
-.tt-sub { font-size: 10px; font-weight: 700; color: var(--accent-emerald); }
+.tt-date {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.tt-value {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+}
+.tt-sub {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent-emerald);
+}
 
 /* Channel Performance Right Widget */
 .widget-header {
@@ -121,7 +139,10 @@
   justify-content: space-between;
   margin-bottom: 18px;
 }
-.widget-header h3 { font-size: 16px; font-weight: 800; }
+.widget-header h3 {
+  font-size: 16px;
+  font-weight: 800;
+}
 .icon-btn-sm {
   background: transparent;
   border: none;
@@ -142,7 +163,10 @@
   font-weight: 700;
   margin-bottom: 6px;
 }
-.source-val { font-family: var(--font-mono); color: var(--text-primary); }
+.source-val {
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+}
 .bar-track {
   height: 8px;
   background: rgba(255, 255, 255, 0.08);
@@ -155,10 +179,18 @@
   position: relative;
   transition: width 0.8s var(--spring-ease);
 }
-.bar-fill-1 { background: linear-gradient(90deg, var(--primary), var(--accent-cyan)); }
-.bar-fill-2 { background: linear-gradient(90deg, var(--accent-purple), var(--accent-rose)); }
-.bar-fill-3 { background: linear-gradient(90deg, var(--accent-emerald), var(--accent-cyan)); }
-.bar-fill-4 { background: linear-gradient(90deg, var(--accent-amber), var(--accent-rose)); }
+.bar-fill-1 {
+  background: linear-gradient(90deg, var(--primary), var(--accent-cyan));
+}
+.bar-fill-2 {
+  background: linear-gradient(90deg, var(--accent-purple), var(--accent-rose));
+}
+.bar-fill-3 {
+  background: linear-gradient(90deg, var(--accent-emerald), var(--accent-cyan));
+}
+.bar-fill-4 {
+  background: linear-gradient(90deg, var(--accent-amber), var(--accent-rose));
+}
 
 .realtime-status-box {
   margin-top: 24px;
@@ -179,9 +211,25 @@
   animation: pulse-ring 2s infinite ease-out;
 }
 @keyframes pulse-ring {
-  0% { transform: scale(0.9); opacity: 1; }
-  50% { transform: scale(1.4); opacity: 0.5; }
-  100% { transform: scale(0.9); opacity: 1; }
+  0% {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 1;
+  }
 }
-.status-text strong { display: block; font-size: 12px; color: var(--text-primary); }
-.status-text span { font-size: 10px; color: var(--text-muted); }
+.status-text strong {
+  display: block;
+  font-size: 12px;
+  color: var(--text-primary);
+}
+.status-text span {
+  font-size: 10px;
+  color: var(--text-muted);
+}

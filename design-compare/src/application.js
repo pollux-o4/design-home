@@ -1,53 +1,86 @@
-import { rankReferences } from './library/index.js';
-import { activityStore } from './activity/index.js';
-import { prepareBrief } from './application/brief.js';
-import { inventory } from './application/inventory.js';
-import { createLibrary } from './library/index.js';
-import { loadProject } from './project.js';
-import { readFile } from 'node:fs/promises';
-import { catalog } from './catalog/index.js';
-import { validateId } from './domain/identifiers.js';
-import { capture } from './capture/index.js';
-import { inspectReference, inspectReport } from './application/queries.js';
-import { comparePage as compareWorkflow } from './application/compare.js';
-import { auditUi } from './audit/ui.js';
-import { auditMotion } from './audit/motion.js';
-import { auditContrast } from './audit/contrast.js';
-import { auditLocalization } from './audit/localization.js';
+import { rankReferences } from "./library/index.js";
+import { activityStore } from "./activity/index.js";
+import { prepareBrief } from "./application/brief.js";
+import { inventory } from "./application/inventory.js";
+import { createLibrary } from "./library/index.js";
+import { loadProject } from "./project.js";
+import { readFile } from "node:fs/promises";
+import { catalog } from "./catalog/index.js";
+import { validateId } from "./domain/identifiers.js";
+import { capture } from "./capture/index.js";
+import { inspectReference, inspectReport } from "./application/queries.js";
+import { comparePage as compareWorkflow } from "./application/compare.js";
+import { auditUi } from "./audit/ui.js";
+import { auditMotion } from "./audit/motion.js";
+import { auditContrast } from "./audit/contrast.js";
+import { auditLocalization } from "./audit/localization.js";
 
 // Composition root: production adapters are replaceable by concrete test adapters.
-export function createApplication({ repositoryFor = catalog, capturePage = capture, read = readFile, now = () => new Date().toISOString(), project = loadProject() } = {}) {
+export function createApplication({
+  repositoryFor = catalog,
+  capturePage = capture,
+  read = readFile,
+  now = () => new Date().toISOString(),
+  project = loadProject(),
+} = {}) {
   const library = createLibrary(project);
   return {
     inventory,
-    history: async ({ store }) => ({ schemaVersion: 1, status: 'history', entries: await activityStore(store).recent() }),
-    prepareBrief: request => prepareBrief(request, { repository: repositoryFor(request.store), capture: capturePage, documentsRoot: project.documentsRoot }),
+    history: async ({ store }) => ({
+      schemaVersion: 1,
+      status: "history",
+      entries: await activityStore(store).recent(),
+    }),
+    prepareBrief: (request) =>
+      prepareBrief(request, {
+        repository: repositoryFor(request.store),
+        capture: capturePage,
+        documentsRoot: project.documentsRoot,
+      }),
     async link({ manifest, store }) {
-      const fields = JSON.parse(await read(manifest, 'utf8'));
-      const record = { ...fields, schemaVersion: 1, mode: 'live', createdAt: now() };
+      const fields = JSON.parse(await read(manifest, "utf8"));
+      const record = { ...fields, schemaVersion: 1, mode: "live", createdAt: now() };
       const directory = await repositoryFor(store).link(record);
-      return { status: 'linked', referenceId: record.id, directory, metadata: record };
+      return { status: "linked", referenceId: record.id, directory, metadata: record };
     },
     async searchDesigns({ query, tags = [], store }) {
       const result = library.search(query, tags);
-      const registered = rankReferences(query ?? '', (await repositoryFor(store).list()).filter(item => item.mode === 'live' && item.status === 'ready' && !item.transient), tags).results;
+      const registered = rankReferences(
+        query ?? "",
+        (await repositoryFor(store).list()).filter(
+          (item) => item.mode === "live" && item.status === "ready" && !item.transient,
+        ),
+        tags,
+      ).results;
       return { ...result, registered };
     },
     getDesignContext: ({ id }) => library.context(id),
     async listReferences({ store }) {
-      return { schemaVersion: 1, status: 'listed', references: await repositoryFor(store).list() };
+      return { schemaVersion: 1, status: "listed", references: await repositoryFor(store).list() };
     },
     inspect(request) {
-      return request.reportPath ? inspectReport(request, read) : inspectReference(request, repositoryFor(request.store));
+      return request.reportPath
+        ? inspectReport(request, read)
+        : inspectReference(request, repositoryFor(request.store));
     },
     async register({ id, store, ...options }) {
       validateId(id);
       const captured = await capturePage(options);
-      const directory = await repositoryFor(store).save(id, captured.snapshot, captured.png, captured.capture);
-      return { status: 'registered', referenceId: id, directory };
+      const directory = await repositoryFor(store).save(
+        id,
+        captured.snapshot,
+        captured.png,
+        captured.capture,
+      );
+      return { status: "registered", referenceId: id, directory };
     },
     comparePage(request) {
-      return compareWorkflow(request, { repository: repositoryFor(request.store), capture: capturePage, read, now });
+      return compareWorkflow(request, {
+        repository: repositoryFor(request.store),
+        capture: capturePage,
+        read,
+        now,
+      });
     },
     auditUi,
     auditMotion,
@@ -56,7 +89,7 @@ export function createApplication({ repositoryFor = catalog, capturePage = captu
   };
 }
 
-export const listReferences = request => createApplication().listReferences(request);
-export const inspect = request => createApplication().inspect(request);
-export const register = request => createApplication().register(request);
-export const comparePage = request => createApplication().comparePage(request);
+export const listReferences = (request) => createApplication().listReferences(request);
+export const inspect = (request) => createApplication().inspect(request);
+export const register = (request) => createApplication().register(request);
+export const comparePage = (request) => createApplication().comparePage(request);

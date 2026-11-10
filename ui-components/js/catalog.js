@@ -10,9 +10,7 @@
         return groups(module).flatMap((group) => group.components);
       }
       const byId = new Map(
-        modules
-          .flatMap(components)
-          .map((definition) => [definition.id, definition]),
+        modules.flatMap(components).map((definition) => [definition.id, definition]),
       );
       function filter(items, query) {
         const needle = query.trim().toLowerCase();

@@ -14,21 +14,15 @@ export function mountCollectionFilter(root = document) {
   const count = root.querySelector(".collection-count");
   function filterCollection() {
     clear.hidden = !search.value;
-    const mood = filters.find(
-      (filter) => filter.getAttribute("aria-pressed") === "true",
-    ).dataset.mood;
-    const terms = search.value
-      .trim()
-      .toLocaleLowerCase()
-      .split(/\s+/)
-      .filter(Boolean);
+    const mood = filters.find((filter) => filter.getAttribute("aria-pressed") === "true").dataset
+      .mood;
+    const terms = search.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
     cards.forEach((card) => {
       const moods = card.dataset.moods.split(" ");
       const text =
         `${card.textContent} ${moods.map((item) => moodLabels[item]).join(" ")}`.toLocaleLowerCase();
       card.hidden =
-        (mood !== "all" && !moods.includes(mood)) ||
-        !terms.every((term) => text.includes(term));
+        (mood !== "all" && !moods.includes(mood)) || !terms.every((term) => text.includes(term));
     });
     const visible = cards.filter((card) => !card.hidden).length;
     count.textContent = `${visible} / ${cards.length}`;
@@ -36,13 +30,15 @@ export function mountCollectionFilter(root = document) {
   }
   filters.forEach((button) =>
     button.addEventListener("click", () => {
-      filters.forEach((filter) =>
-        filter.setAttribute("aria-pressed", String(filter === button)),
-      );
+      filters.forEach((filter) => filter.setAttribute("aria-pressed", String(filter === button)));
       filterCollection();
     }),
   );
   search.addEventListener("input", filterCollection);
-  clear.addEventListener("click", () => { search.value = ""; filterCollection(); search.focus(); });
+  clear.addEventListener("click", () => {
+    search.value = "";
+    filterCollection();
+    search.focus();
+  });
   document.addEventListener("dh:language-change", filterCollection);
 }

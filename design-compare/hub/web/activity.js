@@ -42,16 +42,11 @@ function imageFigure(entry, image) {
   link.rel = "noopener";
   link.append(img);
   figure.append(link, element("figcaption", image.label));
-  const item = entry.output.items?.find(
-    (item) => item.imagePath === image.path,
-  );
+  const item = entry.output.items?.find((item) => item.imagePath === image.path);
   if (item) {
     figure.append(
       element("p", item.guidance.summary),
-      element(
-        "p",
-        `선택 근거: ${item.reasons.map((reason) => reason.matched).join(" · ")}`,
-      ),
+      element("p", `선택 근거: ${item.reasons.map((reason) => reason.matched).join(" · ")}`),
     );
     const guidance = element("ul");
     for (const constraint of item.guidance.constraints ?? [])
@@ -79,17 +74,44 @@ function renderDetail(entry) {
   if (entry.output.message) card.append(element("p", entry.output.message));
   if (entry.command === "motion" && entry.output.coverage) {
     const { coverage, evidence } = entry.output;
-    card.append(element("p", `화면 ${coverage.frameSamples}장 · 변화 ${(entry.output.changeRatio * 100).toFixed(1)}% · 관찰 ${coverage.actualDurationMs}ms`));
-    card.append(element("p", `CSS 이벤트 ${evidence?.cssEvents ?? 0}개 · ${coverage.note}`, "muted"));
+    card.append(
+      element(
+        "p",
+        `화면 ${coverage.frameSamples}장 · 변화 ${(entry.output.changeRatio * 100).toFixed(1)}% · 관찰 ${coverage.actualDurationMs}ms`,
+      ),
+    );
+    card.append(
+      element("p", `CSS 이벤트 ${evidence?.cssEvents ?? 0}개 · ${coverage.note}`, "muted"),
+    );
   }
   if (entry.command === "contrast" && entry.output.summary) {
     const { summary, findings = [], incomplete = [] } = entry.output;
-    card.append(element("p", `검사 ${summary.checked}개 · 대비 문제 ${summary.findings}개 · 수동 확인 ${summary.incomplete}개`));
-    for (const item of findings) card.append(element("p", `${item.theme} · ${item.state} · ${item.target.join(" → ")}`, "muted"));
-    if (incomplete.length) card.append(element("p", "그라디언트나 겹친 요소 등은 자동 판정이 어려워 수동 확인이 필요합니다.", "muted"));
+    card.append(
+      element(
+        "p",
+        `검사 ${summary.checked}개 · 대비 문제 ${summary.findings}개 · 수동 확인 ${summary.incomplete}개`,
+      ),
+    );
+    for (const item of findings)
+      card.append(
+        element("p", `${item.theme} · ${item.state} · ${item.target.join(" → ")}`, "muted"),
+      );
+    if (incomplete.length)
+      card.append(
+        element(
+          "p",
+          "그라디언트나 겹친 요소 등은 자동 판정이 어려워 수동 확인이 필요합니다.",
+          "muted",
+        ),
+      );
   }
   if (entry.command === "localization" && entry.output.summary) {
-    card.append(element("p", `검사 ${entry.output.summary.checked}개 · 언어 누락 ${entry.output.summary.findings}개`));
+    card.append(
+      element(
+        "p",
+        `검사 ${entry.output.summary.checked}개 · 언어 누락 ${entry.output.summary.findings}개`,
+      ),
+    );
   }
   for (const failure of entry.output.failures ?? [])
     card.append(element("p", `${failure.title}: ${failure.message}`));
@@ -170,24 +192,20 @@ export function createActivityView() {
       list.append(card);
     }
   }
-  document
-    .querySelector("#refresh-activity")
-    .addEventListener("click", async () => {
-      try {
-        await load();
-      } catch (error) {
-        document.querySelector("#activity-status").textContent = error.message;
-      }
-    });
+  document.querySelector("#refresh-activity").addEventListener("click", async () => {
+    try {
+      await load();
+    } catch (error) {
+      document.querySelector("#activity-status").textContent = error.message;
+    }
+  });
   return {
     async show(route, current) {
       if (!route.id) {
         await load(current);
         return;
       }
-      const entry = await getJSON(
-        `/api/activity/${encodeURIComponent(route.id)}`,
-      );
+      const entry = await getJSON(`/api/activity/${encodeURIComponent(route.id)}`);
       if (!current()) return;
       if (!entries.length) {
         const history = await getJSON("/api/activity");
@@ -196,29 +214,20 @@ export function createActivityView() {
       }
       renderDetail(entry);
       document.title = `${activityTitle(entry)} · Design System Library`;
-      const steps = entries
-        .filter((item) => item.taskId === entry.taskId)
-        .reverse();
+      const steps = entries.filter((item) => item.taskId === entry.taskId).reverse();
       if (steps.length > 1) {
         const nav = element("nav", null, "task-steps");
         nav.setAttribute("aria-label", "같은 작업의 단계");
         for (const step of steps) {
           const link = element("a", labels[step.command] ?? step.command);
           link.href = `#/activity/${step.id}`;
-          link.setAttribute(
-            "aria-current",
-            step.id === entry.id ? "step" : "false",
-          );
+          link.setAttribute("aria-current", step.id === entry.id ? "step" : "false");
           nav.append(link);
         }
         document.querySelector("#activity-detail").prepend(nav);
       }
-      document
-        .querySelector("#activity-detail h1")
-        .setAttribute("tabindex", "-1");
-      document
-        .querySelector("#activity-detail h1")
-        .focus({ preventScroll: true });
+      document.querySelector("#activity-detail h1").setAttribute("tabindex", "-1");
+      document.querySelector("#activity-detail h1").focus({ preventScroll: true });
     },
   };
 }

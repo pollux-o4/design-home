@@ -16,45 +16,26 @@ test("state morphing supports completion, cancellation, expansion, controls, red
     await page.goto(base + "#/motion/adaptive");
     await page.locator("[data-morph-action]").click();
     await page.locator("[data-action-cancel]").click();
-    assert.equal(
-      await page.locator("[data-morph-action]").getAttribute("data-state"),
-      "idle",
-    );
+    assert.equal(await page.locator("[data-morph-action]").getAttribute("data-state"), "idle");
     await page.locator("[data-morph-action]").click();
     await page.waitForFunction(
-      () =>
-        document.querySelector("[data-morph-action]").dataset.state === "done",
+      () => document.querySelector("[data-morph-action]").dataset.state === "done",
     );
     assert.ok(
-      await page
-        .locator("[data-morph-action]")
-        .evaluate((el) => el === document.activeElement),
+      await page.locator("[data-morph-action]").evaluate((el) => el === document.activeElement),
     );
     await page.locator("[data-island-toggle]").click();
     await page.locator("[data-play]").click();
-    assert.equal(
-      await page.locator("[data-play-state]").textContent(),
-      "재생 중",
-    );
+    assert.equal(await page.locator("[data-play-state]").textContent(), "재생 중");
     await page.locator("[data-next]").click();
-    assert.equal(
-      await page.locator("[data-track]").textContent(),
-      "Ocean Light",
-    );
+    assert.equal(await page.locator("[data-track]").textContent(), "Ocean Light");
     await page.waitForTimeout(400);
-    await page
-      .locator("[data-island]")
-      .evaluate((el) => el.scrollIntoView({ block: "center" }));
+    await page.locator("[data-island]").evaluate((el) => el.scrollIntoView({ block: "center" }));
     await page.screenshot({ path: "/tmp/morph-island-desktop.png" });
     await page.keyboard.press("Escape");
-    assert.equal(
-      await page.locator("[data-island-toggle]").getAttribute("aria-expanded"),
-      "false",
-    );
+    assert.equal(await page.locator("[data-island-toggle]").getAttribute("aria-expanded"), "false");
     assert.ok(
-      await page
-        .locator("[data-island-toggle]")
-        .evaluate((el) => el === document.activeElement),
+      await page.locator("[data-island-toggle]").evaluate((el) => el === document.activeElement),
     );
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.locator("[data-island-toggle]").click();
@@ -62,11 +43,7 @@ test("state morphing supports completion, cancellation, expansion, controls, red
     await page.setViewportSize({ width: 390, height: 844 });
     await page.locator("[data-island]").scrollIntoViewIfNeeded();
     await page.screenshot({ path: "/tmp/morph-island-mobile.png" });
-    assert.ok(
-      await page.evaluate(
-        () => document.documentElement.scrollWidth <= innerWidth,
-      ),
-    );
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
     await page.goto(base + "#/heuristics/visibility?view=purpose");
     assert.ok(await page.locator("[data-morph-action]").isVisible());
     await page.locator("[data-morph-action]").click();

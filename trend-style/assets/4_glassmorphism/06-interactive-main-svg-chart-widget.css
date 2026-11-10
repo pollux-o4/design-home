@@ -73,10 +73,13 @@
   stroke: var(--accent);
   stroke-width: 3;
   cursor: pointer;
-  transition: transform 0.2s ease, fill 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    fill 0.2s ease;
 }
 
-.chart-node:hover, .chart-node.active {
+.chart-node:hover,
+.chart-node.active {
   transform: scale(1.6);
   fill: var(--accent);
   filter: drop-shadow(0 0 10px var(--accent-glow));
@@ -96,7 +99,9 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.2s ease, transform 0.15s ease-out;
+  transition:
+    opacity 0.2s ease,
+    transform 0.15s ease-out;
   z-index: 200;
   white-space: nowrap;
 }

@@ -9,8 +9,7 @@ export function morphAction(root, scope) {
     progress = 0;
   // Phase is the state source; DOM attributes are its projection.
   function render() {
-    const restoreFocus =
-      document.activeElement === cancel && phase !== "progress";
+    const restoreFocus = document.activeElement === cancel && phase !== "progress";
     const sending = phase === "progress";
     action.dataset.state = phase;
     action.disabled = sending;
@@ -24,8 +23,7 @@ export function morphAction(root, scope) {
       : phase === "done"
         ? "완료 · 다시 보내기"
         : "파일 보내기";
-    if (restoreFocus && !root.closest("[hidden],[inert]"))
-      action.focus({ preventScroll: true });
+    if (restoreFocus && !root.closest("[hidden],[inert]")) action.focus({ preventScroll: true });
   }
   function reset(message) {
     scope.cancel(timer);
@@ -67,20 +65,14 @@ export function morphIsland(root, scope) {
   function expand(open) {
     const from = island.getBoundingClientRect().height;
     motion.cancel();
-    if (!open && detail.contains(document.activeElement))
-      toggle.focus({ preventScroll: true });
+    if (!open && detail.contains(document.activeElement)) toggle.focus({ preventScroll: true });
     toggle.setAttribute("aria-expanded", String(open));
     detail.hidden = !open;
     island.classList.toggle("is-expanded", open);
-    motion.play(
-      island,
-      [{ height: `${from}px` }, { height: `${island.scrollHeight}px` }],
-      { duration: 350 },
-    );
-    announce(
-      root,
-      open ? "재생 컨트롤을 펼쳤습니다." : "작은 재생 상태로 돌아왔습니다.",
-    );
+    motion.play(island, [{ height: `${from}px` }, { height: `${island.scrollHeight}px` }], {
+      duration: 350,
+    });
+    announce(root, open ? "재생 컨트롤을 펼쳤습니다." : "작은 재생 상태로 돌아왔습니다.");
   }
   scope.on(toggle, "click", () => expand(detail.hidden));
   scope.on(root.querySelector("[data-collapse]"), "click", () => expand(false));
@@ -93,9 +85,7 @@ export function morphIsland(root, scope) {
   scope.on(play, "click", () => {
     playing = !playing;
     play.textContent = playing ? "일시 정지" : "재생";
-    root.querySelector("[data-play-state]").textContent = playing
-      ? "재생 중"
-      : "일시 정지";
+    root.querySelector("[data-play-state]").textContent = playing ? "재생 중" : "일시 정지";
     island.classList.toggle("is-playing", playing);
     announce(
       root,

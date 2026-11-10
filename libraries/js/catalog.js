@@ -10,5 +10,4 @@ export const libraries = collections.flatMap(({ id, items }) =>
 );
 export const libraryById = new Map(libraries.map((item) => [item.id, item]));
 
-if (libraryById.size !== libraries.length)
-  throw new Error("Duplicate library ID");
+if (libraryById.size !== libraries.length) throw new Error("Duplicate library ID");

@@ -1,13 +1,12 @@
-const heuristicSource =
-  "https://www.nngroup.com/articles/ten-usability-heuristics/";
-const principle = (
+const heuristicSource = "https://www.nngroup.com/articles/ten-usability-heuristics/";
+const principle = (id, title, term, desc, ids, reference = heuristicSource) => ({
   id,
   title,
   term,
   desc,
   ids,
-  reference = heuristicSource,
-) => ({ id, title, term, desc, ids, reference });
+  reference,
+});
 export default [
   {
     id: "heuristics",
@@ -68,23 +67,14 @@ export default [
         "유연성과 효율성",
         "Flexibility and Efficiency of Use",
         "숙련자는 빠른 경로를, 초보자는 명확한 조작을 사용할 수 있습니다.",
-        [
-          "interaction-command-palette",
-          "interaction-bulk-select",
-          "interaction-inline-edit",
-        ],
+        ["interaction-command-palette", "interaction-bulk-select", "interaction-inline-edit"],
       ),
       principle(
         "minimalism",
         "심미적이고 간결한 설계",
         "Aesthetic and Minimalist Design",
         "핵심 정보에 집중하고 부가 정보는 필요한 때 드러냅니다.",
-        [
-          "accordion",
-          "popover",
-          "motion-shared-element",
-          "layout-master-detail",
-        ],
+        ["accordion", "popover", "motion-shared-element", "layout-master-detail"],
       ),
       principle(
         "recovery",

@@ -67,6 +67,7 @@ AI가 `registrationTemplate`의 이름·설명·분류·태그·검색어·실�
 - `contrast --scenario ./contrast-scenario.json --json`: axe-core로 지정 영역의 글자 대비를 검사한다. `themes`별로 별도 브라우저를 열고 `openEach`로 지정한 버튼을 차례로 눌러 `scope`를 검사한다. 선택적으로 `afterEach`에 영역 내 버튼 선택자를 지정하면 버튼을 한 번 더 누른 상태도 검사한다. 확인 불가 항목은 `incomplete`에 기록한다. 기본은 차단하지 않으며 `--strict`는 위반 시 1, 검사 오류 또는 수동 확인 필요 시 2를 반환한다. CSS 선택자는 프로젝트가 소유하며 실제 클릭이 실행되므로 안전한 검사 환경을 사용한다.
 
 대비 시나리오는 기본적으로 브라우저의 색상 선호도를 설정한다. 프로젝트가 별도의 테마 선택 버튼을 쓰면 `themeControls`에 테마별 선택자를, 메뉴를 먼저 열어야 하면 `themeOpen`에 버튼 선택자를 지정한다. 실제 적용 여부를 확인하려면 `themeVerification`에 요소 선택자·속성·테마별 기대값을 지정한다. 미지정 시 `themeEvidence`는 `browser-preference`이며 앱의 실제 테마 적용을 보증하지 않는다. 예: `"themeVerification": { "selector": "html", "attribute": "data-theme", "values": { "light": "light", "dark": "dark" } }`.
+
 - `inventory --project /프로젝트/features --json`: TSX/JSX의 내보낸 컴포넌트 후보와 `*.ui-preview.tsx` 수집. 실제 컴포넌트·샘플 연결 판단은 AI가 수행한다.
 - `search --query "의도" --json`: 이미지를 만들지 않고 문서와 등록 자료 검색.
 - `context --id ID --json`: 문서·관련 원본 일부 조회.

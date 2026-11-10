@@ -13,10 +13,7 @@ export function readRoute(hash) {
   };
 }
 export function routeHref({ category, group, query, level, view }) {
-  const path = [category, group]
-    .filter(Boolean)
-    .map(encodeURIComponent)
-    .join("/");
+  const path = [category, group].filter(Boolean).map(encodeURIComponent).join("/");
   const params = new URLSearchParams();
   if (view === "purpose") params.set("view", view);
   if (query) params.set("q", query);

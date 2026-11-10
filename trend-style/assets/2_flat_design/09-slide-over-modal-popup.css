@@ -2,102 +2,109 @@
    SLIDE-OVER / MODAL POPUP
    ========================================================================== */
 .modal-backdrop {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: rgba(15, 23, 42, 0.6);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(15, 23, 42, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .modal-backdrop.active {
-    display: flex;
-    opacity: 1;
+  display: flex;
+  opacity: 1;
 }
 
 .modal-panel {
-    background-color: var(--bg-card);
-    border: var(--border-width) solid var(--border-color);
-    border-radius: var(--border-radius);
-    width: 100%;
-    max-width: 520px;
-    padding: 24px;
-    box-shadow: var(--box-shadow);
-    transform: translateY(20px);
-    transition: transform 0.3s ease;
+  background-color: var(--bg-card);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--border-radius);
+  width: 100%;
+  max-width: 520px;
+  padding: 24px;
+  box-shadow: var(--box-shadow);
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
 }
 
 .modal-backdrop.active .modal-panel {
-    transform: translateY(0);
+  transform: translateY(0);
 }
 
 .modal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    border-bottom: var(--border-width) solid var(--border-color);
-    padding-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border-bottom: var(--border-width) solid var(--border-color);
+  padding-bottom: 12px;
 }
 
 .modal-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text-primary);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
 }
 
 .form-group {
-    margin-bottom: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .form-label {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--text-secondary);
-    text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
 }
 
-.form-input, .form-select, .form-textarea {
-    width: 100%;
-    padding: 10px 12px;
-    background-color: var(--bg-body);
-    border: var(--border-width) solid var(--border-color);
-    border-radius: var(--button-radius);
-    font-size: 0.9rem;
-    color: var(--text-primary);
-    outline: none;
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  background-color: var(--bg-body);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--button-radius);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  outline: none;
 }
 
-.form-input:focus, .form-select:focus, .form-textarea:focus {
-    border-color: var(--color-primary);
-    background-color: var(--bg-card);
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--color-primary);
+  background-color: var(--bg-card);
 }
 
 .modal-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
 }
 
 .btn-secondary {
-    background-color: var(--bg-body);
-    color: var(--text-primary);
-    border: var(--border-width) solid var(--border-color);
-    padding: 8px 16px;
-    border-radius: var(--button-radius);
-    font-size: 0.85rem;
-    font-weight: 700;
-    cursor: pointer;
+  background-color: var(--bg-body);
+  color: var(--text-primary);
+  border: var(--border-width) solid var(--border-color);
+  padding: 8px 16px;
+  border-radius: var(--button-radius);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .btn-secondary:hover {
-    background-color: var(--bg-hover);
+  background-color: var(--bg-hover);
 }

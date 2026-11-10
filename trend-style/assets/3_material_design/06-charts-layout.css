@@ -1,114 +1,121 @@
 /* Charts Layout */
 .charts-row {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 24px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
 }
 
 .chart-card {
-    background-color: var(--md-sys-color-surface);
-    border: 1px solid var(--md-sys-color-outline-variant);
-    border-radius: var(--md-shape-radius);
-    padding: 24px;
-    box-shadow: var(--md-elevation-1);
-    display: flex;
-    flex-direction: column;
-    position: relative;
+  background-color: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-shape-radius);
+  padding: 24px;
+  box-shadow: var(--md-elevation-1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .chart-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .chart-title-area h3 {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--md-sys-color-on-surface);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--md-sys-color-on-surface);
 }
 
 .chart-title-area p {
-    font-size: 12px;
-    color: var(--md-sys-color-on-surface-variant);
+  font-size: 12px;
+  color: var(--md-sys-color-on-surface-variant);
 }
 
 /* Dynamic SVG Line & Bar Charts */
 .svg-container {
-    width: 100%;
-    height: 280px;
-    position: relative;
+  width: 100%;
+  height: 280px;
+  position: relative;
 }
 
 .svg-chart {
-    width: 100%;
-    height: 100%;
-    overflow: visible;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
 }
 
 .chart-path-revenue {
-    fill: none;
-    stroke: var(--md-sys-color-primary);
-    stroke-width: 3.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    transition: all 0.5s ease;
+  fill: none;
+  stroke: var(--md-sys-color-primary);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: all 0.5s ease;
 }
 
 .chart-path-users {
-    fill: none;
-    stroke: var(--md-sys-color-tertiary);
-    stroke-width: 2.5;
-    stroke-dasharray: 4 4;
-    stroke-linecap: round;
-    transition: all 0.5s ease;
+  fill: none;
+  stroke: var(--md-sys-color-tertiary);
+  stroke-width: 2.5;
+  stroke-dasharray: 4 4;
+  stroke-linecap: round;
+  transition: all 0.5s ease;
 }
 
 .chart-point {
-    fill: var(--md-sys-color-surface);
-    stroke: var(--md-sys-color-primary);
-    stroke-width: 3;
-    r: 5;
-    cursor: pointer;
-    transition: transform 0.2s ease, r 0.2s ease;
+  fill: var(--md-sys-color-surface);
+  stroke: var(--md-sys-color-primary);
+  stroke-width: 3;
+  r: 5;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    r 0.2s ease;
 }
 
 .chart-point:hover {
-    r: 8;
-    stroke-width: 4;
-    fill: var(--md-sys-color-primary-container);
+  r: 8;
+  stroke-width: 4;
+  fill: var(--md-sys-color-primary-container);
 }
 
 .chart-bar {
-    fill: var(--md-sys-color-primary-container);
-    rx: 6;
-    transition: height 0.5s ease, y 0.5s ease, fill 0.2s ease;
-    cursor: pointer;
+  fill: var(--md-sys-color-primary-container);
+  rx: 6;
+  transition:
+    height 0.5s ease,
+    y 0.5s ease,
+    fill 0.2s ease;
+  cursor: pointer;
 }
 
 .chart-bar:hover {
-    fill: var(--md-sys-color-primary);
+  fill: var(--md-sys-color-primary);
 }
 
 /* Chart Tooltip */
 .chart-tooltip {
-    position: absolute;
-    background: var(--md-sys-color-on-surface);
-    color: var(--md-sys-color-surface);
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: 600;
-    pointer-events: none;
-    opacity: 0;
-    transform: translate(-50%, -120%);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    box-shadow: var(--md-elevation-3);
-    white-space: nowrap;
-    z-index: 600;
+  position: absolute;
+  background: var(--md-sys-color-on-surface);
+  color: var(--md-sys-color-surface);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -120%);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  box-shadow: var(--md-elevation-3);
+  white-space: nowrap;
+  z-index: 600;
 }
 
 .chart-tooltip.visible {
-    opacity: 1;
+  opacity: 1;
 }

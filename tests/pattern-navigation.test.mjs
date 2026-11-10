@@ -16,15 +16,9 @@ test("Patterns starts at the top and exclusively opens categories and subtopics,
       await p.setViewportSize({ width, height: 1000 });
       await p.goto(base);
       assert.equal(await p.locator(".pattern-topic-card").count(), 6);
-      assert.equal(
-        await p.locator(".layer-tree [aria-expanded=true]").count(),
-        0,
-      );
+      assert.equal(await p.locator(".layer-tree [aria-expanded=true]").count(), 0);
       assert.equal(await p.locator(".component-card:visible").count(), 0);
-      assert.equal(
-        await p.locator("[data-i18n=nav_components]").textContent(),
-        "Patterns",
-      );
+      assert.equal(await p.locator("[data-i18n=nav_components]").textContent(), "Patterns");
       const components = p.locator("[data-target=components] .category-button"),
         layout = p.locator("[data-target=layout-navigation] .category-button");
       await components.click();
@@ -32,23 +26,12 @@ test("Patterns starts at the top and exclusively opens categories and subtopics,
       await layout.click();
       assert.equal(await components.getAttribute("aria-expanded"), "false");
       assert.equal(await layout.getAttribute("aria-expanded"), "true");
-      await p.waitForFunction(
-        () => document.getElementById("panel-tree-components").hidden,
-      );
-      assert.equal(
-        await p.locator(".layer-tree [aria-expanded=true]").count(),
-        1,
-      );
-      await p
-        .locator("[data-target=layout-navigation] [data-group=structure]")
-        .click();
-      await p
-        .locator("[data-sample-id=lnb-sidebar]")
-        .waitFor({ state: "visible" });
+      await p.waitForFunction(() => document.getElementById("panel-tree-components").hidden);
+      assert.equal(await p.locator(".layer-tree [aria-expanded=true]").count(), 1);
+      await p.locator("[data-target=layout-navigation] [data-group=structure]").click();
+      await p.locator("[data-sample-id=lnb-sidebar]").waitFor({ state: "visible" });
       assert.match(p.url(), /#\/layout-navigation\/structure/);
-      const structure = p.locator(
-          "#summary-content-layout-navigation-structure",
-        ),
+      const structure = p.locator("#summary-content-layout-navigation-structure"),
         content = p.locator("#summary-content-layout-navigation-content");
       await content.click();
       assert.equal(await structure.getAttribute("aria-expanded"), "false");
@@ -57,39 +40,27 @@ test("Patterns starts at the top and exclusively opens categories and subtopics,
       assert.equal(await structure.getAttribute("aria-expanded"), "true");
       await p.reload();
       assert.equal(await structure.getAttribute("aria-expanded"), "true");
-      assert.equal(
-        await p.locator(".layer-tree [aria-expanded=true]").count(),
-        1,
-      );
+      assert.equal(await p.locator(".layer-tree [aria-expanded=true]").count(), 1);
       await components.click();
       await layout.click();
       assert.equal(await structure.getAttribute("aria-expanded"), "true");
       await p.keyboard.press("Control+k");
       assert.equal(
-        await p
-          .locator("#search-input")
-          .evaluate((e) => e === document.activeElement),
+        await p.locator("#search-input").evaluate((e) => e === document.activeElement),
         true,
       );
       await p.locator("#search-input").fill("Accordion");
-      assert.equal(
-        await p.locator(".component-title").textContent(),
-        "접이식 영역",
-      );
+      assert.equal(await p.locator(".component-title").textContent(), "접이식 영역");
       await p.locator("#search-input").fill("화면 이동 ");
       assert.equal(await p.locator("#search-input").inputValue(), "화면 이동 ");
       await p.keyboard.press("Escape");
       assert.equal(await p.locator("#search-input").inputValue(), "");
       await p.locator("#summary-content-layout-navigation-structure").click();
       await p.waitForFunction(
-        () =>
-          document.getElementById("panel-content-layout-navigation-structure")
-            .hidden,
+        () => document.getElementById("panel-content-layout-navigation-structure").hidden,
       );
       assert.equal(
-        await p.evaluate(
-          () => document.documentElement.scrollWidth > innerWidth,
-        ),
+        await p.evaluate(() => document.documentElement.scrollWidth > innerWidth),
         false,
       );
     }
@@ -117,14 +88,9 @@ test("subtopic folds preserve sample state and reduced motion skips animations",
     assert.equal(await checkbox.isChecked(), false);
     await p.emulateMedia({ reducedMotion: "reduce" });
     await p.locator("[data-target=layout-navigation] .category-button").click();
+    assert.equal(await p.locator("#panel-tree-components").evaluate((e) => e.hidden), true);
     assert.equal(
-      await p.locator("#panel-tree-components").evaluate((e) => e.hidden),
-      true,
-    );
-    assert.equal(
-      await p
-        .locator("#panel-tree-layout-navigation")
-        .evaluate((e) => e.getAnimations().length),
+      await p.locator("#panel-tree-layout-navigation").evaluate((e) => e.getAnimations().length),
       0,
     );
   } finally {

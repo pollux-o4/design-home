@@ -6,15 +6,8 @@
   "summary": "실패에서 재시도로 이어지는 연결 복구 시나리오",
   "kind": "component",
   "category": "states-and-feedback",
-  "keywords": [
-    "오류와 재시도",
-    "error-retry",
-    "접근성",
-    "피드백"
-  ],
-  "useCases": [
-    "오류와 재시도"
-  ],
+  "keywords": ["오류와 재시도", "error-retry", "접근성", "피드백"],
+  "useCases": ["오류와 재시도"],
   "sourcePath": "ui-components/index.html",
   "sources": [
     "ui-components/js/components/states-and-feedback.js",
@@ -24,10 +17,7 @@
     "shared/css/interface.css"
   ],
   "previewPath": "/ui-components/index.html?view=specimen&component=error-retry",
-  "tags": [
-    "minimal",
-    "feedback"
-  ],
+  "tags": ["minimal", "feedback"],
   "viewport": {
     "width": 1024,
     "height": 900
@@ -36,12 +26,8 @@
     "selector": "[data-sample-id=\"error-retry\"]",
     "parts": {}
   },
-  "structure": [
-    "레이블·컨트롤·상태 피드백"
-  ],
-  "interactions": [
-    "재시도 중·실패·성공 상태"
-  ],
+  "structure": ["레이블·컨트롤·상태 피드백"],
+  "interactions": ["재시도 중·실패·성공 상태"],
   "constraints": [
     "공통 CSS와 samples/runtime.js를 함께 사용",
     "서버 연결 없이 브라우저에서 동작하는 샘플"

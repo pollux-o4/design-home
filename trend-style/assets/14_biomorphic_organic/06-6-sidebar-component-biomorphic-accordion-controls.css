@@ -39,15 +39,21 @@
 }
 
 @keyframes morphLogo {
-  0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
-  50% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-  100% { border-radius: 50% 50% 40% 60% / 30% 70% 50% 50%; }
+  0% {
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  }
+  50% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  100% {
+    border-radius: 50% 50% 40% 60% / 30% 70% 50% 50%;
+  }
 }
 
 .brand-logo-icon svg {
   width: 24px;
   height: 24px;
-  fill: #FFFFFF;
+  fill: #ffffff;
 }
 
 .brand-title {
@@ -128,20 +134,23 @@
   transform: rotate(90deg);
 }
 
-.nav-link:hover, .nav-item.active > .nav-link {
+.nav-link:hover,
+.nav-item.active > .nav-link {
   color: var(--text-main);
   background: rgba(0, 0, 0, 0.04);
   transform: translateX(4px);
 }
 
-[data-theme="biolum"] .nav-link:hover, [data-theme="forest"] .nav-link:hover, [data-theme="cyberbio"] .nav-link:hover {
+[data-theme="biolum"] .nav-link:hover,
+[data-theme="forest"] .nav-link:hover,
+[data-theme="cyberbio"] .nav-link:hover {
   background: rgba(255, 255, 255, 0.06);
 }
 
 .nav-item.active > .nav-link {
   background: var(--card-bg);
   color: var(--text-main);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   border: 1px solid var(--card-border);
 }
 
@@ -150,7 +159,9 @@
   list-style: none;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s var(--ease-smooth), opacity 0.3s var(--ease-smooth);
+  transition:
+    max-height 0.4s var(--ease-smooth),
+    opacity 0.3s var(--ease-smooth);
   opacity: 0;
   padding-left: 38px;
   display: flex;
@@ -178,7 +189,7 @@
 }
 
 .submenu-item a::before {
-  content: '';
+  content: "";
   position: absolute;
   left: -12px;
   top: 50%;
@@ -190,12 +201,14 @@
   transition: all 0.2s ease;
 }
 
-.submenu-item a:hover, .submenu-item a.active {
+.submenu-item a:hover,
+.submenu-item a.active {
   color: var(--text-main);
   font-weight: 700;
 }
 
-.submenu-item a:hover::before, .submenu-item a.active::before {
+.submenu-item a:hover::before,
+.submenu-item a.active::before {
   background: var(--accent-1);
   transform: translateY(-50%) scale(1.5);
 }
@@ -210,7 +223,9 @@
   gap: 16px;
 }
 
-[data-theme="biolum"] .sidebar-footer, [data-theme="forest"] .sidebar-footer, [data-theme="cyberbio"] .sidebar-footer {
+[data-theme="biolum"] .sidebar-footer,
+[data-theme="forest"] .sidebar-footer,
+[data-theme="cyberbio"] .sidebar-footer {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -224,7 +239,9 @@
   border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
-[data-theme="biolum"] .toggle-widget, [data-theme="forest"] .toggle-widget, [data-theme="cyberbio"] .toggle-widget {
+[data-theme="biolum"] .toggle-widget,
+[data-theme="forest"] .toggle-widget,
+[data-theme="cyberbio"] .toggle-widget {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
@@ -251,13 +268,13 @@
 }
 
 .switch-input::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 3px;
   left: 3px;
   width: 18px;
   height: 18px;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 50%;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s var(--ease-fluid);

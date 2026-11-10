@@ -1,36 +1,23 @@
 import { test, before, after } from "node:test";
 import assert from "node:assert/strict";
 import { mkdir } from "node:fs/promises";
-import {
-  chromium,
-  firefox,
-  webkit,
-} from "../design-compare/node_modules/playwright/index.mjs";
+import { chromium, firefox, webkit } from "../design-compare/node_modules/playwright/index.mjs";
 import { createStaticServer } from "./support/static-server.mjs";
 import { createHubServer } from "../design-compare/hub/server.js";
 
 let servers, bases;
 before(async () => {
-  servers = [
-    createStaticServer({ prefix: "/design-home/" }),
-    createHubServer(),
-  ];
+  servers = [createStaticServer({ prefix: "/design-home/" }), createHubServer()];
   await Promise.all(
-    servers.map(
-      (server) =>
-        new Promise((resolve) => server.listen(0, "127.0.0.1", resolve)),
-    ),
+    servers.map((server) => new Promise((resolve) => server.listen(0, "127.0.0.1", resolve))),
   );
   bases = servers.map(
-    (server, i) =>
-      `http://127.0.0.1:${server.address().port}/${i ? "" : "design-home/"}`,
+    (server, i) => `http://127.0.0.1:${server.address().port}/${i ? "" : "design-home/"}`,
   );
   await mkdir(".legacy-review/navigation", { recursive: true });
 });
 after(async () => {
-  await Promise.all(
-    servers.map((server) => new Promise((resolve) => server.close(resolve))),
-  );
+  await Promise.all(servers.map((server) => new Promise((resolve) => server.close(resolve))));
 });
 
 for (const [name, engine] of Object.entries({ chromium, firefox, webkit })) {
@@ -42,10 +29,7 @@ for (const [name, engine] of Object.entries({ chromium, firefox, webkit })) {
     const errors = [];
     page.on("pageerror", (error) => errors.push(error.message));
     page.on("response", (response) => {
-      if (
-        bases.some((base) => response.url().startsWith(base)) &&
-        response.status() >= 400
-      )
+      if (bases.some((base) => response.url().startsWith(base)) && response.status() >= 400)
         errors.push(`${response.status()} ${response.url()}`);
     });
     await page.route("https://**/*", (route) => route.abort());
@@ -70,19 +54,14 @@ for (const [name, engine] of Object.entries({ chromium, firefox, webkit })) {
           await page.locator("body > .skip-link").evaluate((node) => {
             const rect = node.getBoundingClientRect();
             return node.contains(
-              document.elementFromPoint(
-                rect.x + rect.width / 2,
-                rect.y + rect.height / 2,
-              ),
+              document.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2),
             );
           }),
           true,
         );
         assert.equal(await page.locator(".dh-nav-links > li").count(), 2);
         assert.equal(
-          await page
-            .getByRole("link", { name: "트렌드 스타일", exact: true })
-            .count(),
+          await page.getByRole("link", { name: "트렌드 스타일", exact: true }).count(),
           0,
         );
         await toggle.focus();
@@ -95,10 +74,7 @@ for (const [name, engine] of Object.entries({ chromium, firefox, webkit })) {
         );
         await page.keyboard.press("Escape");
         assert.equal(await panel.isVisible(), false);
-        assert.equal(
-          await toggle.evaluate((node) => node === document.activeElement),
-          true,
-        );
+        assert.equal(await toggle.evaluate((node) => node === document.activeElement), true);
         await page.keyboard.press("Space");
         for (let i = 0; i < 4; i++) await page.keyboard.press("Tab");
         assert.equal(
@@ -120,9 +96,7 @@ for (const [name, engine] of Object.entries({ chromium, firefox, webkit })) {
         assert.equal(await panel.isVisible(), false);
         await toggle.click();
         assert.equal(
-          await page
-            .getByRole("link", { name: "Trend Styles", exact: true })
-            .isVisible(),
+          await page.getByRole("link", { name: "Trend Styles", exact: true }).isVisible(),
           true,
         );
         await page.getByRole("link", { name: "Glossary", exact: true }).click();
@@ -142,19 +116,13 @@ for (const [name, engine] of Object.entries({ chromium, firefox, webkit })) {
         await page.getByRole("link", { name: "Patterns", exact: true }).click();
         await page.waitForURL("**/ui-components/index.html");
         await page.locator("#dh-study-toggle").click();
-        await page
-          .getByRole("link", { name: "Libraries", exact: true })
-          .click();
+        await page.getByRole("link", { name: "Libraries", exact: true }).click();
         await page.waitForURL("**/libraries/index.html");
         await page.locator("#dh-study-toggle").click();
-        await page
-          .getByRole("link", { name: "Trend Styles", exact: true })
-          .click();
+        await page.getByRole("link", { name: "Trend Styles", exact: true }).click();
         await page.waitForURL("**/trend-style/index.html");
         await page.locator("#dh-study-toggle").click();
-        await page
-          .getByRole("link", { name: "Design System Library", exact: true })
-          .click();
+        await page.getByRole("link", { name: "Design System Library", exact: true }).click();
         await page.waitForURL("**/design-library/**");
         await page.getByRole("link", { name: /프로젝트 화면/ }).click();
         await page.locator(".design-card").first().waitFor();
@@ -163,27 +131,19 @@ for (const [name, engine] of Object.entries({ chromium, firefox, webkit })) {
           "Design System Library",
         );
         const headers = await page.evaluate(() => ({
-          global: document
-            .querySelector("#dh-global-nav")
-            .getBoundingClientRect().bottom,
-          app: document.querySelector(".app-header").getBoundingClientRect()
-            .top,
+          global: document.querySelector("#dh-global-nav").getBoundingClientRect().bottom,
+          app: document.querySelector(".app-header").getBoundingClientRect().top,
         }));
         assert.ok(headers.app >= headers.global);
         await page.locator("#dh-study-toggle").click();
-        await page
-          .getByRole("link", { name: "Trend Styles", exact: true })
-          .click();
+        await page.getByRole("link", { name: "Trend Styles", exact: true }).click();
         await page.waitForURL("**/trend-style/index.html");
         await page.goBack();
         await page.locator(".design-card").first().waitFor();
         assert.equal(await page.locator("#dh-study-panel").isVisible(), false);
         await page.locator(".dh-brand").click();
         await page.waitForURL("**/index.html");
-        assert.equal(
-          await page.locator(".dh-brand").getAttribute("aria-current"),
-          "page",
-        );
+        assert.equal(await page.locator(".dh-brand").getAttribute("aria-current"), "page");
         await page.locator("#dh-lang-ko").click();
       }
       assert.deepEqual(errors, []);
@@ -255,9 +215,7 @@ for (const [name, engine] of Object.entries({ chromium, firefox, webkit })) {
             };
           });
           assert.ok(
-            bounds.left >= 0 &&
-              bounds.right <= bounds.width &&
-              bounds.bottom <= bounds.height,
+            bounds.left >= 0 && bounds.right <= bounds.width && bounds.bottom <= bounds.height,
             `${route}: ${JSON.stringify(bounds)}`,
           );
           assert.equal(bounds.targets, true);
@@ -265,18 +223,13 @@ for (const [name, engine] of Object.entries({ chromium, firefox, webkit })) {
             await panel.locator("a").last().focus();
             await page.waitForFunction(() => {
               const node = document.querySelector("#dh-study-panel");
-              const link = node
-                .querySelector("li:last-child a")
-                .getBoundingClientRect();
+              const link = node.querySelector("li:last-child a").getBoundingClientRect();
               const rect = node.getBoundingClientRect();
               return link.top >= rect.top - 1 && link.bottom <= rect.bottom + 1;
             });
           }
           assert.equal(bounds.clipped, false, `${route} overflow ${width}`);
-          if (
-            ["", "design-library/"].includes(route) &&
-            [390, 1440].includes(width)
-          ) {
+          if (["", "design-library/"].includes(route) && [390, 1440].includes(width)) {
             await page.screenshot({
               animations: "disabled",
               path: `.legacy-review/navigation/${name}-${route ? "workspace" : "home"}-${width}.png`,
@@ -314,7 +267,10 @@ test("theme preference follows the system and persists explicit choices", async 
     await page.goto(bases[0]);
     await page.locator("#dh-theme-toggle").waitFor();
     assert.equal(await page.locator("html").getAttribute("data-theme"), null);
-    assert.equal(await page.locator('[data-theme-choice="system"]').getAttribute('aria-pressed'), 'true');
+    assert.equal(
+      await page.locator('[data-theme-choice="system"]').getAttribute("aria-pressed"),
+      "true",
+    );
     assert.equal(
       await page.evaluate(() => getComputedStyle(document.body).backgroundColor),
       "rgb(22, 22, 24)",
@@ -323,12 +279,12 @@ test("theme preference follows the system and persists explicit choices", async 
     await page.locator("#dh-theme-toggle").click();
     await page.locator('[data-theme-choice="light"]').click();
     assert.equal(await page.locator("html").getAttribute("data-theme"), "light");
-    assert.equal(
-      await page.evaluate(() => localStorage.getItem("dh_theme")),
-      "light",
-    );
+    assert.equal(await page.evaluate(() => localStorage.getItem("dh_theme")), "light");
     await page.reload();
-    assert.equal(await page.locator('[data-theme-choice="light"]').getAttribute('aria-pressed'), 'true');
+    assert.equal(
+      await page.locator('[data-theme-choice="light"]').getAttribute("aria-pressed"),
+      "true",
+    );
 
     await page.locator("#dh-theme-toggle").click();
     await page.locator('[data-theme-choice="system"]').click();
@@ -341,7 +297,10 @@ test("theme preference follows the system and persists explicit choices", async 
     await page.keyboard.press("Enter");
     await page.keyboard.press("Escape");
     assert.equal(await page.locator("#dh-theme-panel").isVisible(), false);
-    assert.equal(await page.locator("#dh-theme-toggle").evaluate(node => node === document.activeElement), true);
+    assert.equal(
+      await page.locator("#dh-theme-toggle").evaluate((node) => node === document.activeElement),
+      true,
+    );
     await page.locator("#dh-theme-toggle").click();
     await page.locator('[data-theme-choice="dark"]').click();
     await page.emulateMedia({ colorScheme: "light" });
@@ -355,38 +314,56 @@ test("ux_001: cancelled document transitions settle without unhandled rejections
   const browser = await chromium.launch();
   const page = await browser.newPage();
   const errors = [];
-  page.on("pageerror", error => errors.push(error.message));
+  page.on("pageerror", (error) => errors.push(error.message));
   try {
     await page.goto(bases[0]);
     await page.evaluate(async () => {
       for (const type of ["pageswap", "pagereveal"]) {
         for (const name of ["AbortError", "InvalidStateError", "TimeoutError"]) {
           const event = new Event(type);
-          Object.defineProperty(event, "viewTransition", { value: {
-            ready: Promise.reject(new DOMException("navigation skipped", name)),
-            finished: Promise.reject(new DOMException("navigation skipped", name)),
-          } });
+          Object.defineProperty(event, "viewTransition", {
+            value: {
+              ready: Promise.reject(new DOMException("navigation skipped", name)),
+              finished: Promise.reject(new DOMException("navigation skipped", name)),
+            },
+          });
           window.dispatchEvent(event);
         }
       }
       const cancellation = new PromiseRejectionEvent("unhandledrejection", {
-        promise: Promise.resolve(), cancelable: true,
-        reason: new DOMException("Transition was aborted because of invalid state. ViewTransition opt-in disabled", "InvalidStateError"),
+        promise: Promise.resolve(),
+        cancelable: true,
+        reason: new DOMException(
+          "Transition was aborted because of invalid state. ViewTransition opt-in disabled",
+          "InvalidStateError",
+        ),
       });
       window.dispatchEvent(cancellation);
-      if (!cancellation.defaultPrevented) throw new Error("Expected navigation cancellation was not handled");
+      if (!cancellation.defaultPrevented)
+        throw new Error("Expected navigation cancellation was not handled");
       const unrelated = new PromiseRejectionEvent("unhandledrejection", {
-        promise: Promise.resolve(), cancelable: true,
+        promise: Promise.resolve(),
+        cancelable: true,
         reason: new DOMException("unrelated invalid state", "InvalidStateError"),
       });
       window.dispatchEvent(unrelated);
       if (unrelated.defaultPrevented) throw new Error("Unrelated errors must remain observable");
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
     });
     assert.deepEqual(errors, []);
-    assert.equal(await page.evaluate(() => [...document.styleSheets].some(sheet =>
-      [...sheet.cssRules].some(rule => rule.cssText.includes("@view-transition") && rule.cssText.includes("auto")))), true);
+    assert.equal(
+      await page.evaluate(() =>
+        [...document.styleSheets].some((sheet) =>
+          [...sheet.cssRules].some(
+            (rule) => rule.cssText.includes("@view-transition") && rule.cssText.includes("auto"),
+          ),
+        ),
+      ),
+      true,
+    );
     await page.getByRole("button", { name: "Design Study", exact: true }).click();
     assert.equal(await page.locator("#dh-study-panel").isVisible(), true);
-  } finally { await browser.close(); }
+  } finally {
+    await browser.close();
+  }
 });

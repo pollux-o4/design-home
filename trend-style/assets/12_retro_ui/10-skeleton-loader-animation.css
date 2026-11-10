@@ -9,6 +9,10 @@
   min-height: 20px;
 }
 @keyframes pixel-pulse {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }

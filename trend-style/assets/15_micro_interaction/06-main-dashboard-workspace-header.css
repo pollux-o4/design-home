@@ -101,7 +101,8 @@
   gap: 8px;
   transition: all 0.15s ease;
 }
-.dropdown-item:hover, .dropdown-item.active {
+.dropdown-item:hover,
+.dropdown-item.active {
   color: var(--text-primary);
   background: var(--primary-light);
 }
@@ -110,7 +111,9 @@
   background: var(--border-color);
   margin: 4px 0;
 }
-.text-danger { color: var(--accent-rose) !important; }
+.text-danger {
+  color: var(--accent-rose) !important;
+}
 
 /* Profile Switcher Trigger */
 .profile-trigger {
@@ -154,8 +157,15 @@
   flex-direction: column;
   text-align: left;
 }
-.user-name { font-size: 12px; font-weight: 700; color: var(--text-primary); }
-.user-role { font-size: 10px; color: var(--text-muted); }
+.user-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.user-role {
+  font-size: 10px;
+  color: var(--text-muted);
+}
 
 /* Liquid Morph Action Button (+ New Project) */
 .liquid-btn {

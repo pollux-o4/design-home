@@ -17,11 +17,7 @@ export function createLibraryCard(item, onCompare) {
   details.append(list);
   const outcomes = element("div", "library-outcomes");
   outcomes.append(
-    element(
-      "p",
-      "outcomes-label",
-      fields.find((field) => field.key === "capabilities").title,
-    ),
+    element("p", "outcomes-label", fields.find((field) => field.key === "capabilities").title),
     element("p", "outcomes-description", item.capabilities),
   );
   const links = element("div", "library-links");

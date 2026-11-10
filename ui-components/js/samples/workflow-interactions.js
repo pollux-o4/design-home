@@ -62,9 +62,7 @@ export function bulkSelect(root, scope) {
   });
   items.forEach((input) => scope.on(input, "change", update));
   scope.on(archive, "click", () => {
-    archived = items.filter(
-      (input) => input.checked && !input.closest("label").hidden,
-    );
+    archived = items.filter((input) => input.checked && !input.closest("label").hidden);
     archived.forEach((input) => {
       input.closest("label").hidden = true;
       input.checked = false;
@@ -152,8 +150,7 @@ export function commandPalette(root, scope) {
           ? event.key === "ArrowDown"
             ? 0
             : buttons.length - 1
-          : (current + (event.key === "ArrowDown" ? 1 : -1) + buttons.length) %
-            buttons.length;
+          : (current + (event.key === "ArrowDown" ? 1 : -1) + buttons.length) % buttons.length;
       buttons[selected].focus();
       highlight();
     }

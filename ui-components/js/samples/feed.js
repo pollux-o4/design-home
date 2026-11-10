@@ -34,9 +34,7 @@ export function feed(root, scope) {
     scope.cancel(pending);
     state = "idle";
     count = initialCount;
-    list.replaceChildren(
-      ...Array.from({ length: initialCount }, (_, i) => item(i + 1)),
-    );
+    list.replaceChildren(...Array.from({ length: initialCount }, (_, i) => item(i + 1)));
     list.scrollTop = 0;
     update();
   }

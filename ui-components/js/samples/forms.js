@@ -23,9 +23,7 @@ export function datetime(root, scope) {
   scope.on(input, "change", () =>
     announce(
       root,
-      input.value
-        ? `선택 일시: ${input.value.replace("T", " ")}`
-        : "일시를 선택하세요.",
+      input.value ? `선택 일시: ${input.value.replace("T", " ")}` : "일시를 선택하세요.",
     ),
   );
 }
@@ -41,9 +39,7 @@ export function upload(root, scope) {
     reset.hidden = !file;
     announce(
       root,
-      file
-        ? "파일 선택 완료. 이 데모는 서버로 전송하지 않습니다."
-        : "파일 선택이 취소되었습니다.",
+      file ? "파일 선택 완료. 이 데모는 서버로 전송하지 않습니다." : "파일 선택이 취소되었습니다.",
     );
   }
   scope.on(input, "change", () => show(input.files[0]));
@@ -102,9 +98,7 @@ export function searchable(root, scope) {
   scope.on(input, "input", () => {
     let count = 0;
     for (const item of items) {
-      item.hidden = !item.textContent
-        .toLowerCase()
-        .includes(input.value.trim().toLowerCase());
+      item.hidden = !item.textContent.toLowerCase().includes(input.value.trim().toLowerCase());
       if (!item.hidden) count++;
     }
     announce(root, count ? `${count}개의 결과` : "일치하는 결과가 없습니다.");

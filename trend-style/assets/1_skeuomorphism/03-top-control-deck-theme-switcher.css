@@ -19,7 +19,7 @@
 }
 
 .theme-label {
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 1.5px;
@@ -31,7 +31,7 @@
 }
 
 .theme-label::before {
-  content: '';
+  content: "";
   display: inline-block;
   width: 8px;
   height: 8px;
@@ -43,11 +43,11 @@
 .theme-select {
   background: var(--track-bg);
   color: var(--text-main);
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: var(--track-shadow);
   padding: 6px 12px;
   border-radius: 6px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 12px;
   font-weight: 600;
   outline: none;
@@ -57,7 +57,9 @@
 
 .theme-select:focus {
   border-color: var(--accent-primary);
-  box-shadow: var(--track-shadow), 0 0 8px var(--accent-primary);
+  box-shadow:
+    var(--track-shadow),
+    0 0 8px var(--accent-primary);
 }
 
 /* Screws Decorative Element */
@@ -66,17 +68,19 @@
   height: 10px;
   border-radius: 50%;
   background: var(--screw-head);
-  box-shadow: inset 1px 1px 1px rgba(255,255,255,0.8), 1px 1px 2px rgba(0,0,0,0.8);
+  box-shadow:
+    inset 1px 1px 1px rgba(255, 255, 255, 0.8),
+    1px 1px 2px rgba(0, 0, 0, 0.8);
   position: relative;
   display: inline-block;
 }
 .screw::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 4px;
   left: 2px;
   width: 6px;
   height: 2px;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0, 0, 0, 0.7);
   transform: rotate(45deg);
 }

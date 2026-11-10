@@ -2,60 +2,62 @@
    Fixed Version Switcher (Top-Right)
 ---------------------------------------------------- */
 .version-switcher {
-    position: fixed;
-    top: 18px;
-    right: 24px;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.5rem 0.75rem 0.5rem 1rem;
-    border-radius: 16px;
-    background: var(--surface-color);
-    box-shadow: var(--shadow-outset-lg);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  position: fixed;
+  top: 18px;
+  right: 24px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem 0.5rem 1rem;
+  border-radius: 16px;
+  background: var(--surface-color);
+  box-shadow: var(--shadow-outset-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .version-switcher label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--accent);
-    white-space: nowrap;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent);
+  white-space: nowrap;
 }
 
 .select-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .select-wrapper select {
-    background: var(--surface-color);
-    color: var(--text-main);
-    border: none;
-    padding: 0.45rem 2.2rem 0.45rem 0.9rem;
-    border-radius: 10px;
-    box-shadow: var(--shadow-inset-sm);
-    font-family: inherit;
-    font-size: 0.85rem;
-    font-weight: 600;
-    outline: none;
-    cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
+  background: var(--surface-color);
+  color: var(--text-main);
+  border: none;
+  padding: 0.45rem 2.2rem 0.45rem 0.9rem;
+  border-radius: 10px;
+  box-shadow: var(--shadow-inset-sm);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .select-wrapper select:focus {
-    box-shadow: var(--shadow-inset-sm), 0 0 0 2px var(--accent);
+  box-shadow:
+    var(--shadow-inset-sm),
+    0 0 0 2px var(--accent);
 }
 
 .select-arrow {
-    position: absolute;
-    right: 0.7rem;
-    pointer-events: none;
-    width: 14px;
-    height: 14px;
-    fill: var(--text-muted);
+  position: absolute;
+  right: 0.7rem;
+  pointer-events: none;
+  width: 14px;
+  height: 14px;
+  fill: var(--text-muted);
 }

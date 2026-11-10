@@ -5,17 +5,14 @@ import { kindLabel } from "./design-presentation.js";
 export function renderContext(design) {
   const detail = document.querySelector("#detail");
   detail.hidden = false;
-  document.querySelector("#detail-kind").textContent =
-    kindLabel(design.kind);
+  document.querySelector("#detail-kind").textContent = kindLabel(design.kind);
   document.querySelector("#title").textContent = design.title;
   document.querySelector("#summary").textContent = design.summary;
   const preview = document.querySelector("#preview");
   preview.onload = () => {
     if (!design.capture?.openSelector) return;
     try {
-      preview.contentDocument
-        ?.querySelector(design.capture.openSelector)
-        ?.click();
+      preview.contentDocument?.querySelector(design.capture.openSelector)?.click();
     } catch {
       /* External sample servers own their interaction state. */
     }
@@ -41,12 +38,7 @@ export function renderContext(design) {
   const context = document.querySelector("#context");
   context.replaceChildren();
   for (const [label, items] of [
-    [
-      "적합한 의도",
-      (design.tagDetails ?? []).map(
-        (tag) => `${tag.groupLabel} · ${tag.label}`,
-      ),
-    ],
+    ["적합한 의도", (design.tagDetails ?? []).map((tag) => `${tag.groupLabel} · ${tag.label}`)],
     ["화면 구조", design.structure],
     ["상호작용", design.interactions],
     ["적용 전 확인", design.constraints],
@@ -56,9 +48,7 @@ export function renderContext(design) {
     section.append(element("h3", label));
     const list = element("ul");
     for (const item of items ?? [])
-      list.append(
-        element("li", typeof item === "string" ? item : JSON.stringify(item)),
-      );
+      list.append(element("li", typeof item === "string" ? item : JSON.stringify(item)));
     section.append(list);
     context.append(section);
   }
@@ -68,14 +58,10 @@ export function renderContext(design) {
     const body = element("div");
     for (const block of design.documentation.split(/\n\s*\n/)) {
       const heading = /^(#{1,6}) (.+)$/.exec(block);
-      if (heading)
-        body.append(
-          element(`h${Math.min(heading[1].length + 1, 6)}`, heading[2]),
-        );
+      if (heading) body.append(element(`h${Math.min(heading[1].length + 1, 6)}`, heading[2]));
       else if (block.split("\n").every((line) => /^[-*] /.test(line))) {
         const list = element("ul");
-        for (const line of block.split("\n"))
-          list.append(element("li", line.slice(2)));
+        for (const line of block.split("\n")) list.append(element("li", line.slice(2)));
         body.append(list);
       } else body.append(element("p", block));
     }
@@ -83,20 +69,13 @@ export function renderContext(design) {
     context.append(section);
   }
   const sources = element("details");
-  sources.append(
-    element(
-      "summary",
-      `구현 원본 · ${(design.sourceFiles ?? []).length}개 파일`,
-    ),
-  );
-  for (const file of design.sourceFiles ?? [])
-    sources.append(element("p", file.path, "source"));
+  sources.append(element("summary", `구현 원본 · ${(design.sourceFiles ?? []).length}개 파일`));
+  for (const file of design.sourceFiles ?? []) sources.append(element("p", file.path, "source"));
   context.append(sources);
   document.querySelector("#command").textContent =
     design.kind === "work"
       ? `./design inspect --reference ${design.id} --json`
       : `./design context --id ${design.id} --json`;
-  document.querySelector("#download").href =
-    contextDownload(design.id, design.kind);
+  document.querySelector("#download").href = contextDownload(design.id, design.kind);
   document.querySelector("#download").download = `${design.id}.json`;
 }

@@ -1,19 +1,10 @@
 import { createOverview } from "./pattern-overview.js";
 import { createSampleGrid } from "./sample-card.js";
 
-export function createSearchView({
-  state,
-  catalog,
-  model,
-  navigate,
-  focusSearch,
-}) {
+export function createSearchView({ state, catalog, model, navigate, focusSearch }) {
   const element = document.createDocumentFragment();
   const topics = model.search(state.query, state.view);
-  const results = catalog.filter(
-    catalog.modules.flatMap(catalog.components),
-    state.query,
-  );
+  const results = catalog.filter(catalog.modules.flatMap(catalog.components), state.query);
   if (results.length) {
     const title = document.createElement("h2");
     title.className = "artboard-title";

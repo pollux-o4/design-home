@@ -1,9 +1,17 @@
 @keyframes content-arrive {
-  0% { opacity: 0.5; transform: translateY(6px); }
-  100% { opacity: 1; transform: translateY(0px); }
+  0% {
+    opacity: 0.5;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }
 
-
-#results, #detail, #guide-panel, #preview-panel {
+#results,
+#detail,
+#guide-panel,
+#preview-panel {
   animation: content-arrive 250ms var(--ui-ease);
 }

@@ -40,8 +40,7 @@ export function createScope(root) {
         }
       }
       cleanup.length = 0;
-      if (errors.length)
-        throw new AggregateError(errors, "Sample cleanup failed");
+      if (errors.length) throw new AggregateError(errors, "Sample cleanup failed");
     },
   };
 }

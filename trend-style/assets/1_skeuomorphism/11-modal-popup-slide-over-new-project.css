@@ -51,7 +51,7 @@
 }
 
 .modal-title {
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   font-size: 16px;
   font-weight: 700;
   color: var(--accent-primary);
@@ -95,18 +95,20 @@
 .form-input {
   background: var(--track-bg);
   box-shadow: var(--track-shadow);
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   padding: 10px 14px;
   color: var(--text-main);
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 13px;
   outline: none;
 }
 
 .form-input:focus {
   border-color: var(--accent-primary);
-  box-shadow: var(--track-shadow), 0 0 8px var(--accent-glow);
+  box-shadow:
+    var(--track-shadow),
+    0 0 8px var(--accent-glow);
 }
 
 /* Range Slider */
@@ -123,7 +125,7 @@
 }
 
 .slider-val-badge {
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Share Tech Mono", monospace;
   font-size: 13px;
   font-weight: 700;
   color: var(--accent-primary);

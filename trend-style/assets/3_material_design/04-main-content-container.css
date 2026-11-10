@@ -1,226 +1,226 @@
 /* Main Content Container */
 .main-wrapper {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  min-width: 0;
 }
 
 /* Header */
 .header {
-    height: 72px;
-    background-color: var(--md-sys-color-surface);
-    border-bottom: 1px solid var(--md-sys-color-outline-variant);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 32px;
-    gap: 24px;
+  height: 72px;
+  background-color: var(--md-sys-color-surface);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  gap: 24px;
 }
 
 .search-bar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background-color: var(--md-sys-color-surface-variant);
-    padding: 8px 16px;
-    border-radius: 50px;
-    width: 320px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--md-sys-color-surface-variant);
+  padding: 8px 16px;
+  border-radius: 50px;
+  width: 320px;
 }
 
 .search-bar svg {
-    width: 18px;
-    height: 18px;
-    fill: var(--md-sys-color-on-surface-variant);
+  width: 18px;
+  height: 18px;
+  fill: var(--md-sys-color-on-surface-variant);
 }
 
 .search-bar input {
-    border: none;
-    background: transparent;
-    outline: none;
-    color: var(--md-sys-color-on-surface);
-    font-size: 14px;
-    width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  color: var(--md-sys-color-on-surface);
+  font-size: 14px;
+  width: 100%;
 }
 
 .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-right: 170px; /* Leave space for version switcher */
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-right: 170px; /* Leave space for version switcher */
 }
 
 /* Dropdowns */
 .dropdown {
-    position: relative;
+  position: relative;
 }
 
 .dropdown-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background-color: var(--md-sys-color-surface-variant);
-    color: var(--md-sys-color-on-surface);
-    border: 1px solid var(--md-sys-color-outline-variant);
-    padding: 8px 14px;
-    border-radius: var(--md-shape-radius);
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--md-sys-color-surface-variant);
+  color: var(--md-sys-color-on-surface);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  padding: 8px 14px;
+  border-radius: var(--md-shape-radius);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .dropdown-menu {
-    position: absolute;
-    top: 110%;
-    right: 0;
-    background-color: var(--md-sys-color-surface);
-    border: 1px solid var(--md-sys-color-outline-variant);
-    border-radius: var(--md-shape-radius);
-    box-shadow: var(--md-elevation-3);
-    min-width: 180px;
-    padding: 6px;
-    display: none;
-    flex-direction: column;
-    gap: 2px;
-    z-index: 500;
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background-color: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-shape-radius);
+  box-shadow: var(--md-elevation-3);
+  min-width: 180px;
+  padding: 6px;
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 500;
 }
 
 .dropdown.open .dropdown-menu {
-    display: flex;
+  display: flex;
 }
 
 .dropdown-option {
-    padding: 10px 14px;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--md-sys-color-on-surface);
-    border-radius: calc(var(--md-shape-radius) - 6px);
-    cursor: pointer;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--md-sys-color-on-surface);
+  border-radius: calc(var(--md-shape-radius) - 6px);
+  cursor: pointer;
 }
 
 .dropdown-option:hover {
-    background-color: var(--md-sys-color-primary-container);
-    color: var(--md-sys-color-on-primary-container);
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
 }
 
 /* Profile Switcher */
 .profile-btn {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 4px 12px 4px 4px;
-    border-radius: 50px;
-    background-color: var(--md-sys-color-surface-variant);
-    border: 1px solid var(--md-sys-color-outline-variant);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 12px 4px 4px;
+  border-radius: 50px;
+  background-color: var(--md-sys-color-surface-variant);
+  border: 1px solid var(--md-sys-color-outline-variant);
 }
 
 .avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--md-sys-color-primary), var(--md-sys-color-tertiary));
-    color: white;
-    font-weight: 700;
-    font-size: 13px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--md-sys-color-primary), var(--md-sys-color-tertiary));
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .profile-info {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
 
 .profile-name {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--md-sys-color-on-surface);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--md-sys-color-on-surface);
 }
 
 .profile-role {
-    font-size: 10px;
-    color: var(--md-sys-color-on-surface-variant);
+  font-size: 10px;
+  color: var(--md-sys-color-on-surface-variant);
 }
 
 /* Dashboard Body */
 .content-container {
-    padding: 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }
 
 .top-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .page-title {
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--md-sys-color-on-surface);
-    letter-spacing: -0.5px;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--md-sys-color-on-surface);
+  letter-spacing: -0.5px;
 }
 
 .page-desc {
-    font-size: 13px;
-    color: var(--md-sys-color-on-surface-variant);
-    margin-top: 2px;
+  font-size: 13px;
+  color: var(--md-sys-color-on-surface-variant);
+  margin-top: 2px;
 }
 
 /* Material Segmented Data Tabs */
 .tabs-wrapper {
-    display: flex;
-    background-color: var(--md-sys-color-surface-variant);
-    padding: 4px;
-    border-radius: 50px;
-    gap: 4px;
+  display: flex;
+  background-color: var(--md-sys-color-surface-variant);
+  padding: 4px;
+  border-radius: 50px;
+  gap: 4px;
 }
 
 .tab-btn {
-    border: none;
-    background: transparent;
-    padding: 8px 20px;
-    border-radius: 50px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--md-sys-color-on-surface-variant);
-    cursor: pointer;
-    transition: all 0.2s ease;
+  border: none;
+  background: transparent;
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--md-sys-color-on-surface-variant);
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .tab-btn.active {
-    background-color: var(--md-sys-color-surface);
-    color: var(--md-sys-color-primary);
-    box-shadow: var(--md-elevation-1);
+  background-color: var(--md-sys-color-surface);
+  color: var(--md-sys-color-primary);
+  box-shadow: var(--md-elevation-1);
 }
 
 /* Action Primary Button */
 .btn-primary {
-    background-color: var(--md-sys-color-primary);
-    color: var(--md-sys-color-on-primary);
-    border: none;
-    padding: 10px 20px;
-    border-radius: 50px;
-    font-size: 14px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: var(--md-elevation-1);
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--md-elevation-1);
 }
 
 .btn-primary:hover {
-    box-shadow: var(--md-elevation-2);
-    transform: translateY(-1px);
+  box-shadow: var(--md-elevation-2);
+  transform: translateY(-1px);
 }
 
 .btn-primary svg {
-    width: 18px;
-    height: 18px;
-    fill: currentColor;
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
 }

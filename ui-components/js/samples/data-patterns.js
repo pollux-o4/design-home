@@ -18,12 +18,8 @@ export function dataSortTable(root, scope) {
           : Number(a.dataset[sortKey]) - Number(b.dataset[sortKey])),
     );
     body.append(...rows);
-    root
-      .querySelectorAll("thead th")
-      .forEach((header) => header.removeAttribute("aria-sort"));
-    button
-      .closest("th")
-      .setAttribute("aria-sort", direction === 1 ? "ascending" : "descending");
+    root.querySelectorAll("thead th").forEach((header) => header.removeAttribute("aria-sort"));
+    button.closest("th").setAttribute("aria-sort", direction === 1 ? "ascending" : "descending");
     announce(
       root,
       `${button.textContent.trim()} ${direction === 1 ? "오름차순" : "내림차순"} 정렬`,
@@ -37,22 +33,16 @@ export function dataTree(root, scope) {
     if (!button) return;
     root
       .querySelectorAll("[data-document]")
-      .forEach((item) =>
-        item.setAttribute("aria-pressed", String(item === button)),
-      );
-    root.querySelector("[data-detail-title]").textContent =
-      button.dataset.document;
-    root.querySelector("[data-detail-description]").textContent =
-      button.dataset.description;
+      .forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+    root.querySelector("[data-detail-title]").textContent = button.dataset.document;
+    root.querySelector("[data-detail-description]").textContent = button.dataset.description;
   });
 }
 
 export function dataFieldGroup(root, scope) {
   scope.on(root, "input", () => {
-    const name =
-      root.querySelector('[name="name"]').value.trim() || "이름 미입력";
-    const email =
-      root.querySelector('[name="email"]').value.trim() || "이메일 미입력";
+    const name = root.querySelector('[name="name"]').value.trim() || "이름 미입력";
+    const email = root.querySelector('[name="email"]').value.trim() || "이메일 미입력";
     root.querySelector("[data-preview]").textContent = `${name} · ${email}`;
   });
 }
@@ -82,9 +72,7 @@ export function dataCombobox(root, scope) {
   }
   function open() {
     visible = options.filter((option) =>
-      option.dataset.option
-        .toLowerCase()
-        .includes(input.value.toLowerCase().trim()),
+      option.dataset.option.toLowerCase().includes(input.value.toLowerCase().trim()),
     );
     options.forEach((option) => {
       option.hidden = !visible.includes(option);
@@ -102,9 +90,7 @@ export function dataCombobox(root, scope) {
   }
   function choose(option) {
     input.value = option.dataset.option;
-    options.forEach((item) =>
-      item.setAttribute("aria-selected", String(item === option)),
-    );
+    options.forEach((item) => item.setAttribute("aria-selected", String(item === option)));
     close();
     announce(root, `${input.value} 선택 완료`);
     input.focus();
@@ -128,8 +114,7 @@ export function dataCombobox(root, scope) {
             ? event.key === "ArrowDown"
               ? 0
               : visible.length - 1
-            : (active + (event.key === "ArrowDown" ? 1 : -1) + visible.length) %
-                visible.length,
+            : (active + (event.key === "ArrowDown" ? 1 : -1) + visible.length) % visible.length,
         );
     } else if (event.key === "Enter" && !list.hidden && active >= 0) {
       event.preventDefault();
@@ -180,16 +165,13 @@ export function dataFormStepper(root, scope) {
   scope.on(form, "submit", (event) => {
     event.preventDefault();
     const invalid = [...panels[current].querySelectorAll("input, select")].find(
-      (input) =>
-        !input.validity.valid || (input.name === "name" && !input.value.trim()),
+      (input) => !input.validity.valid || (input.name === "name" && !input.value.trim()),
     );
     if (invalid) {
       invalid.setAttribute("aria-invalid", "true");
       announce(
         root,
-        invalid.name === "email"
-          ? "올바른 이메일을 입력해주세요."
-          : "이름을 입력해주세요.",
+        invalid.name === "email" ? "올바른 이메일을 입력해주세요." : "이름을 입력해주세요.",
       );
       invalid.focus();
       return;

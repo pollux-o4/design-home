@@ -3,13 +3,16 @@
   "title": "기본 뷰 · 목록과 메모",
   "category": "basic",
   "description": "추가 · 제목 편집 · 메모 열기/저장 · 완료 · 삭제",
-  "sources": ["/home/pollux-o4/DevRoom/Silmari/frontend/design-study/features/planner/list/basic.ui-preview.tsx", "/home/pollux-o4/DevRoom/Silmari/frontend/design-study/features/planner/list/task-list.tsx"],
+  "sources": [
+    "/home/pollux-o4/DevRoom/Silmari/frontend/design-study/features/planner/list/basic.ui-preview.tsx",
+    "/home/pollux-o4/DevRoom/Silmari/frontend/design-study/features/planner/list/task-list.tsx"
+  ],
   "capture": {
     "url": "http://localhost:3000/dev-only/compos",
     "openSelector": "[data-preview-id=\"basic-list\"] .develop-thumbnail-button",
     "selector": ".develop-interactive-preview .develop-sample-content",
-    "parts": {"composer": ".lp-add"},
-    "viewport": {"width": 800, "height": 900},
+    "parts": { "composer": ".lp-add" },
+    "viewport": { "width": 800, "height": 900 },
     "theme": "light",
     "state": "default"
   }

@@ -2,9 +2,7 @@ import { announce } from "./lifecycle.js";
 function choices(root, scope, choose) {
   const buttons = [...root.querySelectorAll("[data-view]")];
   const select = (button) => {
-    buttons.forEach((item) =>
-      item.setAttribute("aria-pressed", String(item === button)),
-    );
+    buttons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
     choose(button.dataset.view, button.textContent);
   };
   buttons.forEach((button) => scope.on(button, "click", () => select(button)));
@@ -16,9 +14,7 @@ export function layoutGrid(root, scope) {
   buttons.forEach((button) =>
     scope.on(button, "click", () => {
       grid.dataset.columns = button.dataset.columns;
-      buttons.forEach((item) =>
-        item.setAttribute("aria-pressed", String(item === button)),
-      );
+      buttons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
       announce(root, `${button.dataset.columns}열로 배치했습니다.`);
     }),
   );
@@ -32,17 +28,14 @@ export function layoutStack(root, scope) {
     announce(root, `간격 ${gap.value}px`);
   });
   scope.on(align, "change", () => {
-    stack.style.alignItems =
-      align.value === "start" ? "flex-start" : align.value;
+    stack.style.alignItems = align.value === "start" ? "flex-start" : align.value;
     announce(root, `${align.selectedOptions[0].textContent} 정렬`);
   });
 }
 export function layoutSplit(root, scope) {
   const ratio = root.querySelector("[data-ratio]");
   scope.on(ratio, "input", () => {
-    root
-      .querySelector("[data-split]")
-      .style.setProperty("--lp-ratio", `${ratio.value}%`);
+    root.querySelector("[data-split]").style.setProperty("--lp-ratio", `${ratio.value}%`);
     root.querySelector("[data-ratio-label]").textContent = `${ratio.value}%`;
   });
 }
@@ -131,8 +124,7 @@ export function layoutDashboard(root, scope) {
     const total = values.reduce((sum, value) => sum + value, 0);
     const label = metric.selectedOptions[0].textContent;
     root.querySelector("[data-metric-label]").textContent = `총 ${label}`;
-    root.querySelector("[data-total]").textContent =
-      total.toLocaleString("ko-KR");
+    root.querySelector("[data-total]").textContent = total.toLocaleString("ko-KR");
     root.querySelector("[data-change]").textContent =
       `첫 구간 대비 마지막 구간 +${Math.round((values.at(-1) / values[0] - 1) * 100)}%`;
     root.querySelector("[data-period-start]").textContent = series.labels[0];
@@ -140,10 +132,7 @@ export function layoutDashboard(root, scope) {
     const bars = root.querySelector("[data-bars]");
     bars.replaceChildren();
     values.forEach((value, index) => {
-      const rect = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "rect",
-      );
+      const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
       const stride = 320 / values.length;
       const height = (value / Math.max(...values)) * 100;
       Object.entries({
@@ -177,20 +166,14 @@ export function layoutStickyPanel(root, scope) {
     saved = !saved;
     button.textContent = saved ? "저장 취소" : "계획 저장";
     button.setAttribute("aria-pressed", String(saved));
-    announce(
-      root,
-      saved ? "주말 계획을 저장했습니다." : "계획 저장을 취소했습니다.",
-    );
+    announce(root, saved ? "주말 계획을 저장했습니다." : "계획 저장을 취소했습니다.");
   });
   button.setAttribute("aria-pressed", "false");
 }
 export function layoutBottomNavigation(root, scope) {
   const screens = {
     today: ["오늘의 발견", "익숙한 하루에서 새로운 순간을 찾아보세요."],
-    collection: [
-      "좋아하는 모음",
-      "오래 간직하고 싶은 이야기들이 모여 있습니다.",
-    ],
+    collection: ["좋아하는 모음", "오래 간직하고 싶은 이야기들이 모여 있습니다."],
     profile: ["나의 작은 공간", "기록하고, 돌아보고, 다음 순간을 준비합니다."],
   };
   choices(root, scope, (key) => {

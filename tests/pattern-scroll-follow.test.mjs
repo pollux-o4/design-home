@@ -16,25 +16,18 @@ test("clicking the next content heading follows its position after the previous 
       await next.scrollIntoViewIfNeeded();
       await next.click();
       await page.waitForFunction(() => {
-        const target = document.querySelector(
-          "#summary-content-motion-loading",
-        );
+        const target = document.querySelector("#summary-content-motion-loading");
         const rect = target.getBoundingClientRect();
-        const nav = document
-          .querySelector("#dh-global-nav")
-          .getBoundingClientRect();
+        const nav = document.querySelector("#dh-global-nav").getBoundingClientRect();
         return (
           document.querySelector("#panel-content-motion-expressive").hidden &&
-            target.getAttribute("aria-expanded") === "true" &&
+          target.getAttribute("aria-expanded") === "true" &&
           rect.top >= nav.bottom &&
           rect.top < 250
         );
       });
       assert.ok(await next.evaluate((el) => document.activeElement === el));
-      assert.equal(
-        await page.locator("#panel-content-motion-expressive").isVisible(),
-        false,
-      );
+      assert.equal(await page.locator("#panel-content-motion-expressive").isVisible(), false);
       await page.emulateMedia({ reducedMotion: "reduce" });
       const earlier = page.locator("#summary-content-motion-transitions");
       await earlier.scrollIntoViewIfNeeded();
@@ -44,9 +37,8 @@ test("clicking the next content heading follows its position after the previous 
           .querySelector("#summary-content-motion-transitions")
           .getBoundingClientRect();
         return (
-          rect.top >=
-            document.querySelector("#dh-global-nav").getBoundingClientRect()
-              .bottom && rect.top < 250
+          rect.top >= document.querySelector("#dh-global-nav").getBoundingClientRect().bottom &&
+          rect.top < 250
         );
       });
       await page.close();

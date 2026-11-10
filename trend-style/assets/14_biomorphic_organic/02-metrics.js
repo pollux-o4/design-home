@@ -8,7 +8,7 @@ const datasets = {
     retention: 99.2,
     latency: 0.98,
     chart: [2100, 3400, 2800, 4500, 3900, 5200, 6100],
-    dates: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '23:59']
+    dates: ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "23:59"],
   },
   weekly: {
     revenue: 128450,
@@ -16,7 +16,7 @@ const datasets = {
     retention: 98.4,
     latency: 1.24,
     chart: [18400, 24500, 21000, 32000, 28900, 39500, 42890],
-    dates: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
+    dates: ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"],
   },
   monthly: {
     revenue: 542000,
@@ -24,36 +24,36 @@ const datasets = {
     retention: 97.8,
     latency: 1.45,
     chart: [85000, 112000, 145000, 168000, 195000, 240000, 310000],
-    dates: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL']
-  }
+    dates: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL"],
+  },
 };
 
-let currentMode = 'weekly';
+let currentMode = "weekly";
 
 function switchDataTab(mode, btnElement) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  btnElement.classList.add('active');
+  document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
+  btnElement.classList.add("active");
   currentMode = mode;
 
   triggerDataRefresh();
 }
 
 function triggerDataRefresh() {
-  const grid = id => document.getElementById(id);
+  const grid = (id) => document.getElementById(id);
 
   // Add Skeleton loader effect
-  document.querySelectorAll('.kpi-card').forEach(card => card.classList.add('skeleton'));
+  document.querySelectorAll(".kpi-card").forEach((card) => card.classList.add("skeleton"));
 
   setTimeout(() => {
-    document.querySelectorAll('.kpi-card').forEach(card => card.classList.remove('skeleton'));
+    document.querySelectorAll(".kpi-card").forEach((card) => card.classList.remove("skeleton"));
 
     const data = datasets[currentMode];
 
     // Count Up animations
-    animateCountUp('kpi-revenue', 0, data.revenue, '$');
-    animateCountUp('kpi-nodes', 0, data.nodes, '');
-    animateCountUp('kpi-retention', 0, data.retention, '', '%');
-    animateCountUp('kpi-latency', 0, data.latency, '', 's');
+    animateCountUp("kpi-revenue", 0, data.revenue, "$");
+    animateCountUp("kpi-nodes", 0, data.nodes, "");
+    animateCountUp("kpi-retention", 0, data.retention, "", "%");
+    animateCountUp("kpi-latency", 0, data.latency, "", "s");
 
     // Re-render chart
     renderLineChart();
@@ -63,12 +63,12 @@ function triggerDataRefresh() {
 /* ==========================================================================
    6. COUNT-UP ANIMATION UTILITY
    ========================================================================== */
-function animateCountUp(elementId, start, end, prefix = '', suffix = '', duration = 1000) {
+function animateCountUp(elementId, start, end, prefix = "", suffix = "", duration = 1000) {
   const el = document.getElementById(elementId);
   if (!el) return;
 
   const startTime = performance.now();
-  const isFloat = end.toString().includes('.');
+  const isFloat = end.toString().includes(".");
 
   function update(now) {
     const elapsed = now - startTime;

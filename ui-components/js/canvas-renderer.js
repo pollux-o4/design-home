@@ -50,9 +50,7 @@ export function createRenderer({
   function activate() {
     for (const sample of canvasGrid.querySelectorAll("[data-sample-id]")) {
       if (mounted.has(sample)) continue;
-      disposers.push(
-        mount(sample, catalog.find(sample.dataset.sampleId).behavior),
-      );
+      disposers.push(mount(sample, catalog.find(sample.dataset.sampleId).behavior));
       mounted.add(sample);
     }
   }
@@ -61,12 +59,7 @@ export function createRenderer({
     const nextKey = state.componentId
       ? `specimen/${state.componentId}`
       : state.query
-        ? JSON.stringify([
-            state.view,
-            state.category,
-            state.group,
-            state.query,
-          ])
+        ? JSON.stringify([state.view, state.category, state.group, state.query])
         : null;
     if (nextKey && nextKey === renderKey) return;
     if (
@@ -85,9 +78,7 @@ export function createRenderer({
       const definition = catalog.find(state.componentId);
       if (definition) canvasGrid.append(createSampleGrid([definition]));
     } else if (state.query) {
-      canvasGrid.append(
-        createSearchView({ state, catalog, model, navigate, focusSearch }),
-      );
+      canvasGrid.append(createSearchView({ state, catalog, model, navigate, focusSearch }));
     } else {
       const topic = model.find(state.category, state.view);
       if (topic) {
@@ -95,10 +86,7 @@ export function createRenderer({
         topicView = createTopicView(topic, navigate);
         canvasGrid.append(topicView.element);
         topicView.update(state);
-      } else
-        canvasGrid.append(
-          createOverview(model.topicsFor(state.view), state.view),
-        );
+      } else canvasGrid.append(createOverview(model.topicsFor(state.view), state.view));
     }
     activate();
   }

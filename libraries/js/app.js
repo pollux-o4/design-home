@@ -23,22 +23,16 @@ function toggleCompare(id) {
   const selected = state.compare.includes(id);
   if (!selected && state.compare.length === comparisonLimit) return;
   navigate({
-    compare: selected
-      ? state.compare.filter((value) => value !== id)
-      : [...state.compare, id],
+    compare: selected ? state.compare.filter((value) => value !== id) : [...state.compare, id],
   });
   $("#status").textContent =
     `${libraryById.get(id).name} ${selected ? "비교에서 제거했습니다." : "비교에 추가했습니다."} (${state.compare.length}/${comparisonLimit})`;
 }
 function update(initial = false) {
   state = readRoute();
-  if ($("#library-search").value !== state.query)
-    $("#library-search").value = state.query;
+  if ($("#library-search").value !== state.query) $("#library-search").value = state.query;
   $("#reset-search").hidden = !state.query;
-  const count = views.reduce(
-    (sum, view) => sum + view.update(state, initial),
-    0,
-  );
+  const count = views.reduce((sum, view) => sum + view.update(state, initial), 0);
   $("#empty").hidden = count > 0;
   $("#comparison").hidden = !state.compare.length;
   $("#show-comparison").hidden = !state.compare.length;
@@ -56,8 +50,7 @@ function update(initial = false) {
       state.compare.map((id) => libraryById.get(id)),
       toggleCompare,
     );
-    if (restoringFocus)
-      ($("#comparison-content button") ?? $("#library-search")).focus();
+    if (restoringFocus) ($("#comparison-content button") ?? $("#library-search")).focus();
     lastCompare = key;
   }
 }
@@ -67,9 +60,7 @@ $("#library-search").addEventListener("input", (event) =>
       query: event.target.value,
       category:
         libraries.find(
-          (item) =>
-            item.category === state.category &&
-            matches(item, event.target.value),
+          (item) => item.category === state.category && matches(item, event.target.value),
         )?.category ??
         libraries.find((item) => matches(item, event.target.value))?.category ??
         "",
@@ -88,16 +79,12 @@ $("#clear-comparison").addEventListener("click", () => {
 });
 window.addEventListener("hashchange", () => update());
 window.addEventListener("popstate", () => update());
-window.addEventListener("pagehide", () =>
-  views.forEach((view) => view.dispose()),
-);
+window.addEventListener("pagehide", () => views.forEach((view) => view.dispose()));
 update(true);
 
 $("#show-comparison").addEventListener("click", () => {
   $("#comparison").scrollIntoView({
-    behavior: matchMedia("(prefers-reduced-motion: reduce)").matches
-      ? "instant"
-      : "smooth",
+    behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
     block: "start",
   });
   $("#compare-title").tabIndex = -1;

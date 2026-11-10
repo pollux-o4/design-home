@@ -19,41 +19,27 @@ test("hub search → actual interactive preview → CLI source context; responsi
     await page.locator(".design-card").first().waitFor();
     await page.locator("#filters summary").click();
     assert.equal(
-      await page
-        .locator('.facet-section[aria-label="연관 태그"] .facet-row')
-        .count(),
+      await page.locator('.facet-section[aria-label="연관 태그"] .facet-row').count(),
       5,
     );
     assert.equal(
-      await page
-        .locator('.facet-row[data-group="density"] button[data-tag="minimal"]')
-        .count(),
+      await page.locator('.facet-row[data-group="density"] button[data-tag="minimal"]').count(),
       1,
     );
     assert.equal(
-      await page
-        .locator('.facet-row[data-group="mood"] button[data-tag="minimal"]')
-        .count(),
+      await page.locator('.facet-row[data-group="mood"] button[data-tag="minimal"]').count(),
       0,
     );
     const mood = page.locator(
       '.facet-section[aria-label="연관 태그"] .facet-row[data-group="mood"]',
     );
-    assert.equal(
-      await mood.locator(".facet-chips").first().locator("button").count(),
-      3,
-    );
+    assert.equal(await mood.locator(".facet-chips").first().locator("button").count(), 3);
     const extra = mood.locator(".disclosure-chips button").first();
-    assert.equal(
-      await mood.locator(".disclosure-panel").evaluate((node) => node.inert),
-      true,
-    );
+    assert.equal(await mood.locator(".disclosure-panel").evaluate((node) => node.inert), true);
     const disclosure = mood.locator(".disclosure-trigger");
     await disclosure.focus();
     const panel = mood.locator(".disclosure-panel");
-    const startHeight = await panel.evaluate(
-      (node) => node.getBoundingClientRect().height,
-    );
+    const startHeight = await panel.evaluate((node) => node.getBoundingClientRect().height);
     await page.keyboard.press("Enter");
     await page.waitForFunction(
       (start) =>
@@ -64,19 +50,11 @@ test("hub search → actual interactive preview → CLI source context; responsi
           .getBoundingClientRect().height > start,
       startHeight,
     );
-    const endHeight = await panel.evaluate(
-      (node) => node.getBoundingClientRect().height,
-    );
-    assert.ok(
-      endHeight > startHeight,
-      `height transition: ${startHeight}, ${endHeight}`,
-    );
+    const endHeight = await panel.evaluate((node) => node.getBoundingClientRect().height);
+    assert.ok(endHeight > startHeight, `height transition: ${startHeight}, ${endHeight}`);
     assert.equal(await extra.isVisible(), true);
     await page.keyboard.press("Enter");
-    assert.equal(
-      await mood.locator(".disclosure-panel").evaluate((node) => node.inert),
-      true,
-    );
+    assert.equal(await mood.locator(".disclosure-panel").evaluate((node) => node.inert), true);
     await page.emulateMedia({ reducedMotion: "reduce" });
     await disclosure.click();
     assert.equal(await extra.isVisible(), true);
@@ -95,10 +73,7 @@ test("hub search → actual interactive preview → CLI source context; responsi
     assert.equal(await page.locator(".design-card").count(), 1);
     await page.locator('#facets button[data-tag="minimal"]').click();
     await page.locator('.design-card[data-id="material-design"]').click();
-    await page
-      .locator("#title")
-      .filter({ hasText: "머티리얼 디자인" })
-      .waitFor();
+    await page.locator("#title").filter({ hasText: "머티리얼 디자인" }).waitFor();
     const command = await page.locator("#command").textContent();
     assert.equal(command, "./design context --id material-design --json");
     const frame = page.frameLocator("#preview");
@@ -106,24 +81,12 @@ test("hub search → actual interactive preview → CLI source context; responsi
     await frame.locator(".theme-btn").nth(1).click();
     assert.match(await frame.locator("body").getAttribute("data-theme"), /v2/);
     await page.getByRole("button", { name: "모바일", exact: true }).click();
-    assert.equal(
-      await page.locator("#preview").evaluate((node) => node.clientWidth),
-      390,
-    );
-    const response = await page.request.get(
-      `${base}/api/context?id=material-design`,
-    );
+    assert.equal(await page.locator("#preview").evaluate((node) => node.clientWidth), 390);
+    const response = await page.request.get(`${base}/api/context?id=material-design`);
     const context = await response.json();
     const cli = JSON.parse(
-      (
-        await run(process.execPath, [
-          "src/cli.js",
-          "context",
-          "--id",
-          "material-design",
-          "--json",
-        ])
-      ).stdout,
+      (await run(process.execPath, ["src/cli.js", "context", "--id", "material-design", "--json"]))
+        .stdout,
     );
     const { taskId, activity, ...cliContext } = cli;
     assert.ok(activity.id);
@@ -132,27 +95,20 @@ test("hub search → actual interactive preview → CLI source context; responsi
     assert.ok(cli.sourceFiles.some((file) => file.role === "interaction"));
     await page.setViewportSize({ width: 390, height: 844 });
     assert.equal(
-      await page.evaluate(
-        () => document.documentElement.scrollWidth <= innerWidth,
-      ),
+      await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
       true,
     );
     await page.getByRole("button", { name: "목록으로", exact: true }).click();
     await page.locator("#query").fill("우주선엔진");
     await page.locator("#search button[type=submit]").click();
-    await page
-      .getByText("일치하는 디자인이 없습니다.", { exact: false })
-      .waitFor();
+    await page.getByText("일치하는 디자인이 없습니다.", { exact: false }).waitFor();
     assert.equal(await page.locator("#detail").isVisible(), false);
     await page.locator("#query").fill("<img src=x onerror=alert(1)>");
     await page.locator("#search button[type=submit]").click();
     await page.waitForTimeout(100);
     assert.equal(await page.locator("#results img").count(), 0);
     assert.deepEqual(errors, []);
-    assert.equal(
-      (await page.request.get(`${base}/api/context?id=unknown`)).status(),
-      400,
-    );
+    assert.equal((await page.request.get(`${base}/api/context?id=unknown`)).status(), 400);
   } finally {
     await browser.close();
     await new Promise((resolve) => server.close(resolve));

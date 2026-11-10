@@ -17,9 +17,7 @@ export function carousel(root, scope) {
     root.querySelector("[data-slide-label]").textContent = slides[index].label;
     dots
       .querySelectorAll("button")
-      .forEach((button, i) =>
-        button.setAttribute("aria-pressed", String(i === index)),
-      );
+      .forEach((button, i) => button.setAttribute("aria-pressed", String(i === index)));
     announce(root, `${index + 1} / ${slides.length}`);
   }
   scope.on(root, "click", (event) => {
@@ -75,9 +73,7 @@ export function integrated(root, scope) {
   function chooseItem(button) {
     sub
       .querySelectorAll("button")
-      .forEach((item) =>
-        item.setAttribute("aria-pressed", String(item === button)),
-      );
+      .forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
     root.querySelector("[data-view-title]").textContent = button.textContent;
     root.querySelector("[data-view-desc]").textContent = current.desc;
   }
@@ -86,10 +82,7 @@ export function integrated(root, scope) {
     main
       .querySelectorAll("button")
       .forEach((button) =>
-        button.setAttribute(
-          "aria-pressed",
-          String(button.dataset.section === key),
-        ),
+        button.setAttribute("aria-pressed", String(button.dataset.section === key)),
       );
     sub.replaceChildren();
     current.items.forEach((label) => {

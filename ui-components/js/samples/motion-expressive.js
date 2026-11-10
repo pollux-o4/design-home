@@ -8,12 +8,7 @@ export function svgDraw(root, scope) {
     motion.play(path, [{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], {
       duration: 1200,
     });
-    announce(
-      root,
-      motion.reduced()
-        ? "심볼이 완성되었습니다."
-        : "선을 따라 심볼을 그립니다.",
-    );
+    announce(root, motion.reduced() ? "심볼이 완성되었습니다." : "선을 따라 심볼을 그립니다.");
   });
 }
 
@@ -38,16 +33,10 @@ export function metricCounter(root, scope) {
         motion.reduced() || document.hidden || root.closest("[hidden], [inert]")
           ? 1
           : Math.min(1, (now - start) / 1000);
-      value = Math.round(
-        from + (target - from) * (1 - Math.pow(1 - progress, 3)),
-      );
+      value = Math.round(from + (target - from) * (1 - Math.pow(1 - progress, 3)));
       metric.textContent = value.toLocaleString("ko-KR");
       if (progress < 1) frame = requestAnimationFrame(tick);
-      else
-        announce(
-          root,
-          `${target.toLocaleString("ko-KR")} 걸음으로 갱신되었습니다.`,
-        );
+      else announce(root, `${target.toLocaleString("ko-KR")} 걸음으로 갱신되었습니다.`);
     };
     tick(start);
   });
@@ -95,9 +84,7 @@ export function meshGradient(root, scope) {
     });
     announce(
       root,
-      alternate
-        ? "보랏빛 분위기로 전환되었습니다."
-        : "푸른빛 분위기로 전환되었습니다.",
+      alternate ? "보랏빛 분위기로 전환되었습니다." : "푸른빛 분위기로 전환되었습니다.",
     );
   });
 }
@@ -123,15 +110,12 @@ export function productOrbit(root, scope) {
     pause.textContent = "일시 정지";
     announce(
       root,
-      running
-        ? "궤도 모션을 재생합니다."
-        : "움직임 줄이기 설정으로 완성된 구성을 표시합니다.",
+      running ? "궤도 모션을 재생합니다." : "움직임 줄이기 설정으로 완성된 구성을 표시합니다.",
     );
-    await motion.play(
-      track,
-      [{ transform: "rotate(0)" }, { transform: "rotate(360deg)" }],
-      { duration: 4800, easing: "linear" },
-    );
+    await motion.play(track, [{ transform: "rotate(0)" }, { transform: "rotate(360deg)" }], {
+      duration: 4800,
+      easing: "linear",
+    });
     if (current !== generation) return;
     running = false;
     pause.disabled = true;
@@ -146,9 +130,7 @@ export function productOrbit(root, scope) {
   scope.on(pause, "click", () => {
     if (!running) return;
     paused = !paused;
-    track
-      .getAnimations()
-      .forEach((animation) => (paused ? animation.pause() : animation.play()));
+    track.getAnimations().forEach((animation) => (paused ? animation.pause() : animation.play()));
     pause.textContent = paused ? "계속 재생" : "일시 정지";
     announce(root, paused ? "일시 정지되었습니다." : "다시 재생합니다.");
   });

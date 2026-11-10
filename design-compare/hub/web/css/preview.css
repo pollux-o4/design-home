@@ -55,7 +55,8 @@ iframe.mobile {
 #preview {
   transition: width 300ms var(--ui-ease);
   border-radius: 10px;
-}@media (max-width: 760px) {
+}
+@media (max-width: 760px) {
   .preview-stage {
     height: 460px;
   }

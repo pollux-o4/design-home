@@ -48,14 +48,23 @@
   border: 1px solid var(--dark-shadow);
   font-weight: bold;
 }
-.badge-done { background: #00aa00; color: #fff; }
-.badge-progress { background: #ffaa00; color: #000; }
-.badge-pending { background: #888888; color: #fff; }
+.badge-done {
+  background: #00aa00;
+  color: #fff;
+}
+.badge-progress {
+  background: #ffaa00;
+  color: #000;
+}
+.badge-pending {
+  background: #888888;
+  color: #fff;
+}
 
 .terminal-box {
   background: #000000;
   color: #00ff00;
-  font-family: 'VT323', monospace;
+  font-family: "VT323", monospace;
   padding: 8px;
   height: 130px;
   overflow-y: auto;

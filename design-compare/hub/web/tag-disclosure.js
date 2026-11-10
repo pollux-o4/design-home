@@ -5,9 +5,7 @@ const PREVIEW_COUNT = 3;
 export function tagDisclosure(tags, group, createChip) {
   const content = element("div", null, "facet-content");
   const preview = element("div", null, "facet-chips");
-  tags
-    .slice(0, PREVIEW_COUNT)
-    .forEach((tag) => preview.append(createChip(tag)));
+  tags.slice(0, PREVIEW_COUNT).forEach((tag) => preview.append(createChip(tag)));
   content.append(preview);
   if (tags.length <= PREVIEW_COUNT) return content;
   const disclosure = element("div", null, "tag-disclosure");
@@ -27,13 +25,8 @@ export function tagDisclosure(tags, group, createChip) {
   panel.append(clip);
   function update(open) {
     disclosure.classList.toggle("is-open", open);
-    label.textContent = open
-      ? "접기"
-      : `더 보기 +${tags.length - PREVIEW_COUNT}`;
-    trigger.setAttribute(
-      "aria-label",
-      `${group.label} 태그 ${open ? "접기" : "더 보기"}`,
-    );
+    label.textContent = open ? "접기" : `더 보기 +${tags.length - PREVIEW_COUNT}`;
+    trigger.setAttribute("aria-label", `${group.label} 태그 ${open ? "접기" : "더 보기"}`);
     trigger.setAttribute("aria-expanded", String(open));
     panel.inert = !open;
     panel.setAttribute("aria-hidden", String(!open));

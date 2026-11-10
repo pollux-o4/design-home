@@ -1,143 +1,144 @@
 /* Dashboard Main Layout */
 .dashboard-body {
-    display: flex;
-    flex: 1;
+  display: flex;
+  flex: 1;
 }
 
 /* Sidebar Navigation */
 .sidebar {
-    width: 280px;
-    background: var(--bg-card);
-    border-right: var(--border-width) solid var(--border-color);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 20px 0;
-    flex-shrink: 0;
+  width: 280px;
+  background: var(--bg-card);
+  border-right: var(--border-width) solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 0;
+  flex-shrink: 0;
 }
 
 .sidebar-section-title {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 800;
-    color: var(--text-muted);
-    padding: 0 20px 8px 20px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text-muted);
+  padding: 0 20px 8px 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 /* Accordion Navigation */
 .nav-accordion {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .accordion-header {
-    padding: 12px 20px;
-    font-family: var(--font-head);
-    font-size: 14px;
-    font-weight: 800;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-    transition: background 0.1s ease;
+  padding: 12px 20px;
+  font-family: var(--font-head);
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 0.1s ease;
 }
 
 .accordion-header:hover {
-    background: var(--bg-main);
+  background: var(--bg-main);
 }
 
 .accordion-header.active {
-    background: var(--accent-primary);
-    color: var(--badge-text);
-    border-color: var(--border-color);
+  background: var(--accent-primary);
+  color: var(--badge-text);
+  border-color: var(--border-color);
 }
 
 .accordion-icon {
-    font-family: var(--font-mono);
-    font-weight: bold;
+  font-family: var(--font-mono);
+  font-weight: bold;
 }
 
 .accordion-content {
-    display: none;
-    flex-direction: column;
-    background: var(--bg-main);
-    border-top: 1px solid var(--border-color);
-    border-bottom: 1px solid var(--border-color);
+  display: none;
+  flex-direction: column;
+  background: var(--bg-main);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .accordion-content.show {
-    display: flex;
+  display: flex;
 }
 
 .sub-nav-item {
-    padding: 10px 20px 10px 36px;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--text-main);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border-bottom: 1px dashed var(--border-color);
+  padding: 10px 20px 10px 36px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-main);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px dashed var(--border-color);
 }
 
 .sub-nav-item:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
-.sub-nav-item:hover, .sub-nav-item.active {
-    background: var(--text-main);
-    color: var(--bg-card);
+.sub-nav-item:hover,
+.sub-nav-item.active {
+  background: var(--text-main);
+  color: var(--bg-card);
 }
 
 /* Toggle Switches */
 .sidebar-controls {
-    padding: 20px;
-    border-top: var(--border-width) solid var(--border-color);
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+  padding: 20px;
+  border-top: var(--border-width) solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .toggle-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .brutal-toggle {
-    width: 50px;
-    height: 26px;
-    background: var(--bg-main);
-    border: var(--border-width) solid var(--border-color);
-    position: relative;
-    cursor: pointer;
+  width: 50px;
+  height: 26px;
+  background: var(--bg-main);
+  border: var(--border-width) solid var(--border-color);
+  position: relative;
+  cursor: pointer;
 }
 
 .brutal-toggle-handle {
-    width: 18px;
-    height: 18px;
-    background: var(--text-main);
-    position: absolute;
-    top: 1px;
-    left: 1px;
-    transition: left 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  width: 18px;
+  height: 18px;
+  background: var(--text-main);
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  transition: left 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .brutal-toggle.on {
-    background: var(--accent-primary);
+  background: var(--accent-primary);
 }
 
 .brutal-toggle.on .brutal-toggle-handle {
-    left: 25px;
-    background: var(--badge-text);
+  left: 25px;
+  background: var(--badge-text);
 }

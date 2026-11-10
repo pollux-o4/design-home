@@ -20,8 +20,7 @@
   --ui-warning: #805500;
   --ui-warning-soft: #fff7e6;
   --ui-info-soft: #edf4ff;
-  --font-sans:
-    -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Segoe UI", sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Segoe UI", sans-serif;
   --font-mono: ui-monospace, monospace;
   --min-font-size: 12px;
   --font-size-xs: var(--min-font-size);

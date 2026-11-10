@@ -1,4 +1,8 @@
-import { contrastResult, inspectControlBaseline, summarizeControlAudit } from "../../../shared/js/design-system-audit.js";
+import {
+  contrastResult,
+  inspectControlBaseline,
+  summarizeControlAudit,
+} from "../../../shared/js/design-system-audit.js";
 
 const $ = (selector) => document.querySelector(selector);
 const targetLabels = { text: "일반 텍스트", large: "큰 텍스트", component: "UI 컴포넌트" };
