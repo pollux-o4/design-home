@@ -350,3 +350,43 @@ test("theme preference follows the system and persists explicit choices", async 
     await browser.close();
   }
 });
+
+test("ux_001: cancelled document transitions settle without unhandled rejections", async () => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+  const errors = [];
+  page.on("pageerror", error => errors.push(error.message));
+  try {
+    await page.goto(bases[0]);
+    await page.evaluate(async () => {
+      for (const type of ["pageswap", "pagereveal"]) {
+        for (const name of ["AbortError", "InvalidStateError", "TimeoutError"]) {
+          const event = new Event(type);
+          Object.defineProperty(event, "viewTransition", { value: {
+            ready: Promise.reject(new DOMException("navigation skipped", name)),
+            finished: Promise.reject(new DOMException("navigation skipped", name)),
+          } });
+          window.dispatchEvent(event);
+        }
+      }
+      const cancellation = new PromiseRejectionEvent("unhandledrejection", {
+        promise: Promise.resolve(), cancelable: true,
+        reason: new DOMException("Transition was aborted because of invalid state. ViewTransition opt-in disabled", "InvalidStateError"),
+      });
+      window.dispatchEvent(cancellation);
+      if (!cancellation.defaultPrevented) throw new Error("Expected navigation cancellation was not handled");
+      const unrelated = new PromiseRejectionEvent("unhandledrejection", {
+        promise: Promise.resolve(), cancelable: true,
+        reason: new DOMException("unrelated invalid state", "InvalidStateError"),
+      });
+      window.dispatchEvent(unrelated);
+      if (unrelated.defaultPrevented) throw new Error("Unrelated errors must remain observable");
+      await new Promise(resolve => setTimeout(resolve, 0));
+    });
+    assert.deepEqual(errors, []);
+    assert.equal(await page.evaluate(() => [...document.styleSheets].some(sheet =>
+      [...sheet.cssRules].some(rule => rule.cssText.includes("@view-transition") && rule.cssText.includes("auto")))), true);
+    await page.getByRole("button", { name: "Design Study", exact: true }).click();
+    assert.equal(await page.locator("#dh-study-panel").isVisible(), true);
+  } finally { await browser.close(); }
+});

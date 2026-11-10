@@ -75,3 +75,5 @@ Patterns의 종류별 분류는 `pattern-topics/*`, UX 관점의 원칙 분류�
 ## ARCH-001 · 모듈 계약
 
 용어집 app은 경로·상태·수명주기를 조립하고 list-view는 목록과 표를 표시한다. motion-definitions는 프레임·기본 용어, motion-patterns는 기존 샘플 연결, motion-demos는 조립을 소유한다. MOD-001 · UX-001로 경계와 행동 보존을 검증한다.
+
+공통 page-transitions는 첫 렌더링 전 문서 전환의 취소를 관찰한다. Chromium이 전환 객체 없이 내는 특정 opt-in 취소만 복구하고 다른 오류는 유지한다. 화면 효과는 interface CSS가 계속 소유한다.
