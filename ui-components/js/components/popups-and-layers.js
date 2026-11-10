@@ -1,5 +1,5 @@
 (function () {
-  const { define: d, icon: i, register } = CanvasSamples;
+  const { define: d, icon: i, register } = window.CanvasSamples;
   const close = `<button type="submit" value="cancel" formnovalidate class="ui-btn ui-btn-secondary">취소</button>`;
   register(
     "popups-and-layers",
@@ -58,8 +58,7 @@
           }),
           d({
             id: "snackbar",
-            reference:
-              "https://developer.apple.com/design/human-interface-guidelines/feedback",
+            reference: "https://developer.apple.com/design/human-interface-guidelines/feedback",
             title: "실행 취소 알림",
             term: "Snackbar / Undo",
             desc: "삭제된 항목을 실제로 복원합니다.",
@@ -68,8 +67,7 @@
           }),
           d({
             id: "drawer",
-            reference:
-              "https://developer.apple.com/design/human-interface-guidelines/sheets",
+            reference: "https://developer.apple.com/design/human-interface-guidelines/sheets",
             title: "드로어와 바텀 시트",
             term: "Drawer / Bottom Sheet",
             desc: "데스크톱에서는 우측, 모바일에서는 하단에서 설정을 엽니다.",
@@ -78,8 +76,7 @@
           }),
           d({
             id: "popover",
-            reference:
-              "https://developer.mozilla.org/en-US/docs/Web/API/Popover_API",
+            reference: "https://developer.mozilla.org/en-US/docs/Web/API/Popover_API",
             title: "팝오버",
             term: "Popover",
             desc: "바깥 클릭과 Escape로 닫히는 부가 정보.",

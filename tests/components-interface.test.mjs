@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { chromium } from "../design-compare/node_modules/playwright/index.mjs";
+import { chromium } from "playwright";
 import { createStaticServer } from "./support/static-server.mjs";
 
 test("component browsing, full sample bounds, search recovery and official references", async () => {

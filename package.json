@@ -1,0 +1,36 @@
+{
+  "name": "design-home",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.18.0",
+  "engines": {
+    "node": ">=24.21.0 <25"
+  },
+  "scripts": {
+    "setup": "pnpm install --frozen-lockfile && lefthook install",
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "hub": "pnpm --filter @design-home/compare hub",
+    "test": "pnpm build && pnpm --filter @design-home/compare test",
+    "test:unit": "node scripts/quality/test-unit.mjs",
+    "test:build": "pnpm build && node --test tests/build*.test.mjs",
+    "lint": "biome lint .",
+    "format:check": "biome format .",
+    "format": "biome format --write .",
+    "knip": "knip",
+    "check": "pnpm lint && pnpm format:check && pnpm knip && pnpm check:cycles && pnpm test:unit",
+    "secrets": "node scripts/security/secrets.mjs full",
+    "secrets:staged": "node scripts/security/secrets.mjs staged",
+    "secrets:push": "node scripts/security/secrets.mjs push",
+    "check:cycles": "knip --cycles"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.6",
+    "knip": "6.44.2",
+    "lefthook": "2.2.2",
+    "playwright": "1.64.0",
+    "vite": "8.3.7",
+    "axe-core": "4.14.0"
+  }
+}

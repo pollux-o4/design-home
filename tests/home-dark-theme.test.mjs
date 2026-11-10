@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { chromium } from "../design-compare/node_modules/playwright/index.mjs";
+import { chromium } from "playwright";
 import { createStaticServer } from "./support/static-server.mjs";
 
 test("home learning cards use dark surfaces when the system is dark", async () => {
@@ -32,15 +32,12 @@ test("home learning cards use dark surfaces when the system is dark", async () =
 });
 
 test("core dark-mode entry screens have no color contrast violations", async () => {
+  const axe = await readFile(new URL(import.meta.resolve("axe-core/axe.min.js")), "utf8");
   const server = createStaticServer();
   await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
   const browser = await chromium.launch();
   const context = await browser.newContext({ colorScheme: "dark" });
   const page = await context.newPage();
-  const axe = await readFile(
-    new URL("../design-compare/node_modules/axe-core/axe.min.js", import.meta.url),
-    "utf8",
-  );
   try {
     await page.emulateMedia({ colorScheme: "light" });
     await page.goto(`http://127.0.0.1:${server.address().port}/index.html`);

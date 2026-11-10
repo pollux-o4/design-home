@@ -1,7 +1,7 @@
 import { test, before, after } from "node:test";
 import assert from "node:assert/strict";
 import { mkdir } from "node:fs/promises";
-import { chromium, firefox, webkit } from "../design-compare/node_modules/playwright/index.mjs";
+import { chromium, firefox, webkit } from "playwright";
 import { createStaticServer } from "./support/static-server.mjs";
 import { createHubServer } from "../design-compare/hub/server.js";
 

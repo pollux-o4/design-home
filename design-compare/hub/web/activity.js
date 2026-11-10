@@ -26,7 +26,7 @@ const states = {
   inconclusive: "판정 보류",
   accepted: "즉시 전환 확인",
 };
-export const activityTitle = (entry) =>
+const activityTitle = (entry) =>
   `${labels[entry.command] ?? entry.command} · ${states[entry.output.status] ?? entry.output.status}`;
 function fileUrl(entry, name) {
   return `/api/activity/${entry.id}/files/${encodeURIComponent(name)}`;

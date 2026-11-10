@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { chromium } from "../design-compare/node_modules/playwright/index.mjs";
+import { chromium } from "playwright";
 import { createStaticServer } from "./support/static-server.mjs";
 import { readRoute, routeHref } from "../glossary/js/route.js";
 import { mkdir } from "node:fs/promises";

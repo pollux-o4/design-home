@@ -25,9 +25,7 @@ function table(items, context) {
     name.append(title, english);
     const definition = context.el("td", "term-definition", entry.desc);
     const preview = context.el("td", "term-preview");
-    const trigger = context.button("", "try-button", () =>
-      context.onExpand(entry, row, trigger),
-    );
+    const trigger = context.button("", "try-button", () => context.onExpand(entry, row, trigger));
     trigger.dataset.expand = entry.id;
     trigger.setAttribute("aria-label", `${entry.title} 예시 체험`);
     trigger.setAttribute("aria-expanded", "false");
@@ -47,13 +45,10 @@ function table(items, context) {
   return table;
 }
 export function renderGlossaryList(context) {
-  const { state, entries, categories, search, container, status, el, button, link } = context;
+  const { state, entries, categories, search, container, status, el, button } = context;
   const query = state.query.trim().toLocaleLowerCase();
   const filtered = entries.filter((entry) =>
-    [entry.title, entry.term, entry.desc]
-      .join(" ")
-      .toLocaleLowerCase()
-      .includes(query),
+    [entry.title, entry.term, entry.desc].join(" ").toLocaleLowerCase().includes(query),
   );
   search.value = state.query;
   document.querySelector("#clear-search").hidden = !state.query;

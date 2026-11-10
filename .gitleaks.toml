@@ -1,0 +1,14 @@
+title = "Design Home secret scanning"
+
+[extend]
+useDefault = true
+
+# Detect high-entropy credentials assigned to password-like settings without
+# treating ordinary UI labels or low-entropy sample values as secrets.
+[[rules]]
+id = "password-assignment"
+description = "High-entropy password assigned in source"
+regex = '''(?i)(?:password|passwd|pwd)\s*[:=]\s*["']?([A-Za-z0-9_!@#$%^&*+./=-]{12,})'''
+secretGroup = 1
+entropy = 3.5
+keywords = ["password", "passwd", "pwd"]

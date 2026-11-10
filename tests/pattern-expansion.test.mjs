@@ -1,6 +1,6 @@
 import { test, before, after } from "node:test";
 import assert from "node:assert/strict";
-import { chromium } from "../design-compare/node_modules/playwright/index.mjs";
+import { chromium } from "playwright";
 import { createStaticServer } from "./support/static-server.mjs";
 import { topics } from "../ui-components/js/pattern-taxonomy.js";
 let browser, server, base;

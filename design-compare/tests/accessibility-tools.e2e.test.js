@@ -73,10 +73,7 @@ test("Design System Library exposes contrast and native-UI consistency checks wi
     );
 
     await page.addScriptTag({
-      content: await readFile(
-        new URL("../node_modules/axe-core/axe.min.js", import.meta.url),
-        "utf8",
-      ),
+      content: await readFile(new URL(import.meta.resolve("axe-core/axe.min.js")), "utf8"),
     });
     const violations = await page.evaluate(async () =>
       (await axe.run("#accessibility-section")).violations.map(({ id }) => id),

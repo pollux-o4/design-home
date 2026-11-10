@@ -1,5 +1,5 @@
 (function () {
-  const { define, register } = CanvasSamples;
+  const { define, register } = window.CanvasSamples;
   const status = '<p class="sample-status" data-status role="status"></p>';
   const action = (label = "다시 재생") =>
     `<button class="ui-btn" data-motion-play>${label}</button>`;
@@ -41,8 +41,7 @@
             term: "Staggered Typography Reveal",
             desc: "단어마다 약간의 간격을 두어 시선의 리듬을 만듭니다.",
             behavior: "textReveal",
-            reference:
-              "https://developer.mozilla.org/en-US/docs/Web/API/Element/animate",
+            reference: "https://developer.mozilla.org/en-US/docs/Web/API/Element/animate",
             html: `<div class="motion-stage expressive-stage expressive-type"><p><span class="expressive-reader" lang="en">Make room for wonder.</span><span aria-hidden="true" data-word>Make room</span><span aria-hidden="true" data-word>for <em>wonder.</em></span></p><span class="expressive-caption">작은 여백, 새로운 가능성.</span></div>${action()}${status}`,
           }),
           define({
@@ -52,8 +51,7 @@
             term: "Animated Mesh Gradient",
             desc: "빛의 위치와 혼합을 바꿔 장면의 분위기를 전환합니다.",
             behavior: "meshGradient",
-            reference:
-              "https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/radial-gradient",
+            reference: "https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/radial-gradient",
             html: `<div class="motion-stage expressive-stage expressive-mesh" data-mesh><span class="mesh-light mesh-light-a" data-light></span><span class="mesh-light mesh-light-b" data-light></span><span class="mesh-light mesh-light-c" data-light></span><div class="mesh-copy"><span>COLOR STUDY</span><strong>빛을 담은<br>새로운 순간.</strong></div></div><button class="ui-btn" data-motion-play aria-pressed="false">분위기 전환</button>${status}`,
           }),
           define({
@@ -63,8 +61,7 @@
             term: "Orbital Product Composition",
             desc: "중심 제품 주위의 요소가 깊이와 공간감을 만듭니다.",
             behavior: "productOrbit",
-            reference:
-              "https://developer.mozilla.org/en-US/docs/Web/API/Animation/pause",
+            reference: "https://developer.mozilla.org/en-US/docs/Web/API/Animation/pause",
             html: `<div class="motion-stage expressive-stage expressive-orbit"><div class="orbit-track" data-orbit><span class="orbit-satellite orbit-satellite-a"></span><span class="orbit-satellite orbit-satellite-b"></span><span class="orbit-satellite orbit-satellite-c"></span></div><div class="orbit-product"><span>O</span><small>STUDIO</small></div><span class="expressive-caption">Designed to move you.</span></div><div class="sample-row">${action("궤도 재생")}<button class="ui-btn" data-motion-pause disabled>일시 정지</button></div>${status}`,
           }),
           define({
@@ -74,8 +71,7 @@
             term: "Success Burst / Confetti",
             desc: "작업 완료를 한 번의 짧은 축하 효과로 강조합니다.",
             behavior: "successBurst",
-            reference:
-              "https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API",
+            reference: "https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API",
             html: `<div class="motion-stage expressive-stage expressive-success"><svg class="success-particles" viewBox="0 0 240 180" aria-hidden="true">${Array.from({ length: 12 }, (_, index) => `<rect data-particle x="117" y="87" width="6" height="6" rx="2" class="particle-${index % 3}"/>`).join("")}</svg><div class="success-seal" data-seal><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M11 20 L17 26 L29 13"/></svg></div><strong data-success-label>마지막 한 단계.</strong></div>${action("작업 완료하기")}${status}`,
           }),
         ],

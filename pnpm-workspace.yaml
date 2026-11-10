@@ -1,0 +1,16 @@
+packages:
+  - design-compare
+
+# Build scripts are reviewed explicitly; current tools ship prebuilt binaries.
+allowBuilds:
+  lefthook: false
+
+# Explicitly reviewed fixed versions needed for the initial Vite toolchain.
+minimumReleaseAge: 1440
+minimumReleaseAgeStrict: true
+minimumReleaseAgeExclude:
+  - rolldown@1.2.18
+  - vite@8.3.7
+
+# Dependency installation is explicit (frozen lockfile in setup/CI), never a script side effect.
+verifyDepsBeforeRun: false

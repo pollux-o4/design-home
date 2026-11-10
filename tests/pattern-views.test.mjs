@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import principles from "../ui-components/js/pattern-principles.js";
 import { topics } from "../ui-components/js/pattern-taxonomy.js";
 import { readRoute, routeHref } from "../ui-components/js/pattern-route.js";
-import { chromium } from "../design-compare/node_modules/playwright/index.mjs";
+import { chromium } from "playwright";
 import { createStaticServer } from "./support/static-server.mjs";
 test("UX principles refer to existing samples without duplicates within a category", () => {
   const originals = new Set(topics.flatMap((topic) => topic.groups.flatMap((group) => group.ids)));

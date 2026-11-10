@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { createStaticServer } from "./support/static-server.mjs";
 import { readdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-import { chromium } from "../design-compare/node_modules/playwright/index.mjs";
+import { chromium } from "playwright";
 const root = fileURLToPath(new URL("../", import.meta.url));
 let browser, server, base;
 before(async () => {

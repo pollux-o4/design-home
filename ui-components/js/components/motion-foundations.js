@@ -1,10 +1,8 @@
 (function () {
-  const { define: d, register } = CanvasSamples;
-  const reference =
-    "https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API";
+  const { define: d, register } = window.CanvasSamples;
+  const reference = "https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API";
   const status = '<p class="sample-status" data-status role="status"></p>';
-  const replay =
-    '<button class="ui-btn ui-btn-primary" data-replay>다시 재생</button>';
+  const replay = '<button class="ui-btn ui-btn-primary" data-replay>다시 재생</button>';
   register(
     "motion-foundations",
     "움직임의 원리와 전환",

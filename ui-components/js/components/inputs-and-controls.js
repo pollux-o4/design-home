@@ -1,5 +1,5 @@
 (function () {
-  const { define: d, register } = CanvasSamples;
+  const { define: d, register } = window.CanvasSamples;
   register(
     "inputs-and-controls",
     "입력과 선택 컨트롤",
@@ -29,8 +29,7 @@
           }),
           d({
             id: "stepper",
-            reference:
-              "https://developer.apple.com/design/human-interface-guidelines/steppers",
+            reference: "https://developer.apple.com/design/human-interface-guidelines/steppers",
             title: "수량 조절",
             term: "Stepper",
             desc: "1부터 99까지. 최소값에서는 감소 버튼을 비활성화합니다.",
@@ -142,8 +141,7 @@
           }),
           d({
             id: "chip-tag",
-            reference:
-              "https://developer.apple.com/design/human-interface-guidelines/token-fields",
+            reference: "https://developer.apple.com/design/human-interface-guidelines/token-fields",
             title: "필터 태그",
             term: "Chip / Tag",
             desc: "삭제 후 모든 필터를 다시 복원할 수 있습니다.",
