@@ -137,6 +137,11 @@
     0 3px 10px #1d1d1f08;
   max-height: calc(100dvh - var(--dh-nav-height) - 20px);
   overflow-y: auto;
+  animation: dh-study-enter 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes dh-study-enter {
+  from { opacity: 0; translate: 0 -6px; }
+  to { opacity: 1; translate: 0 0; }
 }
 #dh-global-nav .dh-study-panel[hidden] {
   display: none;
@@ -317,7 +322,8 @@
   #dh-global-nav * {
     transition: none;
   }
-  #dh-global-nav .dh-theme-panel { animation: none; }
+  #dh-global-nav .dh-theme-panel,
+  #dh-global-nav .dh-study-panel { animation: none; }
 }
 @media (forced-colors: active) {
   #dh-global-nav .dh-study-panel {

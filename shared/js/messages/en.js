@@ -1,5 +1,17 @@
 // Korean fallback content lives in the HTML; only translations belong here.
 export default {
+  skip_to_content: "Skip to content",
+  patterns_view_legend: "Pattern perspective",
+  patterns_ui_view: "UI view",
+  patterns_ux_view: "UX view",
+  patterns_settings: "Display settings",
+  patterns_font: "Font",
+  patterns_system_font: "System font (default)",
+  patterns_min_font: "Minimum font size",
+  patterns_default_size: "12px (default)",
+  patterns_search_hint: "Search with / or Ctrl/⌘K",
+  patterns_intro_title: "Patterns.<br>Details that shape experiences.",
+  patterns_intro_desc: "From the big picture to the smallest interactions.<br>Choose a topic and explore its details.",
   nav_glossary: "Glossary",
   nav_home: "Home",
   nav_trends: "Trend Styles",

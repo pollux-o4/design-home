@@ -34,7 +34,7 @@ export function previewSlides(entry) {
   });
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const loads = [];
-  let active = false, autoplay = false, current = 0, timer, generation = 0;
+  let active = false, autoplay = false, current = 0, timer, generation = 0, firstTransition = true;
   function select(index) {
     current = index;
     screen.dataset.slide = String(index);
@@ -60,10 +60,10 @@ export function previewSlides(entry) {
         const next = (current + offset) % images.length;
         const ready = await load(next);
         if (!active || version !== generation) return;
-        if (ready) { select(next); break; }
+        if (ready) { select(next); firstTransition = false; break; }
       }
       schedule();
-    }, 2600);
+    }, firstTransition ? 900 : 2600);
   }
   select(0);
   reduced.addEventListener('change', () => { cancel(); schedule(); });
@@ -74,12 +74,14 @@ export function previewSlides(entry) {
       cancel();
       active = show;
       autoplay = rotate;
-      if (!show) { select(0); return; }
+      if (!show) { firstTransition = true; select(0); return; }
       const version = generation;
       load(0).then(ready => {
         if (!ready) return;
         entry.classList.add('is-preview-ready');
-        if (active && version === generation) schedule();
+        if (active && version === generation) {
+          schedule();
+        }
       });
     },
   };
