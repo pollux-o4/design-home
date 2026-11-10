@@ -4,6 +4,8 @@ import { createGlossary, categories } from "./catalog.js";
 import { readRoute, routeHref } from "./route.js";
 import { visual } from "./visual.js";
 import { mount } from "../../ui-components/js/samples/runtime.js";
+import { localizeGlossary } from "./localization.js";
+import { renderGlossaryList } from "./list-view.js";
 
 const patterns = window.CanvasCatalog.create(window.ComponentModules);
 const catalog = {
@@ -13,6 +15,7 @@ const catalog = {
     patterns.find(id),
 };
 const entries = createGlossary(catalog);
+const localization = localizeGlossary(entries, document.querySelector('#main-content'));
 const search = document.querySelector("#term-search");
 const list = document.querySelector("#list-view");
 const detail = document.querySelector("#detail-view");
@@ -141,114 +144,13 @@ function openInline(entry, row, trigger, initialExample = "") {
   trigger.setAttribute("aria-expanded", "true");
   trigger.querySelector(".try-label").textContent = "접기";
 }
-function table(items) {
-  const table = el("table", "terms-table");
-  const caption = el("caption", "sr-only", "용어, 뜻, 시각적 예시와 체험");
-  const head = el("thead");
-  const labels = el("tr");
-  ["용어", "한 줄 뜻", "예시"].forEach((title) => {
-    const cell = el("th", "", title);
-    cell.scope = "col";
-    labels.append(cell);
-  });
-  head.append(labels);
-  const body = el("tbody");
-  for (const entry of items) {
-    const row = el("tr", "term-row");
-    row.dataset.term = entry.id;
-    const name = el("th", "term-name");
-    name.scope = "row";
-    const title = link(
-      entry.title,
-      { ...state, category: entry.category, id: entry.id, example: "" },
-      "term-link",
-    );
-    const english = el("span", "term-english", entry.term);
-    english.lang = "en";
-    name.append(title, english);
-    const definition = el("td", "term-definition", entry.desc);
-    const preview = el("td", "term-preview");
-    const trigger = button("", "try-button", () =>
-      openInline(entry, row, trigger),
-    );
-    trigger.dataset.expand = entry.id;
-    trigger.setAttribute("aria-label", `${entry.title} 예시 체험`);
-    trigger.setAttribute("aria-expanded", "false");
-    trigger.setAttribute("aria-controls", `example-${entry.id}`);
-    trigger.append(visual(entry.visual), el("span", "try-label", "체험"));
-    preview.append(trigger);
-    row.append(name, definition, preview);
-    const extra = el("tr", "expanded-row");
-    extra.id = `example-${entry.id}`;
-    extra.hidden = true;
-    const extraCell = el("td");
-    extraCell.colSpan = 3;
-    extra.append(extraCell);
-    body.append(row, extra);
-  }
-  table.append(caption, head, body);
-  return table;
-}
 function renderList() {
-  const query = state.query.trim().toLocaleLowerCase();
-  const filtered = entries.filter((entry) =>
-    [entry.title, entry.term, entry.desc]
-      .join(" ")
-      .toLocaleLowerCase()
-      .includes(query),
-  );
-  search.value = state.query;
-  document.querySelector("#clear-search").hidden = !state.query;
-  document.querySelector("#term-count").textContent = filtered.length;
-  document.querySelector("#empty-state").hidden = filtered.length !== 0;
-  container.replaceChildren();
-  for (const category of categories) {
-    const items = filtered.filter((entry) => entry.category === category.id);
-    if (!items.length) continue;
-    const section = el("section", `term-category category-${category.id}`);
-    const heading = el("h2");
-    const isOpen = state.category === category.id || Boolean(query);
-    const toggle = button("", "category-toggle", () => {
-      // Search reveals matching categories; choosing a category exits search into that list.
-      navigate({
-        category: state.category === category.id && !query ? "" : category.id,
-        query: "",
-      });
-    });
-    toggle.id = `category-${category.id}`;
-    toggle.setAttribute("aria-expanded", String(isOpen));
-    toggle.setAttribute("aria-controls", `panel-${category.id}`);
-    const copy = el("span", "category-copy");
-    copy.append(
-      el("span", "category-title", category.title),
-      el("span", "category-subtitle", category.subtitle),
-    );
-    toggle.append(
-      el("span", "category-mark", category.mark),
-      copy,
-      el("span", "category-count", String(items.length)),
-      el("span", "category-chevron", isOpen ? "−" : "+"),
-    );
-    heading.append(toggle);
-    const panel = el("div", "category-panel");
-    panel.id = `panel-${category.id}`;
-    panel.hidden = !isOpen;
-    if (isOpen) panel.append(table(items));
-    section.append(heading, panel);
-    container.append(section);
-  }
-  status.textContent = state.invalid
-    ? "찾을 수 없는 용어 주소입니다. 용어집에서 다시 선택하세요."
-    : `용어 ${filtered.length}개`;
-  if (state.invalid) {
-    const notice = el(
-      "p",
-      "route-notice",
-      "이 주소의 용어를 찾을 수 없어요. 아래에서 다시 찾아보세요.",
-    );
-    container.prepend(notice);
-  }
+  renderGlossaryList({
+    state, entries, categories, search, container, status, el, button, link, visual, navigate,
+    onExpand: openInline,
+  });
 }
+
 function renderDetail(entry) {
   detail.replaceChildren();
   const back = link(
@@ -311,6 +213,15 @@ function render() {
   } else {
     detail.replaceChildren();
     renderList();
+    if (previous && !previous.id && state.category && previous.category !== state.category && !state.query && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const panel = document.getElementById(`panel-${state.category}`);
+      if (panel && !panel.hidden) {
+        const height = panel.getBoundingClientRect().height;
+        panel.style.overflow = "hidden";
+        const animation = panel.animate([{ height: "0px", opacity: 0 }, { height: `${height}px`, opacity: 1 }], { duration: 280, easing: "cubic-bezier(.22,1,.36,1)" });
+        animation.onfinish = () => { panel.style.overflow = ""; };
+      }
+    }
     if (previous?.id && lastList) {
       const trigger = container.querySelector(
         `[data-expand="${lastList.expanded || previous.id}"]`,
@@ -326,6 +237,7 @@ function render() {
       document.getElementById(activeId)?.focus({ preventScroll: true });
     }
   }
+  localization.update();
 }
 search.addEventListener("input", () =>
   navigate({ ...state, id: "", query: search.value }, true),

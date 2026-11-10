@@ -8,6 +8,10 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
+html[lang="en"] .term-english,
+html[lang="en"] .detail-english {
+  display: none;
+}
 [hidden] {
   display: none !important;
 }
@@ -183,9 +187,10 @@ h1 {
   border-radius: 18px;
   background: transparent;
   color: inherit;
+  transition: background-color 160ms ease;
 }
 .category-toggle:hover {
-  background: #f9f9fb;
+  background: var(--ui-subtle);
 }
 .category-toggle:focus-visible {
   outline-offset: -5px;
@@ -263,7 +268,7 @@ h1 {
 .term-row > th,
 .term-row > td {
   padding: 18px 12px;
-  border-top: 1px solid #f0f0f2;
+  border-top: 1px solid var(--ui-line);
   vertical-align: middle;
 }
 .term-row:hover {
@@ -324,7 +329,7 @@ h1 {
 .example {
   border: 1px solid var(--ui-line);
   border-radius: 16px;
-  background: #fafafb;
+  background: var(--ui-subtle);
   overflow: hidden;
 }
 .example-toolbar {
@@ -355,8 +360,7 @@ h1 {
   display: grid;
   place-items: center;
   padding: 36px 24px;
-  background-image: radial-gradient(#d2d2d780 0.65px, transparent 0.65px);
-  background-size: 14px 14px;
+  background: var(--ui-surface);
 }
 .example-content {
   width: 100%;
@@ -393,7 +397,7 @@ h1 {
 }
 .simulation-note {
   font-size: 11px;
-  color: var(--ui-secondary);
+  color: var(--ui-text);
 }
 .detail-link {
   font-size: 12px;
@@ -1193,6 +1197,13 @@ h1 {
 .category-motion .term-sketch {
   color: #39866e;
 }
+.category-motion .term-sketch svg path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 .motion-experiment {
   width: 100%;
   max-width: 480px;
@@ -1313,6 +1324,8 @@ h1 {
 .motion-more summary {
   cursor: pointer;
   padding: 8px;
+  background: var(--ui-surface);
+  border-radius: 8px;
 }
 .motion-more p {
   line-height: 1.7;

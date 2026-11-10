@@ -264,6 +264,10 @@ test("glossary navigation, live examples, search, keyboard, history and responsi
     await page.emulateMedia({ reducedMotion: "no-preference" });
     await page.goto(base + "glossary/index.html#/motion");
     assert.equal(await page.locator("#panel-motion .term-row").count(), 44);
+    const sketches = await page.locator("#panel-motion .term-sketch svg").evaluateAll(nodes => nodes.map(node => node.innerHTML.trim()));
+    assert.equal(sketches.length, 44);
+    assert.ok(sketches.every(Boolean), "Each motion term needs a diagram");
+    assert.equal(new Set(sketches).size, 44, "Different motions need distinguishable diagrams");
     assert.equal(await page.locator(".expanded-row:visible").count(), 0);
     await page.screenshot({
       path: ".legacy-review/glossary-motion-list.png",
