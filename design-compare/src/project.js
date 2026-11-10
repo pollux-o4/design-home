@@ -20,9 +20,11 @@ export function loadProject({ cwd = process.cwd(), config = process.env.DESIGN_C
   const root = file ? dirname(file) : resolve(cwd);
   const sourceRoot = resolve(root, process.env.DESIGN_HOME_ROOT ?? data.sourceRoot ?? '.');
   const documents = process.env.DESIGN_DOCUMENTS_ROOT ?? data.documentsRoot;
-  const baseUrl = process.env.DESIGN_BASE_URL ?? data.baseUrl ?? 'http://127.0.0.1:4184';
-  const url = new URL(baseUrl);
-  if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) throw new Error('프로젝트 설정: 인증정보 없는 HTTP(S) baseUrl 필요');
+  const baseUrl = process.env.DESIGN_BASE_URL ?? data.baseUrl ?? null;
+  if (baseUrl) {
+    const url = new URL(baseUrl);
+    if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) throw new Error('프로젝트 설정: 인증정보 없는 HTTP(S) baseUrl 필요');
+  }
   return {
     name: data.name ?? '내 프로젝트',
     sourceRoot,

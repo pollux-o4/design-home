@@ -63,6 +63,10 @@ AI가 `registrationTemplate`의 이름·설명·분류·태그·검색어·실�
 
 ## 보조 명령
 
+- `localization --scenario ./language-scenario.json --json`: 프로젝트가 지정한 언어 버튼을 누르고 본문·접근성 이름과 새로고침 후 언어 유지를 검사한다. `scope`, 선택적인 `openEach`, `languages`의 `code`·`control`·`rejectPattern`은 프로젝트가 소유한다. 예를 들어 영어 화면에서 남은 한국어는 `rejectPattern: "[가-힣]"`로 검토한다. 의도적인 다국어 콘텐츠는 검사 영역을 분리한다. 기본은 검토 결과를 기록하며 `--strict`를 켜면 누락 시 종료 코드 1을 반환한다. 번역의 의미적 정확성을 자동으로 보증하지 않는다.
+- `contrast --scenario ./contrast-scenario.json --json`: axe-core로 지정 영역의 글자 대비를 검사한다. `themes`별로 별도 브라우저를 열고 `openEach`로 지정한 버튼을 차례로 눌러 `scope`를 검사한다. 선택적으로 `afterEach`에 영역 내 버튼 선택자를 지정하면 버튼을 한 번 더 누른 상태도 검사한다. 확인 불가 항목은 `incomplete`에 기록한다. 기본은 차단하지 않으며 `--strict`는 위반 시 1, 검사 오류 또는 수동 확인 필요 시 2를 반환한다. CSS 선택자는 프로젝트가 소유하며 실제 클릭이 실행되므로 안전한 검사 환경을 사용한다.
+
+대비 시나리오는 기본적으로 브라우저의 색상 선호도를 설정한다. 프로젝트가 별도의 테마 선택 버튼을 쓰면 `themeControls`에 테마별 선택자를, 메뉴를 먼저 열어야 하면 `themeOpen`에 버튼 선택자를 지정한다. 실제 적용 여부를 확인하려면 `themeVerification`에 요소 선택자·속성·테마별 기대값을 지정한다. 미지정 시 `themeEvidence`는 `browser-preference`이며 앱의 실제 테마 적용을 보증하지 않는다. 예: `"themeVerification": { "selector": "html", "attribute": "data-theme", "values": { "light": "light", "dark": "dark" } }`.
 - `inventory --project /프로젝트/features --json`: TSX/JSX의 내보낸 컴포넌트 후보와 `*.ui-preview.tsx` 수집. 실제 컴포넌트·샘플 연결 판단은 AI가 수행한다.
 - `search --query "의도" --json`: 이미지를 만들지 않고 문서와 등록 자료 검색.
 - `context --id ID --json`: 문서·관련 원본 일부 조회.
@@ -70,7 +74,7 @@ AI가 `registrationTemplate`의 이름·설명·분류·태그·검색어·실�
 - `inspect --reference ID --json`: 사진 기준은 저장된 측정값, 원본 연결은 메타데이터·선택자·조건 조회.
 - `inspect --report /비교결과/report.json --part title --json`: 필요한 부분의 수정 근거와 보관 이미지 조회. 조회 종료 코드는 0이고 비교 판정은 `comparisonStatus`에 있다.
 - `audit --url http://localhost:3000 --selector '#app' --viewport 390x844 --theme dark --open-selector '#open-menu' --json`: 지정한 화면 크기·테마와 열기 동작 후 기본 UI를 검사한다. 보이는 iframe과 열린 Shadow DOM도 검사하며 `framePath`·`shadowPath`로 위치를 식별한다. `data-ds-native="allow"` 또는 `--allow '[data-ds-native=allow]'`는 의도적인 시스템 UI를 제외한다. 기본은 검토 결과와 종료 코드 0이며, `--strict`일 때만 시스템 기본 UI가 종료 코드 1이 된다. 프레임 검사가 실패하면 `coverage`에 사유가 남고 종료 코드 2로 불완전함을 알린다. `--open-selector`는 실제 클릭이므로 검사 환경에서 안전한 UI 열기 동작에만 사용한다.
-- `motion --scenario ./motion-scenario.json --json`: 프로젝트가 지정한 동작과 화면을 관찰한다. 기본 900ms 동안 전·중간·후 6장, CSS 이벤트, 실제 관찰 시간과 사전 배경 변화를 기록한다. 클릭·호버·키 입력·뒤로 가기를 지원하며, `region`으로 관심 영역을, `expected`로 동작 후 상태를 지정할 수 있다. `expectation`은 `review`(기본), `motion`, `instant` 중 선택한다. 예시는 [시나리오](../examples/motion-scenario.json)를 참고한다.
+- `motion --scenario ./motion-scenario.json --json`: 프로젝트가 지정한 동작과 화면을 관찰한다. 기본 900ms 동안 전·중간·후 6장, CSS 이벤트, 실제 관찰 시간과 사전 배경 변화를 기록한다. 클릭·호버·키 입력·뒤로 가기를 지원하며, `region`으로 관심 영역을, `expected`로 동작 후 상태를 지정할 수 있다. `locale`과 `timezoneId`로 실행 환경을 지정할 수 있으며 생략하면 기존 한국어·서울 기준을 유지한다. `expectation`은 `review`(기본), `motion`, `instant` 중 선택한다. 예시는 [시나리오](../examples/motion-scenario.json)를 참고한다.
 - `motion --url http://localhost:3000 --action '#open-page' --json`: 기존 클릭 명령도 지원한다. 결과는 `review`(검토), `motion-observed`(움직임 관찰), `accepted`(즉시 전환 기대에 부합), `inconclusive`(근거 부족)다. CSS 이벤트는 인과관계를 보장하지 않으며, 샘플 사이의 짧은 움직임은 놓칠 수 있다. 선택한 정책에 `--strict`를 함께 쓰면 검토 1, 판정 보류 2로 종료한다. 기본 실행은 차단하지 않는다. 실제 동작을 실행하므로 안전한 검사 환경을 사용한다.
 
 검사는 Chromium에서 현재 렌더링된 상태의 DOM과 계산된 스타일을 기준으로 한다. 열기 후 비동기로 표시되는 영역은 `--selector`에 해당 영역을 지정해 표시될 때까지 기다린다. 선택기·날짜·파일·색 입력은 외형을 꾸며도 시스템 선택기가 열릴 수 있어 검토 대상으로 포함한다. 선택기와 `::picker(select)`가 모두 `appearance: base-select`이면 커스텀 목록으로 구분한다. 네이티브 팝업 내부, 닫힌 Shadow DOM, 별도로 열지 않은 메뉴와 다른 브라우저·기기는 이 검사만으로 보증할 수 없다. CSS 스크롤바 판정도 근거가 제한적이므로 프로젝트에서 의도적으로 사용한 영역은 허용 규칙으로 명시한다.

@@ -1,5 +1,5 @@
 import { isIdentifier } from './identifiers.js';
-import { STYLE_PROPERTIES, validateCapture, validateConditions } from '../capture/contract.js';
+import { STYLE_PROPERTIES, validateCapture, validateConditions } from './capture-contract.js';
 
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const text = value => typeof value === 'string';

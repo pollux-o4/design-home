@@ -10,6 +10,8 @@ const labels = {
   inspect: "세부 조회",
   register: "기준 등록",
   motion: "화면 변화 관찰",
+  contrast: "색 대비 검사",
+  localization: "언어 전환 검사",
 };
 const states = {
   prepared: "준비 완료",
@@ -79,6 +81,15 @@ function renderDetail(entry) {
     const { coverage, evidence } = entry.output;
     card.append(element("p", `화면 ${coverage.frameSamples}장 · 변화 ${(entry.output.changeRatio * 100).toFixed(1)}% · 관찰 ${coverage.actualDurationMs}ms`));
     card.append(element("p", `CSS 이벤트 ${evidence?.cssEvents ?? 0}개 · ${coverage.note}`, "muted"));
+  }
+  if (entry.command === "contrast" && entry.output.summary) {
+    const { summary, findings = [], incomplete = [] } = entry.output;
+    card.append(element("p", `검사 ${summary.checked}개 · 대비 문제 ${summary.findings}개 · 수동 확인 ${summary.incomplete}개`));
+    for (const item of findings) card.append(element("p", `${item.theme} · ${item.state} · ${item.target.join(" → ")}`, "muted"));
+    if (incomplete.length) card.append(element("p", "그라디언트나 겹친 요소 등은 자동 판정이 어려워 수동 확인이 필요합니다.", "muted"));
+  }
+  if (entry.command === "localization" && entry.output.summary) {
+    card.append(element("p", `검사 ${entry.output.summary.checked}개 · 언어 누락 ${entry.output.summary.findings}개`));
   }
   for (const failure of entry.output.failures ?? [])
     card.append(element("p", `${failure.title}: ${failure.message}`));

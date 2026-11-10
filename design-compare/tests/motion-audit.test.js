@@ -3,11 +3,23 @@ import assert from 'node:assert/strict';
 import { createServer } from 'node:http';
 import { auditMotion } from '../src/audit/motion.js';
 import { compareFrames } from '../src/audit/motion-evidence.js';
+import { motionScenario } from '../src/audit/motion-scenario.js';
 import { PNG } from 'pngjs';
 import { runCli } from '../src/cli/index.js';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+
+test('motion scenarios can choose a project locale and time zone', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'motion-locale-'));
+  try {
+    const scenario = join(dir, 'scenario.json');
+    await writeFile(scenario, JSON.stringify({ schemaVersion: 1, url: 'https://example.com', action: { type: 'click', selector: '#go' }, locale: 'en-US', timezoneId: 'America/New_York' }));
+    const result = await motionScenario({ scenario });
+    assert.equal(result.locale, 'en-US');
+    assert.equal(result.timezoneId, 'America/New_York');
+  } finally { await rm(dir, { recursive: true, force: true }); }
+});
 
 test('transient movement returning to the original frame is still observed', () => {
   const frame = value => {

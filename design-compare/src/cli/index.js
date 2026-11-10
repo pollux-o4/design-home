@@ -24,7 +24,7 @@ export async function runCli(args, { app, stdout = console.log, stderr = console
     const result = await command.execute(app, name === 'brief' ? { ...request, operation } : request);
     const output = name === 'compare' ? { ...result, nextActions: nextActions(result, args) } : result;
     const policyGate = name === 'motion' && values.strict && ['motion', 'instant'].includes(result.expectation);
-    const exitCode = result.status === 'error' || (policyGate && result.status === 'inconclusive') ? 2 : result.status === 'fail' || (policyGate && result.status === 'review') ? 1 : 0;
+    const exitCode = result.status === 'error' || (policyGate && result.status === 'inconclusive') || (name === 'contrast' && values.strict && result.status === 'review') ? 2 : result.status === 'fail' || (policyGate && result.status === 'review') ? 1 : 0;
     const projected = jsonOutput(name, output, values);
     if (name === 'motion') {
       const { screenshots, ...summary } = projected;

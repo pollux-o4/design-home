@@ -10,7 +10,10 @@ export async function prepareBrief({ intent, baseUrl, limit, operation }, { repo
   const selection = createLibrary({ documentsRoot }).select(intent, { references, limit }), items = [], failures = [];
   for (const item of selection.results) {
     try {
-      if (item.origin === 'library') item.capture = { url: new URL(item.previewPath, baseUrl).href, selector: item.capture?.selector ?? 'body', parts: item.capture?.parts ?? {}, viewport: item.viewport, theme: item.capture?.theme ?? 'light', state: item.capture?.state ?? 'default', openSelector: item.capture?.openSelector };
+      if (item.origin === 'library') {
+        if (!baseUrl) throw new Error('프로젝트 baseUrl 또는 --base-url을 지정하세요');
+        item.capture = { url: new URL(item.previewPath, baseUrl).href, selector: item.capture?.selector ?? 'body', parts: item.capture?.parts ?? {}, viewport: item.viewport, theme: item.capture?.theme ?? 'light', state: item.capture?.state ?? 'default', openSelector: item.capture?.openSelector };
+      }
       const captured = await capture(item.capture);
       const referenceId = `brief-${operation.id.slice(-8)}-${createHash('sha256').update(item.id).digest('hex').slice(0,12)}`;
       await repository.link({ schemaVersion: 1, mode: 'live', id: referenceId, transient: true, title: item.title, description: item.summary,

@@ -5,13 +5,13 @@ import { compareFrames } from './motion-evidence.js';
 
 export async function auditMotion(request) {
   const scenario = await motionScenario(request);
-  const { url, action, viewport, theme, reducedMotion, observationMs, expectation, region, expected, history } = scenario;
+  const { url, action, viewport, theme, reducedMotion, locale, timezoneId, observationMs, expectation, region, expected, history } = scenario;
   const browser = await chromium.launch({ headless: true });
   let collecting = false;
   const events = [];
   let eventsTruncated = false;
   try {
-    const context = await browser.newContext({ viewport, colorScheme: theme, reducedMotion, locale: 'ko-KR', timezoneId: 'Asia/Seoul' });
+    const context = await browser.newContext({ viewport, colorScheme: theme, reducedMotion, locale, timezoneId });
     await context.exposeBinding('__designMotionObserved', (source, event) => {
       if (collecting) {
         if (events.length < 200) events.push({ ...event, url: source.frame.url() });
@@ -81,7 +81,7 @@ export async function auditMotion(request) {
     if (expectedAfterWindow) evaluation.status = 'inconclusive';
     return {
       schemaVersion: 1, ...evaluation,
-      target: { url, action: action.type === 'click' ? action.selector : action, viewport, theme, reducedMotion, ...(region ? { region } : {}) },
+      target: { url, action: action.type === 'click' ? action.selector : action, viewport, theme, reducedMotion, locale, timezoneId, ...(region ? { region } : {}) },
       scenario: { action, expectation, observationMs, ...(expected ? { expected } : {}), ...(history.length ? { history } : {}) },
       finalUrl, observationMs, events, screenshots: { before: frames[0], ...Object.fromEntries(frames.slice(1, -1).map((frame, i) => [`frame-${i + 1}`, frame])), after: frames.at(-1) },
       coverage: { frameSamples: frames.length, sampleTimesMs, actualDurationMs, eventsTruncated, eventScope: region ? 'region' : 'page', imageScope: clip ? 'region' : 'viewport', expectedAfterWindow, navigation, note: navigation ? '페이지 이동 중 로딩 변화는 움직임의 증거로 단정하지 않음' : region && !clip ? '초기 영역이 보이지 않아 전체 화면을 캡처함' : region ? '영역 내 이벤트도 동작과의 인과관계는 확인이 필요함' : '페이지 전체 이벤트는 동작과 무관할 수 있음' },

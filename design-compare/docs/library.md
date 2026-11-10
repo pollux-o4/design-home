@@ -9,7 +9,7 @@
 - `src/hub/`, `hub/`: 현재 프로젝트 연결 설정과 웹 화면.
 - `src/cli/`: 같은 기능을 명령으로 호출한다.
 
-다른 프로젝트에서는 도구 배포 묶음을 설치하고 프로젝트 루트의 `design-system.config.json`에 `sourceRoot`, `documentsRoot`, `store`, `baseUrl`을 설정한다. 경로는 설정 파일 기준이며 CLI·웹이 공유한다. 기존 `DESIGN_HOME_ROOT`, `DESIGN_DOCUMENTS_ROOT`, `DESIGN_STORE`, `DESIGN_BASE_URL`은 실행 시 재정의용으로 유지한다. 원본과 문서는 프로젝트가 소유하고 배포 도구에는 포함하지 않는다.
+다른 프로젝트에서는 도구 배포 묶음을 설치하고 프로젝트 루트의 `design-system.config.json`에 필요한 `sourceRoot`, `documentsRoot`, `store`, `baseUrl`을 설정한다. 미리보기 서버를 쓰려면 프로젝트의 `baseUrl`을 명시한다. 설정이 없으면 다른 프로젝트의 서버로 연결하지 않는다. 경로는 설정 파일 기준이며 CLI·웹이 공유한다. 기존 `DESIGN_HOME_ROOT`, `DESIGN_DOCUMENTS_ROOT`, `DESIGN_STORE`, `DESIGN_BASE_URL`은 실행 시 재정의용으로 유지한다. 원본과 문서는 프로젝트가 소유하고 배포 도구에는 포함하지 않는다.
 
 새 디자인 문서는 [유기적 UI 문서](../../design-home-library/documents/biomorphic-organic.md)처럼 작성한다. 기존 문서의 JSON을 복사해 ID·분류·상대 원본 경로·미리보기 경로를 바꾸고, 필요한 설명을 아래에 추가한다. 웹 목록용으로 같은 내용을 JavaScript에 재등록하지 않는다.
 

@@ -1,21 +1,7 @@
-# 문서 안내
+# 문서 탐색
 
-## 작업별 문서
+- 작업: workflows · library · activity · results-and-validation
+- 구조: architecture에서 C1 맥락 · C2 실행/저장 · C3 책임/의존 · C4 코드 계약 검색
+- 프로젝트 계약: 저장소 specs에서 MOD-001 · UX-001 검색
 
-| 필요한 정보 | 문서 |
-|---|---|
-| 설치·후보 수집·AI 등록·비교·수정 | [실행과 AI 작업 흐름](workflows.md) |
-| 디자인 설명의 원본·문서 형식·외부 프로젝트 연결 | [디자인 문서와 메타데이터](library.md) |
-| AI에 제공한 이미지·최근 10건·같은 작업 연결 | [호출 기록](activity.md) |
-| 저장 자료·보고서·검증·지원 범위 | [결과와 검증](results-and-validation.md) |
-
-## 현재 코드의 C4 모델
-
-| 단계 | 범위 | 문서 |
-|---|---|---|
-| C1 Context | 시스템을 쓰는 사람·AI와 외부 시스템 | [시스템 맥락](architecture/c1-context.md) |
-| C2 Container | 실행되는 애플리케이션과 데이터 저장소 | [컨테이너](architecture/c2-containers.md) |
-| C3 Component | 컨테이너 내부의 주요 모듈과 의존성 | [컴포넌트](architecture/c3-components.md) |
-| C4 Code | 프로젝트 경계의 코드 계약·검증 | [코드 지도](architecture/c4-code.md) · [`src/`](../src/) · [`hub/`](../hub/) |
-
-C1~C4는 현재 구현을 설명한다. C4는 핵심 계약과 코드·검증을 연결하고 전체 함수 목록은 복제하지 않는다. 여기서 Container는 실행·저장 단위이며 Docker 컨테이너를 뜻하지 않는다.
+C4는 대표 계약과 검증을 연결한다. 현재 함수·파일 목록은 코드에서 찾는다.

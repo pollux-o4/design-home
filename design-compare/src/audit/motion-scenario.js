@@ -25,11 +25,13 @@ export async function motionScenario(request) {
   if (!['light', 'dark'].includes(theme)) throw new Error('theme: light 또는 dark 필요');
   const reducedMotion = data.reducedMotion ?? 'no-preference';
   if (!['reduce', 'no-preference'].includes(reducedMotion)) throw new Error('reducedMotion: reduce 또는 no-preference 필요');
+  const locale = data.locale ?? 'ko-KR', timezoneId = data.timezoneId ?? 'Asia/Seoul';
+  try { new Intl.DateTimeFormat(locale, { timeZone: timezoneId }); } catch { throw new Error('유효한 locale과 timezoneId 필요'); }
   const observationMs = data.observationMs ?? 900;
   if (!Number.isInteger(observationMs) || observationMs < 400 || observationMs > 3000) throw new Error('observationMs: 정수 400~3000 필요');
   const expectation = data.expectation ?? 'review';
   if (!['review', 'motion', 'instant'].includes(expectation)) throw new Error('expectation: review, motion 또는 instant 필요');
   if (data.region !== undefined && (typeof data.region !== 'string' || !data.region.trim())) throw new Error('region: CSS 선택자 필요');
   if (data.expected !== undefined && (!data.expected || typeof data.expected.selector !== 'string' || !data.expected.selector.trim() || !['visible', 'hidden'].includes(data.expected.state))) throw new Error('expected: selector와 visible 또는 hidden state 필요');
-  return { url: url.href, action, history, viewport, theme, reducedMotion, observationMs, expectation, region: data.region, expected: data.expected };
+  return { url: url.href, action, history, viewport, theme, reducedMotion, locale, timezoneId, observationMs, expectation, region: data.region, expected: data.expected };
 }

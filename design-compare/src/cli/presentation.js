@@ -17,6 +17,8 @@ export function jsonOutput(name, result, values) {
 }
 
 const textPresenters = {
+  localization: result => `언어 전환 · ${result.status} · 검사 ${result.summary.checked}개 · 누락 ${result.summary.findings}개`,
+  contrast: result => `색 대비 · ${result.status} · 검사 ${result.summary.checked}개 · 문제 ${result.summary.findings}개 · 수동 확인 ${result.summary.incomplete}개`,
   history: result => JSON.stringify(result, null, 2),
   brief: result => JSON.stringify(result, null, 2),
   inventory: result => JSON.stringify(result, null, 2),

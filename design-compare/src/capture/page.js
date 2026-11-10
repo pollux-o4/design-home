@@ -1,4 +1,5 @@
 export async function preparePage(browser, options) {
+  // shortcut: 기존 기준 이미지와 비교 조건 유지를 위해 로케일·시간대를 고정, 프로젝트별 조건 도입 시 기준 스키마를 함께 버전 관리.
   const context = await browser.newContext({ viewport: options.viewport, deviceScaleFactor: 1, colorScheme: options.theme, reducedMotion: 'reduce', locale: 'ko-KR', timezoneId: 'Asia/Seoul' });
   const page = await context.newPage();
   page.setDefaultTimeout(10000);

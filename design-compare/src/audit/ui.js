@@ -19,6 +19,7 @@ export async function auditUi({ url, selector = "body", allow = [], strict = fal
   if (!["light", "dark"].includes(theme)) throw new Error("--theme: light 또는 dark 필요");
   const browser = await chromium.launch({ headless: true });
   try {
+    // shortcut: UI 검사는 기존 한국어 환경에 고정, 프로젝트별 언어 조건을 지원할 때 시나리오 계약에 추가.
     const context = await browser.newContext({
       viewport,
       colorScheme: theme,

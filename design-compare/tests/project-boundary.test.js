@@ -25,13 +25,16 @@ test('project-owned configuration isolates catalogs and stores across simultaneo
       await writeFile(join(directory, 'design-system.config.json'), JSON.stringify({ schemaVersion: 1, name, documentsRoot: 'docs' }));
       const project = loadProject({ cwd: directory });
       assert.equal(project.store, join(directory, '.design-compare'));
+      assert.equal(project.baseUrl, null);
       const server = createHubServer({ project });
       await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
       servers.push(server);
       const base = `http://127.0.0.1:${server.address().port}`;
       assert.equal((await (await fetch(`${base}/api/project`)).json()).name, name);
       assert.deepEqual((await (await fetch(`${base}/api/search`)).json()).results.map(item => item.id), [name]);
-      assert.equal((await (await fetch(`${base}/api/context?id=${name}`)).json()).sourceFiles[0].absolutePath, join(directory, 'sample.html'));
+      const context = await (await fetch(`${base}/api/context?id=${name}`)).json();
+      assert.equal(context.sourceFiles[0].absolutePath, join(directory, 'sample.html'));
+      assert.equal(context.previewPath, null);
     }
     await writeFile(join(root, 'broken.json'), '{"schemaVersion": 1, "name": "", "store": false}');
     assert.throws(() => loadProject({ config: join(root, 'broken.json') }), /프로젝트 설정/);

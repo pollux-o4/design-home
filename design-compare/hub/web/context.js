@@ -20,8 +20,24 @@ export function renderContext(design) {
       /* External sample servers own their interaction state. */
     }
   };
-  preview.src = previewUrl(design.previewPath);
-  document.querySelector("#open-preview").href = previewUrl(design.previewPath);
+  const openPreview = document.querySelector("#open-preview");
+  let missing = document.querySelector("#preview-unavailable");
+  if (!missing) {
+    missing = element("p", "미리보기를 연결하려면 프로젝트 설정에 baseUrl을 지정하세요.", "muted");
+    missing.id = "preview-unavailable";
+    preview.before(missing);
+  }
+  const available = Boolean(design.previewPath);
+  missing.hidden = available;
+  preview.hidden = !available;
+  openPreview.hidden = !available;
+  if (available) {
+    preview.src = previewUrl(design.previewPath);
+    openPreview.href = previewUrl(design.previewPath);
+  } else {
+    preview.removeAttribute("src");
+    openPreview.removeAttribute("href");
+  }
   const context = document.querySelector("#context");
   context.replaceChildren();
   for (const [label, items] of [
