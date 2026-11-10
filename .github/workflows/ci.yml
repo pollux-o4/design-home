@@ -17,6 +17,7 @@ jobs:
   verify:
     runs-on: ubuntu-24.04
     container:
+      options: --user pwuser
       # Match Playwright 1.64.0; the digest pins preinstalled engines and OS dependencies.
       image: mcr.microsoft.com/playwright:v1.64.0-noble@sha256:06a9939e57531807f8d5fd76ce44b53165ffb7d7501d87ab10e285c20b1e971f
     timeout-minutes: 30
@@ -32,6 +33,15 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Audit dependencies
         run: pnpm audit --audit-level=high
+      - name: Validate browser runtime
+        run: |
+          node --input-type=module <<'JS'
+          import { chromium, firefox, webkit } from "playwright";
+          for (const engine of [chromium, firefox, webkit]) {
+            const browser = await engine.launch();
+            await browser.close();
+          }
+          JS
       - name: Scan full Git history
         run: pnpm secrets
       - name: Lint, format, dependency, and unit checks
