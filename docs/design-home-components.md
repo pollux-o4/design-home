@@ -66,6 +66,12 @@ Patterns의 종류별 분류는 `pattern-topics/*`, UX 관점의 원칙 분류�
 
 ## 용어집의 시각적 학습
 
+용어집은 Design Home의 학습 콘텐츠이며 Design System Library의 기본 자료가 아니다. `glossary/js/localization.js`는 용어별 영문 설명과 체험 문구를 조립하고 `shared/js/text-localizer.js`를 통해 텍스트와 접근성 이름만 갱신한다. 입력값·이벤트·실행 상태는 유지하며, 동적으로 바뀐 체험 안내도 같은 번역 경로를 사용한다. `entry-messages-en.js`와 `messages-en.js`는 이 학습 프로젝트가 소유한다. 플랫폼의 `localization` CLI에는 프로젝트가 언어 버튼·범위·누락 문자 패턴을 시나리오로 연결한다. `tests/glossary-localization.test.mjs`는 실제 EN/KO 전환·목록·상세·체험·새로고침을 검증한다.
+
 `glossary/js/catalog.js`는 UI 용어의 큐레이션과 UX 원리의 샘플 연결만 소유한다. UI 정의와 동작은 기존 Patterns의 Definition Factory·카탈로그·runtime, UX 원리는 `pattern-principles.js`를 참조한다. 용어집은 예시를 복제하지 않는다. 피츠·힉·근접성의 원리별 비교 실험만 `glossary/js/ux-demos.js`가 소유하며 같은 수명주기 scope로 해제한다.
 
 `route.js`의 해시 경로가 분류·용어 상세·검색의 원본이다. `app.js`는 접힌 UI/UX 분류, 세 열 표, 한 번에 하나의 행 내 체험, 고유 주소의 상세 화면을 조립한다. 검색은 두 분류를 함께 탐색한다. 도식은 `visual.js`, 반응형 표시와 체험 영역 스타일은 `css/glossary.css`가 소유한다. 체험을 바꾸거나 화면을 떠나면 이전 이벤트·타이머·레이어를 해제하고 BFCache 복원 시 다시 연결한다. 정적 호스트에서도 같은 상대 경로와 해시 주소를 사용한다.
+
+## ARCH-001 · 모듈 계약
+
+용어집 app은 경로·상태·수명주기를 조립하고 list-view는 목록과 표를 표시한다. motion-definitions는 프레임·기본 용어, motion-patterns는 기존 샘플 연결, motion-demos는 조립을 소유한다. MOD-001 · UX-001로 경계와 행동 보존을 검증한다.
