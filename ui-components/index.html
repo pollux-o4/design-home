@@ -3,54 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UI Components - Figma Canvas Design System</title>
-  <meta name="description" content="Figma Canvas style UI component library & interactive playground">
+  <title>Patterns — Design Home</title>
+  <meta name="description" content="컴포넌트부터 접근성까지, 위에서 아래로 살펴보는 UI 패턴">
+  <script src="../shared/js/page-transitions.js"></script>
+  <script src="../shared/js/theme.js"></script>
   
   <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="../shared/css/interface.css">
   <link rel="stylesheet" href="../shared/css/global-nav.css">
   <link rel="stylesheet" href="css/figma-canvas.css">
   <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="../assets/index/navigation.css">
+  <link rel="stylesheet" href="../shared/css/scrollbar.css">
 </head>
-<body>
-
-  <!-- Top Figma Header Toolbar -->
-  <header class="figma-header">
-    <div class="figma-header-left">
-      <div class="figma-logo">
-        <div class="figma-logo-icon">❖</div>
-        <span>UI Components Canvas</span>
-      </div>
-    </div>
-
-    <div class="figma-header-right">
-      <button class="btn-icon" title="맨 위로 이동" onclick="const v = document.querySelector('.figma-canvas-viewport'); if(v) v.scrollTo({top:0, behavior:'smooth'});">⬆️</button>
-      <button class="btn-icon" title="캔버스 리셋" onclick="window.location.reload();">🔄</button>
-    </div>
-  </header>
+<body class="home-page">
 
   <!-- Main Canvas Workspace -->
   <div class="figma-workspace">
     <!-- Left Layers Sidebar -->
     <aside class="figma-sidebar">
+      <fieldset class="pattern-view-switcher" id="pattern-view-switcher"><legend class="sr-only" data-i18n="patterns_view_legend">패턴 탐색 기준</legend><label><input type="radio" name="pattern-view" value="kind" checked><span data-i18n="patterns_ui_view">UI 관점</span></label><label><input type="radio" name="pattern-view" value="purpose"><span data-i18n="patterns_ux_view">UX 관점</span></label></fieldset>
       <div class="sidebar-search">
         <div class="search-box">
-          <span class="search-icon">🔍</span>
-          <input type="text" id="search-input" class="search-input" placeholder="컴포넌트 검색 (Modal, Toggle...)" />
+          <span class="search-icon"><svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#search"></use></svg></span>
+          <input type="text" id="search-input" class="search-input" aria-label="패턴 검색" placeholder="패턴 검색 · /" />
         </div>
       </div>
 
       <!-- Settings Accordion -->
-      <div class="sidebar-accordion">
-        <div class="sidebar-accordion-header" onclick="toggleSidebarAccordion(this)">
-          <span>⚙️ 캔버스 디자인 설정</span>
-          <span class="accordion-arrow">▲</span>
-        </div>
+      <div class="sidebar-accordion collapsed">
+        <button type="button" class="sidebar-accordion-header" aria-expanded="false" onclick="toggleSidebarAccordion(this)">
+          <span data-i18n="patterns_settings">표시 설정</span>
+          <span class="accordion-arrow"><svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#chevron"></use></svg></span>
+        </button>
         <div class="sidebar-accordion-body" id="settings-accordion-body">
           <!-- 폰트 설정 (Noto Sans KR 기본 + 스타일리시 폰트 3종) -->
           <div class="setting-item">
-            <label class="ui-label" style="font-size:11px; margin-bottom:4px; font-weight:600; color:var(--figma-text-secondary);">🎨 폰트 설정 (4가지)</label>
+            <label class="ui-label" data-i18n="patterns_font" style="font-size:11px; margin-bottom:4px; font-weight:600; color:var(--figma-text-secondary);">서체</label>
             <select class="ui-select" id="font-family-select" style="padding:6px 8px; font-size:11px; width:100%;" onchange="changeFontFamily(this.value, true)">
-              <option value="'Noto Sans KR', sans-serif" selected>1. Noto Sans KR (기본 / Standard)</option>
+              <option value="-apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif" data-i18n="patterns_system_font" selected>시스템 서체 (기본)</option>
               <option value="'Poppins', sans-serif">2. Poppins (Stylish Geometric)</option>
               <option value="'Plus Jakarta Sans', sans-serif">3. Plus Jakarta Sans (Trendy Neo-Grotesque)</option>
               <option value="'Space Grotesk', sans-serif">4. Space Grotesk (Futuristic Display)</option>
@@ -60,59 +51,61 @@
           <!-- 최소 글자 크기 슬라이더 (디폴트 12px, 범위 8px ~ 16px) -->
           <div class="setting-item" style="margin-top:14px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-              <label class="ui-label" style="font-size:11px; font-weight:600; color:var(--figma-text-secondary);">📏 최소 글자 크기</label>
+              <label class="ui-label" data-i18n="patterns_min_font" style="font-size:11px; font-weight:600; color:var(--figma-text-secondary);">최소 글자 크기</label>
               <span id="min-font-size-value" style="font-size:11px; font-weight:700; color:var(--figma-accent); background:rgba(13,153,255,0.15); padding:2px 6px; border-radius:4px;">12px</span>
             </div>
             <input type="range" id="min-font-size-slider" min="8" max="16" step="1" value="12" style="width:100%; accent-color:var(--figma-accent); cursor:pointer;" oninput="changeMinFontSize(this.value + 'px')" />
             <div style="display:flex; justify-content:space-between; font-size:9px; color:var(--figma-text-muted); margin-top:3px;">
               <span>8px</span>
-              <span style="color:var(--figma-accent); font-weight:600;">12px (기본)</span>
+              <span data-i18n="patterns_default_size" style="color:var(--figma-accent); font-weight:600;">12px (기본)</span>
               <span>16px</span>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="sidebar-section-title">Layers / Artboards</div>
-      <ul class="layer-tree" id="layer-tree">
+      <div class="sidebar-section-title"><a href="#/" class="patterns-home">Patterns</a><span data-i18n="patterns_search_hint"> / 또는 Ctrl/⌘K로 검색</span></div>
+      <ul class="layer-tree" data-scroll-region id="layer-tree">
         <!-- Dynamically rendered layer items -->
       </ul>
     </aside>
 
     <!-- Canvas Viewport with Dot Grid -->
-    <main class="figma-canvas-viewport">
+    <main class="figma-canvas-viewport" data-scroll-region>
+
+      <section class="canvas-intro"><p class="eyebrow">DESIGN HOME</p><h1 data-i18n="patterns_intro_title">Patterns.<br>경험을 만드는 디테일.</h1><p data-i18n="patterns_intro_desc">큰 그림부터 작은 동작까지.<br>분야를 선택하고, 세부 주제를 펼쳐 직접 살펴보세요.</p></section>
       <div class="canvas-grid" id="canvas-grid">
         <!-- Dynamically rendered Figma Artboard Frames -->
       </div>
     </main>
   </div>
 
-  <!-- Code Preview Modal -->
-  <div class="code-modal-overlay" id="code-modal-overlay">
-    <div class="code-modal">
-      <div class="code-modal-header">
-        <div class="code-modal-title" id="code-modal-title">&lt; ComponentCode /&gt;</div>
-        <button class="btn-icon" id="btn-close-modal">✕</button>
-      </div>
-      <pre class="code-modal-body" id="code-modal-body"></pre>
-      <div class="code-modal-footer">
-        <button class="btn-close" id="btn-close-modal-footer" onclick="document.getElementById('code-modal-overlay').classList.remove('open')">닫기</button>
-        <button class="btn-copy" id="btn-copy-code">Copy Code</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- JS Component Modules (Option B: Works in file:// without server) -->
+  <!-- Declarative sample definitions; serve through the local or static web host. -->
+  <script src="js/sample-definition.js"></script>
   <script src="js/components/popups-and-layers.js"></script>
   <script src="js/components/inputs-and-controls.js"></script>
   <script src="js/components/states-and-feedback.js"></script>
   <script src="js/components/navigation.js"></script>
   <script src="js/components/interactions.js"></script>
 
+  <script src="js/components/motion-foundations.js"></script>
+  <script src="js/components/state-morphing.js"></script>
+  <script src="js/components/motion-spatial.js"></script>
+  <script src="js/components/motion-expressive.js"></script>
+
+  <script src="js/components/layout-patterns.js"></script>
+  <script src="js/components/data-patterns.js"></script>
+  <script src="js/components/workflow-patterns.js"></script>
+  <script src="js/components/accessibility-patterns.js"></script>
+
   <!-- App Controller -->
-  <script src="js/app.js"></script>
+  <script src="js/catalog.js"></script>
+  <script src="js/preferences.js"></script>
+  <script type="module" src="js/app.js"></script>
 
   <!-- Global Navigation -->
+  <script type="module" src="../shared/js/i18n.js"></script>
   <script src="../shared/js/global-nav.js" defer></script>
+  <script type="module" src="../shared/js/scrollbar.js"></script>
 </body>
 </html>

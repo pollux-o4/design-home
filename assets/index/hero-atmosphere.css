@@ -1,0 +1,183 @@
+/* Aceternity's moving radial colors and title sparkles, adapted to the native Home shell. */
+.home-page:not(.trends-page) {
+  isolation: isolate;
+}
+.home-page:not(.trends-page) .hero {
+  position: relative;
+  isolation: isolate;
+  text-align: center;
+  padding-top: calc(var(--dh-nav-height) + 64px);
+  padding-bottom: 38px;
+}
+.hero-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+.home-page:not(.trends-page) .hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  margin-bottom: 24px;
+  border: 1px solid color-mix(in srgb, var(--ui-text) 10%, transparent);
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--ui-surface) 72%, transparent);
+  color: var(--ui-text);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  box-shadow: inset 0 1px 0 #ffffff20;
+}
+.home-page:not(.trends-page) .hero-badge::before {
+  content: "✦";
+  color: var(--ui-blue);
+}
+.home-page:not(.trends-page) .hero-title {
+  font-size: clamp(38px, 6.3vw, 78px);
+  line-height: 1.17;
+}
+.home-page:not(.trends-page) .hero-title span {
+  color: color-mix(in srgb, var(--ui-text) 72%, var(--ui-blue));
+}
+.home-page:not(.trends-page) .hero-subtitle {
+  margin: 18px 0 26px;
+  font-size: 18px;
+}
+.home-page:not(.trends-page)
+  :is(.hero-subtitle, .preview-hint, .eyebrow, .library-invitation p:last-child, footer p) {
+  color: color-mix(in srgb, var(--ui-secondary) 80%, var(--ui-text));
+}
+.home-page:not(.trends-page) .hero-actions {
+  justify-content: center;
+}
+.home-page:not(.trends-page) .hero .btn-primary {
+  min-height: 48px;
+  padding: 13px 24px;
+  border: 1px solid #ffffff26;
+  box-shadow:
+    0 5px 18px #0071e326,
+    inset 0 1px 0 #ffffff29;
+}
+.hero-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  contain: layout paint;
+  pointer-events: none;
+  opacity: 0.52;
+}
+.atmosphere-pointer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: min(65vw, 650px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  opacity: 0;
+  background: radial-gradient(circle, #89a9f275, #ae7eed35 35%, transparent 68%);
+  transition: opacity 350ms;
+}
+.is-pointer-active .atmosphere-pointer {
+  opacity: 1;
+}
+.atmosphere-bloom {
+  /* One color field avoids blending three full-screen moving surfaces on every frame. */
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  top: -10%;
+  left: -10%;
+  background:
+    radial-gradient(ellipse at 25% 45%, #4c9ff485, transparent 65%),
+    radial-gradient(ellipse at 75% 35%, #9973eb85, transparent 65%),
+    radial-gradient(ellipse at 55% 85%, #e58bc155, transparent 60%);
+  animation: atmosphere-orbit 24s linear infinite;
+  animation-play-state: paused;
+}
+.hero-title-sparkles {
+  position: relative;
+  width: min(100%, 520px);
+  height: 38px;
+  margin: 14px auto -8px;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse at top, black, transparent 75%);
+}
+.atmosphere-horizon {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #61bfff, #a599fa, transparent);
+  box-shadow: 0 0 9px 1px #648ff580;
+}
+.atmosphere-sparkles {
+  position: absolute;
+  inset: 0;
+}
+.atmosphere-sparkles i {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: var(--ui-text);
+  opacity: 0.2;
+  animation: atmosphere-twinkle var(--duration) ease-in-out infinite;
+  animation-delay: var(--delay);
+  animation-play-state: paused;
+}
+.is-motion-running .atmosphere-bloom,
+.is-motion-running .hero.is-title-visible .atmosphere-sparkles i {
+  animation-play-state: running;
+}
+@keyframes atmosphere-orbit {
+  from {
+    transform: rotate(0deg) translateX(6%) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(6%) rotate(-360deg);
+  }
+}
+@keyframes atmosphere-twinkle {
+  0%,
+  100% {
+    opacity: 0.1;
+    transform: translateY(4px) scale(0.6);
+  }
+  50% {
+    opacity: 0.85;
+    transform: translateY(-3px) scale(1);
+  }
+}
+@media (max-width: 640px) {
+  .home-page:not(.trends-page) .hero {
+    padding-top: calc(var(--dh-nav-height) + 34px);
+    padding-bottom: 20px;
+  }
+  .hero-copy {
+    padding: 12px 0;
+  }
+  .home-page:not(.trends-page) .hero-subtitle {
+    font-size: 15px;
+  }
+  .home-page:not(.trends-page) .hero-title {
+    font-size: clamp(32px, 9.2vw, 48px);
+  }
+  .home-page:not(.trends-page) .hero-badge {
+    margin-bottom: 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-page .atmosphere-bloom,
+  .hero .atmosphere-sparkles i {
+    animation: none;
+  }
+  .atmosphere-pointer {
+    display: none;
+  }
+}

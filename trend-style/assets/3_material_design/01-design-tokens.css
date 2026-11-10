@@ -1,0 +1,293 @@
+:root {
+  /* V1: Material You Light (Classic Purple Tonal) */
+  --md-sys-color-primary-v1: #6750a4;
+  --md-sys-color-on-primary-v1: #ffffff;
+  --md-sys-color-primary-container-v1: #eaddff;
+  --md-sys-color-on-primary-container-v1: #21005d;
+  --md-sys-color-secondary-v1: #625b71;
+  --md-sys-color-secondary-container-v1: #e8def8;
+  --md-sys-color-on-secondary-container-v1: #1d192b;
+  --md-sys-color-tertiary-v1: #7d5260;
+  --md-sys-color-tertiary-container-v1: #ffd8e4;
+  --md-sys-color-background-v1: #fef7ff;
+  --md-sys-color-surface-v1: #f7f2fa;
+  --md-sys-color-surface-variant-v1: #e7e0ec;
+  --md-sys-color-on-surface-v1: #1d1b20;
+  --md-sys-color-on-surface-variant-v1: #49454f;
+  --md-sys-color-outline-v1: #79747e;
+  --md-sys-color-outline-variant-v1: #cac4d0;
+  --md-elevation-1-v1: 0px 1px 3px 1px rgba(0, 0, 0, 0.08), 0px 1px 2px 0px rgba(0, 0, 0, 0.12);
+  --md-elevation-2-v1: 0px 2px 6px 2px rgba(0, 0, 0, 0.1), 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
+  --md-elevation-3-v1: 0px 4px 12px 3px rgba(0, 0, 0, 0.12), 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+  --md-shape-radius-v1: 16px;
+
+  /* V2: Material You Dark (Violet Night) */
+  --md-sys-color-primary-v2: #d0bcff;
+  --md-sys-color-on-primary-v2: #381e72;
+  --md-sys-color-primary-container-v2: #4f378b;
+  --md-sys-color-on-primary-container-v2: #eaddff;
+  --md-sys-color-secondary-v2: #ccc2dc;
+  --md-sys-color-secondary-container-v2: #4a4458;
+  --md-sys-color-on-secondary-container-v2: #e8def8;
+  --md-sys-color-tertiary-v2: #efb8c8;
+  --md-sys-color-tertiary-container-v2: #633b48;
+  --md-sys-color-background-v2: #141218;
+  --md-sys-color-surface-v2: #211f26;
+  --md-sys-color-surface-variant-v2: #49454f;
+  --md-sys-color-on-surface-v2: #e6e1e5;
+  --md-sys-color-on-surface-variant-v2: #cac4d0;
+  --md-sys-color-outline-v2: #938f99;
+  --md-sys-color-outline-variant-v2: #49454f;
+  --md-elevation-1-v2: 0px 1px 3px 1px rgba(0, 0, 0, 0.35), 0px 1px 2px 0px rgba(0, 0, 0, 0.4);
+  --md-elevation-2-v2: 0px 2px 6px 2px rgba(0, 0, 0, 0.4), 0px 1px 3px 0px rgba(0, 0, 0, 0.5);
+  --md-elevation-3-v2: 0px 4px 12px 3px rgba(0, 0, 0, 0.5), 0px 2px 4px 0px rgba(0, 0, 0, 0.6);
+  --md-shape-radius-v2: 16px;
+
+  /* V3: High-Contrast Dynamic Blue */
+  --md-sys-color-primary-v3: #0061a4;
+  --md-sys-color-on-primary-v3: #ffffff;
+  --md-sys-color-primary-container-v3: #d1e4ff;
+  --md-sys-color-on-primary-container-v3: #001d36;
+  --md-sys-color-secondary-v3: #535f70;
+  --md-sys-color-secondary-container-v3: #d7e3f7;
+  --md-sys-color-on-secondary-container-v3: #101c2b;
+  --md-sys-color-tertiary-v3: #6b5778;
+  --md-sys-color-tertiary-container-v3: #f2daff;
+  --md-sys-color-background-v3: #f8f9ff;
+  --md-sys-color-surface-v3: #eef2fb;
+  --md-sys-color-surface-variant-v3: #dfe2eb;
+  --md-sys-color-on-surface-v3: #1a1c1e;
+  --md-sys-color-on-surface-variant-v3: #43474e;
+  --md-sys-color-outline-v3: #73777f;
+  --md-sys-color-outline-variant-v3: #c3c7d0;
+  --md-elevation-1-v3: 0px 2px 6px rgba(0, 97, 164, 0.08);
+  --md-elevation-2-v3: 0px 4px 12px rgba(0, 97, 164, 0.14);
+  --md-elevation-3-v3: 0px 8px 24px rgba(0, 97, 164, 0.18);
+  --md-shape-radius-v3: 20px;
+
+  /* V4: Monochromatic Eco Sage */
+  --md-sys-color-primary-v4: #386a20;
+  --md-sys-color-on-primary-v4: #ffffff;
+  --md-sys-color-primary-container-v4: #b7f397;
+  --md-sys-color-on-primary-container-v4: #042100;
+  --md-sys-color-secondary-v4: #55624c;
+  --md-sys-color-secondary-container-v4: #d9e7cb;
+  --md-sys-color-on-secondary-container-v4: #131f0d;
+  --md-sys-color-tertiary-v4: #386663;
+  --md-sys-color-tertiary-container-v4: #bcece7;
+  --md-sys-color-background-v4: #f7fbf1;
+  --md-sys-color-surface-v4: #eef4e8;
+  --md-sys-color-surface-variant-v4: #e1e4d5;
+  --md-sys-color-on-surface-v4: #191e16;
+  --md-sys-color-on-surface-variant-v4: #44483d;
+  --md-sys-color-outline-v4: #75796c;
+  --md-sys-color-outline-variant-v4: #c5c8ba;
+  --md-elevation-1-v4: 0px 1px 3px rgba(56, 106, 32, 0.1);
+  --md-elevation-2-v4: 0px 3px 8px rgba(56, 106, 32, 0.15);
+  --md-elevation-3-v4: 0px 6px 16px rgba(56, 106, 32, 0.2);
+  --md-shape-radius-v4: 24px;
+
+  /* V5: Clean Architectural Teal */
+  --md-sys-color-primary-v5: #006874;
+  --md-sys-color-on-primary-v5: #ffffff;
+  --md-sys-color-primary-container-v5: #97f0ff;
+  --md-sys-color-on-primary-container-v5: #001f24;
+  --md-sys-color-secondary-v5: #4a6267;
+  --md-sys-color-secondary-container-v5: #cce8ed;
+  --md-sys-color-on-secondary-container-v5: #051f23;
+  --md-sys-color-tertiary-v5: #525b7d;
+  --md-sys-color-tertiary-container-v5: #dae2ff;
+  --md-sys-color-background-v5: #f5fafb;
+  --md-sys-color-surface-v5: #eaf3f5;
+  --md-sys-color-surface-variant-v5: #dae4e5;
+  --md-sys-color-on-surface-v5: #161d1e;
+  --md-sys-color-on-surface-variant-v5: #3f484a;
+  --md-sys-color-outline-v5: #6f797a;
+  --md-sys-color-outline-variant-v5: #bec8c9;
+  --md-elevation-1-v5: 0px 1px 2px rgba(0, 0, 0, 0.06);
+  --md-elevation-2-v5: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  --md-elevation-3-v5: 0px 4px 12px rgba(0, 0, 0, 0.14);
+  --md-shape-radius-v5: 12px;
+
+  /* V6: Material Cyber Sunset (Neon Dark) */
+  --md-sys-color-primary-v6: #ffb4ab;
+  --md-sys-color-on-primary-v6: #690005;
+  --md-sys-color-primary-container-v6: #93000a;
+  --md-sys-color-on-primary-container-v6: #ffdad6;
+  --md-sys-color-secondary-v6: #f6b8a0;
+  --md-sys-color-secondary-container-v6: #723521;
+  --md-sys-color-on-secondary-container-v6: #ffdbcf;
+  --md-sys-color-tertiary-v6: #e5c158;
+  --md-sys-color-tertiary-container-v6: #574500;
+  --md-sys-color-background-v6: #1b1110;
+  --md-sys-color-surface-v6: #2a1918;
+  --md-sys-color-surface-variant-v6: #534341;
+  --md-sys-color-on-surface-v6: #f1dfdc;
+  --md-sys-color-on-surface-variant-v6: #d8c2bf;
+  --md-sys-color-outline-v6: #a08c8a;
+  --md-sys-color-outline-variant-v6: #534341;
+  --md-elevation-1-v6: 0px 2px 8px rgba(255, 180, 171, 0.12);
+  --md-elevation-2-v6: 0px 4px 16px rgba(255, 180, 171, 0.18);
+  --md-elevation-3-v6: 0px 8px 28px rgba(255, 180, 171, 0.25);
+  --md-shape-radius-v6: 28px;
+}
+
+/* Default fallback binding */
+body[data-theme="v1"] {
+  --md-sys-color-primary: var(--md-sys-color-primary-v1);
+  --md-sys-color-on-primary: var(--md-sys-color-on-primary-v1);
+  --md-sys-color-primary-container: var(--md-sys-color-primary-container-v1);
+  --md-sys-color-on-primary-container: var(--md-sys-color-on-primary-container-v1);
+  --md-sys-color-secondary: var(--md-sys-color-secondary-v1);
+  --md-sys-color-secondary-container: var(--md-sys-color-secondary-container-v1);
+  --md-sys-color-on-secondary-container: var(--md-sys-color-on-secondary-container-v1);
+  --md-sys-color-tertiary: var(--md-sys-color-tertiary-v1);
+  --md-sys-color-tertiary-container: var(--md-sys-color-tertiary-container-v1);
+  --md-sys-color-background: var(--md-sys-color-background-v1);
+  --md-sys-color-surface: var(--md-sys-color-surface-v1);
+  --md-sys-color-surface-variant: var(--md-sys-color-surface-variant-v1);
+  --md-sys-color-on-surface: var(--md-sys-color-on-surface-v1);
+  --md-sys-color-on-surface-variant: var(--md-sys-color-on-surface-variant-v1);
+  --md-sys-color-outline: var(--md-sys-color-outline-v1);
+  --md-sys-color-outline-variant: var(--md-sys-color-outline-variant-v1);
+  --md-elevation-1: var(--md-elevation-1-v1);
+  --md-elevation-2: var(--md-elevation-2-v1);
+  --md-elevation-3: var(--md-elevation-3-v1);
+  --md-shape-radius: var(--md-shape-radius-v1);
+}
+
+body[data-theme="v2"] {
+  --md-sys-color-primary: var(--md-sys-color-primary-v2);
+  --md-sys-color-on-primary: var(--md-sys-color-on-primary-v2);
+  --md-sys-color-primary-container: var(--md-sys-color-primary-container-v2);
+  --md-sys-color-on-primary-container: var(--md-sys-color-on-primary-container-v2);
+  --md-sys-color-secondary: var(--md-sys-color-secondary-v2);
+  --md-sys-color-secondary-container: var(--md-sys-color-secondary-container-v2);
+  --md-sys-color-on-secondary-container: var(--md-sys-color-on-secondary-container-v2);
+  --md-sys-color-tertiary: var(--md-sys-color-tertiary-v2);
+  --md-sys-color-tertiary-container: var(--md-sys-color-tertiary-container-v2);
+  --md-sys-color-background: var(--md-sys-color-background-v2);
+  --md-sys-color-surface: var(--md-sys-color-surface-v2);
+  --md-sys-color-surface-variant: var(--md-sys-color-surface-variant-v2);
+  --md-sys-color-on-surface: var(--md-sys-color-on-surface-v2);
+  --md-sys-color-on-surface-variant: var(--md-sys-color-on-surface-variant-v2);
+  --md-sys-color-outline: var(--md-sys-color-outline-v2);
+  --md-sys-color-outline-variant: var(--md-sys-color-outline-variant-v2);
+  --md-elevation-1: var(--md-elevation-1-v2);
+  --md-elevation-2: var(--md-elevation-2-v2);
+  --md-elevation-3: var(--md-elevation-3-v2);
+  --md-shape-radius: var(--md-shape-radius-v2);
+}
+
+body[data-theme="v3"] {
+  --md-sys-color-primary: var(--md-sys-color-primary-v3);
+  --md-sys-color-on-primary: var(--md-sys-color-on-primary-v3);
+  --md-sys-color-primary-container: var(--md-sys-color-primary-container-v3);
+  --md-sys-color-on-primary-container: var(--md-sys-color-on-primary-container-v3);
+  --md-sys-color-secondary: var(--md-sys-color-secondary-v3);
+  --md-sys-color-secondary-container: var(--md-sys-color-secondary-container-v3);
+  --md-sys-color-on-secondary-container: var(--md-sys-color-on-secondary-container-v3);
+  --md-sys-color-tertiary: var(--md-sys-color-tertiary-v3);
+  --md-sys-color-tertiary-container: var(--md-sys-color-tertiary-container-v3);
+  --md-sys-color-background: var(--md-sys-color-background-v3);
+  --md-sys-color-surface: var(--md-sys-color-surface-v3);
+  --md-sys-color-surface-variant: var(--md-sys-color-surface-variant-v3);
+  --md-sys-color-on-surface: var(--md-sys-color-on-surface-v3);
+  --md-sys-color-on-surface-variant: var(--md-sys-color-on-surface-variant-v3);
+  --md-sys-color-outline: var(--md-sys-color-outline-v3);
+  --md-sys-color-outline-variant: var(--md-sys-color-outline-variant-v3);
+  --md-elevation-1: var(--md-elevation-1-v3);
+  --md-elevation-2: var(--md-elevation-2-v3);
+  --md-elevation-3: var(--md-elevation-3-v3);
+  --md-shape-radius: var(--md-shape-radius-v3);
+}
+
+body[data-theme="v4"] {
+  --md-sys-color-primary: var(--md-sys-color-primary-v4);
+  --md-sys-color-on-primary: var(--md-sys-color-on-primary-v4);
+  --md-sys-color-primary-container: var(--md-sys-color-primary-container-v4);
+  --md-sys-color-on-primary-container: var(--md-sys-color-on-primary-container-v4);
+  --md-sys-color-secondary: var(--md-sys-color-secondary-v4);
+  --md-sys-color-secondary-container: var(--md-sys-color-secondary-container-v4);
+  --md-sys-color-on-secondary-container: var(--md-sys-color-on-secondary-container-v4);
+  --md-sys-color-tertiary: var(--md-sys-color-tertiary-v4);
+  --md-sys-color-tertiary-container: var(--md-sys-color-tertiary-container-v4);
+  --md-sys-color-background: var(--md-sys-color-background-v4);
+  --md-sys-color-surface: var(--md-sys-color-surface-v4);
+  --md-sys-color-surface-variant: var(--md-sys-color-surface-variant-v4);
+  --md-sys-color-on-surface: var(--md-sys-color-on-surface-v4);
+  --md-sys-color-on-surface-variant: var(--md-sys-color-on-surface-variant-v4);
+  --md-sys-color-outline: var(--md-sys-color-outline-v4);
+  --md-sys-color-outline-variant: var(--md-sys-color-outline-variant-v4);
+  --md-elevation-1: var(--md-elevation-1-v4);
+  --md-elevation-2: var(--md-elevation-2-v4);
+  --md-elevation-3: var(--md-elevation-3-v4);
+  --md-shape-radius: var(--md-shape-radius-v4);
+}
+
+body[data-theme="v5"] {
+  --md-sys-color-primary: var(--md-sys-color-primary-v5);
+  --md-sys-color-on-primary: var(--md-sys-color-on-primary-v5);
+  --md-sys-color-primary-container: var(--md-sys-color-primary-container-v5);
+  --md-sys-color-on-primary-container: var(--md-sys-color-on-primary-container-v5);
+  --md-sys-color-secondary: var(--md-sys-color-secondary-v5);
+  --md-sys-color-secondary-container: var(--md-sys-color-secondary-container-v5);
+  --md-sys-color-on-secondary-container: var(--md-sys-color-on-secondary-container-v5);
+  --md-sys-color-tertiary: var(--md-sys-color-tertiary-v5);
+  --md-sys-color-tertiary-container: var(--md-sys-color-tertiary-container-v5);
+  --md-sys-color-background: var(--md-sys-color-background-v5);
+  --md-sys-color-surface: var(--md-sys-color-surface-v5);
+  --md-sys-color-surface-variant: var(--md-sys-color-surface-variant-v5);
+  --md-sys-color-on-surface: var(--md-sys-color-on-surface-v5);
+  --md-sys-color-on-surface-variant: var(--md-sys-color-on-surface-variant-v5);
+  --md-sys-color-outline: var(--md-sys-color-outline-v5);
+  --md-sys-color-outline-variant: var(--md-sys-color-outline-variant-v5);
+  --md-elevation-1: var(--md-elevation-1-v5);
+  --md-elevation-2: var(--md-elevation-2-v5);
+  --md-elevation-3: var(--md-elevation-3-v5);
+  --md-shape-radius: var(--md-shape-radius-v5);
+}
+
+body[data-theme="v6"] {
+  --md-sys-color-primary: var(--md-sys-color-primary-v6);
+  --md-sys-color-on-primary: var(--md-sys-color-on-primary-v6);
+  --md-sys-color-primary-container: var(--md-sys-color-primary-container-v6);
+  --md-sys-color-on-primary-container: var(--md-sys-color-on-primary-container-v6);
+  --md-sys-color-secondary: var(--md-sys-color-secondary-v6);
+  --md-sys-color-secondary-container: var(--md-sys-color-secondary-container-v6);
+  --md-sys-color-on-secondary-container: var(--md-sys-color-on-secondary-container-v6);
+  --md-sys-color-tertiary: var(--md-sys-color-tertiary-v6);
+  --md-sys-color-tertiary-container: var(--md-sys-color-tertiary-container-v6);
+  --md-sys-color-background: var(--md-sys-color-background-v6);
+  --md-sys-color-surface: var(--md-sys-color-surface-v6);
+  --md-sys-color-surface-variant: var(--md-sys-color-surface-variant-v6);
+  --md-sys-color-on-surface: var(--md-sys-color-on-surface-v6);
+  --md-sys-color-on-surface-variant: var(--md-sys-color-on-surface-variant-v6);
+  --md-sys-color-outline: var(--md-sys-color-outline-v6);
+  --md-sys-color-outline-variant: var(--md-sys-color-outline-variant-v6);
+  --md-elevation-1: var(--md-elevation-1-v6);
+  --md-elevation-2: var(--md-elevation-2-v6);
+  --md-elevation-3: var(--md-elevation-3-v6);
+  --md-shape-radius: var(--md-shape-radius-v6);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.2s ease;
+}
+
+body {
+  font-family: "Plus Jakarta Sans", "Roboto", sans-serif;
+  background-color: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-surface);
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+}

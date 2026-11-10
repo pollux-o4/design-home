@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "url": "http://127.0.0.1:4184/glossary/index.html#/ux",
+  "scope": "#main-content",
+  "openEach": "#panel-ux [data-expand]",
+  "languages": [
+    {
+      "code": "en",
+      "control": "#dh-lang-en",
+      "rejectPattern": "[가-힣]"
+    }
+  ]
+}

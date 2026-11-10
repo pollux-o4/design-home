@@ -1,0 +1,127 @@
+/* ----------------------------------------------------
+   Kanban / Interactive Widgets Section
+---------------------------------------------------- */
+.bottom-widgets-grid {
+  display: grid;
+  grid-template-columns: 1.8fr 1.2fr;
+  gap: 1.5rem;
+}
+
+.kanban-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.kanban-col {
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: var(--shadow-inset-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  min-height: 220px;
+}
+
+.kanban-col-title {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kanban-task {
+  padding: 0.85rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-outset-sm);
+  background: var(--surface-color);
+  cursor: grab;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: transform 0.2s;
+}
+
+.kanban-task:active {
+  cursor: grabbing;
+  transform: scale(1.03);
+}
+
+.kanban-task-title {
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.kanban-task-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.tag-pill {
+  padding: 0.1rem 0.4rem;
+  border-radius: 6px;
+  box-shadow: var(--shadow-inset-sm);
+  font-size: 0.68rem;
+}
+
+/* Circular System Performance Meters */
+.system-meters {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.meter-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.concentric-ring {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  box-shadow: var(--shadow-inset);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: conic-gradient(var(--accent) var(--angle, 70%), transparent 0);
+}
+
+.concentric-ring::before {
+  content: "";
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--surface-color);
+  box-shadow: var(--shadow-outset-sm);
+}
+
+.ring-value {
+  position: relative;
+  z-index: 2;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.meter-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}

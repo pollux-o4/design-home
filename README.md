@@ -2,24 +2,29 @@
 
 디자인 스킬/레퍼런스 모음.
 
+Design Home은 디자인 학습 제품이다. `design-compare/`의 Design System Library는 프로젝트별 디자인 검토 도구이며, 루트 `design-system.config.json`이 이 프로젝트의 자료와 검토 저장소를 연결한다. 학습 문서는 `design-home-library/documents/`가 소유한다.
+
+학습 화면의 구조는 [Design Home 컴포넌트 지도](docs/design-home-components.md), 검토 도구는 [Design System Library C1~C4](design-compare/docs/README.md)에서 확인한다.
+
+## 로컬 서버 실행
+
+저장소 루트에서 `mise run hub`로 실행한다. 처음 실행할 때는 `mise trust`로 설정을 신뢰한다.
+Design System Library 주소는 `http://127.0.0.1:4184/design-library/`다. 종료는 실행한 터미널에서 `Ctrl+C`를 누른다.
+
 - `impeccable/` — impeccable 디자인 스킬 (github: pbakaus/impeccable)
 - `mengto-skills/` — MengTo Skills 모음 (github: MengTo/Skills)
+- [`design-compare/`](design-compare/README.md) — 기준 컴포넌트·개발 페이지 시각/CSS 비교 CLI
 
-## 📂 폴더 구조 개요
+## 탐색
 
-### ui-components
+- 학습 제품: Patterns · Glossary · Trends · Libraries. `docs`에서 컴포넌트 관심사를 검색한다.
+- 검토 도구: `design-compare`의 architecture · workflows · results-and-validation.
+- 계약·선택: `specs`의 MOD-001 · UX-001, `decisions`의 ARCH-001.
 
-- **`popups-and-layers`** (팝업과 레이어)
-  - 화면 위에 겹쳐서 뜨는 오버레이 요소 (예: Modal, Toast, Drawer, Custom Alert)
+개발·검증 명령은 각 package.json과 mise.toml이 원본이다. 모듈 경계를 바꾸면 MOD-001, 화면·효과를 바꾸면 UX-001 기준을 적용한다.
 
-- **`inputs-and-controls`** (입력과 선택 컨트롤)
-  - 사용자가 조작하고 입력하는 요소 (예: Accordion, Dropdown, Toggle Switch, Segmented Control, Stepper)
+## 개발 도구
 
-- **`states-and-feedback`** (상태와 피드백)
-  - 시스템 상태와 결과를 전달하는 요소 (예: Skeleton UI, Empty State, Tooltip, Badge)
+mise 설치 후 루트에서 `mise trust`, `mise install`, `mise run setup`을 실행한다. 학습 화면은 `mise run dev`, 로컬 검토 도구는 `mise run hub`로 연다. `mise run check`는 빠른 검사, `mise run test`는 전체 검증, `mise run build`는 정적 배포물 생성이다.
 
-- **`navigation`** (화면 이동과 구조)
-  - 서비스 내 길찾기 및 위치 이동 요소 (예: GNB, LNB, Breadcrumb, Infinite Scroll)
-
-- **`interactions`** (움직임과 반응)
-  - 사용자 행동에 대한 미세 모션 및 상태 반응 (예: Hover/Focus/Active, Disabled, Micro-interaction)
+설치·검사·실패 복구는 docs에서 OPS-001, 도구 선택은 decisions에서 TOOL-001을 검색한다.

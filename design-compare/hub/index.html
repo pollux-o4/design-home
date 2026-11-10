@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="ko" data-mode="static">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Design System Library</title>
+    <link rel="stylesheet" href="../shared/css/interface.css" />
+    <link rel="stylesheet" href="../shared/css/global-nav.css" />
+    <script src="../shared/js/page-transitions.js"></script>
+    <script src="../shared/js/theme.js"></script>
+    <link rel="stylesheet" href="../design-compare/hub/web/styles.css" />
+    <link rel="stylesheet" href="../shared/css/scrollbar.css">
+</head>
+  <body >
+    <a class="skip-link" href="#main">본문으로</a>
+    <header class="app-header">
+      <a class="brand" href="#/features"
+        ><span class="brand-mark" aria-hidden="true"><svg class="ui-icon"><use href="../shared/assets/interface-icons.svg#library"/></svg></span
+        ><span
+          >Design System Library<small>프로젝트 디자인 검토</small></span
+        ></a
+      >
+      <nav aria-label="주요 메뉴">
+        <a href="#/features">제공 기능</a>
+      </nav>
+      <label class="workspace-theme" data-standalone-only>테마 <select id="workspace-theme"><option value="system">시스템</option><option value="light">라이트</option><option value="dark">다크</option></select></label>
+    </header>
+    <main id="main">
+      <aside class="project-context" aria-label="연결 프로젝트"><span class="project-indicator" aria-hidden="true"></span><strong id="project-name">프로젝트</strong><span id="project-status" role="status">연결 정보 확인 중…</span></aside>
+      <section id="screen-heading" class="screen-heading">
+        <p id="eyebrow" class="eyebrow">DESIGN SYSTEM LIBRARY</p>
+        <h1 id="screen-title">디자인 트렌드</h1>
+        <p id="screen-description">화면의 색, 질감, 분위기를 살펴보세요.</p>
+      </section>
+      <div id="detail-toolbar" class="detail-toolbar" hidden>
+        <button
+          id="back"
+          aria-label="목록으로"
+          class="quiet-button"
+          type="button"
+        >
+          <svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#back"/></svg> <span>목록으로</span>
+        </button>
+        <nav aria-label="현재 위치">
+          <a id="parent-crumb"></a><span aria-hidden="true"> / </span
+          ><span>상세</span>
+        </nav>
+        <button id="copy-link" class="quiet-button" type="button">
+          링크 복사</button
+        ><span id="link-status" role="status"></span>
+      </div>
+      <section id="library-list" aria-label="자료 목록">
+        <form id="search" role="search">
+          <svg class="ui-icon search-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#search"/></svg>
+          <label class="sr-only" for="query">자료 검색</label
+          ><input
+            id="query" type="search"
+            placeholder="미니멀, 다크, 입체…"
+            autocomplete="off"
+          /><button id="clear-search" type="button" aria-label="검색과 필터 초기화" hidden><svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#close"/></svg></button><button type="submit">검색</button>
+        </form>
+        <details id="filters" class="filters">
+          <summary>필터 <span id="filter-count"></span><svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#chevron"/></svg></summary>
+          <div id="facets" aria-label="검색 태그"></div>
+        </details>
+        <div class="result-heading">
+          <h2 id="list-title">전체 트렌드</h2>
+          <span id="count" role="status" aria-live="polite"></span>
+        </div>
+        <p id="notice" class="muted"></p>
+        <div id="results"></div>
+      </section>
+      <section id="feature-index" aria-label="제공 기능" hidden>
+        <details class="project-setup"><summary>프로젝트 연결 방법</summary><p>프로젝트 루트의 <code>design-system.config.json</code>이 자료와 기록의 위치를 정합니다.</p><pre><code>{
+  "schemaVersion": 1,
+  "name": "내 제품",
+  "sourceRoot": ".",
+  "documentsRoot": "design-documents",
+  "store": ".design-compare",
+  "baseUrl": "http://127.0.0.1:3000"
+}</code></pre><p>프로젝트 폴더에서 <code>design-system-library</code> 실행 · AI와 자동화는 <code>design-compare --help</code></p></details>
+        <div class="feature-list">
+          <a class="feature-row" href="#/trends">
+            <span class="feature-visual feature-visual--trends" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span><strong>프로젝트 화면</strong><small>이 프로젝트에 연결한 화면 기준</small></span>
+            <svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#arrow"/></svg>
+          </a>
+          <a class="feature-row" href="#/components">
+            <span class="feature-visual feature-visual--components" aria-hidden="true"><i></i><i></i></span>
+            <span><strong>프로젝트 컴포넌트</strong><small>연결된 조작 요소와 구현 정보</small></span>
+            <svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#arrow"/></svg>
+          </a>
+          <a class="feature-row" href="#/accessibility">
+            <span class="feature-visual feature-visual--checks" aria-hidden="true"><i>AA</i><i></i></span>
+            <span><strong>품질 점검</strong><small>색 대비와 기본 UI 신호 확인</small></span>
+            <svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#arrow"/></svg>
+          </a>
+          <a class="feature-row" data-local-only href="#/work">
+            <span class="feature-visual feature-visual--work" aria-hidden="true"><i></i><i></i></span>
+            <span><strong>등록된 작업</strong><small>이 프로젝트가 소유한 비교 기준</small></span>
+            <svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#arrow"/></svg>
+          </a>
+          <a class="feature-row" data-local-only href="#/activity">
+            <span class="feature-visual feature-visual--activity" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span><strong>호출 기록</strong><small>AI 검수 흐름 다시 보기</small></span>
+            <svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#arrow"/></svg>
+          </a>
+        </div>
+      </section>
+      <section id="detail" aria-label="선택한 자료" hidden>
+        <div class="detail-heading">
+          <div>
+            <p id="detail-kind" class="eyebrow"></p>
+            <h1 id="title" tabindex="-1"></h1>
+            <p id="summary"></p>
+          </div>
+          <a
+            id="open-preview"
+            target="_blank"
+            rel="noopener"
+            class="outline-link"
+            >원본 열기 <svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#external"/></svg></a
+          >
+        </div>
+        <div class="detail-tabs" role="group" aria-label="상세 보기">
+          <button id="show-preview" type="button" aria-pressed="true">
+            미리보기</button
+          ><button id="show-guide" type="button" aria-pressed="false">
+            설명
+          </button>
+        </div>
+        <div id="preview-panel">
+          <div class="preview-bar">
+            <span>실제 동작</span>
+            <div role="group" aria-label="미리보기 크기">
+              <button id="desktop" aria-pressed="true">기본</button
+              ><button id="mobile" aria-pressed="false">모바일</button>
+            </div>
+          </div>
+          <div class="preview-stage">
+            <iframe
+              id="preview"
+              title="선택한 자료 미리보기"
+              src="about:blank"
+            ></iframe>
+          </div>
+        </div>
+        <div id="guide-panel" hidden>
+          <div id="context"></div>
+          <details class="handoff">
+            <summary>CLI와 원본 자료</summary>
+            <div>
+              <code id="command"></code
+              ><button id="copy" type="button">명령 복사</button
+              ><a id="download">자료 JSON 받기</a
+              ><span id="copy-status" role="status"></span>
+            </div>
+          </details>
+        </div>
+      </section>
+      <section id="activity-section" aria-label="AI 호출 기록" hidden>
+        <div class="result-heading">
+          <h2>최근 10건</h2>
+          <button id="refresh-activity" class="quiet-button" type="button">
+            새로고침
+          </button>
+        </div>
+        <p id="activity-status" role="status"></p>
+        <div id="activity-list"></div>
+      </section>
+      <section id="activity-detail" aria-label="선택한 호출" hidden></section>
+      <section id="accessibility-index" aria-label="품질 점검 기능" hidden>
+        <div class="feature-list tool-list">
+          <a class="feature-row" href="#/accessibility/contrast">
+            <span class="feature-visual feature-visual--contrast" aria-hidden="true"><i>Aa</i><i>Aa</i></span>
+            <span><strong>색 대비 검사</strong><small>읽기 쉬운 색 조합인지 확인</small></span>
+            <svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#arrow"/></svg>
+          </a>
+          <a class="feature-row" href="#/accessibility/controls">
+            <span class="feature-visual feature-visual--controls" aria-hidden="true"><i></i><i></i></span>
+            <span><strong>디자인 일관성 검사</strong><small>시스템 기본 UI와 형태 신호 찾기</small></span>
+            <svg class="ui-icon" aria-hidden="true"><use href="../shared/assets/interface-icons.svg#arrow"/></svg>
+          </a>
+        </div>
+      </section>
+      <section id="accessibility-section" aria-label="접근성 점검 도구" hidden>
+        <div class="tool-grid">
+          <section id="contrast-tool" class="tool-card" aria-labelledby="contrast-title" hidden>
+            <h2 id="contrast-title">색 대비 검사</h2>
+            <p>WCAG 기준으로 텍스트와 배경의 읽기 쉬운 정도를 확인합니다.</p>
+            <form id="contrast-checker" class="tool-form">
+              <label>글자색 <input id="contrast-foreground" type="text" value="#1D1D1F" autocomplete="off" spellcheck="false" /></label>
+              <label>배경색 <input id="contrast-background" type="text" value="#FFFFFF" autocomplete="off" spellcheck="false" /></label>
+              <fieldset class="contrast-targets"><legend>검사 대상</legend><label><input type="radio" name="contrast-target" value="text" checked />일반 텍스트</label><label><input type="radio" name="contrast-target" value="large" />큰 텍스트</label><label><input type="radio" name="contrast-target" value="component" />UI 컴포넌트</label></fieldset>
+              <button type="submit">대비 검사</button>
+            </form>
+            <div id="contrast-sample">이 텍스트가 충분히 읽히는지 확인합니다.</div>
+            <output id="contrast-result" for="contrast-foreground contrast-background"></output>
+          </section>
+          <section id="controls-tool" class="tool-card" aria-labelledby="audit-title" hidden>
+            <h2 id="audit-title">디자인 일관성 검사</h2>
+            <p>기본 선택 목록·날짜·파일·색·범위 입력과 스크롤바를 찾아 검토 대상으로 표시합니다.</p>
+            <div id="control-audit-sample" class="audit-sample" aria-label="점검 예시">
+              <button type="button" style="border-radius: 0">사각형 버튼</button>
+              <select aria-label="기본 드롭다운"><option>기본 select</option></select>
+              <select aria-label="꾸민 선택기의 기본 목록" style="appearance: none; border-radius: 12px"><option>꾸민 선택기</option></select>
+              <input type="date" aria-label="기본 날짜 선택" />
+              <input type="file" aria-label="기본 파일 선택" />
+              <input type="color" aria-label="기본 색 선택" value="#0071e3" />
+              <input type="range" aria-label="기본 범위 입력" value="60" />
+              <input type="number" aria-label="기본 숫자 스피너" value="2" />
+              <input type="search" aria-label="기본 검색 입력" value="찾기" />
+              <div class="native-scroll-sample" aria-label="기본 스크롤바" tabindex="0"><span>스크롤되는 영역</span><span>기본 스크롤바</span><span>검토 신호</span><span>브랜드 기준</span></div>
+              <select aria-label="의도적으로 허용한 기본 select" data-ds-native="allow"><option>의도적으로 허용</option></select>
+              <input aria-label="개선된 입력" class="modern-control" value="개선된 입력" />
+            </div>
+            <button id="run-control-audit" type="button">이 예시 점검</button>
+            <div id="control-audit-results" role="status" aria-live="polite"></div>
+            <p class="tool-note">꾸민 선택기도 열리는 목록은 시스템 UI일 수 있습니다. 의도적인 사용은 <code>data-ds-native="allow"</code>로 제외하세요.</p>
+            <code class="tool-code">import { inspectControlBaseline } from "/shared/js/design-system-audit.js";
+inspectControlBaseline(document.querySelector("#app"), {
+  allow: ["[data-ds-native='allow']"],
+});</code>
+            <details class="audit-usage"><summary>프로젝트와 CI에서 검사하기</summary><code class="tool-code">design-compare audit --url http://localhost:3000 --selector "#app" --strict --json</code></details>
+            <details class="audit-usage"><summary>화면 전환 검토하기</summary><p class="tool-note">클릭 전후 화면과 실제 움직임을 함께 확인합니다. 결과는 검토 신호입니다.</p><code class="tool-code">design-compare motion --url http://localhost:3000 --action "#open-page" --json</code></details>
+          </section>
+        </div>
+      </section>
+      <div id="error" class="empty-state" role="alert" hidden></div>
+    </main>
+    <script type="module" src="../design-compare/hub/web/app.js"></script>
+    <script type="module" src="../shared/js/scrollbar.js"></script>
+<footer class="library-footer"><span>Design System Library</span><span>프로젝트별 기준으로 살펴보고 검토하기.</span></footer>
+</body>
+</html>

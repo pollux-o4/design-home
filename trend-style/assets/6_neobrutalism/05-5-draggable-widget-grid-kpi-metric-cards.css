@@ -1,0 +1,112 @@
+/* ==========================================================================
+   5. DRAGGABLE WIDGET GRID & KPI METRIC CARDS
+   ========================================================================== */
+.widget-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Drag & Drop Visual Indication */
+.draggable-card {
+  cursor: grab;
+  user-select: none;
+  position: relative;
+}
+
+.draggable-card:active {
+  cursor: grabbing;
+}
+
+.draggable-card.dragging {
+  opacity: 0.4;
+  transform: scale(0.98);
+  border-style: dashed;
+}
+
+.draggable-card.drag-over {
+  border: 4px dashed var(--accent-primary) !important;
+  box-shadow: 0 0 15px var(--accent-primary) !important;
+}
+
+.kpi-card {
+  background: var(--surface-color);
+  border: var(--border-width) solid var(--border-color);
+  box-shadow: var(--shadow-x) var(--shadow-y) 0 var(--shadow-color);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  min-height: 150px;
+}
+
+.kpi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.kpi-label {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--text-color);
+  opacity: 0.8;
+  text-transform: uppercase;
+}
+
+.drag-handle {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  opacity: 0.4;
+  cursor: grab;
+}
+
+.kpi-value-container {
+  margin: 12px 0;
+}
+
+.kpi-value {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+  color: var(--text-color);
+}
+
+.kpi-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kpi-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 4px 8px;
+  border: 2px solid #000000;
+  box-shadow: 2px 2px 0 #000000;
+  border-radius: var(--radius);
+}
+
+.kpi-trend.up {
+  background: var(--accent-tertiary);
+  color: #000000;
+}
+
+.kpi-trend.down {
+  background: var(--accent-primary);
+  color: #ffffff;
+}
+
+.kpi-subtext {
+  font-size: 0.75rem;
+  font-weight: 700;
+  opacity: 0.7;
+}

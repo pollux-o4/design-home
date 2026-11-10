@@ -1,0 +1,50 @@
+/* ==========================================================================
+   TOP VERSION SWITCHER BAR
+   ========================================================================== */
+.version-switcher {
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 6px 12px;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.version-switcher-label {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-right: 4px;
+}
+
+.version-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.version-btn:hover,
+.version-btn.active {
+  background: var(--accent-primary);
+  color: var(--ticker-text);
+  border-color: var(--accent-primary);
+  transform: scale(1.05);
+}

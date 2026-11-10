@@ -1,0 +1,165 @@
+/* ==========================================================================
+   MODAL POPUP SLIDE-OVER ("+ NEW PROJECT")
+   ========================================================================== */
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-window {
+  background: var(--panel-bg);
+  border: var(--panel-border);
+  box-shadow: var(--panel-shadow);
+  border-radius: 20px;
+  width: 90%;
+  max-width: 520px;
+  padding: 28px;
+  transform: scale(0.9);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+.modal-backdrop.active .modal-window {
+  transform: scale(1);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: var(--stitch-border);
+}
+
+.modal-title {
+  font-family: "Cinzel", serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+.modal-close-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--btn-bg);
+  box-shadow: var(--btn-shadow);
+  border: 1px solid var(--accent-primary);
+  color: var(--text-main);
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.form-input {
+  background: var(--track-bg);
+  box-shadow: var(--track-shadow);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: var(--text-main);
+  font-family: "Montserrat", sans-serif;
+  font-size: 13px;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: var(--accent-primary);
+  box-shadow:
+    var(--track-shadow),
+    0 0 8px var(--accent-glow);
+}
+
+/* Range Slider */
+.range-slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.skeuo-range {
+  flex: 1;
+  accent-color: var(--accent-primary);
+  cursor: pointer;
+}
+
+.slider-val-badge {
+  font-family: "Share Tech Mono", monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-primary);
+  background: var(--track-bg);
+  padding: 4px 8px;
+  border-radius: 6px;
+  box-shadow: var(--track-shadow);
+}
+
+.modal-footer {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Toast Notification */
+.toast-notification {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--panel-bg);
+  border: 1px solid var(--accent-primary);
+  box-shadow: var(--panel-shadow);
+  border-radius: 12px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 10001;
+  transform: translateY(120%);
+  transition: transform 0.3s ease;
+}
+
+.toast-notification.visible {
+  transform: translateY(0);
+}

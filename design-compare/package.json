@@ -1,0 +1,35 @@
+{
+  "name": "@design-home/compare",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "design-compare": "src/cli.js",
+    "design-system-library": "hub/server.js"
+  },
+  "files": [
+    "src",
+    "hub",
+    "dist/runtime",
+    "docs",
+    "examples",
+    "README.md"
+  ],
+  "scripts": {
+    "prepack": "node scripts/package-runtime.mjs",
+    "test": "node scripts/test.mjs",
+    "demo": "node demo/server.js",
+    "compare": "node src/cli.js",
+    "hub": "node hub/server.js",
+    "build:library": "node scripts/export-library.mjs && node scripts/export-previews.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "axe-core": "4.14.0",
+    "pixelmatch": "7.1.0",
+    "playwright": "1.64.0",
+    "pngjs": "7.0.0"
+  }
+}

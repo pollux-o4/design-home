@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "url": "http://localhost:3000/",
+  "action": { "type": "click", "selector": "#open-panel" },
+  "region": "#panel",
+  "expected": { "selector": "#panel", "state": "visible" },
+  "viewport": { "width": 1280, "height": 900 },
+  "theme": "light",
+  "reducedMotion": "no-preference",
+  "observationMs": 900,
+  "expectation": "review"
+}

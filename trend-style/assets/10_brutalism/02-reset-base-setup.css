@@ -1,0 +1,35 @@
+/* Reset & Base Setup */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+/* Typography Helper Classes */
+h1,
+h2,
+h3,
+h4,
+.font-head {
+  font-family: var(--font-head);
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}

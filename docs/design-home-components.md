@@ -1,0 +1,77 @@
+# Design Home · 학습 제품 컴포넌트 지도
+
+이 문서는 Design Home이 소유한 학습 화면·예제의 코드 구조를 설명한다. 프로젝트 검토 도구의 구조는 [Design System Library C1~C4](../design-compare/docs/README.md)에서 관리한다.
+
+## 학습 홈
+
+배경의 세 가지 색은 하나의 이동 표면으로 합쳐 프레임마다 큰 레이어를 중첩하는 비용을 줄인다. 히어로에는 배경을 다시 흐리는 큰 필터 표면을 두지 않는다.
+
+히어로는 중앙 정렬된 제목·안내·버튼을 배경 위에 직접 배치하고 작은 브랜드 배지에 반투명 표면을 사용한다. `hero-atmosphere.css`가 페이지 전체의 고정 순환 그라데이션과 제목 아래 Sparkles·반응형 배치를 소유한다. `hero-atmosphere.js`는 48개 입자 생성·포인터 빛의 시간 기반 감쇠·탭 가시성에 따른 실행 상태를 담당한다. 포인터는 목표 도달 시 프레임 예약을 멈추고 창 이탈·숨김·동작 줄이기 설정에서 취소한다. 제목 입자만 히어로가 화면 밖이면 정지한다. 장식은 접근성 트리와 포인터 입력에서 제외한다. 배경은 페이지 전체에서 계속 움직이며 동작 줄이기 설정에서는 정적으로 표시한다. `tests/home-atmosphere.test.mjs`가 지속 동작·커서 반응·스크롤 후 배경 유지·제목 입자 정지·중앙 정렬·320~1440px 경계를 검증한다.
+
+`index.html`은 트렌드·Patterns·용어집·라이브러리 가이드로 연결하는 학습 진입점이다. 각 카드는 호버·포커스·길게 누르기에 실제 목적지 화면의 스냅샷을 표시하고 실제 학습 예제와 카탈로그는 해당 화면이 소유한다. 별도 제품인 Design System Library는 학습 영역 아래의 단일 안내에서 연결한다. `assets/index/learning-preview.js`는 호버·포커스·길게 누르기의 수명과 취소를 담당하고 `preview-motion.js`는 데스크톱 포인터 추적·감쇠·화면 경계 제한을, `learning-preview.css`는 데스크톱 플로팅·모바일 카드 내부 표시와 동작 줄이기 설정을 담당한다. `assets/index/previews/`는 실제 화면 캡처를 소유하며 목적지의 주요 화면 변경 시 함께 갱신한다. 홈에서 목적지 런타임을 동시에 실행하지 않는다. `preview-slides.js`가 카드별 3장 목록·지연 로딩·2.6초 체류 전환·현재 순서 점을 소유한다. 첫 이미지는 처음 열 때만 요청하고 다음 이미지는 전환 시 디코딩 후 교차 전환한다. 닫기·카드 교체는 예약과 늦은 이미지 응답을 무효화하며, 키보드만으로 포커스한 경우와 동작 줄이기 설정에서는 자동 전환하지 않는다. 디코딩 전에는 기존 도식을 유지한다. 홈 스타일은 직접 연결하고 내부 스크롤 영역이 없는 홈에는 스크롤바 런타임을 로드하지 않는다. 미리보기는 입력을 가로채지 않는 비대화형 시각 보조이며, 포인터 입력은 아래 카드로 전달된다. 활성 미리보기와 카드의 화면 좌표를 함께 확인해 카드 밖의 미리보기 영역에서도 추적을 유지하고 두 영역을 벗어나면 닫는다. 활성 미리보기는 하나의 소유자로 관리한다. 실제 다른 카드에 진입하면 이전 상태·타이머·표시를 즉시 해제하며, 스크롤은 포인터 미리보기를 정리하고 키보드 포커스 미리보기만 재배치한다. 별도 재생 버튼 없이 링크 포커스에서도 미리보기를 제공하고 Escape·바깥 터치로 닫으며 기본 링크 탐색을 보존한다. 영어 안내는 `shared/js/messages/en.js`, 도식의 짧은 양언어 캡션은 마크업이 소유한다. 링크·테마·언어·반응형 흐름은 `tests/apple-interface.test.mjs`와 `tests/home-dark-theme.test.mjs`, 입력별 미리보기는 `tests/home-previews.test.mjs`에서 검증한다.
+
+`shared/js/global-nav.js`는 공통 테마 메뉴의 열기·선택·포커스 복귀를 담당하고 실제 저장과 시스템 테마 추적은 `theme.js`가 소유한다. 검색 지우기와 캐러셀 선택 피드백은 각 학습 화면이 소유하며 페이지 스크롤은 브라우저의 기본 입력을 유지하고 공통 CSS로 색과 폭을 정한다.
+
+## 내부 컴포넌트 샘플
+
+`ui-components/js/sample-definition.js`의 Definition Factory가 실제 HTML과 공식 문서 연결을 소유한다. 코드 복사 창과 별도 예제 생성 파이프라인은 두지 않는다. 카테고리 파일은 선언적 정의를 등록하고, `canvas-renderer.js`는 전달받은 `mount` 함수를 통해 조작을 연결한다. 표시 코드에 전역 핸들러나 인라인 스타일을 넣지 않는다.
+
+`samples/runtime.js`의 Strategy 등록표는 폼·선택·탐색·레이어·피드백·순서 변경 동작을 연결한다. 각 동작은 샘플 루트와 수명주기 scope만 받는다. `lifecycle.js`는 이벤트 중단·타이머 취소·레이어 해제를 소유하며 카테고리 또는 검색 변경 시 렌더러가 이를 해제한다. 피드 로딩 상태는 인스턴스 내부에 있고, 기존 피드 호출 함수는 조립 진입점의 호환 Adapter로만 유지한다.
+
+선택 Command는 탭·분할 선택·메뉴의 선택 상태와 본문 갱신을 한 곳에서 처리한다. 알림 Command는 표시·자동 닫기·실행 취소를 소유한다. 캐러셀·통합 메뉴·페이지네이션 데이터는 `samples/data.js`가 소유하며 표시와 상태를 별도로 복제하지 않는다. 샘플 스타일은 `css/controls/`에서 책임별로 나누고 의미별 색상은 공통 interface 토큰을 사용한다. 상속 계층·거대 인터페이스·범용 이벤트 버스는 추가하지 않았다.
+
+사이드바 샘플은 본문과 같은 레이아웃의 지속형 탐색 영역을 보여주고, 드로어 샘플은 열기·닫기·Escape가 있는 오버레이 패널을 보여준다. 사이드바의 모양·레이아웃과 드로어의 표시 방식이 구분되도록 시연 맥락을 제공한다.
+
+## Patterns의 단계별 탐색
+
+`pattern-topics/`의 카테고리별 정의는 여섯 학습 분야와 세부 주제가 참조하는 원본 샘플 ID를 소유하고, `pattern-taxonomy.js`가 등록된 정의를 연결한다. 모션·접근성에서 기존 샘플을 다시 연결하지만 HTML·동작·스타일을 복제하지 않는다. `pattern-route.js`의 해시 경로가 분야·세부 주제·검색 상태의 단일 원본이다. `pattern-navigation.js`는 경로 검증과 세션별 마지막 세부 주제 복원을 소유하고 명시적인 URL로 반영한다. 브라우저 history 이벤트가 같은 URL을 중복 전달하면 다시 렌더링하지 않는다. 조립 진입점은 이 탐색 계약을 화면에 연결한다.
+
+`pattern-tree.js`는 상위 분야와 세부 바로가기를, `pattern-overview.js`는 처음 표시되는 분야 목록을 소유한다. `disclosure.js`는 포커스·inert·열림 상태·중단 가능한 높이 전환·동작 줄이기를 처리한다. 호출자가 단계별 단일 선택을 결정한다. 렌더러는 같은 분야에서 세부 주제만 바뀌면 기존 샘플을 재생성하지 않으며, 분야 또는 검색 결과가 바뀔 때만 수명주기를 해제한다. 링크·키보드·뒤로가기·새로고침이 같은 탐색 상태를 사용한다.
+
+`pattern-viewport.js`는 스크롤과 취소 가능한 포커스 인계를 담당한다. 렌더러가 제공하는 대상·전환 완료 계약만 사용하며 내부 DOM ID나 애니메이션 선택자를 알지 않는다. 아코디언은 다음 열림 상태를 콜백으로 전달하고 ARIA는 상태의 표시 결과로만 사용한다. 렌더러는 샘플 해제와 함께 전환을 취소한다. 검색 포커스 동작은 조립 지점에서 주입한다.
+
+## 난이도와 모션 샘플의 확장
+
+난이도 메타데이터는 Definition Factory, 공통 표시 이름은 `pattern-levels.js`가 소유한다. `pattern-level-view.js`는 펼친 주제의 Basic과 Advanced를 연속된 섹션으로 표시한다. 해당 난이도의 정의가 없으면 섹션을 만들지 않는다. 난이도 전환 탭이나 카드 숨김은 없으며, 카드 DOM은 한 번만 생성한다. 기존 level URL은 열 수 있지만 표시 순서는 Basic → Advanced다.
+
+`canvas-renderer.js`는 화면 선택과 샘플 mount/dispose만 소유한다. 분야의 계층과 전환 계약은 `pattern-topic-view.js`, 검색 결과와 초기화 표시는 `pattern-search-view.js`, 카드 표시는 `sample-card.js`가 담당한다. 분야·검색·개별 표본은 같은 카드 Factory를 사용한다.
+
+모션 정의·동작·스타일은 원리와 전환(`motion-foundations`), 공간과 스크롤(`motion-spatial`), 감각적인 표현(`motion-expressive`)으로 나뉜다. 등록한 정의는 한 번만 존재하고 학습 분류에서 ID로 연결한다. `motion-controller.js`는 공통 WAAPI 재생·대상별 중단·완료·scope 해제와 동작 줄이기·숨김을 처리한다. 표시 효과가 생략되거나 취소되어도 최종 데이터와 상태 변경은 각 샘플이 보장한다. RAF 수치 보간과 스크롤·포인터 직접 조작은 해당 동작 모듈이 소유한다. 범용 플러그인 계층이나 새 애니메이션 의존성은 추가하지 않았다.
+
+## 화면 구조·복합 입력·작업 흐름·접근성
+
+화면 구조와 탐색은 `layout-patterns`, 표와 복합 입력은 `data-patterns`, 직접 검증할 접근성 예제는 `accessibility-patterns`의 정의·동작·스타일이 소유한다. 업무 예제의 선언은 `components/workflow-patterns.js`, 동작의 공개 조립은 `samples/workflow-patterns.js`가 맡으며 내부 편집·선택·명령과 진행·저장·알림은 각각 `workflow-interactions.js`와 `workflow-feedback.js`로 나뉜다. 공통 scope와 의미별 토큰을 사용하고 상태를 DOM 외부의 전역 저장소에 복제하지 않는다.
+
+같은 샘플을 여러 학습 분야에 연결할 때 카테고리별 원본 ID만 참조한다. 같은 카테고리에서는 한 번만 배치해 입력·레이어의 DOM ID를 중복 생성하지 않는다. 정의 helper는 이름 있는 객체로 Factory를 호출한다. 독립적인 작업에는 공통 부모 클래스나 범용 상태 기계를 강제하지 않는다. 실제 변형 연결은 기존 Strategy 등록표를 사용한다.
+
+테이블은 네이티브 행·열 관계와 정렬 상태를 제공하고 좁은 컨테이너에서는 본문 안의 가로 스크롤과 안내를 사용한다. 계층 목록은 네이티브 details, 명령 팔레트는 네이티브 dialog와 실제 버튼 포커스를 사용한다. 저장·연결·비동기 작업은 명시적인 카드 내부 시뮬레이션이며 scope가 타이머를 해제한다. 자동 저장은 새 입력마다 이전 작업을 취소하고 버전을 검증한다. 적응형 사이드바는 화면 축소로 숨겨지는 포커스를 메뉴 버튼으로 복원한다.
+
+## 렌더링 비용과 수명주기
+
+카테고리를 선택하면 주제 구조만 만든다. `pattern-level-view.js`는 실제로 펼친 주제의 카드만 생성하고 렌더러는 새 루트에만 동작을 연결한다. 처음 열었던 카드와 scope는 같은 카테고리 안에서 보관해 접고 다시 펼쳐도 상태를 잃지 않는다. 동일한 표본 또는 동일한 정규화 검색 경로는 재렌더링하지 않는다. `lifecycle.js`는 AbortSignal을 종료 상태의 원본으로 사용하고 중복 해제와 종료 후 비동기 작업 등록을 방지한다.
+
+공통 스크롤바는 `scrollbar.js`의 영역 등록·관찰, `scrollbar-axis.js`의 축별 표시·입력 Command, `scrollbar-frame.js`의 프레임 예약으로 나뉜다. 외부 계약은 `update/dispose`만 제공한다. 한 프레임의 모든 영역 위치·크기·색상·스크롤 값을 먼저 읽은 뒤 레일을 표시하며 네이티브 스크롤과 리사이즈 신호를 묶는다. MutationObserver는 새 영역의 발견·제거·숨김만 처리하고, 텍스트 변경으로 문서 전체를 다시 검사하지 않는다. 직접 콘텐츠의 ResizeObserver가 실제 크기 변화를 감지한다.
+
+## Libraries 도구 탐색과 비교
+
+`libraries/js/catalog/*`는 역할별 선택 기준·공식 링크의 원본이고 `catalog.js`는 이를 조립한다. 카테고리 ID는 각 역할 정의 한곳에만 두고 라이브러리의 분류 값을 여기서 파생한다. `route.js`는 URL의 검색·카테고리·최대 3개 비교 ID를 검증한다. `library-card.js`와 `comparison.js`는 같은 원본과 `elements.js`의 기준·링크 Factory를 사용한다. `app.js`는 상태를 URL에서 읽어 화면에 투영하고 이벤트를 조립한다. Patterns와 Libraries의 접힘 애니메이션은 `shared/js/disclosure.js`가 소유하며 기존 Patterns 진입점은 이를 다시 내보낸다. 외부 라이브러리를 설치하거나 페이지에 로드하지 않는다.
+
+Patterns의 종류별 분류는 `pattern-topics/*`, UX 관점의 원칙 분류는 `pattern-principles.js`가 원본 샘플 ID를 참조한다. `pattern-taxonomy.js`는 두 탐색 투영을 같은 카탈로그에 연결한다. 보기 기준은 `pattern-route.js`의 `view`가 소유하고, `pattern-view-switcher.js`는 네이티브 라디오 선택을 URL에 전달한다. 트리·개요·검색·브레드크럼은 현재 보기 기준을 유지하며 예제의 마크업과 동작은 복제하지 않는다.
+
+상태 변형 예제는 `components/state-morphing.js`의 정의, `samples/state-morphing.js`의 상태·취소·포커스 처리, `controls/state-morphing.css`의 표현으로 나뉜다. 재생·전송은 명시적인 로컬 시뮬레이션이며 타이머는 기존 scope가 해제한다. 원칙별 그룹은 같은 카테고리 내 샘플 ID를 중복 배치하지 않아 캐시된 DOM의 ID와 동작을 격리한다.
+
+주제 선택 정책은 `pattern-route.js`의 `selectPatternGroup`이 소유하며 아코디언과 숏컷이 같은 선택 명령을 사용한다. Libraries의 카테고리 투영·접힘 수명은 `category-view.js`, 카드와 비교 표의 표시 항목 스키마는 `fields.js`가 소유한다. `app.js`는 URL 전환·화면 조립·이벤트 연결만 맡는다. 상태 변형 버튼의 phase는 동작 모듈 안에 한 번만 존재하고 DOM 속성과 텍스트는 render 함수가 파생한다.
+
+## 용어집의 시각적 학습
+
+용어집은 Design Home의 학습 콘텐츠이며 Design System Library의 기본 자료가 아니다. `glossary/js/localization.js`는 용어별 영문 설명과 체험 문구를 조립하고 `shared/js/text-localizer.js`를 통해 텍스트와 접근성 이름만 갱신한다. 입력값·이벤트·실행 상태는 유지하며, 동적으로 바뀐 체험 안내도 같은 번역 경로를 사용한다. `entry-messages-en.js`와 `messages-en.js`는 이 학습 프로젝트가 소유한다. 플랫폼의 `localization` CLI에는 프로젝트가 언어 버튼·범위·누락 문자 패턴을 시나리오로 연결한다. `tests/glossary-localization.test.mjs`는 실제 EN/KO 전환·목록·상세·체험·새로고침을 검증한다.
+
+`glossary/js/catalog.js`는 UI 용어의 큐레이션과 UX 원리의 샘플 연결만 소유한다. UI 정의와 동작은 기존 Patterns의 Definition Factory·카탈로그·runtime, UX 원리는 `pattern-principles.js`를 참조한다. 용어집은 예시를 복제하지 않는다. 피츠·힉·근접성의 원리별 비교 실험만 `glossary/js/ux-demos.js`가 소유하며 같은 수명주기 scope로 해제한다.
+
+`route.js`의 해시 경로가 분류·용어 상세·검색의 원본이다. `app.js`는 접힌 UI/UX 분류, 세 열 표, 한 번에 하나의 행 내 체험, 고유 주소의 상세 화면을 조립한다. 검색은 두 분류를 함께 탐색한다. 도식은 `visual.js`, 반응형 표시와 체험 영역 스타일은 `css/glossary.css`가 소유한다. 체험을 바꾸거나 화면을 떠나면 이전 이벤트·타이머·레이어를 해제하고 BFCache 복원 시 다시 연결한다. 정적 호스트에서도 같은 상대 경로와 해시 주소를 사용한다.
+
+## ARCH-001 · 모듈 계약
+
+용어집 app은 경로·상태·수명주기를 조립하고 list-view는 목록과 표를 표시한다. motion-definitions는 프레임·기본 용어, motion-patterns는 기존 샘플 연결, motion-demos는 조립을 소유한다. MOD-001 · UX-001로 경계와 행동 보존을 검증한다.
+
+공통 page-transitions는 첫 렌더링 전 문서 전환의 취소를 관찰한다. Chromium이 전환 객체 없이 내는 특정 opt-in 취소만 복구하고 다른 오류는 유지한다. 화면 효과는 interface CSS가 계속 소유한다.

@@ -1,0 +1,84 @@
+/* Adapt the source layout to its viewport. */
+.main-wrapper,
+.grid-container > *,
+.charts-row > * {
+  min-width: 0;
+}
+.table-container {
+  overflow-x: auto;
+}
+.modal-container {
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+}
+
+@media (max-width: 1200px) {
+  .version-switcher {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin: 12px;
+    width: fit-content;
+    max-width: calc(100% - 24px);
+    flex-wrap: wrap;
+    flex-basis: 100%;
+  }
+  body {
+    flex-wrap: wrap;
+  }
+  .header-actions {
+    margin-right: 0;
+    flex-wrap: wrap;
+  }
+  .header {
+    height: auto;
+    min-height: 72px;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-block: 16px;
+  }
+  .search-bar {
+    width: min(100%, 320px);
+  }
+}
+
+@media (max-width: 768px) {
+  .top-row,
+  .chart-header {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .content-container,
+  .header {
+    padding: 16px;
+  }
+  .header-actions {
+    width: 100%;
+  }
+  .tabs-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+  .modal-container {
+    padding: 20px;
+  }
+}
+
+.table-responsive {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .main-wrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+  .header-actions {
+    gap: 8px;
+  }
+  .page-title {
+    overflow-wrap: anywhere;
+  }
+}

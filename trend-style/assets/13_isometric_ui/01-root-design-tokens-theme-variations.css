@@ -1,0 +1,402 @@
+/* ==========================================================================
+   ROOT DESIGN TOKENS & THEME VARIATIONS
+   ========================================================================== */
+:root {
+  /* Theme 1: Cyber Neon (Default) */
+  --bg-base: #080c14;
+  --bg-grid-color: rgba(0, 240, 255, 0.05);
+  --card-bg: rgba(15, 23, 42, 0.85);
+  --card-top-bg: rgba(30, 41, 59, 0.9);
+  --card-border: rgba(0, 240, 255, 0.25);
+  --card-shadow: -16px 20px 32px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 240, 255, 0.15);
+  --card-extrusion: #0d1627;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --accent-primary: #00f0ff;
+  --accent-secondary: #ff007f;
+  --accent-tertiary: #7000ff;
+  --accent-success: #00ffaa;
+  --accent-warning: #ffb703;
+  --chart-gradient-1: #00f0ff;
+  --chart-gradient-2: #7000ff;
+  --iso-transform: rotateX(50deg) rotateZ(-40deg) scale(0.92);
+  --radius-card: 16px;
+  --font-main: "Plus Jakarta Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+/* Theme 2: Soft Clay 3D */
+[data-theme="clay"] {
+  --bg-base: #e6ebf5;
+  --bg-grid-color: rgba(99, 102, 241, 0.04);
+  --card-bg: #eef2f9;
+  --card-top-bg: #f5f8fc;
+  --card-border: rgba(255, 255, 255, 0.8);
+  --card-shadow:
+    12px 16px 24px #c2c9db, -10px -10px 20px #ffffff, inset 0 2px 4px rgba(255, 255, 255, 0.9);
+  --card-extrusion: #c9d2e3;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --accent-primary: #4f46e5;
+  --accent-secondary: #f43f5e;
+  --accent-tertiary: #10b981;
+  --accent-success: #10b981;
+  --accent-warning: #f59e0b;
+  --chart-gradient-1: #6366f1;
+  --chart-gradient-2: #ec4899;
+  --radius-card: 22px;
+}
+
+/* Theme 3: Glass Grid 3D */
+[data-theme="glass"] {
+  --bg-base: #0d0b21;
+  --bg-grid-color: rgba(168, 85, 247, 0.08);
+  --card-bg: rgba(255, 255, 255, 0.06);
+  --card-top-bg: rgba(255, 255, 255, 0.12);
+  --card-border: rgba(255, 255, 255, 0.2);
+  --card-shadow: -15px 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  --card-extrusion: rgba(40, 30, 80, 0.5);
+  --text-primary: #ffffff;
+  --text-secondary: #c084fc;
+  --accent-primary: #c084fc;
+  --accent-secondary: #38bdf8;
+  --accent-tertiary: #f472b6;
+  --accent-success: #4ade80;
+  --accent-warning: #fbbf24;
+  --chart-gradient-1: #c084fc;
+  --chart-gradient-2: #38bdf8;
+  --radius-card: 20px;
+}
+
+/* Theme 4: Neobrutal Ortho */
+[data-theme="neobrutal"] {
+  --bg-base: #fff7ed;
+  --bg-grid-color: rgba(0, 0, 0, 0.07);
+  --card-bg: #ffffff;
+  --card-top-bg: #ffedd5;
+  --card-border: #000000;
+  --card-shadow: 10px 10px 0px #000000;
+  --card-extrusion: #000000;
+  --text-primary: #000000;
+  --text-secondary: #431407;
+  --accent-primary: #ff5e36;
+  --accent-secondary: #00e5ff;
+  --accent-tertiary: #a855f7;
+  --accent-success: #10b981;
+  --accent-warning: #fbbf24;
+  --chart-gradient-1: #ff5e36;
+  --chart-gradient-2: #00e5ff;
+  --radius-card: 4px;
+}
+
+/* Theme 5: Enterprise Blue 3D */
+[data-theme="enterprise"] {
+  --bg-base: #f8fafc;
+  --bg-grid-color: rgba(37, 99, 235, 0.05);
+  --card-bg: #ffffff;
+  --card-top-bg: #eff6ff;
+  --card-border: #cbd5e1;
+  --card-shadow: -10px 15px 30px rgba(15, 23, 42, 0.08), 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  --card-extrusion: #cbd5e1;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --accent-primary: #2563eb;
+  --accent-secondary: #0284c7;
+  --accent-tertiary: #4f46e5;
+  --accent-success: #16a34a;
+  --accent-warning: #d97706;
+  --chart-gradient-1: #2563eb;
+  --chart-gradient-2: #10b981;
+  --radius-card: 12px;
+}
+
+/* Theme 6: Sunset Synth 3D */
+[data-theme="sunset"] {
+  --bg-base: #180828;
+  --bg-grid-color: rgba(255, 107, 107, 0.08);
+  --card-bg: rgba(45, 16, 68, 0.85);
+  --card-top-bg: rgba(75, 26, 110, 0.9);
+  --card-border: rgba(255, 107, 107, 0.3);
+  --card-shadow: -18px 22px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 107, 107, 0.2);
+  --card-extrusion: #200938;
+  --text-primary: #fff0f5;
+  --text-secondary: #d8b4fe;
+  --accent-primary: #ff6b6b;
+  --accent-secondary: #ffb703;
+  --accent-tertiary: #f72585;
+  --accent-success: #4cc9f0;
+  --accent-warning: #ffb703;
+  --chart-gradient-1: #ff6b6b;
+  --chart-gradient-2: #ffb703;
+  --radius-card: 18px;
+}
+
+/* Reset & Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-main);
+  user-select: none;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image:
+    linear-gradient(var(--bg-grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bg-grid-color) 1px, transparent 1px);
+  background-size: 40px 40px;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+/* Perspective Angle Modifiers */
+body.angle-flat .iso-stage {
+  transform: rotateX(0deg) rotateZ(0deg) scale(1) !important;
+}
+body.angle-subtle .iso-stage {
+  transform: rotateX(25deg) rotateZ(-15deg) scale(0.96) !important;
+}
+
+/* Top Fixed Theme Switcher Bar */
+.top-switcher-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: rgba(10, 15, 25, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="clay"] .top-switcher-bar,
+[data-theme="enterprise"] .top-switcher-bar {
+  background: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+}
+
+.logo-cube {
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: inline-block;
+  box-shadow: 0 0 10px var(--accent-primary);
+}
+
+.theme-switcher-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 4px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="clay"] .theme-switcher-group,
+[data-theme="enterprise"] .theme-switcher-group {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.theme-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.theme-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.theme-btn.active {
+  background: var(--accent-primary);
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+[data-theme="neobrutal"] .theme-btn.active {
+  color: #000000;
+  border: 2px solid #000;
+  box-shadow: 2px 2px 0 #000;
+}
+
+/* 3D View Angle Controls */
+.angle-switcher {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 12px;
+  padding-left: 12px;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.angle-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.angle-btn.active,
+.angle-btn:hover {
+  background: var(--accent-secondary);
+  color: #fff;
+  border-color: transparent;
+}
+
+/* App Wrapper & 3D Stage */
+.app-wrapper {
+  margin-top: 70px;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  perspective: 1600px;
+  min-height: calc(100vh - 70px);
+}
+
+.iso-stage {
+  width: 100%;
+  max-width: 1440px;
+  transform-style: preserve-3d;
+  transform: var(--iso-transform);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 30px;
+  position: relative;
+}
+
+/* 3D Isometric Card Extrusion System */
+.iso-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(12px);
+  transform-style: preserve-3d;
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.35s ease,
+    border-color 0.3s ease;
+  position: relative;
+}
+
+.iso-card::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 8px;
+  right: -8px;
+  height: 100%;
+  background: var(--card-extrusion);
+  border-radius: var(--radius-card);
+  transform: translateZ(-15px);
+  z-index: -1;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+.iso-card:hover {
+  transform: translateZ(24px) translateY(-4px);
+  border-color: var(--accent-primary);
+}
+
+.iso-card:hover::after {
+  transform: translateZ(-25px) translateY(8px);
+  opacity: 0.8;
+}
+
+/* Skeleton Loading State */
+.iso-card.loading .card-content-wrap {
+  opacity: 0.2;
+  filter: blur(2px);
+}
+
+.iso-card.loading .skeleton-overlay {
+  display: flex;
+}
+
+.skeleton-overlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 10;
+  border-radius: var(--radius-card);
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.skeleton-bone {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+  border-radius: 6px;
+}
+
+[data-theme="clay"] .skeleton-bone,
+[data-theme="enterprise"] .skeleton-bone {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.05) 25%,
+    rgba(0, 0, 0, 0.12) 50%,
+    rgba(0, 0, 0, 0.05) 75%
+  );
+  background-size: 200% 100%;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

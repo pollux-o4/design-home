@@ -1,0 +1,93 @@
+/* ==========================================================================
+   DATA TABLE / PROJECT OVERVIEW
+   ========================================================================== */
+
+.table-card {
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.skeuo-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+
+.skeuo-table th {
+  font-family: "Cinzel", serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: var(--stitch-border);
+}
+
+.skeuo-table tr.table-row {
+  background: var(--panel-bg);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: transform 0.15s ease;
+}
+
+.skeuo-table tr.table-row:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 14px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.skeuo-table td {
+  padding: 12px 14px;
+  font-size: 12px;
+  color: var(--text-main);
+}
+
+.skeuo-table td:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  font-weight: 600;
+}
+
+.skeuo-table td:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 10px;
+  background: var(--track-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.status-dot.online {
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+}
+
+.status-dot.warning {
+  background: #f59e0b;
+  box-shadow: 0 0 6px #f59e0b;
+}

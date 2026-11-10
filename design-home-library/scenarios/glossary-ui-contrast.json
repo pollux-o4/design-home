@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "url": "http://127.0.0.1:4184/glossary/index.html#/ui",
+  "themes": ["light", "dark"],
+  "themeOpen": "#dh-theme-toggle",
+  "themeControls": { "light": "[data-theme-choice=light]", "dark": "[data-theme-choice=dark]" },
+  "themeVerification": {
+    "selector": "html",
+    "attribute": "data-theme",
+    "values": { "light": "light", "dark": "dark" }
+  },
+  "openEach": "#panel-ui [data-expand]",
+  "scope": ".expanded-row .example"
+}

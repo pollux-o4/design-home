@@ -1,0 +1,201 @@
+/* ==========================================================================
+   THEME DEFINITIONS (6 DISTINCT DARK MODE UI VARIATIONS)
+   ========================================================================== */
+:root {
+  /* Default Theme: 1. Cyber Neon (Deep Obsidian + Cyber Indigo & Magenta Glow) */
+  --theme-name: "1. Cyber Neon";
+  --bg-base: #090c15;
+  --bg-surface: #101625;
+  --bg-surface-hover: #172033;
+  --bg-card: #141c2e;
+  --bg-card-hover: #1a253d;
+  --bg-input: #0b101c;
+  --border-subtle: rgba(99, 102, 241, 0.18);
+  --border-glow: rgba(99, 102, 241, 0.5);
+  --accent-primary: #6366f1;
+  --accent-secondary: #ec4899;
+  --accent-tertiary: #06b6d4;
+  --accent-glow: rgba(99, 102, 241, 0.4);
+  --accent-glow-strong: rgba(99, 102, 241, 0.65);
+  --text-title: #f8fafc;
+  --text-main: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --success: #10b981;
+  --success-glow: rgba(16, 185, 129, 0.3);
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --card-radius: 16px;
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 15px var(--accent-glow);
+}
+
+/* Theme 2: OLED Mint (Pure OLED Black + Electric Mint Glow) */
+[data-theme="v2"] {
+  --theme-name: "2. OLED Mint";
+  --bg-base: #000000;
+  --bg-surface: #0a0a0a;
+  --bg-surface-hover: #141414;
+  --bg-card: #111111;
+  --bg-card-hover: #181818;
+  --bg-input: #050505;
+  --border-subtle: rgba(16, 185, 129, 0.22);
+  --border-glow: rgba(16, 185, 129, 0.6);
+  --accent-primary: #10b981;
+  --accent-secondary: #06b6d4;
+  --accent-tertiary: #3b82f6;
+  --accent-glow: rgba(16, 185, 129, 0.35);
+  --accent-glow-strong: rgba(16, 185, 129, 0.7);
+  --text-title: #ffffff;
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-dim: #475569;
+  --success: #10b981;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.9), 0 0 12px var(--accent-glow);
+}
+
+/* Theme 3: Solar Gold (Warm Charcoal + Amber Gold & Flame Glow) */
+[data-theme="v3"] {
+  --theme-name: "3. Solar Gold";
+  --bg-base: #0f0e13;
+  --bg-surface: #191720;
+  --bg-surface-hover: #24212d;
+  --bg-card: #1f1c29;
+  --bg-card-hover: #292536;
+  --bg-input: #13111a;
+  --border-subtle: rgba(245, 158, 11, 0.22);
+  --border-glow: rgba(245, 158, 11, 0.6);
+  --accent-primary: #f59e0b;
+  --accent-secondary: #f97316;
+  --accent-tertiary: #ef4444;
+  --accent-glow: rgba(245, 158, 11, 0.35);
+  --accent-glow-strong: rgba(245, 158, 11, 0.65);
+  --text-title: #fffbeb;
+  --text-main: #fef3c7;
+  --text-muted: #d97706;
+  --text-dim: #78350f;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 14px var(--accent-glow);
+}
+
+/* Theme 4: Synth Crimson (Dark Violet + Sunset Crimson & Magenta) */
+[data-theme="v4"] {
+  --theme-name: "4. Synth Crimson";
+  --bg-base: #0b0714;
+  --bg-surface: #140d24;
+  --bg-surface-hover: #1e1336;
+  --bg-card: #1a112e;
+  --bg-card-hover: #23173e;
+  --bg-input: #0e0919;
+  --border-subtle: rgba(236, 72, 153, 0.22);
+  --border-glow: rgba(236, 72, 153, 0.6);
+  --accent-primary: #ec4899;
+  --accent-secondary: #8b5cf6;
+  --accent-tertiary: #d946ef;
+  --accent-glow: rgba(236, 72, 153, 0.4);
+  --accent-glow-strong: rgba(236, 72, 153, 0.7);
+  --text-title: #fdf2f8;
+  --text-main: #f472b6;
+  --text-muted: #c084fc;
+  --text-dim: #6b21a8;
+  --success: #34d399;
+  --warning: #fbbf24;
+  --danger: #f43f5e;
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.85), 0 0 15px var(--accent-glow);
+}
+
+/* Theme 5: GitHub Slate (Deep Midnight Blue-Slate + Cyan Sky) */
+[data-theme="v5"] {
+  --theme-name: "5. GitHub Slate";
+  --bg-base: #0d1117;
+  --bg-surface: #161b22;
+  --bg-surface-hover: #21262d;
+  --bg-card: #1c2128;
+  --bg-card-hover: #272e38;
+  --bg-input: #090d12;
+  --border-subtle: rgba(56, 189, 248, 0.2);
+  --border-glow: rgba(56, 189, 248, 0.55);
+  --accent-primary: #38bdf8;
+  --accent-secondary: #3182ce;
+  --accent-tertiary: #22d3ee;
+  --accent-glow: rgba(56, 189, 248, 0.3);
+  --accent-glow-strong: rgba(56, 189, 248, 0.6);
+  --text-title: #f0f6fc;
+  --text-main: #c9d1d9;
+  --text-muted: #8b949e;
+  --text-dim: #484f58;
+  --success: #2ea043;
+  --warning: #d29922;
+  --danger: #f85149;
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.75), 0 0 12px var(--accent-glow);
+}
+
+/* Theme 6: Tactical Lime (Tactical Carbon Gray + Vibrant Laser Lime) */
+[data-theme="v6"] {
+  --theme-name: "6. Tactical Lime";
+  --bg-base: #111317;
+  --bg-surface: #191c23;
+  --bg-surface-hover: #232732;
+  --bg-card: #1e222b;
+  --bg-card-hover: #272c38;
+  --bg-input: #0d0f12;
+  --border-subtle: rgba(132, 204, 22, 0.25);
+  --border-glow: rgba(132, 204, 22, 0.65);
+  --accent-primary: #84cc16;
+  --accent-secondary: #10b981;
+  --accent-tertiary: #a3e635;
+  --accent-glow: rgba(132, 204, 22, 0.35);
+  --accent-glow-strong: rgba(132, 204, 22, 0.7);
+  --text-title: #f7fee7;
+  --text-main: #ecfdf5;
+  --text-muted: #a3e635;
+  --text-dim: #4d7c0f;
+  --success: #84cc16;
+  --warning: #eab308;
+  --danger: #ef4444;
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 14px var(--accent-glow);
+}
+
+/* Global Reset & Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-base);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-surface-hover);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}

@@ -1,0 +1,100 @@
+/* Shared overlay scrollbar. Native scrolling, wheel and touch stay on the region. */
+.dh-scroll-native {
+  scrollbar-width: none;
+}
+.dh-scroll-native::-webkit-scrollbar {
+  display: none;
+}
+.dh-scroll-rail {
+  --dh-scroll-ink: #506255;
+  position: fixed;
+  z-index: var(--dh-scroll-layer, 40);
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  opacity: 0;
+  transition: opacity 180ms ease;
+  touch-action: none;
+  cursor: default;
+  outline-offset: -2px;
+}
+.dh-scroll-rail[data-axis="y"] {
+  width: 20px;
+}
+.dh-scroll-rail[data-axis="x"] {
+  height: 20px;
+}
+.dh-scroll-rail.is-active,
+.dh-scroll-rail:hover,
+.dh-scroll-rail:focus-visible {
+  opacity: 1;
+}
+.dh-scroll-rail:focus-visible {
+  outline: 2px solid var(--dh-scroll-ink);
+}
+.dh-scroll-rail[hidden] {
+  display: none;
+}
+.dh-scroll-thumb {
+  position: absolute;
+  border-radius: 12px;
+}
+.dh-scroll-rail[data-axis="y"] .dh-scroll-thumb {
+  width: 20px;
+  left: 0;
+}
+.dh-scroll-rail[data-axis="x"] .dh-scroll-thumb {
+  height: 20px;
+  top: 0;
+}
+.dh-scroll-thumb::after {
+  content: "";
+  position: absolute;
+  border-radius: 12px;
+  background: var(--dh-scroll-ink);
+  opacity: 0.62;
+  transition:
+    width 180ms ease,
+    height 180ms ease,
+    opacity 180ms ease;
+}
+.dh-scroll-rail[data-axis="y"] .dh-scroll-thumb::after {
+  width: 4px;
+  height: 100%;
+  right: 4px;
+}
+.dh-scroll-rail[data-axis="x"] .dh-scroll-thumb::after {
+  height: 4px;
+  width: 100%;
+  bottom: 4px;
+}
+.dh-scroll-rail[data-axis="y"]:is(:hover, :focus-visible, .is-dragging) .dh-scroll-thumb::after {
+  width: 8px;
+}
+.dh-scroll-rail[data-axis="x"]:is(:hover, :focus-visible, .is-dragging) .dh-scroll-thumb::after {
+  height: 8px;
+}
+.dh-scroll-rail:is(:hover, :focus-visible, .is-dragging) .dh-scroll-thumb::after {
+  opacity: 0.86;
+}
+html.dh-scroll-dragging {
+  user-select: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dh-scroll-rail,
+  .dh-scroll-thumb::after {
+    transition: none;
+  }
+}
+@media (forced-colors: active) {
+  .dh-scroll-native {
+    scrollbar-width: auto;
+  }
+  .dh-scroll-native::-webkit-scrollbar {
+    display: initial;
+  }
+  .dh-scroll-rail {
+    display: none;
+  }
+}

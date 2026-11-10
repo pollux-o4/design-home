@@ -1,0 +1,56 @@
+/* ==========================================================================
+   6. SKELETON LOADING EFFECTS
+   ========================================================================== */
+.skeleton {
+  pointer-events: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-block {
+  background: linear-gradient(
+    90deg,
+    var(--surface-secondary) 25%,
+    var(--bg-color) 50%,
+    var(--surface-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading-stripes 1.2s infinite ease-in-out;
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+}
+
+@keyframes loading-stripes {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Hide elements when skeleton active */
+.skeleton-active .kpi-value,
+.skeleton-active .kpi-trend,
+.skeleton-active svg.chart-svg {
+  opacity: 0.1;
+}
+
+.skeleton-overlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--surface-color);
+  z-index: 10;
+  padding: 20px;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+}
+
+.skeleton-active .skeleton-overlay {
+  display: flex;
+}

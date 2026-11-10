@@ -1,0 +1,109 @@
+/* ==========================================================================
+   3. BACKGROUND MORPHING LIVING BLOBS (BIOMORPHIC AESTHETICS)
+   ========================================================================== */
+.bio-canvas-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.living-blob {
+  position: absolute;
+  filter: blur(50px);
+  opacity: 0.85;
+  mix-blend-mode: multiply;
+  transition: var(--transition-theme);
+  will-change: transform, border-radius;
+}
+
+[data-theme="biolum"] .living-blob,
+[data-theme="forest"] .living-blob,
+[data-theme="cyberbio"] .living-blob {
+  mix-blend-mode: screen;
+  opacity: 0.65;
+}
+
+.blob-1 {
+  width: 520px;
+  height: 520px;
+  top: -100px;
+  left: -100px;
+  background: var(--blob-1);
+  border-radius: var(--radius-blob-1);
+  animation: floatBlob1 18s ease-in-out infinite alternate;
+}
+
+.blob-2 {
+  width: 600px;
+  height: 600px;
+  bottom: -150px;
+  right: -100px;
+  background: var(--blob-2);
+  border-radius: var(--radius-blob-2);
+  animation: floatBlob2 22s ease-in-out infinite alternate;
+}
+
+.blob-3 {
+  width: 450px;
+  height: 450px;
+  top: 40%;
+  left: 35%;
+  background: var(--blob-3);
+  border-radius: var(--radius-blob-3);
+  animation: floatBlob3 15s ease-in-out infinite alternate;
+}
+
+@keyframes floatBlob1 {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    border-radius: var(--radius-blob-1);
+  }
+  50% {
+    transform: translate(120px, 80px) rotate(90deg) scale(1.15);
+    border-radius: var(--radius-blob-2);
+  }
+  100% {
+    transform: translate(-40px, 140px) rotate(180deg) scale(0.95);
+    border-radius: var(--radius-blob-3);
+  }
+}
+
+@keyframes floatBlob2 {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    border-radius: var(--radius-blob-2);
+  }
+  50% {
+    transform: translate(-100px, -90px) rotate(-120deg) scale(1.1);
+    border-radius: var(--radius-blob-3);
+  }
+  100% {
+    transform: translate(60px, -150px) rotate(-240deg) scale(0.9);
+    border-radius: var(--radius-blob-1);
+  }
+}
+
+@keyframes floatBlob3 {
+  0% {
+    transform: translate(0, 0) scale(0.9);
+    border-radius: var(--radius-blob-3);
+  }
+  50% {
+    transform: translate(90px, -60px) scale(1.2);
+    border-radius: var(--radius-blob-1);
+  }
+  100% {
+    transform: translate(-80px, 70px) scale(1);
+    border-radius: var(--radius-blob-2);
+  }
+}
+
+/* Pause animation if Bio-Sync toggle is off */
+body.paused-blobs .living-blob {
+  animation-play-state: paused !important;
+}

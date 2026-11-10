@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "name": "Design Home",
+  "sourceRoot": ".",
+  "documentsRoot": "design-home-library/documents",
+  "store": "design-compare/.design-compare",
+  "baseUrl": "http://127.0.0.1:4184"
+}

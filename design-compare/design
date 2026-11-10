@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+tool_directory="$(dirname "$(realpath "$0")")"
+if command -v mise >/dev/null 2>&1; then
+    exec mise exec node@24.21.0 -- node "$tool_directory/src/cli.js" "$@"
+else
+    exec "$HOME/.local/bin/mise" exec node@24.21.0 -- node "$tool_directory/src/cli.js" "$@"
+fi

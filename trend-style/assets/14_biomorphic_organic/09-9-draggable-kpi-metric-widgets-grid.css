@@ -1,0 +1,180 @@
+/* ==========================================================================
+   9. DRAGGABLE KPI METRIC WIDGETS GRID
+   ========================================================================== */
+.widget-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+@media (max-width: 1200px) {
+  .widget-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .widget-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.kpi-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1.5px solid var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  transition:
+    transform 0.3s var(--ease-fluid),
+    box-shadow 0.3s var(--ease-fluid),
+    border-color 0.3s var(--ease-smooth);
+}
+
+.kpi-card:hover {
+  transform: translateY(-5px) scale(1.015);
+  border-color: var(--accent-1);
+  box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.15);
+}
+
+.kpi-card:active {
+  cursor: grabbing;
+}
+
+.kpi-card.dragging {
+  opacity: 0.5;
+  transform: scale(0.96) rotate(1deg);
+  border: 2px dashed var(--accent-1);
+}
+
+/* Biomorphic Liquid Background Accent in KPI Card */
+.kpi-bg-blob {
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 110px;
+  height: 110px;
+  border-radius: 40% 60% 70% 30% / 50% 30% 70% 50%;
+  background: var(--accent-1);
+  opacity: 0.12;
+  pointer-events: none;
+  transition: transform 0.5s var(--ease-fluid);
+}
+
+.kpi-card:hover .kpi-bg-blob {
+  transform: scale(1.4) rotate(45deg);
+  opacity: 0.22;
+}
+
+.kpi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kpi-icon-wrapper {
+  width: 42px;
+  height: 42px;
+  border-radius: 35% 65% 60% 40% / 50% 40% 60% 50%;
+  background: var(--badge-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s var(--ease-fluid);
+}
+
+.kpi-card:hover .kpi-icon-wrapper {
+  transform: rotate(12deg) scale(1.1);
+}
+
+.kpi-icon-wrapper svg {
+  width: 22px;
+  height: 22px;
+  fill: var(--badge-text);
+}
+
+.kpi-badge {
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.kpi-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kpi-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.kpi-value {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.8px;
+  line-height: 1.1;
+}
+
+.kpi-footer {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Skeleton Loading State for KPI Cards */
+.skeleton .kpi-value,
+.skeleton .kpi-title,
+.skeleton .kpi-footer {
+  position: relative;
+  color: transparent !important;
+  background: rgba(0, 0, 0, 0.08) !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+[data-theme="biolum"] .skeleton .kpi-value,
+[data-theme="forest"] .skeleton .kpi-value,
+[data-theme="cyberbio"] .skeleton .kpi-value {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.skeleton .kpi-value::after,
+.skeleton .kpi-title::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: skeletonSweep 1.2s infinite;
+}
+
+@keyframes skeletonSweep {
+  100% {
+    left: 100%;
+  }
+}

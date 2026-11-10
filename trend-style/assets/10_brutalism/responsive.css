@@ -1,0 +1,73 @@
+/* Reflow the original workspace without scaling its content. */
+.content-area,
+.widget-card,
+.chart-card,
+.table-card {
+  min-width: 0;
+}
+.main-header {
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-top: 96px;
+}
+.header-controls,
+.chart-card-header {
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.version-switcher {
+  max-width: calc(100% - 24px);
+  flex-wrap: wrap;
+}
+.modal-panel {
+  height: 100dvh;
+  max-width: 100vw;
+  overflow-y: auto;
+}
+@media (max-width: 900px) {
+  .dashboard-body {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    border-right: 0;
+    border-bottom: var(--border-width) solid var(--border-color);
+  }
+  .charts-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .version-switcher {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin: 12px;
+    width: fit-content;
+  }
+  .main-header {
+    padding: 16px;
+  }
+  .content-area,
+  .chart-card,
+  .table-card {
+    padding: 16px;
+  }
+  .draggable-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .data-tabs {
+    flex-wrap: wrap;
+  }
+  .brutal-table {
+    min-width: 560px;
+  }
+  .modal-footer {
+    flex-wrap: wrap;
+    padding: 16px;
+  }
+  .toast-container {
+    left: 12px;
+    right: 12px;
+  }
+}

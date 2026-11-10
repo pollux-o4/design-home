@@ -1,164 +1,317 @@
-/* Design Home - Universal Global Navigation Bar Styles */
+/* Shared, token-based navigation across study pages and the design workspace. */
 :root {
-  --gnb-bg: rgba(15, 23, 42, 0.85);
-  --gnb-border: rgba(255, 255, 255, 0.12);
-  --gnb-text: #f8fafc;
-  --gnb-text-muted: #94a3b8;
-  --gnb-accent: #6366f1;
-  --gnb-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --dh-nav-height: 64px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ui-border, #a9a9ae) transparent;
 }
-
-/* Accessibility Focus Ring */
-#dh-global-nav a:focus-visible,
-#dh-global-nav button:focus-visible {
-  outline: 3px solid #818cf8 !important;
-  outline-offset: 3px !important;
-  border-radius: 8px;
-}
-
 #dh-global-nav {
+  --nav-text: var(--ui-text, #1d1d1f);
+  --nav-muted: var(--ui-secondary, #6e6e73);
+  --nav-line: var(--ui-line, #e5e5e7);
+  --nav-surface: var(--ui-surface, #fff);
+  --nav-action: var(--ui-action, #0071e3);
   position: fixed;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
+  inset: 0 0 auto;
   z-index: 99999;
-  width: calc(100% - 32px);
-  max-width: 1100px;
-  background: var(--gnb-bg);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--gnb-border);
-  border-radius: 9999px;
-  padding: 8px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-  font-family: var(--gnb-font);
+  gap: 24px;
+  height: var(--dh-nav-height);
+  padding: 10px max(24px, calc((100% - 1120px) / 2));
+  border-bottom: 1px solid color-mix(in srgb, var(--nav-text) 8%, transparent);
+  background: color-mix(in srgb, var(--nav-surface) 94%, transparent);
+  color: var(--nav-text);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  font:
+    400 14px / 1.4 -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  isolation: isolate;
+}
+#dh-global-nav,
+#dh-global-nav * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
-
-#dh-global-nav .dh-brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  color: var(--gnb-text);
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: -0.02em;
-}
-
-#dh-global-nav .dh-brand-badge {
-  background: linear-gradient(135deg, #4f46e5, #9333ea);
-  width: 26px;
-  height: 26px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 900;
-  color: #ffffff;
-  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.4);
-}
-
-#dh-global-nav .dh-nav-links {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+#dh-global-nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-
-#dh-global-nav .dh-nav-link {
-  color: var(--gnb-text-muted);
+#dh-global-nav a {
   text-decoration: none;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 6px 14px;
-  border-radius: 9999px;
-  transition: all 0.2s ease;
-  display: flex;
+}
+#dh-global-nav button {
+  font: inherit;
+  cursor: pointer;
+}
+#dh-global-nav a:focus-visible,
+#dh-global-nav button:focus-visible {
+  outline: 3px solid var(--nav-action);
+  outline-offset: 2px;
+}
+#dh-global-nav .dh-brand {
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 9px;
+  min-height: 44px;
+  color: var(--nav-text);
+  font-size: 14px;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
 }
-
-#dh-global-nav .dh-nav-link svg {
-  width: 15px;
-  height: 15px;
-  fill: currentColor;
+#dh-global-nav .dh-brand-badge {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: var(--nav-text);
+  color: var(--nav-surface);
+  font-size: 11px;
+  font-weight: 750;
 }
-
-#dh-global-nav .dh-nav-link:hover {
-  color: var(--gnb-text);
-  background: rgba(255, 255, 255, 0.06);
-}
-
-#dh-global-nav .dh-nav-link.active {
-  color: #ffffff;
-  background: rgba(99, 102, 241, 0.2);
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  font-weight: 600;
-}
-
-#dh-global-nav .dh-nav-right {
+#dh-global-nav .dh-nav-links {
   display: flex;
   align-items: center;
   gap: 12px;
 }
-
-/* Language Toggle Switch */
-.dh-lang-switcher {
+#dh-global-nav .dh-nav-link {
   display: inline-flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 9999px;
-  padding: 2px;
-}
-
-.dh-lang-btn {
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 8px;
   background: transparent;
-  border: none;
-  color: var(--gnb-text-muted);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 4px 8px;
-  border-radius: 9999px;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  color: var(--nav-muted);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    color 180ms,
+    background 180ms;
 }
-
-.dh-lang-btn.active {
-  background: #4f46e5;
-  color: #ffffff;
-  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.4);
+#dh-global-nav .dh-nav-link:hover,
+#dh-global-nav .dh-nav-link[aria-expanded="true"] {
+  background: rgba(0, 0, 0, 0.035);
+  color: var(--nav-text);
 }
-
-#dh-global-nav .dh-nav-btn {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #fff;
-  padding: 6px 14px;
-  border-radius: 9999px;
-  font-size: 12px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.2s ease;
+#dh-global-nav .dh-nav-link.active {
+  color: var(--nav-text);
+  font-weight: 650;
+}
+#dh-global-nav .dh-disclosure-caret {
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 180ms;
+}
+#dh-global-nav [aria-expanded="true"] .dh-disclosure-caret {
+  transform: translateY(1px) rotate(225deg);
+}
+#dh-global-nav .dh-study {
+  position: relative;
+}
+#dh-global-nav .dh-study-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 264px;
+  padding: 8px;
+  border: 1px solid var(--nav-line);
+  border-radius: 18px;
+  background: var(--nav-surface);
+  box-shadow:
+    0 16px 48px #1d1d1f14,
+    0 3px 10px #1d1d1f08;
+  max-height: calc(100dvh - var(--dh-nav-height) - 20px);
+  overflow-y: auto;
+  animation: dh-study-enter 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes dh-study-enter {
+  from {
+    opacity: 0;
+    translate: 0 -6px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+#dh-global-nav .dh-study-panel[hidden] {
+  display: none;
+}
+#dh-global-nav .dh-study-link {
   display: flex;
   align-items: center;
+  gap: 14px;
+  min-height: 52px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: var(--nav-text);
+  font-size: 14px;
+}
+#dh-global-nav .dh-study-link svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  color: var(--nav-muted);
+  flex-shrink: 0;
+}
+#dh-global-nav .dh-study-link:hover {
+  background: var(--ui-bg, #f5f5f7);
+}
+#dh-global-nav .dh-study-link.active {
+  background: var(--ui-info-soft, #edf4ff);
+  color: var(--ui-blue, #0066cc);
+  font-weight: 600;
+}
+#dh-global-nav .dh-study-link.active::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  margin-left: auto;
+  border-radius: 50%;
+  background: currentColor;
+}
+#dh-global-nav .dh-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+#dh-global-nav .dh-theme-switcher {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+#dh-global-nav .dh-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 32px;
+  padding: 4px 12px;
+  border: 1px solid var(--nav-line);
+  border-radius: 99px;
+  background: var(--nav-surface);
+  color: var(--nav-muted);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 650;
+  cursor: pointer;
+  transition:
+    background 180ms,
+    color 180ms,
+    border-color 180ms;
+}
+#dh-global-nav .dh-theme-toggle:hover,
+#dh-global-nav .dh-theme-toggle[aria-expanded="true"] {
+  color: var(--nav-text);
+  background: var(--ui-soft, #e8e8ed);
+}
+#dh-global-nav .dh-theme-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  display: grid;
+  min-width: 136px;
+  padding: 6px;
+  border: 1px solid var(--nav-line);
+  border-radius: 14px;
+  background: var(--nav-surface);
+  box-shadow: 0 12px 32px #0003;
+  animation: dh-theme-enter 160ms ease-out;
+}
+#dh-global-nav .dh-theme-panel[hidden] {
+  display: none;
+}
+#dh-global-nav .dh-theme-panel button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 40px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--nav-text);
+  text-align: left;
+  font-size: 13px;
+  transition:
+    background 160ms,
+    color 160ms;
+}
+#dh-global-nav .dh-theme-panel button:hover {
+  background: var(--ui-soft, #e8e8ed);
+}
+#dh-global-nav .dh-theme-panel button[aria-pressed="true"] {
+  color: var(--ui-blue, #0066cc);
+}
+#dh-global-nav .dh-theme-panel button span:last-child {
+  opacity: 0;
+}
+#dh-global-nav .dh-theme-panel button[aria-pressed="true"] span:last-child {
+  opacity: 1;
+}
+@keyframes dh-theme-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+#dh-global-nav .dh-lang-switcher {
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+  background: var(--ui-soft, #e8e8ed);
+  border-radius: 99px;
+}
+#dh-global-nav .dh-lang-btn {
+  min-width: 34px;
+  min-height: 32px;
+  padding: 4px 7px;
+  border: 0;
+  border-radius: 99px;
+  color: var(--nav-text);
+  background: transparent;
+  font-size: 10px;
+  font-weight: 650;
+}
+#dh-global-nav .dh-lang-btn.active {
+  background: var(--nav-surface);
+  color: var(--nav-text);
+  box-shadow: 0 1px 4px #00000010;
+}
+#dh-global-nav .dh-nav-btn {
+  display: inline-flex;
+  align-items: center;
   gap: 6px;
+  min-height: 44px;
+  color: var(--nav-muted);
+  font-size: 12px;
 }
-
-#dh-global-nav .dh-nav-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
-  transform: translateY(-1px);
+#dh-global-nav .dh-nav-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
 }
-
-/* Accessible Screen Reader Utility */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -168,26 +321,78 @@
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
-  border-width: 0;
+  border: 0;
 }
-
+@media (max-width: 900px) {
+  #dh-global-nav .dh-nav-btn {
+    display: none;
+  }
+}
 @media (max-width: 640px) {
+  :root {
+    --dh-nav-height: 104px;
+  }
   #dh-global-nav {
-    top: 8px;
-    padding: 6px 12px;
+    flex-wrap: wrap;
+    gap: 0 16px;
+    padding: 8px 20px;
+  }
+  #dh-global-nav .dh-brand {
+    font-size: 13px;
+  }
+  #dh-global-nav .dh-nav-right {
+    margin-left: auto;
+    gap: 8px;
   }
   #dh-global-nav .dh-nav-links {
-    gap: 4px;
+    order: 3;
+    width: 100%;
+    gap: 12px;
   }
-  #dh-global-nav .dh-nav-link span:not(.sr-only) {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
+  #dh-global-nav .dh-nav-link {
+    padding: 10px 4px;
+    font-size: 13px;
   }
+  #dh-global-nav .dh-study {
+    position: static;
+  }
+  #dh-global-nav .dh-study-panel {
+    inset: calc(100% + 8px) 16px auto;
+    width: auto;
+    transform: none;
+  }
+}
+@media (max-width: 360px) {
+  #dh-global-nav {
+    gap: 0 8px;
+    padding-inline: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #dh-global-nav * {
+    transition: none;
+  }
+  #dh-global-nav .dh-theme-panel,
+  #dh-global-nav .dh-study-panel {
+    animation: none;
+  }
+}
+@media (forced-colors: active) {
+  #dh-global-nav .dh-study-panel {
+    border-color: CanvasText;
+  }
+  #dh-global-nav .active {
+    outline: 1px solid CanvasText;
+    outline-offset: -2px;
+  }
+}
+body > .skip-link:focus {
+  position: fixed;
+  top: 12px;
+  left: 16px;
+  z-index: 100000;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: var(--ui-surface, #fff);
+  color: var(--ui-text, #1d1d1f);
 }

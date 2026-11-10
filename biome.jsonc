@@ -1,0 +1,129 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.6.6/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": true,
+    "includes": [
+      "**",
+      "!!impeccable",
+      "!!mengto-skills",
+      "!!design-library/data",
+      "!!design-library/index.html",
+      "!!design-compare/dist",
+      "!!pnpm-lock.yaml"
+    ]
+  },
+  "formatter": {
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100
+  },
+  "assist": {
+    "enabled": false
+  },
+  "linter": {
+    "rules": {
+      "preset": "none",
+      "correctness": {
+        "noUndeclaredVariables": "error",
+        "noUnusedVariables": "error",
+        "noUnusedImports": "error",
+        "noUnreachable": "error",
+        "noConstAssign": "error",
+        "noInvalidBuiltinInstantiation": "error",
+        "noUnsafeFinally": "error"
+      },
+      "suspicious": {
+        "noDuplicateCase": "error",
+        "noDuplicateObjectKeys": "error"
+      }
+    }
+  },
+  // shortcut: HTML 템플릿의 공백·script 계약 보존을 위해 포맷 보류, 템플릿 파싱 계약 개선 시 재검토.
+  "html": {
+    "formatter": {
+      "enabled": false
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["**/*.html"],
+      "linter": {
+        "enabled": false
+      }
+    },
+    // Classic HTML handlers share declarations across script files; browser E2E verifies these bindings.
+    {
+      "includes": ["trend-style/assets/**/*.js"],
+      "javascript": {
+        "globals": [
+          "DesignExampleInteractions",
+          "animateCountUp",
+          "animateMetrics",
+          "appendTerminalLog",
+          "attachChartHoverListeners",
+          "closeModal",
+          "currentMode",
+          "datasets",
+          "initChartInteractions",
+          "initChartInteractivity",
+          "initChartTooltips",
+          "initDragAndDrop",
+          "initQuantumCanvas",
+          "playBeep",
+          "refreshChartData",
+          "refreshDashboardData",
+          "renderBarChart",
+          "renderLineChart",
+          "renderSVGChart",
+          "runAllCountUps",
+          "setupChartTooltips",
+          "setupDragAndDrop",
+          "showToast",
+          "skeuoAudio",
+          "switchDataTab",
+          "switchViewMode",
+          "triggerCountUp",
+          "triggerCountUpAnimations",
+          "triggerDataRefresh",
+          "triggerKPIAnimations",
+          "triggerMetricAnimation",
+          "triggerMetricCountUp",
+          "triggerSkeletonAndRefresh",
+          "triggerSkeletonLoad",
+          "triggerSkeletonReload",
+          "triggerToast"
+        ]
+      },
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnusedVariables": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["tests/**/*.mjs", "design-compare/tests/**/*.js"],
+      "javascript": {
+        "globals": [
+          "CanvasCatalog",
+          "ComponentModules",
+          "axe",
+          "changeMinFontSize",
+          "detachedStatus",
+          "removedAnimations",
+          "removedSample",
+          "resetInfiniteScroll",
+          "savedStatus",
+          "scrollGeometryReads",
+          "triggerInfiniteScroll"
+        ]
+      }
+    }
+  ]
+}

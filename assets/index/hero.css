@@ -1,0 +1,116 @@
+.hero {
+  padding-top: 130px;
+  text-align: center;
+}
+
+.hero-badge {
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  margin-bottom: 22px;
+}
+
+.hero-title {
+  font-size: clamp(42px, 5.2vw, 72px);
+  font-weight: 700;
+  line-height: 1.16;
+  letter-spacing: -0.065em;
+}
+
+.hero-title span {
+  color: var(--ui-tertiary);
+}
+
+.hero-subtitle {
+  font-size: 20px;
+  line-height: 1.6;
+  letter-spacing: -0.03em;
+  color: var(--ui-secondary);
+  margin: 26px auto 28px;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 26px;
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  font-size: 15px;
+  min-height: 46px;
+  transition:
+    background 180ms,
+    transform 180ms;
+}
+
+.btn-primary {
+  background: var(--ui-action);
+  color: white;
+  border-radius: 99px;
+  padding: 12px 23px;
+}
+
+.btn-primary:hover {
+  background: color-mix(in srgb, var(--ui-action) 86%, white);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-secondary {
+  color: var(--ui-blue);
+}
+
+.btn-secondary:hover {
+  text-decoration: underline;
+}
+
+.btn-secondary .ui-icon {
+  width: 16px;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding-top: 125px;
+  }
+
+  .hero-badge {
+    font-size: 17px;
+  }
+
+  .hero-title {
+    font-size: 42px;
+  }
+
+  .hero-subtitle {
+    font-size: 16px;
+    margin-top: 22px;
+  }
+
+  .hero-actions {
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    font-size: 13px;
+  }
+}
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: 35px;
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+  }
+}

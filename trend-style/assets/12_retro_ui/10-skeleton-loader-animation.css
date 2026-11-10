@@ -1,0 +1,18 @@
+/* ==========================================
+   SKELETON LOADER ANIMATION
+   ========================================== */
+.skeleton-box {
+  background: linear-gradient(90deg, var(--surface) 25%, var(--light) 50%, var(--surface) 75%);
+  background-size: 200% 100%;
+  animation: pixel-pulse 1s infinite steps(6);
+  border: 1px dashed var(--dark-shadow);
+  min-height: 20px;
+}
+@keyframes pixel-pulse {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

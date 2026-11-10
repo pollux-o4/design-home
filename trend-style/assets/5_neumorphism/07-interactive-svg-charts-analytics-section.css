@@ -1,0 +1,190 @@
+/* ----------------------------------------------------
+   Interactive SVG Charts & Analytics Section
+---------------------------------------------------- */
+.charts-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+}
+
+.chart-card {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.chart-title-wrap h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.chart-title-wrap p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.chart-legend {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow: var(--shadow-outset-sm);
+}
+
+/* Dynamic SVG Line & Area Chart */
+.svg-chart-container {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  padding: 0.5rem 0;
+}
+
+.svg-chart-container svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.chart-grid-line {
+  stroke: rgba(0, 0, 0, 0.06);
+  stroke-dasharray: 4 4;
+  stroke-width: 1;
+}
+
+.chart-path-area {
+  fill: url("../../5_neumorphism.html#revenueGradient");
+  opacity: 0.6;
+}
+
+.chart-path-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0px 4px 8px var(--accent-glow));
+}
+
+.chart-path-line-secondary {
+  fill: none;
+  stroke: var(--text-muted);
+  stroke-width: 2.5;
+  stroke-dasharray: 6 6;
+  opacity: 0.5;
+}
+
+.chart-node {
+  fill: var(--surface-color);
+  stroke: var(--accent);
+  stroke-width: 3;
+  r: 5;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chart-node:hover {
+  r: 8;
+  stroke-width: 4;
+  fill: var(--accent);
+}
+
+/* SVG Chart Hover Tooltip */
+.chart-tooltip {
+  position: absolute;
+  background: var(--surface-color);
+  box-shadow: var(--shadow-outset-lg);
+  border-radius: 12px;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.78rem;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -110%);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  z-index: 50;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  white-space: nowrap;
+}
+
+.chart-tooltip.show {
+  opacity: 1;
+}
+
+.chart-tooltip .date {
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 0.2rem;
+}
+
+.chart-tooltip .val {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--accent);
+}
+
+/* Bar Chart Widget (Traffic Channels) */
+.bar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.bar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.bar-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.bar-track {
+  height: 12px;
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: var(--shadow-inset-sm);
+  background: var(--surface-color);
+  overflow: hidden;
+  position: relative;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  background: var(--accent-gradient);
+  box-shadow: var(--shadow-outset-sm);
+  width: 0%;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}

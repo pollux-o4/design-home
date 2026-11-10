@@ -1,0 +1,207 @@
+/* ==========================================
+   CSS VARIABLES & THEME PRESETS
+   ========================================== */
+:root {
+  /* Theme 1: Windows 95 Classic */
+  --win95-bg: #008080;
+  --win95-surface: #c0c0c0;
+  --win95-text: #000000;
+  --win95-light: #ffffff;
+  --win95-shadow: #808080;
+  --win95-dark-shadow: #000000;
+  --win95-title: #000080;
+  --win95-title-text: #ffffff;
+  --win95-accent: #008000;
+  --win95-card-bg: #c0c0c0;
+  --win95-font: "Tahoma", "VT323", monospace;
+
+  /* Theme 2: CRT Terminal / Matrix Green */
+  --cyber-bg: #030c03;
+  --cyber-surface: #0a170a;
+  --cyber-text: #33ff66;
+  --cyber-light: #66ff88;
+  --cyber-shadow: #004411;
+  --cyber-dark-shadow: #001100;
+  --cyber-title: #003300;
+  --cyber-title-text: #33ff66;
+  --cyber-accent: #00ffcc;
+  --cyber-card-bg: #051205;
+  --cyber-font: "VT323", monospace;
+
+  /* Theme 3: 8-Bit Synth Arcade */
+  --arcade-bg: #12092b;
+  --arcade-surface: #241447;
+  --arcade-text: #ffffff;
+  --arcade-light: #00f3ff;
+  --arcade-shadow: #ff0055;
+  --arcade-dark-shadow: #0a041c;
+  --arcade-title: #ff0055;
+  --arcade-title-text: #ffffff;
+  --arcade-accent: #ffe600;
+  --arcade-card-bg: #1c0e3b;
+  --arcade-font: "Press Start 2P", cursive;
+
+  /* Theme 4: Game Boy DMG-01 */
+  --gb-bg: #8bac0f;
+  --gb-surface: #9bbc0f;
+  --gb-text: #0f380f;
+  --gb-light: #9bbc0f;
+  --gb-shadow: #306230;
+  --gb-dark-shadow: #0f380f;
+  --gb-title: #306230;
+  --gb-title-text: #9bbc0f;
+  --gb-accent: #0f380f;
+  --gb-card-bg: #8bac0f;
+  --gb-font: "DotGothic16", monospace;
+
+  /* Theme 5: Vaporwave GeoCities */
+  --vapor-bg: #2b1055;
+  --vapor-surface: #ff77a9;
+  --vapor-text: #ffffff;
+  --vapor-light: #00ffff;
+  --vapor-shadow: #ff007f;
+  --vapor-dark-shadow: #12002b;
+  --vapor-title: #ff007f;
+  --vapor-title-text: #ffff00;
+  --vapor-accent: #00ffff;
+  --vapor-card-bg: #3d1e6d;
+  --vapor-font: "Silkscreen", cursive;
+
+  /* Theme 6: DOS / C64 Blue */
+  --dos-bg: #0000aa;
+  --dos-surface: #0000aa;
+  --dos-text: #ffff55;
+  --dos-light: #ffffff;
+  --dos-shadow: #5555ff;
+  --dos-dark-shadow: #000055;
+  --dos-title: #aaaaaa;
+  --dos-title-text: #0000aa;
+  --dos-accent: #55ffff;
+  --dos-card-bg: #000088;
+  --dos-font: "Share Tech Mono", monospace;
+}
+
+/* Active Theme Class Mapping */
+body.theme-var-1 {
+  --bg: var(--win95-bg);
+  --surface: var(--win95-surface);
+  --text: var(--win95-text);
+  --light: var(--win95-light);
+  --shadow: var(--win95-shadow);
+  --dark-shadow: var(--win95-dark-shadow);
+  --title: var(--win95-title);
+  --title-text: var(--win95-title-text);
+  --accent: var(--win95-accent);
+  --card-bg: var(--win95-card-bg);
+  --font-main: var(--win95-font);
+}
+body.theme-var-2 {
+  --bg: var(--cyber-bg);
+  --surface: var(--cyber-surface);
+  --text: var(--cyber-text);
+  --light: var(--cyber-light);
+  --shadow: var(--cyber-shadow);
+  --dark-shadow: var(--cyber-dark-shadow);
+  --title: var(--cyber-title);
+  --title-text: var(--cyber-title-text);
+  --accent: var(--cyber-accent);
+  --card-bg: var(--cyber-card-bg);
+  --font-main: var(--cyber-font);
+}
+body.theme-var-3 {
+  --bg: var(--arcade-bg);
+  --surface: var(--arcade-surface);
+  --text: var(--arcade-text);
+  --light: var(--arcade-light);
+  --shadow: var(--arcade-shadow);
+  --dark-shadow: var(--arcade-dark-shadow);
+  --title: var(--arcade-title);
+  --title-text: var(--arcade-title-text);
+  --accent: var(--arcade-accent);
+  --card-bg: var(--arcade-card-bg);
+  --font-main: var(--arcade-font);
+}
+body.theme-var-4 {
+  --bg: var(--gb-bg);
+  --surface: var(--gb-surface);
+  --text: var(--gb-text);
+  --light: var(--gb-light);
+  --shadow: var(--gb-shadow);
+  --dark-shadow: var(--gb-dark-shadow);
+  --title: var(--gb-title);
+  --title-text: var(--gb-title-text);
+  --accent: var(--gb-accent);
+  --card-bg: var(--gb-card-bg);
+  --font-main: var(--gb-font);
+}
+body.theme-var-5 {
+  --bg: var(--vapor-bg);
+  --surface: var(--vapor-surface);
+  --text: var(--vapor-text);
+  --light: var(--vapor-light);
+  --shadow: var(--vapor-shadow);
+  --dark-shadow: var(--vapor-dark-shadow);
+  --title: var(--vapor-title);
+  --title-text: var(--vapor-title-text);
+  --accent: var(--vapor-accent);
+  --card-bg: var(--vapor-card-bg);
+  --font-main: var(--vapor-font);
+}
+body.theme-var-6 {
+  --bg: var(--dos-bg);
+  --surface: var(--dos-surface);
+  --text: var(--dos-text);
+  --light: var(--dos-light);
+  --shadow: var(--dos-shadow);
+  --dark-shadow: var(--dos-dark-shadow);
+  --title: var(--dos-title);
+  --title-text: var(--dos-title-text);
+  --accent: var(--dos-accent);
+  --card-bg: var(--dos-card-bg);
+  --font-main: var(--dos-font);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-main);
+  overflow-x: hidden;
+  padding: 12px;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+  position: relative;
+}
+
+/* Pixelated image rendering */
+img,
+svg,
+canvas {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* Retro Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface);
+  border: 2px solid var(--dark-shadow);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface);
+  border-top: 2px solid var(--light);
+  border-left: 2px solid var(--light);
+  border-right: 2px solid var(--dark-shadow);
+  border-bottom: 2px solid var(--dark-shadow);
+}

@@ -1,0 +1,99 @@
+/* ==========================================
+   SIDEBAR ACCORDION NAVIGATION
+   ========================================== */
+.sidebar-panel {
+  background: var(--card-bg);
+  border-top: 2px solid var(--dark-shadow);
+  border-left: 2px solid var(--dark-shadow);
+  border-right: 2px solid var(--light);
+  border-bottom: 2px solid var(--light);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar-header {
+  background: var(--title);
+  color: var(--title-text);
+  padding: 4px 8px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.accordion-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.accordion-item {
+  border: 1px solid var(--dark-shadow);
+}
+
+.accordion-header {
+  background: var(--surface);
+  color: var(--text);
+  padding: 6px 8px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  border-top: 1px solid var(--light);
+  border-left: 1px solid var(--light);
+}
+.accordion-header:hover {
+  background: var(--light);
+  color: var(--dark-shadow);
+}
+
+.accordion-content {
+  display: none;
+  background: var(--surface);
+  padding: 4px 0;
+  border-top: 1px solid var(--dark-shadow);
+}
+.accordion-item.open .accordion-content {
+  display: block;
+}
+
+.accordion-subitem {
+  padding: 5px 12px 5px 24px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.accordion-subitem:hover,
+.accordion-subitem.active {
+  background: var(--title);
+  color: var(--title-text);
+}
+
+.sidebar-widget {
+  margin-top: auto;
+  background: var(--surface);
+  border: 2px inset var(--dark-shadow);
+  padding: 8px;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.progress-bar-outer {
+  height: 14px;
+  background: var(--light);
+  border: 1px solid var(--dark-shadow);
+  position: relative;
+  overflow: hidden;
+}
+.progress-bar-inner {
+  height: 100%;
+  background: var(--accent);
+  width: 78%;
+  transition: width 0.3s ease;
+}

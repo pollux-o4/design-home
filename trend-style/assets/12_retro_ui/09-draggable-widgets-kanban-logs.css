@@ -1,0 +1,80 @@
+/* ==========================================
+   DRAGGABLE WIDGETS & KANBAN / LOGS
+   ========================================== */
+.widgets-bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 900px) {
+  .widgets-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.widget-window {
+  background: var(--card-bg);
+  border-top: 2px solid var(--light);
+  border-left: 2px solid var(--light);
+  border-right: 2px solid var(--dark-shadow);
+  border-bottom: 2px solid var(--dark-shadow);
+  padding: 10px;
+  cursor: grab;
+}
+.widget-window:active {
+  cursor: grabbing;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.task-item {
+  background: var(--surface);
+  border: 1px solid var(--dark-shadow);
+  padding: 6px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.task-badge {
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border: 1px solid var(--dark-shadow);
+  font-weight: bold;
+}
+.badge-done {
+  background: #00aa00;
+  color: #fff;
+}
+.badge-progress {
+  background: #ffaa00;
+  color: #000;
+}
+.badge-pending {
+  background: #888888;
+  color: #fff;
+}
+
+.terminal-box {
+  background: #000000;
+  color: #00ff00;
+  font-family: "VT323", monospace;
+  padding: 8px;
+  height: 130px;
+  overflow-y: auto;
+  border: 2px inset var(--dark-shadow);
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+.terminal-line {
+  margin-bottom: 2px;
+}
+.terminal-prompt {
+  color: #ffff00;
+}

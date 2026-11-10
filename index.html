@@ -1,574 +1,134 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Design Home — 모던 UI/UX 아키텍처 & 쇼케이스 허브</title>
-  <meta name="description" content="Design Home은 15가지 최신 UI 디자인 트렌드, 피그마 캔버스 스타일 인터랙티브 컴포넌트 시스템, 디자인 토큰 가이드를 제공하는 큐레이션 허브입니다." />
-  <link rel="canonical" href="https://pollux-o4.github.io/design-home/" />
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://pollux-o4.github.io/design-home/" />
-  <meta property="og:title" content="Design Home — 모던 UI/UX 아키텍처 허브" />
-  <meta property="og:description" content="15가지 디자인 트렌드, 인터랙티브 컴포넌트 시스템, 시각적 디자인 가이드라인 탐색." />
-  <meta property="og:image" content="https://pollux-o4.github.io/design-home/shared/assets/og-image.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:site_name" content="Design Home" />
-  <meta property="og:locale" content="ko_KR" />
-
-  <!-- Twitter Cards -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://pollux-o4.github.io/design-home/" />
-  <meta name="twitter:title" content="Design Home — 모던 UI/UX 아키텍처 허브" />
-  <meta name="twitter:description" content="15가지 디자인 트렌드, 인터랙티브 컴포넌트 시스템, 시각적 디자인 가이드라인 탐색." />
-  <meta name="twitter:image" content="https://pollux-o4.github.io/design-home/shared/assets/og-image.png" />
-
-  <!-- Favicon & Theme -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>❖</text></svg>" type="image/svg+xml" />
-  <meta name="theme-color" content="#07090e" />
-
-  <!-- Fonts Optimization -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@700;900&display=swap" />
-
-  <!-- Static Styles -->
-  <link rel="stylesheet" href="./shared/css/global-nav.css" />
-
-  <style>
-    :root {
-      --bg: #07090e;
-      --surface: rgba(18, 24, 38, 0.65);
-      --surface-hover: rgba(30, 41, 59, 0.85);
-      --border: rgba(255, 255, 255, 0.1);
-      --border-glow: rgba(99, 102, 241, 0.45);
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      --accent: #6366f1;
-      --accent-glow: rgba(99, 102, 241, 0.35);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-      padding-top: 100px;
-    }
-
-    /* Accessibility Focus Visible Ring */
-    :focus-visible {
-      outline: 3px solid #818cf8 !important;
-      outline-offset: 4px !important;
-    }
-
-    /* Skip Navigation Link */
-    .skip-link {
-      position: absolute;
-      top: -100px;
-      left: 16px;
-      background: #6366f1;
-      color: #ffffff;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 14px;
-      z-index: 100000;
-      text-decoration: none;
-      transition: top 0.2s ease;
-    }
-    .skip-link:focus {
-      top: 16px;
-    }
-
-    /* Ambient Hardware Accelerated Glows */
-    .bg-glow-1 {
-      position: fixed;
-      top: -20%;
-      left: 20%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(99, 102, 241, 0.22) 0%, rgba(0,0,0,0) 70%);
-      filter: blur(80px);
-      z-index: -1;
-      pointer-events: none;
-      will-change: transform;
-      transform: translateZ(0);
-      animation: floatGlow 12s ease-in-out infinite alternate;
-    }
-
-    .bg-glow-2 {
-      position: fixed;
-      bottom: -10%;
-      right: 15%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(168, 85, 247, 0.18) 0%, rgba(0,0,0,0) 70%);
-      filter: blur(90px);
-      z-index: -1;
-      pointer-events: none;
-      will-change: transform;
-      transform: translateZ(0);
-      animation: floatGlow 15s ease-in-out infinite alternate-reverse;
-    }
-
-    @keyframes floatGlow {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(40px, 30px) scale(1.08); }
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* Semantic Header / Hero Section */
-    .hero {
-      padding: 60px 0 50px;
-      text-align: center;
-      position: relative;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      border-radius: 9999px;
-      padding: 6px 18px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--muted);
-      margin-bottom: 28px;
-      backdrop-filter: blur(10px);
-    }
-
-    .hero-badge-spark {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #10b981;
-      box-shadow: 0 0 10px #10b981;
-    }
-
-    .hero-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 4.2rem;
-      font-weight: 900;
-      line-height: 1.15;
-      letter-spacing: -0.04em;
-      margin-bottom: 24px;
-      background: linear-gradient(135deg, #ffffff 20%, #cbd5e1 50%, #818cf8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-title span {
-      background: linear-gradient(135deg, #c084fc, #6366f1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-subtitle {
-      font-size: 1.25rem;
-      color: var(--muted);
-      max-width: 680px;
-      margin: 0 auto 36px;
-      line-height: 1.6;
-      font-weight: 400;
-    }
-
-    /* Hero Dual Actions Hierarchy */
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #6366f1, #4f46e5);
-      color: #ffffff;
-      padding: 14px 28px;
-      border-radius: 9999px;
-      font-weight: 700;
-      font-size: 15px;
-      text-decoration: none;
-      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(99, 102, 241, 0.6);
-      background: linear-gradient(135deg, #4f46e5, #4338ca);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--border);
-      color: #ffffff;
-      padding: 14px 28px;
-      border-radius: 9999px;
-      font-weight: 600;
-      font-size: 15px;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      backdrop-filter: blur(10px);
-    }
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.25);
-      transform: translateY(-2px);
-    }
-
-    /* Main Hub Section */
-    .hub-section {
-      padding-bottom: 80px;
-    }
-
-    .hub-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 32px;
-      margin-bottom: 60px;
-    }
-
-    /* Hub Cards with Real-time Mouse Spotlight */
-    .hub-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-radius: 24px;
-      padding: 36px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      text-decoration: none;
-      color: var(--text);
-      position: relative;
-      overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .hub-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 40%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-    }
-
-    .hub-card:hover {
-      transform: translateY(-8px);
-      border-color: var(--border-glow);
-      background: var(--surface-hover);
-      box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7), 0 0 30px 0 rgba(99, 102, 241, 0.2);
-    }
-
-    .hub-card:hover::before {
-      opacity: 1;
-    }
-
-    .card-icon-box {
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 24px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15);
-    }
-
-    .card-icon-box svg {
-      width: 28px;
-      height: 28px;
-      fill: #818cf8;
-    }
-
-    .card-tag {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #818cf8;
-      margin-bottom: 12px;
-    }
-
-    .card-heading {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.8rem;
-      font-weight: 800;
-      margin-bottom: 12px;
-      letter-spacing: -0.02em;
-    }
-
-    .card-body-text {
-      font-size: 0.975rem;
-      color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 32px;
-    }
-
-    .card-action {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 14px;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .card-action-arrow {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.3s ease, background 0.3s ease;
-    }
-
-    .hub-card:hover .card-action-arrow {
-      background: #6366f1;
-      transform: translateX(6px);
-    }
-
-    /* Stats Bar Section */
-    .stats-bar {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      background: rgba(15, 23, 42, 0.45);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 32px;
-      backdrop-filter: blur(12px);
-    }
-
-    .stat-item {
-      text-align: center;
-      padding: 0 16px;
-      border-right: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .stat-item:last-child {
-      border-right: none;
-    }
-
-    .stat-value {
-      font-family: 'Outfit', sans-serif;
-      font-size: 2.4rem;
-      font-weight: 900;
-      background: linear-gradient(135deg, #fff, #94a3b8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 4px;
-    }
-
-    .stat-label {
-      font-size: 0.875rem;
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 0;
-      text-align: center;
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    @media (max-width: 768px) {
-      .hero-title {
-        font-size: 2.8rem;
-      }
-      .hero-actions {
-        flex-direction: column;
-        width: 100%;
-      }
-      .btn-primary, .btn-secondary {
-        width: 100%;
-        justify-content: center;
-      }
-      .stat-item {
-        border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        padding: 16px 0;
-      }
-      .stat-item:last-child {
-        border-bottom: none;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Skip to Main Content for Accessibility -->
-  <a href="#main-content" class="skip-link">본문 영역으로 건너뛰기</a>
-
-  <!-- Ambient background glow elements -->
-  <div class="bg-glow-1" aria-hidden="true"></div>
-  <div class="bg-glow-2" aria-hidden="true"></div>
-
-  <!-- Header / Hero Landmark -->
-  <header class="hero">
-    <div class="container">
-      <div class="hero-badge">
-        <span class="hero-badge-spark" aria-hidden="true"></span>
-        <span data-i18n="hero_badge">디자인 시스템 & UX 아키텍처 허브</span>
-      </div>
-      <h1 class="hero-title" data-i18n="hero_title">
-        모던 웹 인터페이스 & <br /><span>디자인 트렌드 아키텍처</span>
-      </h1>
-      <p class="hero-subtitle" data-i18n="hero_subtitle">
-        스큐어모피즘부터 글래스모피즘, 인터랙티브 캔버스 컴포넌트까지.<br />
-        최신 웹 UI/UX 모듈 아키텍처와 트렌드 디자인을 한곳에서 탐색하세요.
-      </p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Design Home — 보고, 조작하며 배우는 디자인
+    </title>
+    <meta name="description" content="디자인 트렌드, 인터랙션 패턴, UI·UX·모션 용어와 도구를 눈으로 보고 직접 조작하며 배우는 디자인 공부방." />
+    <link rel="canonical" href="https://pollux-o4.github.io/design-home/" />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://pollux-o4.github.io/design-home/" />
+    <meta property="og:title" content="Design Home — 모던 UI/UX 아키텍처 허브" />
+    <meta property="og:description" content="15가지 디자인 트렌드, 인터랙티브 컴포넌트 시스템, 시각적 디자인 가이드라인 탐색." />
+    <meta property="og:image" content="https://pollux-o4.github.io/design-home/shared/assets/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Design Home" />
+    <meta property="og:locale" content="ko_KR" />
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://pollux-o4.github.io/design-home/" />
+    <meta name="twitter:title" content="Design Home — 모던 UI/UX 아키텍처 허브" />
+    <meta name="twitter:description" content="15가지 디자인 트렌드, 인터랙티브 컴포넌트 시스템, 시각적 디자인 가이드라인 탐색." />
+    <meta name="twitter:image" content="https://pollux-o4.github.io/design-home/shared/assets/og-image.png" />
+    <!-- Favicon & Theme -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><rect x=%223%22 y=%223%22 width=%2218%22 height=%2218%22 rx=%225%22 fill=%22%231d1d1f%22/><path d=%22M8 7v10h4a5 5 0 000-10z%22 fill=%22white%22/></svg>" type="image/svg+xml" />
+    <meta name="theme-color" content="#f5f5f7" />
+    <script src="./shared/js/page-transitions.js"></script>
+    <script src="./shared/js/theme.js"></script>
+    <!-- Static Styles -->
+    <link rel="stylesheet" href="./shared/css/global-nav.css" />
+    <link rel="stylesheet" href="shared/css/interface.css">
+    <link rel="stylesheet" href="./assets/index/base.css">
+    <link rel="stylesheet" href="./assets/index/hero.css">
+    <link rel="stylesheet" href="./assets/index/hero-atmosphere.css">
+    <link rel="stylesheet" href="./assets/index/collections.css">
+    <link rel="stylesheet" href="./assets/index/learning-preview.css">
+  </head>
+  <body class="home-page">
+    <a href="#main-content" class="skip-link">
+      본문 영역으로 건너뛰기
+    </a>
+    <header class="hero container">
+      <div class="hero-copy">
+      <p class="hero-badge" data-i18n="hero_badge">Design Home</p>
+      <h1 class="hero-title" data-i18n="hero_title">디자인을 보고,<br><span>직접 해보며 배우기.</span></h1>
+      <div class="hero-title-sparkles" aria-hidden="true"><div class="atmosphere-horizon"></div><div class="atmosphere-sparkles"></div></div>
+      <p class="hero-subtitle" data-i18n="hero_subtitle">스타일, 인터랙션, 용어와 도구.<br>지금 궁금한 것부터 시작하세요.</p>
       <div class="hero-actions">
-        <a href="./trend-style/index.html" class="btn-primary">
-          <span data-i18n="hero_btn_primary">15가지 트렌드 탐색</span> <span aria-hidden="true">→</span>
-        </a>
-        <a href="./ui-components/index.html" class="btn-secondary">
-          <span data-i18n="hero_btn_secondary">컴포넌트 캔버스</span> <span aria-hidden="true">🧩</span>
-        </a>
+        <a href="./ui-components/index.html" class="btn-primary"><span data-i18n="hero_btn_primary">패턴으로 시작하기</span><svg class="ui-icon" aria-hidden="true"><use href="./shared/assets/interface-icons.svg#arrow"/></svg></a>
       </div>
-    </div>
-  </header>
-
-  <!-- Main Content Landmark -->
-  <main id="main-content" tabindex="-1">
-    <section class="container hub-section" aria-label="메인 내비게이션 허브">
-      <div class="hub-grid">
-        <!-- Card 1: Trend Styles Showcase -->
+      </div>
+    </header>
+      <div class="hero-atmosphere" aria-hidden="true">
+        <div class="atmosphere-bloom"></div>
+        <div class="atmosphere-pointer"></div>
+      </div>
+    <main id="main-content" class="container hub-section" tabindex="-1">
+      <section aria-labelledby="learning-title">
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="hub_eyebrow">EXPLORE & LEARN</p>
+          <h2 id="learning-title" data-i18n="hub_title">무엇부터 살펴볼까요?</h2>
+          <p class="preview-hint" data-i18n="home_preview_hint">올려두거나 꾹 눌러 내부 화면 보기</p>
+        </div>
+        <div class="hub-grid">
+        <div class="learning-entry" data-preview="trends">
         <a href="./trend-style/index.html" class="hub-card">
-          <div>
-            <div class="card-icon-box" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.2 19.54 10.56 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
-            </div>
-            <div class="card-tag" data-i18n="card1_tag">컬렉션</div>
-            <h2 class="card-heading" data-i18n="card1_title">15가지 디자인 트렌드</h2>
-            <p class="card-body-text" data-i18n="card1_desc">
-              스큐어모피즘, 글래스모피즘, 네오브루탈리즘, 키네틱 타이포그래피 등 15가지 핵심 디자인 트렌드 라이브 데모.
-            </p>
-          </div>
-          <div class="card-action">
-            <span data-i18n="card1_action">15가지 스타일 둘러보기</span>
-            <div class="card-action-arrow" aria-hidden="true">→</div>
+          <div class="card-art learning-art learning-art--trends" aria-hidden="true"><span class="preview-note" data-preview-ko="색과 질감" data-preview-en="Color & texture">색과 질감</span><i></i><i></i><i></i></div>
+          <div class="card-copy">
+            <h3 class="card-heading" data-i18n="card1_title">디자인 트렌드</h3>
+            <p class="card-body-text" data-i18n="card1_desc">색과 질감이 만드는 화면의 차이.</p>
+            <span class="card-action"><span data-i18n="card1_action">스타일 비교하기</span><svg class="ui-icon" aria-hidden="true"><use href="./shared/assets/interface-icons.svg#arrow"/></svg></span>
           </div>
         </a>
-
-        <!-- Card 2: UI Components Canvas -->
+        </div>
+        <div class="learning-entry" data-preview="patterns">
         <a href="./ui-components/index.html" class="hub-card">
-          <div>
-            <div class="card-icon-box" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
-            </div>
-            <div class="card-tag" data-i18n="card2_tag">인터랙티브 라이브러리</div>
-            <h2 class="card-heading" data-i18n="card2_title">UI 컴포넌트 캔버스</h2>
-            <p class="card-body-text" data-i18n="card2_desc">
-              피그마(Figma) 캔버스 인터페이스 스타일의 인터랙티브 버튼, 토글, 모달, 네비게이션 컴포넌트 플레이그라운드.
-            </p>
-          </div>
-          <div class="card-action">
-            <span data-i18n="card2_action">컴포넌트 캔버스 실행</span>
-            <div class="card-action-arrow" aria-hidden="true">→</div>
+          <div class="card-art learning-art learning-art--patterns" aria-hidden="true"><span class="preview-note" data-preview-ko="입력 → 완료" data-preview-en="Input → done">입력 → 완료</span><i></i><i></i><i></i></div>
+          <div class="card-copy">
+            <h3 class="card-heading" data-i18n="card2_title">Patterns</h3>
+            <p class="card-body-text" data-i18n="card2_desc">입력과 피드백을 직접 조작하며 익히기.</p>
+            <span class="card-action"><span data-i18n="card2_action">패턴 체험하기</span><svg class="ui-icon" aria-hidden="true"><use href="./shared/assets/interface-icons.svg#arrow"/></svg></span>
           </div>
         </a>
-
-        <!-- Card 3: Design Guidelines & Skills -->
-        <a href="https://github.com/pollux-o4/design-home" target="_blank" rel="noopener" class="hub-card" aria-label="GitHub의 디자인 아키텍처 (새 창으로 열림)">
-          <div>
-            <div class="card-icon-box" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-            </div>
-            <div class="card-tag" data-i18n="card3_tag">저장소 & 문서</div>
-            <h2 class="card-heading" data-i18n="card3_title">디자인 아키텍처</h2>
-            <p class="card-body-text" data-i18n="card3_desc">
-              클린 CSS 아키텍처, 디자인 토큰, 에이전트 스킬 세트 가이드 문서 및 오픈소스 GitHub 저장소.
-            </p>
-          </div>
-          <div class="card-action">
-            <span data-i18n="card3_action">GitHub 저장소 보기</span>
-            <div class="card-action-arrow" aria-hidden="true">→</div>
+        </div>
+        <div class="learning-entry" data-preview="glossary">
+        <a href="./glossary/index.html" class="hub-card">
+          <div class="card-art learning-art learning-art--glossary" aria-hidden="true"><span class="preview-note" data-preview-ko="페이드 · Fade" data-preview-en="Fade in & out">페이드 · Fade</span><i>UI</i><i>UX</i></div>
+          <div class="card-copy">
+            <h3 class="card-heading" data-i18n="home_glossary_title">용어집</h3>
+            <p class="card-body-text" data-i18n="home_glossary_desc">UI·UX·모션 용어를 눈으로 이해하기.</p>
+            <span class="card-action"><span data-i18n="home_glossary_action">용어 찾아보기</span><svg class="ui-icon" aria-hidden="true"><use href="./shared/assets/interface-icons.svg#arrow"/></svg></span>
           </div>
         </a>
-      </div>
-
-      <!-- Stats Telemetry Bar -->
-      <div class="stats-bar" aria-label="프로젝트 핵심 지표">
-        <div class="stat-item">
-          <div class="stat-value">15+</div>
-          <div class="stat-label" data-i18n="stat1_label">UI 디자인 트렌드</div>
         </div>
-        <div class="stat-item">
-          <div class="stat-value">50+</div>
-          <div class="stat-label" data-i18n="stat2_label">재사용 컴포넌트</div>
+        <div class="learning-entry" data-preview="tools">
+        <a href="./libraries/index.html" class="hub-card">
+          <div class="card-art learning-art learning-art--tools" aria-hidden="true"><span class="preview-note" data-preview-ko="기준별 비교" data-preview-en="Compare by criteria">기준별 비교</span><i></i><i></i><i></i></div>
+          <div class="card-copy">
+            <h3 class="card-heading" data-i18n="home_tools_title">라이브러리 가이드</h3>
+            <p class="card-body-text" data-i18n="home_tools_desc">역할과 장단점을 비교해 도구 선택하기.</p>
+            <span class="card-action"><span data-i18n="home_tools_action">도구 비교하기</span><svg class="ui-icon" aria-hidden="true"><use href="./shared/assets/interface-icons.svg#arrow"/></svg></span>
+          </div>
+        </a>
         </div>
-        <div class="stat-item">
-          <div class="stat-value">100%</div>
-          <div class="stat-label" data-i18n="stat3_label">순수 HTML/CSS/JS</div>
         </div>
-        <div class="stat-item">
-          <div class="stat-value">&lt; 10ms</div>
-          <div class="stat-label" data-i18n="stat4_label">초고속 렌더링 타임</div>
+      </section>
+      <section class="library-invitation" aria-labelledby="review-title">
+        <div>
+          <p class="eyebrow">DESIGN SYSTEM LIBRARY</p>
+          <h2 id="review-title" data-i18n="invitation_title">내 프로젝트를 검토할 때.</h2>
+          <p data-i18n="invitation_desc">화면과 기준을 연결하고, 디자인 차이를 확인하세요.</p>
         </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <p data-i18n="footer_text">© 2026 Design Home. 높은 시각적 완성도와 WCAG 2.2 웹 접근성을 준수하여 제작되었습니다.</p>
-    </div>
-  </footer>
-
-  <!-- i18n Internationalization Engine -->
-  <script src="./shared/js/i18n.js"></script>
-
-  <!-- Universal Global Navigation Bar Script -->
-  <script src="./shared/js/global-nav.js" defer></script>
-
-  <!-- Interactive Spotlight Micro-interaction Script -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const cards = document.querySelectorAll('.hub-card');
-      cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          card.style.setProperty('--mouse-x', `${x}px`);
-          card.style.setProperty('--mouse-y', `${y}px`);
-        });
-      });
-    });
-  </script>
-</body>
+        <a href="./design-library/" class="btn-secondary"><span data-i18n="card3_action">프로젝트 검토 도구 열기</span><svg class="ui-icon" aria-hidden="true"><use href="./shared/assets/interface-icons.svg#arrow"/></svg></a>
+      </section>
+    </main>
+    <footer class="container">
+      <a href="./index.html">
+        Design Home
+      </a>
+      <p data-i18n="footer_text">
+        © 2026 Design Home. 디자인을 탐색하는 더 좋은 방법.
+      </p>
+    </footer>
+    <script type="module" src="./assets/index/learning-preview.js"></script>
+    <script type="module" src="./assets/index/hero-atmosphere.js"></script>
+    <script type="module" src="./shared/js/i18n.js">
+    </script>
+    <script src="./shared/js/global-nav.js" defer>
+    </script>
+  </body>
 </html>

@@ -1,0 +1,59 @@
+/* ==========================================
+   MAIN CONTENT VIEW
+   ========================================== */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Sub-header Toolbar & View Tabs */
+.view-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--surface);
+  border: 2px outset var(--light);
+  padding: 6px 10px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tabs-group {
+  display: flex;
+  gap: 4px;
+}
+.tab-btn {
+  padding: 4px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  background: var(--surface);
+  border-top: 2px solid var(--light);
+  border-left: 2px solid var(--light);
+  border-right: 2px solid var(--dark-shadow);
+  border-bottom: 2px solid var(--dark-shadow);
+}
+.tab-btn.active {
+  background: var(--title);
+  color: var(--title-text);
+  font-weight: bold;
+  border-top: 2px solid var(--dark-shadow);
+  border-left: 2px solid var(--dark-shadow);
+  border-right: 2px solid var(--light);
+  border-bottom: 2px solid var(--light);
+}
+
+.status-badge {
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: bold;
+}
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: #00ff00;
+  box-shadow: 0 0 6px #00ff00;
+  border-radius: 50%;
+}

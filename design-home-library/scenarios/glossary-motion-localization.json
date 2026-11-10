@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "url": "http://127.0.0.1:4184/glossary/index.html#/motion",
+  "scope": "#main-content",
+  "openEach": "#panel-motion [data-expand]",
+  "afterEach": "button[data-motion-play], button[data-play]",
+  "languages": [{ "code": "en", "control": "#dh-lang-en", "rejectPattern": "[가-힣]" }]
+}

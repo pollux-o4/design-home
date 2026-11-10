@@ -1,0 +1,185 @@
+/* ==========================================================================
+   1. THEME DESIGN TOKENS & CSS VARIABLES (6 BIOMORPHIC THEMES)
+   ========================================================================== */
+:root {
+  /* Shared Spacing & Physics */
+  --font-main: "Plus Jakarta Sans", "Outfit", -apple-system, sans-serif;
+  --ease-fluid: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --radius-blob-1: 32px 48px 36px 52px / 48px 36px 56px 32px;
+  --radius-blob-2: 54px 30px 48px 36px / 32px 52px 36px 48px;
+  --radius-blob-3: 40px 60px 45px 55px / 55px 42px 58px 40px;
+  --radius-card: 28px 36px 32px 40px / 36px 28px 44px 32px;
+  --radius-pill: 999px;
+  --transition-theme:
+    background-color 0.6s var(--ease-smooth), color 0.6s var(--ease-smooth),
+    border-color 0.6s var(--ease-smooth), box-shadow 0.6s var(--ease-smooth);
+}
+
+/* THEME 1: Ethereal Flora / Soft Pastel (Default) */
+[data-theme="flora"] {
+  --bg-gradient: radial-gradient(circle at 10% 20%, #fff5f7 0%, #f3f8f2 50%, #eceffb 100%);
+  --bg-color: #fafaf8;
+  --card-bg: rgba(255, 255, 255, 0.68);
+  --card-border: rgba(255, 255, 255, 0.85);
+  --card-shadow:
+    0 20px 40px -15px rgba(230, 185, 200, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.9);
+  --text-main: #2d3142;
+  --text-muted: #6c757d;
+  --text-light: #9ea3b0;
+  --accent-1: #ff80ab; /* Soft Rose */
+  --accent-2: #b9f6ca; /* Mint Leaf */
+  --accent-3: #8c9eff; /* Lavender Glow */
+  --accent-4: #ffe082; /* Warm Peach */
+  --accent-gradient: linear-gradient(135deg, #ff80ab 0%, #8c9eff 100%);
+  --blob-1: rgba(255, 128, 171, 0.28);
+  --blob-2: rgba(185, 246, 202, 0.35);
+  --blob-3: rgba(140, 158, 255, 0.25);
+  --sidebar-bg: rgba(255, 255, 255, 0.55);
+  --chart-line: #ff6584;
+  --chart-area-start: rgba(255, 101, 132, 0.4);
+  --chart-area-end: rgba(255, 101, 132, 0);
+  --chart-line-2: #536dfe;
+  --badge-bg: rgba(255, 128, 171, 0.15);
+  --badge-text: #d81b60;
+}
+
+/* THEME 2: Deep Sea Bioluminescent (Dark Ocean) */
+[data-theme="biolum"] {
+  --bg-gradient: radial-gradient(circle at 80% 20%, #0d1b2a 0%, #070a13 60%, #030509 100%);
+  --bg-color: #070a13;
+  --card-bg: rgba(16, 27, 44, 0.65);
+  --card-border: rgba(72, 202, 228, 0.25);
+  --card-shadow:
+    0 20px 50px -10px rgba(0, 242, 254, 0.12), inset 0 1px 2px rgba(255, 255, 255, 0.1);
+  --text-main: #e0e6ed;
+  --text-muted: #8a99ad;
+  --text-light: #52637a;
+  --accent-1: #00f2fe; /* Biolum Cyan */
+  --accent-2: #7209b7; /* Deep Sea Violet */
+  --accent-3: #4ea8de; /* Aqua Pulse */
+  --accent-4: #3a0ca3; /* Abyssal Blue */
+  --accent-gradient: linear-gradient(135deg, #00f2fe 0%, #7209b7 100%);
+  --blob-1: rgba(0, 242, 254, 0.22);
+  --blob-2: rgba(114, 9, 183, 0.28);
+  --blob-3: rgba(78, 168, 222, 0.2);
+  --sidebar-bg: rgba(12, 20, 34, 0.7);
+  --chart-line: #00f2fe;
+  --chart-area-start: rgba(0, 242, 254, 0.45);
+  --chart-area-end: rgba(0, 242, 254, 0);
+  --chart-line-2: #b5179e;
+  --badge-bg: rgba(0, 242, 254, 0.15);
+  --badge-text: #00f2fe;
+}
+
+/* THEME 3: Terracotta Soil & Clay (Earth Bio-Flow) */
+[data-theme="terracotta"] {
+  --bg-gradient: radial-gradient(circle at 30% 10%, #f5ebe6 0%, #efe5dc 50%, #e3d5c8 100%);
+  --bg-color: #f4ebe1;
+  --card-bg: rgba(248, 242, 236, 0.72);
+  --card-border: rgba(255, 255, 255, 0.8);
+  --card-shadow:
+    0 20px 40px -15px rgba(180, 110, 85, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.95);
+  --text-main: #3d312a;
+  --text-muted: #7d6e65;
+  --text-light: #a89b92;
+  --accent-1: #e07a5f; /* Terracotta Orange */
+  --accent-2: #f2cc8f; /* Sunlit Ochre */
+  --accent-3: #81b29a; /* Clay Sage */
+  --accent-4: #d4a373; /* Warm Sand */
+  --accent-gradient: linear-gradient(135deg, #e07a5f 0%, #f2cc8f 100%);
+  --blob-1: rgba(224, 122, 95, 0.26);
+  --blob-2: rgba(242, 204, 143, 0.32);
+  --blob-3: rgba(129, 178, 154, 0.25);
+  --sidebar-bg: rgba(245, 237, 229, 0.65);
+  --chart-line: #e07a5f;
+  --chart-area-start: rgba(224, 122, 95, 0.4);
+  --chart-area-end: rgba(224, 122, 95, 0);
+  --chart-line-2: #81b29a;
+  --badge-bg: rgba(224, 122, 95, 0.15);
+  --badge-text: #c85a3f;
+}
+
+/* THEME 4: Forest Canopy & Moss (Botanical Living) */
+[data-theme="forest"] {
+  --bg-gradient: radial-gradient(circle at 70% 80%, #0f2a1d 0%, #081c12 60%, #040e09 100%);
+  --bg-color: #071910;
+  --card-bg: rgba(18, 48, 33, 0.65);
+  --card-border: rgba(116, 198, 157, 0.25);
+  --card-shadow:
+    0 20px 50px -10px rgba(45, 106, 79, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.15);
+  --text-main: #e8f5e9;
+  --text-muted: #81c784;
+  --text-light: #4caf50;
+  --accent-1: #52b788; /* Emerald Leaf */
+  --accent-2: #74c69d; /* Dewdrop Sage */
+  --accent-3: #d8f3dc; /* Soft Chlorophyll */
+  --accent-4: #1b4332; /* Deep Pine */
+  --accent-gradient: linear-gradient(135deg, #52b788 0%, #b7e4c7 100%);
+  --blob-1: rgba(82, 183, 136, 0.25);
+  --blob-2: rgba(116, 198, 157, 0.22);
+  --blob-3: rgba(45, 106, 79, 0.35);
+  --sidebar-bg: rgba(14, 38, 26, 0.7);
+  --chart-line: #52b788;
+  --chart-area-start: rgba(82, 183, 136, 0.45);
+  --chart-area-end: rgba(82, 183, 136, 0);
+  --chart-line-2: #a7c957;
+  --badge-bg: rgba(82, 183, 136, 0.18);
+  --badge-text: #74c69d;
+}
+
+/* THEME 5: Cyber Bio-Tech / Cellular (Synthetix Organica) */
+[data-theme="cyberbio"] {
+  --bg-gradient: radial-gradient(circle at 50% 30%, #120d24 0%, #090614 60%, #04020a 100%);
+  --bg-color: #080512;
+  --card-bg: rgba(24, 18, 46, 0.65);
+  --card-border: rgba(0, 245, 212, 0.3);
+  --card-shadow:
+    0 20px 50px -10px rgba(157, 78, 221, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.12);
+  --text-main: #f4f0ff;
+  --text-muted: #a39bb9;
+  --text-light: #6a608a;
+  --accent-1: #00f5d4; /* Bio Neon Teal */
+  --accent-2: #9d4edd; /* Bio Synth Violet */
+  --accent-3: #ff007a; /* Pulse Magenta */
+  --accent-4: #3a0ca3; /* Matrix Blue */
+  --accent-gradient: linear-gradient(135deg, #00f5d4 0%, #9d4edd 100%);
+  --blob-1: rgba(0, 245, 212, 0.22);
+  --blob-2: rgba(157, 78, 221, 0.28);
+  --blob-3: rgba(255, 0, 122, 0.2);
+  --sidebar-bg: rgba(18, 13, 36, 0.75);
+  --chart-line: #00f5d4;
+  --chart-area-start: rgba(0, 245, 212, 0.45);
+  --chart-area-end: rgba(0, 245, 212, 0);
+  --chart-line-2: #ff007a;
+  --badge-bg: rgba(0, 245, 212, 0.15);
+  --badge-text: #00f5d4;
+}
+
+/* THEME 6: Sunlit Coral Reef (Oceanic Splash) */
+[data-theme="coral"] {
+  --bg-gradient: radial-gradient(circle at 20% 80%, #eff8f8 0%, #e6f3f4 50%, #faf0ec 100%);
+  --bg-color: #f2f8f8;
+  --card-bg: rgba(255, 255, 255, 0.72);
+  --card-border: rgba(255, 255, 255, 0.9);
+  --card-shadow:
+    0 20px 40px -15px rgba(0, 109, 119, 0.18), inset 0 2px 4px rgba(255, 255, 255, 0.9);
+  --text-main: #004d54;
+  --text-muted: #5c8b90;
+  --text-light: #94b6b9;
+  --accent-1: #e29578; /* Coral Blossom */
+  --accent-2: #83c5be; /* Soft Aqua */
+  --accent-3: #ffddd2; /* Warm Splash */
+  --accent-4: #006d77; /* Ocean Deep */
+  --accent-gradient: linear-gradient(135deg, #e29578 0%, #83c5be 100%);
+  --blob-1: rgba(226, 149, 120, 0.28);
+  --blob-2: rgba(131, 197, 190, 0.32);
+  --blob-3: rgba(0, 109, 119, 0.2);
+  --sidebar-bg: rgba(240, 247, 247, 0.65);
+  --chart-line: #e29578;
+  --chart-area-start: rgba(226, 149, 120, 0.42);
+  --chart-area-end: rgba(226, 149, 120, 0);
+  --chart-line-2: #006d77;
+  --badge-bg: rgba(226, 149, 120, 0.16);
+  --badge-text: #d06b4c;
+}

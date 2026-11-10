@@ -1,0 +1,37 @@
+/* ==========================================================================
+   GLOBAL RESETS & TYPOGRAPHY
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background: var(--bg-texture);
+  color: var(--text-main);
+  min-height: 100vh;
+  padding-bottom: 40px;
+  overflow-x: hidden;
+  transition:
+    background 0.4s ease,
+    color 0.4s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--track-bg);
+  box-shadow: var(--track-shadow);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-metallic);
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}

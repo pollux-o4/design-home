@@ -1,0 +1,160 @@
+/* ==========================================================================
+   SIDEBAR (ACCORDION MENU & LIVE SYNC)
+   ========================================================================== */
+.sidebar {
+  width: 270px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.brand-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+}
+.brand-logo-icon {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 800;
+  box-shadow:
+    4px 6px 12px rgba(0, 0, 0, 0.2),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.4),
+    inset -3px -3px 6px rgba(0, 0, 0, 0.3);
+}
+.brand-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+.brand-subtitle {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.nav-section-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding: 8px 16px 4px 16px;
+}
+
+/* Accordion Navigation */
+.nav-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  border-radius: 18px;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: var(--clay-card-bg);
+  box-shadow: var(--outer-shadow-sm), var(--inner-shadow);
+  transition: all 0.2s ease;
+}
+.nav-item-header:hover {
+  color: var(--accent-primary);
+  transform: translateX(3px);
+}
+.nav-item-header.active {
+  background: var(--accent-primary);
+  color: #ffffff;
+  box-shadow: var(--inner-shadow-pressed);
+}
+.nav-item-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.accordion-arrow {
+  font-size: 0.75rem;
+  transition: transform 0.3s ease;
+}
+.nav-accordion-group.open .accordion-arrow {
+  transform: rotate(180deg);
+}
+
+.sub-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    padding 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 10px 0 28px;
+}
+.nav-accordion-group.open .sub-menu {
+  max-height: 220px;
+  padding: 8px 10px 8px 28px;
+}
+.sub-item {
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+.sub-item:hover,
+.sub-item.active {
+  color: var(--accent-primary);
+  background: var(--clay-card-secondary);
+  transform: translateX(4px);
+}
+
+/* Storage & Sync Widget */
+.sidebar-bottom-card {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+}
+.storage-progress-bar {
+  width: 100%;
+  height: 14px;
+  background: var(--clay-card-secondary);
+  border-radius: 999px;
+  box-shadow: var(--inner-shadow-pressed);
+  overflow: hidden;
+  position: relative;
+}
+.storage-progress-fill {
+  height: 100%;
+  width: 68.4%;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  border-radius: 999px;
+  box-shadow:
+    inset 2px 2px 4px rgba(255, 255, 255, 0.4),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.2);
+  transition: width 1s ease-out;
+}

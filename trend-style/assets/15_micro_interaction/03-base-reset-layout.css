@@ -1,0 +1,78 @@
+/* --------------------------------------------------------------------------
+   BASE RESET & LAYOUT
+   -------------------------------------------------------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+/* Particle Canvas for V4 Quantum Theme */
+#quantumCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+body.theme-v4 #quantumCanvas {
+  opacity: 0.8;
+}
+
+/* Custom Interactive Cursor Dot & Magnet Ring */
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--primary);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition:
+    transform 0.05s ease-out,
+    background-color 0.3s;
+  box-shadow: 0 0 10px var(--primary);
+}
+.cursor-ring {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--primary);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.2s var(--spring-ease),
+    height 0.2s var(--spring-ease),
+    transform 0.15s ease-out,
+    border-color 0.3s;
+  opacity: 0.5;
+}
+body:hover .cursor-dot {
+  opacity: 1;
+}
+
+/* App Layout Container */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}

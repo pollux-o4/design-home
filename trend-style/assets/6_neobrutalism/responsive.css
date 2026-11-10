@@ -1,0 +1,94 @@
+/* Reflow the original workspace without scaling its content. */
+.main-content,
+.dashboard-container,
+.chart-card,
+.widget-card {
+  min-width: 0;
+}
+.header {
+  flex-wrap: wrap;
+  padding-top: 70px;
+}
+.header-controls,
+.dash-top-bar {
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.version-switcher {
+  max-width: calc(100% - 24px);
+  flex-wrap: wrap;
+}
+.brutal-modal {
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+}
+@media (max-width: 900px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    border-right: 0;
+    border-bottom: var(--border-width) solid var(--border-color);
+  }
+  .charts-section {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .header {
+    position: relative;
+    padding: 16px;
+  }
+  .version-switcher {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin: 12px;
+    width: fit-content;
+  }
+  .main-content,
+  .sidebar {
+    padding: 16px;
+  }
+  .widget-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .dash-top-bar {
+    align-items: flex-start;
+  }
+  .chart-card {
+    padding: 16px;
+  }
+  .toast-notification {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    padding: 12px;
+  }
+}
+@media (max-width: 600px) {
+  .brand-container {
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+  .header-controls {
+    min-width: 0;
+    justify-content: flex-start;
+  }
+}
+@media (max-width: 600px) {
+  .data-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 10px 12px;
+  }
+  .modal-header {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}

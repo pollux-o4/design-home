@@ -1,0 +1,56 @@
+export default {
+  id: "components",
+  title: "컴포넌트",
+  term: "Components",
+  desc: "입력하고 선택하고, 필요한 정보를 여는 화면의 기본 요소.",
+  groups: [
+    {
+      id: "inputs",
+      title: "입력",
+      desc: "텍스트·수량·날짜·파일을 입력합니다.",
+      ids: [
+        "text-input",
+        "textarea",
+        "stepper",
+        "slider-range",
+        "date-picker",
+        "file-uploader",
+        "password-field",
+      ],
+    },
+    {
+      id: "selection",
+      title: "선택과 전환",
+      desc: "옵션을 고르고 세부 정보를 펼칩니다.",
+      ids: [
+        "checkbox",
+        "radio",
+        "dropdown-select",
+        "toggle-switch",
+        "segmented-control",
+        "chip-tag",
+        "accordion",
+        "searchable-list",
+        "input-combobox",
+      ],
+    },
+    {
+      id: "layers",
+      title: "대화상자와 레이어",
+      desc: "집중이 필요한 결정과 부가 정보.",
+      ids: ["modal", "confirm", "alert", "drawer", "popover", "interaction-command-palette"],
+    },
+    {
+      id: "forms",
+      title: "복합 폼과 입력 흐름",
+      desc: "연관 입력·검증·단계 이동과 검토.",
+      ids: ["form-field-group", "form-validation", "form-stepper"],
+    },
+    {
+      id: "data",
+      title: "표와 계층",
+      desc: "행과 열로 비교하고, 정렬하거나 계층을 탐색합니다.",
+      ids: ["data-table", "data-sort-table", "data-tree"],
+    },
+  ],
+};

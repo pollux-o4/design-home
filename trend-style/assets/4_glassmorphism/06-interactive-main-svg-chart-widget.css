@@ -1,0 +1,125 @@
+/* ==========================================================================
+   Interactive Main SVG Chart Widget
+   ========================================================================== */
+.chart-panel {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chart-title-box h2 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.chart-title-box p {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.chart-legend {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* SVG Interactive Canvas Container */
+.svg-chart-container {
+  position: relative;
+  width: 100%;
+  height: 280px;
+}
+
+.main-svg-chart {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Chart Hover Crosshair & Dynamic Tooltip */
+.chart-crosshair {
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-dasharray: 4 4;
+  stroke-width: 1.5;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.chart-node {
+  fill: var(--bg-base);
+  stroke: var(--accent);
+  stroke-width: 3;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    fill 0.2s ease;
+}
+
+.chart-node:hover,
+.chart-node.active {
+  transform: scale(1.6);
+  fill: var(--accent);
+  filter: drop-shadow(0 0 10px var(--accent-glow));
+}
+
+.chart-tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -120%);
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border-hover);
+  border-radius: 12px;
+  padding: 8px 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    transform 0.15s ease-out;
+  z-index: 200;
+  white-space: nowrap;
+}
+
+.chart-tooltip.visible {
+  opacity: 1;
+}
+
+.tooltip-date {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.tooltip-val {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  margin-top: 2px;
+}

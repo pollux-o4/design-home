@@ -1,0 +1,73 @@
+/* ==========================================================================
+   GLOBAL BASE STYLES & RESET
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  transition:
+    background 0.4s ease,
+    background-color 0.4s ease,
+    color 0.4s ease,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+  user-select: none;
+}
+
+body {
+  background: var(--bg-main);
+  background-image: var(--bg-gradient);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  padding-bottom: 40px;
+}
+
+h1,
+h2,
+h3,
+h4,
+.font-display {
+  font-family: "Fredoka", cursive, sans-serif;
+  letter-spacing: 0.3px;
+}
+
+/* Ambient Floating Orbs */
+.ambient-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(50px);
+  z-index: 0;
+  opacity: 0.5;
+  pointer-events: none;
+  animation: floatOrb 12s ease-in-out infinite alternate;
+}
+.orb-1 {
+  width: 380px;
+  height: 380px;
+  background: var(--floating-orb-1);
+  top: -80px;
+  left: -80px;
+}
+.orb-2 {
+  width: 420px;
+  height: 420px;
+  background: var(--floating-orb-2);
+  bottom: -100px;
+  right: -100px;
+  animation-delay: -6s;
+}
+
+@keyframes floatOrb {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, 40px) scale(1.08);
+  }
+  100% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}

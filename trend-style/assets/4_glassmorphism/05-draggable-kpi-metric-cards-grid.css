@@ -1,0 +1,125 @@
+/* ==========================================================================
+   Draggable KPI Metric Cards Grid
+   ========================================================================== */
+.draggable-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.kpi-card {
+  padding: 20px 22px;
+  cursor: grab;
+  position: relative;
+}
+
+.kpi-card:active {
+  cursor: grabbing;
+}
+
+.kpi-card.dragging {
+  opacity: 0.4;
+  border-dash: 2px dashed var(--accent);
+  transform: scale(0.98);
+}
+
+.kpi-card.drag-over {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.kpi-icon-box {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+}
+
+.kpi-icon-box svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.drag-handle {
+  color: var(--text-muted);
+  opacity: 0.4;
+  cursor: grab;
+  transition: opacity 0.2s;
+}
+
+.kpi-card:hover .drag-handle {
+  opacity: 0.9;
+}
+
+.kpi-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.kpi-value-group {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.kpi-number {
+  font-size: 28px;
+  font-weight: 800;
+  font-family: var(--font-sans);
+  letter-spacing: -0.8px;
+  color: var(--text-main);
+}
+
+.badge-trend {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.badge-trend.up {
+  background: rgba(16, 185, 129, 0.18);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badge-trend.down {
+  background: rgba(239, 68, 68, 0.18);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Mini Sparkline SVG */
+.mini-sparkline {
+  width: 100%;
+  height: 36px;
+  margin-top: 12px;
+  overflow: visible;
+}
+
+.mini-sparkline path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  filter: drop-shadow(0 4px 6px var(--accent-glow));
+}

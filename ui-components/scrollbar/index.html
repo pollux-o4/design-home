@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko" data-scroll-demo>
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>자동 숨김 스크롤바 · Design System Library</title>
+  <link rel="stylesheet" href="../../shared/css/interface.css">
+  <link rel="stylesheet" href="../../shared/css/scrollbar.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="sample">
+    <header><span class="sample-label">SCROLL AREA</span><h1>흐름을 따라, 가볍게.</h1><p>안쪽을 스크롤하거나 오른쪽 가장자리에 포인터를 가져가세요.</p></header>
+    <div class="scroll-sample" data-scroll-region tabindex="0" aria-label="스크롤바 미리보기">
+      <div class="sample-content">
+        <section><span>01</span><div><h2>필요할 때만 보이도록</h2><p>스크롤 중에는 위치를 알려주고, 멈추면 조용히 사라집니다.</p></div></section>
+        <section><span>02</span><div><h2>가까이 가면 조금 더 넓게</h2><p>가장자리에 포인터를 가져가면 잡기 편한 두께로 바뀝니다.</p></div></section>
+        <section><span>03</span><div><h2>손끝을 따라 움직이는 위치</h2><p>핸들을 잡아 끌거나 트랙을 눌러 원하는 위치로 이동하세요.</p></div></section>
+        <section><span>04</span><div><h2>키보드로도 자연스럽게</h2><p>Tab으로 스크롤바를 선택하고 방향키, Page Up·Down, Home·End로 이동합니다.</p></div></section>
+        <section><span>05</span><div><h2>콘텐츠를 위한 공간</h2><p>스크롤바가 레이아웃 폭을 바꾸지 않아 내용이 흔들리지 않습니다.</p></div></section>
+        <section><span>06</span><div><h2>움직임은 취향에 맞게</h2><p>동작 줄이기 설정에서는 전환 효과 없이 바로 상태를 바꿉니다.</p></div></section>
+      </div>
+    </div>
+    <footer>휠 · 터치 · 드래그 · 키보드</footer>
+  </main>
+  <script type="module" src="../../shared/js/scrollbar.js"></script>
+</body>
+</html>

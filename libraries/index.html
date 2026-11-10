@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Libraries · Design Home</title>
+    <link rel="stylesheet" href="../shared/css/interface.css" />
+    <link rel="stylesheet" href="../shared/css/global-nav.css" />
+    <link rel="stylesheet" href="../assets/index/navigation.css" />
+    <link rel="stylesheet" href="css/libraries.css" />
+    <script src="../shared/js/page-transitions.js"></script>
+    <script src="../shared/js/theme.js"></script>
+    <script src="../shared/js/global-nav.js" defer></script>
+    <script type="module" src="../shared/js/i18n.js"></script>
+    <script type="module" src="js/app.js"></script>
+  </head>
+  <body class="home-page">
+    <main class="libraries-main">
+      <header class="libraries-intro">
+        <p class="eyebrow">LIBRARIES</p>
+        <h1>필요한 도구만.<br />더 나은 경험으로.</h1>
+        <p>역할부터 살펴보고, 내 프로젝트에 맞는 라이브러리를 선택하세요.</p>
+      </header>
+      <div class="catalog-toolbar">
+        <label for="library-search">라이브러리 찾기</label
+        ><input
+          id="library-search"
+          type="search"
+          placeholder="이름, React, 스크롤…"
+          autocomplete="off"
+        /><button id="show-comparison" type="button" hidden>비교 보기</button>
+        <button id="reset-search" type="button" hidden>검색 초기화</button>
+      </div>
+      <p class="catalog-note">
+        하나의 도구가 여러 역할을 맡을 수 있습니다. 장점과 고려 사항은 선택을
+        돕는 판단 기준입니다.
+      </p>
+      <div id="categories"></div>
+      <p id="empty" hidden>
+        검색 결과가 없습니다. 다른 이름이나 역할로 찾아보세요.
+      </p>
+      <section
+        id="comparison"
+        class="comparison"
+        aria-labelledby="compare-title"
+        hidden
+      >
+        <div class="comparison-heading">
+          <div>
+            <p class="eyebrow">SIDE BY SIDE</p>
+            <h2 id="compare-title">선택한 도구 비교</h2>
+          </div>
+          <button id="clear-comparison" type="button">비교 비우기</button>
+        </div>
+        <p id="comparison-hint">최대 3개를 선택해 비교하세요.</p>
+        <div id="comparison-content"></div>
+      </section>
+      <p id="status" role="status" aria-live="polite"></p>
+      <footer>
+        구현 방법과 최신 지원 범위는 각 도구의 공식 문서에서 확인하세요.
+      </footer>
+    </main>
+  </body>
+</html>

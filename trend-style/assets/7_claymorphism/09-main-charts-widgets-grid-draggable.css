@@ -1,0 +1,301 @@
+/* ==========================================================================
+   MAIN CHARTS & WIDGETS GRID (DRAGGABLE)
+   ========================================================================== */
+.widgets-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.widget-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Main Interactive Revenue SVG Line Chart */
+.chart-container-large {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  margin-top: 10px;
+}
+.svg-chart-main {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.chart-line-revenue {
+  fill: none;
+  stroke: var(--accent-primary);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 6px 12px rgba(108, 92, 231, 0.3));
+  transition: d 0.6s ease;
+}
+.chart-area-revenue {
+  fill: url("../../7_claymorphism.html#revenueGradient");
+  opacity: 0.6;
+  transition: d 0.6s ease;
+}
+.chart-line-cost {
+  fill: none;
+  stroke: var(--accent-secondary);
+  stroke-width: 3;
+  stroke-dasharray: 6 6;
+  stroke-linecap: round;
+  opacity: 0.85;
+  transition: d 0.6s ease;
+}
+
+.chart-node {
+  fill: var(--clay-card-bg);
+  stroke: var(--accent-primary);
+  stroke-width: 3;
+  cursor: pointer;
+  transition:
+    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    r 0.2s ease,
+    fill 0.2s ease;
+}
+.chart-node:hover {
+  r: 9;
+  fill: var(--accent-primary);
+  stroke: #ffffff;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+}
+
+/* SVG Dynamic Hover Tooltip */
+.chart-tooltip {
+  position: absolute;
+  background: var(--tooltip-bg);
+  color: var(--tooltip-text);
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -120%) scale(0.85);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  z-index: 100;
+  line-height: 1.4;
+}
+.chart-tooltip.visible {
+  opacity: 1;
+  transform: translate(-50%, -120%) scale(1);
+}
+.chart-tooltip-date {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  margin-bottom: 2px;
+}
+
+/* Chart Legends & Metrics Row */
+.chart-stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border-color);
+}
+.stat-pill-item {
+  text-align: center;
+}
+.stat-pill-label {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.stat-pill-val {
+  font-family: "Fredoka", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Traffic Acquisition Donut Widget */
+.donut-wrapper {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin: 10px auto 16px auto;
+}
+.donut-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.donut-segment {
+  fill: none;
+  stroke-width: 22;
+  cursor: pointer;
+  transition:
+    stroke-width 0.25s ease,
+    filter 0.25s ease;
+}
+.donut-segment:hover {
+  stroke-width: 28;
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.2));
+}
+.donut-center-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+}
+.donut-total {
+  font-family: "Fredoka", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.donut-sub {
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.legend-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.83rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 12px;
+  transition: background 0.2s ease;
+}
+.legend-item:hover {
+  background: var(--clay-card-secondary);
+}
+.legend-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* Secondary Row Widgets */
+.bottom-widgets-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Conversion Funnel Widget */
+.funnel-stages {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 10px;
+}
+.funnel-stage-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.stage-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+.stage-bar-track {
+  height: 16px;
+  background: var(--clay-card-secondary);
+  border-radius: 999px;
+  box-shadow: var(--inner-shadow-pressed);
+  overflow: hidden;
+}
+.stage-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  box-shadow:
+    inset 2px 2px 4px rgba(255, 255, 255, 0.4),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.2);
+  transition: width 0.8s ease-out;
+}
+
+/* Transactions Table Widget */
+.transactions-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  margin-top: 4px;
+}
+.transactions-table th {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  text-align: left;
+  padding: 0 12px 6px 12px;
+}
+.transactions-table td {
+  padding: 10px 12px;
+  background: var(--clay-card-secondary);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.transactions-table tr td:first-child {
+  border-top-left-radius: 14px;
+  border-bottom-left-radius: 14px;
+  box-shadow:
+    inset 4px 4px 6px rgba(255, 255, 255, 0.4),
+    inset 0 -4px 6px rgba(0, 0, 0, 0.05);
+}
+.transactions-table tr td:last-child {
+  border-top-right-radius: 14px;
+  border-bottom-right-radius: 14px;
+  box-shadow:
+    inset -4px 4px 6px rgba(255, 255, 255, 0.4),
+    inset 0 -4px 6px rgba(0, 0, 0, 0.05);
+}
+.user-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.user-mini-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

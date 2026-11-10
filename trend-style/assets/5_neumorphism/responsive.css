@@ -1,0 +1,80 @@
+/* Adapt the source layout to its viewport. */
+.app-layout {
+  grid-template-columns: 280px minmax(0, 1fr);
+}
+.main-workspace,
+.chart-card,
+.kanban-col,
+.bottom-widgets-grid > * {
+  min-width: 0;
+}
+.modal-container {
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+}
+
+.version-switcher {
+  position: relative;
+  top: auto;
+  right: auto;
+  margin: 16px;
+  width: fit-content;
+  max-width: calc(100% - 32px);
+}
+
+@media (max-width: 1100px) {
+  .charts-grid,
+  .bottom-widgets-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .header-actions,
+  .chart-header {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 800px) {
+  .app-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .sidebar {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 540px) {
+  .main-workspace {
+    padding: 20px 16px;
+  }
+  .kpi-grid,
+  .kanban-board {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .header-actions {
+    width: 100%;
+  }
+  .chart-header,
+  .page-header,
+  .dashboard-header {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .search-container input {
+    min-width: 0;
+  }
+  .modal-container {
+    padding: 20px;
+  }
+  .modal-actions {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    display: flex;
+  }
+  .app-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

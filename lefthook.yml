@@ -1,0 +1,20 @@
+min_version: 2.0.0
+
+pre-commit:
+  parallel: false
+  commands:
+    secrets-staged:
+      run: mise exec -- node scripts/security/secrets.mjs staged
+      priority: 1
+    biome-staged:
+      run: mise exec -- node scripts/security/staged-biome.mjs
+      priority: 2
+
+pre-push:
+  parallel: false
+  commands:
+    secrets-push:
+      run: mise exec -- node scripts/security/secrets.mjs push
+      use_stdin: true
+    unit-tests:
+      run: mise exec -- pnpm test:unit

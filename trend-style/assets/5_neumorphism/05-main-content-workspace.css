@@ -1,0 +1,146 @@
+/* ----------------------------------------------------
+   Main Content Workspace
+---------------------------------------------------- */
+.main-workspace {
+  padding: 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Top Header Navigation */
+.top-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow-inset);
+  width: 340px;
+  max-width: 100%;
+}
+
+.search-container svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.search-container input {
+  border: none;
+  background: transparent;
+  outline: none;
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  width: 100%;
+}
+
+.search-container input::placeholder {
+  color: var(--text-light);
+}
+
+.search-shortcut {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15rem 0.4rem;
+  border-radius: 6px;
+  box-shadow: var(--shadow-outset-sm);
+  color: var(--text-muted);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Date Range Selector Dropdown */
+.date-selector {
+  position: relative;
+}
+
+.date-selector select {
+  background: var(--surface-color);
+  color: var(--text-main);
+  border: none;
+  padding: 0.65rem 2.2rem 0.65rem 1.2rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-outset-sm);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: all 0.2s;
+}
+
+.date-selector select:hover {
+  box-shadow: var(--shadow-outset);
+  color: var(--accent);
+}
+
+.date-selector select:focus {
+  box-shadow: var(--shadow-inset-sm);
+}
+
+/* View Mode Segmented Controls / Data Tabs */
+.view-tabs-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.data-tabs {
+  display: inline-flex;
+  padding: 0.4rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow-inset);
+  gap: 0.4rem;
+}
+
+.tab-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.5rem 1.2rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  color: var(--text-main);
+}
+
+.tab-btn.active {
+  background: var(--surface-color);
+  box-shadow: var(--shadow-outset-sm);
+  color: var(--accent);
+}
+
+.view-meta-text {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}

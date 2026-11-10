@@ -1,0 +1,67 @@
+/* ==========================================================================
+   TOP-RIGHT THEME SWITCHER
+   ========================================================================== */
+.version-switcher {
+  position: fixed;
+  top: 14px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-card);
+  border: var(--border-width) solid var(--border-color);
+  padding: 6px 12px;
+  border-radius: 30px;
+  box-shadow: var(--box-shadow);
+}
+
+.version-switcher label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  margin-right: 4px;
+}
+
+.version-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  font-weight: 700;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  color: #fff;
+}
+
+.version-btn[data-version="1"] {
+  background: #2563eb;
+}
+.version-btn[data-version="2"] {
+  background: #9333ea;
+}
+.version-btn[data-version="3"] {
+  background: #090d16;
+  border-color: #38bdf8;
+}
+.version-btn[data-version="4"] {
+  background: #ea580c;
+}
+.version-btn[data-version="5"] {
+  background: #0d9488;
+}
+.version-btn[data-version="6"] {
+  background: #0f172a;
+}
+
+.version-btn.active {
+  transform: scale(1.15);
+  outline: 2px solid var(--text-primary);
+  outline-offset: 2px;
+}

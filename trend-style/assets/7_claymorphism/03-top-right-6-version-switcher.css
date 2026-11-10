@@ -1,0 +1,89 @@
+/* ==========================================================================
+   TOP-RIGHT 6-VERSION SWITCHER
+   ========================================================================== */
+.version-switcher-bar {
+  position: fixed;
+  top: 18px;
+  right: 24px;
+  z-index: 9999;
+  background: var(--clay-card-bg);
+  border-radius: 999px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--outer-shadow-sm), var(--inner-shadow);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+}
+
+.switcher-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  margin-right: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.switcher-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-family: "Fredoka", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: var(--clay-card-secondary);
+  color: var(--text-primary);
+  box-shadow: var(--outer-shadow-sm), var(--inner-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.switcher-btn:hover {
+  transform: translateY(-2px) scale(1.08);
+}
+
+.switcher-btn.active {
+  background: var(--accent-primary);
+  color: #ffffff;
+  box-shadow: var(--inner-shadow-pressed);
+  transform: scale(1.05);
+}
+
+/* Tooltip on Switcher */
+.switcher-btn::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.8);
+  opacity: 0;
+  pointer-events: none;
+  background: var(--tooltip-bg);
+  color: var(--tooltip-text);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 8px;
+  white-space: nowrap;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.switcher-btn:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}

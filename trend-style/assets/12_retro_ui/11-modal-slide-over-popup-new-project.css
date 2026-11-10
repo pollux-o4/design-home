@@ -1,0 +1,66 @@
+/* ==========================================
+   MODAL SLIDE-OVER POPUP ("+ NEW PROJECT")
+   ========================================== */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.modal-backdrop.open {
+  display: flex;
+}
+
+.modal-window {
+  background: var(--surface);
+  border-top: 3px solid var(--light);
+  border-left: 3px solid var(--light);
+  border-right: 3px solid var(--dark-shadow);
+  border-bottom: 3px solid var(--dark-shadow);
+  box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.6);
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.form-control {
+  font-family: var(--font-main);
+  padding: 6px;
+  font-size: 0.9rem;
+  background: var(--light);
+  color: var(--dark-shadow);
+  border: 2px inset var(--dark-shadow);
+  outline: none;
+}
+
+.modal-footer {
+  padding: 10px 16px;
+  background: var(--card-bg);
+  border-top: 2px solid var(--dark-shadow);
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}

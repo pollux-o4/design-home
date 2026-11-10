@@ -1,0 +1,57 @@
+/* ==========================================================================
+   Top-Right Version Switcher
+   ========================================================================== */
+.theme-switcher-bar {
+  position: fixed;
+  top: 16px;
+  right: 24px;
+  z-index: 1000;
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  border-radius: 40px;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: var(--glass-shadow);
+}
+
+.switcher-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--accent);
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.switcher-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.switcher-btn:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.switcher-btn.active {
+  background: rgba(255, 255, 255, 0.18);
+  color: var(--text-main);
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
