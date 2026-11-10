@@ -26,6 +26,7 @@ for (const [name, engine] of Object.entries({ chromium, firefox, webkit })) {
     const page = await browser.newPage({
       viewport: { width: 1440, height: 1000 },
     });
+    await page.context().tracing.start({ screenshots: true, snapshots: true });
     const errors = [];
     page.on("pageerror", (error) => errors.push(error.message));
     page.on("response", (response) => {
@@ -148,6 +149,7 @@ for (const [name, engine] of Object.entries({ chromium, firefox, webkit })) {
       }
       assert.deepEqual(errors, []);
     } catch (error) {
+      await page.context().tracing.stop({ path: `.legacy-review/navigation/${name}-trace.zip` });
       console.log(name, "failure at", page.url(), errors);
       await page.screenshot({
         animations: "disabled",

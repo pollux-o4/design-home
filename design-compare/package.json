@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "prepack": "node scripts/package-runtime.mjs",
-    "test": "node --test --test-concurrency=4 tests/*.test.js ../tests/*.test.mjs",
+    "test": "node scripts/test.mjs",
     "demo": "node demo/server.js",
     "compare": "node src/cli.js",
     "hub": "node hub/server.js",
