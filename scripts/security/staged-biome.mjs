@@ -14,6 +14,9 @@ const supportedExtensions = new Set([
   ".jsonc",
   ".jsx",
   ".mjs",
+  ".md",
+  ".yaml",
+  ".yml",
   ".ts",
   ".tsx",
 ]);

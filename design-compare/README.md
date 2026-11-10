@@ -36,13 +36,13 @@ mise run hub
 }
 ```
 
-경로는 설정 파일 기준이다. 현재 폴더에서 상위로 가장 가까운 설정을 찾으며 `DESIGN_CONFIG`로 파일을 명시할 수 있다. 문서가 없으면 `documentsRoot`를 생략하고 품질 도구부터 사용할 수 있다. 연결한 문서는 기존 [메타데이터 계약](docs/library.md)을 따른다. `baseUrl`은 프로젝트가 별도로 실행하는 개발 서버다. 캡처 명령을 사용할 때 설치 패키지의 Playwright Chromium도 준비한다 (`npx playwright install chromium`).
+경로는 설정 파일 기준이다. 현재 폴더에서 상위로 가장 가까운 설정을 찾으며 `DESIGN_CONFIG`로 파일을 명시할 수 있다. 문서가 없으면 `documentsRoot`를 생략하고 품질 도구부터 사용할 수 있다. 연결한 문서는 기존 [메타데이터 계약](docs/library.md)을 따른다. `baseUrl`은 프로젝트가 별도로 실행하는 개발 서버다. 캡처 명령을 사용할 때 설치 패키지의 Playwright Chromium도 준비한다 (`pnpm exec playwright install chromium`).
 
 설정 없는 프로젝트는 빈 상태로 시작한다. Design Home 문서·학습 화면·검토 기록은 배포 묶음에 포함되지 않는다. Git 훅이나 중앙 서버 없이 실행 가능하며 CI는 기존 CLI 종료 코드를 사용할 수 있다.
 
 ## Design System Library 사용자 화면
 
-Design Home 랜딩에서 **Design System Library**로 진입합니다. 로컬은 `http://127.0.0.1:4184/design-library/`, GitHub Pages는 `/design-home/design-library/`를 사용합니다. SPA는 로컬 API와 정적 JSON 모드를 공유합니다. 공개 데이터 갱신은 `npm run build:library`, 전체 E2E 포함 검증은 `npm test`로 실행합니다. 내부 비교 모듈·CLI 이름은 Design Compare입니다.
+Design Home 랜딩에서 **Design System Library**로 진입합니다. 로컬은 `http://127.0.0.1:4184/design-library/`, GitHub Pages는 `/design-home/design-library/`를 사용합니다. SPA는 로컬 API와 정적 JSON 모드를 공유합니다. 공개 데이터 갱신은 `pnpm --filter @design-home/compare build:library`, 전체 E2E 포함 검증은 `pnpm test`로 실행합니다. 내부 비교 모듈·CLI 이름은 Design Compare입니다.
 
 ### 접근성 점검
 

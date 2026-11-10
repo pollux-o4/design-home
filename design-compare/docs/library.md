@@ -49,6 +49,6 @@ Library의 선택 로직을 검색과 `brief`가 함께 사용한다. `brief`는
 
 ## 목록 미리보기와 공통 스크롤바
 
-목록은 `design-library/previews/<ID>.png`의 실제 샘플 이미지를 표시한다. `npm run build:library`가 문서 기반 JSON과 Chromium 미리보기를 함께 갱신한다. 외부 폰트 요청을 끊은 동일한 로컬 환경에서 문서의 viewport·선택자를 사용하며, 컴포넌트는 조작 요소를 잘라 보여준다. 미리보기 이미지는 탐색용이고 비교 기준은 기존 CLI의 실시간 캡처다.
+목록은 `design-library/previews/<ID>.png`의 실제 샘플 이미지를 표시한다. `pnpm --filter @design-home/compare build:library`가 문서 기반 JSON과 Chromium 미리보기를 함께 갱신한다. 외부 폰트 요청을 끊은 동일한 로컬 환경에서 문서의 viewport·선택자를 사용하며, 컴포넌트는 조작 요소를 잘라 보여준다. 미리보기 이미지는 탐색용이고 비교 기준은 기존 CLI의 실시간 캡처다.
 
 `component-scrollbar`는 공통 `shared/js/scrollbar.js`와 `shared/css/scrollbar.css`에 연결된다. 랜딩·라이브러리·캔버스에서 같은 모듈을 사용하며 내부 영역은 `data-scroll-region`으로 등록한다. 가로·세로 트랙은 내용 크기를 따라 갱신되고, 제거한 영역의 이벤트·트랙도 해제된다. 샘플은 `ui-components/scrollbar/index.html`에서 직접 조작할 수 있다.

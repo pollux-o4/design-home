@@ -17,7 +17,7 @@ AI에 반환한 이미지와 출력은 별도의 호출 기록에도 보관한�
 ## 검증과 한계
 
 ```bash
-npm test
+pnpm test
 ```
 
 - 실제 Chromium과 CLI·보고서·기존 디자인 홈을 함께 검증

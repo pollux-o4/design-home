@@ -84,7 +84,7 @@ AI가 `registrationTemplate`의 이름·설명·분류·태그·검색어·실�
 
 ## 저장된 사진 기준 데모
 
-`npm run demo`로 비교 데모를 띄운 뒤 다른 터미널에서 실행한다.
+`pnpm --filter @design-home/compare demo`로 비교 데모를 띄운 뒤 다른 터미널에서 실행한다.
 
 ```bash
 ./design register --id box-art --url http://127.0.0.1:4173/reference \
@@ -96,6 +96,6 @@ AI가 `registrationTemplate`의 이름·설명·분류·태그·검색어·실�
 
 `mise run hub`로 실행하면 `/`의 기존 랜딩에서 Design System Library로 이동할 수 있다. 직접 진입 주소는 `http://127.0.0.1:4184/design-library/`다.
 
-GitHub Pages에서는 `/design-home/design-library/`로 진입한다. 문서·원본을 수정한 뒤 `design-compare/`에서 `npm run build:library`를 실행하고 생성된 `../design-library/data/`와 `../design-library/previews/`를 소스 변경과 함께 커밋한다. 기존 저장소 Pages 배포를 사용하며 별도 Node 서버는 필요 없다. 공개 배포에 로컬 작업물이나 호출 기록을 포함하지 않는다.
+GitHub Pages에서는 `/design-home/design-library/`로 진입한다. 문서·원본을 수정한 뒤 `design-compare/`에서 `pnpm --filter @design-home/compare build:library`를 실행하고 생성된 `../design-library/data/`와 `../design-library/previews/`를 소스 변경과 함께 커밋한다. 기존 저장소 Pages 배포를 사용하며 별도 Node 서버는 필요 없다. 공개 배포에 로컬 작업물이나 호출 기록을 포함하지 않는다.
 
-`npm test`는 프로젝트 접두사를 가진 API 없는 정적 서버에서 랜딩→검색·필터→상세·실제 미리보기→새로고침·직접 링크·모바일 흐름과 24개 자료의 미리보기를 검증한다. 로컬 서버의 등록 작업·호출 기록 검증도 함께 수행한다.
+`pnpm test`는 프로젝트 접두사를 가진 API 없는 정적 서버에서 랜딩→검색·필터→상세·실제 미리보기→새로고침·직접 링크·모바일 흐름과 24개 자료의 미리보기를 검증한다. 로컬 서버의 등록 작업·호출 기록 검증도 함께 수행한다.

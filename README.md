@@ -22,3 +22,9 @@ Design System Library 주소는 `http://127.0.0.1:4184/design-library/`다. 종�
 - 계약·선택: `specs`의 MOD-001 · UX-001, `decisions`의 ARCH-001.
 
 개발·검증 명령은 각 package.json과 mise.toml이 원본이다. 모듈 경계를 바꾸면 MOD-001, 화면·효과를 바꾸면 UX-001 기준을 적용한다.
+
+## 개발 도구
+
+mise 설치 후 루트에서 `mise trust`, `mise install`, `mise run setup`을 실행한다. 학습 화면은 `mise run dev`, 로컬 검토 도구는 `mise run hub`로 연다. `mise run check`는 빠른 검사, `mise run test`는 전체 검증, `mise run build`는 정적 배포물 생성이다.
+
+설치·검사·실패 복구는 docs에서 OPS-001, 도구 선택은 decisions에서 TOOL-001을 검색한다.

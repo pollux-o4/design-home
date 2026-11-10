@@ -56,6 +56,7 @@ test("tool_001: staged secret scanning blocks leaks and accepts safe staged cont
   assert.equal(result.status, 1, result.stderr);
   assert.doesNotMatch(`${result.stdout}${result.stderr}`, new RegExp(leak, "u"));
 
+  git(root, "restore", "--staged", "credential.txt");
   writeFileSync(join(root, "password.txt"), `PASSWORD=${password}\n`);
   git(root, "add", "password.txt");
   const passwordResult = scan(root, "staged");
@@ -133,4 +134,17 @@ test("new branch and tag pushes scan commits absent from remote refs", (t) => {
   const tagPush = scan(root, "push", `refs/tags/v1 ${head} refs/tags/v1 ${zero}\n`);
   assert.equal(tagPush.status, 1, tagPush.stderr);
   assert.doesNotMatch(`${tagPush.stdout}${tagPush.stderr}`, new RegExp(leak, "u"));
+});
+
+test("tool_001: staged workflow YAML is checked without rewriting files", (t) => {
+  for (const name of ["pipeline.yaml", "pipeline.yml"]) {
+    const root = fixture(t);
+    writeFileSync(join(root, name), "name: CI\n");
+    git(root, "add", name);
+    assert.equal(checkStagedBiome(root), false);
+    writeFileSync(join(root, name), "name:    CI\n");
+    git(root, "add", name);
+    assert.equal(checkStagedBiome(root), true);
+    assert.equal(readFileSync(join(root, name), "utf8"), "name:    CI\n");
+  }
 });
