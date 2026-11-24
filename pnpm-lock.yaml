@@ -170,8 +170,8 @@ importers:
         specifier: 2.6.6
         version: 2.6.6
       axe-core:
-        specifier: 4.14.0
-        version: 4.14.0
+        specifier: 4.14.1
+        version: 4.14.1
       knip:
         specifier: 6.44.2
         version: 6.44.2
@@ -179,8 +179,8 @@ importers:
         specifier: 2.2.2
         version: 2.2.2
       playwright:
-        specifier: 1.64.0
-        version: 1.64.0
+        specifier: 1.65.1
+        version: 1.65.1
       vite:
         specifier: 8.3.7
         version: 8.3.7(jiti@2.7.0)(yaml@2.9.1)
@@ -188,14 +188,14 @@ importers:
   design-compare:
     dependencies:
       axe-core:
-        specifier: 4.14.0
-        version: 4.14.0
+        specifier: 4.14.1
+        version: 4.14.1
       pixelmatch:
-        specifier: 7.1.0
-        version: 7.1.0
+        specifier: 8.0.0
+        version: 8.0.0
       playwright:
-        specifier: 1.64.0
-        version: 1.64.0
+        specifier: 1.65.1
+        version: 1.65.1
       pngjs:
         specifier: 7.0.0
         version: 7.0.0
@@ -617,8 +617,8 @@ packages:
   '@tybys/wasm-util@0.10.4':
     resolution: {integrity: sha512-W3c4gRigFS0T/Ma4qIYF3GDAc5AQdHb1yL5znJT1Zv1YaD9Kitx656wBjvr19qbiosmZT8lWDM5BEMynUqX65A==}
 
-  axe-core@4.14.0:
-    resolution: {integrity: sha512-9WTZxEjsZ7b13TH8JPmbV2z8CHbl80/2hm3XPEG4JgNdQLK81IBRXmSxHfMAOkSqQeRxT/0dwNDz2GOm3zzpcQ==}
+  axe-core@4.14.1:
+    resolution: {integrity: sha512-FHfa+lmNjQZfJz1q8wKqIDwC6DExcHt/pkjNQb09a3NPjCKg2rhu5qb2S4r76ASyFNNtuFooJpZe37OgudVGtQ==}
     engines: {node: '>=4'}
 
   detect-libc@2.1.2:
@@ -814,17 +814,17 @@ packages:
     resolution: {integrity: sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA==}
     engines: {node: '>=12'}
 
-  pixelmatch@7.1.0:
-    resolution: {integrity: sha512-1wrVzJ2STrpmONHKBy228LM1b84msXDUoAzVEl0R8Mz4Ce6EPr+IVtxm8+yvrqLYMHswREkjYFaMxnyGnaY3Ng==}
+  pixelmatch@8.0.0:
+    resolution: {integrity: sha512-cIqOLfh5k52us715qf3B3+kTOxZv+WDv77HN7xokLScYQGYQHi4m/ynoDIPpvF2LvCyUJGyvzY64i0QCXtzu1g==}
     hasBin: true
 
-  playwright-core@1.64.0:
-    resolution: {integrity: sha512-T9r+MZkTECl2+oUcZ26YgZzTrYidTsIhYYkJix+6iDOymOb1FB2RLLSOxRGnZGv5DStt+aduIVbt+E8WygXYpg==}
+  playwright-core@1.65.1:
+    resolution: {integrity: sha512-hqPpz7blSMPxWVdoeE1yiBSzXsKiVOd2k+kjCvmUywD2GPO2Dd9HfcWnq9NN0GHbNZDFgZ9JfBFr+X5/BLo0qw==}
     engines: {node: '>=20'}
     hasBin: true
 
-  playwright@1.64.0:
-    resolution: {integrity: sha512-kVzTnYFYEyQ9RGzBjNCd2+yEqWmVbxl3AHPynv3qQ6JTjv4a+kwRcnqQwIpuP3NnrnIrE/Q6wWAIAvMfIE2/Yg==}
+  playwright@1.65.1:
+    resolution: {integrity: sha512-vJ1FuoOrNwOKHUIVEvSt3jT1L+wjjDpwhwIstKtfvTh8XIG4FG4bIFuvNdMxi81LGfAhUgUZleVFaOLY4RIUUw==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -1162,7 +1162,7 @@ snapshots:
       tslib: 2.9.1
     optional: true
 
-  axe-core@4.14.0: {}
+  axe-core@4.14.1: {}
 
   detect-libc@2.1.2: {}
 
@@ -1353,15 +1353,15 @@ snapshots:
 
   picomatch@4.0.7: {}
 
-  pixelmatch@7.1.0:
+  pixelmatch@8.0.0:
     dependencies:
       pngjs: 7.0.0
 
-  playwright-core@1.64.0: {}
+  playwright-core@1.65.1: {}
 
-  playwright@1.64.0:
+  playwright@1.65.1:
     dependencies:
-      playwright-core: 1.64.0
+      playwright-core: 1.65.1
 
   pngjs@7.0.0: {}
 
